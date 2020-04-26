@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Form, Select, Input, Button, Checkbox, DatePicker } from "antd";
+import { Form, Select, Input, Button, Checkbox, DatePicker, Radio } from "antd";
 import { Row, Col } from "antd";
 import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
 
@@ -11,7 +11,7 @@ const { Option } = Select;
 const { MonthPicker, RangePicker } = DatePicker;
 
 //Formatting
-const formGutter = [16, 8];
+const formGutter = [16, 16];
 const standardSpan = 24;
 const halfSpan = standardSpan / 2;
 const thirdSpan = standardSpan / 3;
@@ -89,6 +89,7 @@ const daysOfTheWeek = [
   "Saturday"
 ];
 const timesOfTheDay = ["Mornings", "Afternoons", "Evenings"];
+const paidOrUnpaid = ["Yes", "No", "It doesn't matter"];
 
 class PageInternshipInformation extends Component {
   state = {
@@ -114,6 +115,8 @@ class PageInternshipInformation extends Component {
     //Format the dates in the array for start and end dates
   };
 
+  boldify = text => <strong>{text}</strong>;
+
   render() {
     return (
       <div className="FormArea">
@@ -129,7 +132,7 @@ class PageInternshipInformation extends Component {
             <Col span={halfSpan}>
               <Form.Item
                 key="firstName"
-                label="First Name"
+                label={this.boldify("First Name")}
                 name="firstName"
                 rules={this.validationRules("first name", "string")}
               >
@@ -139,7 +142,7 @@ class PageInternshipInformation extends Component {
             <Col span={halfSpan}>
               <Form.Item
                 key="lastName"
-                label="Last Name"
+                label={this.boldify("Last Name")}
                 name="lastName"
                 rules={this.validationRules("last name", "string")}
               >
@@ -152,7 +155,7 @@ class PageInternshipInformation extends Component {
             <Col span={halfSpan}>
               <Form.Item
                 key="phoneNumber"
-                label="Phone Number"
+                label={this.boldify("Phone Number")}
                 name="phoneNumber"
                 extra="Please input your phone number without any formatting."
                 rules={this.validationRules("phone number")}
@@ -163,7 +166,7 @@ class PageInternshipInformation extends Component {
             <Col span={halfSpan}>
               <Form.Item
                 key="email"
-                label="Email"
+                label={this.boldify("Email")}
                 name="email"
                 rules={this.validationRules("email", "email")}
               >
@@ -176,7 +179,7 @@ class PageInternshipInformation extends Component {
             <Col span={standardSpan}>
               <Form.Item
                 key="addressLine"
-                label="Address"
+                label={this.boldify("Address")}
                 name="address"
                 rules={this.validationRules("address")}
               >
@@ -225,7 +228,7 @@ class PageInternshipInformation extends Component {
             <Col span={standardSpan}>
               <Form.Item
                 key="yog"
-                label="Year of graduation"
+                label={this.boldify("Year of graduation")}
                 name="yog"
                 rules={this.validationRules("year of graduation")}
               >
@@ -238,7 +241,7 @@ class PageInternshipInformation extends Component {
             <Col span={standardSpan}>
               <Form.Item
                 key="industry"
-                label="What industry are you applying to?"
+                label={this.boldify("What industry are you applying to?")}
                 name="industry"
                 rules={[
                   {
@@ -380,7 +383,7 @@ class PageInternshipInformation extends Component {
             <Col span={halfSpan}>
               <Form.Item
                 key="unweightedGPA"
-                label="What is your unweighted GPA?"
+                label={this.boldify("What is your unweighted GPA?")}
                 name="unweightedGPA"
                 rules={this.validationRules("unweighted GPA")}
                 extra="Your GPA should be out of 4.0"
@@ -391,7 +394,7 @@ class PageInternshipInformation extends Component {
             <Col span={halfSpan}>
               <Form.Item
                 key="weightedGPA"
-                label="What is your weighted GPA (optional)?"
+                label={this.boldify("What is your weighted GPA (optional)?")}
                 name="weightedGPA"
                 extra="Indicate your weighted GPA over the scale"
               >
@@ -404,12 +407,15 @@ class PageInternshipInformation extends Component {
             <Col span={standardSpan}>
               <Form.Item
                 key="courses"
-                label="Relevant courses to your industry."
+                label={this.boldify("Relevant courses to your industry.")}
                 name="courses"
                 rules={this.validationRules("relevant courses")}
                 extra="Separate each entry with a comma and a space, and capitalize the AP/IB for your AP/IB Classes"
               >
-                <Input.TextArea placeholder="(e.g.) Business Communications, AP Computer Science, etc." />
+                <Input.TextArea
+                  placeholder="(e.g.) Business Communications, AP Computer Science, etc."
+                  style={{ height: "100px" }}
+                />
               </Form.Item>
             </Col>
           </Row>
@@ -419,12 +425,15 @@ class PageInternshipInformation extends Component {
             <Col span={standardSpan}>
               <Form.Item
                 key="extracurriculars"
-                label="Extracurricular Activities "
+                label={this.boldify("Extracurricular Activities")}
                 name="extracurriculars"
                 rules={this.validationRules("extracurricular activities")}
                 extra="Separate each entry with a comma and a space, and in parentheses, show how long you spent on the activity."
               >
-                <Input.TextArea placeholder="(e.g.) Speech and Debate (3), DECA (4), HOSA (2), Student Council (2)" />
+                <Input.TextArea
+                  placeholder="(e.g.) Speech and Debate (3), DECA (4), HOSA (2), Student Council (2)"
+                  style={{ height: "100px" }}
+                />
               </Form.Item>
             </Col>
           </Row>
@@ -433,7 +442,7 @@ class PageInternshipInformation extends Component {
             <Col span={halfSpan}>
               <Form.Item
                 key="daysToWork"
-                label="What days are you willing to work?"
+                label={this.boldify("What days are you willing to work?")}
                 name="daysToWork"
                 rules={this.validationRules("optimal days to work", "array")}
               >
@@ -452,7 +461,7 @@ class PageInternshipInformation extends Component {
             <Col span={halfSpan}>
               <Form.Item
                 key="timesToWork"
-                label="What times are you willing to work?"
+                label={this.boldify("What times are you willing to work?")}
                 name="timesToWork"
                 rules={this.validationRules("times available to work", "array")}
               >
@@ -475,10 +484,31 @@ class PageInternshipInformation extends Component {
               <Form.Item
                 key="dateOfStartAndEnd"
                 name="dateOfStartAndEnd"
-                label="When can you start working and when do you need to stop working?"
+                label={this.boldify(
+                  "When can you start working and when do you need to stop working?"
+                )}
                 rules={this.validationRules("available dates of work", "array")}
               >
                 <RangePicker />
+              </Form.Item>
+            </Col>
+          </Row>
+
+          <Row gutter={formGutter}>
+            <Col span={standardSpan}>
+              <Form.Item
+                key="paidUnpaid"
+                name="paidUnpaid"
+                label={this.boldify("Are you willing to work unpaid?")}
+                rules={this.validationRules("preference for pay")}
+              >
+                <Radio.Group>
+                  {paidOrUnpaid.map(choice => (
+                    <Radio key={choice} value={choice}>
+                      {choice}
+                    </Radio>
+                  ))}
+                </Radio.Group>
               </Form.Item>
             </Col>
           </Row>

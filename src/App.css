@@ -4,7 +4,7 @@
 }
 
 /* Form Styles */
-.Form-input > label {
+Form.Item > label {
   font-weight: bold;
 }
 /* App Styles */
