@@ -21,8 +21,7 @@ class IntegratedForm extends Component {
       Extracurriculars: "",
       daysToWork: null,
       timesToWork: null,
-      dateOfStart: null,
-      dateOfEnd: null,
+      dateOfStartAndEnd: null,
       paidUnpaid: null,
       resume: null
     }

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Form, Select, Input, Button, Checkbox } from "antd";
+import { Form, Select, Input, Button, Checkbox, DatePicker } from "antd";
 import { Row, Col } from "antd";
 import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
 
@@ -8,6 +8,7 @@ import "../App.css";
 
 //Object Destructuring
 const { Option } = Select;
+const { MonthPicker, RangePicker } = DatePicker;
 
 //Formatting
 const formGutter = [16, 8];
@@ -78,6 +79,16 @@ const allStates = [
   "Wisconsin",
   "Wyoming"
 ];
+const daysOfTheWeek = [
+  "Sunday",
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday"
+];
+const timesOfTheDay = ["Mornings", "Afternoons", "Evenings"];
 
 class PageInternshipInformation extends Component {
   state = {
@@ -97,6 +108,11 @@ class PageInternshipInformation extends Component {
       type: type
     }
   ];
+
+  onFinish = () => {
+    //TO BE FILLED
+    //Format the dates in the array for start and end dates
+  };
 
   render() {
     return (
@@ -414,92 +430,42 @@ class PageInternshipInformation extends Component {
           </Row>
 
           <Row gutter={formGutter}>
-            <Col span={standardSpan}>
+            <Col span={halfSpan}>
               <Form.Item
                 key="daysToWork"
                 label="What days are you willing to work?"
                 name="daysToWork"
-                rules={[
-                  {
-                    required: true,
-                    message: "Please input the days that you want to work"
-                  }
-                ]}
+                rules={this.validationRules("optimal days to work", "array")}
               >
-                <Checkbox.Group>
-                  <Row>
-                    <Col span={quarterSpan}>
-                      <Checkbox
-                        value="monday"
-                        style={{
-                          lineHeight: "32px"
-                        }}
-                      >
-                        Monday
-                      </Checkbox>
-                    </Col>
-                    <Col span={quarterSpan}>
-                      <Checkbox
-                        value="tuesday"
-                        style={{
-                          lineHeight: "32px"
-                        }}
-                      >
-                        Tuesday
-                      </Checkbox>
-                    </Col>
-                    <Col span={quarterSpan}>
-                      <Checkbox
-                        value="wednesday"
-                        style={{
-                          lineHeight: "32px"
-                        }}
-                      >
-                        Wednesday
-                      </Checkbox>
-                    </Col>
-                    <Col span={quarterSpan}>
-                      <Checkbox
-                        value="thursday"
-                        style={{
-                          lineHeight: "32px"
-                        }}
-                      >
-                        Thursday
-                      </Checkbox>
-                    </Col>
-                    <Col span={quarterSpan}>
-                      <Checkbox
-                        value="friday"
-                        style={{
-                          lineHeight: "32px"
-                        }}
-                      >
-                        Friday
-                      </Checkbox>
-                    </Col>
-                    <Col span={quarterSpan}>
-                      <Checkbox
-                        value="saturday"
-                        style={{
-                          lineHeight: "32px"
-                        }}
-                      >
-                        Saturday
-                      </Checkbox>
-                    </Col>
-                    <Col span={quarterSpan}>
-                      <Checkbox
-                        value="sunday"
-                        style={{
-                          lineHeight: "32px"
-                        }}
-                      >
-                        Sunday
-                      </Checkbox>
-                    </Col>
-                  </Row>
-                </Checkbox.Group>
+                <Select
+                  mode="multiple"
+                  placeholder="Please select the days where you can work"
+                >
+                  {daysOfTheWeek.map(day => (
+                    <Option key={day} value={day}>
+                      {day}
+                    </Option>
+                  ))}
+                </Select>
+              </Form.Item>
+            </Col>
+            <Col span={halfSpan}>
+              <Form.Item
+                key="timesToWork"
+                label="What times are you willing to work?"
+                name="timesToWork"
+                rules={this.validationRules("times available to work", "array")}
+              >
+                <Select
+                  mode="multiple"
+                  placeholder="Please select the times when you can work"
+                >
+                  {timesOfTheDay.map(time => (
+                    <Option key={time} value={time}>
+                      {time}
+                    </Option>
+                  ))}
+                </Select>
               </Form.Item>
             </Col>
           </Row>
@@ -507,50 +473,12 @@ class PageInternshipInformation extends Component {
           <Row gutter={formGutter}>
             <Col span={standardSpan}>
               <Form.Item
-                key="timesToWork"
-                label="What times are you willing to work?"
-                name="timesToWork"
-                rules={[
-                  {
-                    required: true,
-                    message: "Please input the times that you want to work"
-                  }
-                ]}
+                key="dateOfStartAndEnd"
+                name="dateOfStartAndEnd"
+                label="When can you start working and when do you need to stop working?"
+                rules={this.validationRules("available dates of work", "array")}
               >
-                <Checkbox.Group>
-                  <Row>
-                    <Col span={8}>
-                      <Checkbox
-                        value="mornings"
-                        style={{
-                          lineHeight: "32px"
-                        }}
-                      >
-                        Mornings
-                      </Checkbox>
-                    </Col>
-                    <Col span={8}>
-                      <Checkbox
-                        value="afternoons"
-                        style={{
-                          lineHeight: "32px"
-                        }}
-                      >
-                        Afternoons
-                      </Checkbox>
-                    </Col>
-                    <Col span={8}>
-                      <Checkbox
-                        value="evenings"
-                        style={{
-                          lineHeight: "32px"
-                        }}
-                      >
-                        Evenings
-                      </Checkbox>
-                    </Col>
-                  </Row>
-                </Checkbox.Group>
+                <RangePicker />
               </Form.Item>
             </Col>
           </Row>
