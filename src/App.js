@@ -7,8 +7,8 @@ import logo from "./logo.svg";
 import { Layout, Menu } from "antd";
 
 //Custom Component Imports
-import IntegratedForm from "/Users/hongzhenzhang/Desktop/2019-2020/Extracurriculars/TII/TII-app/src/components/integratedForm.jsx";
-import Navbar from "/Users/hongzhenzhang/Desktop/2019-2020/Extracurriculars/TII/TII-app/src/components/navbar.jsx";
+import IntegratedForm from "./components/integratedForm.jsx";
+import Navbar from "./components/navbar.jsx";
 
 //CSS Imports
 import "./App.css";

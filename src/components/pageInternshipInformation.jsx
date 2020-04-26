@@ -4,7 +4,7 @@ import { Row, Col } from "antd";
 import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
 
 import "antd/dist/antd.css";
-import "/Users/hongzhenzhang/Desktop/2019-2020/Extracurriculars/TII/TII-app/src/App.css";
+import "../App.css";
 
 //Object Destructuring
 const { Option } = Select;

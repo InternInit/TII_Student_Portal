@@ -3,13 +3,13 @@ import React, { Component } from "react";
 
 //CSS Imports
 import "antd/dist/antd.css";
-import "/Users/hongzhenzhang/Desktop/2019-2020/Extracurriculars/TII/TII-app/src/App.css";
+import "../App.css";
 
 //Ant Design Imports
 import { Menu } from "antd";
 
 //Logo Import
-import Logo from "/Users/hongzhenzhang/Desktop/2019-2020/Extracurriculars/TII/TII-app/src/TII-logo.png";
+import Logo from "../TII-logo.png";
 
 class Navbar extends Component {
   //State saved on Apply button

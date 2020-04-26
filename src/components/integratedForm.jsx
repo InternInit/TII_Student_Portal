@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import PageInternshipInformation from "/Users/hongzhenzhang/Desktop/2019-2020/Extracurriculars/TII/TII-app/src/components/pageInternshipInformation.jsx";
+import PageInternshipInformation from "../components/pageInternshipInformation.jsx";
 
 class IntegratedForm extends Component {
   state = {
