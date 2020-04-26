@@ -4,7 +4,9 @@
 }
 
 /* Form Styles */
-
+.Form-input > label {
+  font-weight: bold;
+}
 /* App Styles */
 .FormArea {
   background-color: white;
