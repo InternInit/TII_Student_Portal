@@ -24,16 +24,23 @@ class App extends Component {
         <header>
           <Navbar />
         </header>
-        <Content style={{ padding: "0 50px", margin: " 5% 0 0 0" }}>
-          <Layout>
-            <Sider width={300} style={{ background: "white" }}>
-              <TiiNav />
-            </Sider>
-            <Content className="FormArea" style={{ padding: "3%" }}>
-              <IntegratedForm />
-            </Content>
-          </Layout>
-        </Content>
+        <Layout>
+
+
+          >
+            <TiiNav />
+
+
+          <Content className="FormArea" style={{
+            display: "flex",
+            padding: "30px",
+            width: "75%",
+          }}>
+
+            <IntegratedForm />
+
+          </Content>
+        </Layout>
       </div>
     );
   }

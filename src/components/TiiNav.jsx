@@ -42,11 +42,9 @@ class TiiNav extends React.Component {
         justifyContent: "center",
         color: "gray",
         backgroundColor: "ghostwhite",
-        width: "275px"
+
       },
-      barStyle: {
-        width: "275px"
-      }
+
     };
   }
 
@@ -66,8 +64,7 @@ class TiiNav extends React.Component {
         style={{
           position: "fixed",
           overflow: "initial",
-          margin: "20px",
-          width: "300px"
+          width: "207px"
         }}
       >
         <div
@@ -81,7 +78,6 @@ class TiiNav extends React.Component {
           theme="light"
           mode="inline"
           defaultSelectedKeys={["1"]}
-          style={this.state.barStyle}
         >
           <Menu.Item
             key="1"
@@ -139,7 +135,7 @@ class TiiNav extends React.Component {
     } else {
       notification.open({
         message: "Failed.",
-        description: "You have to fill all neccessary forms.",
+        description: "You have to fill all necessary forms.",
         icon: <CloseOutlined style={{ color: "red" }} />
       });
     }
