@@ -26,15 +26,12 @@ class App extends Component {
         </header>
         <Layout>
 
-
-          >
-            <TiiNav />
-
-
-          <Content className="FormArea" style={{
+          <TiiNav />
+          <Content style={{
             display: "flex",
             padding: "30px",
-            width: "75%",
+            justifyContent: "center",
+            backgroundColor: "white"
           }}>
 
             <IntegratedForm />
