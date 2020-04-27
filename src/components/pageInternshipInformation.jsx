@@ -119,7 +119,7 @@ class PageInternshipInformation extends Component {
 
   render() {
     return (
-      <div className="FormArea">
+      <div style={{ marginTop: "50px" }}>
         <Form
           name="basic"
           initialValues={{

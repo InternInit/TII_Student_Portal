@@ -29,7 +29,14 @@ class IntegratedForm extends Component {
 
   render() {
     return (
-      <div>
+      <div
+        style={{
+          display: "flex",
+          width: "60%",
+          justifyContent: "center",
+        }}
+
+      >
         <PageInternshipInformation />
       </div>
     );
