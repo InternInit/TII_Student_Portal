@@ -29,7 +29,7 @@ class TiiNav extends React.Component {
       ReferencesButton: <TeamOutlined />,
 
       //submission
-      SubmitButton: "Submit",
+      SubmitButton: "",
       CanSubmit: false,
 
       //collapsing
@@ -64,14 +64,8 @@ class TiiNav extends React.Component {
         style={{
           position: "fixed",
           overflow: "initial",
-<<<<<<< HEAD
-          margin: "20px",
-          marginTop: "2%",
-          width: "300px"
-=======
           width: "207px",
           margin: "10px"
->>>>>>> FixNavPanel
         }}
       >
         <div
@@ -111,7 +105,7 @@ class TiiNav extends React.Component {
             key="5"
             onClick={this.handleSubmit} //checks other states before allowing submit
           >
-            {SubmitButton}{" "}
+            {SubmitButton}<span>Submit</span>
           </Menu.Item>
         </Menu>
       </Sider>
@@ -180,7 +174,7 @@ class TiiNav extends React.Component {
       //toggling between "Submit" icon
       this.setState({ SubmitButton: <CaretDownOutlined /> });
     } else {
-      this.setState({ SubmitButton: "Submit" });
+      this.setState({ SubmitButton: "" });
     }
   };
 }
