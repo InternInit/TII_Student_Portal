@@ -513,9 +513,14 @@ class PageInternshipInformation extends Component {
             </Col>
           </Row>
 
+          {/*Save and Continue or Next*/}
           <Form.Item>
-            <Button type="primary" htmlType="submit">
-              Submit
+            <Button
+              className="save-and-continue"
+              type="primary"
+              htmlType="submit"
+            >
+              Next
             </Button>
           </Form.Item>
         </Form>
