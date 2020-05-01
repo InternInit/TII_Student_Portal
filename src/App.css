@@ -4,8 +4,9 @@
 }
 
 /* Form Styles */
-Form.Item > label {
-  font-weight: bold;
+.save-and-continue {
+  float: right;
+  width: 150px;
 }
 /* App Styles */
 .FormArea {

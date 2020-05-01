@@ -41,10 +41,8 @@ class TiiNav extends React.Component {
         display: "flex",
         justifyContent: "center",
         color: "gray",
-        backgroundColor: "ghostwhite",
-
-      },
-
+        backgroundColor: "ghostwhite"
+      }
     };
   }
 
@@ -65,7 +63,9 @@ class TiiNav extends React.Component {
           position: "fixed",
           overflow: "initial",
           width: "207px",
-          margin: "10px"
+
+          margin: "10px",
+          marginTop: "5%"
         }}
       >
         <div
