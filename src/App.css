@@ -7,6 +7,10 @@
 Form.Item > label {
   font-weight: bold;
 }
+
+.next-button {
+    float: right;
+}
 /* App Styles */
 .FormArea {
   background-color: white;

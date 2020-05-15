@@ -514,8 +514,8 @@ class PageInternshipInformation extends Component {
           </Row>
 
           <Form.Item>
-            <Button type="primary" htmlType="submit">
-              Submit
+            <Button className="next-button"  type="primary" htmlType="submit">
+              Next
             </Button>
           </Form.Item>
         </Form>

@@ -64,14 +64,9 @@ class TiiNav extends React.Component {
         style={{
           position: "fixed",
           overflow: "initial",
-<<<<<<< HEAD
           margin: "20px",
-          marginTop: "2%",
+          marginTop: "5%",
           width: "300px"
-=======
-          width: "207px",
-          margin: "10px"
->>>>>>> FixNavPanel
         }}
       >
         <div
