@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PageInternshipInformation from "../components/pageInternshipInformation.jsx";
+import PagePersonal from "../components/pagePersonal.jsx";
 
 class IntegratedForm extends Component {
   state = {
@@ -28,14 +29,7 @@ class IntegratedForm extends Component {
 
   constructor(props) {
     super(props);
-    const formRef = React.createRef();
   }
-
-  /*
-  submit = () => {
-    this.formRef.current.SetFieldValues
-  };
-  */
 
   render() {
     const { page } = this.props;
@@ -48,7 +42,6 @@ class IntegratedForm extends Component {
             width: "60%",
             justifyContent: "center"
           }}
-          ref={this.myRef}
         >
           <PageInternshipInformation
             onNext={this.props.onNext}
@@ -64,9 +57,8 @@ class IntegratedForm extends Component {
             width: "60%",
             justifyContent: "center"
           }}
-          ref={this.myRef}
         >
-          <h1>Hello!</h1>
+          <PagePersonal onNext={this.props.onNext} />
         </div>
       );
     }
