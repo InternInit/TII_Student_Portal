@@ -18,6 +18,52 @@ import "./App.css";
 const { Header, Content, Footer, Sider } = Layout;
 
 class App extends Component {
+  state = {
+    page: 0
+  };
+
+  onNext = () => {
+    const newPage = this.state.page + 1;
+    this.setState({
+      page: newPage
+    });
+  };
+
+  clickOne = () => {
+    this.setState({ page: 0 });
+  };
+
+  clickTwo = () => {
+    this.setState({ page: 1 });
+  };
+
+  clickThree = () => {
+    this.setState({ page: 2 });
+  };
+
+  clickFour = () => {
+    this.setState({ page: 3 });
+  };
+
+  renderPage = () => {
+    const pageNumber = this.state.page;
+    return <IntegratedForm page={pageNumber} onNext={this.onNext} />;
+  };
+
+  // BUG: PROBLEM WITH RENDERING THE DIFFERENT NAVBAR SELECTIONS
+  renderNav = () => {
+    const highlightKey = String([this.state.page + 1]);
+    return (
+      <TiiNav
+        clickOne={this.clickOne}
+        clickTwo={this.clickTwo}
+        clickThree={this.clickThree}
+        clickThree={this.clickThree}
+        highlightKey={highlightKey}
+      />
+    );
+  };
+
   render() {
     return (
       <div className="App">
@@ -25,17 +71,16 @@ class App extends Component {
           <Navbar />
         </header>
         <Layout>
-
-          <TiiNav />
-          <Content style={{
-            display: "flex",
-            padding: "30px",
-            justifyContent: "center",
-            backgroundColor: "white"
-          }}>
-
-            <IntegratedForm />
-
+          {this.renderNav()}
+          <Content
+            style={{
+              display: "flex",
+              padding: "30px",
+              justifyContent: "center",
+              backgroundColor: "white"
+            }}
+          >
+            {this.renderPage()}
           </Content>
         </Layout>
       </div>

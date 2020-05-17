@@ -514,8 +514,23 @@ class PageInternshipInformation extends Component {
           </Row>
 
           <Form.Item>
-            <Button className="next-button"  type="primary" htmlType="submit">
+            <Button
+              className="next-button"
+              type="primary"
+              htmlType="submit"
+              onClick={this.props.onNext}
+            >
               Next
+            </Button>
+          </Form.Item>
+          <Form.Item>
+            <Button
+              className="submit-button"
+              type="primary"
+              htmlType="submit"
+              onClick={this.props.submit}
+            >
+              Submit
             </Button>
           </Form.Item>
         </Form>

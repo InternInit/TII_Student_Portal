@@ -3,9 +3,8 @@ import PageInternshipInformation from "../components/pageInternshipInformation.j
 
 class IntegratedForm extends Component {
   state = {
-    page: 0,
     internshipInformation: {
-      firstName: "",
+      firstName: "porridge",
       lastName: "",
       phone: null,
       email: "",
@@ -27,19 +26,50 @@ class IntegratedForm extends Component {
     }
   };
 
-  render() {
-    return (
-      <div
-        style={{
-          display: "flex",
-          width: "60%",
-          justifyContent: "center",
-        }}
+  constructor(props) {
+    super(props);
+    const formRef = React.createRef();
+  }
 
-      >
-        <PageInternshipInformation />
-      </div>
-    );
+  /*
+  submit = () => {
+    this.formRef.current.SetFieldValues
+  };
+  */
+
+  render() {
+    const { page } = this.props;
+
+    if (page === 0) {
+      return (
+        <div
+          style={{
+            display: "flex",
+            width: "60%",
+            justifyContent: "center"
+          }}
+          ref={this.myRef}
+        >
+          <PageInternshipInformation
+            onNext={this.props.onNext}
+            submit={this.submit}
+          />
+        </div>
+      );
+    } else if (page === 1) {
+      return (
+        <div
+          style={{
+            display: "flex",
+            width: "60%",
+            justifyContent: "center"
+          }}
+          ref={this.myRef}
+        >
+          <h1>Hello!</h1>
+        </div>
+      );
+    }
   }
 }
 
