@@ -68,80 +68,7 @@ class Ref extends React.Component {
                          */
                         return (
                             <div style={{ marginTop: "60px" }}>
-                                <Col>
-                                    <Divider />
-                                    <Row gutter={formGutter}>
-                                        <Col span={halfSpan}>
-                                            <Form.Item
-                                                key="firstName"
-                                                label={this.boldify("First Name")}
-                                                name="firstName"
-                                                rules={this.validationRules("first name", "string")}
-                                            >
-                                                <Input />
-                                            </Form.Item>
-                                        </Col>
-                                        <Col span={halfSpan}>
-                                            <Form.Item
-                                                key="lastName"
-                                                label={this.boldify("Last Name")}
-                                                name="lastName"
-                                                rules={this.validationRules("last name", "string")}
-                                            >
-                                                <Input />
-                                            </Form.Item>
-                                        </Col>
-                                    </Row>
 
-                                    <Row gutter={formGutter}>
-                                        <Col span={halfSpan}>
-                                            <Form.Item
-                                                key="school/Company"
-                                                label={this.boldify("School/Company")}
-                                                name="school/Company"
-                                                rules={this.validationRules("School/Company", "string")}
-                                            >
-                                                <Input />
-                                            </Form.Item>
-                                        </Col>
-                                        <Col span={halfSpan}>
-                                            <Form.Item
-                                                key="Title"
-                                                label={this.boldify("Title")}
-                                                name="title"
-                                                rules={this.validationRules("Title", "string")}
-                                            >
-                                                <Input />
-                                            </Form.Item>
-                                        </Col>
-                                    </Row>
-
-
-                                    <Row gutter={formGutter}>
-                                        <Col span={halfSpan}>
-                                            <Form.Item
-                                                key="phoneNumber"
-                                                label={this.boldify("Phone Number")}
-                                                name="phoneNumber"
-                                                extra="Please input your phone number without any formatting."
-                                                rules={this.validationRules("phone number")}
-                                            >
-                                                <Input />
-                                            </Form.Item>
-                                        </Col>
-                                        <Col span={halfSpan}>
-                                            <Form.Item
-                                                key="email"
-                                                label={this.boldify("Email")}
-                                                name="email"
-                                                rules={this.validationRules("email", "email")}
-                                            >
-                                                <Input />
-                                            </Form.Item>
-                                        </Col>
-                                    </Row>
-
-                                </Col>
 
                                 {/** These are the forms added by the "add Reference" button */}
                                 {fields.map((field, index) => (
@@ -150,9 +77,9 @@ class Ref extends React.Component {
                                         <Row gutter={formGutter}>
                                             <Col span={halfSpan}>
                                                 <Form.Item
-                                                    key="firstName"
+                                                    key={[field.fieldKey, "firstname"]}
                                                     label={this.boldify("First Name")}
-                                                    name="firstName"
+                                                    name={[field.name, "firstName"]}
                                                     rules={this.validationRules("first name", "string")}
                                                 >
                                                     <Input />
@@ -160,9 +87,9 @@ class Ref extends React.Component {
                                             </Col>
                                             <Col span={halfSpan}>
                                                 <Form.Item
-                                                    key="lastName"
+                                                    key={[field.fieldKey, "lastname"]}
                                                     label={this.boldify("Last Name")}
-                                                    name="lastName"
+                                                    name={[field.name, "lastName"]}
                                                     rules={this.validationRules("last name", "string")}
                                                 >
                                                     <Input />
@@ -173,9 +100,9 @@ class Ref extends React.Component {
                                         <Row gutter={formGutter}>
                                             <Col span={halfSpan}>
                                                 <Form.Item
-                                                    key="school/Company"
+                                                    key={[field.fieldKey, "school/Company"]}
                                                     label={this.boldify("School/Company")}
-                                                    name="school/Company"
+                                                    name={[field.name, "school/Company"]}
                                                     rules={this.validationRules("School/Company", "string")}
                                                 >
                                                     <Input />
@@ -183,9 +110,9 @@ class Ref extends React.Component {
                                             </Col>
                                             <Col span={halfSpan}>
                                                 <Form.Item
-                                                    key="Title"
+                                                    key={[field.fieldKey, "Title"]}
                                                     label={this.boldify("Title")}
-                                                    name="title"
+                                                    name={[field.name, "title"]}
                                                     rules={this.validationRules("Title", "string")}
                                                 >
                                                     <Input />
@@ -197,9 +124,9 @@ class Ref extends React.Component {
                                         <Row gutter={formGutter}>
                                             <Col span={halfSpan}>
                                                 <Form.Item
-                                                    key="phoneNumber"
+                                                    key={[field.fieldKey, "PhoneNumber"]}
                                                     label={this.boldify("Phone Number")}
-                                                    name="phoneNumber"
+                                                    name={[field.name, "phoneNumber"]}
                                                     extra="Please input your phone number without any formatting."
                                                     rules={this.validationRules("phone number")}
                                                 >
@@ -208,9 +135,9 @@ class Ref extends React.Component {
                                             </Col>
                                             <Col span={halfSpan}>
                                                 <Form.Item
-                                                    key="email"
+                                                    key={[field.fieldKey, "Email"]}
                                                     label={this.boldify("Email")}
-                                                    name="email"
+                                                    name={[field.name, "email"]}
                                                     rules={this.validationRules("email", "email")}
                                                 >
                                                     <Input />
