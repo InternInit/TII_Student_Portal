@@ -1,5 +1,5 @@
 import React from "react";
-import { Form, Select, Input, Button, Checkbox, DatePicker, Radio } from "antd";
+import { Form, Divider, Input, Button, } from "antd";
 import { Row, Col } from "antd";
 import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
 
@@ -69,6 +69,7 @@ class Ref extends React.Component {
                         return (
                             <div style={{ marginTop: "60px" }}>
                                 <Col>
+                                    <Divider />
                                     <Row gutter={formGutter}>
                                         <Col span={halfSpan}>
                                             <Form.Item
@@ -145,6 +146,7 @@ class Ref extends React.Component {
                                 {/** These are the forms added by the "add Reference" button */}
                                 {fields.map((field, index) => (
                                     <Col>
+                                        <Divider />
                                         <Row gutter={formGutter}>
                                             <Col span={halfSpan}>
                                                 <Form.Item
