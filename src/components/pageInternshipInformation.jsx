@@ -489,7 +489,7 @@ class PageInternshipInformation extends Component {
                 )}
                 rules={this.validationRules("available dates of work", "array")}
               >
-                <RangePicker />
+                <RangePicker style={{ width: "100%" }} />
               </Form.Item>
             </Col>
           </Row>

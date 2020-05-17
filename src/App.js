@@ -11,6 +11,7 @@ import IntegratedForm from "./components/integratedForm.jsx";
 import Navbar from "./components/navbar.jsx";
 import TiiNav from "./components/TiiNav.jsx";
 import PagePersonal from "./components/pagePersonal.jsx";
+import PageInternshipInformation from "./components/pageInternshipInformation.jsx";
 
 //CSS Imports
 import "./App.css";

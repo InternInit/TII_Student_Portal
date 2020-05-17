@@ -1,5 +1,14 @@
 import React, { Component } from "react";
-import { Form, Select, Input, Button, Checkbox, DatePicker, Radio } from "antd";
+import {
+  Form,
+  Select,
+  Input,
+  Button,
+  Checkbox,
+  DatePicker,
+  Radio,
+  InputNumber
+} from "antd";
 import { Row, Col } from "antd";
 
 import "antd/dist/antd.css";
@@ -17,78 +26,23 @@ const thirdSpan = standardSpan / 3;
 const quarterSpan = standardSpan / 4;
 
 //items
-const allStates = [
-  "Alabama",
-  "Alaska",
-  "American Samoa",
-  "Arizona",
-  "Arkansas",
-  "California",
-  "Colorado",
-  "Connecticut",
-  "Delaware",
-  "District of Columbia",
-  "Federated States of Micronesia",
-  "Florida",
-  "Georgia",
-  "Guam",
-  "Hawaii",
-  "Idaho",
-  "Illinois",
-  "Indiana",
-  "Iowa",
-  "Kansas",
-  "Kentucky",
-  "Louisiana",
-  "Maine",
-  "Marshall Islands",
-  "Maryland",
-  "Massachusetts",
-  "Michigan",
-  "Minnesota",
-  "Mississippi",
-  "Missouri",
-  "Montana",
-  "Nebraska",
-  "Nevada",
-  "New Hampshire",
-  "New Jersey",
-  "New Mexico",
-  "New York",
-  "North Carolina",
-  "North Dakota",
-  "Northern Mariana Islands",
-  "Ohio",
-  "Oklahoma",
-  "Oregon",
-  "Palau",
-  "Pennsylvania",
-  "Puerto Rico",
-  "Rhode Island",
-  "South Carolina",
-  "South Dakota",
-  "Tennessee",
-  "Texas",
-  "Utah",
-  "Vermont",
-  "Virgin Island",
-  "Virginia",
-  "Washington",
-  "West Virginia",
-  "Wisconsin",
-  "Wyoming"
+const genders = ["Male", "Female", "Prefer Not to Say"];
+const race = [
+  "Caucasian",
+  "African American",
+  "Middle Eastern",
+  "Native American/Native Alaskan",
+  "Asian",
+  "Native Hawaiian/Other Pacific Islander"
 ];
-const daysOfTheWeek = [
-  "Sunday",
-  "Monday",
-  "Tuesday",
-  "Wednesday",
-  "Thursday",
-  "Friday",
-  "Saturday"
+const latinx = [
+  "I am not Hispanic/Latino",
+  "Black or African American",
+  "White or Caucasian",
+  "Native American/Native Alaskan",
+  "Asian",
+  "Native Hawaiian/Other Pacific Islander"
 ];
-const timesOfTheDay = ["Mornings", "Afternoons", "Evenings"];
-const paidOrUnpaid = ["Yes", "No", "It doesn't matter"];
 
 class PagePersonal extends Component {
   validationRules = (inputName, type) => [
@@ -101,9 +55,13 @@ class PagePersonal extends Component {
 
   boldify = text => <strong>{text}</strong>;
 
+  renderFields = () => {
+    return <h1>Hello</h1>;
+  };
+
   render() {
     return (
-      <div style={{ marginTop: "50px" }}>
+      <div style={{ width: "100%", marginTop: "50px" }}>
         <Form
           name="basic"
           initialValues={{
@@ -113,27 +71,99 @@ class PagePersonal extends Component {
           align="left"
         >
           <Row gutter={formGutter}>
-            <Col span={halfSpan}>
+            <Col span={standardSpan}>
               <Form.Item
-                key="firstName"
-                label={this.boldify("First Name")}
-                name="firstName"
-                rules={this.validationRules("first name", "string")}
+                key="gender"
+                name="gender"
+                label={this.boldify("What is your gender?")}
+                rules={this.validationRules("gender")}
               >
-                <Input />
-              </Form.Item>
-            </Col>
-            <Col span={halfSpan}>
-              <Form.Item
-                key="lastName"
-                label={this.boldify("Last Name")}
-                name="lastName"
-                rules={this.validationRules("last name", "string")}
-              >
-                <Input />
+                <Radio.Group>
+                  {genders.map(gender => (
+                    <Radio key={gender} value={gender}>
+                      {gender}
+                    </Radio>
+                  ))}
+                </Radio.Group>
               </Form.Item>
             </Col>
           </Row>
+
+          <Row gutter={formGutter}>
+            <Col span={standardSpan}>
+              <Form.Item
+                key="race"
+                label={this.boldify("Race/Ethnicity")}
+                name="race"
+                extra="Check all that apply"
+              >
+                <Checkbox.Group>
+                  <Row>
+                    {race.map(ethnicity => (
+                      <Col span={halfSpan}>
+                        <Checkbox
+                          value={ethnicity}
+                          style={{
+                            lineHeight: "32px"
+                          }}
+                        >
+                          {ethnicity}
+                        </Checkbox>
+                      </Col>
+                    ))}
+                  </Row>
+                </Checkbox.Group>
+              </Form.Item>
+            </Col>
+          </Row>
+
+          <Row gutter={formGutter}>
+            <Col span={standardSpan}>
+              <Form.Item
+                key="latinx"
+                label={this.boldify("If you are Hispanic/Latinx")}
+                name="latinx"
+                extra="Check all that apply"
+              >
+                <Checkbox.Group>
+                  <Row>
+                    {latinx.map(ethnicity => (
+                      <Col span={halfSpan}>
+                        <Checkbox
+                          value={ethnicity}
+                          style={{
+                            lineHeight: "32px"
+                          }}
+                        >
+                          {ethnicity}
+                        </Checkbox>
+                      </Col>
+                    ))}
+                  </Row>
+                </Checkbox.Group>
+              </Form.Item>
+            </Col>
+          </Row>
+
+          <Row gutter={formGutter}>
+            <Col span={standardSpan}>
+              <Form.Item
+                key="age"
+                label={this.boldify("Age")}
+                name="firstName"
+                rules={this.validationRules("age")}
+              >
+                <InputNumber style={{ width: "100%" }} />
+              </Form.Item>
+            </Col>
+          </Row>
+
+          <h1>
+            <strong>Please Input Your Educational History</strong>
+          </h1>
+          <Button type="primary" size="large" onClick={this.renderFields}>
+            Add School
+          </Button>
         </Form>
       </div>
     );
