@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PageInternshipInformation from "../components/pageInternshipInformation.jsx";
-
+import PageReferences from './PageReferences'
 class IntegratedForm extends Component {
   state = {
     page: 0,
@@ -37,7 +37,7 @@ class IntegratedForm extends Component {
         }}
 
       >
-        <PageInternshipInformation />
+        <PageReferences />
       </div>
     );
   }
