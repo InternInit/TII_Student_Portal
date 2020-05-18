@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import PageInternshipInformation from "../components/pageInternshipInformation.jsx";
+
+import PageReferences from './PageReferences'
 import PagePersonal from "../components/pagePersonal.jsx";
 
 class IntegratedForm extends Component {
@@ -33,6 +35,11 @@ class IntegratedForm extends Component {
 
   render() {
     const { page } = this.props;
+
+      >
+        <PageReferences />
+      </div>
+    );
 
     if (page === 0) {
       return (
