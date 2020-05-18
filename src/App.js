@@ -60,7 +60,7 @@ class App extends Component {
         clickOne={this.clickOne}
         clickTwo={this.clickTwo}
         clickThree={this.clickThree}
-        clickThree={this.clickThree}
+        clickFour={this.clickFour}
         highlightKey={highlightKey}
       />
     );

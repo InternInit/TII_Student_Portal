@@ -79,6 +79,7 @@ class TiiNav extends React.Component {
           theme="light"
           mode="inline"
           defaultSelectedKeys={this.props.highlightKey}
+          selectedKeys={this.props.highlightKey}
         >
           <Menu.Item key="1" onClick={this.props.clickOne}>
             {InternButton} <span>Internship Info</span>
@@ -102,7 +103,8 @@ class TiiNav extends React.Component {
             key="5"
             onClick={this.handleSubmit} //checks other states before allowing submit
           >
-            {SubmitButton}<span>Submit</span>
+            {SubmitButton}
+            <span>Submit</span>
           </Menu.Item>
         </Menu>
       </Sider>
