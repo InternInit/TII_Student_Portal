@@ -120,6 +120,9 @@ class PageInternshipInformation extends Component {
   render() {
     return (
       <div style={{ marginTop: "50px" }}>
+        <h1>Internship Information</h1>
+        <br />
+
         <Form
           name="basic"
           initialValues={{
@@ -489,7 +492,7 @@ class PageInternshipInformation extends Component {
                 )}
                 rules={this.validationRules("available dates of work", "array")}
               >
-                <RangePicker />
+                <RangePicker style={{ width: "100%" }} />
               </Form.Item>
             </Col>
           </Row>
@@ -516,11 +519,22 @@ class PageInternshipInformation extends Component {
           {/*Save and Continue or Next*/}
           <Form.Item>
             <Button
-              className="save-and-continue"
+              className="next-button"
               type="primary"
               htmlType="submit"
+              onClick={this.props.onNext}
             >
               Next
+            </Button>
+          </Form.Item>
+          <Form.Item>
+            <Button
+              className="submit-button"
+              type="primary"
+              htmlType="submit"
+              onClick={this.props.submit}
+            >
+              Submit
             </Button>
           </Form.Item>
         </Form>

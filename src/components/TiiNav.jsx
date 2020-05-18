@@ -77,21 +77,18 @@ class TiiNav extends React.Component {
         <Menu //Navigation Panel
           theme="light"
           mode="inline"
-          defaultSelectedKeys={["1"]}
+          defaultSelectedKeys={this.props.highlightKey}
         >
-          <Menu.Item
-            key="1"
-            onClick={this.handleClick} //onClick = testing purposes
-          >
+          <Menu.Item key="1" onClick={this.props.clickOne}>
             {InternButton} <span>Internship Info</span>
           </Menu.Item>
-          <Menu.Item key="2">
+          <Menu.Item key="2" onClick={this.props.clickTwo}>
             {PersonalButton} <span>Personal</span>
           </Menu.Item>
-          <Menu.Item key="3">
+          <Menu.Item key="3" onClick={this.props.clickThree}>
             {EssayButton} <span>Cover Letter</span>
           </Menu.Item>
-          <Menu.Item key="4">
+          <Menu.Item key="4" onClick={this.props.clickFour}>
             {ReferencesButton} <span>References</span>
           </Menu.Item>
           <Menu.Item
