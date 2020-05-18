@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PageInternshipInformation from "../components/pageInternshipInformation.jsx";
 
-import PageReferences from "./PageReferences";
+import PageReferences from "./components/pageReferences";
 import PagePersonal from "../components/pagePersonal.jsx";
 
 class IntegratedForm extends Component {
