@@ -280,9 +280,10 @@ class PagePersonal extends Component {
                         {/*SCHOOL NAME*/}
                         <Form.Item
                           {...field}
-                          key="schoolname"
+                          key={[field.fieldKey, "schoolName"]}
                           name="schoolName"
                           label={this.boldify("School Name")}
+                          validateTrigger={["onChange", "onBlur"]}
                           rules={this.validationRules("gender")}
                         >
                           <Input placeholder="School name" />
