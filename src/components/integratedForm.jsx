@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PageInternshipInformation from "../components/pageInternshipInformation.jsx";
 
-import PageReferences from './PageReferences'
+import PageReferences from "./PageReferences";
 import PagePersonal from "../components/pagePersonal.jsx";
 
 class IntegratedForm extends Component {
@@ -36,11 +36,6 @@ class IntegratedForm extends Component {
   render() {
     const { page } = this.props;
 
-      >
-        <PageReferences />
-      </div>
-    );
-
     if (page === 0) {
       return (
         <div
@@ -66,6 +61,18 @@ class IntegratedForm extends Component {
           }}
         >
           <PagePersonal onNext={this.props.onNext} />
+        </div>
+      );
+    } else if (page === 3) {
+      return (
+        <div
+          style={{
+            display: "flex",
+            width: "60%",
+            justifyContent: "center"
+          }}
+        >
+          <PageReference />
         </div>
       );
     }
