@@ -239,7 +239,7 @@ class PagePersonal extends Component {
               <Form.Item
                 key="age"
                 label={this.boldify("Age")}
-                name="firstName"
+                name="Age"
                 rules={this.validationRules("age")}
               >
                 <InputNumber style={{ width: "100%" }} />
@@ -281,7 +281,7 @@ class PagePersonal extends Component {
                         <Form.Item
                           {...field}
                           key={[field.fieldKey, "schoolName"]}
-                          name="schoolName"
+                          name={[field.name, "schoolName"]}
                           label={this.boldify("School Name")}
                           validateTrigger={["onChange", "onBlur"]}
                           rules={this.validationRules("gender")}
@@ -293,9 +293,9 @@ class PagePersonal extends Component {
                         <Row gutter={addressGutter}>
                           <Col span={standardSpan}>
                             <Form.Item
-                              key="schoolAddress"
+                              key={[field.fieldKey, "schoolAddress"]}
                               label={this.boldify("School Location")}
-                              name="schoolAddress"
+                              name={[field.name, "schoolAddress"]}
                               rules={this.validationRules("school's address")}
                             >
                               <Input placeholder="Address Line" />
@@ -307,8 +307,8 @@ class PagePersonal extends Component {
                         <Row gutter={addressGutter}>
                           <Col span={thirdSpan}>
                             <Form.Item
-                              key="city"
-                              name="city"
+                              key={[field.fieldKey, "city"]}
+                              name={[field.name, "city"]}
                               rules={this.validationRules("city")}
                             >
                               <Input placeholder="City" />
@@ -316,8 +316,8 @@ class PagePersonal extends Component {
                           </Col>
                           <Col span={thirdSpan}>
                             <Form.Item
-                              key="state"
-                              name="state"
+                              key={[field.fieldKey, "state"]}
+                              name={[field.name, "state"]}
                               rules={this.validationRules("state")}
                             >
                               <Select placeholder="State">
@@ -331,8 +331,8 @@ class PagePersonal extends Component {
                           </Col>
                           <Col span={thirdSpan}>
                             <Form.Item
-                              key="zip"
-                              name="zip"
+                              key={[field.fieldKey, "zip"]}
+                              name={[field.name, "zip"]}
                               rules={this.validationRules("zip code")}
                             >
                               <Input placeholder="Zip Code" />
@@ -344,9 +344,9 @@ class PagePersonal extends Component {
                         <Row gutter={formGutter}>
                           <Col span={halfSpan}>
                             <Form.Item
-                              key="courseConcentration"
+                              key={[field.fieldKey, "courseConcentration"]}
                               label={this.boldify("Course Concentration")}
-                              name="courseConcentration"
+                              name={[field.name, "courseConcentration"]}
                               rules={this.validationRules(
                                 "course concentration"
                               )}
@@ -357,9 +357,9 @@ class PagePersonal extends Component {
                           </Col>
                           <Col span={halfSpan}>
                             <Form.Item
-                              key="yearsCompleted"
+                              key={[field.fieldKey, "yearsCompleted"]}
                               label={this.boldify("Years Completed")}
-                              name="yearsCompleted"
+                              name={[field.name, "yearsCompleted"]}
                               rules={this.validationRules("years completed")}
                             >
                               <Input />
