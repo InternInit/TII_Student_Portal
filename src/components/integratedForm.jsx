@@ -1,11 +1,13 @@
 import React, { Component } from "react";
 import PageInternshipInformation from "../components/pageInternshipInformation.jsx";
+
 import PageReferences from './PageReferences'
+import PagePersonal from "../components/pagePersonal.jsx";
+
 class IntegratedForm extends Component {
   state = {
-    page: 0,
     internshipInformation: {
-      firstName: "",
+      firstName: "porridge",
       lastName: "",
       phone: null,
       email: "",
@@ -27,19 +29,46 @@ class IntegratedForm extends Component {
     }
   };
 
+  constructor(props) {
+    super(props);
+  }
+
   render() {
-    return (
-      <div
-        style={{
-          display: "flex",
-          width: "60%",
-          justifyContent: "center",
-        }}
+    const { page } = this.props;
 
       >
         <PageReferences />
       </div>
     );
+
+    if (page === 0) {
+      return (
+        <div
+          style={{
+            display: "flex",
+            width: "60%",
+            justifyContent: "center"
+          }}
+        >
+          <PageInternshipInformation
+            onNext={this.props.onNext}
+            submit={this.submit}
+          />
+        </div>
+      );
+    } else if (page === 1) {
+      return (
+        <div
+          style={{
+            display: "flex",
+            width: "60%",
+            justifyContent: "center"
+          }}
+        >
+          <PagePersonal onNext={this.props.onNext} />
+        </div>
+      );
+    }
   }
 }
 
