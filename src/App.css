@@ -4,12 +4,38 @@
 }
 
 /* Form Styles */
-Form.Item > label {
+form.Item > label {
   font-weight: bold;
 }
 
+h1,
+h2 {
+  font-weight: bold;
+}
+
+p {
+  text-align: left;
+}
+
+.educationBox {
+  padding-left: 25px;
+  padding-right: 25px;
+  padding-top: 20px;
+  margin-top: 30px;
+  background-color: #ededed;
+  border-radius: 10px;
+}
+
+MinusCircleOutlined {
+  display: inline-block;
+}
+
+h2 {
+  display: inline-block;
+}
+
 .next-button {
-    float: right;
+  float: right;
 }
 /* App Styles */
 .FormArea {
