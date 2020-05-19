@@ -1,5 +1,5 @@
 import React from "react";
-import { Form, Divider, Input, Button, } from "antd";
+import { Form, Input, Button, } from "antd";
 import { Row, Col } from "antd";
 import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
 
@@ -15,8 +15,6 @@ export default class PageReferences extends React.Component {
     constructor(props) {
         super(props);
         this.state = {}
-
-
     }
     render() {
         return (
@@ -27,7 +25,6 @@ export default class PageReferences extends React.Component {
     }
 }
 
-const rules = [{ required: true }];
 
 const formItemLayout = {
     labelCol: {
@@ -48,7 +45,7 @@ const formItemLayoutWithOutLabel = {
 };
 
 class Ref extends React.Component {
-
+    //Functions
     //THIS NEEDS TO BE FIXED ASAP!!!
     handleChange = event => {
         this.setState({ otherIndustry: event.target.value });
@@ -69,10 +66,6 @@ class Ref extends React.Component {
     };
 
     boldify = text => <strong>{text}</strong>;
-
-
-
-
 
     render() {
         return (
@@ -102,9 +95,10 @@ class Ref extends React.Component {
                                                     }}
                                                 />
                                             ) : null}
-
+                                            {/**First row of reference box */}
                                             <Row gutter={formGutter}>
                                                 <Col span={halfSpan}>
+                                                    {/**First name of Reference */}
                                                     <Form.Item
                                                         key={[field.fieldKey, "firstname"]}
                                                         label={this.boldify("First Name")}
@@ -115,6 +109,7 @@ class Ref extends React.Component {
                                                     </Form.Item>
                                                 </Col>
                                                 <Col span={halfSpan}>
+                                                    {/**Last name of Reference */}
                                                     <Form.Item
                                                         key={[field.fieldKey, "lastname"]}
                                                         label={this.boldify("Last Name")}
@@ -126,8 +121,10 @@ class Ref extends React.Component {
                                                 </Col>
                                             </Row>
 
+                                            {/**Second row of the reference box */}
                                             <Row gutter={formGutter}>
                                                 <Col span={halfSpan}>
+                                                    {/**Company of Reference */}
                                                     <Form.Item
                                                         key={[field.fieldKey, "school/Company"]}
                                                         label={this.boldify("School/Company")}
@@ -138,6 +135,7 @@ class Ref extends React.Component {
                                                     </Form.Item>
                                                 </Col>
                                                 <Col span={halfSpan}>
+                                                    {/**position within company of Reference */}
                                                     <Form.Item
                                                         key={[field.fieldKey, "Title"]}
                                                         label={this.boldify("Title")}
@@ -173,13 +171,12 @@ class Ref extends React.Component {
                                                     </Form.Item>
                                                 </Col>
                                             </Row>
-
-                                            {/*COURSE CONCENTRATION AND YEARS COMPLETED*/}
-
                                         </Form.Item>
                                     </div>
                                 ))}
+                                {/**Outside Reference Box */}
 
+                                {/**Add Reference Button */}
                                 <Form.Item>
                                     <Button
                                         type="primary"
@@ -190,14 +187,14 @@ class Ref extends React.Component {
                                         style={{ width: "200px", marginTop: "30px" }}
                                     >
                                         <PlusOutlined /> Add Reference
-                    </Button>
+                                    </Button>
                                 </Form.Item>
                             </div>
                         );
                     }}
                 </Form.List>
 
-
+                {/**Submit Button */}
                 <Form.Item>
                     <Button type="primary" htmlType="submit">
                         Submit
