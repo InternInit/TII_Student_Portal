@@ -10,7 +10,6 @@ const standardSpan = 24;
 const halfSpan = standardSpan / 2;
 
 
-
 export default class PageReferences extends React.Component {
     constructor(props) {
         super(props);
@@ -69,11 +68,13 @@ class Ref extends React.Component {
 
     render() {
         return (
+
             <Form onFinish={this.onFinish} className="my-form">
                 <Form.List name="reference">
                     {(fields, { add, remove }) => {
                         return (
                             <div style={{ marginTop: "40px" }}>
+                                <h1>References</h1>
                                 {fields.map((field, index) => (
                                     <div className="educationBox">
                                         <Form.Item

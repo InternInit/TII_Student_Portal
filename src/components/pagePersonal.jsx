@@ -140,7 +140,7 @@ class PagePersonal extends Component {
 
   render() {
     return (
-      <div style={{ width: "100%", marginTop: "50px" }}>
+      <div style={{ width: "100%", marginTop: "40px" }}>
         <h1>General Information</h1>
         <p>
           Fill out only what your comfortable with, but understand that missing
@@ -239,11 +239,7 @@ class PagePersonal extends Component {
               <Form.Item
                 key="age"
                 label={this.boldify("Age")}
-<<<<<<< HEAD
                 name="age"
-=======
-                name="Age"
->>>>>>> aa35adfafefea4a108bd0efc3321c55118a94019
                 rules={this.validationRules("age")}
               >
                 <InputNumber style={{ width: "100%" }} />
