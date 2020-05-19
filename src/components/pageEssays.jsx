@@ -1,21 +1,10 @@
 import React from 'react'
-import { Form, Select, Input, Button, message, DatePicker, Upload } from "antd";
-import { Row, Col } from "antd";
-import { MinusCircleOutlined, UploadOutlined, InboxOutlined } from "@ant-design/icons";
+import { Form, Input, Button, message, Upload } from "antd";
+import { InboxOutlined } from "@ant-design/icons";
 const { TextArea } = Input;
 const { Dragger } = Upload;
 
-//Object Destructuring
-const { Option } = Select;
-const { MonthPicker, RangePicker } = DatePicker;
-
-//Formatting
-const formGutter = [16, 16];
-const standardSpan = 24;
-const halfSpan = standardSpan / 2;
-const thirdSpan = standardSpan / 3;
-const quarterSpan = standardSpan / 4;
-
+//Handles file uploading
 const props = {
     name: 'file',
     action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
@@ -35,42 +24,11 @@ const props = {
 
 
 
-
-
 export default class pageEssays extends React.Component {
     constructor(props) {
         super(props);
         this.state = {}
     }
-
-
-    //THIS NEEDS TO BE FIXED ASAP!!!
-    handleChange = event => {
-        this.setState({ otherIndustry: event.target.value });
-        console.log(this.state);
-    };
-
-
-
-
-    validationRules = (inputName, type) => [
-        {
-            required: true,
-            message: "Please input your " + inputName,
-            type: type
-        }
-    ];
-
-    onFinish = (values) => {
-        console.log(values)
-        //TO BE FILLED
-        //Format the dates in the array for start and end dates
-    };
-
-    boldify = text => <strong>{text}</strong>;
-
-
-
 
     render() {
         return (
@@ -166,8 +124,26 @@ export default class pageEssays extends React.Component {
             </div>
         )
     }
+    //Functions
+    //THIS NEEDS TO BE FIXED ASAP!!!
+    handleChange = event => {
+        this.setState({ otherIndustry: event.target.value });
+        console.log(this.state);
+    };
 
+    validationRules = (inputName, type) => [
+        {
+            required: true,
+            message: "Please input your " + inputName,
+            type: type
+        }];
 
+    onFinish = (values) => {
+        //TO BE FILLED
+        //Format the dates in the array for start and end dates
+    };
+
+    boldify = text => <strong>{text}</strong>;
 
 }
 
