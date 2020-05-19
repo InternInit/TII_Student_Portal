@@ -45,7 +45,7 @@ class IntegratedForm extends Component {
             justifyContent: "center"
           }}
         >
-          <PageEssays
+          <PageInternshipInformation
             onNext={this.props.onNext}
             submit={this.submit}
           />
