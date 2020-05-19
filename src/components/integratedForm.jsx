@@ -3,7 +3,7 @@ import PageInternshipInformation from "../components/pageInternshipInformation.j
 
 import PageReference from "../components/pageReferences.jsx";
 import PagePersonal from "../components/pagePersonal.jsx";
-
+import PageEssays from './pageEssays'
 class IntegratedForm extends Component {
   state = {
     internshipInformation: {
@@ -45,7 +45,7 @@ class IntegratedForm extends Component {
             justifyContent: "center"
           }}
         >
-          <PageInternshipInformation
+          <PageEssays
             onNext={this.props.onNext}
             submit={this.submit}
           />
