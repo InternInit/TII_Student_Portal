@@ -47,7 +47,7 @@ class TiiNav extends React.Component {
   }
 
   render() {
-    const { Sider, Content } = Layout;
+    const { Sider } = Layout;
     let {
       InternButton,
       PersonalButton,
