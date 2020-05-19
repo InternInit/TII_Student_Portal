@@ -239,7 +239,7 @@ class PagePersonal extends Component {
               <Form.Item
                 key="age"
                 label={this.boldify("Age")}
-                name="firstName"
+                name="age"
                 rules={this.validationRules("age")}
               >
                 <InputNumber style={{ width: "100%" }} />
