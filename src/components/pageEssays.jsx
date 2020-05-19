@@ -1,8 +1,9 @@
 import React from 'react'
-import { Form, Select, Input, Button, Checkbox, DatePicker, Radio } from "antd";
+import { Form, Select, Input, Button, message, DatePicker, Upload } from "antd";
 import { Row, Col } from "antd";
-import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
+import { MinusCircleOutlined, UploadOutlined, InboxOutlined } from "@ant-design/icons";
 const { TextArea } = Input;
+const { Dragger } = Upload;
 
 //Object Destructuring
 const { Option } = Select;
@@ -14,6 +15,26 @@ const standardSpan = 24;
 const halfSpan = standardSpan / 2;
 const thirdSpan = standardSpan / 3;
 const quarterSpan = standardSpan / 4;
+
+const props = {
+    name: 'file',
+    action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
+    multiple: true,
+    onChange(info) {
+        const { status } = info.file;
+        if (status !== 'uploading') {
+            console.log(info.file, info.fileList);
+        }
+        if (status === 'done') {
+            message.success(`${info.file.name} file uploaded successfully.`);
+        } else if (status === 'error') {
+            message.error(`${info.file.name} file upload failed.`);
+        }
+    },
+};
+
+
+
 
 
 export default class pageEssays extends React.Component {
@@ -28,6 +49,9 @@ export default class pageEssays extends React.Component {
         this.setState({ otherIndustry: event.target.value });
         console.log(this.state);
     };
+
+
+
 
     validationRules = (inputName, type) => [
         {
@@ -97,7 +121,32 @@ export default class pageEssays extends React.Component {
                         <TextArea autoSize={{ minRows: 5 }} />
                     </Form.Item>
 
+                    {/**Cover Letter */}
+                    <Form.Item
+                        name="CoverLetter"
+                        key="CoverLetter"
+                        label={this.boldify("Cover Letter (Optional)")}>
+                        <Dragger {...props} style={{ width: "250px", height: "30px" }}>
+                            <h1 style={{ color: "blue" }}>
+                                <InboxOutlined />
+                            </h1>
+                            <h5>Click or Drag Files to Upload Here</h5>
+                        </Dragger>
+                    </Form.Item>
 
+                    {/**Portfolio */}
+                    <Form.Item
+                        name="Portfolio"
+                        key="Portfolio"
+                        label={this.boldify("Portfolio")}
+                        rules={this.validationRules("portfolio")}>
+                        <Dragger {...props} style={{ width: "250px", height: "30px" }}>
+                            <h1 style={{ color: "blue" }}>
+                                <InboxOutlined />
+                            </h1>
+                            <h5>Click or Drag Files to Upload Here</h5>
+                        </Dragger>
+                    </Form.Item>
 
 
                     {/*Save and Continue or Next*/}
