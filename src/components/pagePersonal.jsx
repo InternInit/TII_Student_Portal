@@ -140,7 +140,7 @@ class PagePersonal extends Component {
 
   render() {
     return (
-      <div style={{ width: "100%", marginTop: "50px" }}>
+      <div style={{ width: "100%", marginTop: "40px" }}>
         <h1>General Information</h1>
         <p>
           Fill out only what your comfortable with, but understand that missing

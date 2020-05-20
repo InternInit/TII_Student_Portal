@@ -150,7 +150,7 @@ class PageInternshipInformation extends Component {
 
   render() {
     return (
-      <div style={{ marginTop: "50px" }}>
+      <div style={{ marginTop: "40px" }}>
         <h1>Internship Information</h1>
         <br />
 
