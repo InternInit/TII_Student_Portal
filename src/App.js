@@ -6,6 +6,9 @@ import logo from "./logo.svg";
 //Ant Design Imports
 import { Layout, Menu } from "antd";
 
+//Styled Component Imports
+import styled from "styled-components";
+
 //Custom Component Imports
 import IntegratedForm from "./components/integratedForm.jsx";
 import Navbar from "./components/navbar.jsx";
@@ -92,7 +95,7 @@ class App extends Component {
               display: "flex",
               padding: "30px",
               justifyContent: "center",
-              backgroundColor: "white"
+              backgroundColor: "#ededed"
             }}
           >
             {this.renderPage()}

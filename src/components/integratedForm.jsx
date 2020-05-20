@@ -10,8 +10,12 @@ import PageEssays from "./pageEssays";
 //Styles
 const PageContainer = styled.div`
   display: flex;
-  width: 60%;
+  width: 70%;
+  padding-left: 5%;
+  padding-right: 5%;
   justifycontent: center;
+  background-color: white;
+  border-radius: 10px;
 `;
 
 class IntegratedForm extends Component {

@@ -188,12 +188,16 @@ class Ref extends React.Component {
                   {/**Add Reference Button */}
                   <Form.Item>
                     <Button
-                      type="primary"
+                      type="dashed"
                       size="large"
                       onClick={() => {
                         add();
                       }}
-                      style={{ width: "200px", marginTop: "30px" }}
+                      style={{
+                        width: "100%",
+                        marginTop: "10px",
+                        marginBottom: "30px"
+                      }}
                     >
                       <PlusOutlined /> Add Reference
                     </Button>

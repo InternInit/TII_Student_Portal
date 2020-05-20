@@ -372,12 +372,16 @@ class PagePersonal extends Component {
 
                   <Form.Item>
                     <Button
-                      type="primary"
+                      type="dashed"
                       size="large"
                       onClick={() => {
                         add();
                       }}
-                      style={{ width: "20%", marginTop: "30px" }}
+                      style={{
+                        width: "100%",
+                        marginTop: "10px",
+                        marginBottom: "30px"
+                      }}
                     >
                       <PlusOutlined /> Add School
                     </Button>
