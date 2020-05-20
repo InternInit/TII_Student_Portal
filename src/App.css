@@ -4,9 +4,8 @@
 }
 
 /* Form Styles */
-.save-and-continue {
-  float: right;
-  width: 150px;
+html {
+  scroll-behavior: smooth;
 }
 
 h1,
@@ -16,6 +15,11 @@ h2 {
 
 p {
   text-align: left;
+}
+
+.save-and-continue {
+  float: right;
+  width: 150px;
 }
 
 .educationBox {

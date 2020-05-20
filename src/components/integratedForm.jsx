@@ -20,34 +20,31 @@ const PageContainer = styled.div`
 
 class IntegratedForm extends Component {
   render() {
-    const { page } = this.props;
+    const { page, onNext, onBack } = this.props;
 
     //Rerenders the form based on what page the user is currently on
     if (page === 0) {
       return (
         <PageContainer>
-          <PageInternshipInformation
-            onNext={this.props.onNext}
-            submit={this.submit}
-          />
+          <PageInternshipInformation onNext={onNext} />
         </PageContainer>
       );
     } else if (page === 1) {
       return (
         <PageContainer>
-          <PagePersonal onNext={this.props.onNext} onBack={this.props.onBack} />
+          <PagePersonal onNext={onNext} onBack={onBack} />
         </PageContainer>
       );
     } else if (page === 2) {
       return (
         <PageContainer>
-          <PageEssays onNext={this.props.onNext} onBack={this.props.onBack} />
+          <PageEssays onNext={onNext} onBack={onBack} />
         </PageContainer>
       );
     } else if (page === 3) {
       return (
         <PageContainer>
-          <PageReference onBack={this.props.onBack} />
+          <PageReference onBack={onBack} />
         </PageContainer>
       );
     }
