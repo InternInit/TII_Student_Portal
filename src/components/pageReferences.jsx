@@ -43,7 +43,7 @@ const formItemProps = {
     align: "left",
     className: "pageReferences"
   },
-  inputField: function(field, label, name, validationType) {
+  inputField: function (field, label, name, validationType) {
     return {
       key: [field.fieldKey, name],
       label: boldify(label),
@@ -62,9 +62,11 @@ class PageReferences extends Component {
   render() {
     return (
       <div style={{ width: "100%" }}>
-        <Form {...formItemProps.totalForm}>
+        <Form  {...formItemProps.totalForm}>
           <Form.List name="reference">
             {(fields, { add, remove }) => {
+              console.log(fields);
+
               return (
                 <div style={{ marginTop: "40px" }}>
                   {fields.map((field, index) => (

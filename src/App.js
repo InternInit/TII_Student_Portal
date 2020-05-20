@@ -95,7 +95,8 @@ class App extends Component {
               display: "flex",
               padding: "30px",
               justifyContent: "center",
-              backgroundColor: "#ededed"
+              backgroundColor: "#ededed",
+              minHeight: "100vh"
             }}
           >
             {this.renderPage()}
