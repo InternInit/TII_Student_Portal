@@ -122,6 +122,27 @@ const props = {
   }
 };
 
+//Functions
+const validationRules = (inputName, type) => [
+  {
+    required: true,
+    message: "Please input your " + inputName,
+    type: type
+  }
+];
+
+const boldify = text => <strong>{text}</strong>;
+
+//Props
+const formItemProps = {
+  firstName: {
+    key: "firstName",
+    label: boldify("First Name"),
+    name: "firstName",
+    rules: validationRules("first name", "string")
+  }
+};
+
 class PageInternshipInformation extends Component {
   state = {
     otherIndustry: ""
@@ -164,12 +185,7 @@ class PageInternshipInformation extends Component {
         >
           <Row gutter={formGutter}>
             <Col span={halfSpan}>
-              <Form.Item
-                key="firstName"
-                label={this.boldify("First Name")}
-                name="firstName"
-                rules={this.validationRules("first name", "string")}
-              >
+              <Form.Item {...formItemProps.firstName}>
                 <Input />
               </Form.Item>
             </Col>
