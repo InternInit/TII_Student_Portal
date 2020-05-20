@@ -116,6 +116,7 @@ export default class pageEssays extends React.Component {
               className="back-button"
               type="primary"
               htmlType="submit"
+              href="#top"
               onClick={this.props.onBack}
             >
               Previous
@@ -124,6 +125,7 @@ export default class pageEssays extends React.Component {
               className="next-button"
               type="primary"
               htmlType="submit"
+              href="#top"
               onClick={this.props.onNext}
             >
               Next

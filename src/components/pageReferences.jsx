@@ -191,6 +191,7 @@ class PageReferences extends Component {
               className="back-button"
               type="primary"
               htmlType="submit"
+              href="#top"
               onClick={this.props.onBack}
             >
               Previous

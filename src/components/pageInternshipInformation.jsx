@@ -519,6 +519,7 @@ class PageInternshipInformation extends Component {
               className="next-button"
               type="primary"
               htmlType="submit"
+              href="#top"
               onClick={this.props.onNext}
             >
               Next

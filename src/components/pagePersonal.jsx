@@ -396,6 +396,7 @@ class PagePersonal extends Component {
               className="back-button"
               type="primary"
               htmlType="submit"
+              href="#top"
               onClick={this.props.onBack}
             >
               Previous
@@ -404,6 +405,7 @@ class PagePersonal extends Component {
               className="next-button"
               type="primary"
               htmlType="submit"
+              href="#top"
               onClick={this.props.onNext}
             >
               Next
