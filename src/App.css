@@ -35,9 +35,17 @@ h2 {
   display: inline-block;
 }
 
-.next-button {
+.next-button,
+.submit-button {
+  display: inline-block;
   float: right;
 }
+
+.back-button {
+  display: inline-block;
+  float: left;
+}
+
 /* App Styles */
 .FormArea {
   background-color: white;

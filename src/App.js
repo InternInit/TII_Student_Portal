@@ -31,6 +31,13 @@ class App extends Component {
     });
   };
 
+  onBack = () => {
+    const newPage = this.state.page - 1;
+    this.setState({
+      page: newPage
+    });
+  };
+
   clickOne = () => {
     this.setState({ page: 0 });
   };
@@ -49,7 +56,13 @@ class App extends Component {
 
   renderPage = () => {
     const pageNumber = this.state.page;
-    return <IntegratedForm page={pageNumber} onNext={this.onNext} />;
+    return (
+      <IntegratedForm
+        page={pageNumber}
+        onNext={this.onNext}
+        onBack={this.onBack}
+      />
+    );
   };
 
   // BUG: PROBLEM WITH RENDERING THE DIFFERENT NAVBAR SELECTIONS

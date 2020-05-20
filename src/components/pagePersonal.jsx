@@ -239,11 +239,7 @@ class PagePersonal extends Component {
               <Form.Item
                 key="age"
                 label={this.boldify("Age")}
-<<<<<<< HEAD
                 name="age"
-=======
-                name="Age"
->>>>>>> aa35adfafefea4a108bd0efc3321c55118a94019
                 rules={this.validationRules("age")}
               >
                 <InputNumber style={{ width: "100%" }} />
@@ -390,6 +386,25 @@ class PagePersonal extends Component {
               );
             }}
           </Form.List>
+
+          <Form.Item>
+            <Button
+              className="back-button"
+              type="primary"
+              htmlType="submit"
+              onClick={this.props.onBack}
+            >
+              Previous
+            </Button>
+            <Button
+              className="next-button"
+              type="primary"
+              htmlType="submit"
+              onClick={this.props.onNext}
+            >
+              Next
+            </Button>
+          </Form.Item>
         </Form>
       </div>
     );
