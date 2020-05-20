@@ -148,7 +148,7 @@ class PagePersonal extends Component {
         </p>
         <br />
         <Form
-          name="basic"
+          name="pagePersonal"
           initialValues={{
             remember: true
           }}

@@ -1,6 +1,9 @@
 import React from "react";
 import { Form, Input, Button, message, Upload } from "antd";
 import { InboxOutlined } from "@ant-design/icons";
+import "../App.css";
+
+//Object Destructuring
 const { TextArea } = Input;
 const { Dragger } = Upload;
 
@@ -35,7 +38,7 @@ export default class pageEssays extends React.Component {
         <p>We'd like to learn more about you!</p>
 
         <Form
-          name="basic"
+          name="pageEssays"
           initialValues={{
             remember: true
           }}

@@ -1,24 +1,14 @@
-import React from "react";
+import React, { Component } from "react";
 import { Form, Input, Button } from "antd";
 import { Row, Col } from "antd";
 import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
 import "../App.css";
+import styled from "styled-components";
 
 //Formatting
 const formGutter = [16, 16];
 const standardSpan = 24;
 const halfSpan = standardSpan / 2;
-
-export default class PageReferences extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-  render() {
-    return <Ref />;
-  }
-}
-
 const formItemLayout = {
   labelCol: {
     xs: { span: 24 },
@@ -29,7 +19,6 @@ const formItemLayout = {
     sm: { span: 24 }
   }
 };
-
 const formItemLayoutWithOutLabel = {
   wrapperCol: {
     xs: { span: 24, offset: 0 },
@@ -37,38 +26,43 @@ const formItemLayoutWithOutLabel = {
   }
 };
 
-class Ref extends React.Component {
-  //Functions
-  //THIS NEEDS TO BE FIXED ASAP!!!
-  handleChange = event => {
-    this.setState({ otherIndustry: event.target.value });
-    console.log(this.state);
-  };
+//Functions
+const validationRules = (inputName, type) => [
+  {
+    required: true,
+    message: "Please input your " + inputName,
+    type: type
+  }
+];
+const boldify = text => <strong>{text}</strong>;
 
-  validationRules = (inputName, type) => [
-    {
-      required: true,
-      message: "Please input your " + inputName,
-      type: type
-    }
-  ];
+//Props
+const formItemProps = {
+  totalForm: {
+    layout: "vertical",
+    align: "left",
+    className: "pageReferences"
+  },
+  inputField: function(field, label, name, validationType) {
+    return {
+      key: [field.fieldKey, name],
+      label: boldify(label),
+      name: [field.name, name],
+      rules: validationRules(label, validationType ? validationType : "string")
+    };
+  },
+  addButton: {
+    type: "dashed",
+    size: "large",
+    style: { width: "100%", marginTop: "10px", marginBottom: "30px" }
+  }
+};
 
-  onFinish = () => {
-    //TO BE FILLED
-    //Format the dates in the array for start and end dates
-  };
-
-  boldify = text => <strong>{text}</strong>;
-
+class PageReferences extends Component {
   render() {
     return (
       <div style={{ width: "100%" }}>
-        <Form
-          layout="vertical"
-          align="left"
-          onFinish={this.onFinish}
-          className="pageReferences"
-        >
+        <Form {...formItemProps.totalForm}>
           <Form.List name="reference">
             {(fields, { add, remove }) => {
               return (
@@ -82,30 +76,18 @@ class Ref extends React.Component {
                         required={false}
                         key={field.key}
                       >
-                        {fields.length > 1 ? (
-                          <MinusCircleOutlined
-                            className="dynamic-delete-button"
-                            style={{
-                              fontSize: "18px",
-                              padding: "0 8px 0 0"
-                            }}
-                            onClick={() => {
-                              remove(field.name);
-                            }}
-                          />
-                        ) : null}
+                        {/*Minus button removes field when clicked*/}
+                        {this.renderMinusButton(fields, field, remove)}
 
                         {/**First row of reference box */}
                         <Row gutter={formGutter}>
                           <Col span={halfSpan}>
                             {/**First name of Reference */}
                             <Form.Item
-                              key={[field.fieldKey, "firstname"]}
-                              label={this.boldify("First Name")}
-                              name={[field.name, "firstName"]}
-                              rules={this.validationRules(
-                                "first name",
-                                "string"
+                              {...formItemProps.inputField(
+                                field,
+                                "First Name",
+                                "firstName"
                               )}
                             >
                               <Input />
@@ -114,12 +96,10 @@ class Ref extends React.Component {
                           <Col span={halfSpan}>
                             {/**Last name of Reference */}
                             <Form.Item
-                              key={[field.fieldKey, "lastname"]}
-                              label={this.boldify("Last Name")}
-                              name={[field.name, "lastName"]}
-                              rules={this.validationRules(
-                                "last name",
-                                "string"
+                              {...formItemProps.inputField(
+                                field,
+                                "Last Name",
+                                "lastName"
                               )}
                             >
                               <Input />
@@ -132,12 +112,10 @@ class Ref extends React.Component {
                           <Col span={halfSpan}>
                             {/**Company of Reference */}
                             <Form.Item
-                              key={[field.fieldKey, "school/Company"]}
-                              label={this.boldify("School/Company")}
-                              name={[field.name, "school/Company"]}
-                              rules={this.validationRules(
+                              {...formItemProps.inputField(
+                                field,
                                 "School/Company",
-                                "string"
+                                "schoolCompany"
                               )}
                             >
                               <Input />
@@ -146,10 +124,11 @@ class Ref extends React.Component {
                           <Col span={halfSpan}>
                             {/**position within company of Reference */}
                             <Form.Item
-                              key={[field.fieldKey, "Title"]}
-                              label={this.boldify("Title")}
-                              name={[field.name, "title"]}
-                              rules={this.validationRules("Title", "string")}
+                              {...formItemProps.inputField(
+                                field,
+                                "Title",
+                                "title"
+                              )}
                             >
                               <Input />
                             </Form.Item>
@@ -160,21 +139,24 @@ class Ref extends React.Component {
                         <Row gutter={formGutter}>
                           <Col span={halfSpan}>
                             <Form.Item
-                              key={[field.fieldKey, "PhoneNumber"]}
-                              label={this.boldify("Phone Number")}
-                              name={[field.name, "phoneNumber"]}
+                              {...formItemProps.inputField(
+                                field,
+                                "Phone Number",
+                                "phoneNumber"
+                              )}
                               extra="Please input your phone number without any formatting."
-                              rules={this.validationRules("phone number")}
                             >
                               <Input />
                             </Form.Item>
                           </Col>
                           <Col span={halfSpan}>
                             <Form.Item
-                              key={[field.fieldKey, "Email"]}
-                              label={this.boldify("Email")}
-                              name={[field.name, "email"]}
-                              rules={this.validationRules("email", "email")}
+                              {...formItemProps.inputField(
+                                field,
+                                "Email",
+                                "email",
+                                "email"
+                              )}
                             >
                               <Input />
                             </Form.Item>
@@ -188,15 +170,9 @@ class Ref extends React.Component {
                   {/**Add Reference Button */}
                   <Form.Item>
                     <Button
-                      type="dashed"
-                      size="large"
+                      {...formItemProps.addButton}
                       onClick={() => {
                         add();
-                      }}
-                      style={{
-                        width: "100%",
-                        marginTop: "10px",
-                        marginBottom: "30px"
                       }}
                     >
                       <PlusOutlined /> Add Reference
@@ -225,4 +201,20 @@ class Ref extends React.Component {
       </div>
     );
   }
+  renderMinusButton = (fields, field, remove) => {
+    return fields.length > 1 ? (
+      <MinusCircleOutlined
+        className="dynamic-delete-button"
+        style={{
+          fontSize: "18px",
+          padding: "0 8px 0 0"
+        }}
+        onClick={() => {
+          remove(field.name);
+        }}
+      />
+    ) : null;
+  };
 }
+
+export default PageReferences;
