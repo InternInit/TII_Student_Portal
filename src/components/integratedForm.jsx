@@ -19,30 +19,6 @@ const PageContainer = styled.div`
 `;
 
 class IntegratedForm extends Component {
-  state = {
-    internshipInformation: {
-      firstName: "porridge",
-      lastName: "",
-      phone: null,
-      email: "",
-      addressLine: "",
-      city: "",
-      usState: "",
-      zipcode: "",
-      yearOfGraduation: null,
-      industry: "",
-      unweightedGPA: null,
-      weightedGPA: null,
-      courses: "",
-      Extracurriculars: "",
-      daysToWork: null,
-      timesToWork: null,
-      dateOfStartAndEnd: null,
-      paidUnpaid: null,
-      resume: null
-    }
-  };
-
   render() {
     const { page } = this.props;
 

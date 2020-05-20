@@ -55,6 +55,7 @@ class TiiNav extends React.Component {
       ReferencesButton
     } = this.state;
     let { collapsed, SubmitButton } = this.state;
+    let { clickOne, clickTwo, clickThree, clickFour } = this.props;
 
     return (
       <Sider //styling the sider
@@ -81,19 +82,19 @@ class TiiNav extends React.Component {
           defaultSelectedKeys={this.props.highlightKey}
           selectedKeys={this.props.highlightKey}
         >
-          <Menu.Item key="1" onClick={this.props.clickOne}>
+          <Menu.Item key="1" onClick={clickOne}>
             {InternButton} <span>Internship Info</span>
           </Menu.Item>
 
-          <Menu.Item key="2" onClick={this.props.clickTwo}>
+          <Menu.Item key="2" onClick={clickTwo}>
             {PersonalButton} <span>Personal</span>
           </Menu.Item>
 
-          <Menu.Item key="3" onClick={this.props.clickThree}>
+          <Menu.Item key="3" onClick={clickThree}>
             {EssayButton} <span>Written Work</span>
           </Menu.Item>
 
-          <Menu.Item key="4" onClick={this.props.clickFour}>
+          <Menu.Item key="4" onClick={clickFour}>
             {ReferencesButton} <span>References</span>
           </Menu.Item>
           <Menu.Item
