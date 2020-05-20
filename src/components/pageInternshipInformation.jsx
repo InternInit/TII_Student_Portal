@@ -27,6 +27,7 @@ const { Dragger } = Upload;
 
 //Formatting
 const formGutter = [16, 16];
+const checkGutter = [8, 8];
 const standardSpan = 24;
 const halfSpan = standardSpan / 2;
 const thirdSpan = standardSpan / 3;
@@ -105,6 +106,166 @@ const daysOfTheWeek = [
 ];
 const timesOfTheDay = ["Mornings", "Afternoons", "Evenings"];
 const paidOrUnpaid = ["Yes", "No", "It doesn't matter"];
+const industry = [
+  "General Business",
+  "Consulting",
+  "Finance or Accounting",
+  "Media or Tellecommunications",
+  "Real Estate",
+  "Engineering",
+  "Science Research",
+  "Computer Science",
+  "Biotechnology",
+  "Vocational",
+  "Political",
+  "Marketing"
+];
+
+//Functions
+const validationRules = (inputName, type) => [
+  {
+    required: true,
+    message: "Please input your " + inputName,
+    type: type
+  }
+];
+
+const boldify = text => <strong>{text}</strong>;
+
+//Props
+const formItemProps = {
+  totalForm: {
+    name: "pageInternshipInformation",
+    initialValues: {
+      remember: true
+    },
+    layout: "vertical",
+    align: "left"
+  },
+  firstName: {
+    key: "firstName",
+    label: boldify("First Name"),
+    name: "firstName",
+    rules: validationRules("first name", "string")
+  },
+  lastName: {
+    key: "lastName",
+    label: boldify("Last Name"),
+    name: "lastName",
+    rules: validationRules("last name", "string")
+  },
+  phoneNumber: {
+    key: "phoneNumber",
+    label: boldify("Phone Number"),
+    name: "phoneNumber",
+    extra: "Please input your phone number without any formatting.",
+    rules: validationRules("phone number")
+  },
+  email: {
+    key: "email",
+    label: boldify("Email"),
+    name: "email",
+    rules: validationRules("email", "email")
+  },
+  addressLine: {
+    key: "addressLine",
+    label: boldify("Address"),
+    name: "address",
+    rules: validationRules("address")
+  },
+  city: {
+    key: "city",
+    name: "city",
+    rules: validationRules("city")
+  },
+  livingState: {
+    key: "state",
+    name: "state",
+    rules: validationRules("state")
+  },
+  zip: {
+    key: "zip",
+    name: "zip",
+    rules: validationRules("zip code")
+  },
+  yog: {
+    key: "yog",
+    label: boldify("Year of graduation"),
+    name: "yog",
+    rules: validationRules("year of graduation")
+  },
+  industry: {
+    key: "industry",
+    label: boldify("What industry are you applying to?"),
+    name: "industry",
+    rules: [
+      {
+        required: true,
+        message: "Please input your industries of choice"
+      }
+    ]
+  },
+  unweightedGPA: {
+    key: "unweightedGPA",
+    label: boldify("What is your unweighted GPA?"),
+    name: "unweightedGPA",
+    rules: validationRules("unweighted GPA"),
+    extra: "Your GPA should be out of 4.0"
+  },
+  weightedGPA: {
+    key: "weightedGPA",
+    label: boldify("What is your weighted GPA (optional)?"),
+    name: "weightedGPA",
+    extra: "Indicate your weighted GPA over the scale"
+  },
+  courses: {
+    key: "courses",
+    label: boldify("Relevant courses to your industry."),
+    name: "courses",
+    rules: validationRules("relevant courses"),
+    extra:
+      "Separate each entry with a comma and a space, and capitalize the AP/IB for your AP/IB Classes"
+  },
+  extracurriculars: {
+    key: "extracurriculars",
+    label: boldify("Extracurricular Activities"),
+    name: "extracurriculars",
+    rules: validationRules("extracurricular activities"),
+    extra:
+      "Separate each entry with a comma and a space, and in parentheses, show how long you spent on the activity."
+  },
+  daysToWork: {
+    key: "daysToWork",
+    label: boldify("What days are you willing to work?"),
+    name: "daysToWork",
+    rules: validationRules("optimal days to work", "array")
+  },
+  timesToWork: {
+    key: "timesToWork",
+    label: boldify("What times are you willing to work?"),
+    name: "timesToWork",
+    rules: validationRules("times available to work", "array")
+  },
+  dateOfStartAndEnd: {
+    key: "dateOfStartAndEnd",
+    name: "dateOfStartAndEnd",
+    label: boldify(
+      "When can you start working and when do you need to stop working?"
+    ),
+    rules: validationRules("available dates of work", "array")
+  },
+  paidUnpaid: {
+    key: "paidUnpaid",
+    name: "paidUnpaid",
+    label: boldify("Are you willing to work unpaid?"),
+    rules: validationRules("preference for pay")
+  },
+  resume: {
+    name: "resume",
+    key: "resume",
+    label: boldify("Resumé (Optional)")
+  }
+};
 const props = {
   name: "file",
   action: "https://www.mocky.io/v2/5cc8019d300000980a055e76",
@@ -122,52 +283,10 @@ const props = {
   }
 };
 
-//Functions
-const validationRules = (inputName, type) => [
-  {
-    required: true,
-    message: "Please input your " + inputName,
-    type: type
-  }
-];
-
-const boldify = text => <strong>{text}</strong>;
-
-//Props
-const formItemProps = {
-  firstName: {
-    key: "firstName",
-    label: boldify("First Name"),
-    name: "firstName",
-    rules: validationRules("first name", "string")
-  }
-};
-
 class PageInternshipInformation extends Component {
   state = {
     otherIndustry: ""
   };
-
-  //THIS NEEDS TO BE FIXED ASAP!!!
-  handleChange = event => {
-    this.setState({ otherIndustry: event.target.value });
-    console.log(this.state);
-  };
-
-  validationRules = (inputName, type) => [
-    {
-      required: true,
-      message: "Please input your " + inputName,
-      type: type
-    }
-  ];
-
-  onFinish = () => {
-    //TO BE FILLED
-    //Format the dates in the array for start and end dates
-  };
-
-  boldify = text => <strong>{text}</strong>;
 
   render() {
     return (
@@ -175,85 +294,56 @@ class PageInternshipInformation extends Component {
         <h1>Internship Information</h1>
         <br />
 
-        <Form
-          name="basic"
-          initialValues={{
-            remember: true
-          }}
-          layout="vertical"
-          align="left"
-        >
+        <Form {...formItemProps.totalForm}>
+          {/*First and Last Name*/}
           <Row gutter={formGutter}>
             <Col span={halfSpan}>
               <Form.Item {...formItemProps.firstName}>
                 <Input />
               </Form.Item>
             </Col>
+
             <Col span={halfSpan}>
-              <Form.Item
-                key="lastName"
-                label={this.boldify("Last Name")}
-                name="lastName"
-                rules={this.validationRules("last name", "string")}
-              >
+              <Form.Item {...formItemProps.lastName}>
                 <Input />
               </Form.Item>
             </Col>
           </Row>
 
+          {/*Phone Number and Email*/}
           <Row gutter={formGutter}>
             <Col span={halfSpan}>
-              <Form.Item
-                key="phoneNumber"
-                label={this.boldify("Phone Number")}
-                name="phoneNumber"
-                extra="Please input your phone number without any formatting."
-                rules={this.validationRules("phone number")}
-              >
+              <Form.Item {...formItemProps.phoneNumber}>
                 <Input />
               </Form.Item>
             </Col>
+
             <Col span={halfSpan}>
-              <Form.Item
-                key="email"
-                label={this.boldify("Email")}
-                name="email"
-                rules={this.validationRules("email", "email")}
-              >
+              <Form.Item {...formItemProps.email}>
                 <Input />
               </Form.Item>
             </Col>
           </Row>
 
+          {/*Address Line*/}
           <Row gutter={formGutter}>
             <Col span={standardSpan}>
-              <Form.Item
-                key="addressLine"
-                label={this.boldify("Address")}
-                name="address"
-                rules={this.validationRules("address")}
-              >
+              <Form.Item {...formItemProps.addressLine}>
                 <Input placeholder="Address Line" />
               </Form.Item>
             </Col>
           </Row>
 
+          {/*City, State, and ZipCode*/}
           <Row gutter={formGutter}>
             <Col span={thirdSpan}>
-              <Form.Item
-                key="city"
-                name="city"
-                rules={this.validationRules("city")}
-              >
+              <Form.Item {...formItemProps.city}>
                 <Input placeholder="City" />
               </Form.Item>
             </Col>
+
             <Col span={thirdSpan}>
-              <Form.Item
-                key="state"
-                name="state"
-                rules={this.validationRules("state")}
-              >
+              <Form.Item {...formItemProps.livingState}>
                 <Select placeholder="State">
                   {allStates.map(state => (
                     <Option key={state} value={state}>
@@ -263,155 +353,42 @@ class PageInternshipInformation extends Component {
                 </Select>
               </Form.Item>
             </Col>
+
             <Col span={thirdSpan}>
-              <Form.Item
-                key="zip"
-                name="zip"
-                rules={this.validationRules("zip code")}
-              >
+              <Form.Item {...formItemProps.zip}>
                 <Input placeholder="Zip Code" />
               </Form.Item>
             </Col>
           </Row>
 
+          {/*Year of Graduation*/}
           <Row gutter={formGutter}>
             <Col span={standardSpan}>
-              <Form.Item
-                key="yog"
-                label={this.boldify("Year of graduation")}
-                name="yog"
-                rules={this.validationRules("year of graduation")}
-              >
+              <Form.Item {...formItemProps.yog}>
                 <Input placeholder="(e.g.) 2021, 2022, etc." />
               </Form.Item>
             </Col>
           </Row>
 
+          {/*Industry*/}
           <Row gutter={formGutter}>
             <Col span={standardSpan}>
-              <Form.Item
-                key="industry"
-                label={this.boldify("What industry are you applying to?")}
-                name="industry"
-                rules={[
-                  {
-                    required: true,
-                    message: "Please input your industries of choice"
-                  }
-                ]}
-              >
+              <Form.Item {...formItemProps.industry}>
                 <Checkbox.Group>
-                  <Row>
-                    <Col span={thirdSpan}>
-                      <Checkbox
-                        value="genBusiness"
-                        style={{
-                          lineHeight: "32px"
-                        }}
-                      >
-                        General Business
-                      </Checkbox>
-                    </Col>
-                    <Col span={thirdSpan}>
-                      <Checkbox
-                        value="consulting"
-                        style={{
-                          lineHeight: "32px"
-                        }}
-                      >
-                        Consulting
-                      </Checkbox>
-                    </Col>
-                    <Col span={thirdSpan}>
-                      <Checkbox
-                        value="finance"
-                        style={{
-                          lineHeight: "32px"
-                        }}
-                      >
-                        Finance/Accounting
-                      </Checkbox>
-                    </Col>
-                    <Col span={thirdSpan}>
-                      <Checkbox
-                        value="media"
-                        style={{
-                          lineHeight: "32px"
-                        }}
-                      >
-                        Media/Tellecommunications
-                      </Checkbox>
-                    </Col>
-                    <Col span={thirdSpan}>
-                      <Checkbox
-                        value="realEstate"
-                        style={{
-                          lineHeight: "32px"
-                        }}
-                      >
-                        Real Estate
-                      </Checkbox>
-                    </Col>
-                    <Col span={thirdSpan}>
-                      <Checkbox
-                        value="engineering"
-                        style={{
-                          lineHeight: "32px"
-                        }}
-                      >
-                        Engineering
-                      </Checkbox>
-                    </Col>
-                    <Col span={thirdSpan}>
-                      <Checkbox
-                        value="research"
-                        style={{
-                          lineHeight: "32px"
-                        }}
-                      >
-                        Science Research
-                      </Checkbox>
-                    </Col>
-                    <Col span={thirdSpan}>
-                      <Checkbox
-                        value="computerScience"
-                        style={{
-                          lineHeight: "32px"
-                        }}
-                      >
-                        Computer Science
-                      </Checkbox>
-                    </Col>
-                    <Col span={thirdSpan}>
-                      <Checkbox
-                        value="biotechnology"
-                        style={{
-                          lineHeight: "32px"
-                        }}
-                      >
-                        Biotechnology
-                      </Checkbox>
-                    </Col>
-                    <Col span={thirdSpan}>
-                      <Checkbox
-                        value="vocational"
-                        style={{
-                          lineHeight: "32px"
-                        }}
-                      >
-                        Vocational
-                      </Checkbox>
-                    </Col>
-                    <Col span={thirdSpan}>
-                      <Checkbox
-                        value="marketing"
-                        style={{
-                          lineHeight: "32px"
-                        }}
-                      >
-                        Marketing
-                      </Checkbox>
-                    </Col>
+                  <Row gutter={checkGutter}>
+                    {industry.map(industry => (
+                      <Col span={thirdSpan}>
+                        <Checkbox
+                          key={industry}
+                          value={industry}
+                          style={{
+                            lineHeight: "32px"
+                          }}
+                        >
+                          {industry}
+                        </Checkbox>
+                      </Col>
+                    ))}
                     <Col span={thirdSpan}>
                       <Checkbox
                         value={this.state.otherIndustry}
@@ -429,39 +406,24 @@ class PageInternshipInformation extends Component {
             </Col>
           </Row>
 
+          {/*Unweighted and Weighted GPAs*/}
           <Row gutter={formGutter}>
             <Col span={halfSpan}>
-              <Form.Item
-                key="unweightedGPA"
-                label={this.boldify("What is your unweighted GPA?")}
-                name="unweightedGPA"
-                rules={this.validationRules("unweighted GPA")}
-                extra="Your GPA should be out of 4.0"
-              >
+              <Form.Item {...formItemProps.unweightedGPA}>
                 <Input placeholder="4.0" />
               </Form.Item>
             </Col>
             <Col span={halfSpan}>
-              <Form.Item
-                key="weightedGPA"
-                label={this.boldify("What is your weighted GPA (optional)?")}
-                name="weightedGPA"
-                extra="Indicate your weighted GPA over the scale"
-              >
+              <Form.Item {...formItemProps.weightedGPA}>
                 <Input placeholder="4.7/5.0" />
               </Form.Item>
             </Col>
           </Row>
 
+          {/*Courses*/}
           <Row gutter={formGutter}>
             <Col span={standardSpan}>
-              <Form.Item
-                key="courses"
-                label={this.boldify("Relevant courses to your industry.")}
-                name="courses"
-                rules={this.validationRules("relevant courses")}
-                extra="Separate each entry with a comma and a space, and capitalize the AP/IB for your AP/IB Classes"
-              >
+              <Form.Item {...formItemProps.courses}>
                 <Input.TextArea
                   placeholder="(e.g.) Business Communications, AP Computer Science, etc."
                   style={{ height: "100px" }}
@@ -470,16 +432,13 @@ class PageInternshipInformation extends Component {
             </Col>
           </Row>
 
-          {/*CHANGE REQUIRED: Switch to a standardized input format*/}
+          {/**
+            Extracurriculars
+            CHANGE REQUIRED: Switch to a standardized input format
+          */}
           <Row gutter={formGutter}>
             <Col span={standardSpan}>
-              <Form.Item
-                key="extracurriculars"
-                label={this.boldify("Extracurricular Activities")}
-                name="extracurriculars"
-                rules={this.validationRules("extracurricular activities")}
-                extra="Separate each entry with a comma and a space, and in parentheses, show how long you spent on the activity."
-              >
+              <Form.Item {...formItemProps.extracurriculars}>
                 <Input.TextArea
                   placeholder="(e.g.) Speech and Debate (3), DECA (4), HOSA (2), Student Council (2)"
                   style={{ height: "100px" }}
@@ -488,14 +447,10 @@ class PageInternshipInformation extends Component {
             </Col>
           </Row>
 
+          {/*Days and Times available for work*/}
           <Row gutter={formGutter}>
             <Col span={halfSpan}>
-              <Form.Item
-                key="daysToWork"
-                label={this.boldify("What days are you willing to work?")}
-                name="daysToWork"
-                rules={this.validationRules("optimal days to work", "array")}
-              >
+              <Form.Item {...formItemProps.daysToWork}>
                 <Select
                   mode="multiple"
                   placeholder="Please select the days where you can work"
@@ -509,12 +464,7 @@ class PageInternshipInformation extends Component {
               </Form.Item>
             </Col>
             <Col span={halfSpan}>
-              <Form.Item
-                key="timesToWork"
-                label={this.boldify("What times are you willing to work?")}
-                name="timesToWork"
-                rules={this.validationRules("times available to work", "array")}
-              >
+              <Form.Item {...formItemProps.timesToWork}>
                 <Select
                   mode="multiple"
                   placeholder="Please select the times when you can work"
@@ -529,29 +479,19 @@ class PageInternshipInformation extends Component {
             </Col>
           </Row>
 
+          {/*Start and End dates available for work*/}
           <Row gutter={formGutter}>
             <Col span={standardSpan}>
-              <Form.Item
-                key="dateOfStartAndEnd"
-                name="dateOfStartAndEnd"
-                label={this.boldify(
-                  "When can you start working and when do you need to stop working?"
-                )}
-                rules={this.validationRules("available dates of work", "array")}
-              >
+              <Form.Item {...formItemProps.dateOfStartAndEnd}>
                 <RangePicker style={{ width: "100%" }} />
               </Form.Item>
             </Col>
           </Row>
 
+          {/*Paid or Unpaid Internship Chooser*/}
           <Row gutter={formGutter}>
             <Col span={standardSpan}>
-              <Form.Item
-                key="paidUnpaid"
-                name="paidUnpaid"
-                label={this.boldify("Are you willing to work unpaid?")}
-                rules={this.validationRules("preference for pay")}
-              >
+              <Form.Item {...formItemProps.paidUnpaid}>
                 <Radio.Group>
                   {paidOrUnpaid.map(choice => (
                     <Radio key={choice} value={choice}>
@@ -564,11 +504,7 @@ class PageInternshipInformation extends Component {
           </Row>
 
           {/** Resumé */}
-          <Form.Item
-            name="resume"
-            key="resume"
-            label={this.boldify("Resumé (Optional)")}
-          >
+          <Form.Item {...formItemProps.resume}>
             <Dragger {...props} style={{ width: "250px", height: "30px" }}>
               <h1 style={{ color: "blue" }}>
                 <InboxOutlined />
@@ -592,6 +528,11 @@ class PageInternshipInformation extends Component {
       </div>
     );
   }
+
+  onFinish = () => {
+    //TO BE FILLED
+    //Format the dates in the array for start and end dates
+  };
 }
 
 export default PageInternshipInformation;

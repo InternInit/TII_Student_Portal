@@ -1,9 +1,19 @@
 import React, { Component } from "react";
-import PageInternshipInformation from "../components/pageInternshipInformation.jsx";
 
+import styled from "styled-components";
+
+import PageInternshipInformation from "../components/pageInternshipInformation.jsx";
 import PageReference from "../components/pageReferences.jsx";
 import PagePersonal from "../components/pagePersonal.jsx";
 import PageEssays from "./pageEssays";
+
+//Styles
+const PageContainer = styled.div`
+  display: flex;
+  width: 60%;
+  justifycontent: center;
+`;
+
 class IntegratedForm extends Component {
   state = {
     internshipInformation: {
@@ -29,63 +39,36 @@ class IntegratedForm extends Component {
     }
   };
 
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     const { page } = this.props;
 
+    //Rerenders the form based on what page the user is currently on
     if (page === 0) {
       return (
-        <div
-          style={{
-            display: "flex",
-            width: "60%",
-            justifyContent: "center"
-          }}
-        >
+        <PageContainer>
           <PageInternshipInformation
             onNext={this.props.onNext}
             submit={this.submit}
           />
-        </div>
+        </PageContainer>
       );
     } else if (page === 1) {
       return (
-        <div
-          style={{
-            display: "flex",
-            width: "60%",
-            justifyContent: "center"
-          }}
-        >
+        <PageContainer>
           <PagePersonal onNext={this.props.onNext} onBack={this.props.onBack} />
-        </div>
+        </PageContainer>
       );
     } else if (page === 2) {
       return (
-        <div
-          style={{
-            display: "flex",
-            width: "60%",
-            justifyContent: "center"
-          }}
-        >
+        <PageContainer>
           <PageEssays onNext={this.props.onNext} onBack={this.props.onBack} />
-        </div>
+        </PageContainer>
       );
     } else if (page === 3) {
       return (
-        <div
-          style={{
-            display: "flex",
-            width: "60%",
-            justifyContent: "center"
-          }}
-        >
+        <PageContainer>
           <PageReference onBack={this.props.onBack} />
-        </div>
+        </PageContainer>
       );
     }
   }

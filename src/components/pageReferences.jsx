@@ -2,6 +2,7 @@ import React from "react";
 import { Form, Input, Button } from "antd";
 import { Row, Col } from "antd";
 import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
+import "../App.css";
 
 //Formatting
 const formGutter = [16, 16];
@@ -62,7 +63,12 @@ class Ref extends React.Component {
   render() {
     return (
       <div style={{ width: "100%" }}>
-        <Form onFinish={this.onFinish} className="my-form">
+        <Form
+          layout="vertical"
+          align="left"
+          onFinish={this.onFinish}
+          className="pageReferences"
+        >
           <Form.List name="reference">
             {(fields, { add, remove }) => {
               return (
@@ -88,6 +94,7 @@ class Ref extends React.Component {
                             }}
                           />
                         ) : null}
+
                         {/**First row of reference box */}
                         <Row gutter={formGutter}>
                           <Col span={halfSpan}>
