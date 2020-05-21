@@ -61,7 +61,9 @@ const formItemProps = {
 class PageReferences extends Component {
   render() {
     return (
-      <div style={{ width: "100%" }}>
+      <div style={{ width: "100%", marginTop: "40px", }}>
+        <h1 style={{ textAlign: "left" }}> References</h1>
+        <p>Add a reference here. This could be someone who has worked with you in the past.</p>
         <Form  {...formItemProps.totalForm}>
           <Form.List name="reference">
             {(fields, { add, remove }) => {
