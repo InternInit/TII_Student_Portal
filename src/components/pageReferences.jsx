@@ -64,7 +64,7 @@ class PageReferences extends Component {
       <div style={{ width: "100%", marginTop: "40px", }}>
         <h1 style={{ textAlign: "left" }}> References</h1>
         <p>Add a reference here. This could be someone who has worked with you in the past.</p>
-        <Form  {...formItemProps.totalForm}>
+        <Form  {...formItemProps.totalForm} onFinish={this.onFinish}>
           <Form.List name="reference">
             {(fields, { add, remove }) => {
               console.log(fields);
@@ -197,8 +197,13 @@ class PageReferences extends Component {
               onClick={this.props.onBack}
             >
               Previous
+
             </Button>
-            <Button className="submit-button" type="primary" htmlType="submit" onClick={this.props.onSubmit}>
+            <Button
+              className="next-button"
+              type="primary"
+              htmlType="submit"
+            >
               Submit
             </Button>
           </Form.Item>
@@ -220,6 +225,12 @@ class PageReferences extends Component {
       />
     ) : null;
   };
+
+  onFinish = values => {
+    console.log('FinishRefPage:', values);
+    this.props.onSubmit()
+  };
+
 }
 
 export default PageReferences;

@@ -100,7 +100,6 @@ export default class pageEssays extends React.Component {
             name="Portfolio"
             key="Portfolio"
             label={this.boldify("Portfolio")}
-            rules={this.validationRules("portfolio")}
           >
             <Dragger {...props} style={{ width: "250px", height: "30px" }}>
               <h1 style={{ color: "blue" }}>
@@ -125,8 +124,6 @@ export default class pageEssays extends React.Component {
               className="next-button"
               type="primary"
               htmlType="submit"
-              href="#top"
-              onClick={this.props.onNext}
             >
               Next
             </Button>
@@ -151,8 +148,8 @@ export default class pageEssays extends React.Component {
   ];
 
   onFinish = values => {
-    //TO BE FILLED
-    //Format the dates in the array for start and end dates
+    console.log('FinishedPageEssays:', values);
+    this.props.onNext()
   };
 
   boldify = text => <strong>{text}</strong>;

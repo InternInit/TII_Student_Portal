@@ -22,6 +22,7 @@ class IntegratedForm extends Component {
   render() {
     const { page, onNext, onBack, onSubmit } = this.props;
 
+
     //Rerenders the form based on what page the user is currently on
     if (page === 0) {
       return (

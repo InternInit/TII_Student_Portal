@@ -24,6 +24,7 @@ const { Header, Content, Footer, Sider } = Layout;
 
 //Misc JSON Testing
 const payload = {"abc" : "123"};
+
 class App extends Component {
   state = {
     page: 0
@@ -34,22 +35,7 @@ class App extends Component {
     this.setState({
       page: newPage
     });
-
-    fetch("/get_user_data").then(response =>
-      response.json()).then(data => {
-        console.log(data);
-      });
-
-  };
-
-  onBack = () => {
-    const newPage = this.state.page - 1;
-    this.setState({
-      page: newPage
-    });
-  };
-
-  onSubmit = () => {
+    /*
     fetch("/update_user_data", {
       method: "POST",
       headers: {
@@ -60,6 +46,29 @@ class App extends Component {
         response.json()).then(data => {
           console.log(data);
         });
+        */
+  };
+
+  onBack = () => {
+    const newPage = this.state.page - 1;
+    this.setState({
+      page: newPage
+    });
+  };
+
+  onSubmit = () => {
+    /*
+    fetch("/update_user_data", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(payload)
+      }).then(response =>
+        response.json()).then(data => {
+          console.log(data);
+        });
+      */
   };
 
   clickOne = () => {
