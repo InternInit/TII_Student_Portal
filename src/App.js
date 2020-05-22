@@ -35,19 +35,21 @@ class App extends Component {
       page: newPage
     });
 
-
-    fetch("/test_get").then(response =>
+    fetch("/get_user_data").then(response =>
       response.json()).then(data => {
         console.log(data);
       });
 
-    fetch("/test_post", {
+    fetch("/update_user_data", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
       body: JSON.stringify(payload)
-      }).then(response => response.json()).then(data => {console.log(data);});
+      }).then(response =>
+        response.json()).then(data => {
+          console.log(data);
+        });
 
   };
 

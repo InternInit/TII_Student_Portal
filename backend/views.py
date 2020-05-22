@@ -2,12 +2,12 @@ from flask import Blueprint, jsonify, request
 
 main = Blueprint("main",__name__)
 
-@main.route("/test_get")
-def test_get():
-    testList = []
-    return jsonify({"testGet": testList})
+@main.route("/get_user_data")
+def get_user_data():
+    return jsonify({"UserData": {}})
 
-@main.route("/test_post", methods=["POST"])
-def test_post():
+
+@main.route("/update_user_data", methods=["POST"])
+def update_user_data():
     data = request.get_json()
     return jsonify(data)
