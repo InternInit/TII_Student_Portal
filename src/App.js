@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useEffect } from "react";
 
 //Logo Import
 import logo from "./logo.svg";
@@ -22,6 +22,8 @@ import "./App.css";
 //Declarations
 const { Header, Content, Footer, Sider } = Layout;
 
+//Misc JSON Testing
+const payload = {"abc" : "123"};
 class App extends Component {
   state = {
     page: 0
@@ -32,6 +34,21 @@ class App extends Component {
     this.setState({
       page: newPage
     });
+
+
+    fetch("/test_get").then(response =>
+      response.json()).then(data => {
+        console.log(data);
+      });
+
+    fetch("/test_post", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(payload)
+      }).then(response => response.json()).then(data => {console.log(data);});
+
   };
 
   onBack = () => {
