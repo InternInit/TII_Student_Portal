@@ -198,7 +198,7 @@ class PageReferences extends Component {
             >
               Previous
             </Button>
-            <Button className="submit-button" type="primary" htmlType="submit">
+            <Button className="submit-button" type="primary" htmlType="submit" onClick={this.props.onSubmit}>
               Submit
             </Button>
           </Form.Item>

@@ -40,6 +40,16 @@ class App extends Component {
         console.log(data);
       });
 
+  };
+
+  onBack = () => {
+    const newPage = this.state.page - 1;
+    this.setState({
+      page: newPage
+    });
+  };
+
+  onSubmit = () => {
     fetch("/update_user_data", {
       method: "POST",
       headers: {
@@ -50,14 +60,6 @@ class App extends Component {
         response.json()).then(data => {
           console.log(data);
         });
-
-  };
-
-  onBack = () => {
-    const newPage = this.state.page - 1;
-    this.setState({
-      page: newPage
-    });
   };
 
   clickOne = () => {
@@ -83,6 +85,7 @@ class App extends Component {
         page={pageNumber}
         onNext={this.onNext}
         onBack={this.onBack}
+        onSubmit={this.onSubmit}
       />
     );
   };
