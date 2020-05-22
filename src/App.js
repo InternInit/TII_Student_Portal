@@ -30,23 +30,23 @@ class App extends Component {
     page: 0
   };
 
-  onNext = () => {
+  onNext = values => {
     const newPage = this.state.page + 1;
     this.setState({
       page: newPage
     });
-    /*
+
     fetch("/update_user_data", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify(payload)
+      body: JSON.stringify(values)
       }).then(response =>
         response.json()).then(data => {
           console.log(data);
         });
-        */
+
   };
 
   onBack = () => {
