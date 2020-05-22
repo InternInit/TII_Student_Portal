@@ -154,6 +154,7 @@ class PagePersonal extends Component {
           }}
           layout="vertical"
           align="left"
+          onFinish={this.onFinish}
         >
           {/*GENDER*/}
           <Row gutter={formGutter}>
@@ -240,7 +241,7 @@ class PagePersonal extends Component {
                 key="age"
                 label={this.boldify("Age")}
                 name="age"
-                rules={this.validationRules("age")}
+                rules={this.validationRules("age", "number")}
               >
                 <InputNumber style={{ width: "100%" }} />
               </Form.Item>
@@ -405,8 +406,6 @@ class PagePersonal extends Component {
               className="next-button"
               type="primary"
               htmlType="submit"
-              href="#top"
-              onClick={this.props.onNext}
             >
               Next
             </Button>
@@ -415,6 +414,11 @@ class PagePersonal extends Component {
       </div>
     );
   }
+
+  onFinish = values => {
+    console.log('FinishedPersonalPage:', values);
+    this.props.onNext()
+  };
 }
 
 export default PagePersonal;

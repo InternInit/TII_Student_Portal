@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useEffect } from "react";
 
 //Logo Import
 import logo from "./logo.svg";
@@ -22,6 +22,9 @@ import "./App.css";
 //Declarations
 const { Header, Content, Footer, Sider } = Layout;
 
+//Misc JSON Testing
+const payload = {"abc" : "123"};
+
 class App extends Component {
   state = {
     page: 0
@@ -32,6 +35,18 @@ class App extends Component {
     this.setState({
       page: newPage
     });
+    /*
+    fetch("/update_user_data", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(payload)
+      }).then(response =>
+        response.json()).then(data => {
+          console.log(data);
+        });
+        */
   };
 
   onBack = () => {
@@ -39,6 +54,21 @@ class App extends Component {
     this.setState({
       page: newPage
     });
+  };
+
+  onSubmit = () => {
+    /*
+    fetch("/update_user_data", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(payload)
+      }).then(response =>
+        response.json()).then(data => {
+          console.log(data);
+        });
+      */
   };
 
   clickOne = () => {
@@ -64,6 +94,7 @@ class App extends Component {
         page={pageNumber}
         onNext={this.onNext}
         onBack={this.onBack}
+        onSubmit={this.onSubmit}
       />
     );
   };

@@ -24,3 +24,6 @@ yarn-error.log*
 
 #Custom config files
 flaskEnvSetup.sh
+
+#Python
+/backend/__pycache__

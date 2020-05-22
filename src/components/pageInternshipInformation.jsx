@@ -132,6 +132,7 @@ const validationRules = (inputName, type) => [
 
 const boldify = text => <strong>{text}</strong>;
 
+
 //Props
 const formItemProps = {
   totalForm: {
@@ -294,9 +295,9 @@ class PageInternshipInformation extends Component {
         <h1>Internship Information</h1>
         <br />
 
-        <Form {...formItemProps.totalForm}>
+        <Form {...formItemProps.totalForm} onFinish={this.onFinish}>
           {/*First and Last Name*/}
-          <Row gutter={formGutter}>
+          <Row name = "first" gutter={formGutter}>
             <Col span={halfSpan}>
               <Form.Item {...formItemProps.firstName}>
                 <Input />
@@ -519,8 +520,6 @@ class PageInternshipInformation extends Component {
               className="next-button"
               type="primary"
               htmlType="submit"
-              href="#top"
-              onClick={this.props.onNext}
             >
               Next
             </Button>
@@ -530,10 +529,11 @@ class PageInternshipInformation extends Component {
     );
   }
 
-  onFinish = () => {
-    //TO BE FILLED
-    //Format the dates in the array for start and end dates
+  onFinish = values => {
+    console.log('FinishedPageInternship:', values);
+    this.props.onNext()
   };
+
 }
 
 export default PageInternshipInformation;
