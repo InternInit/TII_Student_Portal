@@ -4,7 +4,7 @@ import React, { Component, useEffect } from "react";
 import logo from "./logo.svg";
 
 //Ant Design Imports
-import { Layout, Menu } from "antd";
+import { Layout, Menu, Switch } from "antd";
 
 //Styled Component Imports
 import styled from "styled-components";
@@ -27,26 +27,31 @@ const payload = {"abc" : "123"};
 
 class App extends Component {
   state = {
-    page: 0
+    page: 0,
+    submissionState: false
   };
 
-  onNext = () => {
+  onNext = (values, origin) => {
     const newPage = this.state.page + 1;
     this.setState({
       page: newPage
     });
-    /*
-    fetch("/update_user_data", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(payload)
-      }).then(response =>
-        response.json()).then(data => {
-          console.log(data);
-        });
-        */
+
+    if (this.state.submissionState == true){
+      fetch("/update_user_data", {
+        method: "POST",
+        headers: {
+          "Content-Type": "text/plain"
+        },
+        body: JSON.stringify(values) + "#" + origin
+        }).then(response =>
+          response.json()).then(data => {
+            console.log(data);
+          });
+    } else if (this.state.submissionState == false) {
+      console.log("Submission disabled")
+    }
+
   };
 
   onBack = () => {
@@ -56,19 +61,22 @@ class App extends Component {
     });
   };
 
-  onSubmit = () => {
-    /*
-    fetch("/update_user_data", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(payload)
-      }).then(response =>
-        response.json()).then(data => {
-          console.log(data);
-        });
-      */
+  onSubmit = (values, origin) => {
+    if(this.state.submissionState == true){
+      fetch("/update_user_data", {
+        method: "POST",
+        headers: {
+          "Content-Type": "text/plain"
+        },
+        body: JSON.stringify(values) + "#" + origin
+        }).then(response =>
+          response.json()).then(data => {
+            console.log(data);
+          });
+    } else if (this.state.submissionState == false) {
+      console.log("Submission disabled")
+    }
+
   };
 
   clickOne = () => {
@@ -99,6 +107,11 @@ class App extends Component {
     );
   };
 
+  onChange = checked => {
+    this.state.submissionState = checked;
+    console.log(this.state.submissionState)
+  }
+
   // BUG: PROBLEM WITH RENDERING THE DIFFERENT NAVBAR SELECTIONS
   renderNav = () => {
     const highlightKey = String([this.state.page + 1]);
@@ -117,7 +130,7 @@ class App extends Component {
     return (
       <div className="App">
         <header>
-          <Navbar />
+          <Navbar /> <Switch checkedChildren="Submission On" unCheckedChildren="Submission Off" onChange={this.onChange}></Switch>
         </header>
         <Layout>
           {this.renderNav()}
