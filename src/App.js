@@ -30,7 +30,7 @@ class App extends Component {
     page: 0
   };
 
-  onNext = values => {
+  onNext = (values, origin) => {
     const newPage = this.state.page + 1;
     this.setState({
       page: newPage
@@ -39,9 +39,9 @@ class App extends Component {
     fetch("/update_user_data", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "text/plain"
       },
-      body: JSON.stringify(values)
+      body: JSON.stringify(values) + "#" + origin
       }).then(response =>
         response.json()).then(data => {
           console.log(data);
@@ -56,19 +56,17 @@ class App extends Component {
     });
   };
 
-  onSubmit = () => {
-    /*
+  onSubmit = (values, origin) => {
     fetch("/update_user_data", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "text/plain"
       },
-      body: JSON.stringify(payload)
+      body: JSON.stringify(values) + "#" + origin
       }).then(response =>
         response.json()).then(data => {
           console.log(data);
         });
-      */
   };
 
   clickOne = () => {

@@ -531,7 +531,7 @@ class PageInternshipInformation extends Component {
 
   onFinish = values => {
     console.log('FinishedPageInternship:', values);
-    this.props.onNext(values)
+    this.props.onNext(values, "page1")
   };
 
 }
