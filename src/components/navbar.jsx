@@ -14,7 +14,7 @@ import Logo from "../TII-logo.png";
 class Navbar extends Component {
   //State saved on Apply button
   state = {
-    current: "apply"
+    current: "apply",
   };
 
   //Click Handler
