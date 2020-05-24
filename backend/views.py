@@ -59,7 +59,7 @@ def refresh():
 def exchange():
     refresh = request.cookies.get("refresh_token")
     req = requests.post(tokenUrl, headers={"Authorization":"Basic M29nNXBoMTZ0YXFmNTk4YmNob2tkZnMxcjI6YnB1cm91ZDdsY3FvNXQzZW9tZDZudnNzcHRodTgzYzdlOXRhaWsyY3FlbnRmNGYwbzZn","Content-Type":"application/x-www-form-urlencoded"}, data={"grant_type" : "refresh_token", "client_id":username, "refresh_token":refresh})
-
+    print(req.text)
     response = jsonify(req.text)
     return response
 
