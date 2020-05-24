@@ -42,6 +42,7 @@ class App extends Component {
       fetch("/update_user_data", {
         method: "POST",
         headers: {
+          "Authorization": "Bearer " + JSON.stringify(this.inMemoryToken.token),
           "Content-Type": "text/plain"
         },
         body: JSON.stringify(values) + "#" + origin
@@ -67,6 +68,7 @@ class App extends Component {
       fetch("/update_user_data", {
         method: "POST",
         headers: {
+          "Authorization": "Bearer " + JSON.stringify(this.inMemoryToken.token),
           "Content-Type": "text/plain"
         },
         body: JSON.stringify(values) + "#" + origin
@@ -182,15 +184,17 @@ class App extends Component {
   logout = () => {
     fetch("/logout").then(response =>
         response.json()).then(data => {
-          console.log(data);
+          console.log(typeof data);
+          window.location.href = data
         });
-    window.location.href = "https://auth.interninit.com/login?response_type=code&client_id=3og5ph16taqf598bchokdfs1r2&redirect_uri=http://localhost:3000"
+
 
   }
 
   getJwt = () => {
     console.log(this.inMemoryToken);
   }
+
 
   // BUG: PROBLEM WITH RENDERING THE DIFFERENT NAVBAR SELECTIONS
   renderNav = () => {
