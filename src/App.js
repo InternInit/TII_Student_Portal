@@ -4,7 +4,7 @@ import React, { Component, useEffect } from "react";
 import logo from "./logo.svg";
 
 //Ant Design Imports
-import { Layout, Menu, Switch } from "antd";
+import { Layout, Menu, Switch, Button } from "antd";
 
 //Styled Component Imports
 import styled from "styled-components";
@@ -22,10 +22,11 @@ import "./App.css";
 //Declarations
 const { Header, Content, Footer, Sider } = Layout;
 
-//Misc JSON Testing
-const payload = {"abc" : "123"};
+
 
 class App extends Component {
+  inMemoryToken;
+
   state = {
     page: 0,
     submissionState: false
@@ -97,6 +98,7 @@ class App extends Component {
 
   renderPage = () => {
     const pageNumber = this.state.page;
+    this.refresh();
     return (
       <IntegratedForm
         page={pageNumber}
@@ -110,6 +112,74 @@ class App extends Component {
   onChange = checked => {
     this.state.submissionState = checked;
     console.log(this.state.submissionState)
+  }
+
+  auth = () => {
+    try{
+      var authCode = window.location.href.split("?")[1].split("=")[1]
+    } catch(e){
+      window.location.href = "https://auth.interninit.com/login?response_type=code&client_id=3og5ph16taqf598bchokdfs1r2&redirect_uri=http://localhost:3000"
+    }
+    fetch("/auth", {
+      method: "POST",
+      headers: {
+        "Content-Type": "text/plain"
+      },
+      body: authCode
+      }).then(response =>
+        response.json()).then(data => {
+          if(data!=="Invalid Grant"){
+            data = JSON.parse(data)
+
+            this.inMemoryToken = {
+              token: data.id_token,
+              expiry: data.expires_in,
+              refresh: data.refresh_token
+            }
+            console.log(this.inMemoryToken)
+          }
+
+        });
+  }
+
+  refresh = () => {
+    fetch("/auth/refresh").then(response =>
+        response.json()).then(data => {
+          if(data == null){
+            //Exchange Auth
+            //Store JWT in memory
+            //Store Refresh Token
+            this.auth();
+          } else {
+            //Check for JWT
+            if(typeof this.inMemoryToken == "undefined"){
+              console.log("I should probably exchange refresh for JWT")
+              this.exchange();
+            } else {
+              console.log("JWT exists, yay")
+            }
+          }
+        });
+  }
+
+  exchange = () => {
+    console.log("Exchanging")
+    fetch("/auth/exchange").then(response =>
+      response.json()).then(data => {
+        this.inMemoryToken = {
+          token: data.id_token,
+          expiry: data.expires_in,
+          refresh: data.refresh_token
+        }
+        console.log(this.inMemoryToken)
+      });
+  }
+
+  logout = () => {
+    fetch("/logout").then(response =>
+        response.json()).then(data => {
+          console.log(data);
+        });
   }
 
   // BUG: PROBLEM WITH RENDERING THE DIFFERENT NAVBAR SELECTIONS
@@ -130,8 +200,11 @@ class App extends Component {
     return (
       <div className="App">
         <header>
-          <Navbar /> <Switch checkedChildren="Submission On" unCheckedChildren="Submission Off" onChange={this.onChange}></Switch>
+          <Navbar />
         </header>
+        <Switch checkedChildren="Submission On" unCheckedChildren="Submission Off" onChange={this.onChange}></Switch>
+        <Button onClick={this.auth}> Cognito </Button>
+        <Button onClick={this.logout}> Logout </Button>
         <Layout>
           {this.renderNav()}
           <Content
