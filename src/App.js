@@ -42,6 +42,7 @@ class App extends Component {
       fetch("/update_user_data", {
         method: "POST",
         headers: {
+          "Authorization": "Bearer " + JSON.stringify(this.inMemoryToken.token),
           "Content-Type": "text/plain"
         },
         body: JSON.stringify(values) + "#" + origin
@@ -67,6 +68,7 @@ class App extends Component {
       fetch("/update_user_data", {
         method: "POST",
         headers: {
+          "Authorization": "Bearer " + JSON.stringify(this.inMemoryToken.token),
           "Content-Type": "text/plain"
         },
         body: JSON.stringify(values) + "#" + origin
@@ -98,7 +100,6 @@ class App extends Component {
 
   renderPage = () => {
     const pageNumber = this.state.page;
-    this.refresh();
     return (
       <IntegratedForm
         page={pageNumber}
@@ -117,29 +118,32 @@ class App extends Component {
   auth = () => {
     try{
       var authCode = window.location.href.split("?")[1].split("=")[1]
+      fetch("/auth", {
+        method: "POST",
+        headers: {
+          "Content-Type": "text/plain"
+        },
+        body: authCode
+        }).then(response =>
+          response.json()).then(data => {
+            if(data!=="Invalid Grant"){
+              data = JSON.parse(data)
+
+              this.inMemoryToken = {
+                token: data.id_token,
+                expiry: data.expires_in,
+                refresh: data.refresh_token
+              }
+              console.log(this.inMemoryToken)
+            } else {
+              window.location.href = "https://auth.interninit.com/login?response_type=code&client_id=3og5ph16taqf598bchokdfs1r2&redirect_uri=http://localhost:3000"
+            }
+
+          });
     } catch(e){
       window.location.href = "https://auth.interninit.com/login?response_type=code&client_id=3og5ph16taqf598bchokdfs1r2&redirect_uri=http://localhost:3000"
     }
-    fetch("/auth", {
-      method: "POST",
-      headers: {
-        "Content-Type": "text/plain"
-      },
-      body: authCode
-      }).then(response =>
-        response.json()).then(data => {
-          if(data!=="Invalid Grant"){
-            data = JSON.parse(data)
 
-            this.inMemoryToken = {
-              token: data.id_token,
-              expiry: data.expires_in,
-              refresh: data.refresh_token
-            }
-            console.log(this.inMemoryToken)
-          }
-
-        });
   }
 
   refresh = () => {
@@ -166,6 +170,8 @@ class App extends Component {
     console.log("Exchanging")
     fetch("/auth/exchange").then(response =>
       response.json()).then(data => {
+        data = JSON.parse(data)
+
         this.inMemoryToken = {
           token: data.id_token,
           expiry: data.expires_in,
@@ -178,9 +184,17 @@ class App extends Component {
   logout = () => {
     fetch("/logout").then(response =>
         response.json()).then(data => {
-          console.log(data);
+          console.log(typeof data);
+          window.location.href = data
         });
+
+
   }
+
+  getJwt = () => {
+    console.log(this.inMemoryToken);
+  }
+
 
   // BUG: PROBLEM WITH RENDERING THE DIFFERENT NAVBAR SELECTIONS
   renderNav = () => {
@@ -196,6 +210,11 @@ class App extends Component {
     );
   };
 
+  componentDidMount() {
+    console.log("mounted");
+    this.refresh();
+  }
+
   render() {
     return (
       <div className="App">
@@ -203,8 +222,8 @@ class App extends Component {
           <Navbar />
         </header>
         <Switch checkedChildren="Submission On" unCheckedChildren="Submission Off" onChange={this.onChange}></Switch>
-        <Button onClick={this.auth}> Cognito </Button>
-        <Button onClick={this.logout}> Logout </Button>
+        <Button onClick={this.getJwt}>GetJWT</Button>
+        <Button onClick={this.logout}>Logout</Button>
         <Layout>
           {this.renderNav()}
           <Content

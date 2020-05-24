@@ -24,17 +24,16 @@ def update_user_data():
     info = json.loads(body[0])
     origin = str(body[1])
     info["origin"] = origin
-    print(info)
-    req = requests.post(apiUrl, json = info)
+    print(request.headers)
+    req = requests.post(testUrl, headers=request.headers,json = info)
     return jsonify(req.text)
 
 @main.route("/auth", methods=["POST"])
 def auth():
     rawBody = request.get_data()
     body = rawBody.decode("utf-8")
-    print(rawBody)
     req = requests.post(tokenUrl, headers={"Authorization":"Basic M29nNXBoMTZ0YXFmNTk4YmNob2tkZnMxcjI6YnB1cm91ZDdsY3FvNXQzZW9tZDZudnNzcHRodTgzYzdlOXRhaWsyY3FlbnRmNGYwbzZn","Content-Type":"application/x-www-form-urlencoded"}, data={"grant_type" : "authorization_code", "client_id":username, "code":rawBody, "redirect_uri":"http://localhost:3000"})
-
+    print(req.text)
     try:
         load = json.loads(req.text)
         refresh_token = load["refresh_token"]
@@ -59,12 +58,12 @@ def refresh():
 def exchange():
     refresh = request.cookies.get("refresh_token")
     req = requests.post(tokenUrl, headers={"Authorization":"Basic M29nNXBoMTZ0YXFmNTk4YmNob2tkZnMxcjI6YnB1cm91ZDdsY3FvNXQzZW9tZDZudnNzcHRodTgzYzdlOXRhaWsyY3FlbnRmNGYwbzZn","Content-Type":"application/x-www-form-urlencoded"}, data={"grant_type" : "refresh_token", "client_id":username, "refresh_token":refresh})
-
+    #print(req.text)
     response = jsonify(req.text)
     return response
 
 @main.route("/logout")
 def logout():
-    resp = make_response("Response!")
+    resp = make_response(jsonify("https://auth.interninit.com/login?response_type=code&client_id=3og5ph16taqf598bchokdfs1r2&redirect_uri=http://localhost:3000"))
     resp.delete_cookie("refresh_token")
     return resp
