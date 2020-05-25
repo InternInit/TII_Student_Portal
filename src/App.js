@@ -171,13 +171,16 @@ class App extends Component {
     fetch("/auth/exchange").then(response =>
       response.json()).then(data => {
         data = JSON.parse(data)
-
-        this.inMemoryToken = {
-          token: data.id_token,
-          expiry: data.expires_in,
-          refresh: data.refresh_token
+        if(data.error !== "invalid_grant"){
+          this.inMemoryToken = {
+            token: data.id_token,
+            expiry: data.expires_in,
+            refresh: data.refresh_token
+          }
+          console.log(this.inMemoryToken)
+        } else{
+          this.logout();
         }
-        console.log(this.inMemoryToken)
       });
   }
 
