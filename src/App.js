@@ -42,7 +42,7 @@ class App extends Component {
       fetch("/update_user_data", {
         method: "POST",
         headers: {
-          "Authorization": "Bearer " + JSON.stringify(this.inMemoryToken.token),
+          "Authorization": "Bearer " + JSON.parse(JSON.stringify(this.inMemoryToken.token)),
           "Content-Type": "text/plain"
         },
         body: JSON.stringify(values) + "#" + origin
@@ -68,7 +68,7 @@ class App extends Component {
       fetch("/update_user_data", {
         method: "POST",
         headers: {
-          "Authorization": "Bearer " + JSON.stringify(this.inMemoryToken.token),
+          "Authorization": "Bearer " + JSON.parse(JSON.stringify(this.inMemoryToken.token)),
           "Content-Type": "text/plain"
         },
         body: JSON.stringify(values) + "#" + origin

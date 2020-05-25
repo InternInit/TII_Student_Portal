@@ -24,9 +24,11 @@ def update_user_data():
     info = json.loads(body[0])
     origin = str(body[1])
     info["origin"] = origin
-    print(request.headers)
-    req = requests.post(testUrl, headers=request.headers,json = info)
-    return jsonify(req.text)
+    headers = request.headers
+    print(type(request.headers.get("Authorization")), request.headers.get("Authorization"))
+    #req = requests.post(apiUrl, headers=request.headers,data = info)
+    req = requests.post(apiUrl, headers = {"Authorization" : headers.get("Authorization")}, json = info)
+    return req.text
 
 @main.route("/auth", methods=["POST"])
 def auth():

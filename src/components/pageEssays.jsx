@@ -149,7 +149,7 @@ export default class pageEssays extends React.Component {
 
   onFinish = values => {
     console.log('FinishedPageEssays:', values);
-    this.props.onNext(values, "page3")
+    this.props.onNext(values, "3")
   };
 
   boldify = text => <strong>{text}</strong>;
