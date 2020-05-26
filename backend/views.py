@@ -4,8 +4,8 @@ import json
 
 main = Blueprint("main",__name__)
 
-apiUrl = "https://jzvyvnvxld.execute-api.us-east-1.amazonaws.com/beta/"
-
+cacheApiUrl = "https://jzvyvnvxld.execute-api.us-east-1.amazonaws.com/beta/cache"
+forwardApiUrl = "https://jzvyvnvxld.execute-api.us-east-1.amazonaws.com/beta/forward"
 username = "3og5ph16taqf598bchokdfs1r2"
 password = "bpuroud7lcqo5t3eomd6nvsspthu83c7e9taik2cqentf4f0o6g"
 tokenUrl = "https://auth.interninit.com/oauth2/token"
@@ -27,7 +27,7 @@ def update_user_data():
     headers = request.headers
     print(type(request.headers.get("Authorization")), request.headers.get("Authorization"))
     #req = requests.post(apiUrl, headers=request.headers,data = info)
-    req = requests.post(apiUrl, headers = {"Authorization" : headers.get("Authorization")}, json = info)
+    req = requests.post(cacheApiUrl, headers = {"Authorization" : headers.get("Authorization")}, json = info)
     return req.text
 
 @main.route("/auth", methods=["POST"])

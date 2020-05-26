@@ -199,6 +199,7 @@ class App extends Component {
   }
 
 
+
   // BUG: PROBLEM WITH RENDERING THE DIFFERENT NAVBAR SELECTIONS
   renderNav = () => {
     const highlightKey = String([this.state.page + 1]);
