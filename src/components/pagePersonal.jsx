@@ -417,7 +417,7 @@ class PagePersonal extends Component {
 
   onFinish = values => {
     console.log('FinishedPersonalPage:', values);
-    this.props.onNext(values, "page2")
+    this.props.onNext(values, "2")
   };
 }
 

@@ -228,7 +228,7 @@ class PageReferences extends Component {
 
   onFinish = values => {
     console.log('FinishRefPage:', values);
-    this.props.onSubmit(values, "page4")
+    this.props.onSubmit(values, "4")
   };
 
 }

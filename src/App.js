@@ -42,7 +42,7 @@ class App extends Component {
       fetch("/update_user_data", {
         method: "POST",
         headers: {
-          "Authorization": "Bearer " + JSON.stringify(this.inMemoryToken.token),
+          "Authorization": "Bearer " + JSON.parse(JSON.stringify(this.inMemoryToken.token)),
           "Content-Type": "text/plain"
         },
         body: JSON.stringify(values) + "#" + origin
@@ -68,7 +68,7 @@ class App extends Component {
       fetch("/update_user_data", {
         method: "POST",
         headers: {
-          "Authorization": "Bearer " + JSON.stringify(this.inMemoryToken.token),
+          "Authorization": "Bearer " + JSON.parse(JSON.stringify(this.inMemoryToken.token)),
           "Content-Type": "text/plain"
         },
         body: JSON.stringify(values) + "#" + origin
@@ -171,13 +171,16 @@ class App extends Component {
     fetch("/auth/exchange").then(response =>
       response.json()).then(data => {
         data = JSON.parse(data)
-
-        this.inMemoryToken = {
-          token: data.id_token,
-          expiry: data.expires_in,
-          refresh: data.refresh_token
+        if(data.error !== "invalid_grant"){
+          this.inMemoryToken = {
+            token: data.id_token,
+            expiry: data.expires_in,
+            refresh: data.refresh_token
+          }
+          console.log(this.inMemoryToken)
+        } else{
+          this.logout();
         }
-        console.log(this.inMemoryToken)
       });
   }
 
@@ -194,6 +197,7 @@ class App extends Component {
   getJwt = () => {
     console.log(this.inMemoryToken);
   }
+
 
 
   // BUG: PROBLEM WITH RENDERING THE DIFFERENT NAVBAR SELECTIONS
