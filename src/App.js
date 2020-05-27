@@ -29,7 +29,7 @@ class App extends Component {
 
   state = {
     page: 0,
-    submissionState: false
+    submissionState: true
   };
 
   onNext = (values, origin) => {
@@ -110,7 +110,7 @@ class App extends Component {
     );
   };
 
-  onChange = checked => {
+  switchOnChange = checked => {
     this.state.submissionState = checked;
     console.log(this.state.submissionState)
   }
@@ -225,7 +225,7 @@ class App extends Component {
         <header>
           <Navbar />
         </header>
-        <Switch checkedChildren="Submission On" unCheckedChildren="Submission Off" onChange={this.onChange}></Switch>
+        <Switch checkedChildren="Submission On" unCheckedChildren="Submission Off" defaultChecked="true" onChange={this.switchOnChange}></Switch>
         <Button onClick={this.getJwt}>GetJWT</Button>
         <Button onClick={this.logout}>Logout</Button>
         <Layout>

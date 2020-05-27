@@ -49,8 +49,8 @@ export default class pageEssays extends React.Component {
         >
           {/**Industry response */}
           <Form.Item
-            key="industry"
-            name="industry"
+            key="industryEssay"
+            name="industryEssay"
             label={this.boldify("Why do you want to apply to this industry?")}
             rules={this.validationRules("response")}
           >
