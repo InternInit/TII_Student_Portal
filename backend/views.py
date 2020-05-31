@@ -5,7 +5,7 @@ import json
 main = Blueprint("main",__name__)
 
 cacheApiUrl = "https://jzvyvnvxld.execute-api.us-east-1.amazonaws.com/beta/cache"
-forwardApiUrl = "https://jzvyvnvxld.execute-api.us-east-1.amazonaws.com/beta/forward"
+uploadApiUrl = "https://jzvyvnvxld.execute-api.us-east-1.amazonaws.com/beta/upload"
 username = "3og5ph16taqf598bchokdfs1r2"
 password = "bpuroud7lcqo5t3eomd6nvsspthu83c7e9taik2cqentf4f0o6g"
 tokenUrl = "https://auth.interninit.com/oauth2/token"
@@ -30,6 +30,24 @@ def update_user_data():
     req = requests.post(cacheApiUrl, headers = {"Authorization" : headers.get("Authorization")}, json = info)
     return req.text
 
+@main.route("/upload_user_files", methods=["POST"])
+def upload_user_files():
+    req = request.files
+    headers = request.headers
+
+    data = req.get("file")
+    res = requests.post(url=uploadApiUrl,
+                    data=data,
+                    headers = {"Content-Type" : "application/octet-stream",
+                               "Filename" : str(data.filename),
+                               "Authorization" : headers.get("Authorization"),
+                               "Source" : headers.get("Source")})
+    return res.text
+    '''
+    req = requests.post(uploadApiUrl, headers = {"Authorization" : headers.get("Authorization"), "Content-Type" : headers.get("Content-Type")}, data = body)
+    print(req.text)
+    return req.text,req.status_code
+    '''
 @main.route("/auth", methods=["POST"])
 def auth():
     rawBody = request.get_data()

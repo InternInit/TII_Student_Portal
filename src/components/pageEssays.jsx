@@ -49,8 +49,8 @@ export default class pageEssays extends React.Component {
         >
           {/**Industry response */}
           <Form.Item
-            key="industry"
-            name="industry"
+            key="industryEssay"
+            name="industryEssay"
             label={this.boldify("Why do you want to apply to this industry?")}
             rules={this.validationRules("response")}
           >
@@ -87,7 +87,7 @@ export default class pageEssays extends React.Component {
             key="CoverLetter"
             label={this.boldify("Cover Letter (Optional)")}
           >
-            <Dragger {...props} style={{ width: "250px", height: "30px" }}>
+            <Dragger {...props} style={{ width: "250px", height: "30px" }} customRequest={this.customRequestCL}>
               <h1 style={{ color: "blue" }}>
                 <InboxOutlined />
               </h1>
@@ -101,7 +101,7 @@ export default class pageEssays extends React.Component {
             key="Portfolio"
             label={this.boldify("Portfolio")}
           >
-            <Dragger {...props} style={{ width: "250px", height: "30px" }}>
+            <Dragger {...props} style={{ width: "250px", height: "30px" }} customRequest={this.customRequestPortfolio}>
               <h1 style={{ color: "blue" }}>
                 <InboxOutlined />
               </h1>
@@ -150,6 +150,24 @@ export default class pageEssays extends React.Component {
   onFinish = values => {
     console.log('FinishedPageEssays:', values);
     this.props.onNext(values, "3")
+  };
+
+  customRequestCL = ({ onSuccess, onError, file }) => {
+    setTimeout(() => {
+      onSuccess(file)
+      const source = "CoverLetter"
+      this.props.uploadFile(file, source);
+    }, 100);
+
+  };
+
+  customRequestPortfolio = ({ onSuccess, onError, file }) => {
+    setTimeout(() => {
+      onSuccess(file)
+      const source = "Portfolio"
+      this.props.uploadFile(file, source);
+    }, 100);
+
   };
 
   boldify = text => <strong>{text}</strong>;
