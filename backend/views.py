@@ -40,7 +40,8 @@ def upload_user_files():
                     data=data,
                     headers = {"Content-Type" : "application/octet-stream",
                                "Filename" : str(data.filename),
-                               "Authorization" : headers.get("Authorization")})
+                               "Authorization" : headers.get("Authorization"),
+                               "Source" : headers.get("Source")})
     return res.text
     '''
     req = requests.post(uploadApiUrl, headers = {"Authorization" : headers.get("Authorization"), "Content-Type" : headers.get("Content-Type")}, data = body)

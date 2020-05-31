@@ -87,7 +87,7 @@ export default class pageEssays extends React.Component {
             key="CoverLetter"
             label={this.boldify("Cover Letter (Optional)")}
           >
-            <Dragger {...props} style={{ width: "250px", height: "30px" }} customRequest={this.customRequest}>
+            <Dragger {...props} style={{ width: "250px", height: "30px" }} customRequest={this.customRequestCL}>
               <h1 style={{ color: "blue" }}>
                 <InboxOutlined />
               </h1>
@@ -101,7 +101,7 @@ export default class pageEssays extends React.Component {
             key="Portfolio"
             label={this.boldify("Portfolio")}
           >
-            <Dragger {...props} style={{ width: "250px", height: "30px" }} customRequest={this.customRequest}>
+            <Dragger {...props} style={{ width: "250px", height: "30px" }} customRequest={this.customRequestPortfolio}>
               <h1 style={{ color: "blue" }}>
                 <InboxOutlined />
               </h1>
@@ -152,10 +152,20 @@ export default class pageEssays extends React.Component {
     this.props.onNext(values, "3")
   };
 
-  customRequest = ({ onSuccess, onError, file }) => {
+  customRequestCL = ({ onSuccess, onError, file }) => {
     setTimeout(() => {
       onSuccess(file)
-      this.props.uploadFile(file);
+      const source = "CoverLetter"
+      this.props.uploadFile(file, source);
+    }, 100);
+
+  };
+
+  customRequestPortfolio = ({ onSuccess, onError, file }) => {
+    setTimeout(() => {
+      onSuccess(file)
+      const source = "Portfolio"
+      this.props.uploadFile(file, source);
     }, 100);
 
   };

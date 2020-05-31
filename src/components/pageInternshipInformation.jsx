@@ -508,7 +508,7 @@ class PageInternshipInformation extends Component {
 
           {/** Resumé */}
           <Form.Item {...formItemProps.resume}>
-            <Dragger {...props} style={{ width: "250px", height: "30px" }} customRequest={this.customRequest}>
+            <Dragger {...props} style={{ width: "250px", height: "30px" }} customRequest={this.customRequestResume}>
               <h1 style={{ color: "blue" }}>
                 <InboxOutlined />
               </h1>
@@ -539,10 +539,11 @@ class PageInternshipInformation extends Component {
 
 
 
-  customRequest = ({ onSuccess, onError, file }) => {
+  customRequestResume = ({ onSuccess, onError, file }) => {
     setTimeout(() => {
       onSuccess(file)
-      this.props.uploadFile(file);
+      const source = "Resume"
+      this.props.uploadFile(file, source);
     }, 100);
 
   };

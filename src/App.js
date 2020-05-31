@@ -200,7 +200,7 @@ class App extends Component {
     return this.inMemoryToken.token;
   }
 
-  uploadFile = (file) => {
+  uploadFile = (file, source) => {
     console.log("Uploading")
     const fd = new FormData();
     fd.append("file", file)
@@ -212,7 +212,8 @@ class App extends Component {
     fetch('/upload_user_files', {
       method: 'POST',
       headers: {
-        "Authorization": "Bearer " + JSON.parse(JSON.stringify(this.getJwt()))
+        "Authorization": "Bearer " + JSON.parse(JSON.stringify(this.getJwt())),
+        "Source" : JSON.parse(JSON.stringify(source))
       },
       body: fd,
     }).then((response) => {
