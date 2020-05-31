@@ -152,22 +152,13 @@ export default class pageEssays extends React.Component {
     this.props.onNext(values, "3")
   };
 
-  customRequest = ({file, onSuccess}) => {
+  customRequest = ({ onSuccess, onError, file }) => {
     setTimeout(() => {
-      onSuccess("ok");
-      console.log(file.type)
-      fetch("/upload_user_files", {
-        method: "POST",
-        headers: {
-          "Authorization": "Bearer " + JSON.parse(JSON.stringify(this.props.getJwt())),
-          "Content-Type" : JSON.parse(JSON.stringify(file.type))
-        },
-        body: file
-        }).then(response =>
-          response.json()).then(data => {
-          });
-    }, 0);
-  }
+      onSuccess(file)
+      this.props.uploadFile(file);
+    }, 100);
+
+  };
 
   boldify = text => <strong>{text}</strong>;
 }
