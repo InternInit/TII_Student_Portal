@@ -20,6 +20,9 @@ import {
 import "antd/dist/antd.css";
 import "../App.css";
 
+//Stream related
+import axios from 'axios';
+
 //Object Destructuring
 const { Option } = Select;
 const { MonthPicker, RangePicker } = DatePicker;
@@ -269,7 +272,6 @@ const formItemProps = {
 };
 const props = {
   name: "file",
-  action: "https://www.mocky.io/v2/5cc8019d300000980a055e76",
   multiple: true,
   onChange(info) {
     const { status } = info.file;
@@ -506,7 +508,7 @@ class PageInternshipInformation extends Component {
 
           {/** Resumé */}
           <Form.Item {...formItemProps.resume}>
-            <Dragger {...props} style={{ width: "250px", height: "30px" }}>
+            <Dragger {...props} style={{ width: "250px", height: "30px" }} customRequest={this.customRequest}>
               <h1 style={{ color: "blue" }}>
                 <InboxOutlined />
               </h1>
@@ -534,6 +536,18 @@ class PageInternshipInformation extends Component {
     this.props.onNext(values, "1")
   };
 
+
+
+
+  customRequest = ({ onSuccess, onError, file }) => {
+    setTimeout(() => {
+      onSuccess(file)
+      this.props.uploadFile(file);
+    }, 100);
+
+  };
+
 }
+
 
 export default PageInternshipInformation;

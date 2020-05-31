@@ -87,7 +87,7 @@ export default class pageEssays extends React.Component {
             key="CoverLetter"
             label={this.boldify("Cover Letter (Optional)")}
           >
-            <Dragger {...props} style={{ width: "250px", height: "30px" }}>
+            <Dragger {...props} style={{ width: "250px", height: "30px" }} customRequest={this.customRequest}>
               <h1 style={{ color: "blue" }}>
                 <InboxOutlined />
               </h1>
@@ -101,7 +101,7 @@ export default class pageEssays extends React.Component {
             key="Portfolio"
             label={this.boldify("Portfolio")}
           >
-            <Dragger {...props} style={{ width: "250px", height: "30px" }}>
+            <Dragger {...props} style={{ width: "250px", height: "30px" }} customRequest={this.customRequest}>
               <h1 style={{ color: "blue" }}>
                 <InboxOutlined />
               </h1>
@@ -151,6 +151,23 @@ export default class pageEssays extends React.Component {
     console.log('FinishedPageEssays:', values);
     this.props.onNext(values, "3")
   };
+
+  customRequest = ({file, onSuccess}) => {
+    setTimeout(() => {
+      onSuccess("ok");
+      console.log(file.type)
+      fetch("/upload_user_files", {
+        method: "POST",
+        headers: {
+          "Authorization": "Bearer " + JSON.parse(JSON.stringify(this.props.getJwt())),
+          "Content-Type" : JSON.parse(JSON.stringify(file.type))
+        },
+        body: file
+        }).then(response =>
+          response.json()).then(data => {
+          });
+    }, 0);
+  }
 
   boldify = text => <strong>{text}</strong>;
 }

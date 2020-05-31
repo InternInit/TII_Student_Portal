@@ -106,6 +106,8 @@ class App extends Component {
         onNext={this.onNext}
         onBack={this.onBack}
         onSubmit={this.onSubmit}
+        getJwt={this.getJwt}
+        uploadFile={this.uploadFile}
       />
     );
   };
@@ -195,10 +197,29 @@ class App extends Component {
   }
 
   getJwt = () => {
-    console.log(this.inMemoryToken);
+    return this.inMemoryToken.token;
   }
 
+  uploadFile = (file) => {
+    console.log("Uploading")
+    const fd = new FormData();
+    fd.append("file", file)
 
+    for(var pair of fd.entries()) {
+      console.log(pair[0]+ ', '+ pair[1]);
+    }
+
+    fetch('/upload_user_files', {
+      method: 'POST',
+      headers: {
+        "Authorization": "Bearer " + JSON.parse(JSON.stringify(this.getJwt()))
+      },
+      body: fd,
+    }).then((response) => {
+
+    });
+
+  }
 
   // BUG: PROBLEM WITH RENDERING THE DIFFERENT NAVBAR SELECTIONS
   renderNav = () => {
