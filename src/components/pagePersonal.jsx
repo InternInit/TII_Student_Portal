@@ -124,11 +124,12 @@ const allStates = [
 ];
 
 class PagePersonal extends Component {
-  validationRules = (inputName, type) => [
+  validationRules = (required, inputName, type, pattern) => [
     {
-      required: true,
+      required: required,
       message: "Please input your " + inputName,
-      type: type
+      type: type,
+      pattern: pattern
     }
   ];
 
@@ -163,7 +164,7 @@ class PagePersonal extends Component {
                 key="gender"
                 name="gender"
                 label={this.boldify("What is your gender?")}
-                rules={this.validationRules("gender")}
+                rules={this.validationRules(true, "gender")}
               >
                 <Radio.Group>
                   {genders.map(gender => (
@@ -241,7 +242,7 @@ class PagePersonal extends Component {
                 key="age"
                 label={this.boldify("Age")}
                 name="age"
-                rules={this.validationRules("age", "number")}
+                rules={this.validationRules(true, "age", "number")}
               >
                 <InputNumber style={{ width: "100%" }} />
               </Form.Item>
@@ -285,7 +286,7 @@ class PagePersonal extends Component {
                           name={[field.name, "schoolName"]}
                           label={this.boldify("School Name")}
                           validateTrigger={["onChange", "onBlur"]}
-                          rules={this.validationRules("gender")}
+                          rules={this.validationRules(true, "school name", "string")}
                         >
                           <Input placeholder="School name" />
                         </Form.Item>
@@ -297,7 +298,7 @@ class PagePersonal extends Component {
                               key={[field.fieldKey, "schoolAddress"]}
                               label={this.boldify("School Location")}
                               name={[field.name, "schoolAddress"]}
-                              rules={this.validationRules("school's address")}
+                              rules={this.validationRules(true, "school's address", "string", /\d{1,3}.?\d{0,3}\s[a-zA-Z]{2,30}\s[a-zA-Z]{2,15}/)}
                             >
                               <Input placeholder="Address Line" />
                             </Form.Item>
@@ -310,7 +311,7 @@ class PagePersonal extends Component {
                             <Form.Item
                               key={[field.fieldKey, "city"]}
                               name={[field.name, "city"]}
-                              rules={this.validationRules("city")}
+                              rules={this.validationRules(true, "city", "string", /^[a-zA-Z]+(?:[\s-][a-zA-Z]+)*$/)}
                             >
                               <Input placeholder="City" />
                             </Form.Item>
@@ -319,7 +320,7 @@ class PagePersonal extends Component {
                             <Form.Item
                               key={[field.fieldKey, "state"]}
                               name={[field.name, "state"]}
-                              rules={this.validationRules("state")}
+                              rules={this.validationRules(true, "state")}
                             >
                               <Select placeholder="State">
                                 {allStates.map(state => (
@@ -334,7 +335,7 @@ class PagePersonal extends Component {
                             <Form.Item
                               key={[field.fieldKey, "zip"]}
                               name={[field.name, "zip"]}
-                              rules={this.validationRules("zip code")}
+                              rules={this.validationRules(true, "zip code", "string", /^\d{5}$/)}
                             >
                               <Input placeholder="Zip Code" />
                             </Form.Item>
@@ -361,7 +362,7 @@ class PagePersonal extends Component {
                               key={[field.fieldKey, "yearsCompleted"]}
                               label={this.boldify("Years Completed")}
                               name={[field.name, "yearsCompleted"]}
-                              rules={this.validationRules("years completed")}
+                              rules={this.validationRules(true, "years completed", "string", /^\d{1,3}$/)}
                             >
                               <Input />
                             </Form.Item>

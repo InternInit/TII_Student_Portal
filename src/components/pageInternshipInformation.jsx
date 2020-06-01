@@ -125,11 +125,12 @@ const industry = [
 ];
 
 //Functions
-const validationRules = (inputName, type) => [
+const validationRules = (required, inputName, type, pattern) => [
   {
-    required: true,
+    required: required,
     message: "Please input your " + inputName,
-    type: type
+    type: type,
+    pattern: pattern
   }
 ];
 
@@ -150,53 +151,53 @@ const formItemProps = {
     key: "firstName",
     label: boldify("First Name"),
     name: "firstName",
-    rules: validationRules("first name", "string")
+    rules: validationRules(true, "first name", "string")
   },
   lastName: {
     key: "lastName",
     label: boldify("Last Name"),
     name: "lastName",
-    rules: validationRules("last name", "string")
+    rules: validationRules(true, "last name", "string")
   },
   phoneNumber: {
     key: "phoneNumber",
     label: boldify("Phone Number"),
     name: "phoneNumber",
     extra: "Please input your phone number without any formatting.",
-    rules: validationRules("phone number")
+    rules: validationRules(true, "phone number", "string", /^(1?([-\s]?\(?\d{3}\)?)[-\s]?)(\d{3})([-\s]?\d{4})$/)
   },
   email: {
     key: "email",
     label: boldify("Email"),
     name: "email",
-    rules: validationRules("email", "email")
+    rules: validationRules(true, "email", "email")
   },
   addressLine: {
     key: "addressLine",
     label: boldify("Address"),
     name: "address",
-    rules: validationRules("address")
+    rules: validationRules(true, "address", "string", /\d{1,3}.?\d{0,3}\s[a-zA-Z]{2,30}\s[a-zA-Z]{2,15}/)
   },
   city: {
     key: "city",
     name: "city",
-    rules: validationRules("city")
+    rules: validationRules(true, "city", "string", /^[a-zA-Z]+(?:[\s-][a-zA-Z]+)*$/)
   },
   livingState: {
     key: "state",
     name: "state",
-    rules: validationRules("state")
+    rules: validationRules(true, "state")
   },
   zip: {
     key: "zip",
     name: "zip",
-    rules: validationRules("zip code")
+    rules: validationRules(true, "zip code", "string", /^\d{5}$/)
   },
   yog: {
     key: "yog",
     label: boldify("Year of graduation"),
     name: "yog",
-    rules: validationRules("year of graduation")
+    rules: validationRules(true, "year of graduation", "string", /^\d{4}$/)
   },
   industry: {
     key: "industry",
@@ -213,20 +214,21 @@ const formItemProps = {
     key: "unweightedGPA",
     label: boldify("What is your unweighted GPA?"),
     name: "unweightedGPA",
-    rules: validationRules("unweighted GPA"),
+    rules: validationRules(true, "unweighted GPA", "string", /^(([0-3]\.\d{1,2})|([4]\.[0]{1,2})|([0-4]))$/),
     extra: "Your GPA should be out of 4.0"
   },
   weightedGPA: {
     key: "weightedGPA",
     label: boldify("What is your weighted GPA (optional)?"),
     name: "weightedGPA",
-    extra: "Indicate your weighted GPA over the scale"
+    extra: "Indicate your weighted GPA over the scale",
+    rules: validationRules(false, "weighted GPA", "string", /^(\d+(\.\d+)?)\/(\d+(\.\d+)?)$/)
   },
   courses: {
     key: "courses",
     label: boldify("Relevant courses to your industry."),
     name: "courses",
-    rules: validationRules("relevant courses"),
+    rules: validationRules(true, "relevant courses"),
     extra:
       "Separate each entry with a comma and a space, and capitalize the AP/IB for your AP/IB Classes"
   },
@@ -234,7 +236,7 @@ const formItemProps = {
     key: "extracurriculars",
     label: boldify("Extracurricular Activities"),
     name: "extracurriculars",
-    rules: validationRules("extracurricular activities"),
+    rules: validationRules(true, "extracurricular activities"),
     extra:
       "Separate each entry with a comma and a space, and in parentheses, show how long you spent on the activity."
   },
@@ -242,13 +244,13 @@ const formItemProps = {
     key: "daysToWork",
     label: boldify("What days are you willing to work?"),
     name: "daysToWork",
-    rules: validationRules("optimal days to work", "array")
+    rules: validationRules(true, "optimal days to work", "array")
   },
   timesToWork: {
     key: "timesToWork",
     label: boldify("What times are you willing to work?"),
     name: "timesToWork",
-    rules: validationRules("times available to work", "array")
+    rules: validationRules(true, "times available to work", "array")
   },
   dateOfStartAndEnd: {
     key: "dateOfStartAndEnd",
@@ -256,13 +258,13 @@ const formItemProps = {
     label: boldify(
       "When can you start working and when do you need to stop working?"
     ),
-    rules: validationRules("available dates of work", "array")
+    rules: validationRules(true, "available dates of work", "array")
   },
   paidUnpaid: {
     key: "paidUnpaid",
     name: "paidUnpaid",
     label: boldify("Are you willing to work unpaid?"),
-    rules: validationRules("preference for pay")
+    rules: validationRules(true, "preference for pay")
   },
   resume: {
     name: "resume",
