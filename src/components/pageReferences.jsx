@@ -27,11 +27,12 @@ const formItemLayoutWithOutLabel = {
 };
 
 //Functions
-const validationRules = (inputName, type) => [
+const validationRules = (required, inputName, type, pattern) => [
   {
-    required: true,
+    required: required,
     message: "Please input your " + inputName,
-    type: type
+    type: type,
+    pattern: pattern
   }
 ];
 const boldify = text => <strong>{text}</strong>;
@@ -43,12 +44,12 @@ const formItemProps = {
     align: "left",
     className: "pageReferences"
   },
-  inputField: function (field, label, name, validationType) {
+  inputField: function (required, field, label, name, validationType, pattern) {
     return {
       key: [field.fieldKey, name],
       label: boldify(label),
       name: [field.name, name],
-      rules: validationRules(label, validationType ? validationType : "string")
+      rules: validationRules(required, label, validationType ? validationType : "string", pattern)
     };
   },
   addButton: {
@@ -89,6 +90,7 @@ class PageReferences extends Component {
                             {/**First name of Reference */}
                             <Form.Item
                               {...formItemProps.inputField(
+                                true,
                                 field,
                                 "First Name",
                                 "firstName"
@@ -101,6 +103,7 @@ class PageReferences extends Component {
                             {/**Last name of Reference */}
                             <Form.Item
                               {...formItemProps.inputField(
+                                true,
                                 field,
                                 "Last Name",
                                 "lastName"
@@ -117,6 +120,7 @@ class PageReferences extends Component {
                             {/**Company of Reference */}
                             <Form.Item
                               {...formItemProps.inputField(
+                                true,
                                 field,
                                 "School/Company",
                                 "schoolCompany"
@@ -129,6 +133,7 @@ class PageReferences extends Component {
                             {/**position within company of Reference */}
                             <Form.Item
                               {...formItemProps.inputField(
+                                true,
                                 field,
                                 "Title",
                                 "title"
@@ -144,9 +149,12 @@ class PageReferences extends Component {
                           <Col span={halfSpan}>
                             <Form.Item
                               {...formItemProps.inputField(
+                                true,
                                 field,
                                 "Phone Number",
-                                "phoneNumber"
+                                "phoneNumber",
+                                "string",
+                                /^(1?([-\s]?\(?\d{3}\)?)[-\s]?)(\d{3})([-\s]?\d{4})$/
                               )}
                               extra="Please input your phone number without any formatting."
                             >
@@ -156,6 +164,7 @@ class PageReferences extends Component {
                           <Col span={halfSpan}>
                             <Form.Item
                               {...formItemProps.inputField(
+                                true,
                                 field,
                                 "Email",
                                 "email",
