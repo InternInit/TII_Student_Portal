@@ -142,7 +142,6 @@ const formItemProps = {
   totalForm: {
     name: "pageInternshipInformation",
     initialValues: {
-      remember: true
     },
     layout: "vertical",
     align: "left"

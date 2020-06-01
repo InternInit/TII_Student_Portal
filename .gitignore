@@ -23,7 +23,8 @@ yarn-debug.log*
 yarn-error.log*
 
 #Custom config files
-flaskEnvSetup.sh
+#flaskEnvSetup.sh
 
 #Python
 /backend/__pycache__
+/env
