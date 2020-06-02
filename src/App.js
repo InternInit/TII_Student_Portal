@@ -75,6 +75,7 @@ class App extends Component {
         }).then(response =>
           response.json()).then(data => {
             console.log(data);
+            window.location.href = "https://interninit.com"
           });
     } else if (this.state.submissionState == false) {
       console.log("Submission disabled")
