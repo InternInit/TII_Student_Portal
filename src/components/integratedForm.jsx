@@ -20,14 +20,14 @@ const PageContainer = styled.div`
 
 class IntegratedForm extends Component {
   render() {
-    const { page, onNext, onBack, onSubmit, getJwt, uploadFile } = this.props;
+    const { page, onNext, onBack, onSubmit, getJwt, uploadFile, getUserData} = this.props;
 
 
     //Rerenders the form based on what page the user is currently on
     if (page === 0) {
       return (
         <PageContainer>
-          <PageInternshipInformation onNext={onNext} getJwt={getJwt} uploadFile={uploadFile} />
+          <PageInternshipInformation onNext={onNext} getJwt={getJwt} uploadFile={uploadFile}/>
         </PageContainer>
       );
     } else if (page === 1) {

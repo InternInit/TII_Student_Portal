@@ -11,9 +11,13 @@ password = "bpuroud7lcqo5t3eomd6nvsspthu83c7e9taik2cqentf4f0o6g"
 tokenUrl = "https://auth.interninit.com/oauth2/token"
 testUrl = "https://webhook.site/c2795845-3b0d-4cf1-8ac4-3da037d87588"
 
-@main.route("/get_user_data")
+@main.route("/get_user_data", methods=["POST"])
 def get_user_data():
-    return jsonify({"UserData": {}})
+    page = request.get_data().decode("utf-8")
+    token = request.headers.get("Authorization").split(" ")[1]
+    params={"page":page, "token":token}
+    req = requests.get(cacheApiUrl, params=params)
+    return jsonify(req.text)
 
 
 @main.route("/update_user_data", methods=["POST"])
