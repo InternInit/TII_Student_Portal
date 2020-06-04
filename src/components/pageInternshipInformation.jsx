@@ -141,8 +141,6 @@ const boldify = text => <strong>{text}</strong>;
 const formItemProps = {
   totalForm: {
     name: "pageInternshipInformation",
-    initialValues: {
-    },
     layout: "vertical",
     align: "left"
   },
