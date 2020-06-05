@@ -15,6 +15,8 @@ import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
 import "antd/dist/antd.css";
 import "../App.css";
 
+import moment from 'moment'
+
 //Object Destructuring
 const { Option } = Select;
 const { MonthPicker, RangePicker } = DatePicker;
@@ -139,6 +141,16 @@ class PagePersonal extends Component {
     return <h1>Hello</h1>;
   };
 
+  formRef = React.createRef();
+
+  componentDidUpdate(){
+    this.getUserData()
+  }
+
+  componentDidMount(){
+    this.getUserData()
+  }
+
   render() {
     return (
       <div style={{ width: "100%", marginTop: "40px" }}>
@@ -156,6 +168,7 @@ class PagePersonal extends Component {
           layout="vertical"
           align="left"
           onFinish={this.onFinish}
+          ref={this.formRef}
         >
           {/*GENDER*/}
           <Row gutter={formGutter}>
@@ -420,6 +433,27 @@ class PagePersonal extends Component {
     console.log('FinishedPersonalPage:', values);
     this.props.onNext(values, "2")
   };
+
+  getUserData = async() => {
+    let token = await this.props.getJwt()
+    fetch("/get_user_data", {
+      method: "POST",
+      headers: {
+        "Authorization": "Bearer " + JSON.parse(JSON.stringify(token)),
+      },
+      body: 1
+    }).then(response => response.json()).then(data => {
+      let parsedData = JSON.parse(data)
+      if(parsedData !== "No Info"){
+        //parsedData.dateOfStartAndEnd = [moment(parsedData.dateOfStartAndEnd[0]),moment(parsedData.dateOfStartAndEnd[1])]
+        //delete parsedData.resume
+        console.log(parsedData)
+        this.formRef.current.setFieldsValue(parsedData)
+      }
+
+    });
+  }
+
 }
 
 export default PagePersonal;

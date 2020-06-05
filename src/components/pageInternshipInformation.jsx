@@ -298,7 +298,6 @@ class PageInternshipInformation extends Component {
   formRef = React.createRef();
 
   componentDidUpdate(){
-    console.log("Updated")
     this.getUserData()
   }
 
@@ -583,25 +582,15 @@ class PageInternshipInformation extends Component {
       body: 0
     }).then(response => response.json()).then(data => {
       let parsedData = JSON.parse(data)
-      parsedData.dateOfStartAndEnd = [moment(parsedData.dateOfStartAndEnd[0]),moment(parsedData.dateOfStartAndEnd[1])]
-      delete parsedData.resume
-      console.log(parsedData)
-      //this.formatData(JSON.parse(data))
-      this.formRef.current.setFieldsValue(parsedData)
+      if(parsedData !== "No Info"){
+        parsedData.dateOfStartAndEnd = [moment(parsedData.dateOfStartAndEnd[0]),moment(parsedData.dateOfStartAndEnd[1])]
+        delete parsedData.resume
+        this.formRef.current.setFieldsValue(parsedData)
+      }
 
     });
   }
 
-  formatData = (data) => {
-    for (var prop in data) {
-    if (!data.hasOwnProperty(prop)) {
-        //The current property is not a direct property of p
-        continue;
-    }
-    //Do your logic with the property here
-}
-
-  }
 
 
 

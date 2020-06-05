@@ -138,7 +138,6 @@ class App extends Component {
                 refresh: data.refresh_token
               }
               console.log(this.inMemoryToken)
-              this.getUserData();
             } else {
               window.location.href = "https://auth.interninit.com/login?response_type=code&client_id=3og5ph16taqf598bchokdfs1r2&redirect_uri=http://localhost:3000"
             }
