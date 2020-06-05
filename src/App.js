@@ -109,7 +109,6 @@ class App extends Component {
         onSubmit={this.onSubmit}
         getJwt={this.getJwt}
         uploadFile={this.uploadFile}
-        getUserData={this.getUserData}
       />
     );
   };
@@ -139,7 +138,6 @@ class App extends Component {
                 refresh: data.refresh_token
               }
               console.log(this.inMemoryToken)
-              this.getUserData();
             } else {
               window.location.href = "https://auth.interninit.com/login?response_type=code&client_id=3og5ph16taqf598bchokdfs1r2&redirect_uri=http://localhost:3000"
             }
@@ -185,7 +183,6 @@ class App extends Component {
             refresh: data.refresh_token
           }
           console.log(this.inMemoryToken)
-          this.getUserData();
         } else{
           this.logout();
         }
@@ -203,10 +200,26 @@ class App extends Component {
   }
 
   getJwt = () => {
-    return this.inMemoryToken.token;
+
+    return new Promise((resolve, reject) => {
+      var app = this;
+      function checkToken() {
+        if(app.inMemoryToken === undefined){
+          setTimeout(() => {
+            checkToken()
+          }, 10)
+        } else {
+          resolve(app.inMemoryToken.token)
+        }
+
+    }
+    checkToken();
+
+    })
+
   }
 
-  uploadFile = (file, source) => {
+  uploadFile = async(file, source) => {
     console.log("Uploading")
     const fd = new FormData();
     fd.append("file", file)
@@ -214,11 +227,12 @@ class App extends Component {
     for(var pair of fd.entries()) {
       console.log(pair[0]+ ', '+ pair[1]);
     }
+    let token = await this.getJwt()
 
     fetch('/upload_user_files', {
       method: 'POST',
       headers: {
-        "Authorization": "Bearer " + JSON.parse(JSON.stringify(this.getJwt())),
+        "Authorization": "Bearer " + JSON.parse(JSON.stringify(token)),
         "Source" : JSON.parse(JSON.stringify(source))
       },
       body: fd,
@@ -226,22 +240,6 @@ class App extends Component {
 
     });
 
-  }
-
-  getUserData = () => {
-    fetch("/get_user_data", {
-      method: "POST",
-      headers: {
-        "Authorization": "Bearer " + JSON.parse(JSON.stringify(this.inMemoryToken.token)),
-      },
-      body: this.state.page
-    }).then(response => response.json()).then(data => {
-      console.log(JSON.parse(data))
-      this.initValues = JSON.parse(data)
-      return JSON.parse(data)
-
-
-    });
   }
 
   // BUG: PROBLEM WITH RENDERING THE DIFFERENT NAVBAR SELECTIONS
@@ -261,13 +259,13 @@ class App extends Component {
   componentDidMount() {
     console.log("mounted");
     this.refresh();
-    //this.getUserData();
   }
 
+/*
   componentDidUpdate(){
     this.getUserData();
   }
-
+*/
   render() {
     return (
       <div className="App">
@@ -275,7 +273,6 @@ class App extends Component {
           <Navbar />
         </header>
         <Switch checkedChildren="Submission On" unCheckedChildren="Submission Off" defaultChecked="true" onChange={this.switchOnChange}></Switch>
-        <Button onClick={this.getJwt}>GetJWT</Button>
         <Button onClick={this.logout}>Logout</Button>
         <Layout>
           {this.renderNav()}
