@@ -7,6 +7,9 @@ import PageReference from "../components/pageReferences.jsx";
 import PagePersonal from "../components/pagePersonal.jsx";
 import PageEssays from "./pageEssays";
 
+//React Routing
+import { BrowserRouter as Router, Link, Route, Switch as ReactSwitch } from 'react-router-dom'
+
 //Styles
 const PageContainer = styled.div`
   display: flex;
@@ -20,35 +23,26 @@ const PageContainer = styled.div`
 
 class IntegratedForm extends Component {
   render() {
-    const { page, onNext, onBack, onSubmit, getJwt, uploadFile, getUserData} = this.props;
+    const { page, onNext, onBack, onSubmit, getJwt, uploadFile, getUserData } = this.props;
 
 
     //Rerenders the form based on what page the user is currently on
-    if (page === 0) {
-      return (
-        <PageContainer>
-          <PageInternshipInformation onNext={onNext} getJwt={getJwt} uploadFile={uploadFile}/>
-        </PageContainer>
-      );
-    } else if (page === 1) {
-      return (
-        <PageContainer>
-          <PagePersonal onNext={onNext} onBack={onBack} getJwt={getJwt} />
-        </PageContainer>
-      );
-    } else if (page === 2) {
-      return (
-        <PageContainer>
-          <PageEssays onNext={onNext} onBack={onBack} getJwt={getJwt} uploadFile={uploadFile} />
-        </PageContainer>
-      );
-    } else if (page === 3) {
-      return (
-        <PageContainer>
-          <PageReference onBack={onBack} onSubmit={onSubmit} getJwt={getJwt} />
-        </PageContainer>
-      );
-    }
+    return (
+      <PageContainer>
+        <Router>
+          <ReactSwitch>
+            <Route path='/Internship-Information'
+              render={(props) => <PageInternshipInformation {...props} uploadFile={uploadFile} />} />
+            <Route path='/Personal'
+              render={(props) => <PagePersonal {...props} uploadFile={uploadFile} />} />
+            <Route path='/Written-Work'
+              render={(props) => <PageEssays {...props} uploadFile={uploadFile} />} />
+            <Route path='/References'
+              render={(props) => <PageReference {...props} uploadFile={uploadFile} />} />
+          </ReactSwitch>
+        </Router>
+      </PageContainer>
+    )
   }
 }
 

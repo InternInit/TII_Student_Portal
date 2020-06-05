@@ -12,6 +12,9 @@ import {
   SwapOutlined
 } from "@ant-design/icons";
 
+//React Routing
+import { BrowserRouter as Router, Link, Route, Switch as ReactSwitch } from 'react-router-dom'
+
 class TiiNav extends React.Component {
   constructor(props) {
     super(props);
@@ -82,20 +85,42 @@ class TiiNav extends React.Component {
           defaultSelectedKeys={this.props.highlightKey}
           selectedKeys={this.props.highlightKey}
         >
-          <Menu.Item key="1" onClick={clickOne}>
-            {InternButton} <span>Internship Info</span>
+
+
+          <Menu.Item key="1">
+            {InternButton}
+            <Router>
+              <Link to='/Internship-Information'>
+                <span>Internship Info</span>
+              </Link>
+            </Router>
           </Menu.Item>
 
-          <Menu.Item key="2" onClick={clickTwo}>
-            {PersonalButton} <span>Personal</span>
+          <Menu.Item key="2">
+            {PersonalButton}
+            <Router>
+              <Link to='/Personal'>
+                <span>Personal</span>
+              </Link>
+            </Router>
           </Menu.Item>
 
-          <Menu.Item key="3" onClick={clickThree}>
-            {EssayButton} <span>Written Work</span>
+          <Menu.Item key="3">
+            {EssayButton}
+            <Router>
+              <Link to='/Written-Work'>
+                <span>Written Work</span>
+              </Link>
+            </Router>
           </Menu.Item>
 
-          <Menu.Item key="4" onClick={clickFour}>
-            {ReferencesButton} <span>References</span>
+          <Menu.Item key="4" >
+            {ReferencesButton}
+            <Router>
+              <Link to='/References'>
+                <span>References</span>
+              </Link>
+            </Router>
           </Menu.Item>
           <Menu.Item
             style={{
@@ -110,6 +135,7 @@ class TiiNav extends React.Component {
             {SubmitButton}
             <span>Submit</span>
           </Menu.Item>
+
         </Menu>
       </Sider>
     );

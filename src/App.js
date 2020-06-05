@@ -19,10 +19,22 @@ import PageInternshipInformation from "./components/pageInternshipInformation.js
 //CSS Imports
 import "./App.css";
 
+//React Routing
+import { BrowserRouter as Router, Link, Route, Switch as ReactSwitch } from 'react-router-dom'
+
 //Declarations
 const { Header, Content, Footer, Sider } = Layout;
 
-
+//Styles
+const PageContainer = styled.div`
+  display: flex;
+  width: 70%;
+  padding-left: 5%;
+  padding-right: 5%;
+  justifycontent: center;
+  background-color: white;
+  border-radius: 10px;
+`;
 
 class App extends Component {
   inMemoryToken;
@@ -38,7 +50,7 @@ class App extends Component {
       page: newPage
     });
 
-    if (this.state.submissionState == true){
+    if (this.state.submissionState == true) {
       fetch("/update_user_data", {
         method: "POST",
         headers: {
@@ -46,10 +58,10 @@ class App extends Component {
           "Content-Type": "text/plain"
         },
         body: JSON.stringify(values) + "#" + origin
-        }).then(response =>
-          response.json()).then(data => {
-            console.log(data);
-          });
+      }).then(response =>
+        response.json()).then(data => {
+          console.log(data);
+        });
     } else if (this.state.submissionState == false) {
       console.log("Submission disabled")
     }
@@ -64,7 +76,7 @@ class App extends Component {
   };
 
   onSubmit = (values, origin) => {
-    if(this.state.submissionState == true){
+    if (this.state.submissionState == true) {
       fetch("/update_user_data", {
         method: "POST",
         headers: {
@@ -72,11 +84,11 @@ class App extends Component {
           "Content-Type": "text/plain"
         },
         body: JSON.stringify(values) + "#" + origin
-        }).then(response =>
-          response.json()).then(data => {
-            console.log(data);
-            window.location.href = "https://interninit.com"
-          });
+      }).then(response =>
+        response.json()).then(data => {
+          console.log(data);
+          window.location.href = "https://interninit.com"
+        });
     } else if (this.state.submissionState == false) {
       console.log("Submission disabled")
     }
@@ -102,6 +114,7 @@ class App extends Component {
   renderPage = () => {
     const pageNumber = this.state.page;
     return (
+      /*
       <IntegratedForm
         page={pageNumber}
         onNext={this.onNext}
@@ -111,6 +124,21 @@ class App extends Component {
         uploadFile={this.uploadFile}
         getUserData={this.getUserData}
       />
+      */
+      <PageContainer>
+        <Router>
+          <ReactSwitch>
+            <Route path='/Internship-Information'
+              render={(props) => <PageInternshipInformation {...props} uploadFile={uploadFile} />} />
+            <Route path='/Personal'
+              render={(props) => <PagePersonal {...props} uploadFile={uploadFile} />} />
+            <Route path='/Written-Work'
+              render={(props) => <PageEssays {...props} uploadFile={uploadFile} />} />
+            <Route path='/References'
+              render={(props) => <PageReference {...props} uploadFile={uploadFile} />} />
+          </ReactSwitch>
+        </Router>
+      </PageContainer>
     );
   };
 
@@ -120,7 +148,7 @@ class App extends Component {
   }
 
   auth = () => {
-    try{
+    try {
       var authCode = window.location.href.split("?")[1].split("=")[1]
       fetch("/auth", {
         method: "POST",
@@ -128,24 +156,24 @@ class App extends Component {
           "Content-Type": "text/plain"
         },
         body: authCode
-        }).then(response =>
-          response.json()).then(data => {
-            if(data!=="Invalid Grant"){
-              data = JSON.parse(data)
+      }).then(response =>
+        response.json()).then(data => {
+          if (data !== "Invalid Grant") {
+            data = JSON.parse(data)
 
-              this.inMemoryToken = {
-                token: data.id_token,
-                expiry: data.expires_in,
-                refresh: data.refresh_token
-              }
-              console.log(this.inMemoryToken)
-              this.getUserData();
-            } else {
-              window.location.href = "https://auth.interninit.com/login?response_type=code&client_id=3og5ph16taqf598bchokdfs1r2&redirect_uri=http://localhost:3000"
+            this.inMemoryToken = {
+              token: data.id_token,
+              expiry: data.expires_in,
+              refresh: data.refresh_token
             }
+            console.log(this.inMemoryToken)
+            this.getUserData();
+          } else {
+            window.location.href = "https://auth.interninit.com/login?response_type=code&client_id=3og5ph16taqf598bchokdfs1r2&redirect_uri=http://localhost:3000"
+          }
 
-          });
-    } catch(e){
+        });
+    } catch (e) {
       window.location.href = "https://auth.interninit.com/login?response_type=code&client_id=3og5ph16taqf598bchokdfs1r2&redirect_uri=http://localhost:3000"
     }
 
@@ -153,24 +181,24 @@ class App extends Component {
 
   refresh = () => {
     fetch("/auth/refresh").then(response =>
-        response.json()).then(data => {
-          if(data == null){
-            //Exchange Auth
-            //Store JWT in memory
-            //Store Refresh Token
-            this.auth();
+      response.json()).then(data => {
+        if (data == null) {
+          //Exchange Auth
+          //Store JWT in memory
+          //Store Refresh Token
+          this.auth();
+        } else {
+          //Check for JWT
+          if (typeof this.inMemoryToken == "undefined") {
+            console.log("I should probably exchange refresh for JWT")
+            this.exchange();
           } else {
-            //Check for JWT
-            if(typeof this.inMemoryToken == "undefined"){
-              console.log("I should probably exchange refresh for JWT")
-              this.exchange();
-            } else {
-              console.log("JWT exists, yay")
-              this.getUserData();
-            }
+            console.log("JWT exists, yay")
+            this.getUserData();
           }
-        });
-        //console.log(this.inMemoryToken.token)
+        }
+      });
+    //console.log(this.inMemoryToken.token)
   }
 
   exchange = () => {
@@ -178,7 +206,7 @@ class App extends Component {
     fetch("/auth/exchange").then(response =>
       response.json()).then(data => {
         data = JSON.parse(data)
-        if(data.error !== "invalid_grant"){
+        if (data.error !== "invalid_grant") {
           this.inMemoryToken = {
             token: data.id_token,
             expiry: data.expires_in,
@@ -186,7 +214,7 @@ class App extends Component {
           }
           console.log(this.inMemoryToken)
           this.getUserData();
-        } else{
+        } else {
           this.logout();
         }
       });
@@ -194,10 +222,10 @@ class App extends Component {
 
   logout = () => {
     fetch("/logout").then(response =>
-        response.json()).then(data => {
-          console.log(typeof data);
-          window.location.href = data
-        });
+      response.json()).then(data => {
+        console.log(typeof data);
+        window.location.href = data
+      });
 
 
   }
@@ -211,15 +239,15 @@ class App extends Component {
     const fd = new FormData();
     fd.append("file", file)
 
-    for(var pair of fd.entries()) {
-      console.log(pair[0]+ ', '+ pair[1]);
+    for (var pair of fd.entries()) {
+      console.log(pair[0] + ', ' + pair[1]);
     }
 
     fetch('/upload_user_files', {
       method: 'POST',
       headers: {
         "Authorization": "Bearer " + JSON.parse(JSON.stringify(this.getJwt())),
-        "Source" : JSON.parse(JSON.stringify(source))
+        "Source": JSON.parse(JSON.stringify(source))
       },
       body: fd,
     }).then((response) => {
@@ -264,7 +292,7 @@ class App extends Component {
     //this.getUserData();
   }
 
-  componentDidUpdate(){
+  componentDidUpdate() {
     this.getUserData();
   }
 
