@@ -23,6 +23,8 @@ import "../App.css";
 //Stream related
 import axios from 'axios';
 
+import moment from 'moment'
+
 //Object Destructuring
 const { Option } = Select;
 const { MonthPicker, RangePicker } = DatePicker;
@@ -285,10 +287,24 @@ const props = {
   }
 };
 
+
+
 class PageInternshipInformation extends Component {
+
   state = {
     otherIndustry: ""
   };
+
+  formRef = React.createRef();
+
+  componentDidUpdate(){
+    this.getUserData()
+  }
+
+  componentDidMount(){
+    this.getUserData()
+  }
+
 
   render() {
     return (
@@ -296,7 +312,7 @@ class PageInternshipInformation extends Component {
         <h1>Internship Information</h1>
         <br />
 
-        <Form {...formItemProps.totalForm} onFinish={this.onFinish}>
+        <Form {...formItemProps.totalForm} onFinish={this.onFinish} ref={this.formRef}>
           {/*First and Last Name*/}
           <Row name = "first" gutter={formGutter}>
             <Col span={halfSpan}>
@@ -524,6 +540,15 @@ class PageInternshipInformation extends Component {
             >
               Next
             </Button>
+            <Button
+              className="test-button"
+              type="default"
+              htmlType="button"
+              onClick={()=>{this.getUserData()}}
+              //onClick={()=>{console.log(moment("20111031"))}}
+            >
+              Test
+            </Button>
           </Form.Item>
         </Form>
       </div>
@@ -546,6 +571,28 @@ class PageInternshipInformation extends Component {
     }, 100);
 
   };
+
+  getUserData = async() => {
+    let token = await this.props.getJwt()
+    fetch("/get_user_data", {
+      method: "POST",
+      headers: {
+        "Authorization": "Bearer " + JSON.parse(JSON.stringify(token)),
+      },
+      body: 0
+    }).then(response => response.json()).then(data => {
+      let parsedData = JSON.parse(data)
+      if(parsedData !== "No Info"){
+        parsedData.dateOfStartAndEnd = [moment(parsedData.dateOfStartAndEnd[0]),moment(parsedData.dateOfStartAndEnd[1])]
+        delete parsedData.resume
+        this.formRef.current.setFieldsValue(parsedData)
+      }
+
+    });
+  }
+
+
+
 
 }
 

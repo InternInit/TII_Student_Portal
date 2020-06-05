@@ -122,7 +122,6 @@ class App extends Component {
         onSubmit={this.onSubmit}
         getJwt={this.getJwt}
         uploadFile={this.uploadFile}
-        getUserData={this.getUserData}
       />
       */
       <PageContainer>
@@ -167,161 +166,164 @@ class App extends Component {
               refresh: data.refresh_token
             }
             console.log(this.inMemoryToken)
-            this.getUserData();
           } else {
             window.location.href = "https://auth.interninit.com/login?response_type=code&client_id=3og5ph16taqf598bchokdfs1r2&redirect_uri=http://localhost:3000"
-          }
-
-        });
-    } catch (e) {
-      window.location.href = "https://auth.interninit.com/login?response_type=code&client_id=3og5ph16taqf598bchokdfs1r2&redirect_uri=http://localhost:3000"
-    }
-
-  }
-
-  refresh = () => {
-    fetch("/auth/refresh").then(response =>
-      response.json()).then(data => {
-        if (data == null) {
-          //Exchange Auth
-          //Store JWT in memory
-          //Store Refresh Token
-          this.auth();
-        } else {
-          //Check for JWT
-          if (typeof this.inMemoryToken == "undefined") {
-            console.log("I should probably exchange refresh for JWT")
-            this.exchange();
-          } else {
-            console.log("JWT exists, yay")
-            this.getUserData();
-          }
-        }
-      });
-    //console.log(this.inMemoryToken.token)
-  }
-
-  exchange = () => {
-    console.log("Exchanging")
-    fetch("/auth/exchange").then(response =>
-      response.json()).then(data => {
-        data = JSON.parse(data)
-        if (data.error !== "invalid_grant") {
-          this.inMemoryToken = {
-            token: data.id_token,
-            expiry: data.expires_in,
-            refresh: data.refresh_token
           }
           console.log(this.inMemoryToken)
           this.getUserData();
         } else {
-          this.logout();
+          window.location.href = "https://auth.interninit.com/login?response_type=code&client_id=3og5ph16taqf598bchokdfs1r2&redirect_uri=http://localhost:3000"
         }
-      });
+
+        });
+  } catch(e) {
+    window.location.href = "https://auth.interninit.com/login?response_type=code&client_id=3og5ph16taqf598bchokdfs1r2&redirect_uri=http://localhost:3000"
   }
 
-  logout = () => {
-    fetch("/logout").then(response =>
-      response.json()).then(data => {
-        console.log(typeof data);
-        window.location.href = data
-      });
+}
+
+refresh = () => {
+  fetch("/auth/refresh").then(response =>
+    response.json()).then(data => {
+      if (data == null) {
+        //Exchange Auth
+        //Store JWT in memory
+        //Store Refresh Token
+        this.auth();
+      } else {
+        //Check for JWT
+        if (typeof this.inMemoryToken == "undefined") {
+          console.log("I should probably exchange refresh for JWT")
+          this.exchange();
+        } else {
+          console.log("JWT exists, yay")
+          this.getUserData();
+        }
+      }
+    });
+  //console.log(this.inMemoryToken.token)
+}
+
+exchange = () => {
+  console.log("Exchanging")
+  fetch("/auth/exchange").then(response =>
+    response.json()).then(data => {
+      data = JSON.parse(data)
+      if (data.error !== "invalid_grant") {
+        this.inMemoryToken = {
+          token: data.id_token,
+          expiry: data.expires_in,
+          refresh: data.refresh_token
+        }
+        console.log(this.inMemoryToken)
+      } else {
+        this.logout();
+      }
+    });
+}
+
+logout = () => {
+  fetch("/logout").then(response =>
+    response.json()).then(data => {
+      console.log(typeof data);
+      window.location.href = data
+    });
 
 
-  }
+}
 
-  getJwt = () => {
-    return this.inMemoryToken.token;
-  }
+getJwt = () => {
 
-  uploadFile = (file, source) => {
-    console.log("Uploading")
-    const fd = new FormData();
-    fd.append("file", file)
+  return new Promise((resolve, reject) => {
+    var app = this;
+    function checkToken() {
+      if (app.inMemoryToken === undefined) {
+        setTimeout(() => {
+          checkToken()
+        }, 10)
+      } else {
+        resolve(app.inMemoryToken.token)
+      }
 
-    for (var pair of fd.entries()) {
-      console.log(pair[0] + ', ' + pair[1]);
     }
+    checkToken();
 
-    fetch('/upload_user_files', {
-      method: 'POST',
-      headers: {
-        "Authorization": "Bearer " + JSON.parse(JSON.stringify(this.getJwt())),
-        "Source": JSON.parse(JSON.stringify(source))
-      },
-      body: fd,
-    }).then((response) => {
+  })
 
-    });
+}
 
+uploadFile = async (file, source) => {
+  console.log("Uploading")
+  const fd = new FormData();
+  fd.append("file", file)
+
+  for (var pair of fd.entries()) {
+    console.log(pair[0] + ', ' + pair[1]);
   }
+  let token = await this.getJwt()
 
-  getUserData = () => {
-    fetch("/get_user_data", {
-      method: "POST",
-      headers: {
-        "Authorization": "Bearer " + JSON.parse(JSON.stringify(this.inMemoryToken.token)),
-      },
-      body: this.state.page
-    }).then(response => response.json()).then(data => {
-      console.log(JSON.parse(data))
-      this.initValues = JSON.parse(data)
-      return JSON.parse(data)
+  fetch('/upload_user_files', {
+    method: 'POST',
+    headers: {
+      "Authorization": "Bearer " + JSON.parse(JSON.stringify(token)),
+      "Source": JSON.parse(JSON.stringify(source))
+    },
+    body: fd,
+  }).then((response) => {
 
+  });
 
-    });
-  }
+}
 
-  // BUG: PROBLEM WITH RENDERING THE DIFFERENT NAVBAR SELECTIONS
-  renderNav = () => {
-    const highlightKey = String([this.state.page + 1]);
-    return (
-      <TiiNav
-        clickOne={this.clickOne}
-        clickTwo={this.clickTwo}
-        clickThree={this.clickThree}
-        clickFour={this.clickFour}
-        highlightKey={highlightKey}
-      />
-    );
-  };
+// BUG: PROBLEM WITH RENDERING THE DIFFERENT NAVBAR SELECTIONS
+renderNav = () => {
+  const highlightKey = String([this.state.page + 1]);
+  return (
+    <TiiNav
+      clickOne={this.clickOne}
+      clickTwo={this.clickTwo}
+      clickThree={this.clickThree}
+      clickFour={this.clickFour}
+      highlightKey={highlightKey}
+    />
+  );
+};
 
-  componentDidMount() {
-    console.log("mounted");
-    this.refresh();
-    //this.getUserData();
-  }
+componentDidMount() {
+  console.log("mounted");
+  this.refresh();
+}
 
-  componentDidUpdate() {
+/*
+  componentDidUpdate(){
     this.getUserData();
   }
-
-  render() {
-    return (
-      <div className="App">
-        <header>
-          <Navbar />
-        </header>
-        <Switch checkedChildren="Submission On" unCheckedChildren="Submission Off" defaultChecked="true" onChange={this.switchOnChange}></Switch>
-        <Button onClick={this.getJwt}>GetJWT</Button>
-        <Button onClick={this.logout}>Logout</Button>
-        <Layout>
-          {this.renderNav()}
-          <Content
-            style={{
-              display: "flex",
-              padding: "30px",
-              justifyContent: "center",
-              backgroundColor: "#ededed",
-              minHeight: "100vh"
-            }}
-          >
-            {this.renderPage()}
-          </Content>
-        </Layout>
-      </div>
-    );
-  }
+*/
+render() {
+  return (
+    <div className="App">
+      <header>
+        <Navbar />
+      </header>
+      <Switch checkedChildren="Submission On" unCheckedChildren="Submission Off" defaultChecked="true" onChange={this.switchOnChange}></Switch>
+      <Button onClick={this.logout}>Logout</Button>
+      <Layout>
+        {this.renderNav()}
+        <Content
+          style={{
+            display: "flex",
+            padding: "30px",
+            justifyContent: "center",
+            backgroundColor: "#ededed",
+            minHeight: "100vh"
+          }}
+        >
+          {this.renderPage()}
+        </Content>
+      </Layout>
+    </div>
+  );
+}
 }
 
 export default App;

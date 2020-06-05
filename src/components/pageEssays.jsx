@@ -26,6 +26,17 @@ const props = {
 };
 
 export default class pageEssays extends React.Component {
+
+  formRef = React.createRef();
+
+  componentDidUpdate(){
+    this.getUserData()
+  }
+
+  componentDidMount(){
+    this.getUserData()
+  }
+
   constructor(props) {
     super(props);
     this.state = {};
@@ -46,6 +57,7 @@ export default class pageEssays extends React.Component {
           align="left"
           width="100%"
           onFinish={this.onFinish}
+          ref={this.formRef}
         >
           {/**Industry response */}
           <Form.Item
@@ -169,6 +181,27 @@ export default class pageEssays extends React.Component {
     }, 100);
 
   };
+
+  getUserData = async() => {
+    let token = await this.props.getJwt()
+    fetch("/get_user_data", {
+      method: "POST",
+      headers: {
+        "Authorization": "Bearer " + JSON.parse(JSON.stringify(token)),
+      },
+      body: 2
+    }).then(response => response.json()).then(data => {
+      let parsedData = JSON.parse(data)
+      if(parsedData !== "No Info"){
+        //parsedData.dateOfStartAndEnd = [moment(parsedData.dateOfStartAndEnd[0]),moment(parsedData.dateOfStartAndEnd[1])]
+        delete parsedData.CoverLetter
+        delete parsedData.Portfolio
+        console.log(parsedData)
+        this.formRef.current.setFieldsValue(parsedData)
+      }
+
+    });
+  }
 
   boldify = text => <strong>{text}</strong>;
 }

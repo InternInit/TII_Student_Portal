@@ -28,3 +28,4 @@ yarn-error.log*
 #Python
 /backend/__pycache__
 /env
+/virtual-environment
