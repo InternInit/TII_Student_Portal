@@ -10,7 +10,7 @@ const { Dragger } = Upload;
 //Handles file uploading
 const props = {
   name: "file",
-  action: "https://www.mocky.io/v2/5cc8019d300000980a055e76",
+  accept: ".doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document, .pdf, application/pdf",
   multiple: true,
   onChange(info) {
     const { status } = info.file;
@@ -111,7 +111,7 @@ export default class pageEssays extends React.Component {
           <Form.Item
             name="Portfolio"
             key="Portfolio"
-            label={this.boldify("Portfolio")}
+            label={this.boldify("Portfolio (Optional)")}
           >
             <Dragger {...props} style={{ width: "250px", height: "30px" }} customRequest={this.customRequestPortfolio}>
               <h1 style={{ color: "blue" }}>

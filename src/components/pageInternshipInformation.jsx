@@ -268,11 +268,13 @@ const formItemProps = {
   resume: {
     name: "resume",
     key: "resume",
-    label: boldify("Resumé (Optional)")
+    label: boldify("Resumé (.doc, .docx, .pdf)"),
+    rules: validationRules(true, "resume", "object")
   }
 };
 const props = {
   name: "file",
+  accept: ".doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document, .pdf, application/pdf",
   multiple: true,
   onChange(info) {
     const { status } = info.file;
@@ -540,15 +542,6 @@ class PageInternshipInformation extends Component {
             >
               Next
             </Button>
-            <Button
-              className="test-button"
-              type="default"
-              htmlType="button"
-              onClick={()=>{this.getUserData()}}
-              //onClick={()=>{console.log(moment("20111031"))}}
-            >
-              Test
-            </Button>
           </Form.Item>
         </Form>
       </div>
@@ -571,6 +564,7 @@ class PageInternshipInformation extends Component {
     }, 100);
 
   };
+
 
   getUserData = async() => {
     let token = await this.props.getJwt()
