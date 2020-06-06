@@ -77,7 +77,7 @@ class TiiNav extends React.Component {
           theme="light"
           mode="inline"
           defaultSelectedKeys={this.props.highlightKey}
-          selectedKeys={CurrentKey}
+          selectedKeys={this.props.highlightKey}
         >
           <Menu.Item key="1" onClick={() => { this.routeChange('/Internship-Info') }}>
             {InternButton}
@@ -177,15 +177,19 @@ class TiiNav extends React.Component {
   routeChange = (path) => {
     console.log(path)
     if (path === '/Internship-Info') {
+      this.props.clickOne()
       this.setState({ CurrentKey: "1" })
     }
     else if (path === '/Personal') {
+      this.props.clickTwo()
       this.setState({ CurrentKey: "2" })
     }
     else if (path === '/Written-Work') {
+      this.props.clickThree()
       this.setState({ CurrentKey: "3" })
     }
     else if (path === '/References') {
+      this.props.clickFour()
       this.setState({ CurrentKey: "4" })
     }
     else {

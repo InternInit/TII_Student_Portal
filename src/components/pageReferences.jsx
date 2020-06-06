@@ -249,7 +249,7 @@ class PageReferences extends Component {
   };
   routeChange = (path) => {
     console.log(path)
-
+    this.props.clickThree()
     this.props.history.push(path);
   }
 

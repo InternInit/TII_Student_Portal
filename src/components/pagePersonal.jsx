@@ -465,7 +465,12 @@ class PagePersonal extends Component {
 
   routeChange = (path) => {
     console.log(path)
-
+    if (path === '/Written-Work') {
+      this.props.clickThree()
+    }
+    else {
+      this.props.clickOne()
+    }
     this.props.history.push(path);
   }
 

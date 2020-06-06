@@ -606,6 +606,7 @@ class PageInternshipInformation extends Component {
 
   routeChange = (path) => {
     console.log(path)
+    this.props.clickTwo()
     this.props.history.push(path);
   }
 

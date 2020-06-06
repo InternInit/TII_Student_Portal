@@ -212,7 +212,12 @@ class pageEssays extends React.Component {
 
   routeChange = (path) => {
     console.log(path)
-
+    if (path === '/Personal') {
+      this.props.clickTwo()
+    }
+    else {
+      this.props.clickFour()
+    }
     this.props.history.push(path);
   }
 }

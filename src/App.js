@@ -114,31 +114,36 @@ class App extends Component {
   };
 
   renderPage = () => {
-    const pageNumber = this.state.page;
     return (
       <PageContainer>
         <ReactSwitch>
 
           <Route path='/Internship-Info' exact="true"
             render={(props) => <PageInternshipInformation {...props}
+              clickTwo={this.clickTwo}
               uploadFile={this.uploadFile}
               onSubmit={this.onSubmit}
               getJwt={this.getJwt} />} />
 
           <Route path='/Personal' exact="true"
             render={(props) => <PagePersonal {...props}
+              clickOne={this.clickOne}
+              clickThree={this.clickThree}
               uploadFile={this.uploadFile}
               onSubmit={this.onSubmit}
               getJwt={this.getJwt} />} />
 
           <Route path='/Written-Work' exact="true"
             render={(props) => <PageEssays {...props}
+              clickTwo={this.clickTwo}
+              clickFour={this.clickFour}
               uploadFile={this.uploadFile}
               onSubmit={this.onSubmit}
               getJwt={this.getJwt} />} />
 
           <Route path='/References' exact="true"
             render={(props) => <PageReferences {...props}
+              clickThree={this.clickThree}
               uploadFile={this.uploadFile}
               onSubmit={this.onSubmit}
               getJwt={this.getJwt} />} />
@@ -282,6 +287,10 @@ class App extends Component {
     const highlightKey = String([this.state.page + 1]);
     return (
       <TiiNav
+        clickOne={this.clickOne}
+        clickTwo={this.clickTwo}
+        clickThree={this.clickThree}
+        clickFour={this.clickFour}
         highlightKey={highlightKey}
       />
     );
