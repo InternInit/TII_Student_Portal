@@ -1,16 +1,15 @@
-import React, { Component, useEffect } from "react";
+import React, { Component } from "react";
 
 //Logo Import
 import logo from "./logo.svg";
 
 //Ant Design Imports
-import { Layout, Menu, Switch, Button } from "antd";
+import { Layout, Switch, Button } from "antd";
 
 //Styled Component Imports
 import styled from "styled-components";
 
 //Custom Component Imports
-import IntegratedForm from "./components/integratedForm.jsx";
 import Navbar from "./components/navbar.jsx";
 import TiiNav from "./components/TiiNav.jsx";
 import PagePersonal from "./components/pagePersonal.jsx";

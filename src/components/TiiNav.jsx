@@ -24,7 +24,6 @@ class TiiNav extends React.Component {
       PersonalComplete: false,
       EssayComplete: false,
       ReferencesComplete: false,
-      CurrentKey: "1",
 
       //icons
       InternButton: <ContainerOutlined />,
@@ -57,7 +56,6 @@ class TiiNav extends React.Component {
       PersonalButton,
       EssayButton,
       ReferencesButton,
-      CurrentKey
     } = this.state;
     let { SubmitButton } = this.state;
     return (
@@ -178,22 +176,15 @@ class TiiNav extends React.Component {
     console.log(path)
     if (path === '/Internship-Info') {
       this.props.clickOne()
-      this.setState({ CurrentKey: "1" })
     }
     else if (path === '/Personal') {
       this.props.clickTwo()
-      this.setState({ CurrentKey: "2" })
     }
     else if (path === '/Written-Work') {
       this.props.clickThree()
-      this.setState({ CurrentKey: "3" })
     }
     else if (path === '/References') {
       this.props.clickFour()
-      this.setState({ CurrentKey: "4" })
-    }
-    else {
-      this.setState({ CurrentKey: "5" })
     }
     this.props.history.push(path);
   }
