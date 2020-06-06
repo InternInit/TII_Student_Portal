@@ -5,6 +5,10 @@ import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
 import "../App.css";
 import styled from "styled-components";
 
+//React Routing
+import { BrowserRouter as Router, Link } from 'react-router-dom';
+import { withRouter } from 'react-router'
+
 //Formatting
 const formGutter = [16, 16];
 const standardSpan = 24;
@@ -60,6 +64,10 @@ const formItemProps = {
 };
 
 class PageReferences extends Component {
+  constructor(props) {
+    super(props);
+    this.routeChange = this.routeChange.bind(this);
+  }
   render() {
     return (
       <div style={{ width: "100%", marginTop: "40px", }}>
@@ -203,7 +211,7 @@ class PageReferences extends Component {
               type="primary"
               htmlType="submit"
               href="#top"
-              onClick={this.props.onBack}
+              onClick={() => { this.routeChange('/Written-Work') }}
             >
               Previous
 
@@ -239,7 +247,14 @@ class PageReferences extends Component {
     console.log('FinishRefPage:', values);
     this.props.onSubmit(values, "4")
   };
+  routeChange = (path) => {
+    console.log(path)
+
+    this.props.history.push(path);
+  }
 
 }
 
-export default PageReferences;
+
+
+export default withRouter(PageReferences);

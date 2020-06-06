@@ -6,24 +6,25 @@ import {
   CloseOutlined,
   UserOutlined,
   EditOutlined,
-  CaretDownOutlined,
   ContainerOutlined,
   TeamOutlined,
-  SwapOutlined
 } from "@ant-design/icons";
 
 //React Routing
-import { BrowserRouter as Router, Link, Route, Switch as ReactSwitch } from 'react-router-dom'
+import { BrowserRouter as Router, Link } from 'react-router-dom';
+import { withRouter } from 'react-router'
 
 class TiiNav extends React.Component {
   constructor(props) {
     super(props);
+    this.routeChange = this.routeChange.bind(this);
     this.state = {
       //states
       InternIComplete: false,
       PersonalComplete: false,
       EssayComplete: false,
       ReferencesComplete: false,
+      CurrentKey: "1",
 
       //icons
       InternButton: <ContainerOutlined />,
@@ -35,8 +36,7 @@ class TiiNav extends React.Component {
       SubmitButton: "",
       CanSubmit: false,
 
-      //collapsing
-      collapsed: false,
+
 
       //Styles
       collapseStyle: {
@@ -49,20 +49,19 @@ class TiiNav extends React.Component {
     };
   }
 
+
   render() {
     const { Sider } = Layout;
     let {
       InternButton,
       PersonalButton,
       EssayButton,
-      ReferencesButton
+      ReferencesButton,
+      CurrentKey
     } = this.state;
-    let { collapsed, SubmitButton } = this.state;
-    let { clickOne, clickTwo, clickThree, clickFour } = this.props;
-
+    let { SubmitButton } = this.state;
     return (
       <Sider //styling the sider
-        collapsed={collapsed}
         style={{
           position: "fixed",
           overflow: "initial",
@@ -72,40 +71,27 @@ class TiiNav extends React.Component {
           marginTop: "5%"
         }}
       >
-        <div
-          onClick={this.toggleCollapsed} //The collapsing bar (can be deleted)
-          style={this.state.collapseStyle}
-        >
-          <SwapOutlined />
-        </div>
+
 
         <Menu //Navigation Panel
           theme="light"
           mode="inline"
           defaultSelectedKeys={this.props.highlightKey}
-          selectedKeys={this.props.highlightKey}
+          selectedKeys={CurrentKey}
         >
-
-
-          <Menu.Item key="1">
+          <Menu.Item key="1" onClick={() => { this.routeChange('/Internship-Info') }}>
             {InternButton}
-            <Router>
-              <Link to='/Internship-Information'>
-                <span>Internship Info</span>
-              </Link>
-            </Router>
+            <span>Internship Info</span>
           </Menu.Item>
 
-          <Menu.Item key="2">
+          <Menu.Item key="2" onClick={() => { this.routeChange('/Personal') }}>
             {PersonalButton}
-            <Router>
-              <Link to='/Personal'>
-                <span>Personal</span>
-              </Link>
-            </Router>
+
+            <span>Personal</span>
+
           </Menu.Item>
 
-          <Menu.Item key="3">
+          <Menu.Item key="3" onClick={() => { this.routeChange('/Written-Work') }}>
             {EssayButton}
             <Router>
               <Link to='/Written-Work'>
@@ -114,7 +100,7 @@ class TiiNav extends React.Component {
             </Router>
           </Menu.Item>
 
-          <Menu.Item key="4" >
+          <Menu.Item key="4" onClick={() => { this.routeChange('/References') }}>
             {ReferencesButton}
             <Router>
               <Link to='/References'>
@@ -135,7 +121,6 @@ class TiiNav extends React.Component {
             {SubmitButton}
             <span>Submit</span>
           </Menu.Item>
-
         </Menu>
       </Sider>
     );
@@ -187,24 +172,27 @@ class TiiNav extends React.Component {
     });
   };
 
-  onCollapse = () => {
-    //changing collapsed state
-    let { collapsed } = this.state;
-    this.setState({ collapsed });
-  };
 
-  toggleCollapsed = () => {
-    //toggling collapsed
-    this.setState({
-      collapsed: !this.state.collapsed
-    });
 
-    if (!this.state.collapsed) {
-      //toggling between "Submit" icon
-      this.setState({ SubmitButton: <CaretDownOutlined /> });
-    } else {
-      this.setState({ SubmitButton: "" });
+  routeChange = (path) => {
+    console.log(path)
+    if (path === '/Internship-Info') {
+      this.setState({ CurrentKey: "1" })
     }
-  };
+    else if (path === '/Personal') {
+      this.setState({ CurrentKey: "2" })
+    }
+    else if (path === '/Written-Work') {
+      this.setState({ CurrentKey: "3" })
+    }
+    else if (path === '/References') {
+      this.setState({ CurrentKey: "4" })
+    }
+    else {
+      this.setState({ CurrentKey: "5" })
+    }
+    this.props.history.push(path);
+  }
+
 }
-export default TiiNav;
+export default withRouter(TiiNav);
