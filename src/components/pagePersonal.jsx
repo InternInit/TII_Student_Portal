@@ -418,9 +418,8 @@ class PagePersonal extends Component {
             <Button
               className="back-button"
               type="primary"
-              htmlType="submit"
-              href="#top"
-              onClick={() => { this.routeChange('/Internship-Info') }}
+              htmlType="button"
+              onClick={()=>this.props.onBack(this.formRef.current.getFieldsValue(), "1")}
             >
               Previous
             </Button>
@@ -440,10 +439,11 @@ class PagePersonal extends Component {
 
   onFinish = values => {
     console.log('FinishedPersonalPage:', values);
-    this.props.onNext(values, "2")
+    this.props.onNext(values, "1")
   };
 
-  getUserData = async () => {
+
+  getUserData = async() => {
     let token = await this.props.getJwt()
     fetch("/get_user_data", {
       method: "POST",

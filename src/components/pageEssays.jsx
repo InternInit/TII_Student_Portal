@@ -14,7 +14,7 @@ const { Dragger } = Upload;
 //Handles file uploading
 const props = {
   name: "file",
-  action: "https://www.mocky.io/v2/5cc8019d300000980a055e76",
+  accept: ".doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document, .pdf, application/pdf",
   multiple: true,
   onChange(info) {
     const { status } = info.file;
@@ -115,7 +115,7 @@ class pageEssays extends React.Component {
           <Form.Item
             name="Portfolio"
             key="Portfolio"
-            label={this.boldify("Portfolio")}
+            label={this.boldify("Portfolio (Optional)")}
           >
             <Dragger {...props} style={{ width: "250px", height: "30px" }} customRequest={this.customRequestPortfolio}>
               <h1 style={{ color: "blue" }}>
@@ -130,9 +130,8 @@ class pageEssays extends React.Component {
             <Button
               className="back-button"
               type="primary"
-              htmlType="submit"
-              href="#top"
-              onClick={() => { this.routeChange('/Personal') }}
+              htmlType="button"
+              onClick={()=>this.props.onBack(this.formRef.current.getFieldsValue(), "2")}
             >
               Previous
             </Button>
@@ -166,7 +165,7 @@ class pageEssays extends React.Component {
 
   onFinish = values => {
     console.log('FinishedPageEssays:', values);
-    this.props.onNext(values, "3")
+    this.props.onNext(values, "2")
   };
 
   customRequestCL = ({ onSuccess, onError, file }) => {

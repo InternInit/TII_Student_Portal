@@ -64,6 +64,18 @@ const formItemProps = {
 };
 
 class PageReferences extends Component {
+
+  formRef = React.createRef();
+
+  componentDidUpdate(){
+    this.getUserData()
+  }
+
+  componentDidMount(){
+    this.getUserData()
+  }
+
+
   constructor(props) {
     super(props);
     this.routeChange = this.routeChange.bind(this);
@@ -73,7 +85,7 @@ class PageReferences extends Component {
       <div style={{ width: "100%", marginTop: "40px", }}>
         <h1 style={{ textAlign: "left" }}> References</h1>
         <p>Add a reference here. This could be someone who has worked with you in the past.</p>
-        <Form  {...formItemProps.totalForm} onFinish={this.onFinish}>
+        <Form  {...formItemProps.totalForm} onFinish={this.onFinish} ref={this.formRef}>
           <Form.List name="reference">
             {(fields, { add, remove }) => {
               console.log(fields);
@@ -209,9 +221,14 @@ class PageReferences extends Component {
             <Button
               className="back-button"
               type="primary"
+<<<<<<< HEAD
+              htmlType="button"
+              onClick={()=>this.props.onBack(this.formRef.current.getFieldsValue(), "3")}
+=======
               htmlType="submit"
               href="#top"
               onClick={() => { this.routeChange('/Written-Work') }}
+>>>>>>> master
             >
               Previous
 
@@ -245,12 +262,31 @@ class PageReferences extends Component {
 
   onFinish = values => {
     console.log('FinishRefPage:', values);
-    this.props.onSubmit(values, "4")
+    this.props.onSubmit(values, "3")
   };
   routeChange = (path) => {
     console.log(path)
     this.props.clickThree()
     this.props.history.push(path);
+  }
+
+  getUserData = async() => {
+    let token = await this.props.getJwt()
+    fetch("/get_user_data", {
+      method: "POST",
+      headers: {
+        "Authorization": "Bearer " + JSON.parse(JSON.stringify(token)),
+      },
+      body: 3
+    }).then(response => response.json()).then(data => {
+      let parsedData = JSON.parse(data)
+      if(parsedData !== "No Info"){
+        try{
+          this.formRef.current.setFieldsValue(parsedData)
+        } catch (e) {}
+      }
+
+    });
   }
 
 }

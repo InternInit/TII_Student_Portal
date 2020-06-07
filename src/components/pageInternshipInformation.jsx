@@ -273,11 +273,13 @@ const formItemProps = {
   resume: {
     name: "resume",
     key: "resume",
-    label: boldify("Resumé (Optional)")
+    label: boldify("Resumé (.doc, .docx, .pdf)"),
+    rules: validationRules(true, "resume", "object")
   }
 };
 const props = {
   name: "file",
+  accept: ".doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document, .pdf, application/pdf",
   multiple: true,
   onChange(info) {
     const { status } = info.file;
@@ -553,15 +555,6 @@ class PageInternshipInformation extends Component {
             >
               Next
             </Button>
-            <Button
-              className="test-button"
-              type="default"
-              htmlType="button"
-              onClick={() => { this.getUserData() }}
-            //onClick={()=>{console.log(moment("20111031"))}}
-            >
-              Test
-            </Button>
           </Form.Item>
         </Form>
       </div>
@@ -570,7 +563,7 @@ class PageInternshipInformation extends Component {
 
   onFinish = values => {
     console.log('FinishedPageInternship:', values);
-    this.props.onNext(values, "1")
+    this.props.onNext(values, "0")
   };
 
 
@@ -585,7 +578,8 @@ class PageInternshipInformation extends Component {
 
   };
 
-  getUserData = async () => {
+
+  getUserData = async() => {
     let token = await this.props.getJwt()
     fetch("/get_user_data", {
       method: "POST",
@@ -595,10 +589,12 @@ class PageInternshipInformation extends Component {
       body: 0
     }).then(response => response.json()).then(data => {
       let parsedData = JSON.parse(data)
-      if (parsedData !== "No Info") {
-        parsedData.dateOfStartAndEnd = [moment(parsedData.dateOfStartAndEnd[0]), moment(parsedData.dateOfStartAndEnd[1])]
-        delete parsedData.resume
-        this.formRef.current.setFieldsValue(parsedData)
+      if(parsedData !== "No Info"){
+        try{
+          parsedData.dateOfStartAndEnd = [moment(parsedData.dateOfStartAndEnd[0]),moment(parsedData.dateOfStartAndEnd[1])]
+          delete parsedData.resume
+          this.formRef.current.setFieldsValue(parsedData)
+        } catch (e) {}
       }
 
     });
