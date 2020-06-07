@@ -20,7 +20,7 @@ import PageReferences from "./components/pageReferences";
 import "./App.css";
 
 //React Routing
-import { BrowserRouter as Router, Link, Route, Switch as ReactSwitch } from 'react-router-dom';
+import { BrowserRouter as Router, Link, Route, Switch as ReactSwitch, Redirect } from 'react-router-dom';
 
 
 //Declarations
@@ -39,6 +39,7 @@ const PageContainer = styled.div`
 
 class App extends Component {
   inMemoryToken;
+  authParam = "absasd";
 
   state = {
     page: 0,
@@ -116,8 +117,16 @@ class App extends Component {
     return (
       <PageContainer>
         <ReactSwitch>
+          <Route path='/' exact="true"
+            render={(props)=>{
+              return (
+                this.authParam = props.location.search,
+                <Redirect to="/Internship-Info/" />
+              )
+            }}
+          />
 
-          <Route path='/Internship-Info' exact="true"
+          <Route path='/Internship-Info/' exact="true"
             render={(props) => <PageInternshipInformation {...props}
               clickTwo={this.clickTwo}
               uploadFile={this.uploadFile}
@@ -159,7 +168,7 @@ class App extends Component {
 
   auth = () => {
     try {
-      var authCode = window.location.href.split("?")[1].split("=")[1]
+      var authCode = this.authParam.split("=")[1]
       fetch("/auth", {
         method: "POST",
         headers: {
