@@ -67,9 +67,6 @@ class PageReferences extends Component {
 
   formRef = React.createRef();
 
-  componentDidUpdate(){
-    this.getUserData()
-  }
 
   componentDidMount(){
     this.getUserData()
@@ -221,14 +218,8 @@ class PageReferences extends Component {
             <Button
               className="back-button"
               type="primary"
-<<<<<<< HEAD
               htmlType="button"
-              onClick={()=>this.props.onBack(this.formRef.current.getFieldsValue(), "3")}
-=======
-              htmlType="submit"
-              href="#top"
-              onClick={() => { this.routeChange('/Written-Work') }}
->>>>>>> master
+              onClick={this.backHandler}
             >
               Previous
 
@@ -264,6 +255,12 @@ class PageReferences extends Component {
     console.log('FinishRefPage:', values);
     this.props.onSubmit(values, "3")
   };
+
+  backHandler = () => {
+    this.props.onBack(this.formRef.current.getFieldsValue(), "3")
+    this.routeChange("/Written-Work")
+  }
+
   routeChange = (path) => {
     console.log(path)
     this.props.clickThree()

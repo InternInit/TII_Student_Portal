@@ -151,10 +151,6 @@ class PagePersonal extends Component {
 
   formRef = React.createRef();
 
-  componentDidUpdate() {
-    this.getUserData()
-  }
-
   componentDidMount() {
     this.getUserData()
   }
@@ -419,7 +415,7 @@ class PagePersonal extends Component {
               className="back-button"
               type="primary"
               htmlType="button"
-              onClick={()=>this.props.onBack(this.formRef.current.getFieldsValue(), "1")}
+              onClick={this.backHandler}
             >
               Previous
             </Button>
@@ -427,7 +423,6 @@ class PagePersonal extends Component {
               className="next-button"
               type="primary"
               htmlType="submit"
-              onClick={() => { this.routeChange('/Written-Work') }}
             >
               Next
             </Button>
@@ -440,6 +435,12 @@ class PagePersonal extends Component {
   onFinish = values => {
     console.log('FinishedPersonalPage:', values);
     this.props.onNext(values, "1")
+    this.routeChange('/Written-Work')
+  };
+
+  backHandler = () => {
+    this.props.onBack(this.formRef.current.getFieldsValue(), "1")
+    this.routeChange("/Internship-Info")
   };
 
 

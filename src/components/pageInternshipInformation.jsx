@@ -307,9 +307,6 @@ class PageInternshipInformation extends Component {
 
   formRef = React.createRef();
 
-  componentDidUpdate() {
-    this.getUserData()
-  }
 
   componentDidMount() {
     this.getUserData()
@@ -551,7 +548,6 @@ class PageInternshipInformation extends Component {
               className="next-button"
               type="primary"
               htmlType="submit"
-              onClick={() => { this.routeChange('/Personal') }}
             >
               Next
             </Button>
@@ -564,6 +560,7 @@ class PageInternshipInformation extends Component {
   onFinish = values => {
     console.log('FinishedPageInternship:', values);
     this.props.onNext(values, "0")
+    this.routeChange('/Personal')
   };
 
 
@@ -605,6 +602,8 @@ class PageInternshipInformation extends Component {
     this.props.clickTwo()
     this.props.history.push(path);
   }
+
+
 
 
 }

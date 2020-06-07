@@ -47,11 +47,6 @@ class App extends Component {
   };
 
   onNext = (values, origin) => {
-    const newPage = this.state.page + 1;
-    this.setState({
-      page: newPage
-    });
-
     if (this.state.submissionState == true) {
       fetch("/update_user_data", {
         method: "POST",
@@ -71,11 +66,6 @@ class App extends Component {
   };
 
   onBack = (values, origin) => {
-    const newPage = this.state.page - 1;
-    this.setState({
-      page: newPage
-    });
-
     if (this.state.submissionState == true){
       fetch("/update_user_data", {
         method: "POST",
@@ -146,15 +136,15 @@ class App extends Component {
             render={(props) => <PageInternshipInformation {...props}
               clickTwo={this.clickTwo}
               uploadFile={this.uploadFile}
-              onSubmit={this.onSubmit}
+              onNext={this.onNext}
               getJwt={this.getJwt} />} />
 
           <Route path='/Personal' exact="true"
             render={(props) => <PagePersonal {...props}
               clickOne={this.clickOne}
               clickThree={this.clickThree}
-              uploadFile={this.uploadFile}
-              onSubmit={this.onSubmit}
+              onNext={this.onNext}
+              onBack={this.onBack}
               getJwt={this.getJwt} />} />
 
           <Route path='/Written-Work' exact="true"
@@ -162,14 +152,15 @@ class App extends Component {
               clickTwo={this.clickTwo}
               clickFour={this.clickFour}
               uploadFile={this.uploadFile}
-              onSubmit={this.onSubmit}
+              onNext={this.onNext}
+              onBack={this.onBack}
               getJwt={this.getJwt} />} />
 
           <Route path='/References' exact="true"
             render={(props) => <PageReferences {...props}
               clickThree={this.clickThree}
-              uploadFile={this.uploadFile}
               onSubmit={this.onSubmit}
+              onBack={this.onBack}
               getJwt={this.getJwt} />} />
 
         </ReactSwitch>

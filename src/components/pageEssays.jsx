@@ -33,9 +33,6 @@ class pageEssays extends React.Component {
 
   formRef = React.createRef();
 
-  componentDidUpdate() {
-    this.getUserData()
-  }
 
   componentDidMount() {
     this.getUserData()
@@ -131,7 +128,7 @@ class pageEssays extends React.Component {
               className="back-button"
               type="primary"
               htmlType="button"
-              onClick={()=>this.props.onBack(this.formRef.current.getFieldsValue(), "2")}
+              onClick={this.backHandler}
             >
               Previous
             </Button>
@@ -139,7 +136,6 @@ class pageEssays extends React.Component {
               className="next-button"
               type="primary"
               htmlType="submit"
-              onClick={() => { this.routeChange('/References') }}
             >
               Next
             </Button>
@@ -166,7 +162,14 @@ class pageEssays extends React.Component {
   onFinish = values => {
     console.log('FinishedPageEssays:', values);
     this.props.onNext(values, "2")
+    this.routeChange('/References')
   };
+
+  backHandler = () => {
+    this.props.onBack(this.formRef.current.getFieldsValue(), "2")
+    this.routeChange("/Personal")
+
+  }
 
   customRequestCL = ({ onSuccess, onError, file }) => {
     setTimeout(() => {
@@ -202,6 +205,7 @@ class pageEssays extends React.Component {
         delete parsedData.Portfolio
         console.log(parsedData)
         this.formRef.current.setFieldsValue(parsedData)
+
       }
 
     });
