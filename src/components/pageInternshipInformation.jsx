@@ -550,7 +550,7 @@ class PageInternshipInformation extends Component {
 
   onFinish = values => {
     console.log('FinishedPageInternship:', values);
-    this.props.onNext(values, "1")
+    this.props.onNext(values, "0")
   };
 
 
@@ -577,9 +577,11 @@ class PageInternshipInformation extends Component {
     }).then(response => response.json()).then(data => {
       let parsedData = JSON.parse(data)
       if(parsedData !== "No Info"){
-        parsedData.dateOfStartAndEnd = [moment(parsedData.dateOfStartAndEnd[0]),moment(parsedData.dateOfStartAndEnd[1])]
-        delete parsedData.resume
-        this.formRef.current.setFieldsValue(parsedData)
+        try{
+          parsedData.dateOfStartAndEnd = [moment(parsedData.dateOfStartAndEnd[0]),moment(parsedData.dateOfStartAndEnd[1])]
+          delete parsedData.resume
+          this.formRef.current.setFieldsValue(parsedData)
+        } catch (e) {}
       }
 
     });

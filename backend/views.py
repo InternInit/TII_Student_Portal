@@ -28,6 +28,12 @@ def update_user_data():
     info = json.loads(body[0])
     origin = str(body[1])
     info["origin"] = origin
+
+    try:
+        submitFlag = str(body[2])
+        info["submitFlag"] = submitFlag
+    except:
+        pass
     headers = request.headers
     print(type(request.headers.get("Authorization")), request.headers.get("Authorization"))
     #req = requests.post(apiUrl, headers=request.headers,data = info)

@@ -126,9 +126,8 @@ export default class pageEssays extends React.Component {
             <Button
               className="back-button"
               type="primary"
-              htmlType="submit"
-              href="#top"
-              onClick={this.props.onBack}
+              htmlType="button"
+              onClick={()=>this.props.onBack(this.formRef.current.getFieldsValue(), "2")}
             >
               Previous
             </Button>
@@ -161,7 +160,7 @@ export default class pageEssays extends React.Component {
 
   onFinish = values => {
     console.log('FinishedPageEssays:', values);
-    this.props.onNext(values, "3")
+    this.props.onNext(values, "2")
   };
 
   customRequestCL = ({ onSuccess, onError, file }) => {
