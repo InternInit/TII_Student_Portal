@@ -223,7 +223,6 @@ class App extends Component {
           }
         }
       });
-    //console.log(this.inMemoryToken.token)
   }
 
   exchange = () => {
@@ -316,11 +315,6 @@ class App extends Component {
     this.refresh();
   }
 
-  /*
-    componentDidUpdate(){
-      this.getUserData();
-    }
-  */
   render() {
     return (
       <div className="App">
