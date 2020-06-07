@@ -25,6 +25,11 @@ import axios from 'axios';
 
 import moment from 'moment'
 
+//React Routing
+import { BrowserRouter as Router, Link } from 'react-router-dom';
+import { withRouter } from 'react-router'
+import TiiNav from "./TiiNav";
+
 //Object Destructuring
 const { Option } = Select;
 const { MonthPicker, RangePicker } = DatePicker;
@@ -292,23 +297,30 @@ const props = {
 
 
 class PageInternshipInformation extends Component {
-
+  constructor(props) {
+    super(props);
+    this.routeChange = this.routeChange.bind(this);
+  }
   state = {
     otherIndustry: ""
   };
 
   formRef = React.createRef();
 
-  componentDidUpdate(){
+  componentDidUpdate() {
     this.getUserData()
   }
 
-  componentDidMount(){
+  componentDidMount() {
     this.getUserData()
   }
 
+  renderNav() {
+    this.props.renderNav()
+  }
 
   render() {
+
     return (
       <div style={{ marginTop: "40px" }}>
         <h1>Internship Information</h1>
@@ -316,7 +328,7 @@ class PageInternshipInformation extends Component {
 
         <Form {...formItemProps.totalForm} onFinish={this.onFinish} ref={this.formRef}>
           {/*First and Last Name*/}
-          <Row name = "first" gutter={formGutter}>
+          <Row name="first" gutter={formGutter}>
             <Col span={halfSpan}>
               <Form.Item {...formItemProps.firstName}>
                 <Input />
@@ -539,6 +551,7 @@ class PageInternshipInformation extends Component {
               className="next-button"
               type="primary"
               htmlType="submit"
+              onClick={() => { this.routeChange('/Personal') }}
             >
               Next
             </Button>
@@ -587,10 +600,14 @@ class PageInternshipInformation extends Component {
     });
   }
 
-
+  routeChange = (path) => {
+    console.log(path)
+    this.props.clickTwo()
+    this.props.history.push(path);
+  }
 
 
 }
 
 
-export default PageInternshipInformation;
+export default withRouter(PageInternshipInformation);

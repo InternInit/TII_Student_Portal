@@ -5,6 +5,10 @@ import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
 import "../App.css";
 import styled from "styled-components";
 
+//React Routing
+import { BrowserRouter as Router, Link } from 'react-router-dom';
+import { withRouter } from 'react-router'
+
 //Formatting
 const formGutter = [16, 16];
 const standardSpan = 24;
@@ -72,6 +76,10 @@ class PageReferences extends Component {
   }
 
 
+  constructor(props) {
+    super(props);
+    this.routeChange = this.routeChange.bind(this);
+  }
   render() {
     return (
       <div style={{ width: "100%", marginTop: "40px", }}>
@@ -213,8 +221,14 @@ class PageReferences extends Component {
             <Button
               className="back-button"
               type="primary"
+<<<<<<< HEAD
               htmlType="button"
               onClick={()=>this.props.onBack(this.formRef.current.getFieldsValue(), "3")}
+=======
+              htmlType="submit"
+              href="#top"
+              onClick={() => { this.routeChange('/Written-Work') }}
+>>>>>>> master
             >
               Previous
 
@@ -250,6 +264,11 @@ class PageReferences extends Component {
     console.log('FinishRefPage:', values);
     this.props.onSubmit(values, "3")
   };
+  routeChange = (path) => {
+    console.log(path)
+    this.props.clickThree()
+    this.props.history.push(path);
+  }
 
   getUserData = async() => {
     let token = await this.props.getJwt()
@@ -272,4 +291,6 @@ class PageReferences extends Component {
 
 }
 
-export default PageReferences;
+
+
+export default withRouter(PageReferences);

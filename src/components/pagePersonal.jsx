@@ -17,6 +17,10 @@ import "../App.css";
 
 import moment from 'moment'
 
+//React Routing
+import { BrowserRouter as Router, Link } from 'react-router-dom';
+import { withRouter } from 'react-router'
+
 //Object Destructuring
 const { Option } = Select;
 const { MonthPicker, RangePicker } = DatePicker;
@@ -126,6 +130,10 @@ const allStates = [
 ];
 
 class PagePersonal extends Component {
+  constructor(props) {
+    super(props);
+    this.routeChange = this.routeChange.bind(this);
+  }
   validationRules = (required, inputName, type, pattern) => [
     {
       required: required,
@@ -143,11 +151,11 @@ class PagePersonal extends Component {
 
   formRef = React.createRef();
 
-  componentDidUpdate(){
+  componentDidUpdate() {
     this.getUserData()
   }
 
-  componentDidMount(){
+  componentDidMount() {
     this.getUserData()
   }
 
@@ -419,6 +427,7 @@ class PagePersonal extends Component {
               className="next-button"
               type="primary"
               htmlType="submit"
+              onClick={() => { this.routeChange('/Written-Work') }}
             >
               Next
             </Button>
@@ -444,7 +453,7 @@ class PagePersonal extends Component {
       body: 1
     }).then(response => response.json()).then(data => {
       let parsedData = JSON.parse(data)
-      if(parsedData !== "No Info"){
+      if (parsedData !== "No Info") {
         //parsedData.dateOfStartAndEnd = [moment(parsedData.dateOfStartAndEnd[0]),moment(parsedData.dateOfStartAndEnd[1])]
         //delete parsedData.resume
         console.log(parsedData)
@@ -454,6 +463,17 @@ class PagePersonal extends Component {
     });
   }
 
+  routeChange = (path) => {
+    console.log(path)
+    if (path === '/Written-Work') {
+      this.props.clickThree()
+    }
+    else {
+      this.props.clickOne()
+    }
+    this.props.history.push(path);
+  }
+
 }
 
-export default PagePersonal;
+export default withRouter(PagePersonal);

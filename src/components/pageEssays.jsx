@@ -3,6 +3,10 @@ import { Form, Input, Button, message, Upload } from "antd";
 import { InboxOutlined } from "@ant-design/icons";
 import "../App.css";
 
+//React Routing
+import { BrowserRouter as Router, Link } from 'react-router-dom';
+import { withRouter } from 'react-router'
+
 //Object Destructuring
 const { TextArea } = Input;
 const { Dragger } = Upload;
@@ -25,21 +29,21 @@ const props = {
   }
 };
 
-export default class pageEssays extends React.Component {
+class pageEssays extends React.Component {
 
   formRef = React.createRef();
 
-  componentDidUpdate(){
+  componentDidUpdate() {
     this.getUserData()
   }
 
-  componentDidMount(){
+  componentDidMount() {
     this.getUserData()
   }
 
   constructor(props) {
     super(props);
-    this.state = {};
+    this.routeChange = this.routeChange.bind(this);
   }
 
   render() {
@@ -135,6 +139,7 @@ export default class pageEssays extends React.Component {
               className="next-button"
               type="primary"
               htmlType="submit"
+              onClick={() => { this.routeChange('/References') }}
             >
               Next
             </Button>
@@ -181,7 +186,7 @@ export default class pageEssays extends React.Component {
 
   };
 
-  getUserData = async() => {
+  getUserData = async () => {
     let token = await this.props.getJwt()
     fetch("/get_user_data", {
       method: "POST",
@@ -191,7 +196,7 @@ export default class pageEssays extends React.Component {
       body: 2
     }).then(response => response.json()).then(data => {
       let parsedData = JSON.parse(data)
-      if(parsedData !== "No Info"){
+      if (parsedData !== "No Info") {
         //parsedData.dateOfStartAndEnd = [moment(parsedData.dateOfStartAndEnd[0]),moment(parsedData.dateOfStartAndEnd[1])]
         delete parsedData.CoverLetter
         delete parsedData.Portfolio
@@ -203,4 +208,16 @@ export default class pageEssays extends React.Component {
   }
 
   boldify = text => <strong>{text}</strong>;
+
+  routeChange = (path) => {
+    console.log(path)
+    if (path === '/Personal') {
+      this.props.clickTwo()
+    }
+    else {
+      this.props.clickFour()
+    }
+    this.props.history.push(path);
+  }
 }
+export default withRouter(pageEssays);
