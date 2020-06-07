@@ -455,8 +455,7 @@ class PagePersonal extends Component {
     }).then(response => response.json()).then(data => {
       let parsedData = JSON.parse(data)
       if (parsedData !== "No Info") {
-        //parsedData.dateOfStartAndEnd = [moment(parsedData.dateOfStartAndEnd[0]),moment(parsedData.dateOfStartAndEnd[1])]
-        //delete parsedData.resume
+        
         console.log(parsedData)
         this.formRef.current.setFieldsValue(parsedData)
       }
