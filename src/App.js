@@ -289,7 +289,7 @@ class App extends Component {
           <Navbar />
         </header>
         <Switch checkedChildren="Submission On" unCheckedChildren="Submission Off" defaultChecked="true" onChange={this.switchOnChange}></Switch>
-        <Button onClick={this.logout}>Logout</Button>
+        <Button type="danger" onClick={this.logout}>Logout</Button>
         <Layout>
           {this.renderNav()}
           <Content
