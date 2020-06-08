@@ -17,6 +17,10 @@ import "../App.css";
 
 import moment from 'moment'
 
+//React Routing
+import { BrowserRouter as Router, Link } from 'react-router-dom';
+import { withRouter } from 'react-router'
+
 //Object Destructuring
 const { Option } = Select;
 const { MonthPicker, RangePicker } = DatePicker;
@@ -126,6 +130,10 @@ const allStates = [
 ];
 
 class PagePersonal extends Component {
+  constructor(props) {
+    super(props);
+    this.routeChange = this.routeChange.bind(this);
+  }
   validationRules = (required, inputName, type, pattern) => [
     {
       required: required,
@@ -143,11 +151,7 @@ class PagePersonal extends Component {
 
   formRef = React.createRef();
 
-  componentDidUpdate(){
-    this.getUserData()
-  }
-
-  componentDidMount(){
+  componentDidMount() {
     this.getUserData()
   }
 
@@ -410,9 +414,8 @@ class PagePersonal extends Component {
             <Button
               className="back-button"
               type="primary"
-              htmlType="submit"
-              href="#top"
-              onClick={this.props.onBack}
+              htmlType="button"
+              onClick={this.backHandler}
             >
               Previous
             </Button>
@@ -431,8 +434,15 @@ class PagePersonal extends Component {
 
   onFinish = values => {
     console.log('FinishedPersonalPage:', values);
-    this.props.onNext(values, "2")
+    this.props.onNext(values, "1")
+    this.routeChange('/Written-Work')
   };
+
+  backHandler = () => {
+    this.props.onBack(this.formRef.current.getFieldsValue(), "1")
+    this.routeChange("/Internship-Info")
+  };
+
 
   getUserData = async() => {
     let token = await this.props.getJwt()
@@ -444,9 +454,8 @@ class PagePersonal extends Component {
       body: 1
     }).then(response => response.json()).then(data => {
       let parsedData = JSON.parse(data)
-      if(parsedData !== "No Info"){
-        //parsedData.dateOfStartAndEnd = [moment(parsedData.dateOfStartAndEnd[0]),moment(parsedData.dateOfStartAndEnd[1])]
-        //delete parsedData.resume
+      if (parsedData !== "No Info") {
+        
         console.log(parsedData)
         this.formRef.current.setFieldsValue(parsedData)
       }
@@ -454,6 +463,17 @@ class PagePersonal extends Component {
     });
   }
 
+  routeChange = (path) => {
+    console.log(path)
+    if (path === '/Written-Work') {
+      this.props.clickThree()
+    }
+    else {
+      this.props.clickOne()
+    }
+    this.props.history.push(path);
+  }
+
 }
 
-export default PagePersonal;
+export default withRouter(PagePersonal);

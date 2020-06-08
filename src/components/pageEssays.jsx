@@ -3,6 +3,10 @@ import { Form, Input, Button, message, Upload } from "antd";
 import { InboxOutlined } from "@ant-design/icons";
 import "../App.css";
 
+//React Routing
+import { BrowserRouter as Router, Link } from 'react-router-dom';
+import { withRouter } from 'react-router'
+
 //Object Destructuring
 const { TextArea } = Input;
 const { Dragger } = Upload;
@@ -10,7 +14,7 @@ const { Dragger } = Upload;
 //Handles file uploading
 const props = {
   name: "file",
-  action: "https://www.mocky.io/v2/5cc8019d300000980a055e76",
+  accept: ".doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document, .pdf, application/pdf",
   multiple: true,
   onChange(info) {
     const { status } = info.file;
@@ -25,21 +29,18 @@ const props = {
   }
 };
 
-export default class pageEssays extends React.Component {
+class pageEssays extends React.Component {
 
   formRef = React.createRef();
 
-  componentDidUpdate(){
-    this.getUserData()
-  }
 
-  componentDidMount(){
+  componentDidMount() {
     this.getUserData()
   }
 
   constructor(props) {
     super(props);
-    this.state = {};
+    this.routeChange = this.routeChange.bind(this);
   }
 
   render() {
@@ -111,7 +112,7 @@ export default class pageEssays extends React.Component {
           <Form.Item
             name="Portfolio"
             key="Portfolio"
-            label={this.boldify("Portfolio")}
+            label={this.boldify("Portfolio (Optional)")}
           >
             <Dragger {...props} style={{ width: "250px", height: "30px" }} customRequest={this.customRequestPortfolio}>
               <h1 style={{ color: "blue" }}>
@@ -126,9 +127,8 @@ export default class pageEssays extends React.Component {
             <Button
               className="back-button"
               type="primary"
-              htmlType="submit"
-              href="#top"
-              onClick={this.props.onBack}
+              htmlType="button"
+              onClick={this.backHandler}
             >
               Previous
             </Button>
@@ -161,8 +161,15 @@ export default class pageEssays extends React.Component {
 
   onFinish = values => {
     console.log('FinishedPageEssays:', values);
-    this.props.onNext(values, "3")
+    this.props.onNext(values, "2")
+    this.routeChange('/References')
   };
+
+  backHandler = () => {
+    this.props.onBack(this.formRef.current.getFieldsValue(), "2")
+    this.routeChange("/Personal")
+
+  }
 
   customRequestCL = ({ onSuccess, onError, file }) => {
     setTimeout(() => {
@@ -182,7 +189,7 @@ export default class pageEssays extends React.Component {
 
   };
 
-  getUserData = async() => {
+  getUserData = async () => {
     let token = await this.props.getJwt()
     fetch("/get_user_data", {
       method: "POST",
@@ -192,16 +199,28 @@ export default class pageEssays extends React.Component {
       body: 2
     }).then(response => response.json()).then(data => {
       let parsedData = JSON.parse(data)
-      if(parsedData !== "No Info"){
-        //parsedData.dateOfStartAndEnd = [moment(parsedData.dateOfStartAndEnd[0]),moment(parsedData.dateOfStartAndEnd[1])]
+      if (parsedData !== "No Info") {
         delete parsedData.CoverLetter
         delete parsedData.Portfolio
         console.log(parsedData)
         this.formRef.current.setFieldsValue(parsedData)
+
       }
 
     });
   }
 
   boldify = text => <strong>{text}</strong>;
+
+  routeChange = (path) => {
+    console.log(path)
+    if (path === '/Personal') {
+      this.props.clickTwo()
+    }
+    else {
+      this.props.clickFour()
+    }
+    this.props.history.push(path);
+  }
 }
+export default withRouter(pageEssays);

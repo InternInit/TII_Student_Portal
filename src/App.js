@@ -1,31 +1,45 @@
-import React, { Component, useEffect } from "react";
+import React, { Component } from "react";
 
 //Logo Import
 import logo from "./logo.svg";
 
 //Ant Design Imports
-import { Layout, Menu, Switch, Button } from "antd";
+import { Layout, Switch, Button } from "antd";
 
 //Styled Component Imports
 import styled from "styled-components";
 
 //Custom Component Imports
-import IntegratedForm from "./components/integratedForm.jsx";
 import Navbar from "./components/navbar.jsx";
 import TiiNav from "./components/TiiNav.jsx";
 import PagePersonal from "./components/pagePersonal.jsx";
 import PageInternshipInformation from "./components/pageInternshipInformation.jsx";
-
+import PageEssays from "./components/pageEssays";
+import PageReferences from "./components/pageReferences";
 //CSS Imports
 import "./App.css";
+
+//React Routing
+import { BrowserRouter as Router, Link, Route, Switch as ReactSwitch, Redirect } from 'react-router-dom';
+
 
 //Declarations
 const { Header, Content, Footer, Sider } = Layout;
 
-
+//Styles
+const PageContainer = styled.div`
+  display: flex;
+  width: 70%;
+  padding-left: 5%;
+  padding-right: 5%;
+  justifycontent: center;
+  background-color: white;
+  border-radius: 10px;
+`;
 
 class App extends Component {
   inMemoryToken;
+  authParam = "absasd";
 
   state = {
     page: 0,
@@ -33,11 +47,25 @@ class App extends Component {
   };
 
   onNext = (values, origin) => {
-    const newPage = this.state.page + 1;
-    this.setState({
-      page: newPage
-    });
+    if (this.state.submissionState == true) {
+      fetch("/update_user_data", {
+        method: "POST",
+        headers: {
+          "Authorization": "Bearer " + JSON.parse(JSON.stringify(this.inMemoryToken.token)),
+          "Content-Type": "text/plain"
+        },
+        body: JSON.stringify(values) + "#" + origin
+      }).then(response =>
+        response.json()).then(data => {
+          console.log(data);
+        });
+    } else if (this.state.submissionState == false) {
+      console.log("Submission disabled")
+    }
 
+  };
+
+  onBack = (values, origin) => {
     if (this.state.submissionState == true){
       fetch("/update_user_data", {
         method: "POST",
@@ -53,25 +81,17 @@ class App extends Component {
     } else if (this.state.submissionState == false) {
       console.log("Submission disabled")
     }
-
-  };
-
-  onBack = () => {
-    const newPage = this.state.page - 1;
-    this.setState({
-      page: newPage
-    });
   };
 
   onSubmit = (values, origin) => {
-    if(this.state.submissionState == true){
+    if (this.state.submissionState == true) {
       fetch("/update_user_data", {
         method: "POST",
         headers: {
           "Authorization": "Bearer " + JSON.parse(JSON.stringify(this.inMemoryToken.token)),
           "Content-Type": "text/plain"
         },
-        body: JSON.stringify(values) + "#" + origin
+        body: JSON.stringify(values) + "#" + origin + "#" + "submit"
         }).then(response =>
           response.json()).then(data => {
             console.log(data);
@@ -100,16 +120,51 @@ class App extends Component {
   };
 
   renderPage = () => {
-    const pageNumber = this.state.page;
     return (
-      <IntegratedForm
-        page={pageNumber}
-        onNext={this.onNext}
-        onBack={this.onBack}
-        onSubmit={this.onSubmit}
-        getJwt={this.getJwt}
-        uploadFile={this.uploadFile}
-      />
+      <PageContainer>
+        <ReactSwitch>
+          <Route path='/' exact="true"
+            render={(props)=>{
+              return (
+                this.authParam = props.location.search,
+                <Redirect to="/Internship-Info/" />
+              )
+            }}
+          />
+
+          <Route path='/Internship-Info/' exact="true"
+            render={(props) => <PageInternshipInformation {...props}
+              clickTwo={this.clickTwo}
+              uploadFile={this.uploadFile}
+              onNext={this.onNext}
+              getJwt={this.getJwt} />} />
+
+          <Route path='/Personal' exact="true"
+            render={(props) => <PagePersonal {...props}
+              clickOne={this.clickOne}
+              clickThree={this.clickThree}
+              onNext={this.onNext}
+              onBack={this.onBack}
+              getJwt={this.getJwt} />} />
+
+          <Route path='/Written-Work' exact="true"
+            render={(props) => <PageEssays {...props}
+              clickTwo={this.clickTwo}
+              clickFour={this.clickFour}
+              uploadFile={this.uploadFile}
+              onNext={this.onNext}
+              onBack={this.onBack}
+              getJwt={this.getJwt} />} />
+
+          <Route path='/References' exact="true"
+            render={(props) => <PageReferences {...props}
+              clickThree={this.clickThree}
+              onSubmit={this.onSubmit}
+              onBack={this.onBack}
+              getJwt={this.getJwt} />} />
+
+        </ReactSwitch>
+      </PageContainer>
     );
   };
 
@@ -119,31 +174,31 @@ class App extends Component {
   }
 
   auth = () => {
-    try{
-      var authCode = window.location.href.split("?")[1].split("=")[1]
+    try {
+      var authCode = this.authParam.split("=")[1]
       fetch("/auth", {
         method: "POST",
         headers: {
           "Content-Type": "text/plain"
         },
         body: authCode
-        }).then(response =>
-          response.json()).then(data => {
-            if(data!=="Invalid Grant"){
-              data = JSON.parse(data)
+      }).then(response =>
+        response.json()).then(data => {
+          if (data !== "Invalid Grant") {
+            data = JSON.parse(data)
 
-              this.inMemoryToken = {
-                token: data.id_token,
-                expiry: data.expires_in,
-                refresh: data.refresh_token
-              }
-              console.log(this.inMemoryToken)
-            } else {
-              window.location.href = "https://auth.interninit.com/login?response_type=code&client_id=3og5ph16taqf598bchokdfs1r2&redirect_uri=http://localhost:3000"
+            this.inMemoryToken = {
+              token: data.id_token,
+              expiry: data.expires_in,
+              refresh: data.refresh_token
             }
+            console.log(this.inMemoryToken)
+          } else {
+            window.location.href = "https://auth.interninit.com/login?response_type=code&client_id=3og5ph16taqf598bchokdfs1r2&redirect_uri=http://localhost:3000"
+          }
 
-          });
-    } catch(e){
+        });
+    } catch (e) {
       window.location.href = "https://auth.interninit.com/login?response_type=code&client_id=3og5ph16taqf598bchokdfs1r2&redirect_uri=http://localhost:3000"
     }
 
@@ -151,24 +206,23 @@ class App extends Component {
 
   refresh = () => {
     fetch("/auth/refresh").then(response =>
-        response.json()).then(data => {
-          if(data == null){
-            //Exchange Auth
-            //Store JWT in memory
-            //Store Refresh Token
-            this.auth();
+      response.json()).then(data => {
+        if (data == null) {
+          //Exchange Auth
+          //Store JWT in memory
+          //Store Refresh Token
+          this.auth();
+        } else {
+          //Check for JWT
+          if (typeof this.inMemoryToken == "undefined") {
+            console.log("I should probably exchange refresh for JWT")
+            this.exchange();
           } else {
-            //Check for JWT
-            if(typeof this.inMemoryToken == "undefined"){
-              console.log("I should probably exchange refresh for JWT")
-              this.exchange();
-            } else {
-              console.log("JWT exists, yay")
-              this.getUserData();
-            }
+            console.log("JWT exists, yay")
+            this.getUserData();
           }
-        });
-        //console.log(this.inMemoryToken.token)
+        }
+      });
   }
 
   exchange = () => {
@@ -176,14 +230,14 @@ class App extends Component {
     fetch("/auth/exchange").then(response =>
       response.json()).then(data => {
         data = JSON.parse(data)
-        if(data.error !== "invalid_grant"){
+        if (data.error !== "invalid_grant") {
           this.inMemoryToken = {
             token: data.id_token,
             expiry: data.expires_in,
             refresh: data.refresh_token
           }
           console.log(this.inMemoryToken)
-        } else{
+        } else {
           this.logout();
         }
       });
@@ -191,10 +245,10 @@ class App extends Component {
 
   logout = () => {
     fetch("/logout").then(response =>
-        response.json()).then(data => {
-          console.log(typeof data);
-          window.location.href = data
-        });
+      response.json()).then(data => {
+        console.log(typeof data);
+        window.location.href = data
+      });
 
 
   }
@@ -204,7 +258,7 @@ class App extends Component {
     return new Promise((resolve, reject) => {
       var app = this;
       function checkToken() {
-        if(app.inMemoryToken === undefined){
+        if (app.inMemoryToken === undefined) {
           setTimeout(() => {
             checkToken()
           }, 10)
@@ -212,20 +266,20 @@ class App extends Component {
           resolve(app.inMemoryToken.token)
         }
 
-    }
-    checkToken();
+      }
+      checkToken();
 
     })
 
   }
 
-  uploadFile = async(file, source) => {
+  uploadFile = async (file, source) => {
     console.log("Uploading")
     const fd = new FormData();
     fd.append("file", file)
 
-    for(var pair of fd.entries()) {
-      console.log(pair[0]+ ', '+ pair[1]);
+    for (var pair of fd.entries()) {
+      console.log(pair[0] + ', ' + pair[1]);
     }
     let token = await this.getJwt()
 
@@ -233,7 +287,7 @@ class App extends Component {
       method: 'POST',
       headers: {
         "Authorization": "Bearer " + JSON.parse(JSON.stringify(token)),
-        "Source" : JSON.parse(JSON.stringify(source))
+        "Source": JSON.parse(JSON.stringify(source))
       },
       body: fd,
     }).then((response) => {
@@ -261,33 +315,30 @@ class App extends Component {
     this.refresh();
   }
 
-/*
-  componentDidUpdate(){
-    this.getUserData();
-  }
-*/
   render() {
     return (
       <div className="App">
-        <header>
-          <Navbar />
-        </header>
-        <Switch checkedChildren="Submission On" unCheckedChildren="Submission Off" defaultChecked="true" onChange={this.switchOnChange}></Switch>
-        <Button onClick={this.logout}>Logout</Button>
-        <Layout>
-          {this.renderNav()}
-          <Content
-            style={{
-              display: "flex",
-              padding: "30px",
-              justifyContent: "center",
-              backgroundColor: "#ededed",
-              minHeight: "100vh"
-            }}
-          >
-            {this.renderPage()}
-          </Content>
-        </Layout>
+        <Router>
+          <header>
+            <Navbar />
+          </header>
+          <Switch checkedChildren="Submission On" unCheckedChildren="Submission Off" defaultChecked="true" onChange={this.switchOnChange}></Switch>
+          <Button onClick={this.logout}>Logout</Button>
+          <Layout>
+            {this.renderNav()}
+            <Content
+              style={{
+                display: "flex",
+                padding: "30px",
+                justifyContent: "center",
+                backgroundColor: "#ededed",
+                minHeight: "100vh"
+              }}
+            >
+              {this.renderPage()}
+            </Content>
+          </Layout>
+        </Router>
       </div>
     );
   }

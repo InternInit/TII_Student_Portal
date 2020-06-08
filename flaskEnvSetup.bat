@@ -1,0 +1,5 @@
+@ECHO OFF
+
+SET FLASK_APP=backend
+SET FLASK_DEBUG=1
+

@@ -5,6 +5,10 @@ import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
 import "../App.css";
 import styled from "styled-components";
 
+//React Routing
+import { BrowserRouter as Router, Link } from 'react-router-dom';
+import { withRouter } from 'react-router'
+
 //Formatting
 const formGutter = [16, 16];
 const standardSpan = 24;
@@ -60,12 +64,25 @@ const formItemProps = {
 };
 
 class PageReferences extends Component {
+
+  formRef = React.createRef();
+
+
+  componentDidMount(){
+    this.getUserData()
+  }
+
+
+  constructor(props) {
+    super(props);
+    this.routeChange = this.routeChange.bind(this);
+  }
   render() {
     return (
       <div style={{ width: "100%", marginTop: "40px", }}>
         <h1 style={{ textAlign: "left" }}> References</h1>
         <p>Add a reference here. This could be someone who has worked with you in the past.</p>
-        <Form  {...formItemProps.totalForm} onFinish={this.onFinish}>
+        <Form  {...formItemProps.totalForm} onFinish={this.onFinish} ref={this.formRef}>
           <Form.List name="reference">
             {(fields, { add, remove }) => {
               console.log(fields);
@@ -201,9 +218,8 @@ class PageReferences extends Component {
             <Button
               className="back-button"
               type="primary"
-              htmlType="submit"
-              href="#top"
-              onClick={this.props.onBack}
+              htmlType="button"
+              onClick={this.backHandler}
             >
               Previous
 
@@ -237,9 +253,41 @@ class PageReferences extends Component {
 
   onFinish = values => {
     console.log('FinishRefPage:', values);
-    this.props.onSubmit(values, "4")
+    this.props.onSubmit(values, "3")
   };
+
+  backHandler = () => {
+    this.props.onBack(this.formRef.current.getFieldsValue(), "3")
+    this.routeChange("/Written-Work")
+  }
+
+  routeChange = (path) => {
+    console.log(path)
+    this.props.clickThree()
+    this.props.history.push(path);
+  }
+
+  getUserData = async() => {
+    let token = await this.props.getJwt()
+    fetch("/get_user_data", {
+      method: "POST",
+      headers: {
+        "Authorization": "Bearer " + JSON.parse(JSON.stringify(token)),
+      },
+      body: 3
+    }).then(response => response.json()).then(data => {
+      let parsedData = JSON.parse(data)
+      if(parsedData !== "No Info"){
+        try{
+          this.formRef.current.setFieldsValue(parsedData)
+        } catch (e) {}
+      }
+
+    });
+  }
 
 }
 
-export default PageReferences;
+
+
+export default withRouter(PageReferences);
