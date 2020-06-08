@@ -50,6 +50,11 @@ h2 {
   float: left;
 }
 
+.image_404 {
+  max-width: 100%;
+  height: auto;
+}
+
 /* App Styles */
 .FormArea {
   background-color: white;
