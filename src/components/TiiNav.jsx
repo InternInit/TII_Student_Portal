@@ -15,6 +15,25 @@ import { BrowserRouter as Router, Link } from 'react-router-dom';
 import { withRouter } from 'react-router'
 
 class TiiNav extends React.Component {
+
+  getInitialHighlight = () => {
+    console.log(this.props.location.pathname)
+    switch (this.props.location.pathname) {
+      case "/Internship-Info":
+        return Array.from("1");
+        break;
+      case "/Personal":
+        return Array.from("2");
+        break;
+      case "/Written-Work":
+        return Array.from("3");
+        break;
+      case "/References":
+        return Array.from("4");
+        break;
+    }
+  }
+
   constructor(props) {
     super(props);
     this.routeChange = this.routeChange.bind(this);
@@ -74,8 +93,7 @@ class TiiNav extends React.Component {
         <Menu //Navigation Panel
           theme="light"
           mode="inline"
-          defaultSelectedKeys={this.props.highlightKey}
-          selectedKeys={this.props.highlightKey}
+          defaultSelectedKeys={this.getInitialHighlight()}
         >
           <Menu.Item key="1" onClick={() => { this.routeChange('/Internship-Info') }}>
             {InternButton}
