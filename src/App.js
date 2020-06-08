@@ -16,6 +16,8 @@ import PagePersonal from "./components/pagePersonal.jsx";
 import PageInternshipInformation from "./components/pageInternshipInformation.jsx";
 import PageEssays from "./components/pageEssays";
 import PageReferences from "./components/pageReferences";
+import PageNotFound from "./components/pageNotFound";
+
 //CSS Imports
 import "./App.css";
 
@@ -162,6 +164,9 @@ class App extends Component {
               onSubmit={this.onSubmit}
               onBack={this.onBack}
               getJwt={this.getJwt} />} />
+
+          <Route path='*'
+          render={(props) => <PageNotFound {...props} />} />
 
         </ReactSwitch>
       </PageContainer>
