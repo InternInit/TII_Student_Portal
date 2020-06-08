@@ -7,17 +7,16 @@ import {
   UserOutlined,
   EditOutlined,
   ContainerOutlined,
-  TeamOutlined,
+  TeamOutlined
 } from "@ant-design/icons";
 
 //React Routing
-import { BrowserRouter as Router, Link } from 'react-router-dom';
-import { withRouter } from 'react-router'
+import { BrowserRouter as Router, Link } from "react-router-dom";
+import { withRouter } from "react-router";
 
 class TiiNav extends React.Component {
-
   getInitialHighlight = () => {
-    console.log(this.props.location.pathname)
+    console.log(this.props.location.pathname);
     switch (this.props.location.pathname) {
       case "/Internship-Info":
         return Array.from("1");
@@ -32,7 +31,7 @@ class TiiNav extends React.Component {
         return Array.from("4");
         break;
     }
-  }
+  };
 
   constructor(props) {
     super(props);
@@ -54,8 +53,6 @@ class TiiNav extends React.Component {
       SubmitButton: "",
       CanSubmit: false,
 
-
-
       //Styles
       collapseStyle: {
         padding: "8px",
@@ -67,14 +64,13 @@ class TiiNav extends React.Component {
     };
   }
 
-
   render() {
     const { Sider } = Layout;
     let {
       InternButton,
       PersonalButton,
       EssayButton,
-      ReferencesButton,
+      ReferencesButton
     } = this.state;
     let { SubmitButton } = this.state;
     return (
@@ -88,38 +84,56 @@ class TiiNav extends React.Component {
           marginTop: "5%"
         }}
       >
-
-
         <Menu //Navigation Panel
           theme="light"
           mode="inline"
           defaultSelectedKeys={this.getInitialHighlight()}
+          selectedKeys={this.getInitialHighlight()}
         >
-          <Menu.Item key="1" onClick={() => { this.routeChange('/Internship-Info') }}>
+          <Menu.Item
+            key="1"
+            onClick={() => {
+              this.routeChange("/Internship-Info");
+            }}
+          >
             {InternButton}
             <span>Internship Info</span>
           </Menu.Item>
 
-          <Menu.Item key="2" onClick={() => { this.routeChange('/Personal') }}>
+          <Menu.Item
+            key="2"
+            onClick={() => {
+              this.routeChange("/Personal");
+            }}
+          >
             {PersonalButton}
 
             <span>Personal</span>
-
           </Menu.Item>
 
-          <Menu.Item key="3" onClick={() => { this.routeChange('/Written-Work') }}>
+          <Menu.Item
+            key="3"
+            onClick={() => {
+              this.routeChange("/Written-Work");
+            }}
+          >
             {EssayButton}
             <Router>
-              <Link to='/Written-Work'>
+              <Link to="/Written-Work">
                 <span>Written Work</span>
               </Link>
             </Router>
           </Menu.Item>
 
-          <Menu.Item key="4" onClick={() => { this.routeChange('/References') }}>
+          <Menu.Item
+            key="4"
+            onClick={() => {
+              this.routeChange("/References");
+            }}
+          >
             {ReferencesButton}
             <Router>
-              <Link to='/References'>
+              <Link to="/References">
                 <span>References</span>
               </Link>
             </Router>
@@ -188,24 +202,18 @@ class TiiNav extends React.Component {
     });
   };
 
-
-
-  routeChange = (path) => {
-    console.log(path)
-    if (path === '/Internship-Info') {
-      this.props.clickOne()
-    }
-    else if (path === '/Personal') {
-      this.props.clickTwo()
-    }
-    else if (path === '/Written-Work') {
-      this.props.clickThree()
-    }
-    else if (path === '/References') {
-      this.props.clickFour()
+  routeChange = path => {
+    console.log(path);
+    if (path === "/Internship-Info") {
+      this.props.clickOne();
+    } else if (path === "/Personal") {
+      this.props.clickTwo();
+    } else if (path === "/Written-Work") {
+      this.props.clickThree();
+    } else if (path === "/References") {
+      this.props.clickFour();
     }
     this.props.history.push(path);
-  }
-
+  };
 }
 export default withRouter(TiiNav);
