@@ -43,6 +43,11 @@ class pageEssays extends React.Component {
     this.routeChange = this.routeChange.bind(this);
   }
 
+  state = {
+    fileListCL: [],
+    fileListPortfolio: []
+  };
+
   render() {
     return (
       <div style={{ marginTop: "40px", width: "100%" }}>
@@ -100,7 +105,7 @@ class pageEssays extends React.Component {
             key="CoverLetter"
             label={this.boldify("Cover Letter (Optional)")}
           >
-            <Dragger {...props} style={{ width: "250px", height: "30px" }} customRequest={this.customRequestCL}>
+            <Dragger {...props} style={{ width: "250px", height: "30px" }} customRequest={this.customRequestCL} fileList={this.state.fileListCL}>
               <h1 style={{ color: "blue" }}>
                 <InboxOutlined />
               </h1>
@@ -114,7 +119,7 @@ class pageEssays extends React.Component {
             key="Portfolio"
             label={this.boldify("Portfolio (Optional)")}
           >
-            <Dragger {...props} style={{ width: "250px", height: "30px" }} customRequest={this.customRequestPortfolio}>
+            <Dragger {...props} style={{ width: "250px", height: "30px" }} customRequest={this.customRequestPortfolio} fileList={this.state.fileListPortfolio}>
               <h1 style={{ color: "blue" }}>
                 <InboxOutlined />
               </h1>
@@ -175,6 +180,9 @@ class pageEssays extends React.Component {
     setTimeout(() => {
       onSuccess(file)
       const source = "CoverLetter"
+      let currentFileList = this.state.fileListCL
+      currentFileList.push(file)
+      this.setState({fileListCL:currentFileList})
       this.props.uploadFile(file, source);
     }, 100);
 
@@ -184,6 +192,9 @@ class pageEssays extends React.Component {
     setTimeout(() => {
       onSuccess(file)
       const source = "Portfolio"
+      let currentFileList = this.state.fileListPortfolio
+      currentFileList.push(file)
+      this.setState({fileListPortfolio:currentFileList})
       this.props.uploadFile(file, source);
     }, 100);
 
@@ -200,11 +211,21 @@ class pageEssays extends React.Component {
     }).then(response => response.json()).then(data => {
       let parsedData = JSON.parse(data)
       if (parsedData !== "No Info") {
-        delete parsedData.CoverLetter
-        delete parsedData.Portfolio
         console.log(parsedData)
         this.formRef.current.setFieldsValue(parsedData)
 
+        let fileListCL = parsedData.CoverLetter.fileList
+        let fileListPortfolio = parsedData.Portfolio.fileList
+
+        for (var i = 0; i < fileListCL.length; i++) {
+          fileListCL[i].status = "done"
+        }
+
+        for (var i = 0; i < fileListPortfolio.length; i++) {
+          fileListPortfolio[i].status = "done"
+        }
+        this.setState({fileListCL:fileListCL})
+        this.setState({fileListPortfolio:fileListPortfolio})
       }
 
     });
