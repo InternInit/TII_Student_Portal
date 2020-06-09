@@ -45,7 +45,8 @@ class App extends Component {
 
   state = {
     page: 0,
-    submissionState: true
+    submissionState: true,
+    completionState: [false, false, false, false]
   };
 
   onNext = (values, origin) => {
@@ -157,14 +158,17 @@ class App extends Component {
               clickTwo={this.clickTwo}
               uploadFile={this.uploadFile}
               updateData={this.updateData}
-              getJwt={this.getJwt} />} />
+              getJwt={this.getJwt}
+              setCompletionState={this.setCompletionState}/>}
+              />
 
           <Route path='/Personal' exact="true"
             render={(props) => <PagePersonal {...props}
               clickOne={this.clickOne}
               clickThree={this.clickThree}
               updateData={this.updateData}
-              getJwt={this.getJwt} />} />
+              getJwt={this.getJwt}
+              setCompletionState={this.setCompletionState}/>} />
 
           <Route path='/Written-Work' exact="true"
             render={(props) => <PageEssays {...props}
@@ -172,14 +176,16 @@ class App extends Component {
               clickFour={this.clickFour}
               uploadFile={this.uploadFile}
               updateData={this.updateData}
-              getJwt={this.getJwt} />} />
+              getJwt={this.getJwt}
+              setCompletionState={this.setCompletionState}/>} />
 
           <Route path='/References' exact="true"
             render={(props) => <PageReferences {...props}
               clickThree={this.clickThree}
               onSubmit={this.onSubmit}
               updateData={this.updateData}
-              getJwt={this.getJwt} />} />
+              getJwt={this.getJwt}
+              setCompletionState={this.setCompletionState}/>} />
 
           <Route path='*'
           render={(props) => <PageNotFound {...props} />} />
@@ -317,6 +323,19 @@ class App extends Component {
 
   }
 
+  setCompletionState = (page, state) => {
+    let currentCompletionState = this.state.completionState
+    try{
+      currentCompletionState[page] = state
+    } catch (e){
+
+    }
+  }
+
+  getCompletionState = () => {
+    return this.state.completionState
+  }
+
   // BUG: PROBLEM WITH RENDERING THE DIFFERENT NAVBAR SELECTIONS
   renderNav = () => {
     const highlightKey = String([this.state.page + 1]);
@@ -327,6 +346,7 @@ class App extends Component {
         clickThree={this.clickThree}
         clickFour={this.clickFour}
         highlightKey={highlightKey}
+        getCompletionState={this.getCompletionState}
       />
     );
   };
@@ -334,6 +354,7 @@ class App extends Component {
   componentDidMount() {
     console.log("mounted");
     this.refresh();
+
   }
 
   render() {
