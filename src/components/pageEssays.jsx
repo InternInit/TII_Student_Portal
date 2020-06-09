@@ -17,17 +17,7 @@ const props = {
   accept:
     ".doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document, .pdf, application/pdf",
   multiple: true,
-  onChange(info) {
-    const { status } = info.file;
-    if (status !== "uploading") {
-      console.log(info.file, info.fileList);
-    }
-    if (status === "done") {
-      message.success(`${info.file.name} file uploaded successfully.`);
-    } else if (status === "error") {
-      message.error(`${info.file.name} file upload failed.`);
-    }
-  }
+
 };
 
 class pageEssays extends React.Component {
@@ -41,6 +31,11 @@ class pageEssays extends React.Component {
     super(props);
     this.routeChange = this.routeChange.bind(this);
   }
+
+  state = {
+    fileListCL: [],
+    fileListPortfolio: []
+  };
 
   render() {
     return (
@@ -99,11 +94,7 @@ class pageEssays extends React.Component {
             key="CoverLetter"
             label={this.boldify("Cover Letter (Optional)")}
           >
-            <Dragger
-              {...props}
-              style={{ width: "250px", height: "30px" }}
-              customRequest={this.customRequestCL}
-            >
+            <Dragger {...props} style={{ width: "250px", height: "30px" }} customRequest={this.customRequestCL} onChange={this.onChangeCL} fileList={this.state.fileListCL}>
               <h1 style={{ color: "blue" }}>
                 <InboxOutlined />
               </h1>
@@ -117,11 +108,7 @@ class pageEssays extends React.Component {
             key="Portfolio"
             label={this.boldify("Portfolio (Optional)")}
           >
-            <Dragger
-              {...props}
-              style={{ width: "250px", height: "30px" }}
-              customRequest={this.customRequestPortfolio}
-            >
+            <Dragger {...props} style={{ width: "250px", height: "30px" }} customRequest={this.customRequestPortfolio} onChange={this.onChangePortfolio} fileList={this.state.fileListPortfolio}>
               <h1 style={{ color: "blue" }}>
                 <InboxOutlined />
               </h1>
@@ -163,31 +150,80 @@ class pageEssays extends React.Component {
   ];
 
   onFinish = values => {
-    console.log("FinishedPageEssays:", values);
-    this.props.onNext(values, "2");
-    this.routeChange("/apply/References");
+    console.log('FinishedPageEssays:', values);
+    this.props.updateData(values, "2")
+    this.routeChange('/apply/References')
   };
 
   backHandler = () => {
-    this.props.onBack(this.formRef.current.getFieldsValue(), "2");
-    this.routeChange("/apply/Personal");
-  };
+    this.props.updateData(this.formRef.current.getFieldsValue(), "2")
+    this.routeChange("/apply/Personal")
+
+  }
 
   customRequestCL = ({ onSuccess, onError, file }) => {
     setTimeout(() => {
-      onSuccess(file);
-      const source = "CoverLetter";
+      onSuccess(file)
+      const source = "CoverLetter"
+      let currentFileList = this.state.fileListCL
+      currentFileList.push(file)
+      this.setState({fileListCL:currentFileList})
       this.props.uploadFile(file, source);
     }, 100);
   };
 
+  onChangeCL = (info) => {
+    const { status } = info.file;
+    if (status === "removed") {
+      let currentFileList = this.state.fileListCL
+      let index = currentFileList.indexOf(info.file)
+      if(index > -1){
+          currentFileList.splice(index,1)
+      }
+      this.setState({fileListCL:currentFileList})
+
+    }
+    if (status === "done") {
+      message.success(`${info.file.name} file uploaded successfully.`);
+    } else if (status === "error") {
+      message.error(`${info.file.name} file upload failed.`);
+    }
+
+    this.props.updateData(this.formRef.current.getFieldsValue(), "2")
+
+  }
+
   customRequestPortfolio = ({ onSuccess, onError, file }) => {
     setTimeout(() => {
-      onSuccess(file);
-      const source = "Portfolio";
+      onSuccess(file)
+      const source = "Portfolio"
+      let currentFileList = this.state.fileListPortfolio
+      currentFileList.push(file)
+      this.setState({fileListPortfolio:currentFileList})
       this.props.uploadFile(file, source);
     }, 100);
   };
+
+  onChangePortfolio = (info) => {
+    const { status } = info.file;
+    if (status === "removed") {
+      let currentFileList = this.state.fileListPortfolio
+      let index = currentFileList.indexOf(info.file)
+      if(index > -1){
+          currentFileList.splice(index,1)
+      }
+      this.setState({fileListPortfolio:currentFileList})
+
+    }
+    if (status === "done") {
+      message.success(`${info.file.name} file uploaded successfully.`);
+    } else if (status === "error") {
+      message.error(`${info.file.name} file upload failed.`);
+    }
+
+    this.props.updateData(this.formRef.current.getFieldsValue(), "2")
+
+  }
 
   getUserData = async () => {
     let token = await this.props.getJwt();
@@ -197,18 +233,28 @@ class pageEssays extends React.Component {
         Authorization: "Bearer " + JSON.parse(JSON.stringify(token))
       },
       body: 2
-    })
-      .then(response => response.json())
-      .then(data => {
-        let parsedData = JSON.parse(data);
-        if (parsedData !== "No Info") {
-          delete parsedData.CoverLetter;
-          delete parsedData.Portfolio;
-          console.log(parsedData);
-          this.formRef.current.setFieldsValue(parsedData);
+    }).then(response => response.json()).then(data => {
+      let parsedData = JSON.parse(data)
+      if (parsedData !== "No Info") {
+        console.log(parsedData)
+        this.formRef.current.setFieldsValue(parsedData)
+
+        let fileListCL = parsedData.CoverLetter.fileList
+        let fileListPortfolio = parsedData.Portfolio.fileList
+
+        for (var i = 0; i < fileListCL.length; i++) {
+          fileListCL[i].status = "done"
         }
-      });
-  };
+
+        for (var i = 0; i < fileListPortfolio.length; i++) {
+          fileListPortfolio[i].status = "done"
+        }
+        this.setState({fileListCL:fileListCL})
+        this.setState({fileListPortfolio:fileListPortfolio})
+      }
+
+    });
+  }
 
   boldify = text => <strong>{text}</strong>;
 

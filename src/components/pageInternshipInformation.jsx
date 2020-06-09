@@ -306,17 +306,7 @@ const props = {
   accept:
     ".doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document, .pdf, application/pdf",
   multiple: true,
-  onChange(info) {
-    const { status } = info.file;
-    if (status !== "uploading") {
-      console.log(info.file, info.fileList);
-    }
-    if (status === "done") {
-      message.success(`${info.file.name} file uploaded successfully.`);
-    } else if (status === "error") {
-      message.error(`${info.file.name} file upload failed.`);
-    }
-  }
+
 };
 
 class PageInternshipInformation extends Component {
@@ -325,7 +315,8 @@ class PageInternshipInformation extends Component {
     this.routeChange = this.routeChange.bind(this);
   }
   state = {
-    otherIndustry: ""
+    otherIndustry: "",
+    fileList: []
   };
 
   formRef = React.createRef();
@@ -559,11 +550,7 @@ class PageInternshipInformation extends Component {
 
           {/** Resumé */}
           <Form.Item {...formItemProps.resume}>
-            <Dragger
-              {...props}
-              style={{ width: "250px", height: "30px" }}
-              customRequest={this.customRequestResume}
-            >
+            <Dragger {...props} style={{ width: "250px", height: "30px" }} customRequest={this.customRequestResume} onChange={this.onChange} fileList={this.state.fileList}>
               <h1 style={{ color: "blue" }}>
                 <InboxOutlined />
               </h1>
@@ -583,43 +570,71 @@ class PageInternshipInformation extends Component {
   }
 
   onFinish = values => {
-    console.log("FinishedPageInternship:", values);
-    this.props.onNext(values, "0");
-    this.routeChange("/apply/Personal");
+    console.log('FinishedPageInternship:', values);
+    this.props.updateData(values, "0")
+    this.routeChange('/apply/Personal')
   };
+
 
   customRequestResume = ({ onSuccess, onError, file }) => {
     setTimeout(() => {
-      onSuccess(file);
-      const source = "Resume";
+      onSuccess(file)
+      const source = "Resume"
+      let currentFileList = this.state.fileList
+      currentFileList.push(file)
+      this.setState({fileList:currentFileList})
       this.props.uploadFile(file, source);
     }, 100);
   };
 
-  getUserData = async () => {
-    let token = await this.props.getJwt();
+  onChange = (info) => {
+    const { status } = info.file;
+    if (status === "removed") {
+      let currentFileList = this.state.fileList
+      let index = currentFileList.indexOf(info.file)
+      if(index > -1){
+          currentFileList.splice(index,1)
+      }
+      this.setState({fileList:currentFileList})
+
+    }
+    if (status === "done") {
+      message.success(`${info.file.name} file uploaded successfully.`);
+    } else if (status === "error") {
+      message.error(`${info.file.name} file upload failed.`);
+    }
+    this.props.updateData(this.formRef.current.getFieldsValue(), "0")
+
+  }
+
+
+  getUserData = async() => {
+    let token = await this.props.getJwt()
     fetch("/get_user_data", {
       method: "POST",
       headers: {
         Authorization: "Bearer " + JSON.parse(JSON.stringify(token))
       },
       body: 0
-    })
-      .then(response => response.json())
-      .then(data => {
-        let parsedData = JSON.parse(data);
-        if (parsedData !== "No Info") {
-          try {
-            parsedData.dateOfStartAndEnd = [
-              moment(parsedData.dateOfStartAndEnd[0]),
-              moment(parsedData.dateOfStartAndEnd[1])
-            ];
-            delete parsedData.resume;
-            this.formRef.current.setFieldsValue(parsedData);
-          } catch (e) {}
-        }
-      });
-  };
+    }).then(response => response.json()).then(data => {
+      let parsedData = JSON.parse(data)
+      if(parsedData !== "No Info"){
+        try{
+          parsedData.dateOfStartAndEnd = [moment(parsedData.dateOfStartAndEnd[0]),moment(parsedData.dateOfStartAndEnd[1])]
+          //delete parsedData.resume
+          this.formRef.current.setFieldsValue(parsedData)
+
+          let fileList = parsedData.resume.fileList
+          for (var i = 0; i < fileList.length; i++) {
+            fileList[i].status = "done"
+          }
+
+          this.setState({fileList: fileList})
+        } catch (e) {}
+      }
+
+    });
+  }
 
   routeChange = path => {
     console.log(path);

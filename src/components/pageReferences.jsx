@@ -261,9 +261,9 @@ class PageReferences extends Component {
   };
 
   backHandler = () => {
-    this.props.onBack(this.formRef.current.getFieldsValue(), "3");
-    this.routeChange("/apply/Written-Work");
-  };
+    this.props.updateData(this.formRef.current.getFieldsValue(), "3")
+    this.routeChange("/apply/Written-Work")
+  }
 
   routeChange = path => {
     console.log(path);

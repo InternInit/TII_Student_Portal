@@ -453,14 +453,14 @@ class PagePersonal extends Component {
   }
 
   onFinish = values => {
-    console.log("FinishedPersonalPage:", values);
-    this.props.onNext(values, "1");
-    this.routeChange("/apply/Written-Work");
+    console.log('FinishedPersonalPage:', values);
+    this.props.updateData(values, "1")
+    this.routeChange('/apply/Written-Work')
   };
 
   backHandler = () => {
-    this.props.onBack(this.formRef.current.getFieldsValue(), "1");
-    this.routeChange("/apply/Internship-Info");
+    this.props.updateData(this.formRef.current.getFieldsValue(), "1")
+    this.routeChange("/apply/Internship-Info")
   };
 
   getUserData = async () => {

@@ -96,6 +96,24 @@ class App extends Component {
     }
   };
 
+  updateData = (values, origin) => {
+    if (this.state.submissionState == true){
+      fetch("/update_user_data", {
+        method: "POST",
+        headers: {
+          "Authorization": "Bearer " + JSON.parse(JSON.stringify(this.inMemoryToken.token)),
+          "Content-Type": "text/plain"
+        },
+        body: JSON.stringify(values) + "#" + origin
+        }).then(response =>
+          response.json()).then(data => {
+            console.log(data);
+          });
+    } else if (this.state.submissionState == false) {
+      console.log("Submission disabled")
+    }
+  }
+
   onSubmit = (values, origin) => {
     if (this.state.submissionState == true) {
       fetch("/update_user_data", {

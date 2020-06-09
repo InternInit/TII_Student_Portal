@@ -16,7 +16,6 @@ import { withRouter } from "react-router";
 
 class TiiNav extends React.Component {
   getInitialHighlight = () => {
-    console.log(this.props.location.pathname);
     switch (this.props.location.pathname) {
       case "/apply/Internship-Info":
         return Array.from("1");
