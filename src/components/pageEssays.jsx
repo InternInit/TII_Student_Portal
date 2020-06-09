@@ -156,12 +156,12 @@ class pageEssays extends React.Component {
 
   onFinish = values => {
     console.log('FinishedPageEssays:', values);
-    this.props.onNext(values, "2")
+    this.props.updateData(values, "2")
     this.routeChange('/References')
   };
 
   backHandler = () => {
-    this.props.onBack(this.formRef.current.getFieldsValue(), "2")
+    this.props.updateData(this.formRef.current.getFieldsValue(), "2")
     this.routeChange("/Personal")
 
   }
@@ -194,6 +194,9 @@ class pageEssays extends React.Component {
     } else if (status === "error") {
       message.error(`${info.file.name} file upload failed.`);
     }
+
+    this.props.updateData(this.formRef.current.getFieldsValue(), "2")
+
   }
 
   customRequestPortfolio = ({ onSuccess, onError, file }) => {
@@ -224,6 +227,9 @@ class pageEssays extends React.Component {
     } else if (status === "error") {
       message.error(`${info.file.name} file upload failed.`);
     }
+
+    this.props.updateData(this.formRef.current.getFieldsValue(), "2")
+
   }
 
   getUserData = async () => {
