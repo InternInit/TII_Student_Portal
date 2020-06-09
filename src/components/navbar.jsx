@@ -11,6 +11,9 @@ import { Menu } from "antd";
 //Logo Import
 import Logo from "../TII-logo.png";
 
+//React Router
+import { Link } from "react-router-dom";
+
 class Navbar extends Component {
   //State saved on Apply button
   state = {
@@ -35,9 +38,13 @@ class Navbar extends Component {
         <Menu.Item key="logo">
           <img className="TII-logo" alt="Tii-logo" src={Logo} />
         </Menu.Item>
-        <Menu.Item key="dashboard">Dashboard</Menu.Item>
+        <Menu.Item key="dashboard">
+          <Link to="/dashboard">Dashboard</Link>
+        </Menu.Item>
         <Menu.Item key="how-to-apply">How to Apply</Menu.Item>
-        <Menu.Item key="apply">Apply</Menu.Item>
+        <Menu.Item key="apply">
+          <Link to="/apply/Internship-Info/">Apply</Link>
+        </Menu.Item>
         <Menu.Item key="submit">Submit</Menu.Item>
       </Menu>
     );

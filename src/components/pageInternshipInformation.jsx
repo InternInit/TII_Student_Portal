@@ -21,13 +21,13 @@ import "antd/dist/antd.css";
 import "../App.css";
 
 //Stream related
-import axios from 'axios';
+import axios from "axios";
 
-import moment from 'moment'
+import moment from "moment";
 
 //React Routing
-import { BrowserRouter as Router, Link } from 'react-router-dom';
-import { withRouter } from 'react-router'
+import { BrowserRouter as Router, Link } from "react-router-dom";
+import { withRouter } from "react-router";
 import TiiNav from "./TiiNav";
 
 //Object Destructuring
@@ -143,7 +143,6 @@ const validationRules = (required, inputName, type, pattern) => [
 
 const boldify = text => <strong>{text}</strong>;
 
-
 //Props
 const formItemProps = {
   totalForm: {
@@ -168,7 +167,12 @@ const formItemProps = {
     label: boldify("Phone Number"),
     name: "phoneNumber",
     extra: "Please input your phone number without any formatting.",
-    rules: validationRules(true, "phone number", "string", /^(1?([-\s]?\(?\d{3}\)?)[-\s]?)(\d{3})([-\s]?\d{4})$/)
+    rules: validationRules(
+      true,
+      "phone number",
+      "string",
+      /^(1?([-\s]?\(?\d{3}\)?)[-\s]?)(\d{3})([-\s]?\d{4})$/
+    )
   },
   email: {
     key: "email",
@@ -180,12 +184,22 @@ const formItemProps = {
     key: "addressLine",
     label: boldify("Address"),
     name: "address",
-    rules: validationRules(true, "address", "string", /\d{1,3}.?\d{0,3}\s[a-zA-Z]{2,30}\s[a-zA-Z]{2,15}/)
+    rules: validationRules(
+      true,
+      "address",
+      "string",
+      /\d{1,3}.?\d{0,3}\s[a-zA-Z]{2,30}\s[a-zA-Z]{2,15}/
+    )
   },
   city: {
     key: "city",
     name: "city",
-    rules: validationRules(true, "city", "string", /^[a-zA-Z]+(?:[\s-][a-zA-Z]+)*$/)
+    rules: validationRules(
+      true,
+      "city",
+      "string",
+      /^[a-zA-Z]+(?:[\s-][a-zA-Z]+)*$/
+    )
   },
   livingState: {
     key: "state",
@@ -218,7 +232,12 @@ const formItemProps = {
     key: "unweightedGPA",
     label: boldify("What is your unweighted GPA?"),
     name: "unweightedGPA",
-    rules: validationRules(true, "unweighted GPA", "string", /^(([0-3]\.\d{1,2})|([4]\.[0]{1,2})|([0-4]))$/),
+    rules: validationRules(
+      true,
+      "unweighted GPA",
+      "string",
+      /^(([0-3]\.\d{1,2})|([4]\.[0]{1,2})|([0-4]))$/
+    ),
     extra: "Your GPA should be out of 4.0"
   },
   weightedGPA: {
@@ -226,7 +245,12 @@ const formItemProps = {
     label: boldify("What is your weighted GPA (optional)?"),
     name: "weightedGPA",
     extra: "Indicate your weighted GPA over the scale",
-    rules: validationRules(false, "weighted GPA", "string", /^(\d+(\.\d+)?)\/(\d+(\.\d+)?)$/)
+    rules: validationRules(
+      false,
+      "weighted GPA",
+      "string",
+      /^(\d+(\.\d+)?)\/(\d+(\.\d+)?)$/
+    )
   },
   courses: {
     key: "courses",
@@ -279,7 +303,8 @@ const formItemProps = {
 };
 const props = {
   name: "file",
-  accept: ".doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document, .pdf, application/pdf",
+  accept:
+    ".doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document, .pdf, application/pdf",
   multiple: true,
   onChange(info) {
     const { status } = info.file;
@@ -294,8 +319,6 @@ const props = {
   }
 };
 
-
-
 class PageInternshipInformation extends Component {
   constructor(props) {
     super(props);
@@ -307,23 +330,25 @@ class PageInternshipInformation extends Component {
 
   formRef = React.createRef();
 
-
   componentDidMount() {
-    this.getUserData()
+    this.getUserData();
   }
 
   renderNav() {
-    this.props.renderNav()
+    this.props.renderNav();
   }
 
   render() {
-
     return (
       <div style={{ marginTop: "40px" }}>
         <h1>Internship Information</h1>
         <br />
 
-        <Form {...formItemProps.totalForm} onFinish={this.onFinish} ref={this.formRef}>
+        <Form
+          {...formItemProps.totalForm}
+          onFinish={this.onFinish}
+          ref={this.formRef}
+        >
           {/*First and Last Name*/}
           <Row name="first" gutter={formGutter}>
             <Col span={halfSpan}>
@@ -534,7 +559,11 @@ class PageInternshipInformation extends Component {
 
           {/** Resumé */}
           <Form.Item {...formItemProps.resume}>
-            <Dragger {...props} style={{ width: "250px", height: "30px" }} customRequest={this.customRequestResume}>
+            <Dragger
+              {...props}
+              style={{ width: "250px", height: "30px" }}
+              customRequest={this.customRequestResume}
+            >
               <h1 style={{ color: "blue" }}>
                 <InboxOutlined />
               </h1>
@@ -544,11 +573,7 @@ class PageInternshipInformation extends Component {
 
           {/*Save and Continue or Next*/}
           <Form.Item>
-            <Button
-              className="next-button"
-              type="primary"
-              htmlType="submit"
-            >
+            <Button className="next-button" type="primary" htmlType="submit">
               Next
             </Button>
           </Form.Item>
@@ -558,55 +583,49 @@ class PageInternshipInformation extends Component {
   }
 
   onFinish = values => {
-    console.log('FinishedPageInternship:', values);
-    this.props.onNext(values, "0")
-    this.routeChange('/Personal')
+    console.log("FinishedPageInternship:", values);
+    this.props.onNext(values, "0");
+    this.routeChange("/apply/Personal");
   };
-
-
-
 
   customRequestResume = ({ onSuccess, onError, file }) => {
     setTimeout(() => {
-      onSuccess(file)
-      const source = "Resume"
+      onSuccess(file);
+      const source = "Resume";
       this.props.uploadFile(file, source);
     }, 100);
-
   };
 
-
-  getUserData = async() => {
-    let token = await this.props.getJwt()
+  getUserData = async () => {
+    let token = await this.props.getJwt();
     fetch("/get_user_data", {
       method: "POST",
       headers: {
-        "Authorization": "Bearer " + JSON.parse(JSON.stringify(token)),
+        Authorization: "Bearer " + JSON.parse(JSON.stringify(token))
       },
       body: 0
-    }).then(response => response.json()).then(data => {
-      let parsedData = JSON.parse(data)
-      if(parsedData !== "No Info"){
-        try{
-          parsedData.dateOfStartAndEnd = [moment(parsedData.dateOfStartAndEnd[0]),moment(parsedData.dateOfStartAndEnd[1])]
-          delete parsedData.resume
-          this.formRef.current.setFieldsValue(parsedData)
-        } catch (e) {}
-      }
+    })
+      .then(response => response.json())
+      .then(data => {
+        let parsedData = JSON.parse(data);
+        if (parsedData !== "No Info") {
+          try {
+            parsedData.dateOfStartAndEnd = [
+              moment(parsedData.dateOfStartAndEnd[0]),
+              moment(parsedData.dateOfStartAndEnd[1])
+            ];
+            delete parsedData.resume;
+            this.formRef.current.setFieldsValue(parsedData);
+          } catch (e) {}
+        }
+      });
+  };
 
-    });
-  }
-
-  routeChange = (path) => {
-    console.log(path)
-    this.props.clickTwo()
+  routeChange = path => {
+    console.log(path);
+    this.props.clickTwo();
     this.props.history.push(path);
-  }
-
-
-
-
+  };
 }
-
 
 export default withRouter(PageInternshipInformation);

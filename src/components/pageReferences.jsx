@@ -6,8 +6,8 @@ import "../App.css";
 import styled from "styled-components";
 
 //React Routing
-import { BrowserRouter as Router, Link } from 'react-router-dom';
-import { withRouter } from 'react-router'
+import { BrowserRouter as Router, Link } from "react-router-dom";
+import { withRouter } from "react-router";
 
 //Formatting
 const formGutter = [16, 16];
@@ -48,12 +48,17 @@ const formItemProps = {
     align: "left",
     className: "pageReferences"
   },
-  inputField: function (required, field, label, name, validationType, pattern) {
+  inputField: function(required, field, label, name, validationType, pattern) {
     return {
       key: [field.fieldKey, name],
       label: boldify(label),
       name: [field.name, name],
-      rules: validationRules(required, label, validationType ? validationType : "string", pattern)
+      rules: validationRules(
+        required,
+        label,
+        validationType ? validationType : "string",
+        pattern
+      )
     };
   },
   addButton: {
@@ -64,14 +69,11 @@ const formItemProps = {
 };
 
 class PageReferences extends Component {
-
   formRef = React.createRef();
 
-
-  componentDidMount(){
-    this.getUserData()
+  componentDidMount() {
+    this.getUserData();
   }
-
 
   constructor(props) {
     super(props);
@@ -79,10 +81,17 @@ class PageReferences extends Component {
   }
   render() {
     return (
-      <div style={{ width: "100%", marginTop: "40px", }}>
+      <div style={{ width: "100%", marginTop: "40px" }}>
         <h1 style={{ textAlign: "left" }}> References</h1>
-        <p>Add a reference here. This could be someone who has worked with you in the past.</p>
-        <Form  {...formItemProps.totalForm} onFinish={this.onFinish} ref={this.formRef}>
+        <p>
+          Add a reference here. This could be someone who has worked with you in
+          the past.
+        </p>
+        <Form
+          {...formItemProps.totalForm}
+          onFinish={this.onFinish}
+          ref={this.formRef}
+        >
           <Form.List name="reference">
             {(fields, { add, remove }) => {
               console.log(fields);
@@ -222,13 +231,8 @@ class PageReferences extends Component {
               onClick={this.backHandler}
             >
               Previous
-
             </Button>
-            <Button
-              className="next-button"
-              type="primary"
-              htmlType="submit"
-            >
+            <Button className="next-button" type="primary" htmlType="submit">
               Submit
             </Button>
           </Form.Item>
@@ -252,42 +256,40 @@ class PageReferences extends Component {
   };
 
   onFinish = values => {
-    console.log('FinishRefPage:', values);
-    this.props.onSubmit(values, "3")
+    console.log("FinishRefPage:", values);
+    this.props.onSubmit(values, "3");
   };
 
   backHandler = () => {
-    this.props.onBack(this.formRef.current.getFieldsValue(), "3")
-    this.routeChange("/Written-Work")
-  }
+    this.props.onBack(this.formRef.current.getFieldsValue(), "3");
+    this.routeChange("/apply/Written-Work");
+  };
 
-  routeChange = (path) => {
-    console.log(path)
-    this.props.clickThree()
+  routeChange = path => {
+    console.log(path);
+    this.props.clickThree();
     this.props.history.push(path);
-  }
+  };
 
-  getUserData = async() => {
-    let token = await this.props.getJwt()
+  getUserData = async () => {
+    let token = await this.props.getJwt();
     fetch("/get_user_data", {
       method: "POST",
       headers: {
-        "Authorization": "Bearer " + JSON.parse(JSON.stringify(token)),
+        Authorization: "Bearer " + JSON.parse(JSON.stringify(token))
       },
       body: 3
-    }).then(response => response.json()).then(data => {
-      let parsedData = JSON.parse(data)
-      if(parsedData !== "No Info"){
-        try{
-          this.formRef.current.setFieldsValue(parsedData)
-        } catch (e) {}
-      }
-
-    });
-  }
-
+    })
+      .then(response => response.json())
+      .then(data => {
+        let parsedData = JSON.parse(data);
+        if (parsedData !== "No Info") {
+          try {
+            this.formRef.current.setFieldsValue(parsedData);
+          } catch (e) {}
+        }
+      });
+  };
 }
-
-
 
 export default withRouter(PageReferences);

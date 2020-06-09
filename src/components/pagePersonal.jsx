@@ -15,11 +15,11 @@ import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
 import "antd/dist/antd.css";
 import "../App.css";
 
-import moment from 'moment'
+import moment from "moment";
 
 //React Routing
-import { BrowserRouter as Router, Link } from 'react-router-dom';
-import { withRouter } from 'react-router'
+import { BrowserRouter as Router, Link } from "react-router-dom";
+import { withRouter } from "react-router";
 
 //Object Destructuring
 const { Option } = Select;
@@ -152,7 +152,7 @@ class PagePersonal extends Component {
   formRef = React.createRef();
 
   componentDidMount() {
-    this.getUserData()
+    this.getUserData();
   }
 
   render() {
@@ -303,7 +303,11 @@ class PagePersonal extends Component {
                           name={[field.name, "schoolName"]}
                           label={this.boldify("School Name")}
                           validateTrigger={["onChange", "onBlur"]}
-                          rules={this.validationRules(true, "school name", "string")}
+                          rules={this.validationRules(
+                            true,
+                            "school name",
+                            "string"
+                          )}
                         >
                           <Input placeholder="School name" />
                         </Form.Item>
@@ -315,7 +319,12 @@ class PagePersonal extends Component {
                               key={[field.fieldKey, "schoolAddress"]}
                               label={this.boldify("School Location")}
                               name={[field.name, "schoolAddress"]}
-                              rules={this.validationRules(true, "school's address", "string", /\d{1,3}.?\d{0,3}\s[a-zA-Z]{2,30}\s[a-zA-Z]{2,15}/)}
+                              rules={this.validationRules(
+                                true,
+                                "school's address",
+                                "string",
+                                /\d{1,3}.?\d{0,3}\s[a-zA-Z]{2,30}\s[a-zA-Z]{2,15}/
+                              )}
                             >
                               <Input placeholder="Address Line" />
                             </Form.Item>
@@ -328,7 +337,12 @@ class PagePersonal extends Component {
                             <Form.Item
                               key={[field.fieldKey, "city"]}
                               name={[field.name, "city"]}
-                              rules={this.validationRules(true, "city", "string", /^[a-zA-Z]+(?:[\s-][a-zA-Z]+)*$/)}
+                              rules={this.validationRules(
+                                true,
+                                "city",
+                                "string",
+                                /^[a-zA-Z]+(?:[\s-][a-zA-Z]+)*$/
+                              )}
                             >
                               <Input placeholder="City" />
                             </Form.Item>
@@ -352,7 +366,12 @@ class PagePersonal extends Component {
                             <Form.Item
                               key={[field.fieldKey, "zip"]}
                               name={[field.name, "zip"]}
-                              rules={this.validationRules(true, "zip code", "string", /^\d{5}$/)}
+                              rules={this.validationRules(
+                                true,
+                                "zip code",
+                                "string",
+                                /^\d{5}$/
+                              )}
                             >
                               <Input placeholder="Zip Code" />
                             </Form.Item>
@@ -379,7 +398,12 @@ class PagePersonal extends Component {
                               key={[field.fieldKey, "yearsCompleted"]}
                               label={this.boldify("Years Completed")}
                               name={[field.name, "yearsCompleted"]}
-                              rules={this.validationRules(true, "years completed", "string", /^\d{1,3}$/)}
+                              rules={this.validationRules(
+                                true,
+                                "years completed",
+                                "string",
+                                /^\d{1,3}$/
+                              )}
                             >
                               <Input />
                             </Form.Item>
@@ -419,11 +443,7 @@ class PagePersonal extends Component {
             >
               Previous
             </Button>
-            <Button
-              className="next-button"
-              type="primary"
-              htmlType="submit"
-            >
+            <Button className="next-button" type="primary" htmlType="submit">
               Next
             </Button>
           </Form.Item>
@@ -433,47 +453,44 @@ class PagePersonal extends Component {
   }
 
   onFinish = values => {
-    console.log('FinishedPersonalPage:', values);
-    this.props.onNext(values, "1")
-    this.routeChange('/Written-Work')
+    console.log("FinishedPersonalPage:", values);
+    this.props.onNext(values, "1");
+    this.routeChange("/apply/Written-Work");
   };
 
   backHandler = () => {
-    this.props.onBack(this.formRef.current.getFieldsValue(), "1")
-    this.routeChange("/Internship-Info")
+    this.props.onBack(this.formRef.current.getFieldsValue(), "1");
+    this.routeChange("/apply/Internship-Info");
   };
 
-
-  getUserData = async() => {
-    let token = await this.props.getJwt()
+  getUserData = async () => {
+    let token = await this.props.getJwt();
     fetch("/get_user_data", {
       method: "POST",
       headers: {
-        "Authorization": "Bearer " + JSON.parse(JSON.stringify(token)),
+        Authorization: "Bearer " + JSON.parse(JSON.stringify(token))
       },
       body: 1
-    }).then(response => response.json()).then(data => {
-      let parsedData = JSON.parse(data)
-      if (parsedData !== "No Info") {
-        
-        console.log(parsedData)
-        this.formRef.current.setFieldsValue(parsedData)
-      }
+    })
+      .then(response => response.json())
+      .then(data => {
+        let parsedData = JSON.parse(data);
+        if (parsedData !== "No Info") {
+          console.log(parsedData);
+          this.formRef.current.setFieldsValue(parsedData);
+        }
+      });
+  };
 
-    });
-  }
-
-  routeChange = (path) => {
-    console.log(path)
-    if (path === '/Written-Work') {
-      this.props.clickThree()
-    }
-    else {
-      this.props.clickOne()
+  routeChange = path => {
+    console.log(path);
+    if (path === "/apply/Written-Work") {
+      this.props.clickThree();
+    } else {
+      this.props.clickOne();
     }
     this.props.history.push(path);
-  }
-
+  };
 }
 
 export default withRouter(PagePersonal);
