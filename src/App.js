@@ -17,13 +17,21 @@ import PageInternshipInformation from "./components/pageInternshipInformation.js
 import PageEssays from "./components/pageEssays";
 import PageReferences from "./components/pageReferences";
 import PageNotFound from "./components/pageNotFound";
+import Dashboard from "./components/dashboard";
 
 //CSS Imports
 import "./App.css";
 
 //React Routing
-import { BrowserRouter as Router, Link, Route, Switch as ReactSwitch, Redirect } from 'react-router-dom';
-
+import {
+  BrowserRouter as Router,
+  Link,
+  Route,
+  Switch as ReactSwitch,
+  Redirect,
+  useRouteMatch as match,
+  useParams
+} from "react-router-dom";
 
 //Declarations
 const { Header, Content, Footer, Sider } = Layout;
@@ -46,43 +54,6 @@ class App extends Component {
   state = {
     page: 0,
     submissionState: true
-  };
-
-  onNext = (values, origin) => {
-    if (this.state.submissionState == true) {
-      fetch("/update_user_data", {
-        method: "POST",
-        headers: {
-          "Authorization": "Bearer " + JSON.parse(JSON.stringify(this.inMemoryToken.token)),
-          "Content-Type": "text/plain"
-        },
-        body: JSON.stringify(values) + "#" + origin
-      }).then(response =>
-        response.json()).then(data => {
-          console.log(data);
-        });
-    } else if (this.state.submissionState == false) {
-      console.log("Submission disabled")
-    }
-
-  };
-
-  onBack = (values, origin) => {
-    if (this.state.submissionState == true){
-      fetch("/update_user_data", {
-        method: "POST",
-        headers: {
-          "Authorization": "Bearer " + JSON.parse(JSON.stringify(this.inMemoryToken.token)),
-          "Content-Type": "text/plain"
-        },
-        body: JSON.stringify(values) + "#" + origin
-        }).then(response =>
-          response.json()).then(data => {
-            console.log(data);
-          });
-    } else if (this.state.submissionState == false) {
-      console.log("Submission disabled")
-    }
   };
 
   updateData = (values, origin) => {
@@ -108,19 +79,20 @@ class App extends Component {
       fetch("/update_user_data", {
         method: "POST",
         headers: {
-          "Authorization": "Bearer " + JSON.parse(JSON.stringify(this.inMemoryToken.token)),
+          Authorization:
+            "Bearer " + JSON.parse(JSON.stringify(this.inMemoryToken.token)),
           "Content-Type": "text/plain"
         },
         body: JSON.stringify(values) + "#" + origin + "#" + "submit"
-        }).then(response =>
-          response.json()).then(data => {
-            console.log(data);
-            window.location.href = "https://interninit.com"
-          });
+      })
+        .then(response => response.json())
+        .then(data => {
+          console.log(data);
+          window.location.href = "https://interninit.com";
+        });
     } else if (this.state.submissionState == false) {
-      console.log("Submission disabled")
+      console.log("Submission disabled");
     }
-
   };
 
   clickOne = () => {
@@ -139,95 +111,159 @@ class App extends Component {
     this.setState({ page: 3 });
   };
 
-  renderPage = () => {
+  AppContainer = () => {
     return (
-      <PageContainer>
-        <ReactSwitch>
-          <Route path='/' exact="true"
-            render={(props)=>{
-              return (
-                this.authParam = props.location.search,
-                <Redirect to="/Internship-Info" />
-              )
+      <React.Fragment>
+        <Switch
+          checkedChildren="Submission On"
+          unCheckedChildren="Submission Off"
+          defaultChecked="true"
+          onChange={this.switchOnChange}
+        ></Switch>
+        <Button onClick={this.logout}> Logout </Button>
+        <Layout>
+          {this.renderNav()}
+          <Content
+            style={{
+              display: "flex",
+              padding: "30px",
+              justifyContent: "center",
+              backgroundColor: "#ededed",
+              minHeight: "100vh"
             }}
-          />
+          >
+            {this.RenderedPages()}
+          </Content>
+        </Layout>
+      </React.Fragment>
+    );
+  };
 
-          <Route path='/Internship-Info' exact="true"
-            render={(props) => <PageInternshipInformation {...props}
-              clickTwo={this.clickTwo}
-              uploadFile={this.uploadFile}
-              updateData={this.updateData}
-              getJwt={this.getJwt} />} />
+  RenderedPages = () => {
+    return (
+      <React.Fragment>
+        <PageContainer>
+          <ReactSwitch>
+            <Route
+              path="/apply"
+              exact
+              render={props => {
+                return (
+                  (this.authParam = props.location.search),
+                  <Redirect to="/apply/Internship-Info" />
+                );
+              }}
+            />
 
-          <Route path='/Personal' exact="true"
-            render={(props) => <PagePersonal {...props}
-              clickOne={this.clickOne}
-              clickThree={this.clickThree}
-              updateData={this.updateData}
-              getJwt={this.getJwt} />} />
+            <Route
+              path="/apply/Internship-Info"
+              render={props => (
+                <PageInternshipInformation
+                  {...props}
+                  clickTwo={this.clickTwo}
+                  uploadFile={this.uploadFile}
+                  updateData={this.updateData}
+                  getJwt={this.getJwt}
+                />
+              )}
+            />
 
-          <Route path='/Written-Work' exact="true"
-            render={(props) => <PageEssays {...props}
-              clickTwo={this.clickTwo}
-              clickFour={this.clickFour}
-              uploadFile={this.uploadFile}
-              updateData={this.updateData}
-              getJwt={this.getJwt} />} />
+            <Route
+              path="/apply/Personal"
+              render={props => (
+                <PagePersonal
+                  {...props}
+                  clickOne={this.clickOne}
+                  clickThree={this.clickThree}
+                  updateData={this.updateData}
+                  getJwt={this.getJwt}
+                />
+              )}
+            />
 
-          <Route path='/References' exact="true"
-            render={(props) => <PageReferences {...props}
-              clickThree={this.clickThree}
-              onSubmit={this.onSubmit}
-              updateData={this.updateData}
-              getJwt={this.getJwt} />} />
+            <Route
+              path="/apply/Written-Work"
+              render={props => (
+                <PageEssays
+                  {...props}
+                  clickTwo={this.clickTwo}
+                  clickFour={this.clickFour}
+                  uploadFile={this.uploadFile}
+                  updateData={this.updateData}
+                  getJwt={this.getJwt}
+                />
+              )}
+            />
 
-          <Route path='*'
-          render={(props) => <PageNotFound {...props} />} />
+            <Route
+              path="/apply/References"
+              render={props => (
+                <PageReferences
+                  {...props}
+                  clickThree={this.clickThree}
+                  onSubmit={this.onSubmit}
+                  updateData={this.updateData}
+                  getJwt={this.getJwt}
+                />
+              )}
+            />
 
-        </ReactSwitch>
-      </PageContainer>
+            <Route
+              path="/apply/*"
+              render={props => {
+                return (
+                  (this.authParam = props.location.search),
+                  <Redirect to="/apply/Internship-Info/" />
+                );
+              }}
+            />
+          </ReactSwitch>
+        </PageContainer>
+      </React.Fragment>
     );
   };
 
   switchOnChange = checked => {
     this.state.submissionState = checked;
-    console.log(this.state.submissionState)
-  }
+    console.log(this.state.submissionState);
+  };
 
   auth = () => {
     try {
-      var authCode = this.authParam.split("=")[1]
+      var authCode = this.authParam.split("=")[1];
       fetch("/auth", {
         method: "POST",
         headers: {
           "Content-Type": "text/plain"
         },
         body: authCode
-      }).then(response =>
-        response.json()).then(data => {
+      })
+        .then(response => response.json())
+        .then(data => {
           if (data !== "Invalid Grant") {
-            data = JSON.parse(data)
+            data = JSON.parse(data);
 
             this.inMemoryToken = {
               token: data.id_token,
               expiry: data.expires_in,
               refresh: data.refresh_token
-            }
-            console.log(this.inMemoryToken)
+            };
+            console.log(this.inMemoryToken);
           } else {
-            window.location.href = "https://auth.interninit.com/login?response_type=code&client_id=3og5ph16taqf598bchokdfs1r2&redirect_uri=http://localhost:3000"
+            window.location.href =
+              "https://auth.interninit.com/login?response_type=code&client_id=3og5ph16taqf598bchokdfs1r2&redirect_uri=http://localhost:3000";
           }
-
         });
     } catch (e) {
-      window.location.href = "https://auth.interninit.com/login?response_type=code&client_id=3og5ph16taqf598bchokdfs1r2&redirect_uri=http://localhost:3000"
+      window.location.href =
+        "https://auth.interninit.com/login?response_type=code&client_id=3og5ph16taqf598bchokdfs1r2&redirect_uri=http://localhost:3000";
     }
-
-  }
+  };
 
   refresh = () => {
-    fetch("/auth/refresh").then(response =>
-      response.json()).then(data => {
+    fetch("/auth/refresh")
+      .then(response => response.json())
+      .then(data => {
         if (data == null) {
           //Exchange Auth
           //Store JWT in memory
@@ -236,86 +272,79 @@ class App extends Component {
         } else {
           //Check for JWT
           if (typeof this.inMemoryToken == "undefined") {
-            console.log("I should probably exchange refresh for JWT")
+            console.log("I should probably exchange refresh for JWT");
             this.exchange();
           } else {
-            console.log("JWT exists, yay")
+            console.log("JWT exists, yay");
             this.getUserData();
           }
         }
       });
-  }
+  };
 
   exchange = () => {
-    console.log("Exchanging")
-    fetch("/auth/exchange").then(response =>
-      response.json()).then(data => {
-        data = JSON.parse(data)
+    console.log("Exchanging");
+    fetch("/auth/exchange")
+      .then(response => response.json())
+      .then(data => {
+        data = JSON.parse(data);
         if (data.error !== "invalid_grant") {
           this.inMemoryToken = {
             token: data.id_token,
             expiry: data.expires_in,
             refresh: data.refresh_token
-          }
-          console.log(this.inMemoryToken)
+          };
+          console.log(this.inMemoryToken);
         } else {
           this.logout();
         }
       });
-  }
+  };
 
   logout = () => {
-    fetch("/logout").then(response =>
-      response.json()).then(data => {
+    fetch("/logout")
+      .then(response => response.json())
+      .then(data => {
         console.log(typeof data);
-        window.location.href = data
+        window.location.href = data;
       });
-
-
-  }
+  };
 
   getJwt = () => {
-
     return new Promise((resolve, reject) => {
       var app = this;
       function checkToken() {
         if (app.inMemoryToken === undefined) {
           setTimeout(() => {
-            checkToken()
-          }, 10)
+            checkToken();
+          }, 10);
         } else {
-          resolve(app.inMemoryToken.token)
+          resolve(app.inMemoryToken.token);
         }
-
       }
       checkToken();
-
-    })
-
-  }
+    });
+  };
 
   uploadFile = async (file, source) => {
-    console.log("Uploading")
+    console.log("Uploading");
     const fd = new FormData();
-    fd.append("file", file)
+    fd.append("file", file);
 
     for (var pair of fd.entries()) {
-      console.log(pair[0] + ', ' + pair[1]);
+      console.log(pair[0] + ", " + pair[1]);
     }
-    let token = await this.getJwt()
+    let token = await this.getJwt();
 
-    fetch('/upload_user_files', {
-      method: 'POST',
+    fetch("/upload_user_files", {
+      method: "POST",
       headers: {
-        "Authorization": "Bearer " + JSON.parse(JSON.stringify(token)),
-        "Source": JSON.parse(JSON.stringify(source))
+        Authorization: "Bearer " + JSON.parse(JSON.stringify(token)),
+        Source: JSON.parse(JSON.stringify(source))
       },
-      body: fd,
-    }).then((response) => {
-
-    });
-
-  }
+      body: fd
+    }).then(response => {});
+  };
 
   // BUG: PROBLEM WITH RENDERING THE DIFFERENT NAVBAR SELECTIONS
   renderNav = () => {
@@ -343,22 +372,21 @@ class App extends Component {
           <header>
             <Navbar />
           </header>
-          <Switch checkedChildren="Submission On" unCheckedChildren="Submission Off" defaultChecked="true" onChange={this.switchOnChange}></Switch>
-          <Button onClick={this.logout}>Logout</Button>
-          <Layout>
-            {this.renderNav()}
-            <Content
-              style={{
-                display: "flex",
-                padding: "30px",
-                justifyContent: "center",
-                backgroundColor: "#ededed",
-                minHeight: "100vh"
+          <ReactSwitch>
+            <Route path="/dashboard" exact component={Dashboard} />
+            <Route path="/apply">{this.AppContainer()}</Route>
+            <Route
+              path="/"
+              exact
+              render={props => {
+                return (
+                  (this.authParam = props.location.search),
+                  <Redirect to="/apply/Internship-Info" />
+                );
               }}
-            >
-              {this.renderPage()}
-            </Content>
-          </Layout>
+            />
+            <Route path="*" render={props => <PageNotFound {...props} />} />
+          </ReactSwitch>
         </Router>
       </div>
     );
