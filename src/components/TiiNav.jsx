@@ -17,16 +17,16 @@ import { withRouter } from "react-router";
 class TiiNav extends React.Component {
   getInitialHighlight = () => {
     switch (this.props.location.pathname) {
-      case "/Internship-Info":
+      case "/apply/Internship-Info":
         return Array.from("1");
         break;
-      case "/Personal":
+      case "/apply/Personal":
         return Array.from("2");
         break;
-      case "/Written-Work":
+      case "/apply/Written-Work":
         return Array.from("3");
         break;
-      case "/References":
+      case "/apply/References":
         return Array.from("4");
         break;
     }
@@ -92,7 +92,7 @@ class TiiNav extends React.Component {
           <Menu.Item
             key="1"
             onClick={() => {
-              this.routeChange("/Internship-Info");
+              this.routeChange("/apply/Internship-Info");
             }}
           >
             {InternButton}
@@ -102,7 +102,7 @@ class TiiNav extends React.Component {
           <Menu.Item
             key="2"
             onClick={() => {
-              this.routeChange("/Personal");
+              this.routeChange("/apply/Personal");
             }}
           >
             {PersonalButton}
@@ -113,26 +113,24 @@ class TiiNav extends React.Component {
           <Menu.Item
             key="3"
             onClick={() => {
-              this.routeChange("/Written-Work");
+              this.routeChange("/apply/Written-Work");
             }}
           >
             {EssayButton}
             <Router>
-              <Link to="/Written-Work">
-                <span>Written Work</span>
-              </Link>
+              <span>Written Work</span>
             </Router>
           </Menu.Item>
 
           <Menu.Item
             key="4"
             onClick={() => {
-              this.routeChange("/References");
+              this.routeChange("/apply/References");
             }}
           >
             {ReferencesButton}
             <Router>
-              <Link to="/References">
+              <Link to="/apply/References">
                 <span>References</span>
               </Link>
             </Router>
@@ -203,13 +201,13 @@ class TiiNav extends React.Component {
 
   routeChange = path => {
     console.log(path);
-    if (path === "/Internship-Info") {
+    if (path === "/apply/Internship-Info") {
       this.props.clickOne();
-    } else if (path === "/Personal") {
+    } else if (path === "/apply/Personal") {
       this.props.clickTwo();
-    } else if (path === "/Written-Work") {
+    } else if (path === "/apply/Written-Work") {
       this.props.clickThree();
-    } else if (path === "/References") {
+    } else if (path === "/apply/References") {
       this.props.clickFour();
     }
     this.props.history.push(path);
