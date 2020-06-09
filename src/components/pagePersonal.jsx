@@ -434,12 +434,12 @@ class PagePersonal extends Component {
 
   onFinish = values => {
     console.log('FinishedPersonalPage:', values);
-    this.props.onNext(values, "1")
+    this.props.updateData(values, "1")
     this.routeChange('/Written-Work')
   };
 
   backHandler = () => {
-    this.props.onBack(this.formRef.current.getFieldsValue(), "1")
+    this.props.updateData(this.formRef.current.getFieldsValue(), "1")
     this.routeChange("/Internship-Info")
   };
 
@@ -455,7 +455,7 @@ class PagePersonal extends Component {
     }).then(response => response.json()).then(data => {
       let parsedData = JSON.parse(data)
       if (parsedData !== "No Info") {
-        
+
         console.log(parsedData)
         this.formRef.current.setFieldsValue(parsedData)
       }

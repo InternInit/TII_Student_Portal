@@ -549,7 +549,7 @@ class PageInternshipInformation extends Component {
 
   onFinish = values => {
     console.log('FinishedPageInternship:', values);
-    this.props.onNext(values, "0")
+    this.props.updateData(values, "0")
     this.routeChange('/Personal')
   };
 
@@ -582,6 +582,8 @@ class PageInternshipInformation extends Component {
     } else if (status === "error") {
       message.error(`${info.file.name} file upload failed.`);
     }
+    this.props.updateData(this.formRef.current.getFieldsValue(), "0")
+
   }
 
 

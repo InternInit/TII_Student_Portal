@@ -85,6 +85,24 @@ class App extends Component {
     }
   };
 
+  updateData = (values, origin) => {
+    if (this.state.submissionState == true){
+      fetch("/update_user_data", {
+        method: "POST",
+        headers: {
+          "Authorization": "Bearer " + JSON.parse(JSON.stringify(this.inMemoryToken.token)),
+          "Content-Type": "text/plain"
+        },
+        body: JSON.stringify(values) + "#" + origin
+        }).then(response =>
+          response.json()).then(data => {
+            console.log(data);
+          });
+    } else if (this.state.submissionState == false) {
+      console.log("Submission disabled")
+    }
+  }
+
   onSubmit = (values, origin) => {
     if (this.state.submissionState == true) {
       fetch("/update_user_data", {
@@ -129,24 +147,23 @@ class App extends Component {
             render={(props)=>{
               return (
                 this.authParam = props.location.search,
-                <Redirect to="/Internship-Info/" />
+                <Redirect to="/Internship-Info" />
               )
             }}
           />
 
-          <Route path='/Internship-Info/' exact="true"
+          <Route path='/Internship-Info' exact="true"
             render={(props) => <PageInternshipInformation {...props}
               clickTwo={this.clickTwo}
               uploadFile={this.uploadFile}
-              onNext={this.onNext}
+              updateData={this.updateData}
               getJwt={this.getJwt} />} />
 
           <Route path='/Personal' exact="true"
             render={(props) => <PagePersonal {...props}
               clickOne={this.clickOne}
               clickThree={this.clickThree}
-              onNext={this.onNext}
-              onBack={this.onBack}
+              updateData={this.updateData}
               getJwt={this.getJwt} />} />
 
           <Route path='/Written-Work' exact="true"
@@ -154,15 +171,14 @@ class App extends Component {
               clickTwo={this.clickTwo}
               clickFour={this.clickFour}
               uploadFile={this.uploadFile}
-              onNext={this.onNext}
-              onBack={this.onBack}
+              updateData={this.updateData}
               getJwt={this.getJwt} />} />
 
           <Route path='/References' exact="true"
             render={(props) => <PageReferences {...props}
               clickThree={this.clickThree}
               onSubmit={this.onSubmit}
-              onBack={this.onBack}
+              updateData={this.updateData}
               getJwt={this.getJwt} />} />
 
           <Route path='*'
