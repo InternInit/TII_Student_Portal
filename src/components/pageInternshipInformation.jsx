@@ -281,17 +281,7 @@ const props = {
   name: "file",
   accept: ".doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document, .pdf, application/pdf",
   multiple: true,
-  onChange(info) {
-    const { status } = info.file;
-    if (status !== "uploading") {
-      console.log(info.file, info.fileList);
-    }
-    if (status === "done") {
-      message.success(`${info.file.name} file uploaded successfully.`);
-    } else if (status === "error") {
-      message.error(`${info.file.name} file upload failed.`);
-    }
-  }
+
 };
 
 
@@ -534,7 +524,7 @@ class PageInternshipInformation extends Component {
 
           {/** Resumé */}
           <Form.Item {...formItemProps.resume}>
-            <Dragger {...props} style={{ width: "250px", height: "30px" }} customRequest={this.customRequestResume} fileList={this.state.fileList}>
+            <Dragger {...props} style={{ width: "250px", height: "30px" }} customRequest={this.customRequestResume} onChange={this.onChange} fileList={this.state.fileList}>
               <h1 style={{ color: "blue" }}>
                 <InboxOutlined />
               </h1>
@@ -575,6 +565,24 @@ class PageInternshipInformation extends Component {
     }, 100);
 
   };
+
+  onChange = (info) => {
+    const { status } = info.file;
+    if (status === "removed") {
+      let currentFileList = this.state.fileList
+      let index = currentFileList.indexOf(info.file)
+      if(index > -1){
+          currentFileList.splice(index,1)
+      }
+      this.setState({fileList:currentFileList})
+
+    }
+    if (status === "done") {
+      message.success(`${info.file.name} file uploaded successfully.`);
+    } else if (status === "error") {
+      message.error(`${info.file.name} file upload failed.`);
+    }
+  }
 
 
   getUserData = async() => {
