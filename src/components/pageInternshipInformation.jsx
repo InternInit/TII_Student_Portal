@@ -325,6 +325,9 @@ class PageInternshipInformation extends Component {
     this.getUserData();
   }
 
+  componentWillUnmount(){
+    this.testFunc();
+  }
 
   renderNav() {
     this.props.renderNav();
@@ -588,9 +591,12 @@ class PageInternshipInformation extends Component {
   testFunc = async () => {
     try {
       const values = await this.formRef.current.validateFields();
-      console.log('Success:', values);
+      console.log(values)
+      this.props.setCompletionState(0,true)
+      this.props.updateData(values, "0")
     } catch (errorInfo) {
-      console.log('Failed:', errorInfo);
+      this.props.setCompletionState(0,false)
+      this.props.updateData(errorInfo.values, "0")
     }
   };
 

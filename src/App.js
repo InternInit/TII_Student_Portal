@@ -366,7 +366,12 @@ class App extends Component {
   }
 
   getCompletionState = () => {
-    return this.state.completionState
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve(this.state.completionState)
+      }, 10);
+    });
+
   }
 
   // BUG: PROBLEM WITH RENDERING THE DIFFERENT NAVBAR SELECTIONS

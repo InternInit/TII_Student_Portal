@@ -32,13 +32,11 @@ class TiiNav extends React.Component {
     }
   };
 
-  componentWillMount(){
-    this.handleClick()
 
+  componentDidUpdate(prevProps, prevState){
+    this.handleClick();
   }
-  componentWillUpdate(){
-    this.handleClick()
-  }
+
 
   constructor(props) {
     super(props);
@@ -55,6 +53,7 @@ class TiiNav extends React.Component {
       PersonalButton: <UserOutlined />,
       EssayButton: <EditOutlined />,
       ReferencesButton: <TeamOutlined />,
+      TestButton: <CheckOutlined style={{ color: "green" }} />,
 
       //submission
       SubmitButton: "",
@@ -67,7 +66,9 @@ class TiiNav extends React.Component {
         justifyContent: "center",
         color: "gray",
         backgroundColor: "ghostwhite"
-      }
+      },
+
+      modFlag: false
     };
   }
 
@@ -161,7 +162,7 @@ class TiiNav extends React.Component {
     );
   }
 
-  handleSubmit = e => {
+  handleSubmit = () => {
     let {
       InternIComplete,
       EssayComplete,
@@ -191,13 +192,24 @@ class TiiNav extends React.Component {
     }
   };
 
-  handleClick = e => {
+  handleClick = async(e) => {
     //The handleClick function is purely for testing. When you click on the first button, it will set all states to "true"
-    let completionState = this.props.getCompletionState();
+    let completionState = await this.props.getCompletionState();
+    console.log(completionState)
+
+
     for (var i = 0; i < completionState.length; i++) {
       switch (i){
         case 0:
-          this.state.InternButton = ((completionState[i]) ? <CheckOutlined style={{ color: "green" }} /> : <ContainerOutlined />)
+          if(completionState[i] === true){
+            if(this.state.InternButton.type.render.displayName !== "CheckOutlined"){
+              this.setState({InternButton:<CheckOutlined style={{ color: "green" }} />})
+            }
+          } else {
+            if(this.state.InternButton.type.render.displayName !== "ContainerOutlined"){
+              this.setState({InternButton: <ContainerOutlined />})
+            }
+          }
           break;
         case 1:
           this.state.EssayButton = ((completionState[i]) ? <CheckOutlined style={{ color: "green" }} /> : <EditOutlined />)
@@ -213,10 +225,11 @@ class TiiNav extends React.Component {
 
     }
 
+
+
   };
 
   routeChange = path => {
-    console.log(path);
     if (path === "/apply/Internship-Info") {
       this.props.clickOne();
     } else if (path === "/apply/Personal") {
