@@ -48,6 +48,11 @@ const PageContainer = styled.div`
 `;
 
 class App extends Component {
+  constructor(props) {
+    super(props)
+    this.navRef = React.createRef();
+  }
+
   inMemoryToken;
   authParam = "absasd";
 

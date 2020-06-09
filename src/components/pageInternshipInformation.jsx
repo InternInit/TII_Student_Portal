@@ -309,6 +309,10 @@ const props = {
 
 };
 
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
 class PageInternshipInformation extends Component {
   constructor(props) {
     super(props);
@@ -324,6 +328,7 @@ class PageInternshipInformation extends Component {
   componentDidMount() {
     this.getUserData();
   }
+
 
   renderNav() {
     this.props.renderNav();
@@ -563,6 +568,14 @@ class PageInternshipInformation extends Component {
             <Button className="next-button" type="primary" htmlType="submit">
               Next
             </Button>
+            <Button
+              className="next-button"
+              type="default"
+              htmlType="button"
+              onClick={this.testFunc}
+            >
+              Test
+            </Button>
           </Form.Item>
         </Form>
       </div>
@@ -571,10 +584,19 @@ class PageInternshipInformation extends Component {
 
   onFinish = values => {
     console.log('FinishedPageInternship:', values);
+    this.props.setCompletionState(0,true)
     this.props.updateData(values, "0")
     this.routeChange('/apply/Personal')
   };
 
+  testFunc = async () => {
+    try {
+      const values = await this.formRef.current.validateFields();
+      console.log('Success:', values);
+    } catch (errorInfo) {
+      console.log('Failed:', errorInfo);
+    }
+  };
 
   customRequestResume = ({ onSuccess, onError, file }) => {
     setTimeout(() => {

@@ -454,6 +454,7 @@ class PagePersonal extends Component {
 
   onFinish = values => {
     console.log('FinishedPersonalPage:', values);
+    //this.setCompletionState(1,true)
     this.props.updateData(values, "1")
     this.routeChange('/apply/Written-Work')
   };

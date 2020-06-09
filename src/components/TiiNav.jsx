@@ -32,6 +32,14 @@ class TiiNav extends React.Component {
     }
   };
 
+  componentWillMount(){
+    this.handleClick()
+
+  }
+  componentWillUpdate(){
+    this.handleClick()
+  }
+
   constructor(props) {
     super(props);
     this.routeChange = this.routeChange.bind(this);
@@ -185,18 +193,26 @@ class TiiNav extends React.Component {
 
   handleClick = e => {
     //The handleClick function is purely for testing. When you click on the first button, it will set all states to "true"
-    this.setState({
-      InternIComplete: true,
-      EssayComplete: true,
-      ReferencesComplete: true,
-      PersonalComplete: true
-    });
-    this.setState({
-      InternButton: <CheckOutlined style={{ color: "green" }} />,
-      EssayButton: <CheckOutlined style={{ color: "green" }} />,
-      ReferencesButton: <CheckOutlined style={{ color: "green" }} />,
-      PersonalButton: <CheckOutlined style={{ color: "green" }} />
-    });
+    let completionState = this.props.getCompletionState();
+    for (var i = 0; i < completionState.length; i++) {
+      switch (i){
+        case 0:
+          this.state.InternButton = ((completionState[i]) ? <CheckOutlined style={{ color: "green" }} /> : <ContainerOutlined />)
+          break;
+        case 1:
+          this.state.EssayButton = ((completionState[i]) ? <CheckOutlined style={{ color: "green" }} /> : <EditOutlined />)
+          break;
+        case 2:
+          this.state.PersonalButton = ((completionState[i]) ? <CheckOutlined style={{ color: "green" }} /> : <UserOutlined />)
+          break;
+        case 3:
+          this.state.ReferencesButton = ((completionState[i]) ? <CheckOutlined style={{ color: "green" }} /> : <TeamOutlined />)
+          break;
+
+      }
+
+    }
+
   };
 
   routeChange = path => {
