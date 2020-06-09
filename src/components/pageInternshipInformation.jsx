@@ -309,10 +309,6 @@ const props = {
 
 };
 
-<<<<<<< Updated upstream
-=======
-
->>>>>>> Stashed changes
 class PageInternshipInformation extends Component {
   constructor(props) {
     super(props);

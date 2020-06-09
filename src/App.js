@@ -170,6 +170,7 @@ class App extends Component {
                   uploadFile={this.uploadFile}
                   updateData={this.updateData}
                   getJwt={this.getJwt}
+                  setCompletionState={this.setCompletionState}
                 />
               )}
             />
@@ -183,6 +184,7 @@ class App extends Component {
                   clickThree={this.clickThree}
                   updateData={this.updateData}
                   getJwt={this.getJwt}
+                  setCompletionState={this.setCompletionState}
                 />
               )}
             />
@@ -197,6 +199,7 @@ class App extends Component {
                   uploadFile={this.uploadFile}
                   updateData={this.updateData}
                   getJwt={this.getJwt}
+                  setCompletionState={this.setCompletionState}
                 />
               )}
             />
@@ -210,6 +213,7 @@ class App extends Component {
                   onSubmit={this.onSubmit}
                   updateData={this.updateData}
                   getJwt={this.getJwt}
+                  setCompletionState={this.setCompletionState}
                 />
               )}
             />
