@@ -43,6 +43,11 @@ class pageEssays extends React.Component {
     this.routeChange = this.routeChange.bind(this);
   }
 
+  state = {
+    fileListCL: [],
+    fileListPortfolio: []
+  };
+
   render() {
     return (
       <div style={{ marginTop: "40px", width: "100%" }}>
@@ -100,7 +105,7 @@ class pageEssays extends React.Component {
             key="CoverLetter"
             label={this.boldify("Cover Letter (Optional)")}
           >
-            <Dragger {...props} style={{ width: "250px", height: "30px" }} customRequest={this.customRequestCL}>
+            <Dragger {...props} style={{ width: "250px", height: "30px" }} customRequest={this.customRequestCL} fileList={this.state.fileListCL}>
               <h1 style={{ color: "blue" }}>
                 <InboxOutlined />
               </h1>
@@ -114,7 +119,7 @@ class pageEssays extends React.Component {
             key="Portfolio"
             label={this.boldify("Portfolio (Optional)")}
           >
-            <Dragger {...props} style={{ width: "250px", height: "30px" }} customRequest={this.customRequestPortfolio}>
+            <Dragger {...props} style={{ width: "250px", height: "30px" }} customRequest={this.customRequestPortfolio} fileList={this.state.fileListPortfolio}>
               <h1 style={{ color: "blue" }}>
                 <InboxOutlined />
               </h1>
@@ -200,11 +205,10 @@ class pageEssays extends React.Component {
     }).then(response => response.json()).then(data => {
       let parsedData = JSON.parse(data)
       if (parsedData !== "No Info") {
-        delete parsedData.CoverLetter
-        delete parsedData.Portfolio
         console.log(parsedData)
         this.formRef.current.setFieldsValue(parsedData)
-
+        this.setState({fileListCL:parsedData.CoverLetter.fileList})
+        this.setState({fileListPortfolio:parsedData.Portfolio.fileList})
       }
 
     });

@@ -302,11 +302,11 @@ class PageInternshipInformation extends Component {
     this.routeChange = this.routeChange.bind(this);
   }
   state = {
-    otherIndustry: ""
+    otherIndustry: "",
+    fileList: []
   };
 
   formRef = React.createRef();
-
 
   componentDidMount() {
     this.getUserData()
@@ -534,7 +534,7 @@ class PageInternshipInformation extends Component {
 
           {/** Resumé */}
           <Form.Item {...formItemProps.resume}>
-            <Dragger {...props} style={{ width: "250px", height: "30px" }} customRequest={this.customRequestResume}>
+            <Dragger {...props} style={{ width: "250px", height: "30px" }} customRequest={this.customRequestResume} fileList={this.state.fileList}>
               <h1 style={{ color: "blue" }}>
                 <InboxOutlined />
               </h1>
@@ -564,12 +564,13 @@ class PageInternshipInformation extends Component {
   };
 
 
-
-
   customRequestResume = ({ onSuccess, onError, file }) => {
     setTimeout(() => {
       onSuccess(file)
       const source = "Resume"
+      let currentFileList = this.state.fileList
+      currentFileList.push(file)
+      this.setState({fileList:currentFileList})
       this.props.uploadFile(file, source);
     }, 100);
 
@@ -589,8 +590,15 @@ class PageInternshipInformation extends Component {
       if(parsedData !== "No Info"){
         try{
           parsedData.dateOfStartAndEnd = [moment(parsedData.dateOfStartAndEnd[0]),moment(parsedData.dateOfStartAndEnd[1])]
-          delete parsedData.resume
+          //delete parsedData.resume
           this.formRef.current.setFieldsValue(parsedData)
+
+          let fileList = parsedData.resume.fileList
+          for (var i = 0; i < fileList.length; i++) {
+            fileList[i].status = "done"
+          }
+
+          this.setState({fileList: fileList})
         } catch (e) {}
       }
 
@@ -602,8 +610,6 @@ class PageInternshipInformation extends Component {
     this.props.clickTwo()
     this.props.history.push(path);
   }
-
-
 
 
 }
