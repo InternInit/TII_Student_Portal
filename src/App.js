@@ -56,46 +56,6 @@ class App extends Component {
     submissionState: true
   };
 
-  onNext = (values, origin) => {
-    if (this.state.submissionState == true) {
-      fetch("/update_user_data", {
-        method: "POST",
-        headers: {
-          Authorization:
-            "Bearer " + JSON.parse(JSON.stringify(this.inMemoryToken.token)),
-          "Content-Type": "text/plain"
-        },
-        body: JSON.stringify(values) + "#" + origin
-      })
-        .then(response => response.json())
-        .then(data => {
-          console.log(data);
-        });
-    } else if (this.state.submissionState == false) {
-      console.log("Submission disabled");
-    }
-  };
-
-  onBack = (values, origin) => {
-    if (this.state.submissionState == true) {
-      fetch("/update_user_data", {
-        method: "POST",
-        headers: {
-          Authorization:
-            "Bearer " + JSON.parse(JSON.stringify(this.inMemoryToken.token)),
-          "Content-Type": "text/plain"
-        },
-        body: JSON.stringify(values) + "#" + origin
-      })
-        .then(response => response.json())
-        .then(data => {
-          console.log(data);
-        });
-    } else if (this.state.submissionState == false) {
-      console.log("Submission disabled");
-    }
-  };
-
   updateData = (values, origin) => {
     if (this.state.submissionState == true){
       fetch("/update_user_data", {
@@ -202,7 +162,7 @@ class App extends Component {
                   {...props}
                   clickTwo={this.clickTwo}
                   uploadFile={this.uploadFile}
-                  onNext={this.onNext}
+                  updateData={this.updateData}
                   getJwt={this.getJwt}
                 />
               )}
@@ -215,8 +175,7 @@ class App extends Component {
                   {...props}
                   clickOne={this.clickOne}
                   clickThree={this.clickThree}
-                  onNext={this.onNext}
-                  onBack={this.onBack}
+                  updateData={this.updateData}
                   getJwt={this.getJwt}
                 />
               )}
@@ -230,8 +189,7 @@ class App extends Component {
                   clickTwo={this.clickTwo}
                   clickFour={this.clickFour}
                   uploadFile={this.uploadFile}
-                  onNext={this.onNext}
-                  onBack={this.onBack}
+                  updateData={this.updateData}
                   getJwt={this.getJwt}
                 />
               )}
@@ -244,7 +202,7 @@ class App extends Component {
                   {...props}
                   clickThree={this.clickThree}
                   onSubmit={this.onSubmit}
-                  onBack={this.onBack}
+                  updateData={this.updateData}
                   getJwt={this.getJwt}
                 />
               )}
