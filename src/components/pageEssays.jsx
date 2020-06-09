@@ -16,17 +16,7 @@ const props = {
   name: "file",
   accept: ".doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document, .pdf, application/pdf",
   multiple: true,
-  onChange(info) {
-    const { status } = info.file;
-    if (status !== "uploading") {
-      console.log(info.file, info.fileList);
-    }
-    if (status === "done") {
-      message.success(`${info.file.name} file uploaded successfully.`);
-    } else if (status === "error") {
-      message.error(`${info.file.name} file upload failed.`);
-    }
-  }
+
 };
 
 class pageEssays extends React.Component {
@@ -105,7 +95,7 @@ class pageEssays extends React.Component {
             key="CoverLetter"
             label={this.boldify("Cover Letter (Optional)")}
           >
-            <Dragger {...props} style={{ width: "250px", height: "30px" }} customRequest={this.customRequestCL} fileList={this.state.fileListCL}>
+            <Dragger {...props} style={{ width: "250px", height: "30px" }} customRequest={this.customRequestCL} onChange={this.onChangeCL} fileList={this.state.fileListCL}>
               <h1 style={{ color: "blue" }}>
                 <InboxOutlined />
               </h1>
@@ -119,7 +109,7 @@ class pageEssays extends React.Component {
             key="Portfolio"
             label={this.boldify("Portfolio (Optional)")}
           >
-            <Dragger {...props} style={{ width: "250px", height: "30px" }} customRequest={this.customRequestPortfolio} fileList={this.state.fileListPortfolio}>
+            <Dragger {...props} style={{ width: "250px", height: "30px" }} customRequest={this.customRequestPortfolio} onChange={this.onChangePortfolio} fileList={this.state.fileListPortfolio}>
               <h1 style={{ color: "blue" }}>
                 <InboxOutlined />
               </h1>
@@ -188,6 +178,24 @@ class pageEssays extends React.Component {
 
   };
 
+  onChangeCL = (info) => {
+    const { status } = info.file;
+    if (status === "removed") {
+      let currentFileList = this.state.fileListCL
+      let index = currentFileList.indexOf(info.file)
+      if(index > -1){
+          currentFileList.splice(index,1)
+      }
+      this.setState({fileListCL:currentFileList})
+
+    }
+    if (status === "done") {
+      message.success(`${info.file.name} file uploaded successfully.`);
+    } else if (status === "error") {
+      message.error(`${info.file.name} file upload failed.`);
+    }
+  }
+
   customRequestPortfolio = ({ onSuccess, onError, file }) => {
     setTimeout(() => {
       onSuccess(file)
@@ -199,6 +207,24 @@ class pageEssays extends React.Component {
     }, 100);
 
   };
+
+  onChangePortfolio = (info) => {
+    const { status } = info.file;
+    if (status === "removed") {
+      let currentFileList = this.state.fileListPortfolio
+      let index = currentFileList.indexOf(info.file)
+      if(index > -1){
+          currentFileList.splice(index,1)
+      }
+      this.setState({fileListPortfolio:currentFileList})
+
+    }
+    if (status === "done") {
+      message.success(`${info.file.name} file uploaded successfully.`);
+    } else if (status === "error") {
+      message.error(`${info.file.name} file upload failed.`);
+    }
+  }
 
   getUserData = async () => {
     let token = await this.props.getJwt()
