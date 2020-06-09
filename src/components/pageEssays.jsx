@@ -180,6 +180,9 @@ class pageEssays extends React.Component {
     setTimeout(() => {
       onSuccess(file)
       const source = "CoverLetter"
+      let currentFileList = this.state.fileListCL
+      currentFileList.push(file)
+      this.setState({fileListCL:currentFileList})
       this.props.uploadFile(file, source);
     }, 100);
 
@@ -189,6 +192,9 @@ class pageEssays extends React.Component {
     setTimeout(() => {
       onSuccess(file)
       const source = "Portfolio"
+      let currentFileList = this.state.fileListPortfolio
+      currentFileList.push(file)
+      this.setState({fileListPortfolio:currentFileList})
       this.props.uploadFile(file, source);
     }, 100);
 
@@ -207,8 +213,19 @@ class pageEssays extends React.Component {
       if (parsedData !== "No Info") {
         console.log(parsedData)
         this.formRef.current.setFieldsValue(parsedData)
-        this.setState({fileListCL:parsedData.CoverLetter.fileList})
-        this.setState({fileListPortfolio:parsedData.Portfolio.fileList})
+
+        let fileListCL = parsedData.CoverLetter.fileList
+        let fileListPortfolio = parsedData.Portfolio.fileList
+
+        for (var i = 0; i < fileListCL.length; i++) {
+          fileListCL[i].status = "done"
+        }
+
+        for (var i = 0; i < fileListPortfolio.length; i++) {
+          fileListPortfolio[i].status = "done"
+        }
+        this.setState({fileListCL:fileListCL})
+        this.setState({fileListPortfolio:fileListPortfolio})
       }
 
     });
