@@ -49,12 +49,18 @@ const PageContainer = styled.div`
 `;
 
 class App extends Component {
+  constructor(props) {
+    super(props)
+    this.navRef = React.createRef();
+  }
+
   inMemoryToken;
   authParam = "absasd";
 
   state = {
     page: 0,
-    submissionState: true
+    submissionState: true,
+    completionState: [false, false, false, false]
   };
 
   updateData = (values, origin) => {
@@ -165,6 +171,7 @@ class App extends Component {
                   uploadFile={this.uploadFile}
                   updateData={this.updateData}
                   getJwt={this.getJwt}
+                  setCompletionState={this.setCompletionState}
                 />
               )}
             />
@@ -178,6 +185,7 @@ class App extends Component {
                   clickThree={this.clickThree}
                   updateData={this.updateData}
                   getJwt={this.getJwt}
+                  setCompletionState={this.setCompletionState}
                 />
               )}
             />
@@ -192,6 +200,7 @@ class App extends Component {
                   uploadFile={this.uploadFile}
                   updateData={this.updateData}
                   getJwt={this.getJwt}
+                  setCompletionState={this.setCompletionState}
                 />
               )}
             />
@@ -205,6 +214,7 @@ class App extends Component {
                   onSubmit={this.onSubmit}
                   updateData={this.updateData}
                   getJwt={this.getJwt}
+                  setCompletionState={this.setCompletionState}
                 />
               )}
             />
@@ -347,6 +357,24 @@ class App extends Component {
     }).then(response => { });
   };
 
+  setCompletionState = (page, state) => {
+    let currentCompletionState = this.state.completionState
+    try{
+      currentCompletionState[page] = state
+    } catch (e){
+
+    }
+  }
+
+  getCompletionState = () => {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve(this.state.completionState)
+      }, 10);
+    });
+
+  }
+
   // BUG: PROBLEM WITH RENDERING THE DIFFERENT NAVBAR SELECTIONS
   renderNav = () => {
     const highlightKey = String([this.state.page + 1]);
@@ -357,6 +385,8 @@ class App extends Component {
         clickThree={this.clickThree}
         clickFour={this.clickFour}
         highlightKey={highlightKey}
+        getCompletionState={this.getCompletionState}
+        onSubmit={this.onSubmit}
       />
     );
   };
@@ -364,6 +394,7 @@ class App extends Component {
   componentDidMount() {
     console.log("mounted");
     this.refresh();
+
   }
 
   render() {

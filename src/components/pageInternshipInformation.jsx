@@ -325,6 +325,10 @@ class PageInternshipInformation extends Component {
     this.getUserData();
   }
 
+  componentWillUnmount(){
+    this.setCompletionState();
+  }
+
   renderNav() {
     this.props.renderNav();
   }
@@ -563,6 +567,14 @@ class PageInternshipInformation extends Component {
             <Button className="next-button" type="primary" htmlType="submit">
               Next
             </Button>
+            <Button
+              className="next-button"
+              type="default"
+              htmlType="button"
+              onClick={this.testFunc}
+            >
+              Test
+            </Button>
           </Form.Item>
         </Form>
       </div>
@@ -571,10 +583,22 @@ class PageInternshipInformation extends Component {
 
   onFinish = values => {
     console.log('FinishedPageInternship:', values);
+    this.props.setCompletionState(0,true)
     this.props.updateData(values, "0")
     this.routeChange('/apply/Personal')
   };
 
+  setCompletionState = async () => {
+    try {
+      const values = await this.formRef.current.validateFields();
+      console.log(values)
+      this.props.setCompletionState(0,true)
+      this.props.updateData(values, "0")
+    } catch (errorInfo) {
+      this.props.setCompletionState(0,false)
+      this.props.updateData(errorInfo.values, "0")
+    }
+  };
 
   customRequestResume = ({ onSuccess, onError, file }) => {
     setTimeout(() => {
@@ -622,7 +646,6 @@ class PageInternshipInformation extends Component {
         try{
           parsedData.dateOfStartAndEnd = [moment(parsedData.dateOfStartAndEnd[0]),moment(parsedData.dateOfStartAndEnd[1])]
           //delete parsedData.resume
-          this.formRef.current.setFieldsValue(parsedData)
 
           let fileList = parsedData.resume.fileList
           for (var i = 0; i < fileList.length; i++) {
@@ -630,7 +653,10 @@ class PageInternshipInformation extends Component {
           }
 
           this.setState({fileList: fileList})
-        } catch (e) {}
+        } catch (e) {
+          console.log(e)
+        }
+        this.formRef.current.setFieldsValue(parsedData)
       }
 
     });
