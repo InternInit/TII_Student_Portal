@@ -18,6 +18,7 @@ import PageEssays from "./components/pageEssays";
 import PageReferences from "./components/pageReferences";
 import PageNotFound from "./components/pageNotFound";
 import Dashboard from "./components/dashboard";
+import HowtoApply from './components/HowtoApply';
 
 //CSS Imports
 import "./App.css";
@@ -57,7 +58,7 @@ class App extends Component {
   };
 
   updateData = (values, origin) => {
-    if (this.state.submissionState == true){
+    if (this.state.submissionState == true) {
       fetch("/update_user_data", {
         method: "POST",
         headers: {
@@ -65,10 +66,10 @@ class App extends Component {
           "Content-Type": "text/plain"
         },
         body: JSON.stringify(values) + "#" + origin
-        }).then(response =>
-          response.json()).then(data => {
-            console.log(data);
-          });
+      }).then(response =>
+        response.json()).then(data => {
+          console.log(data);
+        });
     } else if (this.state.submissionState == false) {
       console.log("Submission disabled")
     }
@@ -158,7 +159,7 @@ class App extends Component {
             <Route
               path="/apply/Internship-Info"
               render={props => (
-                <PageInternshipInformation
+                <HowtoApply
                   {...props}
                   clickTwo={this.clickTwo}
                   uploadFile={this.uploadFile}
@@ -343,7 +344,7 @@ class App extends Component {
         Source: JSON.parse(JSON.stringify(source))
       },
       body: fd
-    }).then(response => {});
+    }).then(response => { });
   };
 
   // BUG: PROBLEM WITH RENDERING THE DIFFERENT NAVBAR SELECTIONS
