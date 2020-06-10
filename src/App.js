@@ -33,6 +33,7 @@ import {
   useRouteMatch as match,
   useParams
 } from "react-router-dom";
+import pageInternshipInformation from "./components/pageInternshipInformation.jsx";
 
 //Declarations
 const { Header, Content, Footer, Sider } = Layout;
@@ -165,7 +166,7 @@ class App extends Component {
             <Route
               path="/apply/Internship-Info"
               render={props => (
-                <HowtoApply
+                <PageInternshipInformation
                   {...props}
                   clickTwo={this.clickTwo}
                   uploadFile={this.uploadFile}
@@ -359,9 +360,9 @@ class App extends Component {
 
   setCompletionState = (page, state) => {
     let currentCompletionState = this.state.completionState
-    try{
+    try {
       currentCompletionState[page] = state
-    } catch (e){
+    } catch (e) {
 
     }
   }
@@ -406,6 +407,7 @@ class App extends Component {
           </header>
           <ReactSwitch>
             <Route path="/dashboard" exact component={Dashboard} />
+            <Route path="/how-to-apply" exact component={HowtoApply} />
             <Route path="/apply">{this.AppContainer()}</Route>
             <Route
               path="/"
@@ -420,7 +422,7 @@ class App extends Component {
             <Route path="*" render={props => <PageNotFound {...props} />} />
           </ReactSwitch>
         </Router>
-      </div>
+      </div >
     );
   }
 }

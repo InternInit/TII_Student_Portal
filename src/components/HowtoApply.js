@@ -4,45 +4,46 @@ import Internshipimg from '../How_To_Apply/internshipinfo.JPG'
 import Personalimg from '../How_To_Apply/personal.JPG'
 import Writtenimg from '../How_To_Apply/written.JPG'
 import Referencesimg from '../How_To_Apply/reference.JPG'
-
+import { CheckOutlined } from '@ant-design/icons';
 //styles
 const Banner = styled.div`
 background-color: #8fc3d1;
-padding:20px;
+padding:55px;
 font-size:36px;
 color:white;
 font-weight:normal;
 `;
 const Header = styled.div`
 padding:10px;
-font-size:24px;
+font-size:28px;
 font-weight:bold;
 display:flex;
 justify-content:align-left;
 padding-left:20px;
-margin-top:70px;
-background-color:blue
+margin-top:90px;
 `;
 const Text = styled.div`
 padding:5px;
 font-weight:normal;
 display:flex;
 width:90%;
+font-size:18px;
 justify-content:align-left;
-padding-left:20px;
+padding-left:30px;
 `;
 const Bullet = styled.div`
 font-weight:normal;
 display:flex;
+font-size:18px;
 justify-content:align-left;
-padding-left:40px;
+padding-left:50px;
 
 `;
 const Image = styled.img`
 border-radius:20px;
-margin-top:20px;
-width:90%;
-height:90%;
+padding:30px;
+width:70%;
+height:70%;
 object-fit:scale-down;
 pointer-events: none;
 `;
@@ -50,6 +51,7 @@ const Caption = styled.div`
 padding:5px;
 font-weight:normal;
 display:flex;
+font-size:18px;
 width:90%;
 `;
 
@@ -69,7 +71,6 @@ class HowtoApply extends React.Component {
                 width: "100%",
                 height: "100%",
                 flexDirection: "column",
-                backgroundColor: "green",
                 alignItems: 'center'
             }}>
 
@@ -79,12 +80,11 @@ class HowtoApply extends React.Component {
 
                 <div style={{
                     width: '70%',
-                    backgroundColor: 'red',
                     display: "flex",
                     flexDirection: 'column',
                 }}>
                     <Header style={{
-                        marginTop: '70px'
+                        marginTop: '110px'
                     }}>
                         It's Simple!
                     </Header>
@@ -101,11 +101,60 @@ class HowtoApply extends React.Component {
                         - Submit when everything is filled out!
                     </Bullet>
 
+                    {/**Things you will Need */}
+                    <Header>
+                        Things you need
+                    </Header>
+                    <Text>
+                        In order to apply, make sure you have the following information:
+                    </Text>
+                    <Bullet style={{ marginTop: '15px' }}>
+                        <CheckOutlined style={{ color: 'green', paddingRight: '10px' }} />Weighted and Unweighted Grade Point Average (GPA)
+                        </Bullet>
+                    <Bullet>
+                        <CheckOutlined style={{ color: 'green', paddingRight: '10px' }} />List of interested industries (Ie. Finance or Biotechnology)
+                        </Bullet>
+                    <Bullet>
+                        <CheckOutlined style={{ color: 'green', paddingRight: '10px' }} />List of relevant courses taken
+                        </Bullet>
+                    <Bullet>
+                        <CheckOutlined style={{ color: 'green', paddingRight: '10px' }} />List of extracurricular activities
+                        </Bullet>
+                    <Bullet>
+                        <CheckOutlined style={{ color: 'green', paddingRight: '10px' }} />Year of Graduation (Must be at least a high school Sophomore to high school Senior)
+                        </Bullet>
+                    <Bullet>
+                        <CheckOutlined style={{ color: 'green', paddingRight: '10px' }} />Availability to work
+                        </Bullet>
+                    <Bullet>
+                        <CheckOutlined style={{ color: 'green', paddingRight: '10px' }} />Resumé or CV
+                        </Bullet>
+                    <Bullet>
+                        <CheckOutlined style={{ color: 'green', paddingRight: '10px' }} />List Item
+                        </Bullet>
+                    <Bullet>
+                        <CheckOutlined style={{ color: 'green', paddingRight: '10px' }} />Cover Letter (Optional)
+                        </Bullet>
+                    <Bullet>
+                        <CheckOutlined style={{ color: 'green', paddingRight: '10px' }} />Letters of Recommendation (1 required, but 2 is advised)
+                        </Bullet>
+                    <Bullet>
+                        <CheckOutlined style={{ color: 'green', paddingRight: '10px' }} />Transcript
+                        </Bullet>
+                    <Bullet>
+                        <CheckOutlined style={{ color: 'green', paddingRight: '10px' }} />School Profile
+                        </Bullet>
+                    <Bullet>
+                        <CheckOutlined style={{ color: 'green', paddingRight: '10px' }} />List of Accomplishments/Achievements
+                        </Bullet>
+
+
+
                     {/**Internship Information */}
                     <Header>
                         Internship Information
                     </Header>
-                    <div style={{ backgroundColor: '#ededed', width: '90%', display: 'flex', alignContent: 'center' }}>
+                    <div style={{ backgroundColor: '#ededed', width: '100%' }}>
                         <Image src={Internshipimg} alt='internshipinfo' />
                     </div>
                     <Caption>
@@ -119,7 +168,7 @@ class HowtoApply extends React.Component {
                     <Header>
                         Personal Information
                     </Header>
-                    <div style={{ backgroundColor: '#ededed', width: '90%' }}>
+                    <div style={{ backgroundColor: '#ededed', width: '100%' }}>
                         <Image src={Personalimg} alt='Personal' />
                     </div>
                     <Caption>
@@ -131,7 +180,7 @@ class HowtoApply extends React.Component {
                     <Header>
                         Written Work
                     </Header>
-                    <div style={{ backgroundColor: '#ededed', width: '90%' }}>
+                    <div style={{ backgroundColor: '#ededed', width: '100%' }}>
                         <Image src={Writtenimg} alt='Personal' />
                     </div>
                     <Caption>
@@ -144,7 +193,7 @@ class HowtoApply extends React.Component {
                     {/**References */}
                     <Header>
                         References                </Header>
-                    <div style={{ backgroundColor: '#ededed', width: '90%' }}>
+                    <div style={{ backgroundColor: '#ededed', width: '100%' }}>
                         <Image src={Referencesimg} alt='Personal' />
                     </div>
                     <Caption>

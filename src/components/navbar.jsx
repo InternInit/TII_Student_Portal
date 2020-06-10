@@ -13,12 +13,17 @@ import Logo from "../TII-logo.png";
 
 //React Router
 import { Link } from "react-router-dom";
+import { BrowserRouter as Router } from "react-router-dom";
+import { withRouter } from "react-router";
 
 class Navbar extends Component {
-  //State saved on Apply button
-  state = {
-    current: "apply"
-  };
+  constructor(props) {
+    super(props);
+    this.routeChange = this.routeChange.bind(this);
+    this.state = {
+      current: "apply"
+    };
+  }
 
   //Click Handler
   handleClick = e => {
@@ -26,6 +31,10 @@ class Navbar extends Component {
     this.setState({
       current: e.key
     });
+  };
+
+  routeChange = path => {
+    this.props.history.push(path);
   };
 
   render() {
@@ -41,7 +50,9 @@ class Navbar extends Component {
         <Menu.Item key="dashboard">
           <Link to="/dashboard">Dashboard</Link>
         </Menu.Item>
-        <Menu.Item key="how-to-apply">How to Apply</Menu.Item>
+        <Menu.Item key="how-to-apply" onClick={() => {
+          this.routeChange("/how-to-apply");
+        }}>How to Apply</Menu.Item>
         <Menu.Item key="apply">
           <Link to="/apply/Internship-Info/">Apply</Link>
         </Menu.Item>
@@ -51,4 +62,4 @@ class Navbar extends Component {
   }
 }
 
-export default Navbar;
+export default withRouter(Navbar);
