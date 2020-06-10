@@ -170,37 +170,21 @@ class pageEssays extends React.Component {
   ];
 
   onFinish = values => {
-<<<<<<< HEAD
-    console.log('FinishedPageEssays:', values);
-    this.props.setCompletionState(2, true)
-    this.props.updateData(values, "2")
-    this.routeChange('/apply/References')
-=======
     console.log("FinishedPageEssays:", values);
     this.props.setCompletionState(2, true);
     this.props.updateData(values, "2");
     this.routeChange("/apply/References");
->>>>>>> 4565f6c4fafc2a73289770b14c4d5b2c4ada3f2a
   };
 
   setCompletionState = async () => {
     try {
       const values = await this.formRef.current.validateFields();
-<<<<<<< HEAD
-      console.log(values)
-      this.props.setCompletionState(2, true)
-      this.props.updateData(values, "2")
-    } catch (errorInfo) {
-      this.props.setCompletionState(2, false)
-      this.props.updateData(errorInfo.values, "2")
-=======
       console.log(values);
       this.props.setCompletionState(2, true);
       this.props.updateData(values, "2");
     } catch (errorInfo) {
       this.props.setCompletionState(2, false);
       this.props.updateData(errorInfo.values, "2");
->>>>>>> 4565f6c4fafc2a73289770b14c4d5b2c4ada3f2a
     }
   };
 
@@ -211,19 +195,11 @@ class pageEssays extends React.Component {
 
   customRequestCL = ({ onSuccess, onError, file }) => {
     setTimeout(() => {
-<<<<<<< HEAD
-      onSuccess(file)
-      const source = "CoverLetter"
-      let currentFileList = this.state.fileListCL
-      currentFileList.push(file)
-      this.setState({ fileListCL: currentFileList })
-=======
       onSuccess(file);
       const source = "CoverLetter";
       let currentFileList = this.state.fileListCL;
       currentFileList.push(file);
       this.setState({ fileListCL: currentFileList });
->>>>>>> 4565f6c4fafc2a73289770b14c4d5b2c4ada3f2a
       this.props.uploadFile(file, source);
     }, 100);
   };
@@ -231,22 +207,12 @@ class pageEssays extends React.Component {
   onChangeCL = info => {
     const { status } = info.file;
     if (status === "removed") {
-<<<<<<< HEAD
-      let currentFileList = this.state.fileListCL
-      let index = currentFileList.indexOf(info.file)
-      if (index > -1) {
-        currentFileList.splice(index, 1)
-      }
-      this.setState({ fileListCL: currentFileList })
-
-=======
       let currentFileList = this.state.fileListCL;
       let index = currentFileList.indexOf(info.file);
       if (index > -1) {
         currentFileList.splice(index, 1);
       }
       this.setState({ fileListCL: currentFileList });
->>>>>>> 4565f6c4fafc2a73289770b14c4d5b2c4ada3f2a
     }
     if (status === "done") {
       message.success(`${info.file.name} file uploaded successfully.`);
@@ -259,19 +225,11 @@ class pageEssays extends React.Component {
 
   customRequestPortfolio = ({ onSuccess, onError, file }) => {
     setTimeout(() => {
-<<<<<<< HEAD
-      onSuccess(file)
-      const source = "Portfolio"
-      let currentFileList = this.state.fileListPortfolio
-      currentFileList.push(file)
-      this.setState({ fileListPortfolio: currentFileList })
-=======
       onSuccess(file);
       const source = "Portfolio";
       let currentFileList = this.state.fileListPortfolio;
       currentFileList.push(file);
       this.setState({ fileListPortfolio: currentFileList });
->>>>>>> 4565f6c4fafc2a73289770b14c4d5b2c4ada3f2a
       this.props.uploadFile(file, source);
     }, 100);
   };
@@ -279,22 +237,12 @@ class pageEssays extends React.Component {
   onChangePortfolio = info => {
     const { status } = info.file;
     if (status === "removed") {
-<<<<<<< HEAD
-      let currentFileList = this.state.fileListPortfolio
-      let index = currentFileList.indexOf(info.file)
-      if (index > -1) {
-        currentFileList.splice(index, 1)
-      }
-      this.setState({ fileListPortfolio: currentFileList })
-
-=======
       let currentFileList = this.state.fileListPortfolio;
       let index = currentFileList.indexOf(info.file);
       if (index > -1) {
         currentFileList.splice(index, 1);
       }
       this.setState({ fileListPortfolio: currentFileList });
->>>>>>> 4565f6c4fafc2a73289770b14c4d5b2c4ada3f2a
     }
     if (status === "done") {
       message.success(`${info.file.name} file uploaded successfully.`);
@@ -313,39 +261,6 @@ class pageEssays extends React.Component {
         Authorization: "Bearer " + JSON.parse(JSON.stringify(token))
       },
       body: 2
-<<<<<<< HEAD
-    }).then(response => response.json()).then(data => {
-      let parsedData = JSON.parse(data)
-      if (parsedData !== "No Info") {
-        try {
-          console.log(parsedData)
-          this.formRef.current.setFieldsValue(parsedData)
-
-          try {
-            let fileListCL = parsedData.CoverLetter.fileList
-            for (var i = 0; i < fileListCL.length; i++) {
-              fileListCL[i].status = "done"
-            }
-            this.setState({ fileListCL: fileListCL })
-          } catch {
-
-          }
-          try {
-            let fileListPortfolio = parsedData.Portfolio.fileList
-            for (var i = 0; i < fileListPortfolio.length; i++) {
-              fileListPortfolio[i].status = "done"
-            }
-            this.setState({ fileListPortfolio: fileListPortfolio })
-          } catch (e) {
-
-          }
-        }
-        catch (e) {
-        }
-      }
-    });
-  }
-=======
     })
       .then(response => response.json())
       .then(data => {
@@ -362,20 +277,19 @@ class pageEssays extends React.Component {
                 fileListCL[i].status = "done";
               }
               this.setState({ fileListCL: fileListCL });
-            } catch {}
+            } catch { }
             try {
               let fileListPortfolio = parsedData.Portfolio.fileList;
               for (var i = 0; i < fileListPortfolio.length; i++) {
                 fileListPortfolio[i].status = "done";
               }
               this.setState({ fileListPortfolio: fileListPortfolio });
-            } catch (e) {}
-          } catch (e) {}
+            } catch (e) { }
+          } catch (e) { }
         }
         this.setState({ loaded: true });
       });
   };
->>>>>>> 4565f6c4fafc2a73289770b14c4d5b2c4ada3f2a
 
   boldify = text => <strong>{text}</strong>;
 

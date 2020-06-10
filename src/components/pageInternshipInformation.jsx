@@ -591,55 +591,31 @@ class PageInternshipInformation extends Component {
   }
 
   onFinish = values => {
-<<<<<<< HEAD
-    console.log('FinishedPageInternship:', values);
-    this.props.setCompletionState(0, true)
-    this.props.updateData(values, "0")
-    this.routeChange('/apply/Personal')
-=======
     console.log("FinishedPageInternship:", values);
     this.props.setCompletionState(0, true);
     this.props.updateData(values, "0");
     this.routeChange("/apply/Personal");
->>>>>>> 4565f6c4fafc2a73289770b14c4d5b2c4ada3f2a
   };
 
   setCompletionState = async () => {
     try {
       const values = await this.formRef.current.validateFields();
-<<<<<<< HEAD
-      console.log(values)
-      this.props.setCompletionState(0, true)
-      this.props.updateData(values, "0")
-    } catch (errorInfo) {
-      this.props.setCompletionState(0, false)
-      this.props.updateData(errorInfo.values, "0")
-=======
       console.log(values);
       this.props.setCompletionState(0, true);
       this.props.updateData(values, "0");
     } catch (errorInfo) {
       this.props.setCompletionState(0, false);
       this.props.updateData(errorInfo.values, "0");
->>>>>>> 4565f6c4fafc2a73289770b14c4d5b2c4ada3f2a
     }
   };
 
   customRequestResume = ({ onSuccess, onError, file }) => {
     setTimeout(() => {
-<<<<<<< HEAD
-      onSuccess(file)
-      const source = "Resume"
-      let currentFileList = this.state.fileList
-      currentFileList.push(file)
-      this.setState({ fileList: currentFileList })
-=======
       onSuccess(file);
       const source = "Resume";
       let currentFileList = this.state.fileList;
       currentFileList.push(file);
       this.setState({ fileList: currentFileList });
->>>>>>> 4565f6c4fafc2a73289770b14c4d5b2c4ada3f2a
       this.props.uploadFile(file, source);
     }, 100);
   };
@@ -647,22 +623,12 @@ class PageInternshipInformation extends Component {
   onChange = info => {
     const { status } = info.file;
     if (status === "removed") {
-<<<<<<< HEAD
-      let currentFileList = this.state.fileList
-      let index = currentFileList.indexOf(info.file)
-      if (index > -1) {
-        currentFileList.splice(index, 1)
-      }
-      this.setState({ fileList: currentFileList })
-
-=======
       let currentFileList = this.state.fileList;
       let index = currentFileList.indexOf(info.file);
       if (index > -1) {
         currentFileList.splice(index, 1);
       }
       this.setState({ fileList: currentFileList });
->>>>>>> 4565f6c4fafc2a73289770b14c4d5b2c4ada3f2a
     }
     if (status === "done") {
       message.success(`${info.file.name} file uploaded successfully.`);
@@ -673,34 +639,13 @@ class PageInternshipInformation extends Component {
   };
 
   getUserData = async () => {
-<<<<<<< HEAD
-    let token = await this.props.getJwt()
-=======
     let token = await this.props.getJwt();
->>>>>>> 4565f6c4fafc2a73289770b14c4d5b2c4ada3f2a
     fetch("/get_user_data", {
       method: "POST",
       headers: {
         Authorization: "Bearer " + JSON.parse(JSON.stringify(token))
       },
       body: 0
-<<<<<<< HEAD
-    }).then(response => response.json()).then(data => {
-      let parsedData = JSON.parse(data)
-      if (parsedData !== "No Info") {
-        try {
-          parsedData.dateOfStartAndEnd = [moment(parsedData.dateOfStartAndEnd[0]), moment(parsedData.dateOfStartAndEnd[1])]
-          //delete parsedData.resume
-
-          let fileList = parsedData.resume.fileList
-          for (var i = 0; i < fileList.length; i++) {
-            fileList[i].status = "done"
-          }
-
-          this.setState({ fileList: fileList })
-        } catch (e) {
-          console.log(e)
-=======
     })
       .then(response => response.json())
       .then(data => {
@@ -724,7 +669,6 @@ class PageInternshipInformation extends Component {
           }
           this.setState({ loaded: true });
           this.formRef.current.setFieldsValue(parsedData);
->>>>>>> 4565f6c4fafc2a73289770b14c4d5b2c4ada3f2a
         }
         this.setState({ loaded: true });
       });
