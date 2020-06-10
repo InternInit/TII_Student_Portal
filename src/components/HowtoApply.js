@@ -16,12 +16,12 @@ color:white;
 font-weight:normal;
 `;
 const Header = styled.div`
-padding:10px;
 font-size:28px;
+padding-bottom:10px;
+padding-top:10px;
 font-weight:bold;
 display:flex;
 justify-content:align-left;
-padding-left:20px;
 margin-top:90px;
 `;
 const Text = styled.div`
