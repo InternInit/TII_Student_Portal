@@ -20,8 +20,17 @@ class Navbar extends Component {
     super(props);
     this.routeChange = this.routeChange.bind(this);
     this.state = {
-      current: "apply"
+      current: this.getCurrentKey()
     };
+  }
+
+  getCurrentKey = () => {
+    if (window.location.pathname.includes("apply/")) {
+      return "apply";
+    }
+    let defaultKey = window.location.pathname;
+    let newDefaultKey = defaultKey.replace("/", "");
+    return newDefaultKey;
   }
 
   //Click Handler
