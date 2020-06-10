@@ -326,7 +326,7 @@ class PageInternshipInformation extends Component {
   }
 
   componentWillUnmount(){
-    this.testFunc();
+    this.setCompletionState();
   }
 
   renderNav() {
@@ -588,7 +588,7 @@ class PageInternshipInformation extends Component {
     this.routeChange('/apply/Personal')
   };
 
-  testFunc = async () => {
+  setCompletionState = async () => {
     try {
       const values = await this.formRef.current.validateFields();
       console.log(values)
@@ -646,7 +646,6 @@ class PageInternshipInformation extends Component {
         try{
           parsedData.dateOfStartAndEnd = [moment(parsedData.dateOfStartAndEnd[0]),moment(parsedData.dateOfStartAndEnd[1])]
           //delete parsedData.resume
-          this.formRef.current.setFieldsValue(parsedData)
 
           let fileList = parsedData.resume.fileList
           for (var i = 0; i < fileList.length; i++) {
@@ -654,7 +653,10 @@ class PageInternshipInformation extends Component {
           }
 
           this.setState({fileList: fileList})
-        } catch (e) {}
+        } catch (e) {
+          console.log(e)
+        }
+        this.formRef.current.setFieldsValue(parsedData)
       }
 
     });

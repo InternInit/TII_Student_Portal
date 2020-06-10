@@ -155,6 +155,10 @@ class PagePersonal extends Component {
     this.getUserData();
   }
 
+  componentWillUnmount(){
+    this.setCompletionState();
+  }
+
   render() {
     return (
       <div style={{ width: "100%", marginTop: "40px" }}>
@@ -454,9 +458,21 @@ class PagePersonal extends Component {
 
   onFinish = values => {
     console.log('FinishedPersonalPage:', values);
-    //this.setCompletionState(1,true)
+    this.props.setCompletionState(1,true)
     this.props.updateData(values, "1")
     this.routeChange('/apply/Written-Work')
+  };
+
+  setCompletionState = async () => {
+    try {
+      const values = await this.formRef.current.validateFields();
+      console.log(values)
+      this.props.setCompletionState(1,true)
+      this.props.updateData(values, "1")
+    } catch (errorInfo) {
+      this.props.setCompletionState(1,false)
+      this.props.updateData(errorInfo.values, "1")
+    }
   };
 
   backHandler = () => {

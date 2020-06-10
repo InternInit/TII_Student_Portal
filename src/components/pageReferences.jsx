@@ -75,6 +75,11 @@ class PageReferences extends Component {
     this.getUserData();
   }
 
+  componentWillUnmount(){
+    this.setCompletionState();
+  }
+
+
   constructor(props) {
     super(props);
     this.routeChange = this.routeChange.bind(this);
@@ -257,7 +262,20 @@ class PageReferences extends Component {
 
   onFinish = values => {
     console.log("FinishRefPage:", values);
+    this.props.setCompletionState(3,true)
     this.props.onSubmit(values, "3");
+  };
+
+  setCompletionState = async () => {
+    try {
+      const values = await this.formRef.current.validateFields();
+      console.log(values)
+      this.props.setCompletionState(3,true)
+      this.props.updateData(values, "3")
+    } catch (errorInfo) {
+      this.props.setCompletionState(3,false)
+      this.props.updateData(errorInfo.values, "3")
+    }
   };
 
   backHandler = () => {

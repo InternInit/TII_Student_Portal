@@ -27,6 +27,10 @@ class pageEssays extends React.Component {
     this.getUserData();
   }
 
+  componentWillUnmount(){
+    this.setCompletionState();
+  }
+
   constructor(props) {
     super(props);
     this.routeChange = this.routeChange.bind(this);
@@ -151,8 +155,21 @@ class pageEssays extends React.Component {
 
   onFinish = values => {
     console.log('FinishedPageEssays:', values);
+    this.props.setCompletionState(2,true)
     this.props.updateData(values, "2")
     this.routeChange('/apply/References')
+  };
+
+  setCompletionState = async () => {
+    try {
+      const values = await this.formRef.current.validateFields();
+      console.log(values)
+      this.props.setCompletionState(2,true)
+      this.props.updateData(values, "2")
+    } catch (errorInfo) {
+      this.props.setCompletionState(2,false)
+      this.props.updateData(errorInfo.values, "2")
+    }
   };
 
   backHandler = () => {
@@ -236,23 +253,32 @@ class pageEssays extends React.Component {
     }).then(response => response.json()).then(data => {
       let parsedData = JSON.parse(data)
       if (parsedData !== "No Info") {
-        console.log(parsedData)
-        this.formRef.current.setFieldsValue(parsedData)
+        try{
+          console.log(parsedData)
+          this.formRef.current.setFieldsValue(parsedData)
 
-        let fileListCL = parsedData.CoverLetter.fileList
-        let fileListPortfolio = parsedData.Portfolio.fileList
+          try{
+            let fileListCL = parsedData.CoverLetter.fileList
+            for (var i = 0; i < fileListCL.length; i++) {
+              fileListCL[i].status = "done"
+            }
+            this.setState({fileListCL:fileListCL})
+          } catch {
 
-        for (var i = 0; i < fileListCL.length; i++) {
-          fileListCL[i].status = "done"
+          }
+          try{
+            let fileListPortfolio = parsedData.Portfolio.fileList
+            for (var i = 0; i < fileListPortfolio.length; i++) {
+              fileListPortfolio[i].status = "done"
+            }
+            this.setState({fileListPortfolio:fileListPortfolio})
+          } catch(e) {
+
+          }
         }
-
-        for (var i = 0; i < fileListPortfolio.length; i++) {
-          fileListPortfolio[i].status = "done"
-        }
-        this.setState({fileListCL:fileListCL})
-        this.setState({fileListPortfolio:fileListPortfolio})
-      }
-
+       catch(e){
+       }
+     }
     });
   }
 

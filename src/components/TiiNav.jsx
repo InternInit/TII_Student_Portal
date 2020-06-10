@@ -53,7 +53,6 @@ class TiiNav extends React.Component {
       PersonalButton: <UserOutlined />,
       EssayButton: <EditOutlined />,
       ReferencesButton: <TeamOutlined />,
-      TestButton: <CheckOutlined style={{ color: "green" }} />,
 
       //submission
       SubmitButton: "",
@@ -195,8 +194,6 @@ class TiiNav extends React.Component {
   handleClick = async(e) => {
     //The handleClick function is purely for testing. When you click on the first button, it will set all states to "true"
     let completionState = await this.props.getCompletionState();
-    console.log(completionState)
-
 
     for (var i = 0; i < completionState.length; i++) {
       switch (i){
@@ -212,13 +209,37 @@ class TiiNav extends React.Component {
           }
           break;
         case 1:
-          this.state.EssayButton = ((completionState[i]) ? <CheckOutlined style={{ color: "green" }} /> : <EditOutlined />)
+          if(completionState[i] === true){
+            if(this.state.PersonalButton.type.render.displayName !== "CheckOutlined"){
+              this.setState({PersonalButton:<CheckOutlined style={{ color: "green" }} />})
+            }
+          } else {
+            if(this.state.PersonalButton.type.render.displayName !== "UserOutlined"){
+              this.setState({PersonalButton: <UserOutlined />})
+            }
+          }
           break;
         case 2:
-          this.state.PersonalButton = ((completionState[i]) ? <CheckOutlined style={{ color: "green" }} /> : <UserOutlined />)
+          if(completionState[i] === true){
+            if(this.state.EssayButton.type.render.displayName !== "CheckOutlined"){
+              this.setState({EssayButton:<CheckOutlined style={{ color: "green" }} />})
+            }
+          } else {
+            if(this.state.EssayButton.type.render.displayName !== "EditOutlined"){
+              this.setState({EssayButton: <EditOutlined />})
+            }
+          }
           break;
         case 3:
-          this.state.ReferencesButton = ((completionState[i]) ? <CheckOutlined style={{ color: "green" }} /> : <TeamOutlined />)
+          if(completionState[i] === true){
+            if(this.state.ReferencesButton.type.render.displayName !== "CheckOutlined"){
+              this.setState({ReferencesButton:<CheckOutlined style={{ color: "green" }} />})
+            }
+          } else {
+            if(this.state.ReferencesButton.type.render.displayName !== "TeamOutlined"){
+              this.setState({ReferencesButton: <TeamOutlined />})
+            }
+          }
           break;
 
       }
