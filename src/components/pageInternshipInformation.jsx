@@ -325,7 +325,7 @@ class PageInternshipInformation extends Component {
     this.getUserData();
   }
 
-  componentWillUnmount(){
+  componentWillUnmount() {
     this.setCompletionState();
   }
 
@@ -583,7 +583,7 @@ class PageInternshipInformation extends Component {
 
   onFinish = values => {
     console.log('FinishedPageInternship:', values);
-    this.props.setCompletionState(0,true)
+    this.props.setCompletionState(0, true)
     this.props.updateData(values, "0")
     this.routeChange('/apply/Personal')
   };
@@ -592,10 +592,10 @@ class PageInternshipInformation extends Component {
     try {
       const values = await this.formRef.current.validateFields();
       console.log(values)
-      this.props.setCompletionState(0,true)
+      this.props.setCompletionState(0, true)
       this.props.updateData(values, "0")
     } catch (errorInfo) {
-      this.props.setCompletionState(0,false)
+      this.props.setCompletionState(0, false)
       this.props.updateData(errorInfo.values, "0")
     }
   };
@@ -606,7 +606,7 @@ class PageInternshipInformation extends Component {
       const source = "Resume"
       let currentFileList = this.state.fileList
       currentFileList.push(file)
-      this.setState({fileList:currentFileList})
+      this.setState({ fileList: currentFileList })
       this.props.uploadFile(file, source);
     }, 100);
   };
@@ -616,10 +616,10 @@ class PageInternshipInformation extends Component {
     if (status === "removed") {
       let currentFileList = this.state.fileList
       let index = currentFileList.indexOf(info.file)
-      if(index > -1){
-          currentFileList.splice(index,1)
+      if (index > -1) {
+        currentFileList.splice(index, 1)
       }
-      this.setState({fileList:currentFileList})
+      this.setState({ fileList: currentFileList })
 
     }
     if (status === "done") {
@@ -632,7 +632,7 @@ class PageInternshipInformation extends Component {
   }
 
 
-  getUserData = async() => {
+  getUserData = async () => {
     let token = await this.props.getJwt()
     fetch("/get_user_data", {
       method: "POST",
@@ -642,9 +642,9 @@ class PageInternshipInformation extends Component {
       body: 0
     }).then(response => response.json()).then(data => {
       let parsedData = JSON.parse(data)
-      if(parsedData !== "No Info"){
-        try{
-          parsedData.dateOfStartAndEnd = [moment(parsedData.dateOfStartAndEnd[0]),moment(parsedData.dateOfStartAndEnd[1])]
+      if (parsedData !== "No Info") {
+        try {
+          parsedData.dateOfStartAndEnd = [moment(parsedData.dateOfStartAndEnd[0]), moment(parsedData.dateOfStartAndEnd[1])]
           //delete parsedData.resume
 
           let fileList = parsedData.resume.fileList
@@ -652,7 +652,7 @@ class PageInternshipInformation extends Component {
             fileList[i].status = "done"
           }
 
-          this.setState({fileList: fileList})
+          this.setState({ fileList: fileList })
         } catch (e) {
           console.log(e)
         }

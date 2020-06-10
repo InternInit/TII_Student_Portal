@@ -4,7 +4,6 @@ import { InboxOutlined } from "@ant-design/icons";
 import "../App.css";
 
 //React Routing
-import { BrowserRouter as Router, Link } from "react-router-dom";
 import { withRouter } from "react-router";
 
 //Object Destructuring
@@ -27,7 +26,7 @@ class pageEssays extends React.Component {
     this.getUserData();
   }
 
-  componentWillUnmount(){
+  componentWillUnmount() {
     this.setCompletionState();
   }
 
@@ -155,7 +154,7 @@ class pageEssays extends React.Component {
 
   onFinish = values => {
     console.log('FinishedPageEssays:', values);
-    this.props.setCompletionState(2,true)
+    this.props.setCompletionState(2, true)
     this.props.updateData(values, "2")
     this.routeChange('/apply/References')
   };
@@ -164,10 +163,10 @@ class pageEssays extends React.Component {
     try {
       const values = await this.formRef.current.validateFields();
       console.log(values)
-      this.props.setCompletionState(2,true)
+      this.props.setCompletionState(2, true)
       this.props.updateData(values, "2")
     } catch (errorInfo) {
-      this.props.setCompletionState(2,false)
+      this.props.setCompletionState(2, false)
       this.props.updateData(errorInfo.values, "2")
     }
   };
@@ -184,7 +183,7 @@ class pageEssays extends React.Component {
       const source = "CoverLetter"
       let currentFileList = this.state.fileListCL
       currentFileList.push(file)
-      this.setState({fileListCL:currentFileList})
+      this.setState({ fileListCL: currentFileList })
       this.props.uploadFile(file, source);
     }, 100);
   };
@@ -194,10 +193,10 @@ class pageEssays extends React.Component {
     if (status === "removed") {
       let currentFileList = this.state.fileListCL
       let index = currentFileList.indexOf(info.file)
-      if(index > -1){
-          currentFileList.splice(index,1)
+      if (index > -1) {
+        currentFileList.splice(index, 1)
       }
-      this.setState({fileListCL:currentFileList})
+      this.setState({ fileListCL: currentFileList })
 
     }
     if (status === "done") {
@@ -216,7 +215,7 @@ class pageEssays extends React.Component {
       const source = "Portfolio"
       let currentFileList = this.state.fileListPortfolio
       currentFileList.push(file)
-      this.setState({fileListPortfolio:currentFileList})
+      this.setState({ fileListPortfolio: currentFileList })
       this.props.uploadFile(file, source);
     }, 100);
   };
@@ -226,10 +225,10 @@ class pageEssays extends React.Component {
     if (status === "removed") {
       let currentFileList = this.state.fileListPortfolio
       let index = currentFileList.indexOf(info.file)
-      if(index > -1){
-          currentFileList.splice(index,1)
+      if (index > -1) {
+        currentFileList.splice(index, 1)
       }
-      this.setState({fileListPortfolio:currentFileList})
+      this.setState({ fileListPortfolio: currentFileList })
 
     }
     if (status === "done") {
@@ -253,32 +252,32 @@ class pageEssays extends React.Component {
     }).then(response => response.json()).then(data => {
       let parsedData = JSON.parse(data)
       if (parsedData !== "No Info") {
-        try{
+        try {
           console.log(parsedData)
           this.formRef.current.setFieldsValue(parsedData)
 
-          try{
+          try {
             let fileListCL = parsedData.CoverLetter.fileList
             for (var i = 0; i < fileListCL.length; i++) {
               fileListCL[i].status = "done"
             }
-            this.setState({fileListCL:fileListCL})
+            this.setState({ fileListCL: fileListCL })
           } catch {
 
           }
-          try{
+          try {
             let fileListPortfolio = parsedData.Portfolio.fileList
             for (var i = 0; i < fileListPortfolio.length; i++) {
               fileListPortfolio[i].status = "done"
             }
-            this.setState({fileListPortfolio:fileListPortfolio})
-          } catch(e) {
+            this.setState({ fileListPortfolio: fileListPortfolio })
+          } catch (e) {
 
           }
         }
-       catch(e){
-       }
-     }
+        catch (e) {
+        }
+      }
     });
   }
 

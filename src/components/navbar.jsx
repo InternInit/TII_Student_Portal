@@ -13,7 +13,6 @@ import Logo from "../TII-logo.png";
 
 //React Router
 import { Link } from "react-router-dom";
-import { BrowserRouter as Router } from "react-router-dom";
 import { withRouter } from "react-router";
 
 class Navbar extends Component {

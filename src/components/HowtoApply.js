@@ -6,6 +6,8 @@ import Writtenimg from '../How_To_Apply/written.JPG'
 import Referencesimg from '../How_To_Apply/reference.JPG'
 import { CheckOutlined } from '@ant-design/icons';
 //styles
+import { withRouter } from 'react-router-dom';
+
 const Banner = styled.div`
 background-color: #8fc3d1;
 padding:55px;
@@ -48,7 +50,7 @@ object-fit:scale-down;
 pointer-events: none;
 `;
 const Caption = styled.div`
-padding:5px;
+padding:20px;
 font-weight:normal;
 display:flex;
 font-size:18px;
@@ -60,11 +62,20 @@ width:90%;
 class HowtoApply extends React.Component {
     constructor(props) {
         super(props);
+        this.routeChange = this.routeChange.bind(this);
         this.state = {}
     }
 
 
     render() {
+        let link = <div style={{
+            color: 'blue',
+            textDecorationLine: 'underline',
+            cursor: 'pointer'
+        }} onClick={() => {
+            this.routeChange("/apply/Internship-Info");
+        }}
+        >Click here to go to the 'Apply' page.</div>
         return (
             <div style={{
                 display: "flex",
@@ -89,8 +100,10 @@ class HowtoApply extends React.Component {
                         It's Simple!
                     </Header>
                     <Text>
-                        Fill out the information form found on the "Apply" tab. When filling out the form, make sure to:
+                        Fill out the information form found on the 'Apply' tab. When filling out the form, make sure to:
                     </Text>
+
+
                     <Bullet>
                         - Be specific, give us as much information as you can.
                     </Bullet>
@@ -98,8 +111,12 @@ class HowtoApply extends React.Component {
                         - Make sure to fill out all the necessary forms so we can fulfill company requirements
                     </Bullet>
                     <Bullet>
+                        - Be honest, write about yourself
+                    </Bullet>
+                    <Bullet>
                         - Submit when everything is filled out!
                     </Bullet>
+
 
                     {/**Things you will Need */}
                     <Header>
@@ -149,42 +166,57 @@ class HowtoApply extends React.Component {
                         </Bullet>
 
 
-
                     {/**Internship Information */}
                     <Header>
-                        Internship Information
+                        <span style={{
+                            cursor: 'pointer'
+                        }} onClick={() => {
+                            this.routeChange("/apply/Internship-Info");
+                        }}>Internship Information</span>
                     </Header>
                     <div style={{ backgroundColor: '#ededed', width: '100%' }}>
                         <Image src={Internshipimg} alt='internshipinfo' />
                     </div>
                     <Caption>
                         This is where you will fill out information regarding your preferences and desires in internships.
-                        For example, if you wanted to apply for a company in the Real Estate industry,
+                        For example, if you wanted to apply for a company in the Real Estate industry or can only work on certain days,
                         this is where you would state that information.
                     </Caption>
 
 
                     {/**Personal Information */}
                     <Header>
-                        Personal Information
+                        <span style={{
+                            cursor: 'pointer'
+                        }} onClick={() => {
+                            this.routeChange("/apply/Personal");
+                        }}>Personal Information</span>
                     </Header>
                     <div style={{ backgroundColor: '#ededed', width: '100%' }}>
                         <Image src={Personalimg} alt='Personal' />
                     </div>
                     <Caption>
-                        This is where you will give us personal information about yourself. This includes, gender, race, and educational history.
+                        In the 'General Information' tab, you will give us personal information about yourself. This includes, gender, race, and educational history. Please note
+                        that you do not have to fill out any information if you are not comfortable doing so, but it could hinder your application's reach after
+                        submission.
                     </Caption>
 
 
                     {/**Written Work */}
                     <Header>
-                        Written Work
+                        <span style={{
+                            cursor: 'pointer'
+                        }} onClick={() => {
+                            this.routeChange("/apply/Written-Work");
+                        }}>Written Work</span>
                     </Header>
                     <div style={{ backgroundColor: '#ededed', width: '100%' }}>
                         <Image src={Writtenimg} alt='Personal' />
                     </div>
                     <Caption>
-                        Please will tell us more about yourself! Remember to be specific and answer in complete sentences.
+                        Please will tell us more about yourself! Let us know why a company should give you an intern, and what you would
+                        bring to their facility.
+                        Remember to be specific and answer in complete sentences.
                         It is also where you will give us additional information that could be useful.
                     </Caption>
 
@@ -192,18 +224,26 @@ class HowtoApply extends React.Component {
 
                     {/**References */}
                     <Header>
-                        References                </Header>
+                        <span style={{
+                            cursor: 'pointer'
+                        }} onClick={() => {
+                            this.routeChange("/apply/References");
+                        }}>References</span>
+                    </Header>
                     <div style={{ backgroundColor: '#ededed', width: '100%' }}>
                         <Image src={Referencesimg} alt='Personal' />
                     </div>
                     <Caption>
-                        Fill out the reference tab and and add references as needed.
-                        A reference could be someone you worked with in the past, or a trusted adult.
+                        This is what our reference tab looks like. Here, you can add or delete references as you please.
+                        A reference could be someone you worked with in the past, or a trusted adult. They serve to give us information
+                        regarding your past work experience, and vouche for you to hiring companies.
                     </Caption>
-
                 </div >
-            </div>
+            </div >
         )
     }
+    routeChange = path => {
+        this.props.history.push(path);
+    };
 }
-export default HowtoApply;
+export default withRouter(HowtoApply);
