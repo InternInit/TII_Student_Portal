@@ -385,6 +385,7 @@ class App extends Component {
         clickFour={this.clickFour}
         highlightKey={highlightKey}
         getCompletionState={this.getCompletionState}
+        onSubmit={this.onSubmit}
       />
     );
   };

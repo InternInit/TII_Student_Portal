@@ -13,6 +13,8 @@ import {
 //React Routing
 import { BrowserRouter as Router, Link } from "react-router-dom";
 import { withRouter } from "react-router";
+import _ from 'lodash';
+
 
 class TiiNav extends React.Component {
   getInitialHighlight = () => {
@@ -161,27 +163,19 @@ class TiiNav extends React.Component {
     );
   }
 
-  handleSubmit = () => {
-    let {
-      InternIComplete,
-      EssayComplete,
-      ReferencesComplete,
-      PersonalComplete
-    } = this.state;
-    if (
-      InternIComplete &&
-      EssayComplete &&
-      ReferencesComplete &&
-      PersonalComplete
-    ) {
+  handleSubmit = async() => {
+    let status = await this.props.getCompletionState();
+
+    if (_.isEqual(status,[true,true,true,true])) {
       // checks to see if all forms are completed
-      this.setState({ CanSubmit: true }); //sets canSubmit to true
+      //this.setState({ CanSubmit: true }); //sets canSubmit to true
       notification.open({
         //notification
         message: "Success.",
         description: "Your results have been submitted",
         icon: <CheckOutlined style={{ color: "green" }} />
       });
+      this.props.onSubmit({},-1)
     } else {
       notification.open({
         message: "Failed.",
@@ -189,6 +183,8 @@ class TiiNav extends React.Component {
         icon: <CloseOutlined style={{ color: "red" }} />
       });
     }
+
+
   };
 
   handleClick = async(e) => {
@@ -245,10 +241,9 @@ class TiiNav extends React.Component {
       }
 
     }
-
-
-
   };
+
+
 
   routeChange = path => {
     if (path === "/apply/Internship-Info") {
