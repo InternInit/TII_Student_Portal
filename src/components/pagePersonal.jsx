@@ -495,6 +495,7 @@ class PagePersonal extends Component {
         if (parsedData !== "No Info") {
           console.log(parsedData);
           this.formRef.current.setFieldsValue(parsedData);
+          this.setCompletionState();
         }
       });
   };
