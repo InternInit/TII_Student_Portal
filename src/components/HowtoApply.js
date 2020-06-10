@@ -49,11 +49,12 @@ height:70%;
 object-fit:scale-down;
 pointer-events: none;
 `;
-const Caption = styled.div`
+const Caption = styled.p`
 padding:20px;
 font-weight:normal;
 display:flex;
 font-size:18px;
+justify-content:align-left;
 width:90%;
 `;
 
