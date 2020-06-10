@@ -8,7 +8,8 @@ import {
   DatePicker,
   Radio,
   Upload,
-  message
+  message,
+  Spin
 } from "antd";
 import { Row, Col } from "antd";
 import {
@@ -305,8 +306,7 @@ const props = {
   name: "file",
   accept:
     ".doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document, .pdf, application/pdf",
-  multiple: true,
-
+  multiple: true
 };
 
 class PageInternshipInformation extends Component {
@@ -316,7 +316,8 @@ class PageInternshipInformation extends Component {
   }
   state = {
     otherIndustry: "",
-    fileList: []
+    fileList: [],
+    loaded: false
   };
 
   formRef = React.createRef();
@@ -325,7 +326,7 @@ class PageInternshipInformation extends Component {
     this.getUserData();
   }
 
-  componentWillUnmount(){
+  componentWillUnmount() {
     this.setCompletionState();
   }
 
@@ -336,331 +337,342 @@ class PageInternshipInformation extends Component {
   render() {
     return (
       <div style={{ marginTop: "40px" }}>
-        <h1>Internship Information</h1>
-        <br />
+        <Spin size="large" spinning={!this.state.loaded}>
+          <h1>Internship Information</h1>
+          <br />
 
-        <Form
-          {...formItemProps.totalForm}
-          onFinish={this.onFinish}
-          ref={this.formRef}
-        >
-          {/*First and Last Name*/}
-          <Row name="first" gutter={formGutter}>
-            <Col span={halfSpan}>
-              <Form.Item {...formItemProps.firstName}>
-                <Input />
-              </Form.Item>
-            </Col>
+          <Form
+            {...formItemProps.totalForm}
+            onFinish={this.onFinish}
+            ref={this.formRef}
+          >
+            {/*First and Last Name*/}
+            <Row name="first" gutter={formGutter}>
+              <Col span={halfSpan}>
+                <Form.Item {...formItemProps.firstName}>
+                  <Input />
+                </Form.Item>
+              </Col>
 
-            <Col span={halfSpan}>
-              <Form.Item {...formItemProps.lastName}>
-                <Input />
-              </Form.Item>
-            </Col>
-          </Row>
+              <Col span={halfSpan}>
+                <Form.Item {...formItemProps.lastName}>
+                  <Input />
+                </Form.Item>
+              </Col>
+            </Row>
 
-          {/*Phone Number and Email*/}
-          <Row gutter={formGutter}>
-            <Col span={halfSpan}>
-              <Form.Item {...formItemProps.phoneNumber}>
-                <Input />
-              </Form.Item>
-            </Col>
+            {/*Phone Number and Email*/}
+            <Row gutter={formGutter}>
+              <Col span={halfSpan}>
+                <Form.Item {...formItemProps.phoneNumber}>
+                  <Input />
+                </Form.Item>
+              </Col>
 
-            <Col span={halfSpan}>
-              <Form.Item {...formItemProps.email}>
-                <Input />
-              </Form.Item>
-            </Col>
-          </Row>
+              <Col span={halfSpan}>
+                <Form.Item {...formItemProps.email}>
+                  <Input />
+                </Form.Item>
+              </Col>
+            </Row>
 
-          {/*Address Line*/}
-          <Row gutter={formGutter}>
-            <Col span={standardSpan}>
-              <Form.Item {...formItemProps.addressLine}>
-                <Input placeholder="Address Line" />
-              </Form.Item>
-            </Col>
-          </Row>
+            {/*Address Line*/}
+            <Row gutter={formGutter}>
+              <Col span={standardSpan}>
+                <Form.Item {...formItemProps.addressLine}>
+                  <Input placeholder="Address Line" />
+                </Form.Item>
+              </Col>
+            </Row>
 
-          {/*City, State, and ZipCode*/}
-          <Row gutter={formGutter}>
-            <Col span={thirdSpan}>
-              <Form.Item {...formItemProps.city}>
-                <Input placeholder="City" />
-              </Form.Item>
-            </Col>
+            {/*City, State, and ZipCode*/}
+            <Row gutter={formGutter}>
+              <Col span={thirdSpan}>
+                <Form.Item {...formItemProps.city}>
+                  <Input placeholder="City" />
+                </Form.Item>
+              </Col>
 
-            <Col span={thirdSpan}>
-              <Form.Item {...formItemProps.livingState}>
-                <Select placeholder="State">
-                  {allStates.map(state => (
-                    <Option key={state} value={state}>
-                      {state}
-                    </Option>
-                  ))}
-                </Select>
-              </Form.Item>
-            </Col>
+              <Col span={thirdSpan}>
+                <Form.Item {...formItemProps.livingState}>
+                  <Select placeholder="State">
+                    {allStates.map(state => (
+                      <Option key={state} value={state}>
+                        {state}
+                      </Option>
+                    ))}
+                  </Select>
+                </Form.Item>
+              </Col>
 
-            <Col span={thirdSpan}>
-              <Form.Item {...formItemProps.zip}>
-                <Input placeholder="Zip Code" />
-              </Form.Item>
-            </Col>
-          </Row>
+              <Col span={thirdSpan}>
+                <Form.Item {...formItemProps.zip}>
+                  <Input placeholder="Zip Code" />
+                </Form.Item>
+              </Col>
+            </Row>
 
-          {/*Year of Graduation*/}
-          <Row gutter={formGutter}>
-            <Col span={standardSpan}>
-              <Form.Item {...formItemProps.yog}>
-                <Input placeholder="(e.g.) 2021, 2022, etc." />
-              </Form.Item>
-            </Col>
-          </Row>
+            {/*Year of Graduation*/}
+            <Row gutter={formGutter}>
+              <Col span={standardSpan}>
+                <Form.Item {...formItemProps.yog}>
+                  <Input placeholder="(e.g.) 2021, 2022, etc." />
+                </Form.Item>
+              </Col>
+            </Row>
 
-          {/*Industry*/}
-          <Row gutter={formGutter}>
-            <Col span={standardSpan}>
-              <Form.Item {...formItemProps.industry}>
-                <Checkbox.Group>
-                  <Row gutter={checkGutter}>
-                    {industry.map(industry => (
+            {/*Industry*/}
+            <Row gutter={formGutter}>
+              <Col span={standardSpan}>
+                <Form.Item {...formItemProps.industry}>
+                  <Checkbox.Group>
+                    <Row gutter={checkGutter}>
+                      {industry.map(industry => (
+                        <Col span={thirdSpan}>
+                          <Checkbox
+                            key={industry}
+                            value={industry}
+                            style={{
+                              lineHeight: "32px"
+                            }}
+                          >
+                            {industry}
+                          </Checkbox>
+                        </Col>
+                      ))}
                       <Col span={thirdSpan}>
                         <Checkbox
-                          key={industry}
-                          value={industry}
+                          value={this.state.otherIndustry}
                           style={{
                             lineHeight: "32px"
                           }}
                         >
-                          {industry}
+                          Other
+                          <Input onChange={this.handleChange} />
                         </Checkbox>
                       </Col>
-                    ))}
-                    <Col span={thirdSpan}>
-                      <Checkbox
-                        value={this.state.otherIndustry}
-                        style={{
-                          lineHeight: "32px"
-                        }}
-                      >
-                        Other
-                        <Input onChange={this.handleChange} />
-                      </Checkbox>
-                    </Col>
-                  </Row>
-                </Checkbox.Group>
-              </Form.Item>
-            </Col>
-          </Row>
+                    </Row>
+                  </Checkbox.Group>
+                </Form.Item>
+              </Col>
+            </Row>
 
-          {/*Unweighted and Weighted GPAs*/}
-          <Row gutter={formGutter}>
-            <Col span={halfSpan}>
-              <Form.Item {...formItemProps.unweightedGPA}>
-                <Input placeholder="4.0" />
-              </Form.Item>
-            </Col>
-            <Col span={halfSpan}>
-              <Form.Item {...formItemProps.weightedGPA}>
-                <Input placeholder="4.7/5.0" />
-              </Form.Item>
-            </Col>
-          </Row>
+            {/*Unweighted and Weighted GPAs*/}
+            <Row gutter={formGutter}>
+              <Col span={halfSpan}>
+                <Form.Item {...formItemProps.unweightedGPA}>
+                  <Input placeholder="4.0" />
+                </Form.Item>
+              </Col>
+              <Col span={halfSpan}>
+                <Form.Item {...formItemProps.weightedGPA}>
+                  <Input placeholder="4.7/5.0" />
+                </Form.Item>
+              </Col>
+            </Row>
 
-          {/*Courses*/}
-          <Row gutter={formGutter}>
-            <Col span={standardSpan}>
-              <Form.Item {...formItemProps.courses}>
-                <Input.TextArea
-                  placeholder="(e.g.) Business Communications, AP Computer Science, etc."
-                  style={{ height: "100px" }}
-                />
-              </Form.Item>
-            </Col>
-          </Row>
+            {/*Courses*/}
+            <Row gutter={formGutter}>
+              <Col span={standardSpan}>
+                <Form.Item {...formItemProps.courses}>
+                  <Input.TextArea
+                    placeholder="(e.g.) Business Communications, AP Computer Science, etc."
+                    style={{ height: "100px" }}
+                  />
+                </Form.Item>
+              </Col>
+            </Row>
 
-          {/**
+            {/**
             Extracurriculars
             CHANGE REQUIRED: Switch to a standardized input format
           */}
-          <Row gutter={formGutter}>
-            <Col span={standardSpan}>
-              <Form.Item {...formItemProps.extracurriculars}>
-                <Input.TextArea
-                  placeholder="(e.g.) Speech and Debate (3), DECA (4), HOSA (2), Student Council (2)"
-                  style={{ height: "100px" }}
-                />
-              </Form.Item>
-            </Col>
-          </Row>
+            <Row gutter={formGutter}>
+              <Col span={standardSpan}>
+                <Form.Item {...formItemProps.extracurriculars}>
+                  <Input.TextArea
+                    placeholder="(e.g.) Speech and Debate (3), DECA (4), HOSA (2), Student Council (2)"
+                    style={{ height: "100px" }}
+                  />
+                </Form.Item>
+              </Col>
+            </Row>
 
-          {/*Days and Times available for work*/}
-          <Row gutter={formGutter}>
-            <Col span={halfSpan}>
-              <Form.Item {...formItemProps.daysToWork}>
-                <Select
-                  mode="multiple"
-                  placeholder="Please select the days where you can work"
-                >
-                  {daysOfTheWeek.map(day => (
-                    <Option key={day} value={day}>
-                      {day}
-                    </Option>
-                  ))}
-                </Select>
-              </Form.Item>
-            </Col>
-            <Col span={halfSpan}>
-              <Form.Item {...formItemProps.timesToWork}>
-                <Select
-                  mode="multiple"
-                  placeholder="Please select the times when you can work"
-                >
-                  {timesOfTheDay.map(time => (
-                    <Option key={time} value={time}>
-                      {time}
-                    </Option>
-                  ))}
-                </Select>
-              </Form.Item>
-            </Col>
-          </Row>
+            {/*Days and Times available for work*/}
+            <Row gutter={formGutter}>
+              <Col span={halfSpan}>
+                <Form.Item {...formItemProps.daysToWork}>
+                  <Select
+                    mode="multiple"
+                    placeholder="Please select the days where you can work"
+                  >
+                    {daysOfTheWeek.map(day => (
+                      <Option key={day} value={day}>
+                        {day}
+                      </Option>
+                    ))}
+                  </Select>
+                </Form.Item>
+              </Col>
+              <Col span={halfSpan}>
+                <Form.Item {...formItemProps.timesToWork}>
+                  <Select
+                    mode="multiple"
+                    placeholder="Please select the times when you can work"
+                  >
+                    {timesOfTheDay.map(time => (
+                      <Option key={time} value={time}>
+                        {time}
+                      </Option>
+                    ))}
+                  </Select>
+                </Form.Item>
+              </Col>
+            </Row>
 
-          {/*Start and End dates available for work*/}
-          <Row gutter={formGutter}>
-            <Col span={standardSpan}>
-              <Form.Item {...formItemProps.dateOfStartAndEnd}>
-                <RangePicker style={{ width: "100%" }} />
-              </Form.Item>
-            </Col>
-          </Row>
+            {/*Start and End dates available for work*/}
+            <Row gutter={formGutter}>
+              <Col span={standardSpan}>
+                <Form.Item {...formItemProps.dateOfStartAndEnd}>
+                  <RangePicker style={{ width: "100%" }} />
+                </Form.Item>
+              </Col>
+            </Row>
 
-          {/*Paid or Unpaid Internship Chooser*/}
-          <Row gutter={formGutter}>
-            <Col span={standardSpan}>
-              <Form.Item {...formItemProps.paidUnpaid}>
-                <Radio.Group>
-                  {paidOrUnpaid.map(choice => (
-                    <Radio key={choice} value={choice}>
-                      {choice}
-                    </Radio>
-                  ))}
-                </Radio.Group>
-              </Form.Item>
-            </Col>
-          </Row>
+            {/*Paid or Unpaid Internship Chooser*/}
+            <Row gutter={formGutter}>
+              <Col span={standardSpan}>
+                <Form.Item {...formItemProps.paidUnpaid}>
+                  <Radio.Group>
+                    {paidOrUnpaid.map(choice => (
+                      <Radio key={choice} value={choice}>
+                        {choice}
+                      </Radio>
+                    ))}
+                  </Radio.Group>
+                </Form.Item>
+              </Col>
+            </Row>
 
-          {/** Resumé */}
-          <Form.Item {...formItemProps.resume}>
-            <Dragger {...props} style={{ width: "250px", height: "30px" }} customRequest={this.customRequestResume} onChange={this.onChange} fileList={this.state.fileList}>
-              <h1 style={{ color: "blue" }}>
-                <InboxOutlined />
-              </h1>
-              <h5>Click or Drag Files to Upload Here</h5>
-            </Dragger>
-          </Form.Item>
+            {/** Resumé */}
+            <Form.Item {...formItemProps.resume}>
+              <Dragger
+                {...props}
+                style={{ width: "250px", height: "30px" }}
+                customRequest={this.customRequestResume}
+                onChange={this.onChange}
+                fileList={this.state.fileList}
+              >
+                <h1 style={{ color: "blue" }}>
+                  <InboxOutlined />
+                </h1>
+                <h5>Click or Drag Files to Upload Here</h5>
+              </Dragger>
+            </Form.Item>
 
-          {/*Save and Continue or Next*/}
-          <Form.Item>
-            <Button className="next-button" type="primary" htmlType="submit">
-              Next
-            </Button>
-            <Button
-              className="next-button"
-              type="default"
-              htmlType="button"
-              onClick={this.testFunc}
-            >
-              Test
-            </Button>
-          </Form.Item>
-        </Form>
+            {/*Save and Continue or Next*/}
+            <Form.Item>
+              <Button className="next-button" type="primary" htmlType="submit">
+                Next
+              </Button>
+              <Button
+                className="next-button"
+                type="default"
+                htmlType="button"
+                onClick={this.testFunc}
+              >
+                Test
+              </Button>
+            </Form.Item>
+          </Form>
+        </Spin>
       </div>
     );
   }
 
   onFinish = values => {
-    console.log('FinishedPageInternship:', values);
-    this.props.setCompletionState(0,true)
-    this.props.updateData(values, "0")
-    this.routeChange('/apply/Personal')
+    console.log("FinishedPageInternship:", values);
+    this.props.setCompletionState(0, true);
+    this.props.updateData(values, "0");
+    this.routeChange("/apply/Personal");
   };
 
   setCompletionState = async () => {
     try {
       const values = await this.formRef.current.validateFields();
-      console.log(values)
-      this.props.setCompletionState(0,true)
-      this.props.updateData(values, "0")
+      console.log(values);
+      this.props.setCompletionState(0, true);
+      this.props.updateData(values, "0");
     } catch (errorInfo) {
-      this.props.setCompletionState(0,false)
-      this.props.updateData(errorInfo.values, "0")
+      this.props.setCompletionState(0, false);
+      this.props.updateData(errorInfo.values, "0");
     }
   };
 
   customRequestResume = ({ onSuccess, onError, file }) => {
     setTimeout(() => {
-      onSuccess(file)
-      const source = "Resume"
-      let currentFileList = this.state.fileList
-      currentFileList.push(file)
-      this.setState({fileList:currentFileList})
+      onSuccess(file);
+      const source = "Resume";
+      let currentFileList = this.state.fileList;
+      currentFileList.push(file);
+      this.setState({ fileList: currentFileList });
       this.props.uploadFile(file, source);
     }, 100);
   };
 
-  onChange = (info) => {
+  onChange = info => {
     const { status } = info.file;
     if (status === "removed") {
-      let currentFileList = this.state.fileList
-      let index = currentFileList.indexOf(info.file)
-      if(index > -1){
-          currentFileList.splice(index,1)
+      let currentFileList = this.state.fileList;
+      let index = currentFileList.indexOf(info.file);
+      if (index > -1) {
+        currentFileList.splice(index, 1);
       }
-      this.setState({fileList:currentFileList})
-
+      this.setState({ fileList: currentFileList });
     }
     if (status === "done") {
       message.success(`${info.file.name} file uploaded successfully.`);
     } else if (status === "error") {
       message.error(`${info.file.name} file upload failed.`);
     }
-    this.props.updateData(this.formRef.current.getFieldsValue(), "0")
+    this.props.updateData(this.formRef.current.getFieldsValue(), "0");
+  };
 
-  }
-
-
-  getUserData = async() => {
-    let token = await this.props.getJwt()
+  getUserData = async () => {
+    let token = await this.props.getJwt();
     fetch("/get_user_data", {
       method: "POST",
       headers: {
         Authorization: "Bearer " + JSON.parse(JSON.stringify(token))
       },
       body: 0
-    }).then(response => response.json()).then(data => {
-      let parsedData = JSON.parse(data)
-      if(parsedData !== "No Info"){
-        try{
-          parsedData.dateOfStartAndEnd = [moment(parsedData.dateOfStartAndEnd[0]),moment(parsedData.dateOfStartAndEnd[1])]
-          //delete parsedData.resume
+    })
+      .then(response => response.json())
+      .then(data => {
+        let parsedData = JSON.parse(data);
+        if (parsedData !== "No Info") {
+          try {
+            parsedData.dateOfStartAndEnd = [
+              moment(parsedData.dateOfStartAndEnd[0]),
+              moment(parsedData.dateOfStartAndEnd[1])
+            ];
+            //delete parsedData.resume
 
-          let fileList = parsedData.resume.fileList
-          for (var i = 0; i < fileList.length; i++) {
-            fileList[i].status = "done"
+            let fileList = parsedData.resume.fileList;
+            for (var i = 0; i < fileList.length; i++) {
+              fileList[i].status = "done";
+            }
+
+            this.setState({ fileList: fileList });
+          } catch (e) {
+            console.log(e);
           }
-
-          this.setState({fileList: fileList})
-        } catch (e) {
-          console.log(e)
+          this.setState({ loaded: true });
+          this.formRef.current.setFieldsValue(parsedData);
         }
-        this.formRef.current.setFieldsValue(parsedData)
-      }
-
-    });
-  }
+        this.setState({ loaded: true });
+      });
+  };
 
   routeChange = path => {
     console.log(path);

@@ -1,5 +1,5 @@
 import React from "react";
-import { Form, Input, Button, message, Upload } from "antd";
+import { Form, Input, Button, message, Upload, Spin } from "antd";
 import { InboxOutlined } from "@ant-design/icons";
 import "../App.css";
 
@@ -16,18 +16,21 @@ const props = {
   name: "file",
   accept:
     ".doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document, .pdf, application/pdf",
-  multiple: true,
-
+  multiple: true
 };
 
 class pageEssays extends React.Component {
   formRef = React.createRef();
 
+  state = {
+    loaded: false
+  };
+
   componentDidMount() {
     this.getUserData();
   }
 
-  componentWillUnmount(){
+  componentWillUnmount() {
     this.setCompletionState();
   }
 
@@ -44,97 +47,111 @@ class pageEssays extends React.Component {
   render() {
     return (
       <div style={{ marginTop: "40px", width: "100%" }}>
-        <h1 style={{ textAlign: "left" }}>Written Work</h1>
-        <p>We'd like to learn more about you!</p>
+        <Spin size="large" spinning={!this.state.loaded}>
+          <h1 style={{ textAlign: "left" }}>Written Work</h1>
+          <p>We'd like to learn more about you!</p>
 
-        <Form
-          name="pageEssays"
-          initialValues={{
-            remember: true
-          }}
-          layout="vertical"
-          align="left"
-          width="100%"
-          onFinish={this.onFinish}
-          ref={this.formRef}
-        >
-          {/**Industry response */}
-          <Form.Item
-            key="industryEssay"
-            name="industryEssay"
-            label={this.boldify("Why do you want to apply to this industry?")}
-            rules={this.validationRules("response")}
+          <Form
+            name="pageEssays"
+            initialValues={{
+              remember: true
+            }}
+            layout="vertical"
+            align="left"
+            width="100%"
+            onFinish={this.onFinish}
+            ref={this.formRef}
           >
-            <TextArea autoSize={{ minRows: 5 }} />
-          </Form.Item>
-
-          {/**leadership response */}
-          <Form.Item
-            key="leadership"
-            name="leadership"
-            label={this.boldify(
-              "What are your leadership roles in your extracurriculars and what have they taught you?"
-            )}
-            rules={this.validationRules("response")}
-          >
-            <TextArea autoSize={{ minRows: 5 }} />
-          </Form.Item>
-
-          {/**extra information response */}
-          <Form.Item
-            key="extra"
-            name="extra"
-            label={this.boldify(
-              "Is there anything more about you that we should know?"
-            )}
-            rules={this.validationRules("response")}
-          >
-            <TextArea autoSize={{ minRows: 5 }} />
-          </Form.Item>
-
-          {/**Cover Letter */}
-          <Form.Item
-            name="CoverLetter"
-            key="CoverLetter"
-            label={this.boldify("Cover Letter (Optional)")}
-          >
-            <Dragger {...props} style={{ width: "250px", height: "30px" }} customRequest={this.customRequestCL} onChange={this.onChangeCL} fileList={this.state.fileListCL}>
-              <h1 style={{ color: "blue" }}>
-                <InboxOutlined />
-              </h1>
-              <h5>Click or Drag Files to Upload Here</h5>
-            </Dragger>
-          </Form.Item>
-
-          {/**Portfolio */}
-          <Form.Item
-            name="Portfolio"
-            key="Portfolio"
-            label={this.boldify("Portfolio (Optional)")}
-          >
-            <Dragger {...props} style={{ width: "250px", height: "30px" }} customRequest={this.customRequestPortfolio} onChange={this.onChangePortfolio} fileList={this.state.fileListPortfolio}>
-              <h1 style={{ color: "blue" }}>
-                <InboxOutlined />
-              </h1>
-              <h5>Click or Drag Files to Upload Here</h5>
-            </Dragger>
-          </Form.Item>
-
-          {/*Save and Continue or Next*/}
-          <Form.Item>
-            <Button
-              className="back-button"
-              type="primary"
-              htmlType="button"
-              onClick={this.backHandler}
+            {/**Industry response */}
+            <Form.Item
+              key="industryEssay"
+              name="industryEssay"
+              label={this.boldify("Why do you want to apply to this industry?")}
+              rules={this.validationRules("response")}
             >
-              Previous
-            </Button>
-            <Button className="next-button" type="primary" htmlType="submit">
-              Next
-            </Button>
-          </Form.Item>
-        </Form>
+              <TextArea autoSize={{ minRows: 5 }} />
+            </Form.Item>
+
+            {/**leadership response */}
+            <Form.Item
+              key="leadership"
+              name="leadership"
+              label={this.boldify(
+                "What are your leadership roles in your extracurriculars and what have they taught you?"
+              )}
+              rules={this.validationRules("response")}
+            >
+              <TextArea autoSize={{ minRows: 5 }} />
+            </Form.Item>
+
+            {/**extra information response */}
+            <Form.Item
+              key="extra"
+              name="extra"
+              label={this.boldify(
+                "Is there anything more about you that we should know?"
+              )}
+              rules={this.validationRules("response")}
+            >
+              <TextArea autoSize={{ minRows: 5 }} />
+            </Form.Item>
+
+            {/**Cover Letter */}
+            <Form.Item
+              name="CoverLetter"
+              key="CoverLetter"
+              label={this.boldify("Cover Letter (Optional)")}
+            >
+              <Dragger
+                {...props}
+                style={{ width: "250px", height: "30px" }}
+                customRequest={this.customRequestCL}
+                onChange={this.onChangeCL}
+                fileList={this.state.fileListCL}
+              >
+                <h1 style={{ color: "blue" }}>
+                  <InboxOutlined />
+                </h1>
+                <h5>Click or Drag Files to Upload Here</h5>
+              </Dragger>
+            </Form.Item>
+
+            {/**Portfolio */}
+            <Form.Item
+              name="Portfolio"
+              key="Portfolio"
+              label={this.boldify("Portfolio (Optional)")}
+            >
+              <Dragger
+                {...props}
+                style={{ width: "250px", height: "30px" }}
+                customRequest={this.customRequestPortfolio}
+                onChange={this.onChangePortfolio}
+                fileList={this.state.fileListPortfolio}
+              >
+                <h1 style={{ color: "blue" }}>
+                  <InboxOutlined />
+                </h1>
+                <h5>Click or Drag Files to Upload Here</h5>
+              </Dragger>
+            </Form.Item>
+
+            {/*Save and Continue or Next*/}
+            <Form.Item>
+              <Button
+                className="back-button"
+                type="primary"
+                htmlType="button"
+                onClick={this.backHandler}
+              >
+                Previous
+              </Button>
+              <Button className="next-button" type="primary" htmlType="submit">
+                Next
+              </Button>
+            </Form.Item>
+          </Form>
+        </Spin>
       </div>
     );
   }
@@ -154,51 +171,49 @@ class pageEssays extends React.Component {
   ];
 
   onFinish = values => {
-    console.log('FinishedPageEssays:', values);
-    this.props.setCompletionState(2,true)
-    this.props.updateData(values, "2")
-    this.routeChange('/apply/References')
+    console.log("FinishedPageEssays:", values);
+    this.props.setCompletionState(2, true);
+    this.props.updateData(values, "2");
+    this.routeChange("/apply/References");
   };
 
   setCompletionState = async () => {
     try {
       const values = await this.formRef.current.validateFields();
-      console.log(values)
-      this.props.setCompletionState(2,true)
-      this.props.updateData(values, "2")
+      console.log(values);
+      this.props.setCompletionState(2, true);
+      this.props.updateData(values, "2");
     } catch (errorInfo) {
-      this.props.setCompletionState(2,false)
-      this.props.updateData(errorInfo.values, "2")
+      this.props.setCompletionState(2, false);
+      this.props.updateData(errorInfo.values, "2");
     }
   };
 
   backHandler = () => {
-    this.props.updateData(this.formRef.current.getFieldsValue(), "2")
-    this.routeChange("/apply/Personal")
-
-  }
+    this.props.updateData(this.formRef.current.getFieldsValue(), "2");
+    this.routeChange("/apply/Personal");
+  };
 
   customRequestCL = ({ onSuccess, onError, file }) => {
     setTimeout(() => {
-      onSuccess(file)
-      const source = "CoverLetter"
-      let currentFileList = this.state.fileListCL
-      currentFileList.push(file)
-      this.setState({fileListCL:currentFileList})
+      onSuccess(file);
+      const source = "CoverLetter";
+      let currentFileList = this.state.fileListCL;
+      currentFileList.push(file);
+      this.setState({ fileListCL: currentFileList });
       this.props.uploadFile(file, source);
     }, 100);
   };
 
-  onChangeCL = (info) => {
+  onChangeCL = info => {
     const { status } = info.file;
     if (status === "removed") {
-      let currentFileList = this.state.fileListCL
-      let index = currentFileList.indexOf(info.file)
-      if(index > -1){
-          currentFileList.splice(index,1)
+      let currentFileList = this.state.fileListCL;
+      let index = currentFileList.indexOf(info.file);
+      if (index > -1) {
+        currentFileList.splice(index, 1);
       }
-      this.setState({fileListCL:currentFileList})
-
+      this.setState({ fileListCL: currentFileList });
     }
     if (status === "done") {
       message.success(`${info.file.name} file uploaded successfully.`);
@@ -206,31 +221,29 @@ class pageEssays extends React.Component {
       message.error(`${info.file.name} file upload failed.`);
     }
 
-    this.props.updateData(this.formRef.current.getFieldsValue(), "2")
-
-  }
+    this.props.updateData(this.formRef.current.getFieldsValue(), "2");
+  };
 
   customRequestPortfolio = ({ onSuccess, onError, file }) => {
     setTimeout(() => {
-      onSuccess(file)
-      const source = "Portfolio"
-      let currentFileList = this.state.fileListPortfolio
-      currentFileList.push(file)
-      this.setState({fileListPortfolio:currentFileList})
+      onSuccess(file);
+      const source = "Portfolio";
+      let currentFileList = this.state.fileListPortfolio;
+      currentFileList.push(file);
+      this.setState({ fileListPortfolio: currentFileList });
       this.props.uploadFile(file, source);
     }, 100);
   };
 
-  onChangePortfolio = (info) => {
+  onChangePortfolio = info => {
     const { status } = info.file;
     if (status === "removed") {
-      let currentFileList = this.state.fileListPortfolio
-      let index = currentFileList.indexOf(info.file)
-      if(index > -1){
-          currentFileList.splice(index,1)
+      let currentFileList = this.state.fileListPortfolio;
+      let index = currentFileList.indexOf(info.file);
+      if (index > -1) {
+        currentFileList.splice(index, 1);
       }
-      this.setState({fileListPortfolio:currentFileList})
-
+      this.setState({ fileListPortfolio: currentFileList });
     }
     if (status === "done") {
       message.success(`${info.file.name} file uploaded successfully.`);
@@ -238,9 +251,8 @@ class pageEssays extends React.Component {
       message.error(`${info.file.name} file upload failed.`);
     }
 
-    this.props.updateData(this.formRef.current.getFieldsValue(), "2")
-
-  }
+    this.props.updateData(this.formRef.current.getFieldsValue(), "2");
+  };
 
   getUserData = async () => {
     let token = await this.props.getJwt();
@@ -250,37 +262,35 @@ class pageEssays extends React.Component {
         Authorization: "Bearer " + JSON.parse(JSON.stringify(token))
       },
       body: 2
-    }).then(response => response.json()).then(data => {
-      let parsedData = JSON.parse(data)
-      if (parsedData !== "No Info") {
-        try{
-          console.log(parsedData)
-          this.formRef.current.setFieldsValue(parsedData)
+    })
+      .then(response => response.json())
+      .then(data => {
+        let parsedData = JSON.parse(data);
+        if (parsedData !== "No Info") {
+          try {
+            console.log(parsedData);
+            this.setState({ loaded: true });
+            this.formRef.current.setFieldsValue(parsedData);
 
-          try{
-            let fileListCL = parsedData.CoverLetter.fileList
-            for (var i = 0; i < fileListCL.length; i++) {
-              fileListCL[i].status = "done"
-            }
-            this.setState({fileListCL:fileListCL})
-          } catch {
-
-          }
-          try{
-            let fileListPortfolio = parsedData.Portfolio.fileList
-            for (var i = 0; i < fileListPortfolio.length; i++) {
-              fileListPortfolio[i].status = "done"
-            }
-            this.setState({fileListPortfolio:fileListPortfolio})
-          } catch(e) {
-
-          }
+            try {
+              let fileListCL = parsedData.CoverLetter.fileList;
+              for (var i = 0; i < fileListCL.length; i++) {
+                fileListCL[i].status = "done";
+              }
+              this.setState({ fileListCL: fileListCL });
+            } catch {}
+            try {
+              let fileListPortfolio = parsedData.Portfolio.fileList;
+              for (var i = 0; i < fileListPortfolio.length; i++) {
+                fileListPortfolio[i].status = "done";
+              }
+              this.setState({ fileListPortfolio: fileListPortfolio });
+            } catch (e) {}
+          } catch (e) {}
         }
-       catch(e){
-       }
-     }
-    });
-  }
+        this.setState({ loaded: true });
+      });
+  };
 
   boldify = text => <strong>{text}</strong>;
 
