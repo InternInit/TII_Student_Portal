@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Form, Input, Button } from "antd";
+import { Form, Input, Button, Spin } from "antd";
 import { Row, Col } from "antd";
 import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
 import "../App.css";
@@ -71,14 +71,17 @@ const formItemProps = {
 class PageReferences extends Component {
   formRef = React.createRef();
 
+  state = {
+    loaded: false
+  };
+
   componentDidMount() {
     this.getUserData();
   }
 
-  componentWillUnmount(){
+  componentWillUnmount() {
     this.setCompletionState();
   }
-
 
   constructor(props) {
     super(props);
@@ -87,161 +90,163 @@ class PageReferences extends Component {
   render() {
     return (
       <div style={{ width: "100%", marginTop: "40px" }}>
-        <h1 style={{ textAlign: "left" }}> References</h1>
-        <p>
-          Add a reference here. This could be someone who has worked with you in
-          the past.
-        </p>
-        <Form
-          {...formItemProps.totalForm}
-          onFinish={this.onFinish}
-          ref={this.formRef}
-        >
-          <Form.List name="reference">
-            {(fields, { add, remove }) => {
-              console.log(fields);
+        <Spin size="large" spinning={!this.state.loaded}>
+          <h1 style={{ textAlign: "left" }}> References</h1>
+          <p>
+            Add a reference here. This could be someone who has worked with you
+            in the past.
+          </p>
+          <Form
+            {...formItemProps.totalForm}
+            onFinish={this.onFinish}
+            ref={this.formRef}
+          >
+            <Form.List name="reference">
+              {(fields, { add, remove }) => {
+                console.log(fields);
 
-              return (
-                <div style={{ marginTop: "40px" }}>
-                  {fields.map((field, index) => (
-                    <div className="educationBox">
-                      <Form.Item
-                        {...(index === 0
-                          ? formItemLayout
-                          : formItemLayoutWithOutLabel)}
-                        required={false}
-                        key={field.key}
+                return (
+                  <div style={{ marginTop: "40px" }}>
+                    {fields.map((field, index) => (
+                      <div className="educationBox">
+                        <Form.Item
+                          {...(index === 0
+                            ? formItemLayout
+                            : formItemLayoutWithOutLabel)}
+                          required={false}
+                          key={field.key}
+                        >
+                          {/*Minus button removes field when clicked*/}
+                          {this.renderMinusButton(fields, field, remove)}
+
+                          {/**First row of reference box */}
+                          <Row gutter={formGutter}>
+                            <Col span={halfSpan}>
+                              {/**First name of Reference */}
+                              <Form.Item
+                                {...formItemProps.inputField(
+                                  true,
+                                  field,
+                                  "First Name",
+                                  "firstName"
+                                )}
+                              >
+                                <Input />
+                              </Form.Item>
+                            </Col>
+                            <Col span={halfSpan}>
+                              {/**Last name of Reference */}
+                              <Form.Item
+                                {...formItemProps.inputField(
+                                  true,
+                                  field,
+                                  "Last Name",
+                                  "lastName"
+                                )}
+                              >
+                                <Input />
+                              </Form.Item>
+                            </Col>
+                          </Row>
+
+                          {/**Second row of the reference box */}
+                          <Row gutter={formGutter}>
+                            <Col span={halfSpan}>
+                              {/**Company of Reference */}
+                              <Form.Item
+                                {...formItemProps.inputField(
+                                  true,
+                                  field,
+                                  "School/Company",
+                                  "schoolCompany"
+                                )}
+                              >
+                                <Input />
+                              </Form.Item>
+                            </Col>
+                            <Col span={halfSpan}>
+                              {/**position within company of Reference */}
+                              <Form.Item
+                                {...formItemProps.inputField(
+                                  true,
+                                  field,
+                                  "Title",
+                                  "title"
+                                )}
+                              >
+                                <Input />
+                              </Form.Item>
+                            </Col>
+                          </Row>
+
+                          {/*SCHOOL ADDRESS CONT'D (CITY, STATE, ZIPCODE)*/}
+                          <Row gutter={formGutter}>
+                            <Col span={halfSpan}>
+                              <Form.Item
+                                {...formItemProps.inputField(
+                                  true,
+                                  field,
+                                  "Phone Number",
+                                  "phoneNumber",
+                                  "string",
+                                  /^(1?([-\s]?\(?\d{3}\)?)[-\s]?)(\d{3})([-\s]?\d{4})$/
+                                )}
+                                extra="Please input your phone number without any formatting."
+                              >
+                                <Input />
+                              </Form.Item>
+                            </Col>
+                            <Col span={halfSpan}>
+                              <Form.Item
+                                {...formItemProps.inputField(
+                                  true,
+                                  field,
+                                  "Email",
+                                  "email",
+                                  "email"
+                                )}
+                              >
+                                <Input />
+                              </Form.Item>
+                            </Col>
+                          </Row>
+                        </Form.Item>
+                      </div>
+                    ))}
+                    {/**Outside Reference Box */}
+
+                    {/**Add Reference Button */}
+                    <Form.Item>
+                      <Button
+                        {...formItemProps.addButton}
+                        onClick={() => {
+                          add();
+                        }}
                       >
-                        {/*Minus button removes field when clicked*/}
-                        {this.renderMinusButton(fields, field, remove)}
+                        <PlusOutlined /> Add Reference
+                      </Button>
+                    </Form.Item>
+                  </div>
+                );
+              }}
+            </Form.List>
 
-                        {/**First row of reference box */}
-                        <Row gutter={formGutter}>
-                          <Col span={halfSpan}>
-                            {/**First name of Reference */}
-                            <Form.Item
-                              {...formItemProps.inputField(
-                                true,
-                                field,
-                                "First Name",
-                                "firstName"
-                              )}
-                            >
-                              <Input />
-                            </Form.Item>
-                          </Col>
-                          <Col span={halfSpan}>
-                            {/**Last name of Reference */}
-                            <Form.Item
-                              {...formItemProps.inputField(
-                                true,
-                                field,
-                                "Last Name",
-                                "lastName"
-                              )}
-                            >
-                              <Input />
-                            </Form.Item>
-                          </Col>
-                        </Row>
-
-                        {/**Second row of the reference box */}
-                        <Row gutter={formGutter}>
-                          <Col span={halfSpan}>
-                            {/**Company of Reference */}
-                            <Form.Item
-                              {...formItemProps.inputField(
-                                true,
-                                field,
-                                "School/Company",
-                                "schoolCompany"
-                              )}
-                            >
-                              <Input />
-                            </Form.Item>
-                          </Col>
-                          <Col span={halfSpan}>
-                            {/**position within company of Reference */}
-                            <Form.Item
-                              {...formItemProps.inputField(
-                                true,
-                                field,
-                                "Title",
-                                "title"
-                              )}
-                            >
-                              <Input />
-                            </Form.Item>
-                          </Col>
-                        </Row>
-
-                        {/*SCHOOL ADDRESS CONT'D (CITY, STATE, ZIPCODE)*/}
-                        <Row gutter={formGutter}>
-                          <Col span={halfSpan}>
-                            <Form.Item
-                              {...formItemProps.inputField(
-                                true,
-                                field,
-                                "Phone Number",
-                                "phoneNumber",
-                                "string",
-                                /^(1?([-\s]?\(?\d{3}\)?)[-\s]?)(\d{3})([-\s]?\d{4})$/
-                              )}
-                              extra="Please input your phone number without any formatting."
-                            >
-                              <Input />
-                            </Form.Item>
-                          </Col>
-                          <Col span={halfSpan}>
-                            <Form.Item
-                              {...formItemProps.inputField(
-                                true,
-                                field,
-                                "Email",
-                                "email",
-                                "email"
-                              )}
-                            >
-                              <Input />
-                            </Form.Item>
-                          </Col>
-                        </Row>
-                      </Form.Item>
-                    </div>
-                  ))}
-                  {/**Outside Reference Box */}
-
-                  {/**Add Reference Button */}
-                  <Form.Item>
-                    <Button
-                      {...formItemProps.addButton}
-                      onClick={() => {
-                        add();
-                      }}
-                    >
-                      <PlusOutlined /> Add Reference
-                    </Button>
-                  </Form.Item>
-                </div>
-              );
-            }}
-          </Form.List>
-
-          {/**Submit Button */}
-          <Form.Item>
-            <Button
-              className="back-button"
-              type="primary"
-              htmlType="button"
-              onClick={this.backHandler}
-            >
-              Previous
-            </Button>
-            <Button className="next-button" type="primary" htmlType="submit">
-              Submit
-            </Button>
-          </Form.Item>
-        </Form>
+            {/**Submit Button */}
+            <Form.Item>
+              <Button
+                className="back-button"
+                type="primary"
+                htmlType="button"
+                onClick={this.backHandler}
+              >
+                Previous
+              </Button>
+              <Button className="next-button" type="primary" htmlType="submit">
+                Submit
+              </Button>
+            </Form.Item>
+          </Form>
+        </Spin>
       </div>
     );
   }
@@ -262,26 +267,26 @@ class PageReferences extends Component {
 
   onFinish = values => {
     console.log("FinishRefPage:", values);
-    this.props.setCompletionState(3,true)
+    this.props.setCompletionState(3, true);
     this.props.onSubmit(values, "3");
   };
 
   setCompletionState = async () => {
     try {
       const values = await this.formRef.current.validateFields();
-      console.log(values)
-      this.props.setCompletionState(3,true)
-      this.props.updateData(values, "3")
+      console.log(values);
+      this.props.setCompletionState(3, true);
+      this.props.updateData(values, "3");
     } catch (errorInfo) {
-      this.props.setCompletionState(3,false)
-      this.props.updateData(errorInfo.values, "3")
+      this.props.setCompletionState(3, false);
+      this.props.updateData(errorInfo.values, "3");
     }
   };
 
   backHandler = () => {
-    this.props.updateData(this.formRef.current.getFieldsValue(), "3")
-    this.routeChange("/apply/Written-Work")
-  }
+    this.props.updateData(this.formRef.current.getFieldsValue(), "3");
+    this.routeChange("/apply/Written-Work");
+  };
 
   routeChange = path => {
     console.log(path);
@@ -303,9 +308,11 @@ class PageReferences extends Component {
         let parsedData = JSON.parse(data);
         if (parsedData !== "No Info") {
           try {
+            this.setState({ loaded: true });
             this.formRef.current.setFieldsValue(parsedData);
           } catch (e) {}
         }
+        this.setState({ loaded: true });
       });
   };
 }
