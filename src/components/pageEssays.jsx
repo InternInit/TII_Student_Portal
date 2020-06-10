@@ -278,7 +278,6 @@ class pageEssays extends React.Component {
         }
        catch(e){
        }
-       this.setCompletionState();
      }
     });
   }

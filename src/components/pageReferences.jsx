@@ -305,7 +305,6 @@ class PageReferences extends Component {
           try {
             this.formRef.current.setFieldsValue(parsedData);
           } catch (e) {}
-          this.setCompletionState();
         }
       });
   };

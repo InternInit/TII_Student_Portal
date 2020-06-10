@@ -657,7 +657,6 @@ class PageInternshipInformation extends Component {
           console.log(e)
         }
         this.formRef.current.setFieldsValue(parsedData)
-        this.setCompletionState();
       }
 
     });
