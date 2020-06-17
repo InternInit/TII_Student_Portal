@@ -55,7 +55,7 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.navRef = React.createRef();
-    this.state = { wWidth: window.innerWidth, wHeight: window.innerHeight, isCollapsed: false }
+    this.setState({ wWidth: window.innerWidth, wHeight: window.innerHeight, isCollapsed: false })
   }
 
   inMemoryToken;
