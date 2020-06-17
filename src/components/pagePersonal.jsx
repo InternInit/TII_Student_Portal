@@ -456,7 +456,7 @@ class PagePersonal extends Component {
                 Previous
               </Button>
               <Button className="next-button" type="primary" htmlType="submit">
-                Next
+                Save and Continue
               </Button>
             </Form.Item>
           </Form>

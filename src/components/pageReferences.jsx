@@ -269,6 +269,7 @@ class PageReferences extends Component {
     console.log("FinishRefPage:", values);
     this.props.setCompletionState(3, true);
     this.props.onSubmit(values, "3");
+    this.routeChange("/submission-success");
   };
 
   setCompletionState = async () => {

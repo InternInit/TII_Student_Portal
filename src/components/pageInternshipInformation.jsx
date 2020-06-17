@@ -573,7 +573,7 @@ class PageInternshipInformation extends Component {
             {/*Save and Continue or Next*/}
             <Form.Item>
               <Button className="next-button" type="primary" htmlType="submit">
-                Next
+                Save and Continue
               </Button>
               <Button
                 className="next-button"
