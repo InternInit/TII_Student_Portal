@@ -173,7 +173,7 @@ class pageEssays extends React.Component {
     console.log("FinishedPageEssays:", values);
     this.props.setCompletionState(2, true);
     this.props.updateData(values, "2");
-    this.routeChange("/apply/References");
+    this.routeChange("/apply/references");
   };
 
   setCompletionState = async () => {
@@ -190,7 +190,7 @@ class pageEssays extends React.Component {
 
   backHandler = () => {
     this.props.updateData(this.formRef.current.getFieldsValue(), "2");
-    this.routeChange("/apply/Personal");
+    this.routeChange("/apply/personal");
   };
 
   customRequestCL = ({ onSuccess, onError, file }) => {
@@ -295,7 +295,7 @@ class pageEssays extends React.Component {
 
   routeChange = path => {
     console.log(path);
-    if (path === "/apply/Personal") {
+    if (path === "/apply/personal") {
       this.props.clickTwo();
     } else {
       this.props.clickFour();

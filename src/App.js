@@ -164,13 +164,13 @@ class App extends Component {
               render={props => {
                 return (
                   (this.authParam = props.location.search),
-                  <Redirect to="/apply/Internship-Info" />
+                  <Redirect to="/apply/internship-info" />
                 );
               }}
             />
 
             <Route
-              path="/apply/Internship-Info"
+              path="/apply/internship-info"
               render={props => (
                 <PageInternshipInformation
                   {...props}
@@ -184,7 +184,7 @@ class App extends Component {
             />
 
             <Route
-              path="/apply/Personal"
+              path="/apply/personal"
               render={props => (
                 <PagePersonal
                   {...props}
@@ -198,7 +198,7 @@ class App extends Component {
             />
 
             <Route
-              path="/apply/Written-Work"
+              path="/apply/written-work"
               render={props => (
                 <PageEssays
                   {...props}
@@ -213,7 +213,7 @@ class App extends Component {
             />
 
             <Route
-              path="/apply/References"
+              path="/apply/references"
               render={props => (
                 <PageReferences
                   {...props}
@@ -231,7 +231,7 @@ class App extends Component {
               render={props => {
                 return (
                   (this.authParam = props.location.search),
-                  <Redirect to="/apply/Internship-Info/" />
+                  <Redirect to="/apply/internship-info/" />
                 );
               }}
             />
@@ -384,13 +384,11 @@ class App extends Component {
 
 
   resize = () => {
-    let currentHideNav = (window.innerWidth <= 1300);
-    let { isCollapsed } = this.state;
-    console.log("Before: currentHideNav:" + currentHideNav + ", isCollapsed:" + isCollapsed + ", WindowInnerWidth:" + window.innerWidth)
-    if (currentHideNav !== this.state.isCollapsed) {
-      this.setState({ isCollapsed: currentHideNav });
+    let hideNav = (window.innerWidth <= 1300);
+    if (hideNav !== this.state.isCollapsed) {
+      this.setState({ isCollapsed: hideNav });
     }
-    console.log("After: currentHideNav:" + currentHideNav + ", isCollapsed:" + isCollapsed + ", WindowInnerWidth:" + window.innerWidth)
+    //console.log("After: currentHideNav:" + currentHideNav + ", isCollapsed:" + isCollapsed + ", WindowInnerWidth:" + window.innerWidth)
   }
 
   // BUG: PROBLEM WITH RENDERING THE DIFFERENT NAVBAR SELECTIONS
@@ -440,7 +438,7 @@ class App extends Component {
               render={props => {
                 return (
                   (this.authParam = props.location.search),
-                  < Redirect to="/apply/Internship-Info" />
+                  < Redirect to="/apply/internship-info" />
                 );
               }}
             />

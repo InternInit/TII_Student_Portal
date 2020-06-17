@@ -594,7 +594,7 @@ class PageInternshipInformation extends Component {
     console.log("FinishedPageInternship:", values);
     this.props.setCompletionState(0, true);
     this.props.updateData(values, "0");
-    this.routeChange("/apply/Personal");
+    this.routeChange("/apply/personal");
   };
 
   setCompletionState = async () => {

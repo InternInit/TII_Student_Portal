@@ -285,7 +285,7 @@ class PageReferences extends Component {
 
   backHandler = () => {
     this.props.updateData(this.formRef.current.getFieldsValue(), "3");
-    this.routeChange("/apply/Written-Work");
+    this.routeChange("/apply/written-work");
   };
 
   routeChange = path => {

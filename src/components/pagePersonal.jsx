@@ -469,7 +469,7 @@ class PagePersonal extends Component {
     console.log("FinishedPersonalPage:", values);
     this.props.setCompletionState(1, true);
     this.props.updateData(values, "1");
-    this.routeChange("/apply/Written-Work");
+    this.routeChange("/apply/written-work");
   };
 
   setCompletionState = async () => {
@@ -486,7 +486,7 @@ class PagePersonal extends Component {
 
   backHandler = () => {
     this.props.updateData(this.formRef.current.getFieldsValue(), "1");
-    this.routeChange("/apply/Internship-Info");
+    this.routeChange("/apply/internship-info");
   };
 
   getUserData = async () => {
@@ -512,7 +512,7 @@ class PagePersonal extends Component {
 
   routeChange = path => {
     console.log(path);
-    if (path === "/apply/Written-Work") {
+    if (path === "/apply/written-work") {
       this.props.clickThree();
     } else {
       this.props.clickOne();

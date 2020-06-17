@@ -19,16 +19,16 @@ import _ from 'lodash';
 class TiiNav extends React.Component {
   getInitialHighlight = () => {
     switch (this.props.location.pathname) {
-      case "/apply/Internship-Info":
+      case "/apply/internship-info":
         return Array.from("1");
         break;
-      case "/apply/Personal":
+      case "/apply/personal":
         return Array.from("2");
         break;
-      case "/apply/Written-Work":
+      case "/apply/written-work":
         return Array.from("3");
         break;
-      case "/apply/References":
+      case "/apply/references":
         return Array.from("4");
         break;
     }
@@ -49,7 +49,7 @@ class TiiNav extends React.Component {
       PersonalComplete: false,
       EssayComplete: false,
       ReferencesComplete: false,
-      isCollapsed: false,
+
 
       //icons
       InternButton: <ContainerOutlined />,
@@ -107,7 +107,7 @@ class TiiNav extends React.Component {
           <Menu.Item
             key="1"
             onClick={() => {
-              this.routeChange("/apply/Internship-Info");
+              this.routeChange("/apply/internship-info");
 
             }}
           >
@@ -118,7 +118,7 @@ class TiiNav extends React.Component {
           <Menu.Item
             key="2"
             onClick={() => {
-              this.routeChange("/apply/Personal");
+              this.routeChange("/apply/personal");
             }}
           >
             {PersonalButton}
@@ -129,7 +129,7 @@ class TiiNav extends React.Component {
           <Menu.Item
             key="3"
             onClick={() => {
-              this.routeChange("/apply/Written-Work");
+              this.routeChange("/apply/written-work");
             }}
           >
             {EssayButton}
@@ -141,7 +141,7 @@ class TiiNav extends React.Component {
           <Menu.Item
             key="4"
             onClick={() => {
-              this.routeChange("/apply/References");
+              this.routeChange("/apply/references");
             }}
           >
             {ReferencesButton}
@@ -252,13 +252,13 @@ class TiiNav extends React.Component {
 
 
   routeChange = path => {
-    if (path === "/apply/Internship-Info") {
+    if (path === "/apply/internship-info") {
       this.props.clickOne();
-    } else if (path === "/apply/Personal") {
+    } else if (path === "/apply/personal") {
       this.props.clickTwo();
-    } else if (path === "/apply/Written-Work") {
+    } else if (path === "/apply/written-work") {
       this.props.clickThree();
-    } else if (path === "/apply/References") {
+    } else if (path === "/apply/references") {
       this.props.clickFour();
     }
     this.props.history.push(path);
