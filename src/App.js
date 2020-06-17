@@ -55,17 +55,11 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.navRef = React.createRef();
-    this.setState({ wWidth: window.innerWidth, wHeight: window.innerHeight, isCollapsed: false })
+    this.state = { wWidth: window.innerWidth, wHeight: window.innerHeight, isCollapsed: false, page: 0, submissionState: true, completionState: [false, false, false, false] }
   }
 
   inMemoryToken;
   authParam = "absasd";
-
-  state = {
-    page: 0,
-    submissionState: true,
-    completionState: [false, false, false, false]
-  };
 
 
 
@@ -412,6 +406,7 @@ class App extends Component {
     console.log("mounted");
     this.refresh();
     this.interval = setInterval(() => this.resize(), 1000)
+    console.log(this.state)
     return () => clearInterval(this.interval);
   }
 
