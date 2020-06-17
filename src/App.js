@@ -55,7 +55,7 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.navRef = React.createRef();
-    this.state = { wWidth: window.innerWidth, wHeight: window.innerHeight, isCollapsed: false }
+
   }
 
   inMemoryToken;
@@ -64,7 +64,8 @@ class App extends Component {
   state = {
     page: 0,
     submissionState: true,
-    completionState: [false, false, false, false]
+    completionState: [false, false, false, false],
+    wWidth: window.innerWidth, wHeight: window.innerHeight, isCollapsed: false
   };
 
 
