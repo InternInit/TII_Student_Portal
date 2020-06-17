@@ -65,7 +65,7 @@ class App extends Component {
 
 
   updateData = (values, origin) => {
-    if (this.state.submissionState == true) {
+    if (this.state.submissionState == true && typeof(this.inMemoryToken) != "undefined") {
       fetch("/update_user_data", {
         method: "POST",
         headers: {
