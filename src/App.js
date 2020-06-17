@@ -49,10 +49,13 @@ const PageContainer = styled.div`
   border-radius: 10px;
 `;
 
+
+
 class App extends Component {
   constructor(props) {
     super(props)
     this.navRef = React.createRef();
+    this.state = { wWidth: window.innerWidth, wHeight: window.innerHeight, isCollapsed: false }
   }
 
   inMemoryToken;
@@ -63,6 +66,9 @@ class App extends Component {
     submissionState: true,
     completionState: [false, false, false, false]
   };
+
+
+
 
   updateData = (values, origin) => {
     if (this.state.submissionState == true) {
@@ -376,6 +382,17 @@ class App extends Component {
 
   }
 
+
+  resize = () => {
+    let currentHideNav = (window.innerWidth <= 1300);
+    let { isCollapsed } = this.state;
+    console.log("Before: currentHideNav:" + currentHideNav + ", isCollapsed:" + isCollapsed + ", WindowInnerWidth:" + window.innerWidth)
+    if (currentHideNav !== this.state.isCollapsed) {
+      this.setState({ isCollapsed: currentHideNav });
+    }
+    console.log("After: currentHideNav:" + currentHideNav + ", isCollapsed:" + isCollapsed + ", WindowInnerWidth:" + window.innerWidth)
+  }
+
   // BUG: PROBLEM WITH RENDERING THE DIFFERENT NAVBAR SELECTIONS
   renderNav = () => {
     const highlightKey = String([this.state.page + 1]);
@@ -388,6 +405,7 @@ class App extends Component {
         highlightKey={highlightKey}
         getCompletionState={this.getCompletionState}
         onSubmit={this.onSubmit}
+        isCollapsed={this.state.isCollapsed}
       />
     );
   };
@@ -395,12 +413,19 @@ class App extends Component {
   componentDidMount() {
     console.log("mounted");
     this.refresh();
+    this.interval = setInterval(() => this.resize(), 1000)
+    return () => clearInterval(this.interval);
+  }
 
+  componentWillUnmount() {
+    //This is here because I don't know if the return statement will work lol
+    clearInterval(this.interval);
   }
 
   render() {
     return (
       <div className="App">
+        {this.resize()}
         <Router>
           <header>
             <Navbar />
@@ -415,7 +440,7 @@ class App extends Component {
               render={props => {
                 return (
                   (this.authParam = props.location.search),
-                  <Redirect to="/apply/Internship-Info" />
+                  < Redirect to="/apply/Internship-Info" />
                 );
               }}
             />

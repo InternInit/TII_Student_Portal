@@ -48,7 +48,7 @@ const formItemProps = {
     align: "left",
     className: "pageReferences"
   },
-  inputField: function(required, field, label, name, validationType, pattern) {
+  inputField: function (required, field, label, name, validationType, pattern) {
     return {
       key: [field.fieldKey, name],
       label: boldify(label),
@@ -310,7 +310,7 @@ class PageReferences extends Component {
           try {
             this.setState({ loaded: true });
             this.formRef.current.setFieldsValue(parsedData);
-          } catch (e) {}
+          } catch (e) { }
         }
         this.setState({ loaded: true });
       });

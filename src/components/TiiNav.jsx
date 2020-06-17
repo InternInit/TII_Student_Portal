@@ -35,7 +35,7 @@ class TiiNav extends React.Component {
   };
 
 
-  componentDidUpdate(prevProps, prevState){
+  componentDidUpdate(prevProps, prevState) {
     this.handleClick();
   }
 
@@ -49,6 +49,7 @@ class TiiNav extends React.Component {
       PersonalComplete: false,
       EssayComplete: false,
       ReferencesComplete: false,
+      isCollapsed: false,
 
       //icons
       InternButton: <ContainerOutlined />,
@@ -79,20 +80,24 @@ class TiiNav extends React.Component {
       InternButton,
       PersonalButton,
       EssayButton,
-      ReferencesButton
+      ReferencesButton,
     } = this.state;
     let { SubmitButton } = this.state;
     return (
+
       <Sider //styling the sider
         style={{
           position: "fixed",
           overflow: "initial",
           width: "207px",
-
           margin: "10px",
           marginTop: "5%"
         }}
+
+        //Collapsing
+        collapsed={this.props.isCollapsed}
       >
+
         <Menu //Navigation Panel
           theme="light"
           mode="inline"
@@ -103,6 +108,7 @@ class TiiNav extends React.Component {
             key="1"
             onClick={() => {
               this.routeChange("/apply/Internship-Info");
+
             }}
           >
             {InternButton}
@@ -140,9 +146,7 @@ class TiiNav extends React.Component {
           >
             {ReferencesButton}
             <Router>
-              <Link to="/apply/References">
-                <span>References</span>
-              </Link>
+              <span>References</span>
             </Router>
           </Menu.Item>
           <Menu.Item
@@ -163,10 +167,10 @@ class TiiNav extends React.Component {
     );
   }
 
-  handleSubmit = async() => {
+  handleSubmit = async () => {
     let status = await this.props.getCompletionState();
 
-    if (_.isEqual(status,[true,true,true,true])) {
+    if (_.isEqual(status, [true, true, true, true])) {
       // checks to see if all forms are completed
       //this.setState({ CanSubmit: true }); //sets canSubmit to true
       notification.open({
@@ -175,7 +179,7 @@ class TiiNav extends React.Component {
         description: "Your results have been submitted",
         icon: <CheckOutlined style={{ color: "green" }} />
       });
-      this.props.onSubmit({},-1)
+      this.props.onSubmit({}, -1)
     } else {
       notification.open({
         message: "Failed.",
@@ -187,53 +191,55 @@ class TiiNav extends React.Component {
 
   };
 
-  handleClick = async(e) => {
+
+
+  handleClick = async (e) => {
     //The handleClick function is purely for testing. When you click on the first button, it will set all states to "true"
     let completionState = await this.props.getCompletionState();
 
     for (var i = 0; i < completionState.length; i++) {
-      switch (i){
+      switch (i) {
         case 0:
-          if(completionState[i] === true){
-            if(this.state.InternButton.type.render.displayName !== "CheckOutlined"){
-              this.setState({InternButton:<CheckOutlined style={{ color: "green" }} />})
+          if (completionState[i] === true) {
+            if (this.state.InternButton.type.render.displayName !== "CheckOutlined") {
+              this.setState({ InternButton: <CheckOutlined style={{ color: "green" }} /> })
             }
           } else {
-            if(this.state.InternButton.type.render.displayName !== "ContainerOutlined"){
-              this.setState({InternButton: <ContainerOutlined />})
+            if (this.state.InternButton.type.render.displayName !== "ContainerOutlined") {
+              this.setState({ InternButton: <ContainerOutlined /> })
             }
           }
           break;
         case 1:
-          if(completionState[i] === true){
-            if(this.state.PersonalButton.type.render.displayName !== "CheckOutlined"){
-              this.setState({PersonalButton:<CheckOutlined style={{ color: "green" }} />})
+          if (completionState[i] === true) {
+            if (this.state.PersonalButton.type.render.displayName !== "CheckOutlined") {
+              this.setState({ PersonalButton: <CheckOutlined style={{ color: "green" }} /> })
             }
           } else {
-            if(this.state.PersonalButton.type.render.displayName !== "UserOutlined"){
-              this.setState({PersonalButton: <UserOutlined />})
+            if (this.state.PersonalButton.type.render.displayName !== "UserOutlined") {
+              this.setState({ PersonalButton: <UserOutlined /> })
             }
           }
           break;
         case 2:
-          if(completionState[i] === true){
-            if(this.state.EssayButton.type.render.displayName !== "CheckOutlined"){
-              this.setState({EssayButton:<CheckOutlined style={{ color: "green" }} />})
+          if (completionState[i] === true) {
+            if (this.state.EssayButton.type.render.displayName !== "CheckOutlined") {
+              this.setState({ EssayButton: <CheckOutlined style={{ color: "green" }} /> })
             }
           } else {
-            if(this.state.EssayButton.type.render.displayName !== "EditOutlined"){
-              this.setState({EssayButton: <EditOutlined />})
+            if (this.state.EssayButton.type.render.displayName !== "EditOutlined") {
+              this.setState({ EssayButton: <EditOutlined /> })
             }
           }
           break;
         case 3:
-          if(completionState[i] === true){
-            if(this.state.ReferencesButton.type.render.displayName !== "CheckOutlined"){
-              this.setState({ReferencesButton:<CheckOutlined style={{ color: "green" }} />})
+          if (completionState[i] === true) {
+            if (this.state.ReferencesButton.type.render.displayName !== "CheckOutlined") {
+              this.setState({ ReferencesButton: <CheckOutlined style={{ color: "green" }} /> })
             }
           } else {
-            if(this.state.ReferencesButton.type.render.displayName !== "TeamOutlined"){
-              this.setState({ReferencesButton: <TeamOutlined />})
+            if (this.state.ReferencesButton.type.render.displayName !== "TeamOutlined") {
+              this.setState({ ReferencesButton: <TeamOutlined /> })
             }
           }
           break;
