@@ -575,14 +575,6 @@ class PageInternshipInformation extends Component {
               <Button className="next-button" type="primary" htmlType="submit">
                 Save and Continue
               </Button>
-              <Button
-                className="next-button"
-                type="default"
-                htmlType="button"
-                onClick={this.testFunc}
-              >
-                Test
-              </Button>
             </Form.Item>
           </Form>
         </Spin>
