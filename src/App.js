@@ -124,12 +124,6 @@ class App extends Component {
   AppContainer = () => {
     return (
       <React.Fragment>
-        <Switch
-          checkedChildren="Submission On"
-          unCheckedChildren="Submission Off"
-          defaultChecked="true"
-          onChange={this.switchOnChange}
-        ></Switch>
         <Button onClick={this.logout}> Logout </Button>
         <Layout>
           {this.renderNav()}
@@ -237,10 +231,6 @@ class App extends Component {
     );
   };
 
-  switchOnChange = checked => {
-    this.state.submissionState = checked;
-    console.log(this.state.submissionState);
-  };
 
   auth = () => {
     try {
