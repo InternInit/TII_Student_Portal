@@ -146,7 +146,7 @@ class pageEssays extends React.Component {
                 Previous
               </Button>
               <Button className="next-button" type="primary" htmlType="submit">
-                Next
+                Save and Continue
               </Button>
             </Form.Item>
           </Form>
@@ -264,7 +264,8 @@ class pageEssays extends React.Component {
     })
       .then(response => response.json())
       .then(data => {
-        let parsedData = JSON.parse(data);
+        let parsedRecv = JSON.parse(data);
+        let parsedData = parsedRecv[0];
         if (parsedData !== "No Info") {
           try {
             console.log(parsedData);
@@ -277,15 +278,15 @@ class pageEssays extends React.Component {
                 fileListCL[i].status = "done";
               }
               this.setState({ fileListCL: fileListCL });
-            } catch { }
+            } catch {}
             try {
               let fileListPortfolio = parsedData.Portfolio.fileList;
               for (var i = 0; i < fileListPortfolio.length; i++) {
                 fileListPortfolio[i].status = "done";
               }
               this.setState({ fileListPortfolio: fileListPortfolio });
-            } catch (e) { }
-          } catch (e) { }
+            } catch (e) {}
+          } catch (e) {}
         }
         this.setState({ loaded: true });
       });

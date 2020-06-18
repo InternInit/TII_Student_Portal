@@ -20,9 +20,18 @@ class Navbar extends Component {
     super(props);
     this.routeChange = this.routeChange.bind(this);
     this.state = {
-      current: "apply"
+      current: this.getCurrentKey()
     };
   }
+
+  getCurrentKey = () => {
+    if (window.location.pathname.includes("apply/")) {
+      return "apply";
+    }
+    let defaultKey = window.location.pathname;
+    let newDefaultKey = defaultKey.replace("/", "");
+    return newDefaultKey;
+  };
 
   //Click Handler
   handleClick = e => {
@@ -43,19 +52,39 @@ class Navbar extends Component {
         selectedKeys={[this.state.current]}
         mode="horizontal"
       >
-        <Menu.Item key="logo">
+        {/*Moved the logo to a Fragment instead of a menu item to prevent
+          random clicking until the dashboard is implemented in the next
+          version*/}
+        <React.Fragment>
           <img className="TII-logo" alt="Tii-logo" src={Logo} />
-        </Menu.Item>
-        <Menu.Item key="dashboard">
+        </React.Fragment>
+
+        {/*
+          Dashboard route for implementation in the next version.
+
+          <Menu.Item key="dashboard">
           <Link to="/dashboard">Dashboard</Link>
         </Menu.Item>
-        <Menu.Item key="how-to-apply" onClick={() => {
-          this.routeChange("/how-to-apply");
-        }}>How to Apply</Menu.Item>
+
+        */}
+        <Menu.Item
+          key="how-to-apply"
+          onClick={() => {
+            this.routeChange("/how-to-apply");
+          }}
+        >
+          How to Apply
+        </Menu.Item>
         <Menu.Item key="apply">
           <Link to="/apply/Internship-Info/">Apply</Link>
         </Menu.Item>
-        <Menu.Item key="submit">Submit</Menu.Item>
+
+        {/*
+          Special submission route for choosing schools to be implemented
+          in the next version.
+
+          <Menu.Item key="submit">Submit</Menu.Item>
+          */}
       </Menu>
     );
   }

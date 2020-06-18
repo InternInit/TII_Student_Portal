@@ -12,6 +12,7 @@
     "bootstrap": "^4.5.0",
     "form-data": "^3.0.0",
     "react": "^16.13.1",
+    "react-confetti": "^5.1.0",
     "react-dom": "^16.13.1",
     "react-fade-in": "^1.1.0",
     "react-loading": "^2.0.3",

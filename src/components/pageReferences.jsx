@@ -269,6 +269,7 @@ class PageReferences extends Component {
     console.log("FinishRefPage:", values);
     this.props.setCompletionState(3, true);
     this.props.onSubmit(values, "3");
+    this.routeChange("/submission-success");
   };
 
   setCompletionState = async () => {
@@ -305,7 +306,8 @@ class PageReferences extends Component {
     })
       .then(response => response.json())
       .then(data => {
-        let parsedData = JSON.parse(data);
+        let parsedRecv = JSON.parse(data);
+        let parsedData = parsedRecv[0];
         if (parsedData !== "No Info") {
           try {
             this.setState({ loaded: true });

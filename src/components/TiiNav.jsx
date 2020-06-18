@@ -18,7 +18,8 @@ import _ from 'lodash';
 
 class TiiNav extends React.Component {
   getInitialHighlight = () => {
-    switch (this.props.location.pathname) {
+    console.log(window.location.pathname)
+    switch (window.location.pathname) {
       case "/apply/internship-info":
         return Array.from("1");
         break;
@@ -32,7 +33,7 @@ class TiiNav extends React.Component {
         return Array.from("4");
         break;
     }
-  };
+  }
 
 
   componentDidUpdate(prevProps, prevState) {

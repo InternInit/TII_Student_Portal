@@ -18,7 +18,8 @@ import PageEssays from "./components/pageEssays";
 import PageReferences from "./components/pageReferences";
 import PageNotFound from "./components/pageNotFound";
 import Dashboard from "./components/dashboard";
-import HowtoApply from './components/HowtoApply';
+import HowtoApply from "./components/HowtoApply";
+import SubmissionSuccess from "./components/submissionSuccess";
 
 //CSS Imports
 import "./App.css";
@@ -53,7 +54,7 @@ const PageContainer = styled.div`
 
 class App extends Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.navRef = React.createRef();
     this.state = { wWidth: window.innerWidth, wHeight: window.innerHeight, isCollapsed: false, page: 0, submissionState: true, completionState: [false, false, false, false] }
   }
@@ -70,17 +71,18 @@ class App extends Component {
         method: "POST",
         headers: {
           "Authorization": "Bearer " + JSON.parse(JSON.stringify(this.inMemoryToken.token)),
-          "Content-Type": "text/plain"
+          "Content-Type": "text/plain",
+          "Completion-State": JSON.stringify(this.state.completionState)
         },
         body: JSON.stringify(values) + "#" + origin
       }).then(response =>
         response.json()).then(data => {
-          console.log(data);
+          console.log("Sent: " + data);
         });
     } else if (this.state.submissionState == false) {
-      console.log("Submission disabled")
+      console.log("Submission disabled");
     }
-  }
+  };
 
   onSubmit = (values, origin) => {
     if (this.state.submissionState == true) {
@@ -89,14 +91,14 @@ class App extends Component {
         headers: {
           Authorization:
             "Bearer " + JSON.parse(JSON.stringify(this.inMemoryToken.token)),
-          "Content-Type": "text/plain"
+          "Content-Type": "text/plain",
+          "Completion-State": JSON.stringify(this.state.completionState)
         },
         body: JSON.stringify(values) + "#" + origin + "#" + "submit"
       })
         .then(response => response.json())
         .then(data => {
           console.log(data);
-          window.location.href = "https://interninit.com";
         });
     } else if (this.state.submissionState == false) {
       console.log("Submission disabled");
@@ -355,25 +357,42 @@ class App extends Component {
         Source: JSON.parse(JSON.stringify(source))
       },
       body: fd
-    }).then(response => { });
+    }).then(response => {});
   };
 
   setCompletionState = (page, state) => {
-    let currentCompletionState = this.state.completionState
+    let currentCompletionState = this.state.completionState;
     try {
-      currentCompletionState[page] = state
-    } catch (e) {
-
-    }
-  }
+      currentCompletionState[page] = state;
+    } catch (e) {}
+  };
 
   getCompletionState = () => {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
-        resolve(this.state.completionState)
+        resolve(this.state.completionState);
       }, 10);
     });
+  };
 
+  getCachedCompletionState = async() => {
+    let token = await this.getJwt();
+    fetch("/get_user_data", {
+      method: "POST",
+      headers: {
+        Authorization: "Bearer " + JSON.parse(JSON.stringify(token))
+      },
+      body: 0
+    })
+      .then(response => response.json())
+      .then(data => {
+        let parsedRecv = JSON.parse(data);
+        if(parsedRecv != "No Info"){
+          let recvCompletionState = parsedRecv[1];
+          this.setState({completionState:recvCompletionState})
+        }
+
+      })
   }
 
 
@@ -405,6 +424,7 @@ class App extends Component {
   componentDidMount() {
     console.log("mounted");
     this.refresh();
+    this.getCachedCompletionState();
     this.interval = setInterval(() => this.resize(), 500)
     console.log(this.state)
     return () => clearInterval(this.interval);
@@ -424,9 +444,18 @@ class App extends Component {
             <Navbar />
           </header>
           <ReactSwitch>
-            <Route path="/dashboard" exact component={Dashboard} />
+            {/*
+              Implement in the next version with the official dashboard
+
+              <Route path="/dashboard" exact component={Dashboard} />
+              */}
             <Route path="/how-to-apply" exact component={HowtoApply} />
             <Route path="/apply">{this.AppContainer()}</Route>
+            <Route
+              path="/submission-success"
+              exact
+              component={SubmissionSuccess}
+            />
             <Route
               path="/"
               exact
@@ -440,7 +469,7 @@ class App extends Component {
             <Route path="*" render={props => <PageNotFound {...props} />} />
           </ReactSwitch>
         </Router>
-      </div >
+      </div>
     );
   }
 }
