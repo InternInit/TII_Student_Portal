@@ -55,24 +55,17 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.navRef = React.createRef();
-
+    this.state = { wWidth: window.innerWidth, wHeight: window.innerHeight, isCollapsed: false, page: 0, submissionState: true, completionState: [false, false, false, false] }
   }
 
   inMemoryToken;
   authParam = "absasd";
 
-  state = {
-    page: 0,
-    submissionState: true,
-    completionState: [false, false, false, false],
-    wWidth: window.innerWidth, wHeight: window.innerHeight, isCollapsed: false
-  };
-
 
 
 
   updateData = (values, origin) => {
-    if (this.state.submissionState == true) {
+    if (this.state.submissionState == true && typeof (this.inMemoryToken) != "undefined") {
       fetch("/update_user_data", {
         method: "POST",
         headers: {
@@ -412,7 +405,8 @@ class App extends Component {
   componentDidMount() {
     console.log("mounted");
     this.refresh();
-    this.interval = setInterval(() => this.resize(), 1000)
+    this.interval = setInterval(() => this.resize(), 500)
+    console.log(this.state)
     return () => clearInterval(this.interval);
   }
 
