@@ -500,9 +500,9 @@ class PagePersonal extends Component {
     })
       .then(response => response.json())
       .then(data => {
-        let parsedData = JSON.parse(data);
+        let parsedRecv = JSON.parse(data);
+        let parsedData = parsedRecv[0];
         if (parsedData !== "No Info") {
-          console.log(parsedData);
           this.setState({ loaded: true });
           this.formRef.current.setFieldsValue(parsedData);
         }

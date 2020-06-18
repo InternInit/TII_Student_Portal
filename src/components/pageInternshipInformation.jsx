@@ -649,7 +649,9 @@ class PageInternshipInformation extends Component {
     })
       .then(response => response.json())
       .then(data => {
-        let parsedData = JSON.parse(data);
+        let parsedRecv = JSON.parse(data);
+        let parsedData = parsedRecv[0];
+
         if (parsedData !== "No Info") {
           try {
             parsedData.dateOfStartAndEnd = [

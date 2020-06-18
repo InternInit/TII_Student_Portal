@@ -9,7 +9,7 @@ uploadApiUrl = "https://jzvyvnvxld.execute-api.us-east-1.amazonaws.com/beta/uplo
 username = "3og5ph16taqf598bchokdfs1r2"
 password = "bpuroud7lcqo5t3eomd6nvsspthu83c7e9taik2cqentf4f0o6g"
 tokenUrl = "https://auth.interninit.com/oauth2/token"
-testUrl = "https://webhook.site/c2795845-3b0d-4cf1-8ac4-3da037d87588"
+testUrl = "https://webhook.site/2d399065-ea56-45ea-b6a0-e19da9c75caa"
 
 @main.route("/get_user_data", methods=["POST"])
 def get_user_data():
@@ -17,6 +17,7 @@ def get_user_data():
     token = request.headers.get("Authorization").split(" ")[1]
     params={"page":page, "token":token}
     req = requests.get(cacheApiUrl, params=params)
+    print(req.text)
     return jsonify(req.text)
 
 
@@ -37,7 +38,7 @@ def update_user_data():
     headers = request.headers
     print(type(request.headers.get("Authorization")), request.headers.get("Authorization"))
     #req = requests.post(apiUrl, headers=request.headers,data = info)
-    req = requests.post(cacheApiUrl, headers = {"Authorization" : headers.get("Authorization")}, json = info)
+    req = requests.post(cacheApiUrl, headers = {"Authorization" : headers.get("Authorization"), "Completion-State" : headers.get("Completion-State")}, json = info)
     return req.text
 
 @main.route("/upload_user_files", methods=["POST"])

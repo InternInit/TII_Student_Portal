@@ -70,12 +70,13 @@ class App extends Component {
         method: "POST",
         headers: {
           "Authorization": "Bearer " + JSON.parse(JSON.stringify(this.inMemoryToken.token)),
-          "Content-Type": "text/plain"
+          "Content-Type": "text/plain",
+          "Completion-State": JSON.stringify(this.state.completionState)
         },
         body: JSON.stringify(values) + "#" + origin
       }).then(response =>
         response.json()).then(data => {
-          console.log(data);
+          console.log("Sent: " + data);
         });
     } else if (this.state.submissionState == false) {
       console.log("Submission disabled")
@@ -376,6 +377,23 @@ class App extends Component {
 
   }
 
+  getCachedCompletionState = async() => {
+    let token = await this.getJwt();
+    fetch("/get_user_data", {
+      method: "POST",
+      headers: {
+        Authorization: "Bearer " + JSON.parse(JSON.stringify(token))
+      },
+      body: 0
+    })
+      .then(response => response.json())
+      .then(data => {
+        let parsedRecv = JSON.parse(data);
+        let recvCompletionState = parsedRecv[1];
+        this.setState({completionState:recvCompletionState})
+      })
+  }
+
   // BUG: PROBLEM WITH RENDERING THE DIFFERENT NAVBAR SELECTIONS
   renderNav = () => {
     const highlightKey = String([this.state.page + 1]);
@@ -395,6 +413,7 @@ class App extends Component {
   componentDidMount() {
     console.log("mounted");
     this.refresh();
+    this.getCachedCompletionState();
 
   }
 
