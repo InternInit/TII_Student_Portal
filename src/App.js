@@ -91,7 +91,8 @@ class App extends Component {
         headers: {
           Authorization:
             "Bearer " + JSON.parse(JSON.stringify(this.inMemoryToken.token)),
-          "Content-Type": "text/plain"
+          "Content-Type": "text/plain",
+          "Completion-State": JSON.stringify(this.state.completionState)
         },
         body: JSON.stringify(values) + "#" + origin + "#" + "submit"
       })
@@ -386,8 +387,11 @@ class App extends Component {
       .then(response => response.json())
       .then(data => {
         let parsedRecv = JSON.parse(data);
-        let recvCompletionState = parsedRecv[1];
-        this.setState({completionState:recvCompletionState})
+        if(parsedRecv != "No Info"){
+          let recvCompletionState = parsedRecv[1];
+          this.setState({completionState:recvCompletionState})
+        }
+
       })
   }
 
