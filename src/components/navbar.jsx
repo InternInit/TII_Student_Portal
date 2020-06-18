@@ -79,6 +79,15 @@ class Navbar extends Component {
           <Link to="/apply/Internship-Info/">Apply</Link>
         </Menu.Item>
 
+        <Menu.Item
+          key="logout"
+          onClick={() => {
+            this.props.logout();
+          }}
+        >
+          Logout
+        </Menu.Item>
+
         {/*
           Special submission route for choosing schools to be implemented
           in the next version.

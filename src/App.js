@@ -124,7 +124,6 @@ class App extends Component {
   AppContainer = () => {
     return (
       <React.Fragment>
-        <Button onClick={this.logout}> Logout </Button>
         <Layout>
           {this.renderNav()}
           <Content
@@ -431,7 +430,9 @@ class App extends Component {
         {this.resize()}
         <Router>
           <header>
-            <Navbar />
+            <Navbar
+              logout={this.logout}
+            />
           </header>
           <ReactSwitch>
             {/*
