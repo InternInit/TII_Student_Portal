@@ -1,8 +1,9 @@
-from flask import Blueprint, jsonify, request, redirect, make_response
+from flask import Blueprint, Flask, jsonify, request, redirect, make_response
 import requests
 import json
 
-main = Blueprint("main",__name__)
+#main = Blueprint("main",__name__)
+app = Flask(__name__)
 
 cacheApiUrl = "https://jzvyvnvxld.execute-api.us-east-1.amazonaws.com/beta/cache"
 uploadApiUrl = "https://jzvyvnvxld.execute-api.us-east-1.amazonaws.com/beta/upload"
@@ -11,7 +12,7 @@ password = "bpuroud7lcqo5t3eomd6nvsspthu83c7e9taik2cqentf4f0o6g"
 tokenUrl = "https://auth.interninit.com/oauth2/token"
 testUrl = "https://webhook.site/2d399065-ea56-45ea-b6a0-e19da9c75caa"
 
-@main.route("/get_user_data", methods=["POST"])
+@app.route("/get_user_data", methods=["POST"])
 def get_user_data():
     page = request.get_data().decode("utf-8")
     token = request.headers.get("Authorization").split(" ")[1]
@@ -21,7 +22,7 @@ def get_user_data():
     return jsonify(req.text)
 
 
-@main.route("/update_user_data", methods=["POST"])
+@app.route("/update_user_data", methods=["POST"])
 def update_user_data():
     body = request.get_data().decode("utf-8")
     body = body.split("#")
@@ -41,7 +42,7 @@ def update_user_data():
     req = requests.post(cacheApiUrl, headers = {"Authorization" : headers.get("Authorization"), "Completion-State" : headers.get("Completion-State")}, json = info)
     return req.text
 
-@main.route("/upload_user_files", methods=["POST"])
+@app.route("/upload_user_files", methods=["POST"])
 def upload_user_files():
     req = request.files
     headers = request.headers
@@ -59,7 +60,7 @@ def upload_user_files():
     print(req.text)
     return req.text,req.status_code
     '''
-@main.route("/auth", methods=["POST"])
+@app.route("/auth", methods=["POST"])
 def auth():
     rawBody = request.get_data()
     body = rawBody.decode("utf-8")
@@ -76,7 +77,7 @@ def auth():
         print("Invalid Grant")
         return jsonify("Invalid Grant")
 
-@main.route("/auth/refresh")
+@app.route("/auth/refresh")
 def refresh():
     refresh = request.cookies.get("refresh_token")
     if(refresh == None):
@@ -85,7 +86,7 @@ def refresh():
         return jsonify(refresh)
 
 
-@main.route("/auth/exchange")
+@app.route("/auth/exchange")
 def exchange():
     refresh = request.cookies.get("refresh_token")
     req = requests.post(tokenUrl, headers={"Authorization":"Basic M29nNXBoMTZ0YXFmNTk4YmNob2tkZnMxcjI6YnB1cm91ZDdsY3FvNXQzZW9tZDZudnNzcHRodTgzYzdlOXRhaWsyY3FlbnRmNGYwbzZn","Content-Type":"application/x-www-form-urlencoded"}, data={"grant_type" : "refresh_token", "client_id":username, "refresh_token":refresh})
@@ -93,8 +94,11 @@ def exchange():
     response = jsonify(req.text)
     return response
 
-@main.route("/logout")
+@app.route("/logout")
 def logout():
     resp = make_response(jsonify("https://auth.interninit.com/login?response_type=code&client_id=3og5ph16taqf598bchokdfs1r2&redirect_uri=http://localhost:3000"))
     resp.delete_cookie("refresh_token")
     return resp
+
+if __name__ == "__main__":
+    app.run(debug=True)
