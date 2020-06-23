@@ -34,7 +34,10 @@ import {
   useRouteMatch as match,
   useParams
 } from "react-router-dom";
+
 import pageInternshipInformation from "./components/pageInternshipInformation.jsx";
+
+import configurationFile from "./configuration_dev.json"
 
 //Declarations
 const { Header, Content, Footer, Sider } = Layout;
@@ -63,11 +66,9 @@ class App extends Component {
   authParam = "absasd";
 
 
-
-
   updateData = (values, origin) => {
     if (this.state.submissionState == true && typeof (this.inMemoryToken) != "undefined") {
-      fetch("/update_user_data", {
+      fetch("/api/update_user_data", {
         method: "POST",
         headers: {
           "Authorization": "Bearer " + JSON.parse(JSON.stringify(this.inMemoryToken.token)),
@@ -86,7 +87,7 @@ class App extends Component {
 
   onSubmit = (values, origin) => {
     if (this.state.submissionState == true) {
-      fetch("/update_user_data", {
+      fetch("/api/update_user_data", {
         method: "POST",
         headers: {
           Authorization:
@@ -234,7 +235,7 @@ class App extends Component {
   auth = () => {
     try {
       var authCode = this.authParam.split("=")[1];
-      fetch("/auth", {
+      fetch("/api/auth", {
         method: "POST",
         headers: {
           "Content-Type": "text/plain"
@@ -254,17 +255,17 @@ class App extends Component {
             console.log(this.inMemoryToken);
           } else {
             window.location.href =
-              "https://auth.interninit.com/login?response_type=code&client_id=3og5ph16taqf598bchokdfs1r2&redirect_uri=http://localhost:3000";
+              configurationFile.authUrl;
           }
         });
     } catch (e) {
       window.location.href =
-        "https://auth.interninit.com/login?response_type=code&client_id=3og5ph16taqf598bchokdfs1r2&redirect_uri=http://localhost:3000";
+        configurationFile.authUrl;
     }
   };
 
   refresh = () => {
-    fetch("/auth/refresh")
+    fetch("/api/auth/refresh")
       .then(response => response.json())
       .then(data => {
         if (data == null) {
@@ -287,7 +288,7 @@ class App extends Component {
 
   exchange = () => {
     console.log("Exchanging");
-    fetch("/auth/exchange")
+    fetch("/api/auth/exchange")
       .then(response => response.json())
       .then(data => {
         data = JSON.parse(data);
@@ -305,7 +306,7 @@ class App extends Component {
   };
 
   logout = () => {
-    fetch("/logout")
+    fetch("/api/logout")
       .then(response => response.json())
       .then(data => {
         console.log(typeof data);
@@ -339,7 +340,7 @@ class App extends Component {
     }
     let token = await this.getJwt();
 
-    fetch("/upload_user_files", {
+    fetch("/api/upload_user_files", {
       method: "POST",
       headers: {
         Authorization: "Bearer " + JSON.parse(JSON.stringify(token)),
@@ -366,7 +367,7 @@ class App extends Component {
 
   getCachedCompletionState = async() => {
     let token = await this.getJwt();
-    fetch("/get_user_data", {
+    fetch("/api/get_user_data", {
       method: "POST",
       headers: {
         Authorization: "Bearer " + JSON.parse(JSON.stringify(token))

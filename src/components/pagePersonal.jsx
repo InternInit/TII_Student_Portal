@@ -491,7 +491,7 @@ class PagePersonal extends Component {
 
   getUserData = async () => {
     let token = await this.props.getJwt();
-    fetch("/get_user_data", {
+    fetch("/api/get_user_data", {
       method: "POST",
       headers: {
         Authorization: "Bearer " + JSON.parse(JSON.stringify(token))
