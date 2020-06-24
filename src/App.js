@@ -37,8 +37,15 @@ import {
 
 import pageInternshipInformation from "./components/pageInternshipInformation.jsx";
 
-import configurationFile from "./configuration_prod.json"
+import devConfigurationFile from "./configuration_dev.json"
+import prodConfigurationFile from "./configuration_prod.json"
 
+let configurationFile = {}
+if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development'){
+  configurationFile = devConfigurationFile
+} else {
+  configurationFile = prodConfigurationFile
+}
 //Declarations
 const { Header, Content, Footer, Sider } = Layout;
 
