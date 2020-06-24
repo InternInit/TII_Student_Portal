@@ -37,7 +37,7 @@ import {
 
 import pageInternshipInformation from "./components/pageInternshipInformation.jsx";
 
-import configurationFile from "./configuration_dev.json"
+import configurationFile from "./configuration_prod.json"
 
 //Declarations
 const { Header, Content, Footer, Sider } = Layout;
