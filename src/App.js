@@ -45,7 +45,13 @@ if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development'){
   configurationFile = devConfigurationFile
 } else {
   configurationFile = prodConfigurationFile
+  console.log = noop;
+  console.warn = noop;
+  console.error = noop;
 }
+
+function noop() {}
+
 //Declarations
 const { Header, Content, Footer, Sider } = Layout;
 
