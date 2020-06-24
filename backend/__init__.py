@@ -33,7 +33,7 @@ if(app.config.get("ENV") == "development"):
     tokenAuth = base64.b64encode(tokenAuthBytes).decode("ascii")
 elif(app.config.get("ENV") == "production"):
     sentry_sdk.init(
-    dsn="https://9f0c84bc369a46348ccb7a3ec53f3ab1@o411757.ingest.sentry.io/5287619",
+    dsn="https://8537ba8551334943a20d5b615f267b36@o412197.ingest.sentry.io/5288579",
     integrations=[FlaskIntegration()]
     )
     username = "3og5ph16taqf598bchokdfs1r2"
