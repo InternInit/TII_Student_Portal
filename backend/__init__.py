@@ -3,9 +3,12 @@ import requests
 import json
 import os
 import base64
+import sentry_sdk
+from sentry_sdk.integrations.flask import FlaskIntegration
 
 #main = Blueprint("main",__name__)
 app = Flask(__name__)
+
 
 cacheApiUrl = "https://jzvyvnvxld.execute-api.us-east-1.amazonaws.com/beta/cache"
 uploadApiUrl = "https://jzvyvnvxld.execute-api.us-east-1.amazonaws.com/beta/upload"
@@ -19,31 +22,27 @@ redirect_uri = ""
 tokenUrl = ""
 logoutUrl = ""
 
-@app.before_request
-def determine_env():
-    global tokenAuth
-    global username
-    global password
-    global redirect_uri
-    global tokenUrl
-    global logoutUrl
 
-    if(app.config.get("ENV") == "development"):
-        username = "12ar1kqn0474torm00iisksbtv"
-        password = "1blet7j9ldoj678qk5mskc1oq8e8em02ttftnkvp4ougqc2mf3qc"
-        redirect_uri = "http://localhost:3000"
-        tokenUrl = "https://interninit.auth.us-east-1.amazoncognito.com/oauth2/token"
-        logoutUrl = "https://interninit.auth.us-east-1.amazoncognito.com/login?response_type=code&client_id=12ar1kqn0474torm00iisksbtv&redirect_uri=http://localhost:3000"
-        tokenAuthBytes = (username + ":" + password).encode("ascii")
-        tokenAuth = base64.b64encode(tokenAuthBytes).decode("ascii")
-    elif(app.config.get("ENV") == "production"):
-        username = "3og5ph16taqf598bchokdfs1r2"
-        password = "bpuroud7lcqo5t3eomd6nvsspthu83c7e9taik2cqentf4f0o6g"
-        redirect_uri = "https://apply.interninit.com"
-        tokenUrl = "https://auth.interninit.com/oauth2/token"
-        logoutUrl = "https://auth.interninit.com/login?response_type=code&client_id=3og5ph16taqf598bchokdfs1r2&redirect_uri=https://apply.interninit.com"
-        tokenAuthBytes = (username + ":" + password).encode("ascii")
-        tokenAuth = base64.b64encode(tokenAuthBytes).decode("ascii")
+if(app.config.get("ENV") == "development"):
+    username = "12ar1kqn0474torm00iisksbtv"
+    password = "1blet7j9ldoj678qk5mskc1oq8e8em02ttftnkvp4ougqc2mf3qc"
+    redirect_uri = "http://localhost:3000"
+    tokenUrl = "https://interninit.auth.us-east-1.amazoncognito.com/oauth2/token"
+    logoutUrl = "https://interninit.auth.us-east-1.amazoncognito.com/login?response_type=code&client_id=12ar1kqn0474torm00iisksbtv&redirect_uri=http://localhost:3000"
+    tokenAuthBytes = (username + ":" + password).encode("ascii")
+    tokenAuth = base64.b64encode(tokenAuthBytes).decode("ascii")
+elif(app.config.get("ENV") == "production"):
+    sentry_sdk.init(
+    dsn="https://9f0c84bc369a46348ccb7a3ec53f3ab1@o411757.ingest.sentry.io/5287619",
+    integrations=[FlaskIntegration()]
+    )
+    username = "3og5ph16taqf598bchokdfs1r2"
+    password = "bpuroud7lcqo5t3eomd6nvsspthu83c7e9taik2cqentf4f0o6g"
+    redirect_uri = "https://apply.interninit.com"
+    tokenUrl = "https://auth.interninit.com/oauth2/token"
+    logoutUrl = "https://auth.interninit.com/login?response_type=code&client_id=3og5ph16taqf598bchokdfs1r2&redirect_uri=https://apply.interninit.com"
+    tokenAuthBytes = (username + ":" + password).encode("ascii")
+    tokenAuth = base64.b64encode(tokenAuthBytes).decode("ascii")
 
 @app.route("/api/")
 def root():
