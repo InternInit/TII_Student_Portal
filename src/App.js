@@ -18,7 +18,8 @@ import PageEssays from "./components/pageEssays";
 import PageReferences from "./components/pageReferences";
 import PageNotFound from "./components/pageNotFound";
 import Dashboard from "./components/dashboard";
-import HowtoApply from './components/HowtoApply';
+import HowtoApply from "./components/HowtoApply";
+import SubmissionSuccess from "./components/submissionSuccess";
 
 //CSS Imports
 import "./App.css";
@@ -49,38 +50,39 @@ const PageContainer = styled.div`
   border-radius: 10px;
 `;
 
+
+
 class App extends Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.navRef = React.createRef();
+    this.state = { wWidth: window.innerWidth, wHeight: window.innerHeight, isCollapsed: false, page: 0, submissionState: true, completionState: [false, false, false, false] }
   }
 
   inMemoryToken;
   authParam = "absasd";
 
-  state = {
-    page: 0,
-    submissionState: true,
-    completionState: [false, false, false, false]
-  };
+
+
 
   updateData = (values, origin) => {
-    if (this.state.submissionState == true) {
+    if (this.state.submissionState == true && typeof (this.inMemoryToken) != "undefined") {
       fetch("/update_user_data", {
         method: "POST",
         headers: {
           "Authorization": "Bearer " + JSON.parse(JSON.stringify(this.inMemoryToken.token)),
-          "Content-Type": "text/plain"
+          "Content-Type": "text/plain",
+          "Completion-State": JSON.stringify(this.state.completionState)
         },
         body: JSON.stringify(values) + "#" + origin
       }).then(response =>
         response.json()).then(data => {
-          console.log(data);
+          console.log("Sent: " + data);
         });
     } else if (this.state.submissionState == false) {
-      console.log("Submission disabled")
+      console.log("Submission disabled");
     }
-  }
+  };
 
   onSubmit = (values, origin) => {
     if (this.state.submissionState == true) {
@@ -89,14 +91,14 @@ class App extends Component {
         headers: {
           Authorization:
             "Bearer " + JSON.parse(JSON.stringify(this.inMemoryToken.token)),
-          "Content-Type": "text/plain"
+          "Content-Type": "text/plain",
+          "Completion-State": JSON.stringify(this.state.completionState)
         },
         body: JSON.stringify(values) + "#" + origin + "#" + "submit"
       })
         .then(response => response.json())
         .then(data => {
           console.log(data);
-          window.location.href = "https://interninit.com";
         });
     } else if (this.state.submissionState == false) {
       console.log("Submission disabled");
@@ -158,13 +160,13 @@ class App extends Component {
               render={props => {
                 return (
                   (this.authParam = props.location.search),
-                  <Redirect to="/apply/Internship-Info" />
+                  <Redirect to="/apply/internship-info" />
                 );
               }}
             />
 
             <Route
-              path="/apply/Internship-Info"
+              path="/apply/internship-info"
               render={props => (
                 <PageInternshipInformation
                   {...props}
@@ -178,7 +180,7 @@ class App extends Component {
             />
 
             <Route
-              path="/apply/Personal"
+              path="/apply/personal"
               render={props => (
                 <PagePersonal
                   {...props}
@@ -192,7 +194,7 @@ class App extends Component {
             />
 
             <Route
-              path="/apply/Written-Work"
+              path="/apply/written-work"
               render={props => (
                 <PageEssays
                   {...props}
@@ -207,7 +209,7 @@ class App extends Component {
             />
 
             <Route
-              path="/apply/References"
+              path="/apply/references"
               render={props => (
                 <PageReferences
                   {...props}
@@ -225,7 +227,7 @@ class App extends Component {
               render={props => {
                 return (
                   (this.authParam = props.location.search),
-                  <Redirect to="/apply/Internship-Info/" />
+                  <Redirect to="/apply/internship-info/" />
                 );
               }}
             />
@@ -355,25 +357,51 @@ class App extends Component {
         Source: JSON.parse(JSON.stringify(source))
       },
       body: fd
-    }).then(response => { });
+    }).then(response => {});
   };
 
   setCompletionState = (page, state) => {
-    let currentCompletionState = this.state.completionState
+    let currentCompletionState = this.state.completionState;
     try {
-      currentCompletionState[page] = state
-    } catch (e) {
-
-    }
-  }
+      currentCompletionState[page] = state;
+    } catch (e) {}
+  };
 
   getCompletionState = () => {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
-        resolve(this.state.completionState)
+        resolve(this.state.completionState);
       }, 10);
     });
+  };
 
+  getCachedCompletionState = async() => {
+    let token = await this.getJwt();
+    fetch("/get_user_data", {
+      method: "POST",
+      headers: {
+        Authorization: "Bearer " + JSON.parse(JSON.stringify(token))
+      },
+      body: 0
+    })
+      .then(response => response.json())
+      .then(data => {
+        let parsedRecv = JSON.parse(data);
+        if(parsedRecv != "No Info"){
+          let recvCompletionState = parsedRecv[1];
+          this.setState({completionState:recvCompletionState})
+        }
+
+      })
+  }
+
+
+  resize = () => {
+    let hideNav = (window.innerWidth <= 1300);
+    if (hideNav !== this.state.isCollapsed) {
+      this.setState({ isCollapsed: hideNav });
+    }
+    //console.log("After: currentHideNav:" + currentHideNav + ", isCollapsed:" + isCollapsed + ", WindowInnerWidth:" + window.innerWidth)
   }
 
   // BUG: PROBLEM WITH RENDERING THE DIFFERENT NAVBAR SELECTIONS
@@ -388,6 +416,7 @@ class App extends Component {
         highlightKey={highlightKey}
         getCompletionState={this.getCompletionState}
         onSubmit={this.onSubmit}
+        isCollapsed={this.state.isCollapsed}
       />
     );
   };
@@ -395,34 +424,52 @@ class App extends Component {
   componentDidMount() {
     console.log("mounted");
     this.refresh();
+    this.getCachedCompletionState();
+    this.interval = setInterval(() => this.resize(), 500)
+    console.log(this.state)
+    return () => clearInterval(this.interval);
+  }
 
+  componentWillUnmount() {
+    //This is here because I don't know if the return statement will work lol
+    clearInterval(this.interval);
   }
 
   render() {
     return (
       <div className="App">
+        {this.resize()}
         <Router>
           <header>
             <Navbar />
           </header>
           <ReactSwitch>
-            <Route path="/dashboard" exact component={Dashboard} />
+            {/*
+              Implement in the next version with the official dashboard
+
+              <Route path="/dashboard" exact component={Dashboard} />
+              */}
             <Route path="/how-to-apply" exact component={HowtoApply} />
             <Route path="/apply">{this.AppContainer()}</Route>
+            <Route
+              path="/submission-success"
+              exact
+              component={SubmissionSuccess}
+            />
             <Route
               path="/"
               exact
               render={props => {
                 return (
                   (this.authParam = props.location.search),
-                  <Redirect to="/apply/Internship-Info" />
+                  < Redirect to="/apply/internship-info" />
                 );
               }}
             />
             <Route path="*" render={props => <PageNotFound {...props} />} />
           </ReactSwitch>
         </Router>
-      </div >
+      </div>
     );
   }
 }

@@ -146,7 +146,7 @@ class pageEssays extends React.Component {
                 Previous
               </Button>
               <Button className="next-button" type="primary" htmlType="submit">
-                Next
+                Save and Continue
               </Button>
             </Form.Item>
           </Form>
@@ -173,7 +173,7 @@ class pageEssays extends React.Component {
     console.log("FinishedPageEssays:", values);
     this.props.setCompletionState(2, true);
     this.props.updateData(values, "2");
-    this.routeChange("/apply/References");
+    this.routeChange("/apply/references");
   };
 
   setCompletionState = async () => {
@@ -190,7 +190,7 @@ class pageEssays extends React.Component {
 
   backHandler = () => {
     this.props.updateData(this.formRef.current.getFieldsValue(), "2");
-    this.routeChange("/apply/Personal");
+    this.routeChange("/apply/personal");
   };
 
   customRequestCL = ({ onSuccess, onError, file }) => {
@@ -264,7 +264,8 @@ class pageEssays extends React.Component {
     })
       .then(response => response.json())
       .then(data => {
-        let parsedData = JSON.parse(data);
+        let parsedRecv = JSON.parse(data);
+        let parsedData = parsedRecv[0];
         if (parsedData !== "No Info") {
           try {
             console.log(parsedData);
@@ -277,15 +278,15 @@ class pageEssays extends React.Component {
                 fileListCL[i].status = "done";
               }
               this.setState({ fileListCL: fileListCL });
-            } catch { }
+            } catch {}
             try {
               let fileListPortfolio = parsedData.Portfolio.fileList;
               for (var i = 0; i < fileListPortfolio.length; i++) {
                 fileListPortfolio[i].status = "done";
               }
               this.setState({ fileListPortfolio: fileListPortfolio });
-            } catch (e) { }
-          } catch (e) { }
+            } catch (e) {}
+          } catch (e) {}
         }
         this.setState({ loaded: true });
       });
@@ -295,7 +296,7 @@ class pageEssays extends React.Component {
 
   routeChange = path => {
     console.log(path);
-    if (path === "/apply/Personal") {
+    if (path === "/apply/personal") {
       this.props.clickTwo();
     } else {
       this.props.clickFour();

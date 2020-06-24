@@ -573,7 +573,7 @@ class PageInternshipInformation extends Component {
             {/*Save and Continue or Next*/}
             <Form.Item>
               <Button className="next-button" type="primary" htmlType="submit">
-                Next
+                Save and Continue
               </Button>
               <Button
                 className="next-button"
@@ -594,7 +594,7 @@ class PageInternshipInformation extends Component {
     console.log("FinishedPageInternship:", values);
     this.props.setCompletionState(0, true);
     this.props.updateData(values, "0");
-    this.routeChange("/apply/Personal");
+    this.routeChange("/apply/personal");
   };
 
   setCompletionState = async () => {
@@ -649,7 +649,9 @@ class PageInternshipInformation extends Component {
     })
       .then(response => response.json())
       .then(data => {
-        let parsedData = JSON.parse(data);
+        let parsedRecv = JSON.parse(data);
+        let parsedData = parsedRecv[0];
+
         if (parsedData !== "No Info") {
           try {
             parsedData.dateOfStartAndEnd = [

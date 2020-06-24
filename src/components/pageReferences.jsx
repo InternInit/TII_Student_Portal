@@ -48,7 +48,7 @@ const formItemProps = {
     align: "left",
     className: "pageReferences"
   },
-  inputField: function(required, field, label, name, validationType, pattern) {
+  inputField: function (required, field, label, name, validationType, pattern) {
     return {
       key: [field.fieldKey, name],
       label: boldify(label),
@@ -269,6 +269,7 @@ class PageReferences extends Component {
     console.log("FinishRefPage:", values);
     this.props.setCompletionState(3, true);
     this.props.onSubmit(values, "3");
+    this.routeChange("/submission-success");
   };
 
   setCompletionState = async () => {
@@ -285,7 +286,7 @@ class PageReferences extends Component {
 
   backHandler = () => {
     this.props.updateData(this.formRef.current.getFieldsValue(), "3");
-    this.routeChange("/apply/Written-Work");
+    this.routeChange("/apply/written-work");
   };
 
   routeChange = path => {
@@ -305,12 +306,13 @@ class PageReferences extends Component {
     })
       .then(response => response.json())
       .then(data => {
-        let parsedData = JSON.parse(data);
+        let parsedRecv = JSON.parse(data);
+        let parsedData = parsedRecv[0];
         if (parsedData !== "No Info") {
           try {
             this.setState({ loaded: true });
             this.formRef.current.setFieldsValue(parsedData);
-          } catch (e) {}
+          } catch (e) { }
         }
         this.setState({ loaded: true });
       });

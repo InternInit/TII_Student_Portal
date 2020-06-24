@@ -94,6 +94,7 @@ class HowtoApply extends React.Component {
                     width: '70%',
                     display: "flex",
                     flexDirection: 'column',
+                    paddingBottom: '10%'
                 }}>
                     <Header style={{
                         marginTop: '110px'
@@ -234,7 +235,7 @@ class HowtoApply extends React.Component {
                     <div style={{ backgroundColor: '#ededed', width: '100%' }}>
                         <Image src={Referencesimg} alt='Personal' />
                     </div>
-                    <Caption>
+                    <Caption >
                         This is what our reference tab looks like. Here, you can add or delete references as you please.
                         A reference could be someone you worked with in the past, or a trusted adult. They serve to give us information
                         regarding your past work experience, and vouche for you to hiring companies.
