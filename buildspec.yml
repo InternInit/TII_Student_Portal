@@ -14,9 +14,14 @@ phases:
     commands:
       - echo Building...
       - npm run build
-      - cp ./appspec.yml ./build/appspec.yml
+  post_build:
+    commands:
+      - mkdir ./fullbuild
+      - cp -a ./build ./fullbuild/frontend
+      - cp -a ./backend ./fullbuild/backend 
+      - cp ./appspec.yml ./fullbuild/appspec.yml
 artifacts:
   files:
     - "**/*"
   discard-paths: no
-  base-directory: build
+  base-directory: fullbuild

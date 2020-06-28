@@ -1,5 +1,7 @@
 version: 0.0
 os: linux
 files:
-  - source: /
-    destination: /home/bitnami/test
+  - source: /frontend
+    destination: /home/bitnami/test/frontend
+  - source: /backend
+    destination: /home/bitnami/test/backend
