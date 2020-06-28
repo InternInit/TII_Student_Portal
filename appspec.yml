@@ -3,8 +3,3 @@ os: linux
 files:
   - source: /backend
     destination: /home/bitnami/test
-hooks:
-  BeforeInstall:
-    - location: scripts/cleanup.sh
-      timeout: 300
-      runas: root
