@@ -1,7 +1,7 @@
 version: 0.0
 os: linux
 files:
-  - source: /frontend
-    destination: /home/bitnami/test/frontend
-  - source: /backend
-    destination: /home/bitnami/test/backend
+  - source: /frontend/
+    destination: /home/bitnami/apps/react/htdocs
+  - source: /backend/
+    destination: /home/bitnami/FLASKAPPS/backend
