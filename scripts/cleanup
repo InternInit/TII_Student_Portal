@@ -1,0 +1,3 @@
+#!/bin/bash
+rm -r /home/bitnami/apps/react/htdocs/*
+rm -r /home/bitnami/FLASKAPPS/backend/*
