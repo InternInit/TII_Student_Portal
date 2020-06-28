@@ -3,5 +3,3 @@ os: linux
 files:
   - source: /frontend
     destination: /home/bitnami/apps/react/htdocs
-  - source: /backend
-    destination: /home/bitnami/FLASKAPPS/backend
