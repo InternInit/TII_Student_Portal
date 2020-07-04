@@ -17,7 +17,7 @@ import PageInternshipInformation from "./components/pageInternshipInformation.js
 import PageEssays from "./components/pageEssays";
 import PageReferences from "./components/pageReferences";
 import PageNotFound from "./components/pageNotFound";
-import Dashboard from "./components/dashboard";
+import Dashboard from "./components/dashboard/dashboard.jsx";
 import HowtoApply from "./components/HowtoApply";
 import SubmissionSuccess from "./components/submissionSuccess";
 
@@ -37,14 +37,14 @@ import {
 
 import pageInternshipInformation from "./components/pageInternshipInformation.jsx";
 
-import devConfigurationFile from "./configuration_dev.json"
-import prodConfigurationFile from "./configuration_prod.json"
+import devConfigurationFile from "./configuration_dev.json";
+import prodConfigurationFile from "./configuration_prod.json";
 
-let configurationFile = {}
-if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development'){
-  configurationFile = devConfigurationFile
+let configurationFile = {};
+if (!process.env.NODE_ENV || process.env.NODE_ENV === "development") {
+  configurationFile = devConfigurationFile;
 } else {
-  configurationFile = prodConfigurationFile
+  configurationFile = prodConfigurationFile;
   console.log = noop;
   console.warn = noop;
   console.error = noop;
@@ -66,31 +66,40 @@ const PageContainer = styled.div`
   border-radius: 10px;
 `;
 
-
-
 class App extends Component {
   constructor(props) {
     super(props);
     this.navRef = React.createRef();
-    this.state = { wWidth: window.innerWidth, wHeight: window.innerHeight, isCollapsed: false, page: 0, submissionState: true, completionState: [false, false, false, false] }
+    this.state = {
+      wWidth: window.innerWidth,
+      wHeight: window.innerHeight,
+      isCollapsed: false,
+      page: 0,
+      submissionState: true,
+      completionState: [false, false, false, false]
+    };
   }
 
   inMemoryToken;
   authParam = "absasd";
 
-
   updateData = (values, origin) => {
-    if (this.state.submissionState == true && typeof (this.inMemoryToken) != "undefined") {
+    if (
+      this.state.submissionState == true &&
+      typeof this.inMemoryToken != "undefined"
+    ) {
       fetch("/api/update_user_data", {
         method: "POST",
         headers: {
-          "Authorization": "Bearer " + JSON.parse(JSON.stringify(this.inMemoryToken.token)),
+          Authorization:
+            "Bearer " + JSON.parse(JSON.stringify(this.inMemoryToken.token)),
           "Content-Type": "text/plain",
           "Completion-State": JSON.stringify(this.state.completionState)
         },
         body: JSON.stringify(values) + "#" + origin
-      }).then(response =>
-        response.json()).then(data => {
+      })
+        .then(response => response.json())
+        .then(data => {
           console.log("Sent: " + data);
         });
     } else if (this.state.submissionState == false) {
@@ -244,7 +253,6 @@ class App extends Component {
     );
   };
 
-
   auth = () => {
     try {
       var authCode = this.authParam.split("=")[1];
@@ -267,13 +275,11 @@ class App extends Component {
             };
             console.log(this.inMemoryToken);
           } else {
-            window.location.href =
-              configurationFile.authUrl;
+            window.location.href = configurationFile.authUrl;
           }
         });
     } catch (e) {
-      window.location.href =
-        configurationFile.authUrl;
+      window.location.href = configurationFile.authUrl;
     }
   };
 
@@ -378,7 +384,7 @@ class App extends Component {
     });
   };
 
-  getCachedCompletionState = async() => {
+  getCachedCompletionState = async () => {
     let token = await this.getJwt();
     fetch("/api/get_user_data", {
       method: "POST",
@@ -390,22 +396,20 @@ class App extends Component {
       .then(response => response.json())
       .then(data => {
         let parsedRecv = JSON.parse(data);
-        if(parsedRecv != "No Info"){
+        if (parsedRecv != "No Info") {
           let recvCompletionState = parsedRecv[1];
-          this.setState({completionState:recvCompletionState})
+          this.setState({ completionState: recvCompletionState });
         }
-
-      })
-  }
-
+      });
+  };
 
   resize = () => {
-    let hideNav = (window.innerWidth <= 1300);
+    let hideNav = window.innerWidth <= 1300;
     if (hideNav !== this.state.isCollapsed) {
       this.setState({ isCollapsed: hideNav });
     }
     //console.log("After: currentHideNav:" + currentHideNav + ", isCollapsed:" + isCollapsed + ", WindowInnerWidth:" + window.innerWidth)
-  }
+  };
 
   // BUG: PROBLEM WITH RENDERING THE DIFFERENT NAVBAR SELECTIONS
   renderNav = () => {
@@ -428,8 +432,8 @@ class App extends Component {
     console.log("mounted");
     this.refresh();
     this.getCachedCompletionState();
-    this.interval = setInterval(() => this.resize(), 500)
-    console.log(this.state)
+    this.interval = setInterval(() => this.resize(), 500);
+    console.log(this.state);
     return () => clearInterval(this.interval);
   }
 
@@ -444,16 +448,10 @@ class App extends Component {
         {this.resize()}
         <Router>
           <header>
-            <Navbar
-              logout={this.logout}
-            />
+            <Navbar logout={this.logout} />
           </header>
           <ReactSwitch>
-            {/*
-              Implement in the next version with the official dashboard
-
-              <Route path="/dashboard" exact component={Dashboard} />
-              */}
+            <Route path="/dashboard" exact component={Dashboard} />
             <Route path="/how-to-apply" exact component={HowtoApply} />
             <Route path="/apply">{this.AppContainer()}</Route>
             <Route
@@ -467,7 +465,7 @@ class App extends Component {
               render={props => {
                 return (
                   (this.authParam = props.location.search),
-                  < Redirect to="/apply/internship-info" />
+                  <Redirect to="/apply/internship-info" />
                 );
               }}
             />

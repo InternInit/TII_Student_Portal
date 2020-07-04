@@ -1,0 +1,52 @@
+/*
+============================================================
+************************************************************
+                  Standard Design Changes
+************************************************************
+============================================================
+*/
+
+/* Heading stylings for dashboard modules */
+.module-name {
+  font-family: lato;
+  font-weight: bold;
+  font-size: 36px;
+  line-height: 43px;
+  align-items: center;
+  text-align: left;
+  margin-top: 3%;
+
+  color: #1f1f1f;
+}
+
+html {
+  background-color: gray;
+}
+
+/*
+============================================================
+************************************************************
+                    ANT DESIGN OVERRIDES
+************************************************************
+============================================================
+*/
+
+.dashboard-nav.ant-menu-horizontal > .ant-menu-item:hover,
+.dashboard-nav.ant-menu-horizontal > .ant-menu-submenu:hover,
+.dashboard-nav.ant-menu-horizontal > .ant-menu-item-active,
+.dashboard-nav.ant-menu-horizontal > .ant-menu-submenu-active,
+.dashboard-nav.ant-menu-horizontal > .ant-menu-item-open,
+.dashboard-nav.ant-menu-horizontal > .ant-menu-submenu-open,
+.dashboard-nav.ant-menu-horizontal > .ant-menu-item-selected,
+.dashboard-nav.ant-menu-horizontal > .ant-menu-submenu-selected {
+  color: #1890ff;
+  border-bottom: 5px solid #1890ff;
+}
+
+.dashboard-nav.ant-menu-item-selected {
+  color: #1890ff;
+}
+
+.dashboard-nav.ant-menu-item {
+  color: ##1f1f1f;
+}
