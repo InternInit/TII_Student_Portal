@@ -5,8 +5,8 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import * as Sentry from '@sentry/browser';
 
-if (!process.env.NODE_ENV || process.env.NODE_ENV === 'production'){
-  Sentry.init({dsn: "https://0dfd0aeae06045b0b2f2759dcbcc0efa@o412197.ingest.sentry.io/5288578"});
+if (!process.env.NODE_ENV || process.env.NODE_ENV === 'production') {
+  Sentry.init({ dsn: "https://0dfd0aeae06045b0b2f2759dcbcc0efa@o412197.ingest.sentry.io/5288578" });
 }
 
 ReactDOM.render(

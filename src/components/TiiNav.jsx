@@ -92,7 +92,7 @@ class TiiNav extends React.Component {
           overflow: "initial",
           width: "207px",
           margin: "10px",
-          marginTop: "5%"
+          marginTop: "8%"
         }}
 
         //Collapsing
