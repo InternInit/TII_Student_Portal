@@ -6,7 +6,7 @@ import "../../App.css";
 import "./dashboard.css";
 import { Layout, Switch, Button } from "antd";
 
-import Companytab from './Companytab.js'
+import Companytab from "./Companytab.js";
 
 const PageContainer = styled.div`
   width: 90%;
@@ -45,9 +45,8 @@ class Dashboard extends Component {
             <PageContainer>
               <WelcomeHeader>Welcome Kevin</WelcomeHeader>
               <DashboardNavBar />
+              <hr />
               <ApplicationProgress />
-
-
             </PageContainer>
           </Content>
         </Layout>
