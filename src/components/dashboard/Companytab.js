@@ -117,7 +117,8 @@ class CLabel extends React.Component {
                         height: '36px',
                         objectFit: 'contain',
                         backgroundColor: 'blue',
-                        marginLeft: '3.5%'
+                        marginLeft: '3.5%',
+                        marginBottom: '18px'
                     }} src='' alt='Logo' />
 
                     {/**company name and job */}
@@ -146,13 +147,16 @@ class DroppedView extends React.Component {
             <div style={{
                 display: 'flex',
                 flexDirection: 'column',
+                padding: '12px'
             }}>
                 <AProgressTab />
                 <div style={{
                     display: 'flex',
                     flexDirection: 'row',
                     justifyContent: 'space-evenly',
-                    marginTop: '1%'
+                    marginTop: '1%',
+                    paddingTop: '8px',
+                    paddingBottom: '8px'
                 }}>
                     <Button style={{
                         backgroundColor: '#BFBFBF',
