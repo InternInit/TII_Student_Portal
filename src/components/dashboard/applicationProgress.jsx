@@ -5,6 +5,7 @@ import "./dashboard.css";
 import "antd/dist/antd.css";
 import { Progress } from "antd";
 import { CheckCircleTwoTone } from "@ant-design/icons";
+import QueueAnim from "rc-queue-anim";
 
 /*
 
@@ -85,6 +86,13 @@ let percentComplete = [
 ];
 
 class ApplicationProgress extends Component {
+  state = {
+    internshipInfoChecklist: false,
+    personalChecklist: false,
+    essayChecklist: false,
+    referencesChecklist: false
+  };
+
   render() {
     return (
       <React.Fragment>
@@ -105,8 +113,13 @@ class ApplicationProgress extends Component {
               </PercentHeader>
               <Progress
                 percent={section[1]}
-                trailColor={section[2]}
-                strokeColor={section[1] < 100 ? section[3] : "#52c41a"}
+                trailColor="#e6f7ff"
+                strokeColor={
+                  //section[1] < 100 ? section[3] : "#52c41a"
+                  section[1] < 100
+                    ? { from: "#108ee9", to: "#87d068" }
+                    : "#52c41a"
+                }
                 strokeWidth="15px"
                 status="active"
                 showInfo={false}

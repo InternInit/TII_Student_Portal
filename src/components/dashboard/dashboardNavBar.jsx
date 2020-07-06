@@ -18,12 +18,12 @@ class DashboardNavBar extends Component {
       <React.Fragment>
         <Menu
           className="dashboard-nav"
-          defaultSelectedKeys={["my-applications"]}
+          defaultSelectedKeys={["my-internships"]}
           style={{ backgroundColor: "#F5F5F5" }}
           mode="horizontal"
         >
-          <Menu.Item style={MenuItemStyle} key="my-applications">
-            My Applications
+          <Menu.Item style={MenuItemStyle} key="my-internships">
+            My Internships
           </Menu.Item>
           <Menu.Item style={MenuItemStyle} key="add-companies">
             Add Companies

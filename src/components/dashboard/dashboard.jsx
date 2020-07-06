@@ -6,8 +6,12 @@ import "../../App.css";
 import "./dashboard.css";
 import { Layout, Switch, Button } from "antd";
 
+<<<<<<< HEAD
 import AddCompanies from './AddCompanies.js'
 import CompanyInformation from './CompanyInformation.js'
+=======
+import Companytab from "./Companytab.js";
+>>>>>>> 497a65bb55b23a2900260caa886473c1dcdf0b83
 
 const PageContainer = styled.div`
   width: 90%;
