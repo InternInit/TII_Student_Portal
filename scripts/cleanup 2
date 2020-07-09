@@ -1,3 +1,0 @@
-#!/bin/bash
-rm -rf /home/bitnami/apps/react/htdocs/{,.[!.],..?}*
-rm -rf /home/bitnami/FLASKAPPS/backend/{,.[!.],..?}*
