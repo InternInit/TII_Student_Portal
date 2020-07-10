@@ -104,9 +104,8 @@ class SearchCompanytab extends React.Component {
         this.state = {
             show: false
         }
-        this.handleonMouseOver = this.handleonMouseOver.bind(this);
-        this.handleonMouseOut = this.handleonMouseOut.bind(this);
-        this.onClick = this.onClick.bind(this);
+
+        this.handleClick = this.handleClick.bind(this);
     }
 
     render() {
@@ -119,9 +118,7 @@ class SearchCompanytab extends React.Component {
         }
 
         return (<div
-            onClick={this.onClick}
-
-        >
+            onClick={this.handleClick}>
             {/**Tab variable, is switched between quickview and standard */}
             {ctab}
         </div >
@@ -130,15 +127,9 @@ class SearchCompanytab extends React.Component {
 
 
     //Handles Switching of Tab
-    handleonMouseOver = () => {
-        this.setState({ show: true })
-    }
 
-    handleonMouseOut = () => {
-        this.setState({ show: false })
-    }
 
-    onClick = () => {
+    handleClick = () => {
         this.setState({ show: !this.state.show })
     }
 
@@ -154,9 +145,9 @@ Standard View of the Tab.
 */
 
 class CLabel extends React.Component {
-
     render() {
         let { name } = this.props;
+
         return (
             <TabContainer>
 
@@ -188,6 +179,7 @@ class CLabel extends React.Component {
         )
     }
 }
+
 
 /*
 
@@ -259,7 +251,7 @@ class QuickView extends React.Component {
                     </Col>
 
                     <Col>
-                        <Button style={{ backgroundColor: '#1890FF' }} >Add</Button>
+                        <Button style={{ backgroundColor: '#1890FF' }} onClick={console.log("clicked 'Add' Button")}>Add</Button>
                         <Button style={{
                             backgroundColor: '#BFBFBF',
                             color: 'black',
@@ -270,6 +262,5 @@ class QuickView extends React.Component {
                 </div>
             </Col >
         </TabContainer >)
-
     }
 }
