@@ -589,6 +589,9 @@ class PageInternshipInformation extends Component {
               <Button className="next-button" type="primary" htmlType="submit">
                 Save and Continue
               </Button>
+              <Button className="next-button" type="default" htmlType="button" onClick={() => this.setCompletionState()}>
+                Test
+              </Button>
             </Form.Item>
           </Form>
         </Spin>
@@ -607,9 +610,27 @@ class PageInternshipInformation extends Component {
     try {
       const values = await this.formRef.current.validateFields();
       console.log(values);
+      this.props.updateCompletionState(0,1.0)
       this.props.setCompletionState(0, true);
       this.props.updateData(values, "0");
     } catch (errorInfo) {
+      let allValues = errorInfo.values
+
+      delete errorInfo.values.weightedGPA
+      let requiredValues = errorInfo.values
+
+      let completedCount = 0;
+      for (var field in allValues) {
+        if (allValues.hasOwnProperty(field) && field != "weightedGPA") {
+
+          if (typeof allValues[field] !== 'undefined') {
+            completedCount++;
+          }
+
+        }
+      }
+      let completionPercentage = (completedCount/Object.keys(requiredValues).length).toFixed(2)
+      this.props.updateCompletionState(0,completionPercentage)
       this.props.setCompletionState(0, false);
       this.props.updateData(errorInfo.values, "0");
     }
