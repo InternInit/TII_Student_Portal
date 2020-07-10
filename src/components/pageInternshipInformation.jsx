@@ -31,6 +31,10 @@ import { BrowserRouter as Router, Link } from "react-router-dom";
 import { withRouter } from "react-router";
 import TiiNav from "./TiiNav";
 
+//Redux
+import { connect } from 'react-redux';
+import { updateCompletionState } from '../redux/actions'
+
 //Object Destructuring
 const { Option } = Select;
 const { MonthPicker, RangePicker } = DatePicker;
@@ -308,6 +312,16 @@ const props = {
     ".doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document, .pdf, application/pdf",
   multiple: true
 };
+
+const mapStateToProps = state => {
+  return {
+    completionState: state.completionState,
+  }
+}
+
+const mapDispatchToProps = {
+  updateCompletionState
+}
 
 class PageInternshipInformation extends Component {
   constructor(props) {
@@ -675,4 +689,7 @@ class PageInternshipInformation extends Component {
   };
 }
 
-export default withRouter(PageInternshipInformation);
+export default withRouter(connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(PageInternshipInformation));

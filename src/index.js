@@ -4,15 +4,22 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import * as Sentry from '@sentry/browser';
+import { createStore } from 'redux';
+import rootReducer from './redux/reducers'
+import { Provider } from 'react-redux';
 
 if (!process.env.NODE_ENV || process.env.NODE_ENV === 'production') {
   Sentry.init({ dsn: "https://0dfd0aeae06045b0b2f2759dcbcc0efa@o412197.ingest.sentry.io/5288578" });
 }
 
+const store = createStore(rootReducer,window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
+
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <Provider store={store}>
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>
+  </Provider>,
   document.getElementById('root')
 );
 

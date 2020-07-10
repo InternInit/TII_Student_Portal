@@ -9,6 +9,10 @@ import styled from "styled-components";
 import { BrowserRouter as Router, Link } from "react-router-dom";
 import { withRouter } from "react-router";
 
+//Redux
+import { connect } from 'react-redux';
+import { updateCompletionState } from '../redux/actions'
+
 //Formatting
 const formGutter = [16, 16];
 const standardSpan = 24;
@@ -67,6 +71,16 @@ const formItemProps = {
     style: { width: "100%", marginTop: "10px", marginBottom: "30px" }
   }
 };
+
+const mapStateToProps = state => {
+  return {
+    completionState: state.completionState,
+  }
+}
+
+const mapDispatchToProps = {
+  updateCompletionState
+}
 
 class PageReferences extends Component {
   formRef = React.createRef();
@@ -319,4 +333,7 @@ class PageReferences extends Component {
   };
 }
 
-export default withRouter(PageReferences);
+export default withRouter(connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(PageReferences));
