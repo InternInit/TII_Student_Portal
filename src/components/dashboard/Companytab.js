@@ -91,10 +91,8 @@ class Companytab extends React.Component {
             </Collapse >
         )
     }
-
-
-
 } export default Companytab
+
 
 
 class CLabel extends React.Component {
@@ -134,12 +132,11 @@ class CLabel extends React.Component {
                         <JobTitle>Communications/ Data Science</JobTitle>
                     </div>
                 </div>
-
-
             </div>
         )
     }
 }
+
 
 class DroppedView extends React.Component {
     render() {
