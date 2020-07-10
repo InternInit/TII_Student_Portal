@@ -102,15 +102,15 @@ class AddCompanies extends React.Component {
                 <h1 className="module-name">Pinned Companies</h1>
                 <ModuleContainer>
                     Not done yet
-</ModuleContainer>
+                </ModuleContainer>
 
 
                 <h1 className="module-name" style={{ marginTop: '100px' }}>Search Companies</h1>
 
                 {/**
-                 * 
+                 *
                  * Search bar
-                 * 
+                 *
                  */}
                 <Search
                     placeholder="Search Companies"
@@ -123,14 +123,14 @@ class AddCompanies extends React.Component {
 
 
                 {/**
-                 * 
+                 *
                  * Filter by industries
-                 * 
+                 *
                  */}
                 <Row>
                     <Collapse defaultActiveKey={['1']} expandIconPosition='right' >
                         <Panel header='Filter by Industry' >
-                            <Checkbox.Group>
+                            <Checkbox.Group onChange={value => this.filterIndustries(value)}>
                                 <Row style={{ flexDirection: 'column' }}>
                                     {industry.map(industry => (
                                         <div >
@@ -140,7 +140,7 @@ class AddCompanies extends React.Component {
                                                 style={{
                                                     lineHeight: "32px"
                                                 }}
-                                                onChange={value => this.filterIndustries(value)}
+
                                             >
                                                 {industry}
                                             </Checkbox>
@@ -162,9 +162,9 @@ class AddCompanies extends React.Component {
 
 
                 {/**
-                 * 
+                 *
                  * Mapping of results
-                 * 
+                 *
                  */}
                 {
                     filteredInfo.map(rice => (
@@ -188,8 +188,11 @@ class AddCompanies extends React.Component {
     }
 
     filterIndustries(event) {
-        this.setState({ industries: event.target.value })
-        console.log(this.state.industries)
+        this.setState({industries: event}, this.stateCallback)
+    }
+
+    stateCallback() {
+      console.log(this.state.industries)
     }
 
 
