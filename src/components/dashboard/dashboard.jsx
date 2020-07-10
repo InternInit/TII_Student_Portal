@@ -6,12 +6,9 @@ import "../../App.css";
 import "./dashboard.css";
 import { Layout, Switch, Button } from "antd";
 
-<<<<<<< HEAD
 import AddCompanies from './AddCompanies.js'
 import CompanyInformation from './CompanyInformation.js'
-=======
 import Companytab from "./Companytab.js";
->>>>>>> 497a65bb55b23a2900260caa886473c1dcdf0b83
 
 const PageContainer = styled.div`
   width: 90%;
@@ -34,6 +31,12 @@ const WelcomeHeader = styled.h1`
 const { Header, Content, Footer, Sider } = Layout;
 
 class Dashboard extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      info: ""
+    }
+  }
   render() {
     return (
       <React.Fragment>
@@ -49,16 +52,27 @@ class Dashboard extends Component {
           >
             <PageContainer>
               <WelcomeHeader>Welcome Kevin</WelcomeHeader>
+              <Companytab />
               <DashboardNavBar />
-
-
-              <ApplicationProgress />
+              <AddCompanies />
             </PageContainer>
           </Content>
         </Layout>
       </React.Fragment>
     );
   }
+
+  componentDidMount() {
+    fetch('https://api.indeed.com/ads/apisearch?publisher=123412341234123&q=java+developer&l=austin%2C+tx&sort=&radius=&st=&jt=&start=&limit=&fromage=&filter=&latlong=1&co=us&chnl=&userip=1.2.3.4&useragent=Mozilla/%2F4.0%28Firefox%29&v=2')
+      .then(response =>
+        response.json().then(data => {
+          this.setState({ info: data });
+        })
+      )
+  }
+
+
+
 }
 
 export default Dashboard;

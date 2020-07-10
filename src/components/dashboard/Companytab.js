@@ -18,7 +18,7 @@ const JobTitle = styled.div`
 font-size:14px;
 font-weight:normal;
 color:#262626;
-
+padding-top:6px;
 `
 const Button = styled.div`
 color:white;
@@ -46,6 +46,14 @@ align-self:center;
 }
 `
 
+const Image = styled.img`
+width:36px;
+height:36px;
+object-fit:contain;
+background-color:blue;
+margin-left:3.5%;
+margin-bottom:24px;
+`
 
 
 class Companytab extends React.Component {
@@ -53,12 +61,11 @@ class Companytab extends React.Component {
         super(props);
         this.state = {
             label: <CLabel />,
-            dropheight: '90px'
 
         }
     }
     render() {
-        let { label, dropheight } = this.state;
+        let { label } = this.state;
         return (
             <Collapse defaultActiveKey={['0']} expandIconPosition='right'
 
@@ -112,14 +119,7 @@ class CLabel extends React.Component {
                 }}>
 
                     {/**company logo */}
-                    <img style={{
-                        width: '36px',
-                        height: '36px',
-                        objectFit: 'contain',
-                        backgroundColor: 'blue',
-                        marginLeft: '3.5%',
-                        marginBottom: '18px'
-                    }} src='' alt='Logo' />
+                    <Image src='' alt='Logo' />
 
                     {/**company name and job */}
                     <div style={{
@@ -174,7 +174,7 @@ class DroppedView extends React.Component {
 
                     <Button style={{
                         backgroundColor: '#BCDFFF',
-                        color: 'blawhiteck'
+                        color: 'white'
                     }}>
                         Submit
                     </Button>
@@ -183,9 +183,3 @@ class DroppedView extends React.Component {
         )
     }
 }
-
-
-
-
-
-

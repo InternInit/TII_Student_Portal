@@ -80,7 +80,7 @@ height:36px;
 object-fit:contain;
 background-color:blue;
 margin-left:11%;
-margin-bottom:10px;
+margin-bottom:14px;
  `
 
 const TabContainer = styled.div`
@@ -102,20 +102,26 @@ class SearchCompanytab extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            ctab: <CLabel />
+            show: false
         }
-        this.handleonMouseEnter = this.handleonMouseEnter.bind(this);
-        this.handleonMouseLeave = this.handleonMouseLeave.bind(this);
-
+        this.handleonMouseOver = this.handleonMouseOver.bind(this);
+        this.handleonMouseOut = this.handleonMouseOut.bind(this);
     }
 
     render() {
-        let { ctab } = this.state;
-        return (<div
-            onMouseEnter={this.handleonMouseEnter}
-            onMouseLeave={this.handleonMouseLeave}
-        >
+        let { show } = this.state;
+        let ctab = <CLabel name={this.props.name} />
 
+
+        if (show === true) {
+            ctab = <QuickView name={this.props.name} />
+        }
+
+        return (<div
+            onMouseEnter={this.handleonMouseOver}
+            onMouseLeave={this.handleonMouseOut}
+
+        >
             {/**Tab variable, is switched between quickview and standard */}
             {ctab}
         </div >
@@ -124,13 +130,14 @@ class SearchCompanytab extends React.Component {
 
 
     //Handles Switching of Tab
-    handleonMouseEnter = () => {
-        this.setState({ ctab: <QuickView /> })
+    handleonMouseOver = () => {
+        this.setState({ show: true })
     }
 
-    handleonMouseLeave = () => {
-        this.setState({ ctab: <CLabel /> })
+    handleonMouseOut = () => {
+        this.setState({ show: false })
     }
+
 
 
 
@@ -143,34 +150,40 @@ Standard View of the Tab.
 
 */
 
-function CLabel() {
-    return (
-        <TabContainer>
-            {/**Company Logo + Name + Position */}
-            <div style={{
-                display: 'flex',
-                flexDirection: 'row',
-                width: '100%',
-                alignItems: 'center'
-            }}>
+class CLabel extends React.Component {
 
-                {/**company logo */}
-                <Logo src='' alt='Logo' />
+    render() {
+        let { name } = this.props;
+        return (
+            <TabContainer>
 
-                {/**company name and job */}
-                <Col style={{
-                    marginLeft: '30px',
-                    alignItems: 'flex-start',
-
+                {/**Company Logo + Name + Position */}
+                < div style={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    width: '100%',
+                    alignItems: 'center'
                 }}>
-                    <CompanyTitle>Tesla</CompanyTitle>
-                    <JobTitle>Communications/ Data Science</JobTitle>
-                </Col>
-            </div>
+
+                    {/**company logo */}
+                    < Logo src='' alt='Logo' />
+
+                    {/**company name and job */}
+                    < Col style={{
+                        marginLeft: '30px',
+                        alignItems: 'flex-start',
+
+                    }}>
+                        <CompanyTitle>{name}</CompanyTitle>
+
+                        <JobTitle style={{ paddingTop: '4px' }}>Communications/ Data Science</JobTitle>
+                    </Col >
+                </div >
 
 
-        </TabContainer>
-    )
+            </TabContainer >
+        )
+    }
 }
 
 /*
@@ -179,78 +192,81 @@ Quick View of the Tab.
 Gives additional Information when hovered over
 
 */
-function QuickView() {
-    return (<TabContainer style={{
-        padding: '24px'
-    }}>
+class QuickView extends React.Component {
+    render() {
+        let { name } = this.props;
+        return (<TabContainer style={{
+            padding: '24px'
+        }}>
 
-        {/**
+            {/**
  * 
  * Left Collumn
  * 
  */}
-        <Col style={{
-            alignItems: 'flex-start',
-            marginLeft: '10%'
-        }}>
+            < Col style={{
+                alignItems: 'flex-start',
+                marginLeft: '10%'
+            }}>
 
 
-            <QVCompany>Tesla</QVCompany>
-            <QVTitle>Communications/ Data Science</QVTitle>
-            <QVCompany style={{
-                marginTop: '10px',
-                fontWeight: '500'
-            }}>Description</QVCompany>
+                <QVCompany>{name}</QVCompany>
+                <QVTitle>Communications/ Data Science</QVTitle>
+                <QVCompany style={{
+                    marginTop: '10px',
+                    fontWeight: '500'
+                }}>Description</QVCompany>
 
-            <QVCaption>
-                Facebook is a website which allows users, who sign-up for free profiles, to connect with friends, work colleagues or people they don’t know, online. It allows users to share pictures...
+                <QVCaption>
+                    Facebook is a website which allows users, who sign-up for free profiles, to connect with friends, work colleagues or people they don’t know, online.zz It allows users to share pictures...
                 </QVCaption>
-        </Col>
+            </Col >
 
 
-        {/**
+            {/**
  * 
  * Right Collumn
  * 
  */}
-        <Col style={{
-            alignItems: 'flex-end',
-            marginRight: '10%',
-            width: '50%'
-        }}>
-            <Image src='' alt='Company Visual' />
-
-            <div style={{
-                display: 'flex',
-                marginTop: '5%',
-                justifyContent: 'space-between',
-                marginRight: '5%'
+            < Col style={{
+                alignItems: 'flex-end',
+                marginRight: '10%',
+                width: '50%'
             }}>
+                <Image src='' alt='Company Visual' />
 
-
-
-                <Col style={{
-                    marginRight: '5%',
+                <div style={{
+                    display: 'flex',
+                    marginTop: '5%',
+                    justifyContent: 'space-between',
+                    marginRight: '5%'
                 }}>
 
-                    <QVCompany style={{ fontWeight: '500' }}>
-                        Location
+
+
+                    <Col style={{
+                        marginRight: '5%',
+                    }}>
+
+                        <QVCompany style={{ fontWeight: '500' }}>
+                            Location
                         </QVCompany>
-                    <QVCaption style={{ textAlign: 'center', width: '150px' }}>Austin, TX</QVCaption>
+                        <QVCaption style={{ textAlign: 'center', width: '150px' }}>Austin, TX</QVCaption>
 
-                </Col>
+                    </Col>
 
-                <Col>
-                    <Button style={{ backgroundColor: '#1890FF' }} onClick={console.log("clicked")}>Add</Button>
-                    <Button style={{
-                        backgroundColor: '#BFBFBF',
-                        color: 'black',
-                        marginTop: '10px'
-                    }}>More Details</Button>
-                </Col>
+                    <Col>
+                        <Button style={{ backgroundColor: '#1890FF' }}>Add</Button>
+                        <Button style={{
+                            backgroundColor: '#BFBFBF',
+                            color: 'black',
+                            marginTop: '10px'
+                        }}>More Details</Button>
+                    </Col>
 
-            </div>
-        </Col>
-    </TabContainer >)
+                </div>
+            </Col >
+        </TabContainer >)
 
+    }
 }

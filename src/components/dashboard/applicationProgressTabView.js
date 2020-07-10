@@ -73,12 +73,18 @@ class ApplicationProgress extends Component {
                             </PercentHeader>
                             <Progress
                                 percent={section[1]}
-                                trailColor={section[2]}
-                                strokeColor={section[1] < 100 ? section[3] : "#52c41a"}
+                                trailColor="#e6f7ff"
+                                strokeColor={
+                                    //section[1] < 100 ? section[3] : "#52c41a"
+                                    section[1] < 100
+                                        ? { from: "#108ee9", to: "#87d068" }
+                                        : "#52c41a"
+                                }
                                 strokeWidth="15px"
                                 status="active"
                                 showInfo={false}
                             />
+
                         </React.Fragment>
                     ))}
                 </ModuleContainer>
