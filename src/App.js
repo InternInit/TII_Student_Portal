@@ -95,7 +95,6 @@ class App extends Component {
       isCollapsed: false,
       page: 0,
       submissionState: true,
-      completionState: [false, false, false, false]
     };
   }
 
@@ -387,24 +386,6 @@ class App extends Component {
       body: fd
     }).then(response => {});
   };
-
-  /*
-  setCompletionState = (page, state) => {
-    let currentCompletionState = this.state.completionState;
-    try {
-      currentCompletionState[page] = state;
-    } catch (e) {}
-  };
-
-
-  getCompletionState = () => {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        resolve(this.state.completionState);
-      }, 10);
-    });
-  };
-  */
 
   getCachedCompletionState = async () => {
     let token = await this.getJwt();
