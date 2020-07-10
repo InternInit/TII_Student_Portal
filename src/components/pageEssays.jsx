@@ -33,7 +33,7 @@ const mapDispatchToProps = {
 }
 
 class PageEssays extends React.Component {
-  formRef = this.props.formRef;
+  formRef = React.createRef();
 
   state = {
     loaded: false
@@ -185,7 +185,7 @@ class PageEssays extends React.Component {
 
   onFinish = values => {
     console.log("FinishedPageEssays:", values);
-    this.props.setCompletionState(2, true);
+    this.props.updateCompletionState(2, 1.0);
     this.props.updateData(values, "2");
     this.routeChange("/apply/references");
   };
@@ -194,10 +194,28 @@ class PageEssays extends React.Component {
     try {
       const values = await this.formRef.current.validateFields();
       console.log(values);
-      this.props.setCompletionState(2, true);
+      this.props.updateCompletionState(2, 1.0);
       this.props.updateData(values, "2");
     } catch (errorInfo) {
-      this.props.setCompletionState(2, false);
+      let allValues = errorInfo.values
+      console.log(allValues)
+      delete errorInfo.values.CoverLetter
+      delete errorInfo.values.Portfolio
+      let requiredValues = errorInfo.values
+
+      let completedCount = 0;
+      for (var field in requiredValues) {
+        if (requiredValues.hasOwnProperty(field)) {
+
+          if (typeof requiredValues[field] !== 'undefined') {
+            completedCount++;
+          }
+
+        }
+      }
+      let completionPercentage = (completedCount/Object.keys(requiredValues).length).toFixed(2)
+      this.props.updateCompletionState(2,completionPercentage)
+      //this.props.setCompletionState(0, false);
       this.props.updateData(errorInfo.values, "2");
     }
   };
@@ -282,7 +300,7 @@ class PageEssays extends React.Component {
         let parsedData = parsedRecv[0];
         if (parsedData !== "No Info") {
           try {
-            console.log(parsedData);
+              console.log(parsedData);
             this.setState({ loaded: true });
             this.formRef.current.setFieldsValue(parsedData);
 

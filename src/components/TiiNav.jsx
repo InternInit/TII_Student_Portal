@@ -36,7 +36,7 @@ class TiiNav extends React.Component {
 
 
   componentDidUpdate(prevProps, prevState) {
-    this.handleClick();
+    this.handleUpdate();
   }
 
 
@@ -167,8 +167,8 @@ class TiiNav extends React.Component {
     );
   }
 
-  handleSubmit = async () => {
-    let status = await this.props.getCompletionState();
+  handleSubmit = () => {
+    let status = this.props.completionState
 
     if (_.isEqual(status, [true, true, true, true])) {
       // checks to see if all forms are completed
@@ -193,9 +193,9 @@ class TiiNav extends React.Component {
 
 
 
-  handleClick = async (e) => {
-    //The handleClick function is purely for testing. When you click on the first button, it will set all states to "true"
-    let completionState = await this.props.getCompletionState();
+  handleUpdate = (e) => {
+    let completionState = this.props.completionState;
+    console.log(this.props.completionState)
 
     for (var i = 0; i < completionState.length; i++) {
       switch (i) {

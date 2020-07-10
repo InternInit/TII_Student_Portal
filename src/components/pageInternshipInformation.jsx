@@ -334,7 +334,7 @@ class PageInternshipInformation extends Component {
     loaded: false
   };
 
-  formRef = this.props.formRef;
+  formRef = React.createRef();
 
   componentDidMount() {
     this.getUserData();
@@ -602,7 +602,7 @@ class PageInternshipInformation extends Component {
 
   onFinish = values => {
     console.log("FinishedPageInternship:", values);
-    this.props.setCompletionState(0, true);
+    this.props.updateCompletionState(0, 1.0);
     this.props.updateData(values, "0");
     this.routeChange("/apply/personal");
   };
@@ -612,7 +612,7 @@ class PageInternshipInformation extends Component {
       const values = await this.formRef.current.validateFields();
       console.log(values);
       this.props.updateCompletionState(0,1.0)
-      this.props.setCompletionState(0, true);
+      //this.props.setCompletionState(0, true);
       this.props.updateData(values, "0");
     } catch (errorInfo) {
       let allValues = errorInfo.values
@@ -621,10 +621,10 @@ class PageInternshipInformation extends Component {
       let requiredValues = errorInfo.values
 
       let completedCount = 0;
-      for (var field in allValues) {
-        if (allValues.hasOwnProperty(field) && field != "weightedGPA") {
+      for (var field in requiredValues) {
+        if (requiredValues.hasOwnProperty(field)) {
 
-          if (typeof allValues[field] !== 'undefined') {
+          if (typeof requiredValues[field] !== 'undefined') {
             completedCount++;
           }
 
@@ -632,7 +632,7 @@ class PageInternshipInformation extends Component {
       }
       let completionPercentage = (completedCount/Object.keys(requiredValues).length).toFixed(2)
       this.props.updateCompletionState(0,completionPercentage)
-      this.props.setCompletionState(0, false);
+      //this.props.setCompletionState(0, false);
       this.props.updateData(errorInfo.values, "0");
     }
   };

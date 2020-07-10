@@ -37,7 +37,7 @@ import {
 
 //Redux
 import { connect } from 'react-redux';
-import { updateName, updateAvatar, updateCompletionState } from './redux/actions'
+import { updateName, updateAvatar, updateCompletionState, batchUpdateCompletionState } from './redux/actions'
 
 import pageInternshipInformation from "./components/pageInternshipInformation.jsx";
 
@@ -80,7 +80,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = {
   updateName,
   updateAvatar,
-  updateCompletionState
+  updateCompletionState,
+  batchUpdateCompletionState
 }
 
 
@@ -100,10 +101,6 @@ class App extends Component {
 
   inMemoryToken;
   authParam = "absasd";
-  internshipInfoFormRef = React.createRef();
-  personalFormRef = React.createRef();
-  essayFormRef = React.createRef();
-  referencesFormRef = React.createRef();
 
   updateData = (values, origin) => {
     if (
@@ -116,7 +113,7 @@ class App extends Component {
           Authorization:
             "Bearer " + JSON.parse(JSON.stringify(this.inMemoryToken.token)),
           "Content-Type": "text/plain",
-          "Completion-State": JSON.stringify(this.state.completionState)
+          "Completion-State": JSON.stringify(this.props.completionState)
         },
         body: JSON.stringify(values) + "#" + origin
       })
@@ -213,7 +210,6 @@ class App extends Component {
                   updateData={this.updateData}
                   getJwt={this.getJwt}
                   setCompletionState={this.setCompletionState}
-                  formRef={this.internshipInfoFormRef}
                 />
               )}
             />
@@ -228,7 +224,6 @@ class App extends Component {
                   updateData={this.updateData}
                   getJwt={this.getJwt}
                   setCompletionState={this.setCompletionState}
-                  formRef={this.personalFormRef}
                 />
               )}
             />
@@ -244,7 +239,6 @@ class App extends Component {
                   updateData={this.updateData}
                   getJwt={this.getJwt}
                   setCompletionState={this.setCompletionState}
-                  formRef={this.essayFormRef}
                 />
               )}
             />
@@ -259,7 +253,6 @@ class App extends Component {
                   updateData={this.updateData}
                   getJwt={this.getJwt}
                   setCompletionState={this.setCompletionState}
-                  formRef={this.referencesFormRef}
                 />
               )}
             />
@@ -395,12 +388,14 @@ class App extends Component {
     }).then(response => {});
   };
 
+  /*
   setCompletionState = (page, state) => {
     let currentCompletionState = this.state.completionState;
     try {
       currentCompletionState[page] = state;
     } catch (e) {}
   };
+
 
   getCompletionState = () => {
     return new Promise((resolve, reject) => {
@@ -409,6 +404,7 @@ class App extends Component {
       }, 10);
     });
   };
+  */
 
   getCachedCompletionState = async () => {
     let token = await this.getJwt();
@@ -424,7 +420,8 @@ class App extends Component {
         let parsedRecv = JSON.parse(data);
         if (parsedRecv != "No Info") {
           let recvCompletionState = parsedRecv[1];
-          this.setState({ completionState: recvCompletionState });
+          this.props.batchUpdateCompletionState(recvCompletionState);
+          //this.setState({ completionState: recvCompletionState });
         }
       });
   };
@@ -447,7 +444,7 @@ class App extends Component {
         clickThree={this.clickThree}
         clickFour={this.clickFour}
         highlightKey={highlightKey}
-        getCompletionState={this.getCompletionState}
+        completionState={this.props.completionState}
         onSubmit={this.onSubmit}
         isCollapsed={this.state.isCollapsed}
       />

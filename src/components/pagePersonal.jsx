@@ -169,7 +169,7 @@ class PagePersonal extends Component {
     return <h1>Hello</h1>;
   };
 
-  formRef = this.props.formRef;
+  formRef = React.createRef();
 
   componentDidMount() {
     this.getUserData();
@@ -481,7 +481,7 @@ class PagePersonal extends Component {
 
   onFinish = values => {
     console.log("FinishedPersonalPage:", values);
-    this.props.setCompletionState(1, true);
+    this.props.updateCompletionState(1, 1.0);
     this.props.updateData(values, "1");
     this.routeChange("/apply/written-work");
   };
@@ -490,10 +490,28 @@ class PagePersonal extends Component {
     try {
       const values = await this.formRef.current.validateFields();
       console.log(values);
-      this.props.setCompletionState(1, true);
+      this.props.updateCompletionState(1, 1.0);
       this.props.updateData(values, "1");
     } catch (errorInfo) {
-      this.props.setCompletionState(1, false);
+      let allValues = errorInfo.values
+      console.log(allValues)
+      delete errorInfo.values.latinx
+      delete errorInfo.values.race
+      let requiredValues = errorInfo.values
+
+      let completedCount = 0;
+      for (var field in requiredValues) {
+        if (requiredValues.hasOwnProperty(field)) {
+
+          if (typeof requiredValues[field] !== 'undefined') {
+            completedCount++;
+          }
+
+        }
+      }
+      let completionPercentage = (completedCount/Object.keys(requiredValues).length).toFixed(2)
+      this.props.updateCompletionState(1,completionPercentage)
+      //this.props.setCompletionState(0, false);
       this.props.updateData(errorInfo.values, "1");
     }
   };

@@ -19,3 +19,10 @@ export const updateCompletionState = (page, completionPercentage) => {
     completionPercentage
   }
 }
+
+export const batchUpdateCompletionState = (completionState) => {
+  return {
+    type:'BATCH_UPDATE_COMPLETION_STATE',
+    completionState
+  }
+}

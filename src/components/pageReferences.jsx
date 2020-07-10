@@ -83,7 +83,7 @@ const mapDispatchToProps = {
 }
 
 class PageReferences extends Component {
-  formRef = this.props.formRef;
+  formRef = React.createRef();
 
   state = {
     loaded: false
@@ -279,7 +279,7 @@ class PageReferences extends Component {
 
   onFinish = values => {
     console.log("FinishRefPage:", values);
-    this.props.setCompletionState(3, true);
+    this.props.updateCompletionState(3, 1.0);
     this.props.onSubmit(values, "3");
     this.routeChange("/submission-success");
   };
@@ -288,10 +288,25 @@ class PageReferences extends Component {
     try {
       const values = await this.formRef.current.validateFields();
       console.log(values);
-      this.props.setCompletionState(3, true);
+      this.props.updateCompletionState(3, 1.0);
       this.props.updateData(values, "3");
     } catch (errorInfo) {
-      this.props.setCompletionState(3, false);
+      let requiredValues = errorInfo.values
+      console.log(requiredValues)
+
+      let completedCount = 0;
+      for (var field in requiredValues) {
+        if (requiredValues.hasOwnProperty(field)) {
+
+          if (typeof requiredValues[field] !== 'undefined') {
+            completedCount++;
+          }
+
+        }
+      }
+      let completionPercentage = (completedCount/Object.keys(requiredValues).length).toFixed(2)
+      this.props.updateCompletionState(3,completionPercentage)
+      //this.props.setCompletionState(0, false);
       this.props.updateData(errorInfo.values, "3");
     }
   };
