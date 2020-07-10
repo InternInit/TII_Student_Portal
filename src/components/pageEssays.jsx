@@ -6,6 +6,10 @@ import "../App.css";
 //React Routing
 import { withRouter } from "react-router";
 
+//Redux
+import { connect } from 'react-redux';
+import { updateCompletionState } from '../redux/actions'
+
 //Object Destructuring
 const { TextArea } = Input;
 const { Dragger } = Upload;
@@ -18,7 +22,17 @@ const props = {
   multiple: true
 };
 
-class pageEssays extends React.Component {
+const mapStateToProps = state => {
+  return {
+    completionState: state.completionState,
+  }
+}
+
+const mapDispatchToProps = {
+  updateCompletionState
+}
+
+class PageEssays extends React.Component {
   formRef = React.createRef();
 
   state = {
@@ -304,4 +318,7 @@ class pageEssays extends React.Component {
     this.props.history.push(path);
   };
 }
-export default withRouter(pageEssays);
+export default withRouter(connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(PageEssays));

@@ -22,6 +22,10 @@ import moment from "moment";
 import { BrowserRouter as Router, Link } from "react-router-dom";
 import { withRouter } from "react-router";
 
+//Redux
+import { connect } from 'react-redux';
+import { updateCompletionState } from '../redux/actions'
+
 //Object Destructuring
 const { Option } = Select;
 const { MonthPicker, RangePicker } = DatePicker;
@@ -129,6 +133,16 @@ const allStates = [
   "Wisconsin",
   "Wyoming"
 ];
+
+const mapStateToProps = state => {
+  return {
+    completionState: state.completionState,
+  }
+}
+
+const mapDispatchToProps = {
+  updateCompletionState
+}
 
 class PagePersonal extends Component {
   constructor(props) {
@@ -521,4 +535,7 @@ class PagePersonal extends Component {
   };
 }
 
-export default withRouter(PagePersonal);
+export default withRouter(connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(PagePersonal));

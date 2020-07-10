@@ -18,7 +18,6 @@ import _ from 'lodash';
 
 class TiiNav extends React.Component {
   getInitialHighlight = () => {
-    console.log(window.location.pathname)
     switch (window.location.pathname) {
       case "/apply/internship-info":
         return Array.from("1");
