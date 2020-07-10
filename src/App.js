@@ -454,7 +454,12 @@ class App extends Component {
             <Navbar logout={this.logout} />
           </header>
           <ReactSwitch>
-            <Route path="/dashboard" exact render={props => <Dashboard {...props} />} />
+            <Route path="/dashboard" exact render={props =>
+              <Dashboard
+              {...props}
+              completionState = {this.props.completionState}
+              />}
+            />
             <Route path="/how-to-apply" exact component={HowtoApply} />
             <Route path="/apply">{this.AppContainer()}</Route>
             <Route
