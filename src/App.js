@@ -133,7 +133,7 @@ class App extends Component {
           Authorization:
             "Bearer " + JSON.parse(JSON.stringify(this.inMemoryToken.token)),
           "Content-Type": "text/plain",
-          "Completion-State": JSON.stringify(this.state.completionState)
+          "Completion-State": JSON.stringify(this.props.completionState)
         },
         body: JSON.stringify(values) + "#" + origin + "#" + "submit"
       })
