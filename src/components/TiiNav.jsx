@@ -195,12 +195,11 @@ class TiiNav extends React.Component {
 
   handleUpdate = (e) => {
     let completionState = this.props.completionState;
-    console.log(this.props.completionState)
 
     for (var i = 0; i < completionState.length; i++) {
       switch (i) {
         case 0:
-          if (completionState[i] === true) {
+          if (completionState[i] === 1) {
             if (this.state.InternButton.type.render.displayName !== "CheckOutlined") {
               this.setState({ InternButton: <CheckOutlined style={{ color: "green" }} /> })
             }
@@ -211,7 +210,7 @@ class TiiNav extends React.Component {
           }
           break;
         case 1:
-          if (completionState[i] === true) {
+          if (completionState[i] === 1) {
             if (this.state.PersonalButton.type.render.displayName !== "CheckOutlined") {
               this.setState({ PersonalButton: <CheckOutlined style={{ color: "green" }} /> })
             }
@@ -222,7 +221,7 @@ class TiiNav extends React.Component {
           }
           break;
         case 2:
-          if (completionState[i] === true) {
+          if (completionState[i] === 1) {
             if (this.state.EssayButton.type.render.displayName !== "CheckOutlined") {
               this.setState({ EssayButton: <CheckOutlined style={{ color: "green" }} /> })
             }
@@ -233,7 +232,7 @@ class TiiNav extends React.Component {
           }
           break;
         case 3:
-          if (completionState[i] === true) {
+          if (completionState[i] === 1) {
             if (this.state.ReferencesButton.type.render.displayName !== "CheckOutlined") {
               this.setState({ ReferencesButton: <CheckOutlined style={{ color: "green" }} /> })
             }
