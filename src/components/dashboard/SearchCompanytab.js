@@ -106,6 +106,7 @@ class SearchCompanytab extends React.Component {
         }
         this.handleonMouseOver = this.handleonMouseOver.bind(this);
         this.handleonMouseOut = this.handleonMouseOut.bind(this);
+        this.onClick = this.onClick.bind(this);
     }
 
     render() {
@@ -118,8 +119,7 @@ class SearchCompanytab extends React.Component {
         }
 
         return (<div
-            onMouseEnter={this.handleonMouseOver}
-            onMouseLeave={this.handleonMouseOut}
+            onClick={this.onClick}
 
         >
             {/**Tab variable, is switched between quickview and standard */}
@@ -138,6 +138,9 @@ class SearchCompanytab extends React.Component {
         this.setState({ show: false })
     }
 
+    onClick = () => {
+        this.setState({ show: !this.state.show })
+    }
 
 
 
@@ -256,7 +259,7 @@ class QuickView extends React.Component {
                     </Col>
 
                     <Col>
-                        <Button style={{ backgroundColor: '#1890FF' }}>Add</Button>
+                        <Button style={{ backgroundColor: '#1890FF' }} >Add</Button>
                         <Button style={{
                             backgroundColor: '#BFBFBF',
                             color: 'black',

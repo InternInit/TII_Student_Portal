@@ -188,11 +188,11 @@ class AddCompanies extends React.Component {
     }
 
     filterIndustries(event) {
-        this.setState({industries: event}, this.stateCallback)
+        this.setState({ industries: event }, this.stateCallback)
     }
 
     stateCallback() {
-      console.log(this.state.industries)
+        console.log(this.state.industries)
     }
 
 
