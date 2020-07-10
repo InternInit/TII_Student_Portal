@@ -334,10 +334,11 @@ class PageInternshipInformation extends Component {
     loaded: false
   };
 
-  formRef = React.createRef();
+  formRef = this.props.formRef;
 
   componentDidMount() {
     this.getUserData();
+    console.log(this.props)
   }
 
   componentWillUnmount() {

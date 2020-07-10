@@ -100,6 +100,10 @@ class App extends Component {
 
   inMemoryToken;
   authParam = "absasd";
+  internshipInfoFormRef = React.createRef();
+  personalFormRef = React.createRef();
+  essayFormRef = React.createRef();
+  referencesFormRef = React.createRef();
 
   updateData = (values, origin) => {
     if (
@@ -209,6 +213,7 @@ class App extends Component {
                   updateData={this.updateData}
                   getJwt={this.getJwt}
                   setCompletionState={this.setCompletionState}
+                  formRef={this.internshipInfoFormRef}
                 />
               )}
             />
@@ -223,6 +228,7 @@ class App extends Component {
                   updateData={this.updateData}
                   getJwt={this.getJwt}
                   setCompletionState={this.setCompletionState}
+                  formRef={this.personalFormRef}
                 />
               )}
             />
@@ -238,6 +244,7 @@ class App extends Component {
                   updateData={this.updateData}
                   getJwt={this.getJwt}
                   setCompletionState={this.setCompletionState}
+                  formRef={this.essayFormRef}
                 />
               )}
             />
@@ -252,6 +259,7 @@ class App extends Component {
                   updateData={this.updateData}
                   getJwt={this.getJwt}
                   setCompletionState={this.setCompletionState}
+                  formRef={this.referencesFormRef}
                 />
               )}
             />

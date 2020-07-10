@@ -169,7 +169,7 @@ class PagePersonal extends Component {
     return <h1>Hello</h1>;
   };
 
-  formRef = React.createRef();
+  formRef = this.props.formRef;
 
   componentDidMount() {
     this.getUserData();

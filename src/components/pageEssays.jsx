@@ -33,7 +33,7 @@ const mapDispatchToProps = {
 }
 
 class PageEssays extends React.Component {
-  formRef = React.createRef();
+  formRef = this.props.formRef;
 
   state = {
     loaded: false

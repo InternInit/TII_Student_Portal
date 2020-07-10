@@ -83,7 +83,7 @@ const mapDispatchToProps = {
 }
 
 class PageReferences extends Component {
-  formRef = React.createRef();
+  formRef = this.props.formRef;
 
   state = {
     loaded: false
@@ -117,8 +117,6 @@ class PageReferences extends Component {
           >
             <Form.List name="reference">
               {(fields, { add, remove }) => {
-                console.log(fields);
-
                 return (
                   <div style={{ marginTop: "40px" }}>
                     {fields.map((field, index) => (
