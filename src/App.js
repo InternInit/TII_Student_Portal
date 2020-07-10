@@ -35,6 +35,10 @@ import {
   useParams
 } from "react-router-dom";
 
+//Redux
+import { connect } from 'react-redux';
+import { updateName, updateAvatar, updateCompletionState } from './redux/actions'
+
 import pageInternshipInformation from "./components/pageInternshipInformation.jsx";
 
 import devConfigurationFile from "./configuration_dev.json";
@@ -65,6 +69,20 @@ const PageContainer = styled.div`
   background-color: white;
   border-radius: 10px;
 `;
+
+const mapStateToProps = state => {
+  return {
+    completionState: state.completionState,
+    userInfo: state.userInfo
+  }
+}
+
+const mapDispatchToProps = {
+  updateName,
+  updateAvatar,
+  updateCompletionState
+}
+
 
 class App extends Component {
   constructor(props) {
@@ -433,7 +451,6 @@ class App extends Component {
     this.refresh();
     this.getCachedCompletionState();
     this.interval = setInterval(() => this.resize(), 500);
-    console.log(this.state);
     return () => clearInterval(this.interval);
   }
 
@@ -477,4 +494,7 @@ class App extends Component {
   }
 }
 
-export default App;
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App);

@@ -1,10 +1,10 @@
-const userInfoReducer = (state = {Name:"",Avatar:""}, action) => {
+const userInfoReducer = (state = {name:"",avatar:""}, action) => {
   switch (action.type) {
     case 'UPDATE_NAME':
-      state.Name = action.name
+      state.name = action.name
       return state
     case 'UPDATE_AVATAR':
-      state.Avatar = action.avater
+      state.avatar = action.avater
       return state
     default:
       return state
