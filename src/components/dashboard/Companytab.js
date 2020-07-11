@@ -37,14 +37,16 @@ box-shadow: 1px 3px 1px #d9d9d9;
 }
 `
 
-const Tab = styled.div`
-font-size:22px;
+const Col = styled.div`
 display:flex;
-align-self:center;
-:hover{
-    cursor:pointer;
-}
+flex-direction:column;
 `
+
+const Row = styled.div`
+display:flex;
+flex-direction:row;
+`
+
 
 const Image = styled.img`
 width:36px;
@@ -98,20 +100,13 @@ class Companytab extends React.Component {
 class CLabel extends React.Component {
     render() {
         return (
-            <div style={{
-
+            <Row style={{
                 borderRadius: '08px',
-                flexDirection: 'row',
                 justifyContent: 'center',
-                display: 'flex',
-                backgroundColor: 'white'
 
             }}>
                 {/**Company Logo + Name + Position */}
-                <div style={{
-                    display: 'flex',
-                    flexDirection: 'row',
-                    backgroundColor: 'white',
+                <Row style={{
                     width: '92.5%',
                     alignItems: 'center'
                 }}>
@@ -120,19 +115,16 @@ class CLabel extends React.Component {
                     <Image src='' alt='Logo' />
 
                     {/**company name and job */}
-                    <div style={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                        backgroundColor: 'white',
+                    <Col style={{
                         marginLeft: '30px',
                         alignItems: 'flex-start',
 
                     }}>
                         <CompanyTitle>Tesla</CompanyTitle>
                         <JobTitle>Communications/ Data Science</JobTitle>
-                    </div>
-                </div>
-            </div>
+                    </Col>
+                </Row>
+            </Row>
         )
     }
 }
@@ -141,20 +133,17 @@ class CLabel extends React.Component {
 class DroppedView extends React.Component {
     render() {
         return (
-            <div style={{
-                display: 'flex',
-                flexDirection: 'column',
-                padding: '12px'
-            }}>
+            <Col style={{ padding: '12px' }}>
+
                 <AProgressTab />
-                <div style={{
-                    display: 'flex',
-                    flexDirection: 'row',
+                <Row style={{
                     justifyContent: 'space-evenly',
                     marginTop: '1%',
                     paddingTop: '8px',
                     paddingBottom: '8px'
                 }}>
+
+                    {/**Button */}
                     <Button style={{
                         backgroundColor: '#BFBFBF',
                         color: 'black'
@@ -162,6 +151,8 @@ class DroppedView extends React.Component {
                         Add Custom Response
                     </Button>
 
+
+                    {/**Button */}
                     <Button style={{
                         backgroundColor: '#52C41A',
                         color: 'white'
@@ -169,14 +160,16 @@ class DroppedView extends React.Component {
                         Company Information
                     </Button>
 
+
+                    {/**Button */}
                     <Button style={{
                         backgroundColor: '#BCDFFF',
                         color: 'white'
                     }}>
                         Submit
                     </Button>
-                </div>
-            </div>
+                </Row>
+            </Col>
         )
     }
 }

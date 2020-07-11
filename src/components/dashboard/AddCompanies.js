@@ -2,11 +2,19 @@ import React from 'react'
 import styled from 'styled-components'
 import { Input } from 'antd';
 import SearchCompanytab from './SearchCompanytab.js'
-import CompanyInformation from './CompanyInformation.js';
-import { Collapse, Col, Checkbox } from 'antd'
+import { Collapse, Checkbox } from 'antd'
+import { Col as antCol, Row as antRow } from 'antd'
 
 const { Search } = Input;
 const { Panel } = Collapse;
+
+
+//Formatting
+const formGutter = [16, 16];
+const checkGutter = [8, 8];
+const standardSpan = 24;
+const thirdSpan = standardSpan / 3;
+
 
 const ModuleContainer = styled.div`
   background: white;
@@ -35,6 +43,7 @@ justify-content:center;
 box-shadow: 1px 3px 1px #d9d9d9;
 :hover{
     cursor:pointer;
+    background-color:#a6c5e0;
 }
 `
 
@@ -70,8 +79,6 @@ let Info = [
     { name: 'qgy type letters', industry: 'Political' },
     { name: 'Tesla', industry: 'Biotechnology' },
     { name: 'Tinder', industry: 'Vocational' },
-
-
 ]
 
 
@@ -80,12 +87,8 @@ class AddCompanies extends React.Component {
         super(props);
         this.state = {
             search: '',
-            industries: '',
-            mergedIndustry: 'BusinessConsultingFinance or AccountingMedia or TellecommunicationsReal EstateEngineeringScience ResearchComputer ScienceBiotechnologyVocationalPoliticalMarketing',
-            tabDropped: '1'
-
-
-
+            industries: industry,
+            mergedIndustry: 'General BusinessBusinessConsultingFinance or AccountingMedia or TellecommunicationsReal EstateEngineeringScience ResearchComputer ScienceBiotechnologyVocationalPoliticalMarketing',
         }
         this.searchCompany = this.searchCompany.bind(this);
         this.filterIndustries = this.filterIndustries.bind(this);
@@ -96,7 +99,6 @@ class AddCompanies extends React.Component {
     render() {
         let { search,
             mergedIndustry,
-            tabDropped
         } = this.state;
 
         //Filtering function for industries
@@ -117,6 +119,11 @@ class AddCompanies extends React.Component {
         return (
             <div style={{ paddingBottom: '50%' }} >
                 <h1 className="module-name">Pinned Companies</h1>
+                {/**
+                 *
+                 * Pinned Companies
+                 *
+                 */}
                 <ModuleContainer>
                     Not done yet
                 </ModuleContainer>
@@ -130,47 +137,44 @@ class AddCompanies extends React.Component {
                  *
                  */}
                 <Search
-                    placeholder="Search Companies"
-                    style={{ width: '100%', marginBottom: '20px' }}
+                    placeholder="Search Company Name"
                     allowClear='true'
-
+                    size='large'
                     onChange={value => this.searchCompany(value)}
-
+                    style={{ width: '100%', marginBottom: '20px' }}
                 />
 
 
                 {/**
                  *
-                 * Filter by industries
+                 * Filter by industries Collapse Tab
                  *
                  */}
                 <Row>
-                    <Collapse defaultActiveKey={['1']} expandIconPosition='right' >
+                    <Collapse defaultActiveKey={['0']} expandIconPosition='right' >
                         <Panel header='Filter by Industry' >
-                            <Checkbox.Group onChange={value => this.filterIndustries(value)}>
-                                <Row style={{ flexDirection: 'column' }}>
-                                    {industry.map(industry => (
-                                        <div >
-                                            <Checkbox
-                                                key={industry}
-                                                value={industry}
-                                                style={{
-                                                    lineHeight: "32px"
-                                                }}
+                            <antRow gutter={formGutter}>
+                                <antCol span={standardSpan}>
+                                    <Checkbox.Group onChange={value => this.filterIndustries(value)}>
+                                        <antRow gutter={checkGutter}>
+                                            {industry.map(industry => (
+                                                <antCol span={thirdSpan}>
+                                                    <Checkbox
+                                                        key={industry}
+                                                        value={industry}
+                                                        style={{
+                                                            lineHeight: "32px"
+                                                        }}
+                                                    >
+                                                        {industry}
+                                                    </Checkbox>
+                                                </antCol>
+                                            ))}
 
-                                            >
-                                                {industry}
-                                            </Checkbox>
-                                        </div>
-                                    ))}
-                                    <Row style={{ marginTop: '20px' }}>
-
-                                        <Button onClick={this.mergeIndustries}>
-                                            Search
-                                        </Button>
-                                    </Row>
-                                </Row>
-                            </Checkbox.Group>
+                                        </antRow>
+                                    </Checkbox.Group>
+                                </antCol>
+                            </antRow>
                         </Panel>
                     </Collapse>
                 </Row>
@@ -180,7 +184,7 @@ class AddCompanies extends React.Component {
 
                 {/**
                  *
-                 * Mapping of results
+                 * Mapping of search results
                  *
                  */}
                 {
@@ -200,20 +204,26 @@ class AddCompanies extends React.Component {
             </div >)
     }
 
+
+
+    //Handles search bar changes
     searchCompany(event) {
         this.setState({ search: event.target.value.substring(0, 20) })
     }
-
+    //Filtering industry checkboxes
     filterIndustries(event) {
         this.setState({ industries: event }, this.stateCallback)
     }
 
+    //Logging info in console
     stateCallback() {
         console.log(this.state.industries)
+        this.mergeIndustries()
     }
 
+    //Sending information to filter function
     mergeIndustries() {
-        let { industries, mergedIndustry } = this.state;
+        let { industries } = this.state;
         let tempVar = "";
         //Creates a variable with all desired industries
         industries.map(camel => (
@@ -225,11 +235,9 @@ class AddCompanies extends React.Component {
 
         //Handles 'all industries'
         if (tempVar === '') {
-            this.setState({ mergedIndustry: 'BusinessConsultingFinance or AccountingMedia or TellecommunicationsReal EstateEngineeringScience ResearchComputer ScienceBiotechnologyVocationalPoliticalMarketing' })
+            this.setState({ mergedIndustry: 'General BusinessBusinessConsultingFinance or AccountingMedia or TellecommunicationsReal EstateEngineeringScience ResearchComputer ScienceBiotechnologyVocationalPoliticalMarketing' })
         }
-
         console.log("This is the merged: ", this.state.mergedIndustry)
     }
-
 }
 export default AddCompanies

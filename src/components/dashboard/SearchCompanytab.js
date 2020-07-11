@@ -251,11 +251,11 @@ class QuickView extends React.Component {
                     </Col>
 
                     <Col>
-                        <Button style={{ backgroundColor: '#1890FF' }} onClick={console.log("clicked 'Add' Button")}>Add</Button>
+                        <Button style={{ backgroundColor: '#1890FF' }} >Add</Button>
                         <Button style={{
                             backgroundColor: '#BFBFBF',
                             color: 'black',
-                            marginTop: '10px'
+                            marginTop: '10px',
                         }}>More Details</Button>
                     </Col>
 
