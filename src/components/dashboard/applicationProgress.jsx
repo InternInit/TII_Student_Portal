@@ -3,6 +3,7 @@ import styled from "styled-components";
 import "../../App.css";
 import "./dashboard.css";
 import "antd/dist/antd.css";
+import Checklist from "./checklist.jsx";
 import { Progress } from "antd";
 import { CheckCircleTwoTone } from "@ant-design/icons";
 import QueueAnim from "rc-queue-anim";
@@ -70,20 +71,31 @@ const ViewChecklist = styled.p`
 `;
 
 /*
-******************************************
-PERCENT COMPLETION ARRAY
-[0] == Title Of the Section
-[1] == Percentage Complete --> adaptable version to be implemented
-[2] == Trail Color
-[3] == Stroke Color
-******************************************
-*/
+  ******************************************
+  PERCENT COMPLETION ARRAY
+  [0] == Title Of the Section
+  [1] == Percentage Complete --> adaptable version to be implemented
+  [2] == Trail Color
+  [3] == Stroke Color
+  [4] == Access code for the state
+  ******************************************
+  BUG: THESE NEEDS TO BE REPLACED BY THE REACT STORE
+  */
 let percentComplete = [
-  ["Internship Information", 85, "#e6f7ff", "#1890ff"],
-  ["Personal", 50, "#fff7e6", "#fa8c16"],
-  ["Essays", 25, "#fcffe6", "#a0d911"],
-  ["References", 100, "#f9f0ff", "#722ed1"]
+  [
+    "Internship Information",
+    85,
+    "#e6f7ff",
+    "#1890ff",
+    "internshipInfoChecklist"
+  ],
+  ["Personal", 50, "#fff7e6", "#fa8c16", "personalChecklist"],
+  ["Essays", 25, "#fcffe6", "#a0d911", "essayChecklist"],
+  ["References", 100, "#f9f0ff", "#722ed1", "referencesChecklist"]
 ];
+
+// BUG: THIS NEEDS TO BE REPLACED BY THE REACT STORE
+let checklistArray = ["Item 1", "Item 2", "Item 3"];
 
 class ApplicationProgress extends Component {
   state = {
@@ -93,6 +105,44 @@ class ApplicationProgress extends Component {
     referencesChecklist: false
   };
 
+  handleClick = section => {
+    const {
+      internshipInfoChecklist,
+      personalChecklist,
+      essayChecklist,
+      referencesChecklist
+    } = this.state;
+
+    switch (section) {
+      case "Internship Information":
+        this.setState({
+          internshipInfoChecklist: !internshipInfoChecklist
+        });
+        console.log(this.state);
+        break;
+      case "Personal":
+        this.setState({
+          personalChecklist: !personalChecklist
+        });
+        console.log(this.state);
+        break;
+      case "Essays":
+        this.setState({
+          essayChecklist: !essayChecklist
+        });
+        console.log(this.state);
+        break;
+      case "References":
+        this.setState({
+          referencesChecklist: !referencesChecklist
+        });
+        console.log(this.state);
+        break;
+      default:
+        break;
+    }
+  };
+
   render() {
     return (
       <React.Fragment>
@@ -100,7 +150,9 @@ class ApplicationProgress extends Component {
         <ModuleContainer>
           {percentComplete.map(section => (
             <React.Fragment>
-              <ProgressHeader>{section[0]}</ProgressHeader>
+              <ProgressHeader key={section[0] + "pheader"}>
+                {section[0]}
+              </ProgressHeader>
               <PercentHeader>
                 {section[1] < 100 ? (
                   section[1] + "%"
@@ -125,8 +177,15 @@ class ApplicationProgress extends Component {
                 showInfo={false}
               />
               <ViewChecklist>
-                <a href="#">View Checklist</a>
+                <a onClick={() => this.handleClick(section[0])}>
+                  View Checklist
+                </a>
               </ViewChecklist>
+              <div>
+                {this.state[section[4]] ? (
+                  <Checklist checklist={checklistArray} />
+                ) : null}
+              </div>
             </React.Fragment>
           ))}
         </ModuleContainer>
