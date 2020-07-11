@@ -6,9 +6,10 @@ import "../../App.css";
 import "./dashboard.css";
 import { Layout, Switch, Button } from "antd";
 
-import AddCompanies from './AddCompanies.js'
-import CompanyInformation from './CompanyInformation.js'
-import Companytab from './Companytab.js'
+import AddCompanies from "./AddCompanies.js";
+import CompanyInformation from "./CompanyInformation.js";
+import Companytab from "./Companytab.js";
+
 const PageContainer = styled.div`
   width: 90%;
   padding-left: 5%;
@@ -34,7 +35,7 @@ class Dashboard extends Component {
     super(props);
     this.state = {
       info: ""
-    }
+    };
   }
   render() {
     return (
@@ -52,6 +53,7 @@ class Dashboard extends Component {
             <PageContainer>
               <WelcomeHeader>Welcome Kevin</WelcomeHeader>
               <DashboardNavBar />
+              <ApplicationProgress />
               <AddCompanies />
             </PageContainer>
           </Content>
@@ -59,7 +61,6 @@ class Dashboard extends Component {
       </React.Fragment>
     );
   }
-
 }
 
 export default Dashboard;
