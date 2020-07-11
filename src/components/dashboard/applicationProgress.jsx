@@ -66,8 +66,8 @@ const ViewChecklist = styled.p`
   font-size: 14px;
   line-height: 16px;
   align-items: center;
-
   color: #1890ff;
+
 `;
 
 /*
@@ -157,11 +157,11 @@ class ApplicationProgress extends Component {
                 {section[1] < 100 ? (
                   section[1] + "%"
                 ) : (
-                  <CheckCircleTwoTone
-                    style={{ fontSize: "24px" }}
-                    twoToneColor="#52c41a"
-                  />
-                )}
+                    <CheckCircleTwoTone
+                      style={{ fontSize: "24px" }}
+                      twoToneColor="#52c41a"
+                    />
+                  )}
               </PercentHeader>
               <Progress
                 percent={section[1]}

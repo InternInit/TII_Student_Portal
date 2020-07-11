@@ -8,9 +8,11 @@ import { BorderOutlined } from "@ant-design/icons";
 import QueueAnim from "rc-queue-anim";
 
 const ChecklistItem = styled.p`
-  font-size: 18px;
+  font-size: 14px;
   align-items: center;
-  line-height: 24px;
+  line-height: 18px;
+  padding:6px;
+  font-weight:500;
 `;
 
 export default function Checklist(props) {
@@ -25,10 +27,11 @@ export default function Checklist(props) {
           <div key={index}>
             <BorderOutlined
               style={{
-                fontSize: 24,
+                fontSize: 18,
                 float: "left",
                 marginRight: "7px",
-                marginLeft: "20px"
+                marginLeft: "20px",
+                padding: '6px',
               }}
             />
             <ChecklistItem>{item}</ChecklistItem>
