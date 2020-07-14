@@ -92,7 +92,7 @@ class Dashboard extends Component {
                 <Route
                   path="/dashboard/my-internships"
                   exact
-                  component={ApplicationProgress}
+                  render={props => <ApplicationProgress {...props} completionState={this.props.completionState}/>}
                 />
                 <Route
                   path="/dashboard/add-companies"
@@ -104,7 +104,7 @@ class Dashboard extends Component {
                 </Route>
                 <Route
                   path="/dashboard/*"
-                  render={props => {
+                  render={() => {
                     return <Redirect to="/dashboard/my-internships" />;
                   }}
                 />
