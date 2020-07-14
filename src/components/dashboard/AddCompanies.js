@@ -121,6 +121,7 @@ class AddCompanies extends React.Component {
 
     return (
       <div style={{ paddingBottom: "50%" }}>
+        <SearchCompanytab key="Poop" name="Poop" />
         <h1 className="module-name">Pinned Companies</h1>
         {/**
          *
