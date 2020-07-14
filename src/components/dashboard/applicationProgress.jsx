@@ -71,28 +71,27 @@ const ViewChecklist = styled.p`
 `;
 
 /*
-  ******************************************
-  PERCENT COMPLETION ARRAY
-  [0] == Title Of the Section
-  [1] == Percentage Complete --> adaptable version to be implemented
-  [2] == Trail Color
-  [3] == Stroke Color
-  [4] == Access code for the state
-  ******************************************
-  TODO: THESE NEEDS TO BE REPLACED BY THE REACT STORE
-  */
-let percentComplete = [
+******************************************
+PERCENT COMPLETION ARRAY
+[0] == Title Of the Section
+[1] == Percentage Complete --> adaptable version to be implemented
+[2] == Trail Color
+[3] == Stroke Color
+[4] == Access code for the state
+******************************************
+TODO: THESE NEEDS TO BE REPLACED BY THE REACT STORE
+*/
+const percentComplete = [
   [
     "Internship Information",
-    0,
     "#e6f7ff",
     "#1890ff",
     "internshipInfoChecklist"
   ],
-  ["Personal", 0, "#fff7e6", "#fa8c16", "personalChecklist"],
-  ["Essays", 0, "#fcffe6", "#a0d911", "essayChecklist"],
-  ["References", 0, "#f9f0ff", "#722ed1", "referencesChecklist"]
-];
+  ["Personal", "#fff7e6", "#fa8c16", "personalChecklist"],
+  ["Essays", "#fcffe6", "#a0d911", "essayChecklist"],
+  ["References", "#f9f0ff", "#722ed1", "referencesChecklist"]
+]
 
 // TODO: THIS NEEDS TO BE REPLACED BY THE REACT STORE
 let checklistArray = ["Item 1", "Item 2", "Item 3"];
@@ -104,22 +103,14 @@ class ApplicationProgress extends Component {
       internshipInfoChecklist: false,
       personalChecklist: false,
       essayChecklist: false,
-      referencesChecklist: false
+      referencesChecklist: false,
+
     };
   }
 
-
-  componentDidMount(){
-    console.log(this.props.completionState)
-  }
   componentDidUpdate(){
-    console.log(this.props.completionState)
+    console.log("adssads")
   }
-
-  drawPercentageCompletion = (completionState) => {
-    
-  }
-
 
   handleClick = section => {
     const {
@@ -164,14 +155,14 @@ class ApplicationProgress extends Component {
       <React.Fragment>
         <h1 className="module-name">Application Progress</h1>
         <ModuleContainer>
-          {percentComplete.map(section => (
+          {percentComplete.map((section,index) => (
             <React.Fragment>
               <ProgressHeader key={section[0] + "pheader"}>
                 {section[0]}
               </ProgressHeader>
               <PercentHeader>
-                {section[1] < 100 ? (
-                  section[1] + "%"
+                {this.props.completionState[index] < 1 ? (
+                  this.props.completionState[index]*100 + "%"
                 ) : (
                     <CheckCircleTwoTone
                       style={{ fontSize: "24px" }}
@@ -180,11 +171,11 @@ class ApplicationProgress extends Component {
                   )}
               </PercentHeader>
               <Progress
-                percent={section[1]}
+                percent={this.props.completionState[index]*100}
                 trailColor="#e6f7ff"
                 strokeColor={
                   //section[1] < 100 ? section[3] : "#52c41a"
-                  section[1] < 100
+                  this.props.completionState[index] < 1
                     ? { from: "#108ee9", to: "#87d068" }
                     : "#52c41a"
                 }
@@ -198,7 +189,7 @@ class ApplicationProgress extends Component {
                 </a>
               </ViewChecklist>
               <div>
-                {this.state[section[4]] ? (
+                {this.state[section[3]] ? (
                   <Checklist checklist={checklistArray} />
                 ) : null}
               </div>

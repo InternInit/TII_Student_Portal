@@ -315,7 +315,7 @@ const props = {
 
 const mapStateToProps = state => {
   return {
-    completionState: state.completionState,
+    completionState: state.completionState
   }
 }
 

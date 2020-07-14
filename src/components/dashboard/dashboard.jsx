@@ -10,6 +10,9 @@ import AddCompanies from "./AddCompanies.js";
 import CompanyInformation from "./CompanyInformation.js";
 import Companytab from "./Companytab.js";
 
+import { connect } from 'react-redux';
+
+
 const PageContainer = styled.div`
   width: 90%;
   padding-left: 5%;
@@ -29,6 +32,12 @@ const WelcomeHeader = styled.h1`
 `;
 
 const { Header, Content, Footer, Sider } = Layout;
+
+const mapStateToProps = state => {
+  return {
+    completionState: state.completionState
+  }
+}
 
 class Dashboard extends Component {
   constructor(props) {
@@ -66,4 +75,6 @@ class Dashboard extends Component {
   }
 }
 
-export default Dashboard;
+export default connect(
+  mapStateToProps
+)(Dashboard);
