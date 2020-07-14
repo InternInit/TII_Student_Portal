@@ -479,7 +479,7 @@ class App extends Component {
               render={props => {
                 return (
                   (this.authParam = props.location.search),
-                  <Redirect to="/apply/internship-info" />
+                  <Redirect to="/dashboard/my-internships" />
                 );
               }}
             />

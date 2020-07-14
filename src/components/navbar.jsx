@@ -62,7 +62,10 @@ class Navbar extends Component {
     if (window.location.pathname.includes("apply/")) {
       return "apply";
     }
-    if (window.location.pathname.includes("dashboard/")) {
+    if (
+      window.location.pathname.includes("dashboard/") ||
+      window.location.pathname === "/"
+    ) {
       return "dashboard";
     }
     let defaultKey = window.location.pathname;
