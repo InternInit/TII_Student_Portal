@@ -7,6 +7,7 @@ import Checklist from "./checklist.jsx";
 import { Progress } from "antd";
 import { CheckCircleTwoTone } from "@ant-design/icons";
 import QueueAnim from "rc-queue-anim";
+import { withRouter } from "react-router";
 
 /*
 
@@ -67,7 +68,6 @@ const ViewChecklist = styled.p`
   line-height: 16px;
   align-items: center;
   color: #1890ff;
-
 `;
 
 /*
@@ -157,11 +157,11 @@ class ApplicationProgress extends Component {
                 {section[1] < 100 ? (
                   section[1] + "%"
                 ) : (
-                    <CheckCircleTwoTone
-                      style={{ fontSize: "24px" }}
-                      twoToneColor="#52c41a"
-                    />
-                  )}
+                  <CheckCircleTwoTone
+                    style={{ fontSize: "24px" }}
+                    twoToneColor="#52c41a"
+                  />
+                )}
               </PercentHeader>
               <Progress
                 percent={section[1]}
@@ -194,4 +194,4 @@ class ApplicationProgress extends Component {
   }
 }
 
-export default ApplicationProgress;
+export default withRouter(ApplicationProgress);

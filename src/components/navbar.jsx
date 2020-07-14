@@ -35,8 +35,8 @@ const menuStyle = {
 };
 
 const menuItemStyle = {
-  marginLeft: "25px",
-  marginRight: "25px"
+  marginLeft: "20px",
+  marginRight: "20px"
 };
 
 const avatarStyle = {
@@ -61,6 +61,9 @@ class Navbar extends Component {
   getCurrentKey = () => {
     if (window.location.pathname.includes("apply/")) {
       return "apply";
+    }
+    if (window.location.pathname.includes("dashboard/")) {
+      return "dashboard";
     }
     let defaultKey = window.location.pathname;
     let newDefaultKey = defaultKey.replace("/", "");
