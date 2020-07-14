@@ -75,6 +75,7 @@ const Logo = styled.img`
   background-color: blue;
   margin-left: 11%;
   margin-bottom: 14px;
+  border-radius:6px;
 `;
 
 const TabContainer = styled.div`
