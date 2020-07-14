@@ -627,7 +627,8 @@ class PageInternshipInformation extends Component {
 
         }
       }
-      let completionPercentage = (completedCount/Object.keys(requiredValues).length).toFixed(2)
+      let completionPercentage = parseFloat((completedCount/Object.keys(requiredValues).length).toFixed(2))
+      console.log(typeof completionPercentage)
       this.props.updateCompletionState(0,completionPercentage)
       //this.props.setCompletionState(0, false);
       this.props.updateData(errorInfo.values, "0");

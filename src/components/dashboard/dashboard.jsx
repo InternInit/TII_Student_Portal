@@ -37,6 +37,8 @@ class Dashboard extends Component {
       info: ""
     };
   }
+
+
   render() {
     return (
       <React.Fragment>
@@ -53,6 +55,8 @@ class Dashboard extends Component {
             <PageContainer>
               <WelcomeHeader>Welcome Kevin</WelcomeHeader>
               <DashboardNavBar />
+              <ApplicationProgress
+                completionState={this.props.completionState}/>
               <AddCompanies />
             </PageContainer>
           </Content>

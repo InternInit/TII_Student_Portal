@@ -98,6 +98,20 @@ class App extends Component {
     };
   }
 
+  componentDidMount() {
+    console.log("mounted");
+    this.refresh();
+    this.getCachedCompletionState();
+    this.interval = setInterval(() => this.resize(), 500);
+    return () => clearInterval(this.interval);
+  }
+
+  //componentWillUpdate() IS A DEPRECATED FUNCTION, SHOULD BE REMOVED
+  componentWillUnmount() {
+    //This is here because I don't know if the return statement will work lol
+    clearInterval(this.interval);
+  }
+
   inMemoryToken;
   authParam = "absasd";
 
@@ -143,6 +157,146 @@ class App extends Component {
         });
     } else if (this.state.submissionState == false) {
       console.log("Submission disabled");
+    }
+  };
+
+  auth = () => {
+    try {
+      var authCode = this.authParam.split("=")[1];
+      fetch("/api/auth", {
+        method: "POST",
+        headers: {
+          "Content-Type": "text/plain"
+        },
+        body: authCode
+      })
+        .then(response => response.json())
+        .then(data => {
+          if (data !== "Invalid Grant") {
+            data = JSON.parse(data);
+
+            this.inMemoryToken = {
+              token: data.id_token,
+              expiry: data.expires_in,
+              refresh: data.refresh_token
+            };
+            console.log(this.inMemoryToken);
+          } else {
+            window.location.href = configurationFile.authUrl;
+          }
+        });
+    } catch (e) {
+      window.location.href = configurationFile.authUrl;
+    }
+  };
+
+  refresh = () => {
+    fetch("/api/auth/refresh")
+      .then(response => response.json())
+      .then(data => {
+        if (data == null) {
+          //Exchange Auth
+          //Store JWT in memory
+          //Store Refresh Token
+          this.auth();
+        } else {
+          //Check for JWT
+          if (typeof this.inMemoryToken == "undefined") {
+            console.log("I should probably exchange refresh for JWT");
+            this.exchange();
+          }
+        }
+      });
+  };
+
+  exchange = () => {
+    console.log("Exchanging");
+    fetch("/api/auth/exchange")
+      .then(response => response.json())
+      .then(data => {
+        data = JSON.parse(data);
+        if (data.error !== "invalid_grant") {
+          this.inMemoryToken = {
+            token: data.id_token,
+            expiry: data.expires_in,
+            refresh: data.refresh_token
+          };
+          console.log(this.inMemoryToken);
+        } else {
+          this.logout();
+        }
+      });
+  };
+
+  logout = () => {
+    fetch("/api/logout")
+      .then(response => response.json())
+      .then(data => {
+        console.log(typeof data);
+        window.location.href = data;
+      });
+  };
+
+  getJwt = () => {
+    return new Promise((resolve, reject) => {
+      var app = this;
+      function checkToken() {
+        if (app.inMemoryToken === undefined) {
+          setTimeout(() => {
+            checkToken();
+          }, 10);
+        } else {
+          resolve(app.inMemoryToken.token);
+        }
+      }
+      checkToken();
+    });
+  };
+
+  uploadFile = async (file, source) => {
+    console.log("Uploading");
+    const fd = new FormData();
+    fd.append("file", file);
+
+    for (var pair of fd.entries()) {
+      console.log(pair[0] + ", " + pair[1]);
+    }
+    let token = await this.getJwt();
+
+    fetch("/api/upload_user_files", {
+      method: "POST",
+      headers: {
+        Authorization: "Bearer " + JSON.parse(JSON.stringify(token)),
+        Source: JSON.parse(JSON.stringify(source))
+      },
+      body: fd
+    }).then(response => {});
+  };
+
+  getCachedCompletionState = async () => {
+    let token = await this.getJwt();
+    fetch("/api/get_user_data", {
+      method: "POST",
+      headers: {
+        Authorization: "Bearer " + JSON.parse(JSON.stringify(token))
+      },
+      body: 0
+    })
+      .then(response => response.json())
+      .then(data => {
+        let parsedRecv = JSON.parse(data);
+        if (parsedRecv != "No Info") {
+          let recvCompletionState = parsedRecv[1];
+          this.props.batchUpdateCompletionState(recvCompletionState);
+          //this.setState({ completionState: recvCompletionState });
+        }
+      });
+  };
+
+  resize = () => {
+    let hideNav = window.innerWidth <= 1300;
+    if (hideNav !== this.state.isCollapsed) {
+      this.setState({ isCollapsed: hideNav });
     }
   };
 
@@ -271,150 +425,6 @@ class App extends Component {
     );
   };
 
-  auth = () => {
-    try {
-      var authCode = this.authParam.split("=")[1];
-      fetch("/api/auth", {
-        method: "POST",
-        headers: {
-          "Content-Type": "text/plain"
-        },
-        body: authCode
-      })
-        .then(response => response.json())
-        .then(data => {
-          if (data !== "Invalid Grant") {
-            data = JSON.parse(data);
-
-            this.inMemoryToken = {
-              token: data.id_token,
-              expiry: data.expires_in,
-              refresh: data.refresh_token
-            };
-            console.log(this.inMemoryToken);
-          } else {
-            window.location.href = configurationFile.authUrl;
-          }
-        });
-    } catch (e) {
-      window.location.href = configurationFile.authUrl;
-    }
-  };
-
-  refresh = () => {
-    fetch("/api/auth/refresh")
-      .then(response => response.json())
-      .then(data => {
-        if (data == null) {
-          //Exchange Auth
-          //Store JWT in memory
-          //Store Refresh Token
-          this.auth();
-        } else {
-          //Check for JWT
-          if (typeof this.inMemoryToken == "undefined") {
-            console.log("I should probably exchange refresh for JWT");
-            this.exchange();
-          } else {
-            console.log("JWT exists, yay");
-            this.getUserData();
-          }
-        }
-      });
-  };
-
-  exchange = () => {
-    console.log("Exchanging");
-    fetch("/api/auth/exchange")
-      .then(response => response.json())
-      .then(data => {
-        data = JSON.parse(data);
-        if (data.error !== "invalid_grant") {
-          this.inMemoryToken = {
-            token: data.id_token,
-            expiry: data.expires_in,
-            refresh: data.refresh_token
-          };
-          console.log(this.inMemoryToken);
-        } else {
-          this.logout();
-        }
-      });
-  };
-
-  logout = () => {
-    fetch("/api/logout")
-      .then(response => response.json())
-      .then(data => {
-        console.log(typeof data);
-        window.location.href = data;
-      });
-  };
-
-  getJwt = () => {
-    return new Promise((resolve, reject) => {
-      var app = this;
-      function checkToken() {
-        if (app.inMemoryToken === undefined) {
-          setTimeout(() => {
-            checkToken();
-          }, 10);
-        } else {
-          resolve(app.inMemoryToken.token);
-        }
-      }
-      checkToken();
-    });
-  };
-
-  uploadFile = async (file, source) => {
-    console.log("Uploading");
-    const fd = new FormData();
-    fd.append("file", file);
-
-    for (var pair of fd.entries()) {
-      console.log(pair[0] + ", " + pair[1]);
-    }
-    let token = await this.getJwt();
-
-    fetch("/api/upload_user_files", {
-      method: "POST",
-      headers: {
-        Authorization: "Bearer " + JSON.parse(JSON.stringify(token)),
-        Source: JSON.parse(JSON.stringify(source))
-      },
-      body: fd
-    }).then(response => {});
-  };
-
-  getCachedCompletionState = async () => {
-    let token = await this.getJwt();
-    fetch("/api/get_user_data", {
-      method: "POST",
-      headers: {
-        Authorization: "Bearer " + JSON.parse(JSON.stringify(token))
-      },
-      body: 0
-    })
-      .then(response => response.json())
-      .then(data => {
-        let parsedRecv = JSON.parse(data);
-        if (parsedRecv != "No Info") {
-          let recvCompletionState = parsedRecv[1];
-          this.props.batchUpdateCompletionState(recvCompletionState);
-          //this.setState({ completionState: recvCompletionState });
-        }
-      });
-  };
-
-  resize = () => {
-    let hideNav = window.innerWidth <= 1300;
-    if (hideNav !== this.state.isCollapsed) {
-      this.setState({ isCollapsed: hideNav });
-    }
-    //console.log("After: currentHideNav:" + currentHideNav + ", isCollapsed:" + isCollapsed + ", WindowInnerWidth:" + window.innerWidth)
-  };
-
   // BUG: PROBLEM WITH RENDERING THE DIFFERENT NAVBAR SELECTIONS
   renderNav = () => {
     const highlightKey = String([this.state.page + 1]);
@@ -432,18 +442,7 @@ class App extends Component {
     );
   };
 
-  componentDidMount() {
-    console.log("mounted");
-    this.refresh();
-    this.getCachedCompletionState();
-    this.interval = setInterval(() => this.resize(), 500);
-    return () => clearInterval(this.interval);
-  }
 
-  componentWillUnmount() {
-    //This is here because I don't know if the return statement will work lol
-    clearInterval(this.interval);
-  }
 
   render() {
     return (

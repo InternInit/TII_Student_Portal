@@ -509,7 +509,7 @@ class PagePersonal extends Component {
 
         }
       }
-      let completionPercentage = (completedCount/Object.keys(requiredValues).length).toFixed(2)
+      let completionPercentage = parseFloat((completedCount/Object.keys(requiredValues).length).toFixed(2))
       this.props.updateCompletionState(1,completionPercentage)
       //this.props.setCompletionState(0, false);
       this.props.updateData(errorInfo.values, "1");
