@@ -7,6 +7,18 @@
 */
 .TII-logo {
   width: 30px;
+  margin-right: 25px;
+}
+
+.main-navbar.ant-menu-horizontal > .ant-menu-item:hover,
+.main-navbar.ant-menu-horizontal > .ant-menu-submenu:hover,
+.main-navbar.ant-menu-horizontal > .ant-menu-item-active,
+.main-navbar.ant-menu-horizontal > .ant-menu-submenu-active,
+.main-navbar.ant-menu-horizontal > .ant-menu-item-open,
+.main-navbar.ant-menu-horizontal > .ant-menu-submenu-open,
+.main-navbar.ant-menu-horizontal > .ant-menu-item-selected {
+  color: #1890ff;
+  border-bottom: 2px solid transparent;
 }
 
 /*

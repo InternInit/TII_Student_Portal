@@ -7,6 +7,12 @@ import "../App.css";
 
 //Ant Design Imports
 import { Menu } from "antd";
+import { Avatar } from "antd";
+import {
+  UserOutlined,
+  LogoutOutlined,
+  AppstoreOutlined
+} from "@ant-design/icons";
 
 //Logo Import
 import Logo from "../TII-logo.png";
@@ -15,6 +21,34 @@ import Logo from "../TII-logo.png";
 import { Link } from "react-router-dom";
 import { withRouter } from "react-router";
 
+//==========================================================
+//
+//            Styles and AntDesign Declarations
+//
+//==========================================================
+const { SubMenu } = Menu;
+const MenuAvatar =
+  "https://www.biography.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cg_face%2Cq_auto:good%2Cw_300/MTE4MDAzNDEwNzg5ODI4MTEw/barack-obama-12782369-1-402.jpg";
+const menuStyle = {
+  textAlign: "left",
+  marginLeft: "60px"
+};
+
+const menuItemStyle = {
+  marginLeft: "25px",
+  marginRight: "25px"
+};
+
+const avatarStyle = {
+  float: "right",
+  marginRight: "60px"
+};
+
+//==========================================================
+//
+//                      Navbar Class
+//
+//==========================================================
 class Navbar extends Component {
   constructor(props) {
     super(props);
@@ -48,9 +82,11 @@ class Navbar extends Component {
   render() {
     return (
       <Menu
+        className="main-navbar"
         onClick={this.handleClick}
         selectedKeys={[this.state.current]}
         mode="horizontal"
+        style={menuStyle}
       >
         {/*Moved the logo to a Fragment instead of a menu item to prevent
           random clicking until the dashboard is implemented in the next
@@ -58,35 +94,39 @@ class Navbar extends Component {
         <React.Fragment>
           <img className="TII-logo" alt="Tii-logo" src={Logo} />
         </React.Fragment>
-
-        {/*
-          Dashboard route for implementation in the next version.
-
-          <Menu.Item key="dashboard">
+        <Menu.Item key="dashboard" style={menuItemStyle}>
           <Link to="/dashboard">Dashboard</Link>
         </Menu.Item>
-
-        */}
         <Menu.Item
           key="how-to-apply"
           onClick={() => {
             this.routeChange("/how-to-apply");
           }}
+          style={menuItemStyle}
         >
           How to Apply
         </Menu.Item>
-        <Menu.Item key="apply">
+        <Menu.Item key="apply" style={menuItemStyle}>
           <Link to="/apply/Internship-Info/">Apply</Link>
         </Menu.Item>
 
-        <Menu.Item
-          key="logout"
-          onClick={() => {
-            this.props.logout();
-          }}
+        <SubMenu
+          key="navbar-avatar"
+          title={<Avatar className="navbar-avatar-icon" src={MenuAvatar} />}
+          style={avatarStyle}
         >
-          Logout
-        </Menu.Item>
+          <Menu.Item key="edit-profile">
+            <UserOutlined /> Edit Profile
+          </Menu.Item>
+          <Menu.Item
+            key="logout"
+            onClick={() => {
+              this.props.logout();
+            }}
+          >
+            <LogoutOutlined /> Logout
+          </Menu.Item>
+        </SubMenu>
 
         {/*
           Special submission route for choosing schools to be implemented
