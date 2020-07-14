@@ -13,6 +13,7 @@ import AddCompanies from "./AddCompanies.js";
 import CompanyInformation from "./CompanyInformation.js";
 import Companytab from "./Companytab.js";
 import ApplicationProgress from "./applicationProgress.jsx";
+import ApplySkills from "./apply-skills/applySkills";
 
 //React Routing
 import {
@@ -90,7 +91,7 @@ class Dashboard extends Component {
                   component={AddCompanies}
                 />
                 <Route exact path="/dashboard/apply-skills">
-                  <h1>Hello</h1>
+                  <ApplySkills />
                 </Route>
                 <Route
                   path="/dashboard/*"

@@ -24,6 +24,9 @@ class DashboardNavBar extends Component {
 
   getCurrentKey = () => {
     let defaultKey = window.location.pathname;
+    if (defaultKey === "/") {
+      return "my-internships";
+    }
     console.log(defaultKey);
     let newDefaultKey = defaultKey.replace("/dashboard/", "");
     console.log(newDefaultKey);
