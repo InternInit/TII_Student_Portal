@@ -18,6 +18,27 @@
 
   color: #1f1f1f;
 }
+/* Stylings for cover image in large education cards */
+.apply-skills-big-card {
+  height: 400px;
+  object-fit: cover;
+  align-items: top;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+.apply-skills-big-card-title {
+  font-size: 36px;
+  font-family: lato;
+  color: black;
+  text-align: left;
+}
+
+.apply-skills-big-card-content {
+  font-size: 18px;
+  font-family: roboto;
+  margin-top: -10px;
+}
 
 html {
   background-color: gray;
@@ -31,6 +52,11 @@ html {
 ============================================================
 */
 
+/*
+============================================================
+                    Dashboard Navbar Overrides
+============================================================
+*/
 .dashboard-nav.ant-menu-horizontal > .ant-menu-item:hover,
 .dashboard-nav.ant-menu-horizontal > .ant-menu-submenu:hover,
 .dashboard-nav.ant-menu-horizontal > .ant-menu-item-active,
@@ -49,4 +75,13 @@ html {
 
 .dashboard-nav.ant-menu-item {
   color: ##1f1f1f;
+}
+
+/*
+============================================================
+                    Education Card Overrides
+============================================================
+*/
+.ant-card-cover img {
+  border-radius: 15px 15px 0 0;
 }

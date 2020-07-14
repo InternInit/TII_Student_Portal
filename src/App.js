@@ -36,8 +36,13 @@ import {
 } from "react-router-dom";
 
 //Redux
-import { connect } from 'react-redux';
-import { updateName, updateAvatar, updateCompletionState, batchUpdateCompletionState } from './redux/actions'
+import { connect } from "react-redux";
+import {
+  updateName,
+  updateAvatar,
+  updateCompletionState,
+  batchUpdateCompletionState
+} from "./redux/actions";
 
 import pageInternshipInformation from "./components/pageInternshipInformation.jsx";
 
@@ -74,16 +79,15 @@ const mapStateToProps = state => {
   return {
     completionState: state.completionState,
     userInfo: state.userInfo
-  }
-}
+  };
+};
 
 const mapDispatchToProps = {
   updateName,
   updateAvatar,
   updateCompletionState,
   batchUpdateCompletionState
-}
-
+};
 
 class App extends Component {
   constructor(props) {
@@ -94,7 +98,7 @@ class App extends Component {
       wHeight: window.innerHeight,
       isCollapsed: false,
       page: 0,
-      submissionState: true,
+      submissionState: true
     };
   }
 
@@ -425,7 +429,6 @@ class App extends Component {
     );
   };
 
-  // BUG: PROBLEM WITH RENDERING THE DIFFERENT NAVBAR SELECTIONS
   renderNav = () => {
     const highlightKey = String([this.state.page + 1]);
     return (
@@ -467,7 +470,7 @@ class App extends Component {
               render={props => {
                 return (
                   (this.authParam = props.location.search),
-                  <Redirect to="/apply/internship-info" />
+                  <Redirect to="/dashboard/my-internships" />
                 );
               }}
             />

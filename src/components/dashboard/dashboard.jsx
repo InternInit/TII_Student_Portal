@@ -1,14 +1,31 @@
+//React Imports
 import React, { Component } from "react";
-import DashboardNavBar from "./dashboardNavBar.jsx";
-import ApplicationProgress from "./applicationProgress.jsx";
 import styled from "styled-components";
 import "../../App.css";
 import "./dashboard.css";
+
+//Ant Design
 import { Layout, Switch, Button } from "antd";
 
+//Custom Components
+import DashboardNavBar from "./dashboardNavBar.jsx";
 import AddCompanies from "./AddCompanies.js";
 import CompanyInformation from "./CompanyInformation.js";
 import Companytab from "./Companytab.js";
+import ApplicationProgress from "./applicationProgress.jsx";
+import ApplySkills from "./apply-skills/applySkills";
+
+//React Routing
+import {
+  BrowserRouter as Router,
+  Link,
+  Route,
+  Switch as ReactSwitch,
+  Redirect,
+  useRouteMatch as match,
+  useParams
+} from "react-router-dom";
+import { withRouter } from "react-router";
 
 import { connect } from 'react-redux';
 
@@ -64,9 +81,34 @@ class Dashboard extends Component {
             <PageContainer>
               <WelcomeHeader>Welcome Kevin</WelcomeHeader>
               <DashboardNavBar />
-              <ApplicationProgress
-                completionState={this.props.completionState}/>
-              <AddCompanies />
+              <ReactSwitch>
+                <Route
+                  path="/dashboard"
+                  exact
+                  render={() => {
+                    return <Redirect to="/dashboard/my-internships" />;
+                  }}
+                />
+                <Route
+                  path="/dashboard/my-internships"
+                  exact
+                  component={ApplicationProgress}
+                />
+                <Route
+                  path="/dashboard/add-companies"
+                  exact
+                  component={AddCompanies}
+                />
+                <Route exact path="/dashboard/apply-skills">
+                  <ApplySkills />
+                </Route>
+                <Route
+                  path="/dashboard/*"
+                  render={props => {
+                    return <Redirect to="/dashboard/my-internships" />;
+                  }}
+                />
+              </ReactSwitch>
             </PageContainer>
           </Content>
         </Layout>
