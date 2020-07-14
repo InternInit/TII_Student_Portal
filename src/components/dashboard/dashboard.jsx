@@ -53,7 +53,6 @@ class Dashboard extends Component {
             <PageContainer>
               <WelcomeHeader>Welcome Kevin</WelcomeHeader>
               <DashboardNavBar />
-              <ApplicationProgress />
               <AddCompanies />
             </PageContainer>
           </Content>

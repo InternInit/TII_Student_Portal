@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import QueueAnim from 'rc-queue-anim'
 
 const CompanyTitle = styled.div`
 font-size:36px;
@@ -96,7 +97,9 @@ outline-color:#d9d9d9;
 background-color:white;
             
  `
-
+const mapping = [
+    "this single item in the array is allowing me to use the queue animations lol"
+]
 
 class SearchCompanytab extends React.Component {
     constructor(props) {
@@ -149,33 +152,41 @@ class CLabel extends React.Component {
         let { name } = this.props;
 
         return (
-            <TabContainer>
+            <QueueAnim
+                type='scale'
+                ease={["easeOutQuart", "easeInOutQuart"]}
 
-                {/**Company Logo + Name + Position */}
-                < div style={{
-                    display: 'flex',
-                    flexDirection: 'row',
-                    width: '100%',
-                    alignItems: 'center'
-                }}>
+            >
+                {mapping.map((item, index) => (
+                    <div key={index}>
+                        <TabContainer>
+                            {/**Company Logo + Name + Position */}
 
-                    {/**company logo */}
-                    < Logo src='' alt='Logo' />
+                            < div style={{
+                                display: 'flex',
+                                flexDirection: 'row',
+                                width: '100%',
+                                alignItems: 'center'
+                            }}>
 
-                    {/**company name and job */}
-                    < Col style={{
-                        marginLeft: '30px',
-                        alignItems: 'flex-start',
+                                {/**company logo */}
+                                < Logo src='' alt='Logo' />
 
-                    }}>
-                        <CompanyTitle>{name}</CompanyTitle>
+                                {/**company name and job */}
+                                < Col style={{
+                                    marginLeft: '30px',
+                                    alignItems: 'flex-start',
 
-                        <JobTitle style={{ paddingTop: '4px' }}>Communications/ Data Science</JobTitle>
-                    </Col >
-                </div >
+                                }}>
+                                    <CompanyTitle>{name}</CompanyTitle>
 
-
-            </TabContainer >
+                                    <JobTitle style={{ paddingTop: '4px' }}>Communications/ Data Science</JobTitle>
+                                </Col >
+                            </div >
+                        </TabContainer >
+                    </div>
+                ))}
+            </QueueAnim>
         )
     }
 }
@@ -190,77 +201,89 @@ Gives additional Information when hovered over
 class QuickView extends React.Component {
     render() {
         let { name } = this.props;
-        return (<TabContainer style={{
-            padding: '24px'
-        }}>
+        return (
+            <QueueAnim
+                type='scale'
+                ease={["easeOutQuart", "easeInOutQuart"]}
 
-            {/**
- * 
- * Left Collumn
- * 
- */}
-            < Col style={{
-                alignItems: 'flex-start',
-                marginLeft: '10%'
-            }}>
+            >
+                {mapping.map((item, index) => (
+                    <div key={index}>
+                        <TabContainer style={{
+                            padding: '24px'
+                        }}>
+
+                            {/**
+             * 
+             * Left Collumn
+             * 
+             */}
+                            < Col style={{
+                                alignItems: 'flex-start',
+                                marginLeft: '10%'
+                            }}>
 
 
-                <QVCompany>{name}</QVCompany>
-                <QVTitle>Communications/ Data Science</QVTitle>
-                <QVCompany style={{
-                    marginTop: '10px',
-                    fontWeight: '500'
-                }}>Description</QVCompany>
+                                <QVCompany>{name}</QVCompany>
+                                <QVTitle>Communications/ Data Science</QVTitle>
+                                <QVCompany style={{
+                                    marginTop: '10px',
+                                    fontWeight: '500'
+                                }}>Description</QVCompany>
 
-                <QVCaption>
-                    Facebook is a website which allows users, who sign-up for free profiles, to connect with friends, work colleagues or people they don’t know, online.zz It allows users to share pictures...
+                                <QVCaption>
+                                    Facebook is a website which allows users, who sign-up for free profiles, to connect with friends, work colleagues or people they don’t know, online.zz It allows users to share pictures...
                 </QVCaption>
-            </Col >
+                            </Col >
 
 
-            {/**
- * 
- * Right Collumn
- * 
- */}
-            < Col style={{
-                alignItems: 'flex-end',
-                marginRight: '10%',
-                width: '50%'
-            }}>
-                <Image src='' alt='Company Visual' />
+                            {/**
+             * 
+             * Right Collumn
+             * 
+             */}
+                            < Col style={{
+                                alignItems: 'flex-end',
+                                marginRight: '10%',
+                                width: '50%'
+                            }}>
+                                <Image src='' alt='Company Visual' />
 
-                <div style={{
-                    display: 'flex',
-                    marginTop: '5%',
-                    justifyContent: 'space-between',
-                    marginRight: '5%'
-                }}>
+                                <div style={{
+                                    display: 'flex',
+                                    marginTop: '5%',
+                                    justifyContent: 'space-between',
+                                    marginRight: '5%'
+                                }}>
 
 
 
-                    <Col style={{
-                        marginRight: '5%',
-                    }}>
+                                    <Col style={{
+                                        marginRight: '5%',
+                                    }}>
 
-                        <QVCompany style={{ fontWeight: '500' }}>
-                            Location
+                                        <QVCompany style={{ fontWeight: '500' }}>
+                                            Location
                         </QVCompany>
-                        <QVCaption style={{ textAlign: 'center', width: '150px' }}>Austin, TX</QVCaption>
+                                        <QVCaption style={{ textAlign: 'center', width: '150px' }}>Austin, TX</QVCaption>
 
-                    </Col>
+                                    </Col>
 
-                    <Col>
-                        <Button style={{ backgroundColor: '#1890FF' }} >Add</Button>
-                        <Button style={{
-                            backgroundColor: '#BFBFBF',
-                            color: 'black',
-                            marginTop: '10px',
-                        }}>More Details</Button>
-                    </Col>
+                                    <Col>
+                                        <Button style={{ backgroundColor: '#1890FF' }} >Add</Button>
+                                        <Button style={{
+                                            backgroundColor: '#BFBFBF',
+                                            color: 'black',
+                                            marginTop: '10px',
+                                        }}>More Details</Button>
+                                    </Col>
 
-                </div>
-            </Col >
-        </TabContainer >)
+                                </div>
+                            </Col >
+                        </TabContainer >
+                    </div>
+                ))}
+            </QueueAnim>
+        )
     }
 }

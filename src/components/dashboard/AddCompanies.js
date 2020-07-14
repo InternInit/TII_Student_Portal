@@ -4,7 +4,8 @@ import { Input } from 'antd';
 import SearchCompanytab from './SearchCompanytab.js'
 import { Collapse, Checkbox } from 'antd'
 import { Col as antCol, Row as antRow } from 'antd'
-
+import QueueAnim from 'rc-queue-anim'
+import Checklist from './checklist.jsx'
 const { Search } = Input;
 const { Panel } = Collapse;
 
@@ -81,6 +82,14 @@ let Info = [
     { name: 'Tinder', industry: 'Vocational' },
 ]
 
+// BUG: THIS NEEDS TO BE REPLACED BY THE REACT STORE
+let pinnedCompanies = [
+    { name: 'This', industry: 'Computer Science' },
+    { name: 'is', industry: 'Computer Science' },
+    { name: 'Pinned', industry: 'Computer Science' },
+    { name: 'Company', industry: 'Consulting' },
+    { name: 'Grubhub', industry: 'Real Estate' },
+];
 
 class AddCompanies extends React.Component {
     constructor(props) {
@@ -118,15 +127,26 @@ class AddCompanies extends React.Component {
 
         return (
             <div style={{ paddingBottom: '50%' }} >
+
                 <h1 className="module-name">Pinned Companies</h1>
                 {/**
                  *
                  * Pinned Companies
                  *
                  */}
-                <ModuleContainer>
-                    Not done yet
-                </ModuleContainer>
+                <QueueAnim
+                    type='scale'
+                    ease={["easeOutQuart", "easeInOutQuart"]}
+                    delay={[300, 0]}
+                >
+                    {pinnedCompanies.map((nice, index) => (
+                        <div style={{ marginBottom: '12px' }} key={index}>
+                            <SearchCompanytab key={nice.name}
+                                name={nice.name}
+                            />
+                        </div>
+                    ))}
+                </QueueAnim>
 
 
                 <h1 className="module-name" style={{ marginTop: '100px' }}>Search Companies</h1>
@@ -176,7 +196,7 @@ class AddCompanies extends React.Component {
                                 </antCol>
                             </antRow>
                         </Panel>
-                    </Collapse>
+                    </Collapse>-
                 </Row>
 
 
@@ -187,20 +207,21 @@ class AddCompanies extends React.Component {
                  * Mapping of search results
                  *
                  */}
-                {
-                    filteredInfo.map(rice => (
-                        <div style={{ marginBottom: '12px' }}>
-                            <SearchCompanytab key={rice.name}
-                                name={rice.name}
-                            />
-                        </div>
-                    ))
-                }
+                <QueueAnim
+                    type='scale'
+                    ease={["easeOutQuart", "easeInOutQuart"]}
 
-
-
-
-
+                >
+                    {
+                        filteredInfo.map((rice, index) => (
+                            <div style={{ marginBottom: '12px' }} key={index}>
+                                <SearchCompanytab key={rice.name}
+                                    name={rice.name}
+                                />
+                            </div>
+                        ))
+                    }
+                </QueueAnim>
             </div >)
     }
 
