@@ -69,14 +69,6 @@ class HowtoApply extends React.Component {
 
 
     render() {
-        let link = <div style={{
-            color: 'blue',
-            textDecorationLine: 'underline',
-            cursor: 'pointer'
-        }} onClick={() => {
-            this.routeChange("/apply/Internship-Info");
-        }}
-        >Click here to go to the 'Apply' page.</div>
         return (
             <div style={{
                 display: "flex",
@@ -169,13 +161,7 @@ class HowtoApply extends React.Component {
 
 
                     {/**Internship Information */}
-                    <Header>
-                        <span style={{
-                            cursor: 'pointer'
-                        }} onClick={() => {
-                            this.routeChange("/apply/Internship-Info");
-                        }}>Internship Information</span>
-                    </Header>
+                    <Header>Internship Information</Header>
                     <div style={{ backgroundColor: '#ededed', width: '100%' }}>
                         <Image src={Internshipimg} alt='internshipinfo' />
                     </div>
@@ -187,13 +173,7 @@ class HowtoApply extends React.Component {
 
 
                     {/**Personal Information */}
-                    <Header>
-                        <span style={{
-                            cursor: 'pointer'
-                        }} onClick={() => {
-                            this.routeChange("/apply/Personal");
-                        }}>Personal Information</span>
-                    </Header>
+                    <Header>Personal Information</Header>
                     <div style={{ backgroundColor: '#ededed', width: '100%' }}>
                         <Image src={Personalimg} alt='Personal' />
                     </div>
@@ -205,13 +185,7 @@ class HowtoApply extends React.Component {
 
 
                     {/**Written Work */}
-                    <Header>
-                        <span style={{
-                            cursor: 'pointer'
-                        }} onClick={() => {
-                            this.routeChange("/apply/Written-Work");
-                        }}>Written Work</span>
-                    </Header>
+                    <Header>Written Work</Header>
                     <div style={{ backgroundColor: '#ededed', width: '100%' }}>
                         <Image src={Writtenimg} alt='Personal' />
                     </div>
@@ -225,13 +199,7 @@ class HowtoApply extends React.Component {
 
 
                     {/**References */}
-                    <Header>
-                        <span style={{
-                            cursor: 'pointer'
-                        }} onClick={() => {
-                            this.routeChange("/apply/References");
-                        }}>References</span>
-                    </Header>
+                    <Header> References </Header>
                     <div style={{ backgroundColor: '#ededed', width: '100%' }}>
                         <Image src={Referencesimg} alt='Personal' />
                     </div>

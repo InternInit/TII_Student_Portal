@@ -52,7 +52,7 @@ const QVCaption = styled.div`
   font-size: 18px;
   font-weight: normal;
   color: #262626;
-  width: 75%;
+  width: 80%;
   text-align: left;
 `;
 const Col = styled.div`
@@ -71,7 +71,7 @@ const Image = styled.img`
 const Logo = styled.img`
   width: 36px;
   height: 36px;
-  object-fit: contain;
+  object-fit: fill;
   background-color: blue;
   margin-left: 11%;
   margin-bottom: 14px;
@@ -101,13 +101,26 @@ class SearchCompanytab extends React.Component {
 
     this.handleClick = this.handleClick.bind(this);
   }
-
   render() {
+    let { name, industry, logo, image, description, location, } = this.props;
     let { show } = this.state;
-    let ctab = <CLabel name={this.props.name} />;
+    let ctab = <CLabel
+      name={name}
+      industry={industry}
+      logo={logo}
+
+
+    />;
 
     if (show === true) {
-      ctab = <QuickView name={this.props.name} />;
+      ctab = <QuickView
+        name={name}
+        industry={industry}
+        image={image}
+        description={description}
+        location={location}
+
+      />;
     }
 
     return (
@@ -134,7 +147,7 @@ Standard View of the Tab.
 
 class CLabel extends React.Component {
   render() {
-    let { name } = this.props;
+    let { name, industry, logo } = this.props;
 
     return (
       <QueueAnim type="scale" ease={["easeOutQuart", "easeInOutQuart"]}>
@@ -152,7 +165,7 @@ class CLabel extends React.Component {
                 }}
               >
                 {/**company logo */}
-                <Logo src="" alt="Logo" />
+                <Logo src={logo} alt="Logo" />
 
                 {/**company name and job */}
                 <Col
@@ -162,10 +175,7 @@ class CLabel extends React.Component {
                   }}
                 >
                   <CompanyTitle>{name}</CompanyTitle>
-
-                  <JobTitle style={{ paddingTop: "4px" }}>
-                    Communications/ Data Science
-                  </JobTitle>
+                  <JobTitle style={{ paddingTop: "4px" }}>{industry} </JobTitle>
                 </Col>
               </div>
             </TabContainer>
@@ -184,7 +194,7 @@ Gives additional Information when hovered over
 */
 class QuickView extends React.Component {
   render() {
-    let { name } = this.props;
+    let { name, industry, image, description, location } = this.props;
     return (
       <QueueAnim type="scale" ease={["easeOutQuart", "easeInOutQuart"]}>
         {mapping.map((item, index) => (
@@ -206,7 +216,7 @@ class QuickView extends React.Component {
                 }}
               >
                 <QVCompany>{name}</QVCompany>
-                <QVTitle>Communications/ Data Science</QVTitle>
+                <QVTitle>{industry}</QVTitle>
                 <QVCompany
                   style={{
                     marginTop: "10px",
@@ -216,11 +226,8 @@ class QuickView extends React.Component {
                   Description
                 </QVCompany>
 
-                <QVCaption>
-                  Facebook is a website which allows users, who sign-up for free
-                  profiles, to connect with friends, work colleagues or people
-                  they don’t know, online.zz It allows users to share
-                  pictures...
+                <QVCaption style={{ marginTop: "4px" }}>
+                  {description.substring(0, 250) + '. . .'}
                 </QVCaption>
               </Col>
 
@@ -236,7 +243,7 @@ class QuickView extends React.Component {
                   width: "50%"
                 }}
               >
-                <Image src="" alt="Company Visual" />
+                <Image src={image} alt="Company Visual" />
 
                 <div
                   style={{
@@ -255,7 +262,7 @@ class QuickView extends React.Component {
                       Location
                     </QVCompany>
                     <QVCaption style={{ textAlign: "center", width: "150px" }}>
-                      Austin, TX
+                      {location}
                     </QVCaption>
                   </Col>
 

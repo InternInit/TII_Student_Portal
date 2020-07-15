@@ -98,7 +98,11 @@ class AddCompanies extends React.Component {
       search: "",
       industries: industry,
       mergedIndustry:
-        "General BusinessBusinessConsultingFinance or AccountingMedia or TellecommunicationsReal EstateEngineeringScience ResearchComputer ScienceBiotechnologyVocationalPoliticalMarketing"
+        "General BusinessConsultingFinance or AccountingMedia or TellecommunicationsReal EstateEngineeringScience ResearchComputer ScienceBiotechnologyVocationalPoliticalMarketing",
+      companies: [],
+
+
+
     };
     this.searchCompany = this.searchCompany.bind(this);
     this.filterIndustries = this.filterIndustries.bind(this);
@@ -107,6 +111,16 @@ class AddCompanies extends React.Component {
 
   render() {
     let { search, mergedIndustry } = this.state;
+
+    /**
+     * 
+     * 
+     * TEMPORARY!
+     * 
+     * 
+     */
+    let { companies } = this.state;
+
 
     //Filtering function for industries
     let industrySearch = Info.filter(company => {
@@ -122,7 +136,6 @@ class AddCompanies extends React.Component {
 
     return (
       <div style={{ paddingBottom: "50%" }}>
-        <Companytab />
         <h1 className="module-name">Pinned Companies</h1>
         {/**
          *
@@ -134,9 +147,22 @@ class AddCompanies extends React.Component {
           ease={["easeOutQuart", "easeInOutQuart"]}
           delay={[300, 0]}
         >
-          {pinnedCompanies.map((pinnedCompany, index) => (
+          {companies.map((pinnedCompany, index) => (
             <div style={{ marginBottom: "12px" }} key={index}>
-              <SearchCompanytab key={pinnedCompany.name} name={pinnedCompany.name} />
+
+              <SearchCompanytab
+                key={pinnedCompany.name_original}
+                name={pinnedCompany.name}
+                industry={pinnedCompany.name}
+                logo={pinnedCompany.background_image_additional}
+                image={pinnedCompany.background_image_additional}
+                description={pinnedCompany.description_raw}
+                location={pinnedCompany.slug}
+
+              />
+
+
+
             </div>
           ))}
         </QueueAnim>
@@ -218,6 +244,32 @@ class AddCompanies extends React.Component {
     );
   }
 
+  componentDidMount() {
+    for (let i = 1; i < 6; i++) {
+      fetch("https://rawg-video-games-database.p.rapidapi.com/games/" + i, {
+        method: "GET",
+        headers: {
+          "x-rapidapi-host": "rawg-video-games-database.p.rapidapi.com",
+          "x-rapidapi-key": "24cc20e856msh686f79ed61d6951p112e88jsn8082d8031701",
+          "entries": 60
+        }
+      })
+        .then(response => {
+          return response.json();
+        })
+        .then(result => {
+          this.state.companies.push(result);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    }
+    console.log(this.state.companies)
+  }
+
+
+
+
   //Handles search bar changes
   searchCompany(event) {
     this.setState({ search: event.target.value.substring(0, 20) });
@@ -251,5 +303,14 @@ class AddCompanies extends React.Component {
     }
     console.log("This is the merged: ", this.state.mergedIndustry);
   }
+
+
+
+
+
+
+
+
+
 }
 export default withRouter(AddCompanies);
