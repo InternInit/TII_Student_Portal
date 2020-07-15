@@ -118,10 +118,7 @@ def auth():
 @app.route("/api/auth/refresh")
 def refresh():
     refresh = request.cookies.get("refresh_token")
-    if(refresh == None):
-        return jsonify(refresh)
-    else:
-        return jsonify(refresh)
+    return jsonify(refresh)
 
 
 @app.route("/api/auth/exchange")

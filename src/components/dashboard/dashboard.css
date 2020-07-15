@@ -19,7 +19,7 @@
   color: #1f1f1f;
 }
 /* Stylings for cover image in large education cards */
-.apply-skills-big-card {
+.apply-skills-big-card-cover {
   height: 400px;
   object-fit: cover;
   align-items: top;
@@ -34,8 +34,36 @@
   text-align: left;
 }
 
+.apply-skills-big-card-time {
+  color: #52c41a;
+  font-family: roboto;
+  font-size: 24px;
+  font-style: oblique;
+  margin-top: -20px;
+  margin-bottom: 10px;
+}
+
 .apply-skills-big-card-content {
   font-size: 18px;
+  font-family: roboto;
+  margin-top: -10px;
+}
+
+.apply-skills-little-card-cover {
+  height: 200px;
+  object-fit: cover;
+  align-items: top;
+}
+
+.apply-skills-little-card-title {
+  font-size: 24px;
+  font-family: lato;
+  color: black;
+  text-align: left;
+}
+
+.apply-skills-little-card-content {
+  font-size: 14px;
   font-family: roboto;
   margin-top: -10px;
 }

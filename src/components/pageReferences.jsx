@@ -94,7 +94,7 @@ class PageReferences extends Component {
   }
 
   componentWillUnmount() {
-    this.setCompletionState();
+    this.updateFieldData();
   }
 
   constructor(props) {
@@ -114,6 +114,7 @@ class PageReferences extends Component {
             {...formItemProps.totalForm}
             onFinish={this.onFinish}
             ref={this.formRef}
+            onValuesChange={this.onValuesChange}
           >
             <Form.List name="reference">
               {(fields, { add, remove }) => {
@@ -277,6 +278,23 @@ class PageReferences extends Component {
     ) : null;
   };
 
+  onValuesChange = () => {
+    let allValues = this.formRef.current.getFieldsValue()
+
+    let completedCount = 0;
+    for (var field in allValues) {
+      if (allValues.hasOwnProperty(field)) {
+
+        if (typeof allValues[field] !== 'undefined') {
+          completedCount++;
+        }
+
+      }
+    }
+    let completionPercentage = parseFloat((completedCount/Object.keys(allValues).length).toFixed(2));
+    if (completionPercentage != this.props.completionState[3]) this.props.updateCompletionState(3,completionPercentage)
+  }
+
   onFinish = values => {
     console.log("FinishRefPage:", values);
     this.props.updateCompletionState(3, 1.0);
@@ -284,31 +302,11 @@ class PageReferences extends Component {
     this.routeChange("/submission-success");
   };
 
-  setCompletionState = async () => {
-    try {
-      const values = await this.formRef.current.validateFields();
-      console.log(values);
-      this.props.updateCompletionState(3, 1.0);
-      this.props.updateData(values, "3");
-    } catch (errorInfo) {
-      let requiredValues = errorInfo.values
-      console.log(requiredValues)
+  updateFieldData = async () => {
+    const values = await this.formRef.current.getFieldsValue();
 
-      let completedCount = 0;
-      for (var field in requiredValues) {
-        if (requiredValues.hasOwnProperty(field)) {
+    this.props.updateData(values, "3");
 
-          if (typeof requiredValues[field] !== 'undefined') {
-            completedCount++;
-          }
-
-        }
-      }
-      let completionPercentage = (completedCount/Object.keys(requiredValues).length).toFixed(2)
-      this.props.updateCompletionState(3,completionPercentage)
-      //this.props.setCompletionState(0, false);
-      this.props.updateData(errorInfo.values, "3");
-    }
   };
 
   backHandler = () => {

@@ -315,7 +315,7 @@ const props = {
 
 const mapStateToProps = state => {
   return {
-    completionState: state.completionState,
+    completionState: state.completionState
   }
 }
 
@@ -338,11 +338,10 @@ class PageInternshipInformation extends Component {
 
   componentDidMount() {
     this.getUserData();
-    console.log(this.props)
   }
 
   componentWillUnmount() {
-    this.setCompletionState();
+    this.updateFieldData();
   }
 
   renderNav() {
@@ -360,6 +359,7 @@ class PageInternshipInformation extends Component {
             {...formItemProps.totalForm}
             onFinish={this.onFinish}
             ref={this.formRef}
+            onValuesChange={this.onValuesChange}
           >
             {/*First and Last Name*/}
             <Row name="first" gutter={formGutter}>
@@ -597,6 +597,24 @@ class PageInternshipInformation extends Component {
     );
   }
 
+  onValuesChange = () => {
+    let allValues = this.formRef.current.getFieldsValue()
+    delete allValues.weightedGPA
+
+    let completedCount = 0;
+    for (var field in allValues) {
+      if (allValues.hasOwnProperty(field)) {
+
+        if (typeof allValues[field] !== 'undefined') {
+          completedCount++;
+        }
+
+      }
+    }
+    let completionPercentage = parseFloat((completedCount/Object.keys(allValues).length).toFixed(2));
+    if (completionPercentage != this.props.completionState[0]) this.props.updateCompletionState(0,completionPercentage)
+  }
+
   onFinish = values => {
     console.log("FinishedPageInternship:", values);
     this.props.updateCompletionState(0, 1.0);
@@ -604,34 +622,11 @@ class PageInternshipInformation extends Component {
     this.routeChange("/apply/personal");
   };
 
-  setCompletionState = async () => {
-    try {
-      const values = await this.formRef.current.validateFields();
-      console.log(values);
-      this.props.updateCompletionState(0,1.0)
-      //this.props.setCompletionState(0, true);
-      this.props.updateData(values, "0");
-    } catch (errorInfo) {
-      let allValues = errorInfo.values
+  updateFieldData = async () => {
+    const values = await this.formRef.current.getFieldsValue();
 
-      delete errorInfo.values.weightedGPA
-      let requiredValues = errorInfo.values
+    this.props.updateData(values, "0");
 
-      let completedCount = 0;
-      for (var field in requiredValues) {
-        if (requiredValues.hasOwnProperty(field)) {
-
-          if (typeof requiredValues[field] !== 'undefined') {
-            completedCount++;
-          }
-
-        }
-      }
-      let completionPercentage = (completedCount/Object.keys(requiredValues).length).toFixed(2)
-      this.props.updateCompletionState(0,completionPercentage)
-      //this.props.setCompletionState(0, false);
-      this.props.updateData(errorInfo.values, "0");
-    }
   };
 
   customRequestResume = ({ onSuccess, onError, file }) => {

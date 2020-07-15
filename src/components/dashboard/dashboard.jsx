@@ -27,6 +27,9 @@ import {
 } from "react-router-dom";
 import { withRouter } from "react-router";
 
+import { connect } from 'react-redux';
+
+
 const PageContainer = styled.div`
   width: 90%;
   padding-left: 5%;
@@ -47,6 +50,12 @@ const WelcomeHeader = styled.h1`
 
 const { Header, Content, Footer, Sider } = Layout;
 
+const mapStateToProps = state => {
+  return {
+    completionState: state.completionState
+  }
+}
+
 class Dashboard extends Component {
   constructor(props) {
     super(props);
@@ -54,6 +63,8 @@ class Dashboard extends Component {
       info: ""
     };
   }
+
+
   render() {
     return (
       <React.Fragment>
@@ -81,9 +92,7 @@ class Dashboard extends Component {
                 <Route
                   path="/dashboard/my-internships"
                   exact
-                  render={() => {
-                    return <ApplicationProgress />;
-                  }}
+                  component={ApplicationProgress}
                 />
                 <Route
                   path="/dashboard/add-companies"
@@ -95,7 +104,7 @@ class Dashboard extends Component {
                 </Route>
                 <Route
                   path="/dashboard/*"
-                  render={props => {
+                  render={() => {
                     return <Redirect to="/dashboard/my-internships" />;
                   }}
                 />
@@ -108,4 +117,6 @@ class Dashboard extends Component {
   }
 }
 
-export default withRouter(Dashboard);
+export default connect(
+  mapStateToProps
+)(Dashboard);

@@ -44,7 +44,7 @@ class PageEssays extends React.Component {
   }
 
   componentWillUnmount() {
-    this.setCompletionState();
+    this.updateFieldData();
   }
 
   constructor(props) {
@@ -74,6 +74,7 @@ class PageEssays extends React.Component {
             width="100%"
             onFinish={this.onFinish}
             ref={this.formRef}
+            onValuesChange={this.onValuesChange}
           >
             {/**Industry response */}
             <Form.Item
@@ -183,6 +184,25 @@ class PageEssays extends React.Component {
     }
   ];
 
+  onValuesChange = () => {
+    let allValues = this.formRef.current.getFieldsValue()
+    delete allValues.CoverLetter
+    delete allValues.Portfolio
+
+    let completedCount = 0;
+    for (var field in allValues) {
+      if (allValues.hasOwnProperty(field)) {
+
+        if (typeof allValues[field] !== 'undefined') {
+          completedCount++;
+        }
+
+      }
+    }
+    let completionPercentage = parseFloat((completedCount/Object.keys(allValues).length).toFixed(2));
+    if (completionPercentage != this.props.completionState[2]) this.props.updateCompletionState(2,completionPercentage)
+  }
+
   onFinish = values => {
     console.log("FinishedPageEssays:", values);
     this.props.updateCompletionState(2, 1.0);
@@ -190,34 +210,11 @@ class PageEssays extends React.Component {
     this.routeChange("/apply/references");
   };
 
-  setCompletionState = async () => {
-    try {
-      const values = await this.formRef.current.validateFields();
-      console.log(values);
-      this.props.updateCompletionState(2, 1.0);
-      this.props.updateData(values, "2");
-    } catch (errorInfo) {
-      let allValues = errorInfo.values
-      console.log(allValues)
-      delete errorInfo.values.CoverLetter
-      delete errorInfo.values.Portfolio
-      let requiredValues = errorInfo.values
+  updateFieldData = async () => {
+    const values = await this.formRef.current.getFieldsValue();
 
-      let completedCount = 0;
-      for (var field in requiredValues) {
-        if (requiredValues.hasOwnProperty(field)) {
+    this.props.updateData(values, "2");
 
-          if (typeof requiredValues[field] !== 'undefined') {
-            completedCount++;
-          }
-
-        }
-      }
-      let completionPercentage = (completedCount/Object.keys(requiredValues).length).toFixed(2)
-      this.props.updateCompletionState(2,completionPercentage)
-      //this.props.setCompletionState(0, false);
-      this.props.updateData(errorInfo.values, "2");
-    }
   };
 
   backHandler = () => {
