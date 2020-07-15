@@ -7,6 +7,7 @@ import { Col as AntCol, Row as AntRow } from "antd";
 import QueueAnim from "rc-queue-anim";
 import Checklist from "./checklist.jsx";
 import { withRouter } from "react-router";
+import Companytab from "./Companytab.js";
 
 const { Search } = Input;
 const { Panel } = Collapse;
@@ -108,19 +109,20 @@ class AddCompanies extends React.Component {
     let { search, mergedIndustry } = this.state;
 
     //Filtering function for industries
-    let industrySearch = Info.filter(rice => {
+    let industrySearch = Info.filter(company => {
       return (
-        mergedIndustry.toLowerCase().indexOf(rice.industry.toLowerCase()) !== -1
+        mergedIndustry.toLowerCase().indexOf(company.industry.toLowerCase()) !== -1
       );
     });
 
     //Filtering function for company names
-    let filteredInfo = industrySearch.filter(rice => {
-      return rice.name.toLowerCase().indexOf(search.toLowerCase()) !== -1;
+    let filteredInfo = industrySearch.filter(company => {
+      return company.name.toLowerCase().indexOf(search.toLowerCase()) !== -1;
     });
 
     return (
       <div style={{ paddingBottom: "50%" }}>
+        <Companytab />
         <h1 className="module-name">Pinned Companies</h1>
         {/**
          *
@@ -132,9 +134,9 @@ class AddCompanies extends React.Component {
           ease={["easeOutQuart", "easeInOutQuart"]}
           delay={[300, 0]}
         >
-          {pinnedCompanies.map((nice, index) => (
+          {pinnedCompanies.map((pinnedCompany, index) => (
             <div style={{ marginBottom: "12px" }} key={index}>
-              <SearchCompanytab key={nice.name} name={nice.name} />
+              <SearchCompanytab key={pinnedCompany.name} name={pinnedCompany.name} />
             </div>
           ))}
         </QueueAnim>
@@ -161,8 +163,9 @@ class AddCompanies extends React.Component {
          * Filter by industries Collapse Tab
          *
          */}
-        <Row>
-          <Collapse defaultActiveKey={["0"]} expandIconPosition="right">
+        <Row style={{ width: '100%' }}>
+          <Collapse defaultActiveKey={["0"]} expandIconPosition="right"
+          >
             <Panel header="Filter by Industry">
               <AntRow gutter={formGutter}>
                 <AntCol span={standardSpan}>
@@ -171,12 +174,19 @@ class AddCompanies extends React.Component {
                   >
                     <AntRow gutter={checkGutter}>
                       {industry.map(industry => (
-                        <AntCol span={thirdSpan}>
+                        <AntCol span={thirdSpan}
+                          style={{
+                            display: 'flex',
+                            alignItems: 'flex-start',
+                          }}>
+
                           <Checkbox
                             key={industry}
                             value={industry}
                             style={{
-                              lineHeight: "32px"
+                              lineHeight: "32px",
+                              marginLeft: '25%'
+
                             }}
                           >
                             {industry}
@@ -198,9 +208,9 @@ class AddCompanies extends React.Component {
          *
          */}
         <QueueAnim type="scale" ease={["easeOutQuart", "easeInOutQuart"]}>
-          {filteredInfo.map((rice, index) => (
+          {filteredInfo.map((company, index) => (
             <div style={{ marginBottom: "12px" }} key={index}>
-              <SearchCompanytab key={rice.name} name={rice.name} />
+              <SearchCompanytab key={company.name} name={company.name} />
             </div>
           ))}
         </QueueAnim>
@@ -228,7 +238,7 @@ class AddCompanies extends React.Component {
     let { industries } = this.state;
     let tempVar = "";
     //Creates a variable with all desired industries
-    industries.map(camel => (tempVar += camel));
+    industries.map(industry => (tempVar += industry));
     //Sets the industries state to the temporary variable
     this.setState({ mergedIndustry: tempVar });
 

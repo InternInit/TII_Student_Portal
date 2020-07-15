@@ -55,6 +55,7 @@ object-fit:contain;
 background-color:blue;
 margin-left:3.5%;
 margin-bottom:24px;
+border-radius:6px;
 `
 
 
@@ -70,7 +71,7 @@ class Companytab extends React.Component {
         let { label } = this.state;
         return (
             <Collapse defaultActiveKey={['0']} expandIconPosition='right'
-
+                style={{ borderRadius: '8px' }}
             >
                 <Panel header={label} key='1' style={{
                     height: { DroppedView },
