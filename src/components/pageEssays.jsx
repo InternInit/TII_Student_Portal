@@ -74,6 +74,7 @@ class PageEssays extends React.Component {
             width="100%"
             onFinish={this.onFinish}
             ref={this.formRef}
+            onValuesChange={this.onValuesChange}
           >
             {/**Industry response */}
             <Form.Item
@@ -183,6 +184,25 @@ class PageEssays extends React.Component {
     }
   ];
 
+  onValuesChange = () => {
+    let allValues = this.formRef.current.getFieldsValue()
+    delete allValues.CoverLetter
+    delete allValues.Portfolio
+
+    let completedCount = 0;
+    for (var field in allValues) {
+      if (allValues.hasOwnProperty(field)) {
+
+        if (typeof allValues[field] !== 'undefined') {
+          completedCount++;
+        }
+
+      }
+    }
+    let completionPercentage = parseFloat((completedCount/Object.keys(allValues).length).toFixed(2));
+    if (completionPercentage != this.props.completionState[2]) this.props.updateCompletionState(2,completionPercentage)
+  }
+
   onFinish = values => {
     console.log("FinishedPageEssays:", values);
     this.props.updateCompletionState(2, 1.0);
@@ -193,7 +213,7 @@ class PageEssays extends React.Component {
   updateFieldData = async () => {
     const values = await this.formRef.current.getFieldsValue();
 
-    this.props.updateData(values, "1");
+    this.props.updateData(values, "2");
 
   };
 

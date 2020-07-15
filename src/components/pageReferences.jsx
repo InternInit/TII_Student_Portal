@@ -114,6 +114,7 @@ class PageReferences extends Component {
             {...formItemProps.totalForm}
             onFinish={this.onFinish}
             ref={this.formRef}
+            onValuesChange={this.onValuesChange}
           >
             <Form.List name="reference">
               {(fields, { add, remove }) => {
@@ -277,6 +278,23 @@ class PageReferences extends Component {
     ) : null;
   };
 
+  onValuesChange = () => {
+    let allValues = this.formRef.current.getFieldsValue()
+
+    let completedCount = 0;
+    for (var field in allValues) {
+      if (allValues.hasOwnProperty(field)) {
+
+        if (typeof allValues[field] !== 'undefined') {
+          completedCount++;
+        }
+
+      }
+    }
+    let completionPercentage = parseFloat((completedCount/Object.keys(allValues).length).toFixed(2));
+    if (completionPercentage != this.props.completionState[3]) this.props.updateCompletionState(3,completionPercentage)
+  }
+
   onFinish = values => {
     console.log("FinishRefPage:", values);
     this.props.updateCompletionState(3, 1.0);
@@ -287,7 +305,7 @@ class PageReferences extends Component {
   updateFieldData = async () => {
     const values = await this.formRef.current.getFieldsValue();
 
-    this.props.updateData(values, "0");
+    this.props.updateData(values, "3");
 
   };
 
