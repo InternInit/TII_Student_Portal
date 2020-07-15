@@ -110,7 +110,6 @@ class App extends Component {
     return () => clearInterval(this.interval);
   }
 
-  //componentWillUpdate() IS A DEPRECATED FUNCTION, SHOULD BE REMOVED
   componentWillUnmount() {
     //This is here because I don't know if the return statement will work lol
     clearInterval(this.interval);

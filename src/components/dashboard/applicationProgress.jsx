@@ -4,10 +4,12 @@ import "../../App.css";
 import "./dashboard.css";
 import "antd/dist/antd.css";
 import Checklist from "./checklist.jsx";
-import { Progress } from "antd";
+import { Progress, Button } from "antd";
 import { CheckCircleTwoTone } from "@ant-design/icons";
 import QueueAnim from "rc-queue-anim";
 import { withRouter } from "react-router";
+import { connect } from "react-redux";
+import { updateCompletionState } from '../../redux/actions'
 
 /*
 
@@ -96,6 +98,16 @@ const percentComplete = [
 // TODO: THIS NEEDS TO BE REPLACED BY THE REACT STORE
 let checklistArray = ["Item 1", "Item 2", "Item 3"];
 
+const mapStateToProps = state => {
+  return {
+    completionState: state.completionState
+  }
+}
+
+const mapDispatchToProps = {
+  updateCompletionState
+}
+
 class ApplicationProgress extends Component {
   constructor(props){
     super(props);
@@ -106,10 +118,6 @@ class ApplicationProgress extends Component {
       referencesChecklist: false,
 
     };
-  }
-
-  componentDidUpdate(){
-    console.log("adssads")
   }
 
   handleClick = section => {
@@ -149,6 +157,16 @@ class ApplicationProgress extends Component {
         break;
     }
   };
+
+  testClick = () => {
+    //this.props.updateCompletionState(1,0.3)
+    console.log(this.props.completionState)
+    this.forceUpdate()
+  }
+
+  componentDidMount(){
+    this.testClick()
+  }
 
   render() {
     return (
@@ -201,4 +219,4 @@ class ApplicationProgress extends Component {
   }
 }
 
-export default withRouter(ApplicationProgress);
+export default withRouter(connect(mapStateToProps,mapDispatchToProps)(ApplicationProgress));
