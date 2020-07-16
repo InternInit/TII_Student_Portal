@@ -4,7 +4,7 @@ import "../../App.css";
 import "./dashboard.css";
 import "antd/dist/antd.css";
 import { Progress } from "antd";
-import { BorderOutlined } from "@ant-design/icons";
+import { BorderOutlined, CheckOutlined, CheckSquareOutlined } from "@ant-design/icons";
 import QueueAnim from "rc-queue-anim";
 
 const ChecklistItem = styled.p`
@@ -25,6 +25,15 @@ export default function Checklist(props) {
       >
         {props.checklist.map((item, index) => (
           <div key={index}>
+            {props.checked ? <CheckSquareOutlined
+              style={{
+                fontSize: 18,
+                float: "left",
+                marginRight: "7px",
+                marginLeft: "20px",
+                padding: '6px',
+              }}
+            /> :
             <BorderOutlined
               style={{
                 fontSize: 18,
@@ -33,7 +42,7 @@ export default function Checklist(props) {
                 marginLeft: "20px",
                 padding: '6px',
               }}
-            />
+            />}
             <ChecklistItem>{item}</ChecklistItem>
           </div>
         ))}

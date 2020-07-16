@@ -607,6 +607,7 @@ class PageInternshipInformation extends Component {
 
         if (typeof allValues[field] !== 'undefined') {
           completedCount++;
+
         }
 
       }
