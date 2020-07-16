@@ -8,4 +8,4 @@ const completionChecklistReducer = (state = [[],[],[],[]], action) => {
   }
 }
 
-export default completionStateReducer
+export default completionChecklistReducer
