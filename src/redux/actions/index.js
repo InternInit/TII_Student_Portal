@@ -26,3 +26,11 @@ export const batchUpdateCompletionState = (completionState) => {
     completionState
   }
 }
+
+export const updateCompletionChecklist = (page, completionChecklist) => {
+  return {
+    type: 'UPDATE_COMPLETION_CHECKLIST',
+    page,
+    completionChecklist
+  }
+}
