@@ -685,7 +685,7 @@ class PageInternshipInformation extends Component {
             ];
             //delete parsedData.resume
 
-            let fileList = parsedData.resume.fileList;
+            let fileList = parsedData.Resume.fileList;
             for (var i = 0; i < fileList.length; i++) {
               fileList[i].status = "done";
             }

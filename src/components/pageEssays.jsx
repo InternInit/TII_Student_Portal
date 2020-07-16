@@ -303,7 +303,7 @@ class PageEssays extends React.Component {
             this.formRef.current.setFieldsValue(parsedData);
 
             try {
-              let fileListCL = parsedData.CoverLetter.fileList;
+              let fileListCL = parsedData["Cover Letter"].fileList;
               for (var i = 0; i < fileListCL.length; i++) {
                 fileListCL[i].status = "done";
               }
