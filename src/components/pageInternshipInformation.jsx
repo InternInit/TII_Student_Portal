@@ -158,19 +158,19 @@ const formItemProps = {
   firstName: {
     key: "firstName",
     label: boldify("First Name"),
-    name: "firstName",
+    name: "First Name",
     rules: validationRules(true, "first name", "string")
   },
   lastName: {
     key: "lastName",
     label: boldify("Last Name"),
-    name: "lastName",
+    name: "Last Name",
     rules: validationRules(true, "last name", "string")
   },
   phoneNumber: {
     key: "phoneNumber",
     label: boldify("Phone Number"),
-    name: "phoneNumber",
+    name: "Phone Number",
     extra: "Please input your phone number without any formatting.",
     rules: validationRules(
       true,
@@ -182,13 +182,13 @@ const formItemProps = {
   email: {
     key: "email",
     label: boldify("Email"),
-    name: "email",
+    name: "Email",
     rules: validationRules(true, "email", "email")
   },
   addressLine: {
     key: "addressLine",
     label: boldify("Address"),
-    name: "address",
+    name: "Address",
     rules: validationRules(
       true,
       "address",
@@ -198,7 +198,7 @@ const formItemProps = {
   },
   city: {
     key: "city",
-    name: "city",
+    name: "City",
     rules: validationRules(
       true,
       "city",
@@ -208,12 +208,12 @@ const formItemProps = {
   },
   livingState: {
     key: "state",
-    name: "state",
+    name: "State",
     rules: validationRules(true, "state")
   },
   zip: {
     key: "zip",
-    name: "zip",
+    name: "Zip Code",
     rules: validationRules(true, "zip code", "string", /^\d{5}$/)
   },
   yog: {
@@ -225,7 +225,7 @@ const formItemProps = {
   industry: {
     key: "industry",
     label: boldify("What industry are you applying to?"),
-    name: "industry",
+    name: "Interested Industries",
     rules: [
       {
         required: true,
@@ -236,7 +236,7 @@ const formItemProps = {
   unweightedGPA: {
     key: "unweightedGPA",
     label: boldify("What is your unweighted GPA?"),
-    name: "unweightedGPA",
+    name: "Unweighted GPA",
     rules: validationRules(
       true,
       "unweighted GPA",
@@ -248,7 +248,7 @@ const formItemProps = {
   weightedGPA: {
     key: "weightedGPA",
     label: boldify("What is your weighted GPA (optional)?"),
-    name: "weightedGPA",
+    name: "Weighted GPA",
     extra: "Indicate your weighted GPA over the scale",
     rules: validationRules(
       false,
@@ -260,7 +260,7 @@ const formItemProps = {
   courses: {
     key: "courses",
     label: boldify("Relevant courses to your industry."),
-    name: "courses",
+    name: "Relevant Courses",
     rules: validationRules(true, "relevant courses"),
     extra:
       "Separate each entry with a comma and a space, and capitalize the AP/IB for your AP/IB Classes"
@@ -268,7 +268,7 @@ const formItemProps = {
   extracurriculars: {
     key: "extracurriculars",
     label: boldify("Extracurricular Activities"),
-    name: "extracurriculars",
+    name: "Extracurriculars",
     rules: validationRules(true, "extracurricular activities"),
     extra:
       "Separate each entry with a comma and a space, and in parentheses, show how long you spent on the activity."
@@ -276,18 +276,18 @@ const formItemProps = {
   daysToWork: {
     key: "daysToWork",
     label: boldify("What days are you willing to work?"),
-    name: "daysToWork",
+    name: "Willing Work Days",
     rules: validationRules(true, "optimal days to work", "array")
   },
   timesToWork: {
     key: "timesToWork",
     label: boldify("What times are you willing to work?"),
-    name: "timesToWork",
+    name: "Willing Work Times",
     rules: validationRules(true, "times available to work", "array")
   },
   dateOfStartAndEnd: {
     key: "dateOfStartAndEnd",
-    name: "dateOfStartAndEnd",
+    name: "Starting/Ending Dates",
     label: boldify(
       "When can you start working and when do you need to stop working?"
     ),
@@ -295,13 +295,13 @@ const formItemProps = {
   },
   paidUnpaid: {
     key: "paidUnpaid",
-    name: "paidUnpaid",
+    name: "Paid/Unpaid Preference",
     label: boldify("Are you willing to work unpaid?"),
     rules: validationRules(true, "preference for pay")
   },
   resume: {
-    name: "resume",
     key: "resume",
+    name: "Resume",
     label: boldify("Resumé (.doc, .docx, .pdf)"),
     rules: validationRules(true, "resume", "object")
   }
@@ -679,9 +679,9 @@ class PageInternshipInformation extends Component {
 
         if (parsedData !== "No Info") {
           try {
-            parsedData.dateOfStartAndEnd = [
-              moment(parsedData.dateOfStartAndEnd[0]),
-              moment(parsedData.dateOfStartAndEnd[1])
+            parsedData["Starting/Ending Dates"] = [
+              moment(parsedData["Starting/Ending Dates"][0]),
+              moment(parsedData["Starting/Ending Dates"][1])
             ];
             //delete parsedData.resume
 

@@ -206,7 +206,7 @@ class PagePersonal extends Component {
               <Col span={standardSpan}>
                 <Form.Item
                   key="gender"
-                  name="gender"
+                  name="Gender"
                   label={this.boldify("What is your gender?")}
                   rules={this.validationRules(true, "gender")}
                 >
@@ -227,7 +227,7 @@ class PagePersonal extends Component {
                 <Form.Item
                   key="race"
                   label={this.boldify("Race/Ethnicity")}
-                  name="race"
+                  name="Race"
                   extra="Check all that apply"
                 >
                   <Checkbox.Group>
@@ -256,7 +256,7 @@ class PagePersonal extends Component {
                 <Form.Item
                   key="latinx"
                   label={this.boldify("If you are Hispanic/Latinx")}
-                  name="latinx"
+                  name="Latinx"
                   extra="Check all that apply"
                 >
                   <Checkbox.Group>
@@ -285,7 +285,7 @@ class PagePersonal extends Component {
                 <Form.Item
                   key="age"
                   label={this.boldify("Age")}
-                  name="age"
+                  name="Age"
                   rules={this.validationRules(true, "age", "number")}
                 >
                   <InputNumber style={{ width: "100%" }} />
@@ -295,7 +295,7 @@ class PagePersonal extends Component {
 
             <h1>Please Input Your Educational History</h1>
 
-            <Form.List name="education">
+            <Form.List name="Education">
               {(fields, { add, remove }) => {
                 return (
                   <div>
@@ -327,7 +327,7 @@ class PagePersonal extends Component {
                           <Form.Item
                             {...field}
                             key={[field.fieldKey, "schoolName"]}
-                            name={[field.name, "schoolName"]}
+                            name={[field.name, "School Name"]}
                             label={this.boldify("School Name")}
                             validateTrigger={["onChange", "onBlur"]}
                             rules={this.validationRules(
@@ -345,7 +345,7 @@ class PagePersonal extends Component {
                               <Form.Item
                                 key={[field.fieldKey, "schoolAddress"]}
                                 label={this.boldify("School Location")}
-                                name={[field.name, "schoolAddress"]}
+                                name={[field.name, "School Address"]}
                                 rules={this.validationRules(
                                   true,
                                   "school's address",
@@ -363,7 +363,7 @@ class PagePersonal extends Component {
                             <Col span={thirdSpan}>
                               <Form.Item
                                 key={[field.fieldKey, "city"]}
-                                name={[field.name, "city"]}
+                                name={[field.name, "School City"]}
                                 rules={this.validationRules(
                                   true,
                                   "city",
@@ -377,7 +377,7 @@ class PagePersonal extends Component {
                             <Col span={thirdSpan}>
                               <Form.Item
                                 key={[field.fieldKey, "state"]}
-                                name={[field.name, "state"]}
+                                name={[field.name, "School State"]}
                                 rules={this.validationRules(true, "state")}
                               >
                                 <Select placeholder="State">
@@ -392,7 +392,7 @@ class PagePersonal extends Component {
                             <Col span={thirdSpan}>
                               <Form.Item
                                 key={[field.fieldKey, "zip"]}
-                                name={[field.name, "zip"]}
+                                name={[field.name, "School Zip Code"]}
                                 rules={this.validationRules(
                                   true,
                                   "zip code",
@@ -411,7 +411,7 @@ class PagePersonal extends Component {
                               <Form.Item
                                 key={[field.fieldKey, "courseConcentration"]}
                                 label={this.boldify("Course Concentration")}
-                                name={[field.name, "courseConcentration"]}
+                                name={[field.name, "Course Concentration"]}
                                 rules={this.validationRules(
                                   "course concentration"
                                 )}
@@ -424,7 +424,7 @@ class PagePersonal extends Component {
                               <Form.Item
                                 key={[field.fieldKey, "yearsCompleted"]}
                                 label={this.boldify("Years Completed")}
-                                name={[field.name, "yearsCompleted"]}
+                                name={[field.name, "Years Completed"]}
                                 rules={this.validationRules(
                                   true,
                                   "years completed",
@@ -482,6 +482,7 @@ class PagePersonal extends Component {
 
   onValuesChange = () => {
     let allValues = this.formRef.current.getFieldsValue()
+    console.log(allValues)
     delete allValues.latinx
     delete allValues.race
 

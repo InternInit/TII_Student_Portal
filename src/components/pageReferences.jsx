@@ -116,7 +116,7 @@ class PageReferences extends Component {
             ref={this.formRef}
             onValuesChange={this.onValuesChange}
           >
-            <Form.List name="reference">
+            <Form.List name="Reference">
               {(fields, { add, remove }) => {
                 return (
                   <div style={{ marginTop: "40px" }}>
@@ -141,7 +141,7 @@ class PageReferences extends Component {
                                   true,
                                   field,
                                   "First Name",
-                                  "firstName"
+                                  "First Name"
                                 )}
                               >
                                 <Input />
@@ -154,7 +154,7 @@ class PageReferences extends Component {
                                   true,
                                   field,
                                   "Last Name",
-                                  "lastName"
+                                  "Last Name"
                                 )}
                               >
                                 <Input />
@@ -171,7 +171,7 @@ class PageReferences extends Component {
                                   true,
                                   field,
                                   "School/Company",
-                                  "schoolCompany"
+                                  "School/Company"
                                 )}
                               >
                                 <Input />
@@ -184,7 +184,7 @@ class PageReferences extends Component {
                                   true,
                                   field,
                                   "Title",
-                                  "title"
+                                  "Title"
                                 )}
                               >
                                 <Input />
@@ -200,7 +200,7 @@ class PageReferences extends Component {
                                   true,
                                   field,
                                   "Phone Number",
-                                  "phoneNumber",
+                                  "Phone Number",
                                   "string",
                                   /^(1?([-\s]?\(?\d{3}\)?)[-\s]?)(\d{3})([-\s]?\d{4})$/
                                 )}
@@ -215,7 +215,7 @@ class PageReferences extends Component {
                                   true,
                                   field,
                                   "Email",
-                                  "email",
+                                  "Email",
                                   "email"
                                 )}
                               >
@@ -280,7 +280,7 @@ class PageReferences extends Component {
 
   onValuesChange = () => {
     let allValues = this.formRef.current.getFieldsValue()
-
+    console.log(allValues)
     let completedCount = 0;
     for (var field in allValues) {
       if (allValues.hasOwnProperty(field)) {

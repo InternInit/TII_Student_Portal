@@ -79,7 +79,7 @@ class PageEssays extends React.Component {
             {/**Industry response */}
             <Form.Item
               key="industryEssay"
-              name="industryEssay"
+              name="Why This Industry Essay"
               label={this.boldify("Why do you want to apply to this industry?")}
               rules={this.validationRules("response")}
             >
@@ -89,7 +89,7 @@ class PageEssays extends React.Component {
             {/**leadership response */}
             <Form.Item
               key="leadership"
-              name="leadership"
+              name="Leadership Roles Essay"
               label={this.boldify(
                 "What are your leadership roles in your extracurriculars and what have they taught you?"
               )}
@@ -101,7 +101,7 @@ class PageEssays extends React.Component {
             {/**extra information response */}
             <Form.Item
               key="extra"
-              name="extra"
+              name="Extra Essay"
               label={this.boldify(
                 "Is there anything more about you that we should know?"
               )}
@@ -112,7 +112,7 @@ class PageEssays extends React.Component {
 
             {/**Cover Letter */}
             <Form.Item
-              name="CoverLetter"
+              name="Cover Letter"
               key="CoverLetter"
               label={this.boldify("Cover Letter (Optional)")}
             >
@@ -186,6 +186,7 @@ class PageEssays extends React.Component {
 
   onValuesChange = () => {
     let allValues = this.formRef.current.getFieldsValue()
+    console.log(allValues)
     delete allValues.CoverLetter
     delete allValues.Portfolio
 
