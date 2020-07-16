@@ -219,7 +219,7 @@ const formItemProps = {
   yog: {
     key: "yog",
     label: boldify("Year of graduation"),
-    name: "yog",
+    name: "Year Of Graduation",
     rules: validationRules(true, "year of graduation", "string", /^\d{4}$/)
   },
   industry: {
@@ -599,17 +599,21 @@ class PageInternshipInformation extends Component {
 
   onValuesChange = () => {
     let allValues = this.formRef.current.getFieldsValue()
+    console.log(allValues)
     delete allValues.weightedGPA
 
     let completedCount = 0;
+    let checklist = [];
     for (var field in allValues) {
       if (allValues.hasOwnProperty(field)) {
-
+        //let item = {};
+        //item.key = field
+        //item.label = formItemProps[field].label.props.children
         if (typeof allValues[field] !== 'undefined') {
           completedCount++;
-
+          //item.completed = true
         }
-
+        //console.log(item)
       }
     }
     let completionPercentage = parseFloat((completedCount/Object.keys(allValues).length).toFixed(2));
