@@ -487,7 +487,7 @@ class PagePersonal extends Component {
   onValuesChange = () => {
     let allValues = this.formRef.current.getFieldsValue()
     console.log(allValues)
-    delete allValues.Latinx
+    delete allValues["Is Latinx"]
     delete allValues.Race
 
     let completedCount = 0;
