@@ -8,7 +8,9 @@ import { withRouter } from "react-router";
 
 //Redux
 import { connect } from 'react-redux';
-import { updateCompletionState } from '../redux/actions'
+import { updateCompletionState, updateCompletionChecklist } from '../redux/actions'
+
+import _ from 'lodash'
 
 //Object Destructuring
 const { TextArea } = Input;
@@ -25,11 +27,13 @@ const props = {
 const mapStateToProps = state => {
   return {
     completionState: state.completionState,
+    completionChecklist: state.completionChecklist
   }
 }
 
 const mapDispatchToProps = {
-  updateCompletionState
+  updateCompletionState,
+  updateCompletionChecklist
 }
 
 class PageEssays extends React.Component {
@@ -191,17 +195,26 @@ class PageEssays extends React.Component {
     delete allValues.Portfolio
 
     let completedCount = 0;
+    let checklist = [];
     for (var field in allValues) {
       if (allValues.hasOwnProperty(field)) {
-
-        if (typeof allValues[field] !== 'undefined') {
+        let item = {};
+        item.key = field
+        if (typeof allValues[field] !== 'undefined' && allValues[field] !== "") {
           completedCount++;
+          item.completed = true
+        } else {
+          item.completed = false
         }
-
+        //console.log(item)
+        checklist.push(item)
       }
     }
+    console.log(this.props)
     let completionPercentage = parseFloat((completedCount/Object.keys(allValues).length).toFixed(2));
     if (completionPercentage != this.props.completionState[2]) this.props.updateCompletionState(2,completionPercentage)
+
+    if (!_.isEqual(checklist, this.props.completionChecklist[2])) this.props.updateCompletionChecklist(2, checklist)
   }
 
   onFinish = values => {
