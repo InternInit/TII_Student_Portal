@@ -170,7 +170,7 @@ class TiiNav extends React.Component {
   handleSubmit = () => {
     let status = this.props.completionState
 
-    if (_.isEqual(status, [true, true, true, true])) {
+    if (_.isEqual(status, [1, 1, 1, 1])) {
       // checks to see if all forms are completed
       //this.setState({ CanSubmit: true }); //sets canSubmit to true
       notification.open({
