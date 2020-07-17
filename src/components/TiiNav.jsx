@@ -180,6 +180,7 @@ class TiiNav extends React.Component {
         icon: <CheckOutlined style={{ color: "green" }} />
       });
       this.props.onSubmit({}, -1)
+      this.routeChange("/submission-success");
     } else {
       notification.open({
         message: "Failed.",
