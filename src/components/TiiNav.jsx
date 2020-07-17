@@ -17,6 +17,7 @@ import _ from 'lodash';
 
 
 class TiiNav extends React.Component {
+
   getInitialHighlight = () => {
     switch (window.location.pathname) {
       case "/apply/internship-info":
@@ -38,6 +39,12 @@ class TiiNav extends React.Component {
   componentDidUpdate(prevProps, prevState) {
     this.handleUpdate();
   }
+
+
+  componentDidMount() {
+    this.getInitialHighlight();
+  }
+
 
 
   constructor(props) {

@@ -113,7 +113,7 @@ class Navbar extends Component {
           How to Apply
         </Menu.Item>
         <Menu.Item key="apply" style={menuItemStyle}>
-          <Link to="/apply/Internship-Info/">Apply</Link>
+          <Link to="/apply/internship-info">Apply</Link>
         </Menu.Item>
 
         <SubMenu
