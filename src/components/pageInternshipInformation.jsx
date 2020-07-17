@@ -35,6 +35,8 @@ import TiiNav from "./TiiNav";
 import { connect } from 'react-redux';
 import { updateCompletionState, updateCompletionChecklist } from '../redux/actions'
 
+import _ from 'lodash'
+
 //Object Destructuring
 const { Option } = Select;
 const { MonthPicker, RangePicker } = DatePicker;
@@ -622,7 +624,8 @@ class PageInternshipInformation extends Component {
     console.log(this.props)
     let completionPercentage = parseFloat((completedCount/Object.keys(allValues).length).toFixed(2));
     if (completionPercentage != this.props.completionState[0]) this.props.updateCompletionState(0,completionPercentage)
-    if (checklist != this.props.completionChecklist[0]) this.props.updateCompletionChecklist(0, checklist)
+
+    if (!_.isEqual(checklist, this.props.completionChecklist[0])) this.props.updateCompletionChecklist(0, checklist)
   }
 
   onFinish = values => {
