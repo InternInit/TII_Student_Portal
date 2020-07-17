@@ -16,7 +16,6 @@ const ChecklistItem = styled.p`
 `;
 
 export default function Checklist(props) {
-  let checklist = [{"field":"firstName","value":"Tejas", "completed":true},{"field":"lastName","value":"Maraliga", "completed":false},{"field":"Age","value":18, "completed":true}];
   return (
     <div>
       <QueueAnim
@@ -24,7 +23,7 @@ export default function Checklist(props) {
         ease={["easeOutQuart", "easeInOutQuart"]}
         leaveReverse
       >
-        {checklist.map((item, index) => (
+        {props.checklist[props.page].map((item, index) => (
           <div key={index}>
             {item.completed ? <CheckOutlined
               style={{
@@ -44,7 +43,7 @@ export default function Checklist(props) {
                 padding: '6px',
               }}
             />}
-            <ChecklistItem>{item.field}</ChecklistItem>
+            <ChecklistItem>{item.key}</ChecklistItem>
           </div>
         ))}
       </QueueAnim>

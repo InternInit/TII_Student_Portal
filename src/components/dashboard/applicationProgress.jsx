@@ -100,7 +100,8 @@ let checklistArray = ["Item 1", "Item 2", "Item 3"];
 
 const mapStateToProps = state => {
   return {
-    completionState: state.completionState
+    completionState: state.completionState,
+    completionChecklist: state.completionChecklist
   }
 }
 
@@ -208,7 +209,7 @@ class ApplicationProgress extends Component {
               </ViewChecklist>
               <div>
                 {this.state[section[3]] ? (
-                  <Checklist checklist={checklistArray} />
+                  <Checklist checklist={this.props.completionChecklist} page={index} />
                 ) : null}
               </div>
             </React.Fragment>

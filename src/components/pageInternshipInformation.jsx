@@ -33,7 +33,7 @@ import TiiNav from "./TiiNav";
 
 //Redux
 import { connect } from 'react-redux';
-import { updateCompletionState } from '../redux/actions'
+import { updateCompletionState, updateCompletionChecklist } from '../redux/actions'
 
 //Object Destructuring
 const { Option } = Select;
@@ -315,12 +315,14 @@ const props = {
 
 const mapStateToProps = state => {
   return {
-    completionState: state.completionState
+    completionState: state.completionState,
+    completionChecklist: state.completionChecklist
   }
 }
 
 const mapDispatchToProps = {
-  updateCompletionState
+  updateCompletionState,
+  updateCompletionChecklist
 }
 
 class PageInternshipInformation extends Component {
@@ -599,25 +601,28 @@ class PageInternshipInformation extends Component {
 
   onValuesChange = () => {
     let allValues = this.formRef.current.getFieldsValue()
-    console.log(allValues)
-    delete allValues.weightedGPA
+    delete allValues["Weighted GPA"]
 
     let completedCount = 0;
     let checklist = [];
     for (var field in allValues) {
       if (allValues.hasOwnProperty(field)) {
-        //let item = {};
-        //item.key = field
-        //item.label = formItemProps[field].label.props.children
-        if (typeof allValues[field] !== 'undefined') {
+        let item = {};
+        item.key = field
+        if (typeof allValues[field] !== 'undefined' && allValues[field] !== "") {
           completedCount++;
-          //item.completed = true
+          item.completed = true
+        } else {
+          item.completed = false
         }
         //console.log(item)
+        checklist.push(item)
       }
     }
+    console.log(this.props)
     let completionPercentage = parseFloat((completedCount/Object.keys(allValues).length).toFixed(2));
     if (completionPercentage != this.props.completionState[0]) this.props.updateCompletionState(0,completionPercentage)
+    if (checklist != this.props.completionChecklist[0]) this.props.updateCompletionChecklist(0, checklist)
   }
 
   onFinish = values => {
@@ -683,7 +688,6 @@ class PageInternshipInformation extends Component {
               moment(parsedData["Starting/Ending Dates"][0]),
               moment(parsedData["Starting/Ending Dates"][1])
             ];
-            //delete parsedData.resume
 
             let fileList = parsedData.Resume.fileList;
             for (var i = 0; i < fileList.length; i++) {
