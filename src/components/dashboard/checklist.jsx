@@ -32,6 +32,7 @@ export default function Checklist(props) {
                 marginRight: "7px",
                 marginLeft: "20px",
                 padding: '6px',
+                color: 'green'
               }}
             /> :
             <BorderOutlined
