@@ -621,7 +621,6 @@ class PageInternshipInformation extends Component {
         checklist.push(item)
       }
     }
-    console.log(this.props)
     let completionPercentage = parseFloat((completedCount/Object.keys(allValues).length).toFixed(2));
     if (completionPercentage != this.props.completionState[0]) this.props.updateCompletionState(0,completionPercentage)
 
