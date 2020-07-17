@@ -260,7 +260,7 @@ class PagePersonal extends Component {
                 <Form.Item
                   key="latinx"
                   label={this.boldify("If you are Hispanic/Latinx")}
-                  name="Latinx"
+                  name="Is Latinx"
                   extra="Check all that apply"
                 >
                   <Checkbox.Group>
@@ -331,7 +331,7 @@ class PagePersonal extends Component {
                           <Form.Item
                             {...field}
                             key={[field.fieldKey, "schoolName"]}
-                            name={[field.name, "School Name"]}
+                            name={[field.name, "Name"]}
                             label={this.boldify("School Name")}
                             validateTrigger={["onChange", "onBlur"]}
                             rules={this.validationRules(
@@ -349,7 +349,7 @@ class PagePersonal extends Component {
                               <Form.Item
                                 key={[field.fieldKey, "schoolAddress"]}
                                 label={this.boldify("School Location")}
-                                name={[field.name, "School Address"]}
+                                name={[field.name, "Address"]}
                                 rules={this.validationRules(
                                   true,
                                   "school's address",
@@ -367,7 +367,7 @@ class PagePersonal extends Component {
                             <Col span={thirdSpan}>
                               <Form.Item
                                 key={[field.fieldKey, "city"]}
-                                name={[field.name, "School City"]}
+                                name={[field.name, "City"]}
                                 rules={this.validationRules(
                                   true,
                                   "city",
@@ -381,7 +381,7 @@ class PagePersonal extends Component {
                             <Col span={thirdSpan}>
                               <Form.Item
                                 key={[field.fieldKey, "state"]}
-                                name={[field.name, "School State"]}
+                                name={[field.name, "State"]}
                                 rules={this.validationRules(true, "state")}
                               >
                                 <Select placeholder="State">
@@ -396,7 +396,7 @@ class PagePersonal extends Component {
                             <Col span={thirdSpan}>
                               <Form.Item
                                 key={[field.fieldKey, "zip"]}
-                                name={[field.name, "School Zip Code"]}
+                                name={[field.name, "Zip Code"]}
                                 rules={this.validationRules(
                                   true,
                                   "zip code",

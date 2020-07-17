@@ -221,7 +221,7 @@ const formItemProps = {
   yog: {
     key: "yog",
     label: boldify("Year of graduation"),
-    name: "Year Of Graduation",
+    name: "Year of Graduation",
     rules: validationRules(true, "year of graduation", "string", /^\d{4}$/)
   },
   industry: {
