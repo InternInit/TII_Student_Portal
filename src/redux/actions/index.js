@@ -34,3 +34,10 @@ export const updateCompletionChecklist = (page, completionChecklist) => {
     completionChecklist
   }
 }
+
+export const batchUpdateCompletionChecklist = (completionChecklist) => {
+  return {
+    type:'BATCH_UPDATE_COMPLETION_CHECKLIST',
+    completionChecklist
+  }
+}

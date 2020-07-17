@@ -637,7 +637,6 @@ class PageInternshipInformation extends Component {
 
   updateFieldData = async () => {
     const values = await this.formRef.current.getFieldsValue();
-
     this.props.updateData(values, "0");
 
   };

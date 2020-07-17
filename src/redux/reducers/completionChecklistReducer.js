@@ -3,6 +3,8 @@ const completionChecklistReducer = (state = [[],[],[],[]], action) => {
     case 'UPDATE_COMPLETION_CHECKLIST':
       state[action.page] = action.completionChecklist
       return state
+    case 'BATCH_UPDATE_COMPLETION_CHECKLIST':
+      return action.completionChecklist
     default:
       return state
   }

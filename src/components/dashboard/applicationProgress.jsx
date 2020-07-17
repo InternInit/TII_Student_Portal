@@ -96,7 +96,6 @@ const percentComplete = [
 ]
 
 // TODO: THIS NEEDS TO BE REPLACED BY THE REACT STORE
-let checklistArray = ["Item 1", "Item 2", "Item 3"];
 
 const mapStateToProps = state => {
   return {

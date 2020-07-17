@@ -41,7 +41,8 @@ import {
   updateName,
   updateAvatar,
   updateCompletionState,
-  batchUpdateCompletionState
+  batchUpdateCompletionState,
+  batchUpdateCompletionChecklist
 } from "./redux/actions";
 
 import pageInternshipInformation from "./components/pageInternshipInformation.jsx";
@@ -78,6 +79,7 @@ const PageContainer = styled.div`
 const mapStateToProps = state => {
   return {
     completionState: state.completionState,
+    completionChecklist: state.completionChecklist,
     userInfo: state.userInfo
   };
 };
@@ -86,7 +88,8 @@ const mapDispatchToProps = {
   updateName,
   updateAvatar,
   updateCompletionState,
-  batchUpdateCompletionState
+  batchUpdateCompletionState,
+  batchUpdateCompletionChecklist
 };
 
 class App extends Component {
@@ -129,7 +132,8 @@ class App extends Component {
           Authorization:
             "Bearer " + JSON.parse(JSON.stringify(this.inMemoryToken.token)),
           "Content-Type": "text/plain",
-          "Completion-State": JSON.stringify(this.props.completionState)
+          "Completion-State": JSON.stringify(this.props.completionState),
+          "Completion-Checklist": JSON.stringify(this.props.completionChecklist)
         },
         body: JSON.stringify(values) + "#" + origin
       })
@@ -150,7 +154,8 @@ class App extends Component {
           Authorization:
             "Bearer " + JSON.parse(JSON.stringify(this.inMemoryToken.token)),
           "Content-Type": "text/plain",
-          "Completion-State": JSON.stringify(this.props.completionState)
+          "Completion-State": JSON.stringify(this.props.completionState),
+          "Completion-Checklist": JSON.stringify(this.props.completionChecklist)
         },
         body: JSON.stringify(values) + "#" + origin + "#" + "submit"
       })
@@ -290,8 +295,12 @@ class App extends Component {
         let parsedRecv = JSON.parse(data);
         if (parsedRecv != "No Info") {
           let recvCompletionState = parsedRecv[1];
+          let recvCompletionChecklist = parsedRecv[2];
           this.props.batchUpdateCompletionState(recvCompletionState);
-          //this.setState({ completionState: recvCompletionState });
+          this.props.batchUpdateCompletionChecklist(recvCompletionChecklist)
+        } else {
+          this.props.batchUpdateCompletionState([0,0,0,0]);
+          this.props.batchUpdateCompletionChecklist([[],[],[],[]])
         }
       });
   };
