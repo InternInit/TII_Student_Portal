@@ -117,7 +117,7 @@ class AddCompanies extends React.Component {
       search: "",
       industries: industry,
       companies: [],
-      pageChange: '0',
+      page: '0',
       mergedIndustry:
         "General BusinessConsultingFinance or AccountingMedia or TellecommunicationsReal EstateEngineeringScience ResearchComputer ScienceBiotechnologyVocationalPoliticalMarketing",
 
@@ -274,7 +274,7 @@ class AddCompanies extends React.Component {
             </div>
           ))}
         </QueueAnim>
-        <Pagination defaultCurrent={0} total={Info.length} onChange={pageChange => this.handlePageChange(pageChange - 1)} />
+        <Pagination defaultCurrent={1} total={Info.length} onChange={pageChange => this.handlePageChange(pageChange - 1)} />
 
 
 
