@@ -76,12 +76,10 @@ const ViewChecklist = styled.p`
 ******************************************
 PERCENT COMPLETION ARRAY
 [0] == Title Of the Section
-[1] == Percentage Complete --> adaptable version to be implemented
-[2] == Trail Color
-[3] == Stroke Color
-[4] == Access code for the state
+[1] == Trail Color
+[2] == Stroke Color
+[3] == Access code for the state
 ******************************************
-TODO: THESE NEEDS TO BE REPLACED BY THE REACT STORE
 */
 const percentComplete = [
   [
@@ -94,8 +92,6 @@ const percentComplete = [
   ["Essays", "#fcffe6", "#a0d911", "essayChecklist"],
   ["References", "#f9f0ff", "#722ed1", "referencesChecklist"]
 ]
-
-// TODO: THIS NEEDS TO BE REPLACED BY THE REACT STORE
 
 const mapStateToProps = state => {
   return {
@@ -158,16 +154,6 @@ class ApplicationProgress extends Component {
     }
   };
 
-  testClick = () => {
-    //this.props.updateCompletionState(1,0.3)
-    console.log(this.props.completionState)
-    this.forceUpdate()
-  }
-
-  componentDidMount = () => {
-    this.testClick()
-  }
-
   render() {
     return (
       <React.Fragment>
@@ -202,7 +188,7 @@ class ApplicationProgress extends Component {
 
 
               {/**
-               * Progress Bar 
+               * Progress Bar
                */}
               <Progress
                 percent={this.props.completionState[index] * 100}
@@ -246,4 +232,6 @@ class ApplicationProgress extends Component {
   }
 }
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ApplicationProgress));
+export default withRouter(connect(
+  mapStateToProps,
+  mapDispatchToProps)(ApplicationProgress));
