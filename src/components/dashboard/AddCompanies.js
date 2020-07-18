@@ -2,12 +2,11 @@ import React from "react";
 import styled from "styled-components";
 import { Input } from "antd";
 import SearchCompanytab from "./SearchCompanytab.js";
-import { Collapse, Checkbox } from "antd";
+import { Collapse, Checkbox, Pagination } from "antd";
 import { Col as AntCol, Row as AntRow } from "antd";
 import QueueAnim from "rc-queue-anim";
-import Checklist from "./checklist.jsx";
 import { withRouter } from "react-router";
-import Companytab from "./Companytab.js";
+import { filter } from "underscore";
 
 const { Search } = Input;
 const { Panel } = Collapse;
@@ -79,7 +78,27 @@ let Info = [
   { name: "Netflix", industry: "Media or Tellecommunications" },
   { name: "qgy type letters", industry: "Political" },
   { name: "Tesla", industry: "Biotechnology" },
-  { name: "Tinder", industry: "Vocational" }
+  { name: "Tinder", industry: "Vocational" },
+  { name: "Desk", industry: "Political" },
+  { name: "Table", industry: "Marketing" },
+  { name: "Chair", industry: "Political" },
+  { name: "Mouse", industry: "Real Estate" },
+  { name: "Mousepad", industry: "Finance or Accounting" },
+  { name: "Moniter", industry: "Media or Tellecommunications" },
+  { name: "Laptop", industry: "Consulting" },
+  { name: "Charger", industry: "Computer Science" },
+  { name: "iPhone 8", industry: "Real Estate" },
+  { name: "Brandon Lu", industry: "Engineering" },
+  { name: "dwasdwasdwas", industry: "Science Research" },
+  { name: "Poop", industry: "General Business" },
+  { name: "Hehehehe", industry: "Vocational" },
+  { name: "Hahahaha", industry: "Biotechnology" },
+  { name: "WHOOOOOO", industry: "Consulting" },
+  { name: "Company Name", industry: "Finance or Accounting" },
+  { name: "lets GO", industry: "Political" },
+
+
+
 ];
 
 // BUG: THIS NEEDS TO BE REPLACED BY THE REACT STORE
@@ -97,29 +116,22 @@ class AddCompanies extends React.Component {
     this.state = {
       search: "",
       industries: industry,
+      companies: [],
+      pageChange: '0',
       mergedIndustry:
         "General BusinessConsultingFinance or AccountingMedia or TellecommunicationsReal EstateEngineeringScience ResearchComputer ScienceBiotechnologyVocationalPoliticalMarketing",
-      companies: [],
-
-
 
     };
     this.searchCompany = this.searchCompany.bind(this);
     this.filterIndustries = this.filterIndustries.bind(this);
     this.mergeIndustries = this.mergeIndustries.bind(this);
+    this.handlePageChange = this.handlePageChange.bind(this);
+
   }
 
   render() {
     let { search, mergedIndustry } = this.state;
-
-    /**
-     * 
-     * 
-     * TEMPORARY!
-     * 
-     * 
-     */
-    let { companies } = this.state;
+    let { companies, page } = this.state;
 
 
     //Filtering function for industries
@@ -137,6 +149,9 @@ class AddCompanies extends React.Component {
     return (
       <div style={{ paddingBottom: "50%" }}>
         <h1 className="module-name">Pinned Companies</h1>
+
+
+
         {/**
          *
          * Pinned Companies
@@ -145,20 +160,19 @@ class AddCompanies extends React.Component {
         <QueueAnim
           type="scale"
           ease={["easeOutQuart", "easeInOutQuart"]}
-          delay={[300, 0]}
         >
-          {companies.map((pinnedCompany, index) => (
+          {pinnedCompanies.map((pinnedCompany, index) => (
             <div style={{ marginBottom: "12px" }} key={index}>
 
-              <SearchCompanytab
-                key={pinnedCompany.name_original}
-                name={pinnedCompany.name}
-                industry={pinnedCompany.name}
-                logo={pinnedCompany.background_image_additional}
-                image={pinnedCompany.background_image_additional}
-                description={pinnedCompany.description_raw}
-                location={pinnedCompany.slug}
 
+              <SearchCompanytab
+                key={pinnedCompany.name}
+                name={pinnedCompany.name}
+                industry={pinnedCompany.industry}
+                logo="filler"
+                image="filler"
+                description="filler"
+                location="filler"
               />
 
 
@@ -166,6 +180,9 @@ class AddCompanies extends React.Component {
             </div>
           ))}
         </QueueAnim>
+
+
+
 
         <h1 className="module-name" style={{ marginTop: "100px" }}>
           Search Companies
@@ -183,6 +200,9 @@ class AddCompanies extends React.Component {
           onChange={value => this.searchCompany(value)}
           style={{ width: "100%", marginBottom: "20px" }}
         />
+
+
+
 
         {/**
          *
@@ -225,8 +245,10 @@ class AddCompanies extends React.Component {
               </AntRow>
             </Panel>
           </Collapse>
-          -
         </Row>
+
+
+
 
         {/**
          *
@@ -234,24 +256,42 @@ class AddCompanies extends React.Component {
          *
          */}
         <QueueAnim type="scale" ease={["easeOutQuart", "easeInOutQuart"]}>
-          {filteredInfo.map((company, index) => (
+          {filteredInfo.slice(page, page + 20).map((company, index) => (
             <div style={{ marginBottom: "12px" }} key={index}>
-              <SearchCompanytab key={company.name} name={company.name} />
+              {console.log(company.industry)}
+
+              <SearchCompanytab
+                key={company.name}
+                name={company.name}
+                industry={company.industry}
+                logo="filler"
+                image="filler"
+                description="filler"
+                location="filler"
+              />
+
+
             </div>
           ))}
         </QueueAnim>
-      </div>
+        <Pagination defaultCurrent={0} total={Info.length} onChange={pageChange => this.handlePageChange(pageChange - 1)} />
+
+
+
+
+
+      </div >
     );
   }
 
   componentDidMount() {
-    for (let i = 1; i < 6; i++) {
+    for (let i = 1; i < 109; i++) {
       fetch("https://rawg-video-games-database.p.rapidapi.com/games/" + i, {
         method: "GET",
         headers: {
           "x-rapidapi-host": "rawg-video-games-database.p.rapidapi.com",
           "x-rapidapi-key": "24cc20e856msh686f79ed61d6951p112e88jsn8082d8031701",
-          "entries": 60
+          "entries": 109
         }
       })
         .then(response => {
@@ -267,6 +307,10 @@ class AddCompanies extends React.Component {
     console.log(this.state.companies)
   }
 
+  //handles pagination bar change
+  handlePageChange(pageChange) {
+    this.setState({ page: pageChange * 20 })
+  }
 
 
 
@@ -274,16 +318,23 @@ class AddCompanies extends React.Component {
   searchCompany(event) {
     this.setState({ search: event.target.value.substring(0, 20) });
   }
+
+
+
   //Filtering industry checkboxes
   filterIndustries(event) {
     this.setState({ industries: event }, this.stateCallback);
   }
+
+
 
   //Logging info in console
   stateCallback() {
     console.log(this.state.industries);
     this.mergeIndustries();
   }
+
+
 
   //Sending information to filter function
   mergeIndustries() {
@@ -303,9 +354,6 @@ class AddCompanies extends React.Component {
     }
     console.log("This is the merged: ", this.state.mergedIndustry);
   }
-
-
-
 
 
 

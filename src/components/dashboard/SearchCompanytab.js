@@ -63,7 +63,7 @@ const Col = styled.div`
 
 const Image = styled.img`
   width: 400px;
-  height: 150px;
+  height: 200px;
   background-color: blue;
   border-radius: 10px;
 `;
@@ -148,7 +148,6 @@ Standard View of the Tab.
 class CLabel extends React.Component {
   render() {
     let { name, industry, logo } = this.props;
-
     return (
       <QueueAnim type="scale" ease={["easeOutQuart", "easeInOutQuart"]}>
         {mapping.map((item, index) => (
@@ -175,7 +174,9 @@ class CLabel extends React.Component {
                   }}
                 >
                   <CompanyTitle>{name}</CompanyTitle>
-                  <JobTitle style={{ paddingTop: "4px" }}>{industry} </JobTitle>
+                  <JobTitle style={{ paddingTop: "4px" }}>
+                    {industry}
+                  </JobTitle>
                 </Col>
               </div>
             </TabContainer>
@@ -201,7 +202,8 @@ class QuickView extends React.Component {
           <div key={index}>
             <TabContainer
               style={{
-                padding: "24px"
+                padding: "24px",
+                paddingBottom: '28px'
               }}
             >
               {/**
@@ -216,7 +218,9 @@ class QuickView extends React.Component {
                 }}
               >
                 <QVCompany>{name}</QVCompany>
-                <QVTitle>{industry}</QVTitle>
+                <QVTitle>
+                  {industry}
+                </QVTitle>
                 <QVCompany
                   style={{
                     marginTop: "10px",
