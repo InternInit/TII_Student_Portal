@@ -3,17 +3,17 @@ import styled from "styled-components";
 import QueueAnim from "rc-queue-anim";
 
 const CompanyTitle = styled.div`
-  font-size: 36px;
-  font-weight: 500;
+  font-size: 32px;
+  font-weight: bold;
   color: black;
   align-items: center;
   height: 29px;
-  margin-bottom: 10px;
+  margin-bottom: 6px;
 `;
 
 const JobTitle = styled.div`
   font-size: 14px;
-  font-weight: normal;
+  font-weight: 500;
   color: #262626;
   margin-bottom: 10px;
   margin-top: 6px;
@@ -44,7 +44,7 @@ const QVCompany = styled.div`
 
 const QVTitle = styled.div`
   font-size: 24px;
-  font-weight: 500;
+  font-weight: bold;
   color: black;
 `;
 
