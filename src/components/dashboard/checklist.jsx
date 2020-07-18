@@ -15,34 +15,35 @@ const ChecklistItem = styled.p`
   font-weight:500;
 `;
 
-function parseChecklist(checklist, page){
+//Functionality behind Checklist
+function parseChecklist(checklist, page) {
   let parsedChecklist = checklist[page];
-  switch(page){
+  switch (page) {
     case 0:
       let newChecklist = []
       var count = 0;
       let completed = false;
-      for(var i=0; i<9; i++){
-        if (parsedChecklist[i].completed){
+      for (var i = 0; i < 9; i++) {
+        if (parsedChecklist[i].completed) {
           count++
         }
       }
-      if(count == 9){
+      if (count == 9) {
         completed = true;
       }
-      newChecklist.push({"key":"Contact Info","completed": completed})
-      completed=false;
-      count=0;
+      newChecklist.push({ "key": "Contact Info", "completed": completed })
+      completed = false;
+      count = 0;
 
-      for(var i=9; i<17; i++){
-        if (parsedChecklist[i].completed){
+      for (var i = 9; i < 17; i++) {
+        if (parsedChecklist[i].completed) {
           count++
         }
       }
-      if(count == 8){
+      if (count == 8) {
         completed = true;
       }
-      newChecklist.push({"key":"Internship Info","completed": completed})
+      newChecklist.push({ "key": "Internship Info", "completed": completed })
       newChecklist.push(parsedChecklist[17])
       parsedChecklist = newChecklist
       break;
@@ -52,6 +53,8 @@ function parseChecklist(checklist, page){
   return parsedChecklist
 }
 
+
+//Displaying Checklist
 export default function Checklist(props) {
   return (
     <div>
@@ -60,6 +63,9 @@ export default function Checklist(props) {
         ease={["easeOutQuart", "easeInOutQuart"]}
         leaveReverse
       >
+        {/**
+         * Mapping checklist elements
+         */}
         {parseChecklist(props.checklist, props.page).map((item, index) => (
           <div key={index}>
             {item.completed ? <CheckOutlined
@@ -72,15 +78,15 @@ export default function Checklist(props) {
                 color: 'green'
               }}
             /> :
-            <BorderOutlined
-              style={{
-                fontSize: 18,
-                float: "left",
-                marginRight: "7px",
-                marginLeft: "20px",
-                padding: '6px',
-              }}
-            />}
+              <BorderOutlined
+                style={{
+                  fontSize: 18,
+                  float: "left",
+                  marginRight: "7px",
+                  marginLeft: "20px",
+                  padding: '6px',
+                }}
+              />}
             <ChecklistItem>{item.key}</ChecklistItem>
           </div>
         ))}

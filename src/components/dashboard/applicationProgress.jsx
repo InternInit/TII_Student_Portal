@@ -109,7 +109,7 @@ const mapDispatchToProps = {
 }
 
 class ApplicationProgress extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
       internshipInfoChecklist: false,
@@ -164,7 +164,7 @@ class ApplicationProgress extends Component {
     this.forceUpdate()
   }
 
-  componentDidMount(){
+  componentDidMount = () => {
     this.testClick()
   }
 
@@ -172,24 +172,40 @@ class ApplicationProgress extends Component {
     return (
       <React.Fragment>
         <h1 className="module-name">Application Progress</h1>
+
+
         <ModuleContainer>
-          {percentComplete.map((section,index) => (
+          {percentComplete.map((section, index) => (
             <React.Fragment>
+
+              {/**
+               * Progress Bar Name
+               */}
               <ProgressHeader key={section[0] + "pheader"}>
                 {section[0]}
               </ProgressHeader>
+
+
+              {/**
+               * Percent Name
+               */}
               <PercentHeader>
                 {this.props.completionState[index] < 1 ? (
-                  this.props.completionState[index]*100 + "%"
+                  this.props.completionState[index] * 100 + "%"
                 ) : (
-                  <CheckCircleTwoTone
-                    style={{ fontSize: "24px" }}
-                    twoToneColor="#52c41a"
-                  />
-                )}
+                    <CheckCircleTwoTone
+                      style={{ fontSize: "24px" }}
+                      twoToneColor="#52c41a"
+                    />
+                  )}
               </PercentHeader>
+
+
+              {/**
+               * Progress Bar 
+               */}
               <Progress
-                percent={this.props.completionState[index]*100}
+                percent={this.props.completionState[index] * 100}
                 trailColor="#e6f7ff"
                 strokeColor={
                   //section[1] < 100 ? section[3] : "#52c41a"
@@ -201,16 +217,27 @@ class ApplicationProgress extends Component {
                 status="active"
                 showInfo={false}
               />
+
+
+              {/**
+               * Checklist Text
+               */}
               <ViewChecklist>
                 <a onClick={() => this.handleClick(section[0])}>
                   View Checklist
                 </a>
               </ViewChecklist>
+
+
+              {/**
+               * Displaying Checkboxes
+               */}
               <div>
                 {this.state[section[3]] ? (
                   <Checklist checklist={this.props.completionChecklist} page={index} />
                 ) : null}
               </div>
+
             </React.Fragment>
           ))}
         </ModuleContainer>
@@ -219,4 +246,4 @@ class ApplicationProgress extends Component {
   }
 }
 
-export default withRouter(connect(mapStateToProps,mapDispatchToProps)(ApplicationProgress));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ApplicationProgress));

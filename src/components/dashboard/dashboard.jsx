@@ -102,6 +102,13 @@ class Dashboard extends Component {
                 <Route exact path="/dashboard/apply-skills">
                   <ApplySkills />
                 </Route>
+
+
+                {/**
+                 * 
+                 * Handles Invalid URL 
+                 * 
+                 */}
                 <Route
                   path="/dashboard/*"
                   render={() => {

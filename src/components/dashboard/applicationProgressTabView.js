@@ -44,19 +44,16 @@ const PercentHeader = styled.h2`
 `;
 
 
-
-
-
 let percentComplete = [
     ["Tesla Application Progress", 85, "#e6f7ff", "#1890ff"],
 
 ];
 
+//This is the progress bar displayed inside the "Company Tab" component, currently it lacks functionality
 class ApplicationProgress extends Component {
     render() {
         return (
             <React.Fragment>
-
                 <ModuleContainer>
                     {percentComplete.map(section => (
                         <React.Fragment>

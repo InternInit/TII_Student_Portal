@@ -22,6 +22,11 @@ class DashboardNavBar extends Component {
     };
   }
 
+  /**
+   * 
+   * Displaying Current Page
+   * 
+   */
   getCurrentKey = () => {
     let defaultKey = window.location.pathname;
     if (defaultKey === "/") {
@@ -43,12 +48,31 @@ class DashboardNavBar extends Component {
           style={{ backgroundColor: "#F5F5F5" }}
           mode="horizontal"
         >
+          {/**
+           * 
+           * Link to My Internships Page
+           * 
+           */}
           <Menu.Item style={MenuItemStyle} key="my-internships">
             <Link to="/dashboard/my-internships">My Internships</Link>
           </Menu.Item>
+
+
+          {/**
+           * 
+           * Link to Company Search Page
+           * 
+           */}
           <Menu.Item style={MenuItemStyle} key="add-companies">
             <Link to="/dashboard/add-companies">Add Companies</Link>
           </Menu.Item>
+
+
+          {/**
+           * 
+           * Link to Apply Skills Page
+           * 
+           */}
           <Menu.Item style={MenuItemStyle} key="apply-skills">
             <Link to="/dashboard/apply-skills">Apply Skills</Link>
           </Menu.Item>

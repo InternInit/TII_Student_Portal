@@ -96,9 +96,6 @@ let Info = [
   { name: "WHOOOOOO", industry: "Consulting" },
   { name: "Company Name", industry: "Finance or Accounting" },
   { name: "lets GO", industry: "Political" },
-
-
-
 ];
 
 // BUG: THIS NEEDS TO BE REPLACED BY THE REACT STORE
@@ -113,6 +110,7 @@ let pinnedCompanies = [
 class AddCompanies extends React.Component {
   constructor(props) {
     super(props);
+    this.myRef = React.createRef();
     this.state = {
       search: "",
       industries: industry,
@@ -132,7 +130,6 @@ class AddCompanies extends React.Component {
   render() {
     let { search, mergedIndustry } = this.state;
     let { companies, page } = this.state;
-
 
     //Filtering function for industries
     let industrySearch = Info.filter(company => {
@@ -184,7 +181,7 @@ class AddCompanies extends React.Component {
 
 
 
-        <h1 className="module-name" style={{ marginTop: "100px" }}>
+        <h1 className="module-name" style={{ marginTop: "100px" }} ref={this.myRef}>
           Search Companies
         </h1>
 
@@ -209,7 +206,7 @@ class AddCompanies extends React.Component {
          * Filter by industries Collapse Tab
          *
          */}
-        <Row style={{ width: '100%' }}>
+        <Row style={{ width: '100%' }} >
           <Collapse defaultActiveKey={["0"]} expandIconPosition="right"
           >
             <Panel header="Filter by Industry">
@@ -258,8 +255,6 @@ class AddCompanies extends React.Component {
         <QueueAnim type="scale" ease={["easeOutQuart", "easeInOutQuart"]}>
           {filteredInfo.slice(page, page + 20).map((company, index) => (
             <div style={{ marginBottom: "12px" }} key={index}>
-              {console.log(company.industry)}
-
               <SearchCompanytab
                 key={company.name}
                 name={company.name}
@@ -284,7 +279,7 @@ class AddCompanies extends React.Component {
     );
   }
 
-  componentDidMount() {
+  componentDidMount = () => {
     for (let i = 1; i < 109; i++) {
       fetch("https://rawg-video-games-database.p.rapidapi.com/games/" + i, {
         method: "GET",
@@ -307,29 +302,30 @@ class AddCompanies extends React.Component {
     console.log(this.state.companies)
   }
 
+
   //handles pagination bar change
-  handlePageChange(pageChange) {
+  handlePageChange = (pageChange) => {
     this.setState({ page: pageChange * 20 })
+    window.scrollTo(0, this.myRef.current.offsetTop - 25)
   }
 
 
-
   //Handles search bar changes
-  searchCompany(event) {
+  searchCompany = (event) => {
     this.setState({ search: event.target.value.substring(0, 20) });
   }
 
 
 
   //Filtering industry checkboxes
-  filterIndustries(event) {
+  filterIndustries = (event) => {
     this.setState({ industries: event }, this.stateCallback);
   }
 
 
 
   //Logging info in console
-  stateCallback() {
+  stateCallback = () => {
     console.log(this.state.industries);
     this.mergeIndustries();
   }
@@ -337,7 +333,7 @@ class AddCompanies extends React.Component {
 
 
   //Sending information to filter function
-  mergeIndustries() {
+  mergeIndustries = () => {
     let { industries } = this.state;
     let tempVar = "";
     //Creates a variable with all desired industries
@@ -352,12 +348,7 @@ class AddCompanies extends React.Component {
           "General BusinessBusinessConsultingFinance or AccountingMedia or TellecommunicationsReal EstateEngineeringScience ResearchComputer ScienceBiotechnologyVocationalPoliticalMarketing"
       });
     }
-    console.log("This is the merged: ", this.state.mergedIndustry);
   }
-
-
-
-
 
 
 }

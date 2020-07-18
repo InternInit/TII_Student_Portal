@@ -70,34 +70,38 @@ class Companytab extends React.Component {
     render() {
         let { label } = this.state;
         return (
+            //Collapse Tab
             <Collapse defaultActiveKey={['0']} expandIconPosition='right'
                 style={{ borderRadius: '8px' }}
             >
-                <Panel header={label} key='1' style={{
-                    height: { DroppedView },
-                    borderRadius: '08px',
-                    flexDirection: 'column',
-                    justifyContent: 'center',
-                    display: 'flex',
-                    paddingBottom: '5px',
-                    paddingTop: '5px',
-                    backgroundColor: 'white',
-                }}
-
+                {
+                    //Dropdown Panel view
+                }
+                <Panel header={label} key='1'
+                    style={{
+                        height: { DroppedView },
+                        borderRadius: '08px',
+                        flexDirection: 'column',
+                        justifyContent: 'center',
+                        display: 'flex',
+                        paddingBottom: '5px',
+                        paddingTop: '5px',
+                        backgroundColor: 'white',
+                    }}
                     onClick={this.onClick}
-
-
                 >
+                    {/**
+                     * Dropdown
+                     */}
                     <DroppedView />
                 </Panel>
-
             </Collapse >
         )
     }
 } export default Companytab
 
 
-
+//Tab View of the Company Tab
 class CLabel extends React.Component {
     render() {
         return (
@@ -130,7 +134,7 @@ class CLabel extends React.Component {
     }
 }
 
-
+//Dropped View of the Company Tab
 class DroppedView extends React.Component {
     render() {
         return (
@@ -144,7 +148,9 @@ class DroppedView extends React.Component {
                     paddingBottom: '8px'
                 }}>
 
-                    {/**Button */}
+                    {/**
+                     * Custom Response Button
+                    */}
                     <Button style={{
                         backgroundColor: '#BFBFBF',
                         color: 'black'
@@ -153,7 +159,9 @@ class DroppedView extends React.Component {
                     </Button>
 
 
-                    {/**Button */}
+                    {/**
+                     * Company Information Button 
+                     */}
                     <Button style={{
                         backgroundColor: '#52C41A',
                         color: 'white'
@@ -162,7 +170,9 @@ class DroppedView extends React.Component {
                     </Button>
 
 
-                    {/**Button */}
+                    {/**
+                     *Submit Button
+                     */}
                     <Button style={{
                         backgroundColor: '#BCDFFF',
                         color: 'white'
