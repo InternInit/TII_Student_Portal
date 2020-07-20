@@ -9,14 +9,9 @@ import { CheckCircleTwoTone } from "@ant-design/icons";
 import QueueAnim from "rc-queue-anim";
 import { withRouter } from "react-router";
 import { connect } from "react-redux";
-<<<<<<< Updated upstream
-import { updateCompletionState } from '../../redux/actions';
-import Companytab from './Companytab.js'
-import ActiveAppCompanytab from './ActiveAppCompanytab.js'
-=======
 import { updateCompletionState } from "../../redux/actions";
-
->>>>>>> Stashed changes
+import Companytab from "./Companytab.js";
+import ActiveAppCompanytab from "./ActiveAppCompanytab.js";
 /*
 
 Container to hold all the progress bars
@@ -112,16 +107,14 @@ const mapDispatchToProps = {
   updateCompletionState
 };
 
-
 // BUG: THIS NEEDS TO BE REPLACED BY THE REACT STORE
 let pinnedCompanies = [
-  { name: "This", industry: "Computer Science", status: 'pending' },
-  { name: "is", industry: "Computer Science", status: 'accepted' },
-  { name: "Pinned", industry: "Computer Science", status: 'rejected' },
-  { name: "Company", industry: "Consulting", status: 'accepted' },
-  { name: "Grubhub", industry: "Real Estate", status: 'pending' }
+  { name: "This", industry: "Computer Science", status: "pending" },
+  { name: "is", industry: "Computer Science", status: "accepted" },
+  { name: "Pinned", industry: "Computer Science", status: "rejected" },
+  { name: "Company", industry: "Consulting", status: "accepted" },
+  { name: "Grubhub", industry: "Real Estate", status: "pending" }
 ];
-
 
 class ApplicationProgress extends Component {
   constructor(props) {
@@ -175,20 +168,13 @@ class ApplicationProgress extends Component {
   render() {
     return (
       <React.Fragment>
-<<<<<<< Updated upstream
-
         {/**
-          * 
-          * Application Progress
-          * 
-          */}
+         *
+         * Application Progress
+         *
+         */}
         <h1 className="module-name">Application Progress</h1>
-=======
-        <h1 className="module-name">Application Progress</h1>
-
->>>>>>> Stashed changes
         <ModuleContainer>
-
           {percentComplete.map((section, index) => (
             <React.Fragment>
               {/**
@@ -254,58 +240,47 @@ class ApplicationProgress extends Component {
           ))}
         </ModuleContainer>
 
-
         {/**
          *
          * Pinned Companies
          *
          */}
-        <h1 className="module-name" style={{ marginTop: "70px" }}>Pinned Companies</h1>
+        <h1 className="module-name" style={{ marginTop: "70px" }}>
+          Pinned Companies
+        </h1>
         <QueueAnim
           type={["right", "left"]}
           ease={["easeOutQuart", "easeInOutQuart"]}
         >
           {pinnedCompanies.map((pinnedCompany, index) => (
             <div style={{ marginBottom: "12px" }} key={index}>
-
               <Companytab
                 name={pinnedCompany.name}
                 industry={pinnedCompany.industry}
                 logo={pinnedCompany.logo}
               />
-
             </div>
           ))}
         </QueueAnim>
 
-
-        <h1 className="module-name" style={{ marginTop: "70px" }}>Active Application</h1>
+        <h1 className="module-name" style={{ marginTop: "70px" }}>
+          Active Application
+        </h1>
         <QueueAnim
           type={["right", "left"]}
           ease={["easeOutQuart", "easeInOutQuart"]}
         >
           {pinnedCompanies.map((pinnedCompany, index) => (
             <div style={{ marginBottom: "12px" }} key={index}>
-
               <ActiveAppCompanytab
                 name={pinnedCompany.name}
                 industry={pinnedCompany.industry}
                 logo={pinnedCompany.logo}
                 status={pinnedCompany.status}
               />
-
-
             </div>
           ))}
         </QueueAnim>
-
-
-
-
-
-
-
-
       </React.Fragment>
     );
   }
