@@ -99,14 +99,7 @@ let Info = [
   { name: "lets GO", industry: "Political" },
 ];
 
-// BUG: THIS NEEDS TO BE REPLACED BY THE REACT STORE
-let pinnedCompanies = [
-  { name: "This", industry: "Computer Science" },
-  { name: "is", industry: "Computer Science" },
-  { name: "Pinned", industry: "Computer Science" },
-  { name: "Company", industry: "Consulting" },
-  { name: "Grubhub", industry: "Real Estate" }
-];
+
 
 class AddCompanies extends React.Component {
   constructor(props) {
@@ -143,46 +136,9 @@ class AddCompanies extends React.Component {
     let filteredInfo = industrySearch.filter(company => {
       return company.name.toLowerCase().indexOf(search.toLowerCase()) !== -1;
     });
-
     return (
       <div style={{ paddingBottom: "50%" }}>
-        <h1 className="module-name">Pinned Companies</h1>
-
-
-
-        {/**
-         *
-         * Pinned Companies
-         *
-         */}
-        <QueueAnim
-          type="scale"
-          ease={["easeOutQuart", "easeInOutQuart"]}
-        >
-          {pinnedCompanies.map((pinnedCompany, index) => (
-            <div style={{ marginBottom: "12px" }} key={index}>
-
-
-              <SearchCompanytab
-                key={pinnedCompany.name}
-                name={pinnedCompany.name}
-                industry={pinnedCompany.industry}
-                logo="filler"
-                image="filler"
-                description="filler"
-                location="filler"
-              />
-
-
-
-            </div>
-          ))}
-        </QueueAnim>
-
-
-
-
-        <h1 className="module-name" style={{ marginTop: "100px" }} ref={this.myRef}>
+        <h1 className="module-name" ref={this.myRef}>
           Search Companies
         </h1>
 
@@ -196,7 +152,7 @@ class AddCompanies extends React.Component {
           allowClear="true"
           size="large"
           onChange={value => this.searchCompany(value)}
-          style={{ width: "100%", marginBottom: "20px" }}
+          style={{ width: "100%", marginBottom: "20px", marginTop: '8px' }}
         />
 
 

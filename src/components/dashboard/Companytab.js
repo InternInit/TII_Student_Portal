@@ -1,8 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { RightOutlined, DownOutlined } from "@ant-design/icons";
-import { Menu, Collapse } from 'antd';
-import AProgressTab from "./applicationProgressTabView.js";
+import { Collapse } from 'antd';
 const { Panel } = Collapse;
 
 
@@ -64,7 +62,7 @@ class Companytab extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            label: <CLabel />,
+            label: <CLabel name={this.props.name} industry={this.props.industry} />,
 
         }
     }
@@ -106,6 +104,7 @@ class Companytab extends React.Component {
 //Tab View of the Company Tab
 class CLabel extends React.Component {
     render() {
+        let { name, industry } = this.props;
         return (
             <Row style={{
                 borderRadius: '08px',
@@ -127,8 +126,8 @@ class CLabel extends React.Component {
                         alignItems: 'flex-start',
 
                     }}>
-                        <CompanyTitle>Tesla</CompanyTitle>
-                        <JobTitle>Communications/ Data Science</JobTitle>
+                        <CompanyTitle>{name}</CompanyTitle>
+                        <JobTitle>{industry}</JobTitle>
                     </Col>
                 </Row>
             </Row>
@@ -140,50 +139,45 @@ class CLabel extends React.Component {
 class DroppedView extends React.Component {
     render() {
         return (
-            <Col style={{ padding: '12px' }}>
+            <Row style={{
+                justifyContent: 'space-evenly',
+                marginTop: '1%',
+                paddingBottom: '8px'
+            }}>
 
-                <AProgressTab />
-                <Row style={{
-                    justifyContent: 'space-evenly',
-                    marginTop: '1%',
-                    paddingTop: '8px',
-                    paddingBottom: '8px'
-                }}>
-
-                    {/**
+                {/**
                      * Custom Response Button
                     */}
-                    <Button style={{
-                        backgroundColor: '#BFBFBF',
-                        color: '#434343',
-                        fontWeight: '500'
-                    }}>
-                        Add Custom Response
+                <Button style={{
+                    backgroundColor: '#BFBFBF',
+                    color: '#434343',
+                    fontWeight: '500'
+                }}>
+                    Add Custom Response
                     </Button>
 
 
-                    {/**
+                {/**
                      * Company Information Button 
                      */}
-                    <Button style={{
-                        backgroundColor: '#52C41A',
-                        color: 'white'
-                    }}>
-                        Company Information
+                <Button style={{
+                    backgroundColor: '#52C41A',
+                    color: 'white'
+                }}>
+                    Company Information
                     </Button>
 
 
-                    {/**
+                {/**
                      *Submit Button
                      */}
-                    <Button style={{
-                        backgroundColor: '#BCDFFF',
-                        color: 'white'
-                    }}>
-                        Submit
+                <Button style={{
+                    backgroundColor: '#BCDFFF',
+                    color: 'white'
+                }}>
+                    Submit
                     </Button>
-                </Row>
-            </Col>
+            </Row>
         )
     }
 }
