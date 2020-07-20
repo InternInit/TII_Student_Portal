@@ -9,9 +9,9 @@ import { CheckCircleTwoTone } from "@ant-design/icons";
 import QueueAnim from "rc-queue-anim";
 import { withRouter } from "react-router";
 import { connect } from "react-redux";
-import { updateCompletionState } from '../../redux/actions';
-import Companytab from './Companytab.js'
-import ActiveAppCompanytab from './ActiveAppCompanytab.js'
+import { updateCompletionState } from "../../redux/actions";
+import Companytab from "./Companytab.js";
+import ActiveAppCompanytab from "./ActiveAppCompanytab.js";
 /*
 
 Container to hold all the progress bars
@@ -80,6 +80,7 @@ PERCENT COMPLETION ARRAY
 [1] == Trail Color
 [2] == Stroke Color
 [3] == Access code for the state
+[4] == Name of link on the dashboard tab
 ******************************************
 */
 const percentComplete = [
@@ -87,34 +88,33 @@ const percentComplete = [
     "Internship Information",
     "#e6f7ff",
     "#1890ff",
-    "internshipInfoChecklist"
+    "internshipInfoChecklist",
+    "internship-info"
   ],
-  ["Personal", "#fff7e6", "#fa8c16", "personalChecklist"],
-  ["Essays", "#fcffe6", "#a0d911", "essayChecklist"],
-  ["References", "#f9f0ff", "#722ed1", "referencesChecklist"]
-]
+  ["Personal", "#fff7e6", "#fa8c16", "personalChecklist", "personal"],
+  ["Essays", "#fcffe6", "#a0d911", "essayChecklist", "written-work"],
+  ["References", "#f9f0ff", "#722ed1", "referencesChecklist", "references"]
+];
 
 const mapStateToProps = state => {
   return {
     completionState: state.completionState,
     completionChecklist: state.completionChecklist
-  }
-}
+  };
+};
 
 const mapDispatchToProps = {
   updateCompletionState
-}
-
+};
 
 // BUG: THIS NEEDS TO BE REPLACED BY THE REACT STORE
 let pinnedCompanies = [
-  { name: "This", industry: "Computer Science", status: 'pending' },
-  { name: "is", industry: "Computer Science", status: 'accepted' },
-  { name: "Pinned", industry: "Computer Science", status: 'rejected' },
-  { name: "Company", industry: "Consulting", status: 'accepted' },
-  { name: "Grubhub", industry: "Real Estate", status: 'pending' }
+  { name: "This", industry: "Computer Science", status: "pending" },
+  { name: "is", industry: "Computer Science", status: "accepted" },
+  { name: "Pinned", industry: "Computer Science", status: "rejected" },
+  { name: "Company", industry: "Consulting", status: "accepted" },
+  { name: "Grubhub", industry: "Real Estate", status: "pending" }
 ];
-
 
 class ApplicationProgress extends Component {
   constructor(props) {
@@ -123,8 +123,7 @@ class ApplicationProgress extends Component {
       internshipInfoChecklist: false,
       personalChecklist: false,
       essayChecklist: false,
-      referencesChecklist: false,
-
+      referencesChecklist: false
     };
   }
 
@@ -169,15 +168,13 @@ class ApplicationProgress extends Component {
   render() {
     return (
       <React.Fragment>
-
         {/**
-          * 
-          * Application Progress
-          * 
-          */}
+         *
+         * Application Progress
+         *
+         */}
         <h1 className="module-name">Application Progress</h1>
         <ModuleContainer>
-
           {percentComplete.map((section, index) => (
             <React.Fragment>
               {/**
@@ -187,19 +184,18 @@ class ApplicationProgress extends Component {
                 {section[0]}
               </ProgressHeader>
 
-
               {/**
                * Percent Name
                */}
               <PercentHeader>
                 {this.props.completionState[index] < 1 ? (
-                  this.props.completionState[index] * 100 + "%"
+                  Math.floor(this.props.completionState[index] * 100) + "%"
                 ) : (
-                    <CheckCircleTwoTone
-                      style={{ fontSize: "24px" }}
-                      twoToneColor="#52c41a"
-                    />
-                  )}
+                  <CheckCircleTwoTone
+                    style={{ fontSize: "24px" }}
+                    twoToneColor="#52c41a"
+                  />
+                )}
               </PercentHeader>
 
               {/**
@@ -228,24 +224,74 @@ class ApplicationProgress extends Component {
                 </a>
               </ViewChecklist>
 
-
               {/**
                * Displaying Checkboxes
                */}
               <div>
                 {this.state[section[3]] ? (
-                  <Checklist checklist={this.props.completionChecklist} page={index} />
+                  <Checklist
+                    checklist={this.props.completionChecklist}
+                    page={index}
+                    linkTo={section[4]}
+                  />
                 ) : null}
               </div>
-
             </React.Fragment>
           ))}
         </ModuleContainer>
+<<<<<<< HEAD
+=======
+
+        {/**
+         *
+         * Pinned Companies
+         *
+         */}
+        <h1 className="module-name" style={{ marginTop: "70px" }}>
+          Pinned Companies
+        </h1>
+        <QueueAnim
+          type={["right", "left"]}
+          ease={["easeOutQuart", "easeInOutQuart"]}
+        >
+          {pinnedCompanies.map((pinnedCompany, index) => (
+            <div style={{ marginBottom: "12px" }} key={index}>
+              <Companytab
+                name={pinnedCompany.name}
+                industry={pinnedCompany.industry}
+                logo={pinnedCompany.logo}
+              />
+            </div>
+          ))}
+        </QueueAnim>
+
+        <h1 className="module-name" style={{ marginTop: "70px" }}>
+          Active Application
+        </h1>
+        <QueueAnim
+          type={["right", "left"]}
+          ease={["easeOutQuart", "easeInOutQuart"]}
+        >
+          {pinnedCompanies.map((pinnedCompany, index) => (
+            <div style={{ marginBottom: "12px" }} key={index}>
+              <ActiveAppCompanytab
+                name={pinnedCompany.name}
+                industry={pinnedCompany.industry}
+                logo={pinnedCompany.logo}
+                status={pinnedCompany.status}
+              />
+            </div>
+          ))}
+        </QueueAnim>
+>>>>>>> 3a7bf0e26c6550785de260a2e4a9bb916d2b0462
       </React.Fragment>
     );
   }
 }
 
-export default withRouter(connect(
-  mapStateToProps,
-  mapDispatchToProps)(ApplicationProgress));
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(ApplicationProgress)
+);
