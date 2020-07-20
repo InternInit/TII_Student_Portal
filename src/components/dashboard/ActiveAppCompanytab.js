@@ -41,7 +41,7 @@ const Logo = styled.img`
   height: 36px;
   object-fit: fill;
   background-color: blue;
-  margin-left: 6%;
+  margin-left: 4.5%;
   margin-bottom: 14px;
   border-radius:6px;
 `;
@@ -64,15 +64,15 @@ const mapping = [
 function ActiveAppCompanytab(props) {
 
     let { name, industry, logo, status } = props;
-    let tabColor = '#fadb14';
+    let tabColor = '';
     switch (status) {
-        case 'pending':
+        case 'Pending':
             tabColor = '#fadb14';
             break;
-        case 'accepted':
+        case 'Accepted':
             tabColor = '#52c41a';
             break;
-        case 'rejected':
+        case 'Rejected':
             tabColor = '#f5222d';
             break;
         default:

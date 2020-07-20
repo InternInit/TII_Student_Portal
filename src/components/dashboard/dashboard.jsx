@@ -28,6 +28,8 @@ import {
 import { withRouter } from "react-router";
 
 import { connect } from 'react-redux';
+import ActiveApplications from "./ActiveApplications";
+import PinCompany from "./PinCompany";
 
 
 const PageContainer = styled.div`
@@ -89,11 +91,16 @@ class Dashboard extends Component {
                     return <Redirect to="/dashboard/my-internships" />;
                   }}
                 />
+
+
                 <Route
                   path="/dashboard/my-internships"
-                  exact
-                  component={ApplicationProgress}
-                />
+                  exact>
+                  <ApplicationProgress />
+                  <PinCompany />
+                  <ActiveApplications />
+                </Route>
+
                 <Route
                   path="/dashboard/add-companies"
                   exact

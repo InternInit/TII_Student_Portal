@@ -96,7 +96,7 @@ const Logo = styled.img`
   height: 36px;
   object-fit: fill;
   background-color: blue;
-  margin-left: 11%;
+  margin-left: 8%;
   margin-bottom: 14px;
   border-radius:6px;
 `;

@@ -241,59 +241,6 @@ class ApplicationProgress extends Component {
             </React.Fragment>
           ))}
         </ModuleContainer>
-
-
-        {/**
-         *
-         * Pinned Companies
-         *
-         */}
-        <h1 className="module-name" style={{ marginTop: "70px" }}>Pinned Companies</h1>
-        <QueueAnim
-          type={["right", "left"]}
-          ease={["easeOutQuart", "easeInOutQuart"]}
-        >
-          {pinnedCompanies.map((pinnedCompany, index) => (
-            <div style={{ marginBottom: "12px" }} key={index}>
-
-              <Companytab
-                name={pinnedCompany.name}
-                industry={pinnedCompany.industry}
-                logo={pinnedCompany.logo}
-              />
-
-            </div>
-          ))}
-        </QueueAnim>
-
-
-        <h1 className="module-name" style={{ marginTop: "70px" }}>Active Application</h1>
-        <QueueAnim
-          type={["right", "left"]}
-          ease={["easeOutQuart", "easeInOutQuart"]}
-        >
-          {pinnedCompanies.map((pinnedCompany, index) => (
-            <div style={{ marginBottom: "12px" }} key={index}>
-
-              <ActiveAppCompanytab
-                name={pinnedCompany.name}
-                industry={pinnedCompany.industry}
-                logo={pinnedCompany.logo}
-                status={pinnedCompany.status}
-              />
-
-
-            </div>
-          ))}
-        </QueueAnim>
-
-
-
-
-
-
-
-
       </React.Fragment>
     );
   }

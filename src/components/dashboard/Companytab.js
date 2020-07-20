@@ -78,13 +78,10 @@ class Companytab extends React.Component {
                 }
                 <Panel header={label} key='1'
                     style={{
-                        height: { DroppedView },
                         borderRadius: '08px',
                         flexDirection: 'column',
                         justifyContent: 'center',
                         display: 'flex',
-                        paddingBottom: '5px',
-                        paddingTop: '5px',
                         backgroundColor: 'white',
                         border: '0'
                     }}
