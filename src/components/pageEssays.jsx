@@ -65,8 +65,8 @@ class PageEssays extends React.Component {
     return (
       <div style={{ marginTop: "40px", width: "100%" }}>
         <Spin size="large" spinning={!this.state.loaded}>
-          <h1 style={{ textAlign: "left" }}>Written Work</h1>
-          <p>We'd like to learn more about you!</p>
+          <h1>Written Work</h1>
+          <p>Real people are reading your application. Show them that real people are applying through your writing!</p>
 
           <Form
             name="pageEssays"
@@ -84,7 +84,7 @@ class PageEssays extends React.Component {
             <Form.Item
               key="industryEssay"
               name="Why This Industry Essay"
-              label={this.boldify("Why do you want to apply to this industry?")}
+              label={this.boldify("Why do you want to apply to the industries you selected?")}
               rules={this.validationRules("response")}
             >
               <TextArea autoSize={{ minRows: 5 }} />
@@ -114,45 +114,61 @@ class PageEssays extends React.Component {
               <TextArea autoSize={{ minRows: 5 }} />
             </Form.Item>
 
-            {/**Cover Letter */}
-            <Form.Item
-              name="Cover Letter"
-              key="CoverLetter"
-              label={this.boldify("Cover Letter (Optional)")}
-            >
-              <Dragger
-                {...props}
-                style={{ width: "250px", height: "30px" }}
-                customRequest={this.customRequestCL}
-                onChange={this.onChangeCL}
-                fileList={this.state.fileListCL}
-              >
-                <h1 style={{ color: "blue" }}>
-                  <InboxOutlined />
-                </h1>
-                <h5>Click or Drag Files to Upload Here</h5>
-              </Dragger>
-            </Form.Item>
 
-            {/**Portfolio */}
-            <Form.Item
-              name="Portfolio"
-              key="Portfolio"
-              label={this.boldify("Portfolio (Optional)")}
-            >
-              <Dragger
-                {...props}
-                style={{ width: "250px", height: "30px" }}
-                customRequest={this.customRequestPortfolio}
-                onChange={this.onChangePortfolio}
-                fileList={this.state.fileListPortfolio}
+
+
+
+
+            <div style={{
+              display: 'flex',
+              flexDirection: 'row',
+              justifyContent: 'space-evenly'
+            }}>
+              {/**Cover Letter */}
+              <Form.Item
+                name="Cover Letter"
+                key="CoverLetter"
+                label={this.boldify("Cover Letter (Optional)")}
               >
-                <h1 style={{ color: "blue" }}>
-                  <InboxOutlined />
-                </h1>
-                <h5>Click or Drag Files to Upload Here</h5>
-              </Dragger>
-            </Form.Item>
+                <Dragger
+                  {...props}
+                  style={{ width: "250px", height: "30px" }}
+                  customRequest={this.customRequestCL}
+                  onChange={this.onChangeCL}
+                  fileList={this.state.fileListCL}
+                >
+                  <h1 style={{ color: "blue" }}>
+                    <InboxOutlined />
+                  </h1>
+                  <h5>Click or Drag Files to Upload Here</h5>
+                </Dragger>
+              </Form.Item>
+
+              {/**Portfolio */}
+              <Form.Item
+                name="Portfolio"
+                key="Portfolio"
+                label={this.boldify("Portfolio (Optional)")}
+              >
+                <Dragger
+                  {...props}
+                  style={{ width: "250px", height: "30px" }}
+                  customRequest={this.customRequestPortfolio}
+                  onChange={this.onChangePortfolio}
+                  fileList={this.state.fileListPortfolio}
+                >
+                  <h1 style={{ color: "blue" }}>
+                    <InboxOutlined />
+                  </h1>
+                  <h5>Click or Drag Files to Upload Here</h5>
+                </Dragger>
+              </Form.Item>
+            </div>
+
+
+
+
+
 
             {/*Save and Continue or Next*/}
             <Form.Item>
@@ -211,8 +227,8 @@ class PageEssays extends React.Component {
       }
     }
     console.log(this.props)
-    let completionPercentage = parseFloat((completedCount/Object.keys(allValues).length).toFixed(2));
-    if (completionPercentage != this.props.completionState[2]) this.props.updateCompletionState(2,completionPercentage)
+    let completionPercentage = parseFloat((completedCount / Object.keys(allValues).length).toFixed(2));
+    if (completionPercentage != this.props.completionState[2]) this.props.updateCompletionState(2, completionPercentage)
 
     if (!_.isEqual(checklist, this.props.completionChecklist[2])) this.props.updateCompletionChecklist(2, checklist)
   }
@@ -311,7 +327,7 @@ class PageEssays extends React.Component {
         let parsedData = parsedRecv[0];
         if (parsedData !== "No Info") {
           try {
-              console.log(parsedData);
+            console.log(parsedData);
             this.setState({ loaded: true });
             this.formRef.current.setFieldsValue(parsedData);
 
@@ -321,15 +337,15 @@ class PageEssays extends React.Component {
                 fileListCL[i].status = "done";
               }
               this.setState({ fileListCL: fileListCL });
-            } catch {}
+            } catch { }
             try {
               let fileListPortfolio = parsedData.Portfolio.fileList;
               for (var i = 0; i < fileListPortfolio.length; i++) {
                 fileListPortfolio[i].status = "done";
               }
               this.setState({ fileListPortfolio: fileListPortfolio });
-            } catch (e) {}
-          } catch (e) {}
+            } catch (e) { }
+          } catch (e) { }
         }
         this.setState({ loaded: true });
       });

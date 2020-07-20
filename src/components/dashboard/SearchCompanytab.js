@@ -19,9 +19,10 @@ const JobTitle = styled.div`
   margin-top: 6px;
 `;
 
-const Button = styled.div`
+
+const AddButton = styled.div`
   color: white;
-  background-color: green;
+  background-color: #1890FF;
   font-size: 18px;
   border-radius: 2px;
   width: 336px;
@@ -33,8 +34,30 @@ const Button = styled.div`
   box-shadow: 1px 3px 1px #d9d9d9;
   :hover {
     cursor: pointer;
+    background-color:#096dd9;
+    color:#fafafa;
   }
 `;
+
+const MoreDetailsButton = styled.div`
+  color: #434343;
+  background-color: #BFBFBF;
+  font-size: 18px;
+  font-weight:500;
+  border-radius: 2px;
+  width: 336px;
+  height: 36px;
+  display: flex;
+  align-self: center;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 1px 3px 1px #d9d9d9;
+  :hover {
+    cursor: pointer;
+    background-color:#8c8c8c;
+  }
+`;
+
 
 const QVCompany = styled.div`
   font-size: 18px;
@@ -85,7 +108,7 @@ const TabContainer = styled.div`
   justify-content: center;
   padding-bottom: 5px;
   padding-top: 5px;
-  border: solid 0.5px #d9d9d9;
+  //border: solid 0.5px #d9d9d9;
   background-color: white;
 `;
 const mapping = [
@@ -271,16 +294,8 @@ class QuickView extends React.Component {
                   </Col>
 
                   <Col>
-                    <Button style={{ backgroundColor: "#1890FF" }}>Add</Button>
-                    <Button
-                      style={{
-                        backgroundColor: "#BFBFBF",
-                        color: "black",
-                        marginTop: "10px"
-                      }}
-                    >
-                      More Details
-                    </Button>
+                    <AddButton>Add</AddButton>
+                    <MoreDetailsButton style={{ marginTop: '12px' }}>More Details</MoreDetailsButton>
                   </Col>
                 </div>
               </Col>

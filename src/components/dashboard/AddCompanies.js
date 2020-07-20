@@ -7,6 +7,7 @@ import { Col as AntCol, Row as AntRow } from "antd";
 import QueueAnim from "rc-queue-anim";
 import { withRouter } from "react-router";
 import { filter } from "underscore";
+import Companytab from "./Companytab.js";
 
 const { Search } = Input;
 const { Panel } = Collapse;
@@ -269,7 +270,7 @@ class AddCompanies extends React.Component {
             </div>
           ))}
         </QueueAnim>
-        <Pagination defaultCurrent={1} total={Info.length} onChange={pageChange => this.handlePageChange(pageChange - 1)} />
+        <Pagination current={parseInt(page) + 1} total={filteredInfo.length} onChange={pageChange => this.handlePageChange(pageChange - 1)} pageSize={20} />
 
 
 
@@ -312,7 +313,7 @@ class AddCompanies extends React.Component {
 
   //Handles search bar changes
   searchCompany = (event) => {
-    this.setState({ search: event.target.value.substring(0, 20) });
+    this.setState({ search: event.target.value.substring(0, 20), page: 0 });
   }
 
 
@@ -339,11 +340,12 @@ class AddCompanies extends React.Component {
     //Creates a variable with all desired industries
     industries.map(industry => (tempVar += industry));
     //Sets the industries state to the temporary variable
-    this.setState({ mergedIndustry: tempVar });
+    this.setState({ mergedIndustry: tempVar, page: 0 });
 
     //Handles 'all industries'
     if (tempVar === "") {
       this.setState({
+        page: 0,
         mergedIndustry:
           "General BusinessBusinessConsultingFinance or AccountingMedia or TellecommunicationsReal EstateEngineeringScience ResearchComputer ScienceBiotechnologyVocationalPoliticalMarketing"
       });

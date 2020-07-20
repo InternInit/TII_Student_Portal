@@ -7,8 +7,8 @@ const { Panel } = Collapse;
 
 
 const CompanyTitle = styled.div`
-font-size:36px;
-font-weight:500;
+font-size:32px;
+font-weight:bold;
 color:black;
 align-items: center;
 height:29px;
@@ -16,9 +16,10 @@ height:29px;
 
 const JobTitle = styled.div`
 font-size:14px;
-font-weight:normal;
+font-weight:500;
 color:#262626;
-padding-top:6px;
+padding-top:2px;
+margin-bottom:4px;
 `
 const Button = styled.div`
 color:white;
@@ -72,7 +73,7 @@ class Companytab extends React.Component {
         return (
             //Collapse Tab
             <Collapse defaultActiveKey={['0']} expandIconPosition='right'
-                style={{ borderRadius: '8px' }}
+                style={{ borderRadius: '8px', border: '0' }}
             >
                 {
                     //Dropdown Panel view
@@ -87,6 +88,7 @@ class Companytab extends React.Component {
                         paddingBottom: '5px',
                         paddingTop: '5px',
                         backgroundColor: 'white',
+                        border: '0'
                     }}
                     onClick={this.onClick}
                 >
@@ -153,7 +155,8 @@ class DroppedView extends React.Component {
                     */}
                     <Button style={{
                         backgroundColor: '#BFBFBF',
-                        color: 'black'
+                        color: '#434343',
+                        fontWeight: '500'
                     }}>
                         Add Custom Response
                     </Button>

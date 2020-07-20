@@ -109,10 +109,9 @@ class PageReferences extends Component {
     return (
       <div style={{ width: "100%", marginTop: "40px" }}>
         <Spin size="large" spinning={!this.state.loaded}>
-          <h1 style={{ textAlign: "left" }}> References</h1>
+          <h1> References</h1>
           <p>
-            Add a reference here. This could be someone who has worked with you
-            in the past.
+            Add your reference(s) here. This could be someone who has worked with you in the past, a previous employer, teacher, coach, pastor, etc. This should not be a family member.
           </p>
           <Form
             {...formItemProps.totalForm}
@@ -302,8 +301,8 @@ class PageReferences extends Component {
       }
     }
     console.log(this.props)
-    let completionPercentage = parseFloat((completedCount/Object.keys(allValues).length).toFixed(2));
-    if (completionPercentage != this.props.completionState[3]) this.props.updateCompletionState(3,completionPercentage)
+    let completionPercentage = parseFloat((completedCount / Object.keys(allValues).length).toFixed(2));
+    if (completionPercentage != this.props.completionState[3]) this.props.updateCompletionState(3, completionPercentage)
 
     if (!_.isEqual(checklist, this.props.completionChecklist[3])) this.props.updateCompletionChecklist(3, checklist)
   }
