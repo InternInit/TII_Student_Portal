@@ -9,9 +9,14 @@ import { CheckCircleTwoTone } from "@ant-design/icons";
 import QueueAnim from "rc-queue-anim";
 import { withRouter } from "react-router";
 import { connect } from "react-redux";
+<<<<<<< Updated upstream
 import { updateCompletionState } from '../../redux/actions';
 import Companytab from './Companytab.js'
 import ActiveAppCompanytab from './ActiveAppCompanytab.js'
+=======
+import { updateCompletionState } from "../../redux/actions";
+
+>>>>>>> Stashed changes
 /*
 
 Container to hold all the progress bars
@@ -80,6 +85,7 @@ PERCENT COMPLETION ARRAY
 [1] == Trail Color
 [2] == Stroke Color
 [3] == Access code for the state
+[4] == Name of link on the dashboard tab
 ******************************************
 */
 const percentComplete = [
@@ -87,23 +93,24 @@ const percentComplete = [
     "Internship Information",
     "#e6f7ff",
     "#1890ff",
-    "internshipInfoChecklist"
+    "internshipInfoChecklist",
+    "internship-info"
   ],
-  ["Personal", "#fff7e6", "#fa8c16", "personalChecklist"],
-  ["Essays", "#fcffe6", "#a0d911", "essayChecklist"],
-  ["References", "#f9f0ff", "#722ed1", "referencesChecklist"]
-]
+  ["Personal", "#fff7e6", "#fa8c16", "personalChecklist", "personal"],
+  ["Essays", "#fcffe6", "#a0d911", "essayChecklist", "written-work"],
+  ["References", "#f9f0ff", "#722ed1", "referencesChecklist", "references"]
+];
 
 const mapStateToProps = state => {
   return {
     completionState: state.completionState,
     completionChecklist: state.completionChecklist
-  }
-}
+  };
+};
 
 const mapDispatchToProps = {
   updateCompletionState
-}
+};
 
 
 // BUG: THIS NEEDS TO BE REPLACED BY THE REACT STORE
@@ -123,8 +130,7 @@ class ApplicationProgress extends Component {
       internshipInfoChecklist: false,
       personalChecklist: false,
       essayChecklist: false,
-      referencesChecklist: false,
-
+      referencesChecklist: false
     };
   }
 
@@ -169,6 +175,7 @@ class ApplicationProgress extends Component {
   render() {
     return (
       <React.Fragment>
+<<<<<<< Updated upstream
 
         {/**
           * 
@@ -176,6 +183,10 @@ class ApplicationProgress extends Component {
           * 
           */}
         <h1 className="module-name">Application Progress</h1>
+=======
+        <h1 className="module-name">Application Progress</h1>
+
+>>>>>>> Stashed changes
         <ModuleContainer>
 
           {percentComplete.map((section, index) => (
@@ -187,19 +198,18 @@ class ApplicationProgress extends Component {
                 {section[0]}
               </ProgressHeader>
 
-
               {/**
                * Percent Name
                */}
               <PercentHeader>
                 {this.props.completionState[index] < 1 ? (
-                  this.props.completionState[index] * 100 + "%"
+                  Math.floor(this.props.completionState[index] * 100) + "%"
                 ) : (
-                    <CheckCircleTwoTone
-                      style={{ fontSize: "24px" }}
-                      twoToneColor="#52c41a"
-                    />
-                  )}
+                  <CheckCircleTwoTone
+                    style={{ fontSize: "24px" }}
+                    twoToneColor="#52c41a"
+                  />
+                )}
               </PercentHeader>
 
               {/**
@@ -228,16 +238,18 @@ class ApplicationProgress extends Component {
                 </a>
               </ViewChecklist>
 
-
               {/**
                * Displaying Checkboxes
                */}
               <div>
                 {this.state[section[3]] ? (
-                  <Checklist checklist={this.props.completionChecklist} page={index} />
+                  <Checklist
+                    checklist={this.props.completionChecklist}
+                    page={index}
+                    linkTo={section[4]}
+                  />
                 ) : null}
               </div>
-
             </React.Fragment>
           ))}
         </ModuleContainer>
@@ -299,6 +311,9 @@ class ApplicationProgress extends Component {
   }
 }
 
-export default withRouter(connect(
-  mapStateToProps,
-  mapDispatchToProps)(ApplicationProgress));
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(ApplicationProgress)
+);
