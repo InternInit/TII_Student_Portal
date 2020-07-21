@@ -239,8 +239,7 @@ class ApplicationProgress extends Component {
             </React.Fragment>
           ))}
         </ModuleContainer>
-<<<<<<< HEAD
-=======
+
 
         {/**
          *
@@ -283,7 +282,6 @@ class ApplicationProgress extends Component {
             </div>
           ))}
         </QueueAnim>
->>>>>>> 3a7bf0e26c6550785de260a2e4a9bb916d2b0462
       </React.Fragment>
     );
   }
