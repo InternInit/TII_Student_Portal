@@ -14,6 +14,7 @@ import CompanyInformation from "./CompanyInformation.js";
 import Companytab from "./Companytab.js";
 import ApplicationProgress from "./applicationProgress.jsx";
 import ApplySkills from "./apply-skills/applySkills";
+import NewStudent from "../newStudent";
 
 //React Routing
 import {
@@ -27,10 +28,9 @@ import {
 } from "react-router-dom";
 import { withRouter } from "react-router";
 
-import { connect } from 'react-redux';
+import { connect } from "react-redux";
 import ActiveApplications from "./ActiveApplications";
 import PinCompany from "./PinCompany";
-
 
 const PageContainer = styled.div`
   width: 90%;
@@ -55,8 +55,8 @@ const { Header, Content, Footer, Sider } = Layout;
 const mapStateToProps = state => {
   return {
     completionState: state.completionState
-  }
-}
+  };
+};
 
 class Dashboard extends Component {
   constructor(props) {
@@ -65,7 +65,6 @@ class Dashboard extends Component {
       info: ""
     };
   }
-
 
   render() {
     return (
@@ -92,10 +91,8 @@ class Dashboard extends Component {
                   }}
                 />
 
-
-                <Route
-                  path="/dashboard/my-internships"
-                  exact>
+                <Route path="/dashboard/my-internships" exact>
+                  <NewStudent />
                   <ApplicationProgress />
                   <PinCompany />
                   <ActiveApplications />
@@ -110,17 +107,17 @@ class Dashboard extends Component {
                 <Route
                   path="/dashboard/add-companies/company-information/:companyid"
                   exact
-                  component={CompanyInformation} />
+                  component={CompanyInformation}
+                />
 
                 <Route exact path="/dashboard/apply-skills">
                   <ApplySkills />
                 </Route>
 
-
                 {/**
-                 * 
-                 * Handles Invalid URL 
-                 * 
+                 *
+                 * Handles Invalid URL
+                 *
                  */}
                 <Route
                   path="/dashboard/*"
@@ -137,6 +134,4 @@ class Dashboard extends Component {
   }
 }
 
-export default connect(
-  mapStateToProps
-)(Dashboard);
+export default connect(mapStateToProps)(Dashboard);

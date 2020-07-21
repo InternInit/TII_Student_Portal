@@ -1,43 +1,57 @@
 export const updateName = name => {
   return {
-    type:'UPDATE_NAME',
+    type: "UPDATE_NAME",
     name
-  }
-}
+  };
+};
 
 export const updateAvatar = avatar => {
   return {
-    type:'UPDATE_AVATAR',
+    type: "UPDATE_AVATAR",
     avatar
-  }
-}
+  };
+};
 
 export const updateCompletionState = (page, completionPercentage) => {
   return {
-    type:'UPDATE_COMPLETION_STATE',
+    type: "UPDATE_COMPLETION_STATE",
     page,
     completionPercentage
-  }
-}
+  };
+};
 
-export const batchUpdateCompletionState = (completionState) => {
+export const batchUpdateCompletionState = completionState => {
   return {
-    type:'BATCH_UPDATE_COMPLETION_STATE',
+    type: "BATCH_UPDATE_COMPLETION_STATE",
     completionState
-  }
-}
+  };
+};
 
 export const updateCompletionChecklist = (page, completionChecklist) => {
   return {
-    type: 'UPDATE_COMPLETION_CHECKLIST',
+    type: "UPDATE_COMPLETION_CHECKLIST",
     page,
     completionChecklist
-  }
-}
+  };
+};
 
-export const batchUpdateCompletionChecklist = (completionChecklist) => {
+export const batchUpdateCompletionChecklist = completionChecklist => {
   return {
-    type:'BATCH_UPDATE_COMPLETION_CHECKLIST',
+    type: "BATCH_UPDATE_COMPLETION_CHECKLIST",
     completionChecklist
-  }
-}
+  };
+};
+
+export const finishTutorial = tutorialStatus => {
+  return {
+    type: "FINISH_TUTORIAL",
+    tutorialStatus
+  };
+};
+
+export const restartTutorial = tutorialStatus => {
+  return {
+    type: "RESTART_TUTORIAL",
+    tutorialStatus
+  };
+};
