@@ -82,6 +82,7 @@ class Dashboard extends Component {
             <PageContainer>
               <WelcomeHeader>Welcome Kevin</WelcomeHeader>
               <DashboardNavBar />
+              <hr />
               <ReactSwitch>
                 <Route
                   path="/dashboard"
