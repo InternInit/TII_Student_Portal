@@ -191,11 +191,11 @@ class ApplicationProgress extends Component {
                 {this.props.completionState[index] < 1 ? (
                   Math.floor(this.props.completionState[index] * 100) + "%"
                 ) : (
-                  <CheckCircleTwoTone
-                    style={{ fontSize: "24px" }}
-                    twoToneColor="#52c41a"
-                  />
-                )}
+                    <CheckCircleTwoTone
+                      style={{ fontSize: "24px" }}
+                      twoToneColor="#52c41a"
+                    />
+                  )}
               </PercentHeader>
 
               {/**
@@ -239,51 +239,6 @@ class ApplicationProgress extends Component {
             </React.Fragment>
           ))}
         </ModuleContainer>
-<<<<<<< HEAD
-=======
-
-        {/**
-         *
-         * Pinned Companies
-         *
-         */}
-        <h1 className="module-name" style={{ marginTop: "70px" }}>
-          Pinned Companies
-        </h1>
-        <QueueAnim
-          type={["right", "left"]}
-          ease={["easeOutQuart", "easeInOutQuart"]}
-        >
-          {pinnedCompanies.map((pinnedCompany, index) => (
-            <div style={{ marginBottom: "12px" }} key={index}>
-              <Companytab
-                name={pinnedCompany.name}
-                industry={pinnedCompany.industry}
-                logo={pinnedCompany.logo}
-              />
-            </div>
-          ))}
-        </QueueAnim>
-
-        <h1 className="module-name" style={{ marginTop: "70px" }}>
-          Active Application
-        </h1>
-        <QueueAnim
-          type={["right", "left"]}
-          ease={["easeOutQuart", "easeInOutQuart"]}
-        >
-          {pinnedCompanies.map((pinnedCompany, index) => (
-            <div style={{ marginBottom: "12px" }} key={index}>
-              <ActiveAppCompanytab
-                name={pinnedCompany.name}
-                industry={pinnedCompany.industry}
-                logo={pinnedCompany.logo}
-                status={pinnedCompany.status}
-              />
-            </div>
-          ))}
-        </QueueAnim>
->>>>>>> 3a7bf0e26c6550785de260a2e4a9bb916d2b0462
       </React.Fragment>
     );
   }

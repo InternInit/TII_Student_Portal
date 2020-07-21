@@ -1,4 +1,4 @@
-import React from "react";
+import React, { } from "react";
 import styled from "styled-components";
 import { Input } from "antd";
 import SearchCompanytab from "./SearchCompanytab.js";
@@ -7,7 +7,6 @@ import { Col as AntCol, Row as AntRow } from "antd";
 import QueueAnim from "rc-queue-anim";
 import { withRouter } from "react-router";
 import { filter } from "underscore";
-import Companytab from "./Companytab.js";
 
 const { Search } = Input;
 const { Panel } = Collapse;
@@ -18,11 +17,6 @@ const checkGutter = [8, 8];
 const standardSpan = 24;
 const thirdSpan = standardSpan / 3;
 
-const ModuleContainer = styled.div`
-  background: white;
-  border-radius: 10px;
-  padding: 3%;
-`;
 
 const Row = styled.div`
   margin-bottom: 22px;
@@ -31,23 +25,6 @@ const Row = styled.div`
   align-items: flex-start;
 `;
 
-const Button = styled.div`
-  color: white;
-  background-color: #bcdfff;
-  font-size: 18px;
-  border-radius: 2px;
-  width: 100px;
-  height: 36px;
-  display: flex;
-  align-self: center;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 1px 3px 1px #d9d9d9;
-  :hover {
-    cursor: pointer;
-    background-color: #a6c5e0;
-  }
-`;
 
 const industry = [
   "General Business",
@@ -220,6 +197,7 @@ class AddCompanies extends React.Component {
                 image="filler"
                 description="filler"
                 location="filler"
+                companyid={company.id}
               />
 
 

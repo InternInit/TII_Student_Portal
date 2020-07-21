@@ -106,6 +106,12 @@ class Dashboard extends Component {
                   exact
                   component={AddCompanies}
                 />
+
+                <Route
+                  path="/dashboard/add-companies/company-information/:companyid"
+                  exact
+                  component={CompanyInformation} />
+
                 <Route exact path="/dashboard/apply-skills">
                   <ApplySkills />
                 </Route>

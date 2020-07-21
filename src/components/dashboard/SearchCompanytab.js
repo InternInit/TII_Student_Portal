@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import QueueAnim from "rc-queue-anim";
-
+import { Link } from 'react-router-dom'
 const CompanyTitle = styled.div`
   font-size: 32px;
   font-weight: bold;
@@ -125,7 +125,7 @@ class SearchCompanytab extends React.Component {
     this.handleClick = this.handleClick.bind(this);
   }
   render() {
-    let { name, industry, logo, image, description, location, } = this.props;
+    let { name, industry, logo, image, description, location, companyid } = this.props;
     let { show } = this.state;
     let ctab = <CLabel
       name={name}
@@ -140,6 +140,7 @@ class SearchCompanytab extends React.Component {
         image={image}
         description={description}
         location={location}
+        companyid={companyid}
       />;
     }
 
@@ -215,7 +216,7 @@ Gives additional Information when hovered over
 */
 class QuickView extends React.Component {
   render() {
-    let { name, industry, image, description, location } = this.props;
+    let { name, industry, image, description, location, companyid } = this.props;
     return (
       <QueueAnim type="scale" ease={["easeOutQuart", "easeInOutQuart"]}>
         {mapping.map((item, index) => (
@@ -292,7 +293,13 @@ class QuickView extends React.Component {
 
                   <Col>
                     <AddButton>Add</AddButton>
-                    <MoreDetailsButton style={{ marginTop: '12px' }}>More Details</MoreDetailsButton>
+
+                    <Link to={`/dashboard/add-companies/company-information/${companyid}`} style={{ color: '#434343' }}>
+                      <MoreDetailsButton style={{ marginTop: '12px' }}>
+                        More Details
+                    </MoreDetailsButton>
+                    </Link>
+
                   </Col>
                 </div>
               </Col>

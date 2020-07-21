@@ -39,304 +39,296 @@ const Row = styled.div`
  `
 
 
-class CompanyInformation extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
+function CompanyInformation() {
 
-        }
-    }
-    render() {
-        return (<React.Fragment>
-
-
-            {/**
+    return (<React.Fragment>
+        {/**
                  * 
                  * Breadcrumb
                  * 
                  */}
-            <Breadcrumb style={{
-                fontSize: '24px',
-                display: 'flex',
-                flexDirection: 'row',
-                fontWeight: '500',
-                marginTop: '70px',
-                marginLeft: '55px'
-            }}>
-                <Breadcrumb.Item>
-                    Add Companies
+        <Breadcrumb style={{
+            fontSize: '24px',
+            display: 'flex',
+            flexDirection: 'row',
+            fontWeight: '500',
+            marginTop: '30px',
+            marginLeft: '55px'
+        }}>
+            <Breadcrumb.Item>
+                Add Companies
                 </Breadcrumb.Item>
-                <Breadcrumb.Item>
-                    Facebook
+            <Breadcrumb.Item>
+                Facebook
                 </Breadcrumb.Item>
-            </Breadcrumb>
+        </Breadcrumb>
 
 
-            <ModuleContainer>
+        <ModuleContainer>
 
 
-                {/**
+            {/**
                  * 
                  * Company Logo and Name
                  * 
                  */}
-                <Row style={{
-                    display: 'flex',
-                    flexDirection: 'row',
-                }}>
-                    <Image src="" alt="Logo" style={{ marginTop: '10px' }} />
-                    <Header style={{
-                        fontSize: '36px',
-                        textAlign: 'left',
-                        marginLeft: '15px',
-                        color: '#8C8C8C',
-                        marginTop: '0px'
-                    }}> Facebook</Header>
-                </Row>
+            <Row style={{
+                display: 'flex',
+                flexDirection: 'row',
+            }}>
+                <Image src="" alt="Logo" style={{ marginTop: '10px' }} />
+                <Header style={{
+                    fontSize: '36px',
+                    textAlign: 'left',
+                    marginLeft: '15px',
+                    color: '#8C8C8C',
+                    marginTop: '0px'
+                }}>Company Name</Header>
+            </Row>
 
 
-                {/**
+            {/**
                  * 
                  * Divider
                  * 
                  */}
-                <Divider >
-                    <Header style={{
-                        color: '#595959',
-                        paddingBottom: '25px',
-                        marginTop: '25px'
-                    }}>Company Overview
+            <Divider >
+                <Header style={{
+                    color: '#595959',
+                    paddingBottom: '25px',
+                    marginTop: '25px'
+                }}>Company Overview
                      </Header>
-                </Divider>
+            </Divider>
 
 
-                {/**
+            {/**
                  * 
                  * Company Description
                  * 
                  */}
-                <Row>
-                    <Header >
-                        Company Description
+            <Row>
+                <Header >
+                    Company Description
                     </Header>
-                    <Caption>
-                        Facebook is a website which allows users, who sign-up for free profiles, to connect with friends, work colleagues or people they don’t know, online.
-                        It allows users to share pictures, music, videos, and articles, as well as their own thoughts and opinions with however many people they like.
+                <Caption>
+                    Facebook is a website which allows users, who sign-up for free profiles, to connect with friends, work colleagues or people they don’t know, online.
+                    It allows users to share pictures, music, videos, and articles, as well as their own thoughts and opinions with however many people they like.
 
-                        Users send “friend requests” to people who they may – or may not – know.
+                    Users send “friend requests” to people who they may – or may not – know.
 
-                        Facebook has over 1 billion users
+                    Facebook has over 1 billion users
 
                     </Caption>
-                </Row>
+            </Row>
 
 
-                {/**
+            {/**
                  * 
                  * Images + Caption
                  * 
                  */}
-                <Row style={{
-                    display: 'flex',
-                    flexDirection: 'row',
-                    justifyContent: 'space-evenly',
-                    marginTop: '45px',
-                    marginBottom: '45px'
-                }}>
-                    <Row>
-                        <Image src="" alt="Logo" style={{ marginTop: '10px', width: '500px', height: '250px', borderRadius: '8px' }} />
-                        <Caption> Image of Company</Caption>
-                    </Row>
-
-                    <Row>
-                        <Image src="" alt="Logo" style={{ marginTop: '10px', width: '500px', height: '250px', borderRadius: '8px' }} />
-                        <Caption> Image of Company</Caption>
-                    </Row>
+            <Row style={{
+                display: 'flex',
+                flexDirection: 'row',
+                justifyContent: 'space-evenly',
+                marginTop: '45px',
+                marginBottom: '45px'
+            }}>
+                <Row>
+                    <Image src="" alt="Logo" style={{ marginTop: '10px', width: '500px', height: '250px', borderRadius: '8px' }} />
+                    <Caption> Image of Company</Caption>
                 </Row>
 
+                <Row>
+                    <Image src="" alt="Logo" style={{ marginTop: '10px', width: '500px', height: '250px', borderRadius: '8px' }} />
+                    <Caption> Image of Company</Caption>
+                </Row>
+            </Row>
 
-                {/**
+
+            {/**
                  * 
                  * Divider
                  * 
                  */}
-                <Divider >
-                    <Header style={{
-                        color: '#595959',
-                        paddingBottom: '25px',
-                        marginTop: '25px'
-                    }}>Internship Information
+            <Divider >
+                <Header style={{
+                    color: '#595959',
+                    paddingBottom: '25px',
+                    marginTop: '25px'
+                }}>Internship Information
                   </Header>
-                </Divider>
+            </Divider>
 
 
-                {/**
+            {/**
                  * 
                  * Intership Description
                  * 
                  */}
-                <Row>
-                    <Header >
-                        Description
+            <Row>
+                <Header >
+                    Description
                     </Header>
-                    <Caption>
-                        looking for an object-oriented Java Developer... Java Servlets, HTML, JavaScript, AJAX, Struts, Struts2, JSF) desirable.
-                        Familiarity with Tomcat and the Java...
+                <Caption>
+                    looking for an object-oriented Java Developer... Java Servlets, HTML, JavaScript, AJAX, Struts, Struts2, JSF) desirable.
+                    Familiarity with Tomcat and the Java...
                     </Caption>
-                </Row>
+            </Row>
 
 
-                {/**
+            {/**
                  * 
                  * Location
                  * 
                  */}
-                <Row>
-                    <Header >
-                        Location
+            <Row>
+                <Header >
+                    Location
                     </Header>
-                    <Caption>
-                        Austin, TX
+                <Caption>
+                    Austin, TX
                     </Caption>
-                </Row>
+            </Row>
 
 
-                {/**
+            {/**
                  * 
                  * Location
                  * 
                  */}
-                <Row>
-                    <Header >
-                        Industry
+            <Row>
+                <Header >
+                    Industry
                     </Header>
-                    <Caption>
-                        Industry 1, Industry 2
+                <Caption>
+                    Industry 1, Industry 2
                     </Caption>
-                </Row>
+            </Row>
 
 
-                {/**
+            {/**
                  * 
                  * Work Period
                  * 
                  */}
-                <Row>
-                    <Header >
-                        Work Period
+            <Row>
+                <Header >
+                    Work Period
                     </Header>
-                    <Caption>
-                        Start Date:1, Finish Date:10
+                <Caption>
+                    Start Date:1, Finish Date:10
                     </Caption>
-                </Row>
+            </Row>
 
 
-                {/**
+            {/**
                  * 
                  * Additional Information
                  * 
                  */}
-                <Row style={{ marginBottom: '45px' }}>
-                    <Header >
-                        Additional Information
+            <Row style={{ marginBottom: '45px' }}>
+                <Header >
+                    Additional Information
                     </Header>
-                    <Caption>
-                        - AP CSA
-                        - AP CSP
-                        - Idk man, Python
-                        - This could also be where we post acedemic credentials or something
-                        - The company needs
+                <Caption>
+                    - AP CSA
+                    - AP CSP
+                    - Idk man, Python
+                    - This could also be where we post acedemic credentials or something
+                    - The company needs
                     </Caption>
-                </Row>
+            </Row>
 
 
-                {/**
+            {/**
                  * 
                  * Divider
                  * 
                  */}
-                <Divider >
-                    <Header style={{
-                        color: '#595959',
-                        paddingBottom: '25px',
-                        marginTop: '25px'
-                    }}>Contact Information
+            <Divider >
+                <Header style={{
+                    color: '#595959',
+                    paddingBottom: '25px',
+                    marginTop: '25px'
+                }}>Contact Information
                   </Header>
-                </Divider>
+            </Divider>
 
 
-                {/**
+            {/**
                  * 
                  * Website
                  * 
                  */}
-                <Row>
-                    <Header >
-                        Website
+            <Row>
+                <Header >
+                    Website
                     </Header>
-                    <Caption>
-                        Click Here!
+                <Caption>
+                    Click Here!
                     </Caption>
-                </Row>
+            </Row>
 
 
-                {/**
+            {/**
                  * 
                  * Email
                  * 
                  */}
-                <Row>
-                    <Header >
-                        Website
+            <Row>
+                <Header >
+                    Website
                     </Header>
-                    <Caption>
-                        Email@gmail.com
+                <Caption>
+                    Email@gmail.com
                     </Caption>
-                </Row>
+            </Row>
 
 
-                {/**
+            {/**
                  * 
                  * Phone Number
                  * 
                  */}
-                <Row>
-                    <Header >
-                        Phone Number
+            <Row>
+                <Header >
+                    Phone Number
                     </Header>
-                    <Caption>
-                        123-456-7891
+                <Caption>
+                    123-456-7891
                     </Caption>
-                </Row>
+            </Row>
 
 
-                {/**
+            {/**
                  * 
                  * Links To Social
                  * 
                  */}
-                <Row>
-                    <Header >
-                        Links
+            <Row>
+                <Header >
+                    Links
                     </Header>
-                    <Row style={{
-                        display: 'flex',
-                        flexDirection: 'row',
-                        justifyContent: 'space-evenly',
-                        width: '20%'
-                    }}>
-                        <Image src="" alt="Logo" style={{ marginTop: '10px' }} />
-                        <Image src="" alt="Logo" style={{ marginTop: '10px' }} />
-                        <Image src="" alt="Logo" style={{ marginTop: '10px' }} />
-                        <Image src="" alt="Logo" style={{ marginTop: '10px' }} />
+                <Row style={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    justifyContent: 'space-evenly',
+                    width: '20%'
+                }}>
+                    <Image src="" alt="Logo" style={{ marginTop: '10px' }} />
+                    <Image src="" alt="Logo" style={{ marginTop: '10px' }} />
+                    <Image src="" alt="Logo" style={{ marginTop: '10px' }} />
+                    <Image src="" alt="Logo" style={{ marginTop: '10px' }} />
 
-                    </Row>
                 </Row>
+            </Row>
 
 
 
-            </ModuleContainer>
-        </React.Fragment>)
-    }
+        </ModuleContainer>
+    </React.Fragment>)
 }
+
 export default CompanyInformation
