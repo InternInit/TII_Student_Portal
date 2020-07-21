@@ -69,6 +69,15 @@
   margin-top: -10px;
 }
 
+.apply-skills-little-card-time {
+  color: #52c41a;
+  font-family: roboto;
+  font-size: 18px;
+  font-style: oblique;
+  margin-top: -10px;
+  margin-bottom: 15px;
+}
+
 html {
   background-color: gray;
 }

@@ -18,6 +18,7 @@ function LittleCard(props) {
           className="apply-skills-little-card"
           style={{
             width: "100%",
+            height: "375px",
             borderRadius: "15px",
             border: "none",
             display: "inline-block"
@@ -28,7 +29,7 @@ function LittleCard(props) {
           hoverable
         >
           <h1 className="apply-skills-little-card-title">{props.title}</h1>
-          <p className="apply-skills-big-card-time">{props.readTime}</p>
+          <p className="apply-skills-little-card-time">{props.readTime}</p>
           <p className="apply-skills-little-card-content">
             {props.description}
           </p>
