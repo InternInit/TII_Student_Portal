@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import QueueAnim from "rc-queue-anim";
 import { Link } from 'react-router-dom'
+import { Button } from 'antd';
 const CompanyTitle = styled.div`
   font-size: 32px;
   font-weight: bold;
@@ -17,43 +18,6 @@ const JobTitle = styled.div`
   color: #262626;
   margin-bottom: 10px;
   margin-top: 6px;
-`;
-
-
-const AddButton = styled.div`
-  color: white;
-  background-color: #1890FF;
-  font-size: 18px;
-  border-radius: 2px;
-  width: 336px;
-  height: 36px;
-  display: flex;
-  align-self: center;
-  align-items: center;
-  justify-content: center;
-  :hover {
-    cursor: pointer;
-    background-color:#1683e9;
-    color:#fafafa;
-  }
-`;
-
-const MoreDetailsButton = styled.div`
-  color: #434343;
-  background-color: #BFBFBF;
-  font-size: 18px;
-  font-weight:500;
-  border-radius: 2px;
-  width: 336px;
-  height: 36px;
-  display: flex;
-  align-self: center;
-  align-items: center;
-  justify-content: center;
-  :hover {
-    cursor: pointer;
-    background-color:#b3b3b3;
-  }
 `;
 
 
@@ -290,14 +254,13 @@ class QuickView extends React.Component {
                   </Col>
 
                   <Col>
-                    <AddButton>Add</AddButton>
+                    <Button className='button-style' type='primary'>Add</Button>
 
-                    <Link to={`/dashboard/add-companies/company-information/${companyid}`} style={{ color: '#434343' }}>
-                      <MoreDetailsButton style={{ marginTop: '12px' }}>
+                    <Link to={`/dashboard/add-companies/company-information/${companyid}`}>
+                      <Button style={{ marginTop: '12px', }} className='button-style' >
                         More Details
-                    </MoreDetailsButton>
+                    </Button>
                     </Link>
-
                   </Col>
                 </div>
               </Col>

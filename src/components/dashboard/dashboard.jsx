@@ -45,7 +45,7 @@ const WelcomeHeader = styled.h1`
   font-size: 72px;
   font-family: Lato;
   font-weight: bold;
-  margin-bottom: 2%;
+  margin-ottom: 3%;
 
   color: #0050b3;
 `;

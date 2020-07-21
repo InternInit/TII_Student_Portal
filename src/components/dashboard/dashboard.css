@@ -114,3 +114,14 @@ html {
 .ant-card-cover img {
   border-radius: 15px 15px 0 0;
 }
+
+.button-style{
+  font-size: 18px;
+  border-radius: 2px;
+  width: 336px;
+  height: 36px;
+  display: flex;
+  align-self: center;
+  align-items: center;
+  justify-content: center;
+}

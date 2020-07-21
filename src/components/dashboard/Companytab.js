@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Collapse } from 'antd';
+import { Collapse, Button } from 'antd';
 const { Panel } = Collapse;
 
 
@@ -19,7 +19,7 @@ color:#262626;
 padding-top:2px;
 margin-bottom:4px;
 `
-const Button = styled.div`
+const Button1 = styled.div`
 color:white;
 background-color:green;
 font-size:18px;
@@ -144,21 +144,22 @@ class DroppedView extends React.Component {
                 {/**
                      * Custom Response Button
                     */}
-                <Button style={{
-                    backgroundColor: '#BFBFBF',
-                    color: '#434343',
-                    fontWeight: '500'
-                }}>
+                <Button
+                    className='button-style'
+                >
                     Add Custom Response
                     </Button>
 
                 {/**
                      * Company Information Button 
                      */}
-                <Button style={{
-                    backgroundColor: '#52C41A',
-                    color: 'white'
-                }}>
+                <Button
+                    className='button-style'
+                    style={{
+                        backgroundColor: '#52C41A',
+                        color: 'white'
+                    }}
+                >
                     Company Information
                     </Button>
 
@@ -166,10 +167,10 @@ class DroppedView extends React.Component {
                 {/**
                      *Submit Button
                      */}
-                <Button style={{
-                    backgroundColor: '#1890FF',
-                    color: 'white'
-                }}>
+                <Button
+                    className='button-style'
+                    type='primary'
+                >
                     Submit
                     </Button>
             </Row>
