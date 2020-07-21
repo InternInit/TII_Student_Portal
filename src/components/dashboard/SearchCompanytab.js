@@ -31,7 +31,6 @@ const AddButton = styled.div`
   align-self: center;
   align-items: center;
   justify-content: center;
-  box-shadow: 1px 3px 1px #d9d9d9;
   :hover {
     cursor: pointer;
     background-color:#1683e9;
@@ -51,7 +50,6 @@ const MoreDetailsButton = styled.div`
   align-self: center;
   align-items: center;
   justify-content: center;
-  box-shadow: 1px 3px 1px #d9d9d9;
   :hover {
     cursor: pointer;
     background-color:#b3b3b3;

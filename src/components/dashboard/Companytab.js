@@ -30,7 +30,6 @@ display:flex;
 align-self:center;
 align-items:center;
 justify-content:center;
-box-shadow: 1px 3px 1px #d9d9d9;
 :hover{
     cursor:pointer;
 }
@@ -153,7 +152,6 @@ class DroppedView extends React.Component {
                     Add Custom Response
                     </Button>
 
-
                 {/**
                      * Company Information Button 
                      */}
@@ -169,7 +167,7 @@ class DroppedView extends React.Component {
                      *Submit Button
                      */}
                 <Button style={{
-                    backgroundColor: '#BCDFFF',
+                    backgroundColor: '#1890FF',
                     color: 'white'
                 }}>
                     Submit
