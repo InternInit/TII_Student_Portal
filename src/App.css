@@ -122,3 +122,14 @@ h2 {
     transform: rotate(360deg);
   }
 }
+
+.profile-button-style{
+  font-size: 16px;
+  border-radius: 2px;
+  width: 200px;
+  height: 32px;
+  display: flex;
+  align-self: center;
+  align-items: center;
+  justify-content: center;
+}

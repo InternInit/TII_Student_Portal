@@ -17,6 +17,8 @@ font-size:36px;
 color:white;
 font-weight:normal;
 `;
+
+
 const Heading = styled.div`
 font-size:28px;
 padding-bottom:10px;
@@ -26,6 +28,8 @@ display:flex;
 justify-content:align-left;
 margin-top:70px;
 `;
+
+
 const Text = styled.div`
 padding:5px;
 font-weight:normal;

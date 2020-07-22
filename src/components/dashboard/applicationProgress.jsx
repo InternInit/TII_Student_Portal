@@ -12,6 +12,7 @@ import { connect } from "react-redux";
 import { updateCompletionState } from "../../redux/actions";
 import Companytab from "./Companytab.js";
 import ActiveAppCompanytab from "./ActiveAppCompanytab.js";
+
 /*
 
 Container to hold all the progress bars
