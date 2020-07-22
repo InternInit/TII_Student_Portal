@@ -40,7 +40,7 @@ const Row = styled.div`
 
 
 function CompanyInformation() {
-
+    window.scrollTo(0, 0)
     return (<React.Fragment>
         {/**
                  * 
@@ -65,8 +65,6 @@ function CompanyInformation() {
 
 
         <ModuleContainer>
-
-
             {/**
                  * 
                  * Company Logo and Name

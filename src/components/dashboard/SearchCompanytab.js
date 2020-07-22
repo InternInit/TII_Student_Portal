@@ -3,6 +3,7 @@ import styled from "styled-components";
 import QueueAnim from "rc-queue-anim";
 import { Link } from 'react-router-dom'
 import { Button } from 'antd';
+
 const CompanyTitle = styled.div`
   font-size: 32px;
   font-weight: bold;
@@ -257,7 +258,7 @@ class QuickView extends React.Component {
                     <Button className='button-style' type='primary'>Add</Button>
 
                     <Link to={`/dashboard/add-companies/company-information/${companyid}`}>
-                      <Button style={{ marginTop: '12px', }} className='button-style' >
+                      <Button style={{ marginTop: '12px', }} className='button-style'>
                         More Details
                     </Button>
                     </Link>
