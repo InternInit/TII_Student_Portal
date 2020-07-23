@@ -1,7 +1,7 @@
-export const updateName = name => {
+export const updateUserName = username => {
   return {
-    type: "UPDATE_NAME",
-    name
+    type: "UPDATE_USER_NAME",
+    username
   };
 };
 
@@ -9,6 +9,13 @@ export const updateAvatar = avatar => {
   return {
     type: "UPDATE_AVATAR",
     avatar
+  };
+};
+
+export const updateEmail = email => {
+  return {
+    type: "UPDATE_EMAIL",
+    email
   };
 };
 
