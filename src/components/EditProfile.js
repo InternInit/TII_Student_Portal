@@ -539,12 +539,8 @@ class EditProfile extends React.Component {
             this.setState({ loading: false });
         }
     };
-
-
 }
 export default connect(mapStateToProps)(EditProfile);
-
-
 
 function beforeUpload(file) {
     const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';

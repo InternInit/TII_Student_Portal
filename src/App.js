@@ -247,7 +247,7 @@ class App extends Component {
       headers: {
         'Authorization': "Bearer " + token,
       }
-      })
+    })
       .then(response => response.json())
       .then(data => {
         console.log('Success:', data);
