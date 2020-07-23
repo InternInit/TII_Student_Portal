@@ -28,6 +28,10 @@ import { Card, Row, Col } from "antd";
 import { Redirect, Link } from "react-router-dom";
 import { withRouter } from "react-router";
 
+
+
+
+
 const resumeSkills = [
   [
     Choosing_Resume,

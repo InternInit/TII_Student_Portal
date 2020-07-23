@@ -96,9 +96,9 @@ const Row = styled.div`
  flex-direction:row;
  `
 const mapStateToProps = state => {
-  return {
-   userInfo: state.userInfo
-  };
+    return {
+        userInfo: state.userInfo
+    };
 };
 
 
