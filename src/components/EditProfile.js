@@ -1,7 +1,17 @@
 import React, { } from "react";
 import styled from "styled-components";
-import { Button, Modal } from 'antd';
+
+import {
+    Button,
+    Modal,
+    Input,
+    notification,
+    message,
+    Upload,
+} from 'antd';
+
 import { withRouter } from "react-router";
+import { CloseOutlined } from '@ant-design/icons'
 
 const ModuleContainer = styled.div`
 display:flex;
@@ -85,13 +95,15 @@ const Row = styled.div`
  `
 
 
+
+
 class EditProfile extends React.Component {
     constructor(props) {
         super(props);
 
 
-        this.handleClick = this.handleClick.bind(this);
         this.showModal = this.showModal.bind(this);
+        this.handleEnter = this.handleEnter.bind(this);
 
 
         this.state = {
@@ -101,10 +113,20 @@ class EditProfile extends React.Component {
             phoneNumber: '774 415 4004',
             schoolCode: '12345',
 
+            changeName: 'Kevin Tucker',
+            changePassword: 'kevinpassword',
+            changeEmail: '21lub@nsboroschools.net',
+            changeNumber: '774 415 4004',
+            changeCode: '2345',
+
+            currentMValue: '',
 
             modalTitle: '',
             visible: false,
             confirmLoading: false,
+            passwordVisible: false,
+            loading: false,
+
         };
 
     }
@@ -117,16 +139,18 @@ class EditProfile extends React.Component {
             phoneNumber,
             schoolCode,
 
+            currentMValue,
+
             modalTitle,
             visible,
             confirmLoading,
+            passwordVisible,
         } = this.state;
 
 
 
 
         let displayPassword = password.replace(/./g, '*');
-
         return (
             <div
                 style={{
@@ -142,8 +166,17 @@ class EditProfile extends React.Component {
                     <Heading style={{ marginLeft: '18px' }}>Profile Details</Heading>
 
 
-
+                    {/**
+                     * 
+                     * Box with Profile Picture
+                     * 
+                     */}
                     <ProfileBox>
+                        {/**
+                     * 
+                     * Picture + Name
+                     * 
+                     */}
                         <Row style={{ alignSelf: 'flex-start', display: 'flex' }}>
                             <Image src="" alt="Logo" />
                             <Header style={{
@@ -154,6 +187,12 @@ class EditProfile extends React.Component {
                             }}>{displayname}</Header>
                         </Row>
 
+
+                        {/**
+                     * 
+                     * Change Profile Picture
+                     * 
+                     */}
                         <h2 style={{ fontWeight: '500' }}>
                             Change Profile Picture
                         </h2>
@@ -162,9 +201,23 @@ class EditProfile extends React.Component {
                             justifyContent: 'space-between',
                             width: '65%'
                         }}>
-                            <Button type='primary' className='profile-button-style'>
-                                Upload Picture
-                            </Button>
+
+                            {/**
+                     * 
+                     * Buttons to add picture/remove current
+                     * 
+                     */}
+                            <Upload
+                                listType="text"
+                                action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+                                beforeUpload={beforeUpload}
+                                onChange={this.handleChange}
+                            >
+                                <Button type='primary' className='profile-button-style'>
+                                    Change Profile Picture
+                                </Button>
+
+                            </Upload>
                             <Button className='profile-button-style'>
                                 Remove Current
                             </Button>
@@ -172,50 +225,90 @@ class EditProfile extends React.Component {
                     </ProfileBox>
 
 
+
+                    {/**
+                     * 
+                     * User Information
+                     * 
+                     */}
                     <UserInfo style={{ marginTop: '36px' }}>
                         Display Name: <Info>{displayname} </Info>
-                    </UserInfo>
-                    <ChangeInfo onClick={this.showModal}>
+                    </UserInfo >
+                    <ChangeInfo onClick={() => this.showModal("Display Name")}>
                         Change display name
                     </ChangeInfo>
 
                     <UserInfo>
                         Password: <Info>{displayPassword}</Info>
                     </UserInfo>
-                    <ChangeInfo>
+                    <ChangeInfo onClick={() => this.showModal("Password")}>
                         Change password
                     </ChangeInfo>
 
                     <UserInfo>
                         E-mail: <Info>{email}</Info>
                     </UserInfo>
-                    <ChangeInfo>
+                    <ChangeInfo onClick={() => this.showModal("E-Mail")}>
                         Change e-mail
                     </ChangeInfo>
 
                     <UserInfo>
                         Phone Number: <Info>{phoneNumber}</Info>
                     </UserInfo>
-                    <ChangeInfo>
+                    <ChangeInfo onClick={() => this.showModal("Phone Number")}>
                         Change phone number
                     </ChangeInfo>
 
                     <UserInfo>
                         School Code: <Info>{schoolCode}</Info>
                     </UserInfo>
-                    <ChangeInfo>
+                    <ChangeInfo onClick={() => this.showModal("School Code")}>
                         Change School Code
                     </ChangeInfo>
 
 
+
+                    {/**
+                     * 
+                     * Password Change Modal
+                     * 
+                     */}
                     <Modal
-                        title={modalTitle}
-                        visible={visible}
+                        title="Change Password"
+                        visible={passwordVisible}
                         onOk={this.handleOk}
                         confirmLoading={confirmLoading}
                         onCancel={this.handleCancel}
                     >
+                        <Input placeholder='Enter Current password' type='password' />
+                        <ChangeInfo style={{ marginLeft: '2px' }}>
+                            Forgot Password
+                        </ChangeInfo>
+                        <Input placeholder='Enter New password' style={{ marginTop: '14px' }} />
+                        <Input placeholder='Confirm New password' style={{ marginTop: '12px' }} />
+                    </Modal>
 
+
+
+
+
+                    {/**
+                     * 
+                     * Change information Modal (excludes Password change)
+                     * 
+                     */}
+                    <Modal
+                        title={"Change " + modalTitle}
+                        visible={visible}
+                        onOk={() => this.handleOk(modalTitle)}
+                        confirmLoading={confirmLoading}
+                        onCancel={this.handleCancel}
+                    >
+                        <Input placeholder={"Enter New " + modalTitle}
+                            allowClear='true'
+                            value={currentMValue}
+                            onChange={(value) => this.handleEnter(value)}
+                            onSearch={(value) => this.handleEnter(value)} />
 
                     </Modal>
 
@@ -223,11 +316,11 @@ class EditProfile extends React.Component {
 
 
 
-
-
-
-
-
+                    {/**
+                     * 
+                     * Save and Cancel button
+                     * 
+                     */}
                     <Row style={{
                         alignSelf: 'flex-end',
                         justifyContent: 'space-between',
@@ -247,40 +340,216 @@ class EditProfile extends React.Component {
         );
     }
 
-    handleClick = () => {
-        this.showModal();
+
+    /**
+     * 
+     * Displays Modal
+     * 
+     */
+    showModal = (info) => {
+        let { displayname, email, schoolCode, phoneNumber, } = this.state;
+        switch (info) {
+            case 'Display Name':
+                this.setState({
+                    currentMValue: displayname,
+                    visible: true,
+                    modalTitle: info
+                })
+                break;
+            case 'Password':
+                this.setState({
+                    passwordVisible: true,
+                    modalTitle: info
+                })
+                break;
+            case 'E-Mail':
+                this.setState({
+                    currentMValue: email,
+                    visible: true,
+                    modalTitle: info
+                })
+                break;
+            case 'Phone Number':
+                this.setState({
+                    currentMValue: phoneNumber,
+                    visible: true,
+                    modalTitle: info
+                })
+                break;
+            case 'School Code':
+                this.setState({
+                    currentMValue: schoolCode,
+                    visible: true,
+                    modalTitle: info
+                })
+                break;
+            default:
+                break;
+        }
+    };
+
+    /**
+     * 
+     *Handles "OK" button on modal
+     * 
+     */
+    handleOk = (modalTitle) => {
+        let {
+            changeName,
+            changeCode,
+            changeEmail,
+            changeNumber,
+            changePassword
+        } = this.state;
+        this.setState({ confirmLoading: true })
+        setTimeout(() => {
+            if (changeName === '' || changeCode === '' || changeEmail === '' || changeNumber === '' || changePassword === '') {
+                notification.open({
+                    message: "Error.",
+                    description: "Please enter new " + modalTitle,
+                    icon: <CloseOutlined style={{ color: "red" }} />
+                })
+                this.setState({ confirmLoading: false })
+            }
+            else {
+                switch (modalTitle) {
+                    case 'Display Name':
+                        this.setState({
+                            displayname: changeName,
+                            visible: false,
+                            confirmLoading: false
+                        })
+                        break;
+                    case 'E-Mail':
+                        this.setState({
+                            email: changeEmail,
+                            visible: false,
+                            confirmLoading: false
+                        })
+                        break;
+                    case 'Phone Number':
+                        this.setState({
+                            phoneNumber: changeNumber,
+                            visible: false,
+                            confirmLoading: false
+                        })
+                        break;
+                    case 'School Code':
+                        this.setState({
+                            schoolCode: changeCode,
+                            visible: false,
+                            confirmLoading: false
+                        })
+                        break;
+                    case 'Password':
+                        this.setState({
+                            password: changePassword,
+                            passwordVisible: false,
+                            confirmLoading: false
+                        })
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }, 1000);
+    };
+
+    /**
+     * 
+     *Handles "Cancel" button on modal
+     * 
+     */
+    handleCancel = () => {
+        let { displayname, email, phoneNumber, schoolCode, password } = this.state;
+        this.setState({
+            changeName: displayname,
+            changeEmail: email,
+            changeNumber: phoneNumber,
+            changeCode: schoolCode,
+            changePassword: password,
+            visible: false,
+            passwordVisible: false
+        });
+    };
+
+    /**
+     * 
+     *Handles changing profile information
+     * 
+     */
+    handleEnter = (event) => {
+        let { modalTitle } = this.state;
+        switch (modalTitle) {
+            case 'Display Name':
+                this.setState({
+                    changeName: event.target.value,
+                    currentMValue: event.target.value
+                })
+                break;
+            case 'Password':
+                this.setState({
+                    changePassword: event.target.value,
+                    currentMValue: event.target.value
+                })
+                break;
+            case 'E-Mail':
+                this.setState({
+                    changeEmail: event.target.value,
+                    currentMValue: event.target.value
+                })
+                break;
+            case 'Phone Number':
+                this.setState({
+                    changeNumber: event.target.value,
+                    currentMValue: event.target.value
+                })
+                break;
+            case 'School Code':
+                this.setState({
+                    changeCode: event.target.value,
+                    currentMValue: event.target.value
+                })
+                break;
+            default:
+                break;
+        }
     }
 
 
 
+    /**
+     * 
+     * Profile Picture Uploading
+     * 
+     */
 
-    showModal = () => {
-        this.setState({
-            visible: true,
-        });
+    handleChange = info => {
+        if (info.file.status === 'uploading') {
+            this.setState({ loading: true });
+            return;
+        }
+        if (info.file.status === 'done') {
+            // Get this url from response in real world.
+            this.setState({ loading: false });
+        }
     };
-
-    handleOk = () => {
-        this.setState({
-            ModalText: 'The modal will be closed after two seconds',
-            confirmLoading: true,
-        });
-        setTimeout(() => {
-            this.setState({
-                visible: false,
-                confirmLoading: false,
-            });
-        }, 2000);
-    };
-
-    handleCancel = () => {
-        this.setState({
-            visible: false,
-        });
-    };
-
-
 
 
 }
 export default EditProfile;
+
+
+
+
+function beforeUpload(file) {
+    const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
+    if (!isJpgOrPng) {
+        message.error('You can only upload JPG/PNG file!');
+    }
+    const isLt2M = file.size / 1024 / 1024 < 2;
+    if (!isLt2M) {
+        message.error('Image must smaller than 2MB!');
+    }
+    return isJpgOrPng && isLt2M;
+}
