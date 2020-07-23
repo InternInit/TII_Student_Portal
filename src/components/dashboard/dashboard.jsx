@@ -110,7 +110,7 @@ class Dashboard extends Component {
                   component={CompanyInformation}
                 />
 
-                <Route exact path="/dashboard/apply-skills">
+                <Route path="/dashboard/apply-skills">
                   <ApplySkills />
                 </Route>
 

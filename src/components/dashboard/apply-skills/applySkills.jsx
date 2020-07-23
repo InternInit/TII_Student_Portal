@@ -3,6 +3,8 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import "../../../App.css";
 import "../dashboard.css";
+
+//IMAGE IMPORTS
 import GettingStarted from "./GettingStarted.jpg";
 import Choosing_Resume from "./tiiArrayPictures/Choosing_Resume.jpg";
 import What_To_Include_On_Resume from "./tiiArrayPictures/What_To_Include_On_Resume.jpg";
@@ -20,13 +22,25 @@ import Letter_of_Rec from "./tiiArrayPictures/Letter_of_Rec.jpg";
 import Cover_Letter from "./tiiArrayPictures/Cover_Letter.jpg";
 import Extra_Info from "./tiiArrayPictures/Extra_Info.jpg";
 
+//HTML IMPORTS
+
 import BigCard from "./bigCard";
 import LittleCard from "./littleCard";
 
 import { Card, Row, Col } from "antd";
 
-import { Redirect, Link } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Link,
+  Route,
+  Switch as ReactSwitch,
+  Redirect,
+  useRouteMatch as match,
+  useParams
+} from "react-router-dom";
 import { withRouter } from "react-router";
+
+import fillingOutAnApplication from "./tiiSkillInfo/Application/fillingOutAnApplication.js";
 
 const resumeSkills = [
   [
@@ -129,52 +143,64 @@ class ApplySkills extends Component {
   render() {
     return (
       <div>
-        <h1 className="module-name">Get Started</h1>
-        <BigCard
-          link="#"
-          cover={GettingStarted}
-          title="Why do I need an internship?"
-          description="Curious about why you would need an internship? Check out our
+        <Route
+          path="/dashboard/apply-skills"
+          exact
+          render={() => {
+            return <Redirect to="/dashboard/apply-skills/" />;
+          }}
+        />
+        <Route exact path="/dashboard/apply-skills/">
+          <h1 className="module-name">Get Started</h1>
+          <BigCard
+            link="#"
+            cover={GettingStarted}
+            title="Why do I need an internship?"
+            description="Curious about why you would need an internship? Check out our
         comprehensive overview about the benefits of high school
         internships and how The Internship Initiative can help you get
         one."
-        />
-        <h1 className="module-name">Build your resumé</h1>
-        <Row gutter={[32, 32]}>
-          {resumeSkills.map(module => (
-            <LittleCard
-              link="#"
-              cover={module[0]}
-              title={module[1]}
-              readTime={module[2]}
-              description={module[3]}
-            />
-          ))}
-        </Row>
-        <h1 className="module-name">Ace your Interview</h1>
-        <Row gutter={[32, 32]}>
-          {interviewSkills.map(module => (
-            <LittleCard
-              link="#"
-              cover={module[0]}
-              title={module[1]}
-              readTime={module[2]}
-              description={module[3]}
-            />
-          ))}
-        </Row>
-        <h1 className="module-name">Master the Written Work</h1>
-        <Row gutter={[32, 32]}>
-          {writtenSkills.map(module => (
-            <LittleCard
-              link="#"
-              cover={module[0]}
-              title={module[1]}
-              readTime={module[2]}
-              description={module[3]}
-            />
-          ))}
-        </Row>
+          />
+          <h1 className="module-name">Build your resumé</h1>
+          <Row gutter={[32, 32]}>
+            {resumeSkills.map(module => (
+              <LittleCard
+                link="#"
+                cover={module[0]}
+                title={module[1]}
+                readTime={module[2]}
+                description={module[3]}
+              />
+            ))}
+          </Row>
+          <h1 className="module-name">Ace your Interview</h1>
+          <Row gutter={[32, 32]}>
+            {interviewSkills.map(module => (
+              <LittleCard
+                link="#"
+                cover={module[0]}
+                title={module[1]}
+                readTime={module[2]}
+                description={module[3]}
+              />
+            ))}
+          </Row>
+          <h1 className="module-name">Master the Written Work</h1>
+          <Row gutter={[32, 32]}>
+            {writtenSkills.map(module => (
+              <LittleCard
+                link="#"
+                cover={module[0]}
+                title={module[1]}
+                readTime={module[2]}
+                description={module[3]}
+              />
+            ))}
+          </Row>
+        </Route>
+        <Route exact path="/dashboard/apply-skills/hello">
+          <div dangerouslySetInnerHTML={{__html: fillingOutAnApplication}}></div>
+        </Route>
       </div>
     );
   }
