@@ -13,6 +13,8 @@ import {
 import { withRouter } from "react-router";
 import { CloseOutlined } from '@ant-design/icons'
 
+import { connect } from "react-redux";
+
 const ModuleContainer = styled.div`
 display:flex;
 flex-direction:column;
@@ -93,8 +95,11 @@ const Row = styled.div`
  display:flex;
  flex-direction:row;
  `
-
-
+const mapStateToProps = state => {
+  return {
+   userInfo: state.userInfo
+  };
+};
 
 
 class EditProfile extends React.Component {
@@ -167,15 +172,15 @@ class EditProfile extends React.Component {
 
 
                     {/**
-                     * 
+                     *
                      * Box with Profile Picture
-                     * 
+                     *
                      */}
                     <ProfileBox>
                         {/**
-                     * 
+                     *
                      * Picture + Name
-                     * 
+                     *
                      */}
                         <Row style={{ alignSelf: 'flex-start', display: 'flex' }}>
                             <Image src="" alt="Logo" />
@@ -189,9 +194,9 @@ class EditProfile extends React.Component {
 
 
                         {/**
-                     * 
+                     *
                      * Change Profile Picture
-                     * 
+                     *
                      */}
                         <h2 style={{ fontWeight: '500' }}>
                             Change Profile Picture
@@ -203,9 +208,9 @@ class EditProfile extends React.Component {
                         }}>
 
                             {/**
-                     * 
+                     *
                      * Buttons to add picture/remove current
-                     * 
+                     *
                      */}
                             <Upload
                                 listType="text"
@@ -227,12 +232,12 @@ class EditProfile extends React.Component {
 
 
                     {/**
-                     * 
+                     *
                      * User Information
-                     * 
+                     *
                      */}
                     <UserInfo style={{ marginTop: '36px' }}>
-                        Display Name: <Info>{displayname} </Info>
+                        Display Name: <Info>{this.props.userInfo.username} </Info>
                     </UserInfo >
                     <ChangeInfo onClick={() => this.showModal("Display Name")}>
                         Change display name
@@ -246,7 +251,7 @@ class EditProfile extends React.Component {
                     </ChangeInfo>
 
                     <UserInfo>
-                        E-mail: <Info>{email}</Info>
+                        E-mail: <Info>{this.props.userInfo.email}</Info>
                     </UserInfo>
                     <ChangeInfo onClick={() => this.showModal("E-Mail")}>
                         Change e-mail
@@ -269,9 +274,9 @@ class EditProfile extends React.Component {
 
 
                     {/**
-                     * 
+                     *
                      * Password Change Modal
-                     * 
+                     *
                      */}
                     <Modal
                         title="Change Password"
@@ -293,9 +298,9 @@ class EditProfile extends React.Component {
 
 
                     {/**
-                     * 
+                     *
                      * Change information Modal (excludes Password change)
-                     * 
+                     *
                      */}
                     <Modal
                         title={"Change " + modalTitle}
@@ -317,9 +322,9 @@ class EditProfile extends React.Component {
 
 
                     {/**
-                     * 
+                     *
                      * Save and Cancel button
-                     * 
+                     *
                      */}
                     <Row style={{
                         alignSelf: 'flex-end',
@@ -342,9 +347,9 @@ class EditProfile extends React.Component {
 
 
     /**
-     * 
+     *
      * Displays Modal
-     * 
+     *
      */
     showModal = (info) => {
         let { displayname, email, schoolCode, phoneNumber, } = this.state;
@@ -389,9 +394,9 @@ class EditProfile extends React.Component {
     };
 
     /**
-     * 
+     *
      *Handles "OK" button on modal
-     * 
+     *
      */
     handleOk = (modalTitle) => {
         let {
@@ -456,9 +461,9 @@ class EditProfile extends React.Component {
     };
 
     /**
-     * 
+     *
      *Handles "Cancel" button on modal
-     * 
+     *
      */
     handleCancel = () => {
         let { displayname, email, phoneNumber, schoolCode, password } = this.state;
@@ -474,9 +479,9 @@ class EditProfile extends React.Component {
     };
 
     /**
-     * 
+     *
      *Handles changing profile information
-     * 
+     *
      */
     handleEnter = (event) => {
         let { modalTitle } = this.state;
@@ -519,9 +524,9 @@ class EditProfile extends React.Component {
 
 
     /**
-     * 
+     *
      * Profile Picture Uploading
-     * 
+     *
      */
 
     handleChange = info => {
@@ -535,8 +540,7 @@ class EditProfile extends React.Component {
         }
     };
 }
-export default EditProfile;
-
+export default connect(mapStateToProps)(EditProfile);
 
 function beforeUpload(file) {
     const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';

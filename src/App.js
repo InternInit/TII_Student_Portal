@@ -39,8 +39,9 @@ import {
 //Redux
 import { connect } from "react-redux";
 import {
-  updateName,
+  updateUserName,
   updateAvatar,
+  updateEmail,
   updateCompletionState,
   batchUpdateCompletionState,
   batchUpdateCompletionChecklist
@@ -86,8 +87,9 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = {
-  updateName,
+  updateUserName,
   updateAvatar,
+  updateEmail,
   updateCompletionState,
   batchUpdateCompletionState,
   batchUpdateCompletionChecklist
@@ -249,6 +251,8 @@ class App extends Component {
       .then(response => response.json())
       .then(data => {
         console.log('Success:', data);
+        this.props.updateEmail(data.email)
+        this.props.updateUserName(data["cognito:username"])
       })
   }
 
@@ -480,7 +484,9 @@ class App extends Component {
         {this.resize()}
         <Router>
           <header>
-            <Navbar logout={this.logout} />
+            <Navbar
+              logout={this.logout}
+            />
           </header>
           <ReactSwitch>
             <Route path="/dashboard" render={() => <Dashboard />} />
