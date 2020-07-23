@@ -534,12 +534,8 @@ class EditProfile extends React.Component {
             this.setState({ loading: false });
         }
     };
-
-
 }
 export default EditProfile;
-
-
 
 
 function beforeUpload(file) {

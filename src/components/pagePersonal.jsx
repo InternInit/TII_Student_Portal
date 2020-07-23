@@ -67,12 +67,9 @@ const race = [
   "Native Hawaiian/Other Pacific Islander"
 ];
 const latinx = [
-  "I am not Hispanic/Latino",
-  "Black or African American",
-  "White or Caucasian",
-  "Native American/Native Alaskan",
-  "Asian",
-  "Native Hawaiian/Other Pacific Islander"
+  "Yes, I AM Hispanic/Latinx",
+  "No, I am NOT Hispanic/Latinx"
+
 ];
 const allStates = [
   "Alabama",
@@ -188,11 +185,7 @@ class PagePersonal extends Component {
       <div style={{ width: "100%", marginTop: "40px" }}>
         <Spin size="large" spinning={!this.state.loaded}>
           <h1>General Information</h1>
-          <p>
-            Fill out only what your comfortable with, but understand that
-            missing factors could prevent your application from getting
-            evaluated.
-          </p>
+
           <br />
           <Form
             name="pagePersonal"
@@ -261,23 +254,20 @@ class PagePersonal extends Component {
                   key="latinx"
                   label={this.boldify("If you are Hispanic/Latinx")}
                   name="Is Latinx"
-                  extra="Check all that apply"
                 >
                   <Checkbox.Group>
-                    <Row>
-                      {latinx.map(ethnicity => (
-                        <Col span={halfSpan}>
-                          <Checkbox
-                            value={ethnicity}
-                            style={{
-                              lineHeight: "32px"
-                            }}
-                          >
-                            {ethnicity}
-                          </Checkbox>
-                        </Col>
-                      ))}
-                    </Row>
+                    {latinx.map(ethnicity => (
+                      <Col>
+                        <Checkbox
+                          value={ethnicity}
+                          style={{
+                            lineHeight: "32px"
+                          }}
+                        >
+                          {ethnicity}
+                        </Checkbox>
+                      </Col>
+                    ))}
                   </Checkbox.Group>
                 </Form.Item>
               </Col>
@@ -296,7 +286,9 @@ class PagePersonal extends Component {
                 </Form.Item>
               </Col>
             </Row>
-
+            <p style={{ paddingBottom: '24px', marginTop: '-12px' }}>
+              Fill out only what you're comfortable with, but understand that missing factors could weaken your application.
+          </p>
             <h1>Please Input Your Educational History</h1>
 
             <Form.List name="Education">
@@ -507,8 +499,8 @@ class PagePersonal extends Component {
       }
     }
     console.log(this.props)
-    let completionPercentage = parseFloat((completedCount/Object.keys(allValues).length).toFixed(2));
-    if (completionPercentage != this.props.completionState[1]) this.props.updateCompletionState(1,completionPercentage)
+    let completionPercentage = parseFloat((completedCount / Object.keys(allValues).length).toFixed(2));
+    if (completionPercentage != this.props.completionState[1]) this.props.updateCompletionState(1, completionPercentage)
 
     if (!_.isEqual(checklist, this.props.completionChecklist[1])) this.props.updateCompletionChecklist(1, checklist)
   }
