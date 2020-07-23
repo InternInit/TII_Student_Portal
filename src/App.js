@@ -484,7 +484,9 @@ class App extends Component {
         {this.resize()}
         <Router>
           <header>
-            <Navbar logout={this.logout} />
+            <Navbar
+              logout={this.logout}
+            />
           </header>
           <ReactSwitch>
             <Route path="/dashboard" render={() => <Dashboard />} />
