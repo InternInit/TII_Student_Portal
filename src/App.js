@@ -21,6 +21,7 @@ import Dashboard from "./components/dashboard/dashboard.jsx";
 import HowtoApply from "./components/HowtoApply";
 import SubmissionSuccess from "./components/submissionSuccess";
 import newStudent from './components/newStudent.jsx';
+import EditProfile from './components/EditProfile.js';
 //CSS Imports
 import "./App.css";
 
@@ -483,7 +484,8 @@ class App extends Component {
           </header>
           <ReactSwitch>
             <Route path="/dashboard" render={() => <Dashboard />} />
-            <Route path="/how-to-apply" exact component={newStudent} />
+            <Route path="/how-to-apply" exact component={HowtoApply} />
+            <Route path="/edit-profile" exact component={EditProfile} />
             <Route path="/apply">{this.AppContainer()}</Route>
             <Route
               path="/submission-success"

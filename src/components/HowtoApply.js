@@ -17,6 +17,8 @@ const Banner = styled.div`
   color: white;
   font-weight: normal;
 `;
+
+
 const Heading = styled.div`
   font-size: 28px;
   padding-bottom: 10px;
@@ -26,6 +28,8 @@ const Heading = styled.div`
   justify-content: align-left;
   margin-top: 70px;
 `;
+
+
 const Text = styled.div`
   padding: 5px;
   font-weight: normal;

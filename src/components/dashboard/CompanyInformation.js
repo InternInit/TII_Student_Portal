@@ -32,6 +32,8 @@ font-weight:500;
 color:#595959;
 margin-top:50px;
 `
+
+
 const Row = styled.div`
  display:flex;
  flex-direction:column;

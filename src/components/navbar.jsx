@@ -121,7 +121,11 @@ class Navbar extends Component {
           title={<Avatar className="navbar-avatar-icon" src={MenuAvatar} />}
           style={avatarStyle}
         >
-          <Menu.Item key="edit-profile">
+          <Menu.Item key="edit-profile"
+            onClick={() => {
+              this.routeChange("/edit-profile");
+            }}
+          >
             <UserOutlined /> Edit Profile
           </Menu.Item>
           <Menu.Item
