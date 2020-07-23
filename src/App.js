@@ -109,6 +109,7 @@ class App extends Component {
     console.log("mounted");
     this.refresh();
     this.getCachedCompletionState();
+    this.getHeaders();
     this.interval = setInterval(() => this.resize(), 500);
     return () => clearInterval(this.interval);
   }
@@ -235,6 +236,20 @@ class App extends Component {
         }
       });
   };
+
+  getHeaders = async () => {
+    let token = await this.getJwt()
+    fetch('/api/auth/getheaders', {
+      method: 'GET', // or 'PUT'
+      headers: {
+        'Authorization': "Bearer " + token,
+      }
+      })
+      .then(response => response.json())
+      .then(data => {
+        console.log('Success:', data);
+      })
+  }
 
   logout = () => {
     fetch("/api/logout")

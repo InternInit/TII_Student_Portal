@@ -44,6 +44,8 @@ elif(app.config.get("ENV") == "production"):
     tokenAuthBytes = (username + ":" + password).encode("ascii")
     tokenAuth = base64.b64encode(tokenAuthBytes).decode("ascii")
 
+jwtUrl = "https://jzvyvnvxld.execute-api.us-east-1.amazonaws.com/beta/auth"
+
 @app.route("/api/")
 def root():
     return "root"
@@ -54,7 +56,6 @@ def get_user_data():
     token = request.headers.get("Authorization").split(" ")[1]
     params={"page":page, "token":token}
     req = requests.get(cacheApiUrl, params=params)
-    print(req.text)
     return jsonify(req.text)
 
 
@@ -120,6 +121,12 @@ def refresh():
     refresh = request.cookies.get("refresh_token")
     return jsonify(refresh)
 
+@app.route("/api/auth/getheaders")
+def get_headers():
+    headers = request.headers
+    auth_header = headers.get("Authorization")
+    req = requests.get(jwtUrl, headers={"Authorization":auth_header})
+    return jsonify(json.loads(req.text)["headers"]["claims"])
 
 @app.route("/api/auth/exchange")
 def exchange():
