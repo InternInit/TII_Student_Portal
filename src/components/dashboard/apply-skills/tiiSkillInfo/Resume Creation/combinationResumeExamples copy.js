@@ -144,7 +144,8 @@ margin-left:15%;
     <li class="list">Joined Debate Team and learned argumentative and critical thinking skills.</li>
     <li class="list">Joined Current Events Club to pursue interest in politics.</li>
   </ul>
-  </body>
+  </div>
+
 </body>
 </html>
 `

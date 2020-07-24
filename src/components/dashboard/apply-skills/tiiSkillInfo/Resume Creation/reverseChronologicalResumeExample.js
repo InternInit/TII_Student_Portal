@@ -69,6 +69,7 @@ margin-left:15%;
   </style>
 </head>
 <body class="c10">
+<div class = "body">
 <p class="header">Dawn Gardener</p>
 <p class="header2">Phone Number:
 </p>
@@ -137,7 +138,8 @@ Address:
   <p class="c2 c8"></p>
   <p class="header2">Awards</p>
    <p class="info"><span>March 2017&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Placed first in regional debate competition.</p>
-</body>
+</div>
+   </body>
 </html>
 `
 export default reverseChronologicalResumeExample;
