@@ -1,4 +1,4 @@
-const writingACoverLetter = `<html>
+const writingACoverLetter = ` <html>
 <head>
   <meta content="text/html; charset=UTF-8" http-equiv="content-type" />
   <style type="text/css">
@@ -27,7 +27,7 @@ const writingACoverLetter = `<html>
       list-style-type: none;
     }
     .lst-kix_1jr43lk6f50b-7 > li:before {
-      content: "\0025cb   ";
+      content: "\\0025cb   ";
     }
     ul.lst-kix_fve67emw1yxs-5 {
       list-style-type: none;
@@ -45,37 +45,37 @@ const writingACoverLetter = `<html>
       list-style-type: none;
     }
     .lst-kix_1jr43lk6f50b-6 > li:before {
-      content: "\0025cf   ";
+      content: "\\0025cf   ";
     }
     .lst-kix_sax64jvb0g1w-8 > li {
       counter-increment: lst-ctn-kix_sax64jvb0g1w-8;
     }
     .lst-kix_1jr43lk6f50b-8 > li:before {
-      content: "\0025a0   ";
+      content: "\\0025a0   ";
     }
     .lst-kix_sax64jvb0g1w-1 > li {
       counter-increment: lst-ctn-kix_sax64jvb0g1w-1;
     }
     .lst-kix_1jr43lk6f50b-1 > li:before {
-      content: "\0025cb   ";
+      content: "\\0025cb   ";
     }
     .lst-kix_1jr43lk6f50b-2 > li:before {
-      content: "\0025a0   ";
+      content: "\\0025a0   ";
     }
     ol.lst-kix_sax64jvb0g1w-2.start {
       counter-reset: lst-ctn-kix_sax64jvb0g1w-2 0;
     }
     .lst-kix_1jr43lk6f50b-3 > li:before {
-      content: "\0025cf   ";
+      content: "\\0025cf   ";
     }
     .lst-kix_1jr43lk6f50b-5 > li:before {
-      content: "\0025a0   ";
+      content: "\\0025a0   ";
     }
     .lst-kix_sax64jvb0g1w-7 > li {
       counter-increment: lst-ctn-kix_sax64jvb0g1w-7;
     }
     .lst-kix_1jr43lk6f50b-4 > li:before {
-      content: "\0025cb   ";
+      content: "\\0025cb   ";
     }
     .lst-kix_sax64jvb0g1w-0 > li {
       counter-increment: lst-ctn-kix_sax64jvb0g1w-0;
@@ -105,37 +105,37 @@ const writingACoverLetter = `<html>
       content: "" counter(lst-ctn-kix_sax64jvb0g1w-1, lower-latin) ". ";
     }
     .lst-kix_5m6c7tajtw2p-3 > li:before {
-      content: "\0025cf   ";
+      content: "\\0025cf   ";
     }
     ol.lst-kix_sax64jvb0g1w-3.start {
       counter-reset: lst-ctn-kix_sax64jvb0g1w-3 0;
     }
     .lst-kix_5m6c7tajtw2p-2 > li:before {
-      content: "\0025a0   ";
+      content: "\\0025a0   ";
     }
     .lst-kix_5m6c7tajtw2p-0 > li:before {
-      content: "\0025cf   ";
+      content: "\\0025cf   ";
     }
     .lst-kix_5m6c7tajtw2p-1 > li:before {
-      content: "\0025cb   ";
+      content: "\\0025cb   ";
     }
     .lst-kix_fve67emw1yxs-5 > li:before {
-      content: "\0025a0   ";
+      content: "\\0025a0   ";
     }
     ol.lst-kix_sax64jvb0g1w-1.start {
       counter-reset: lst-ctn-kix_sax64jvb0g1w-1 0;
     }
     .lst-kix_fve67emw1yxs-3 > li:before {
-      content: "\0025cf   ";
+      content: "\\0025cf   ";
     }
     .lst-kix_fve67emw1yxs-7 > li:before {
-      content: "\0025cb   ";
+      content: "\\0025cb   ";
     }
     .lst-kix_fve67emw1yxs-2 > li:before {
-      content: "\0025a0   ";
+      content: "\\0025a0   ";
     }
     .lst-kix_fve67emw1yxs-6 > li:before {
-      content: "\0025cf   ";
+      content: "\\0025cf   ";
     }
     ul.lst-kix_5m6c7tajtw2p-3 {
       list-style-type: none;
@@ -144,7 +144,7 @@ const writingACoverLetter = `<html>
       counter-reset: lst-ctn-kix_sax64jvb0g1w-8 0;
     }
     .lst-kix_fve67emw1yxs-1 > li:before {
-      content: "\0025cb   ";
+      content: "\\0025cb   ";
     }
     ul.lst-kix_5m6c7tajtw2p-4 {
       list-style-type: none;
@@ -159,25 +159,25 @@ const writingACoverLetter = `<html>
       list-style-type: none;
     }
     .lst-kix_fve67emw1yxs-0 > li:before {
-      content: "\0025cf   ";
+      content: "\\0025cf   ";
     }
     .lst-kix_fve67emw1yxs-8 > li:before {
-      content: "\0025a0   ";
+      content: "\\0025a0   ";
     }
     .lst-kix_5m6c7tajtw2p-4 > li:before {
-      content: "\0025cb   ";
+      content: "\\0025cb   ";
     }
     .lst-kix_sax64jvb0g1w-4 > li {
       counter-increment: lst-ctn-kix_sax64jvb0g1w-4;
     }
     .lst-kix_5m6c7tajtw2p-5 > li:before {
-      content: "\0025a0   ";
+      content: "\\0025a0   ";
     }
     ol.lst-kix_sax64jvb0g1w-4.start {
       counter-reset: lst-ctn-kix_sax64jvb0g1w-4 0;
     }
     .lst-kix_5m6c7tajtw2p-6 > li:before {
-      content: "\0025cf   ";
+      content: "\\0025cf   ";
     }
     ul.lst-kix_5m6c7tajtw2p-7 {
       list-style-type: none;
@@ -192,13 +192,13 @@ const writingACoverLetter = `<html>
       list-style-type: none;
     }
     .lst-kix_5m6c7tajtw2p-8 > li:before {
-      content: "\0025a0   ";
+      content: "\\0025a0   ";
     }
     .lst-kix_sax64jvb0g1w-5 > li:before {
       content: "" counter(lst-ctn-kix_sax64jvb0g1w-5, lower-roman) ". ";
     }
     .lst-kix_5m6c7tajtw2p-7 > li:before {
-      content: "\0025cb   ";
+      content: "\\0025cb   ";
     }
     .lst-kix_sax64jvb0g1w-6 > li:before {
       content: "" counter(lst-ctn-kix_sax64jvb0g1w-6, decimal) ". ";
@@ -210,7 +210,7 @@ const writingACoverLetter = `<html>
       counter-reset: lst-ctn-kix_sax64jvb0g1w-7 0;
     }
     .lst-kix_fve67emw1yxs-4 > li:before {
-      content: "\0025cb   ";
+      content: "\\0025cb   ";
     }
     .lst-kix_sax64jvb0g1w-8 > li:before {
       content: "" counter(lst-ctn-kix_sax64jvb0g1w-8, lower-roman) ". ";
@@ -243,7 +243,7 @@ const writingACoverLetter = `<html>
       list-style-type: none;
     }
     .lst-kix_1jr43lk6f50b-0 > li:before {
-      content: "\0025cf   ";
+      content: "\\0025cf   ";
     }
     ol.lst-kix_sax64jvb0g1w-8 {
       list-style-type: none;

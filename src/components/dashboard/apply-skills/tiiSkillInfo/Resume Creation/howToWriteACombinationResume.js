@@ -42,7 +42,7 @@ const howToWriteACombinationResume = `<html>
       counter-increment: lst-ctn-kix_6oj34jhvgchu-8;
     }
     .lst-kix_9h7pn4rpasti-1 > li:before {
-      content: "\0025cb   ";
+      content: "\\0025cb   ";
     }
     ol.lst-kix_6oj34jhvgchu-6 {
       list-style-type: none;
@@ -51,10 +51,10 @@ const howToWriteACombinationResume = `<html>
       list-style-type: none;
     }
     .lst-kix_9h7pn4rpasti-0 > li:before {
-      content: "\0025cf   ";
+      content: "\\0025cf   ";
     }
     .lst-kix_9h7pn4rpasti-2 > li:before {
-      content: "\0025a0   ";
+      content: "\\0025a0   ";
     }
     ol.lst-kix_6oj34jhvgchu-4 {
       list-style-type: none;
@@ -81,10 +81,10 @@ const howToWriteACombinationResume = `<html>
       list-style-type: none;
     }
     .lst-kix_9h7pn4rpasti-4 > li:before {
-      content: "\0025cb   ";
+      content: "\\0025cb   ";
     }
     .lst-kix_9h7pn4rpasti-5 > li:before {
-      content: "\0025a0   ";
+      content: "\\0025a0   ";
     }
     ul.lst-kix_9h7pn4rpasti-8 {
       list-style-type: none;
@@ -105,13 +105,13 @@ const howToWriteACombinationResume = `<html>
       counter-increment: lst-ctn-kix_6oj34jhvgchu-4;
     }
     .lst-kix_9h7pn4rpasti-3 > li:before {
-      content: "\0025cf   ";
+      content: "\\0025cf   ";
     }
     .lst-kix_9h7pn4rpasti-6 > li:before {
-      content: "\0025cf   ";
+      content: "\\0025cf   ";
     }
     .lst-kix_9h7pn4rpasti-7 > li:before {
-      content: "\0025cb   ";
+      content: "\\0025cb   ";
     }
     .lst-kix_6oj34jhvgchu-2 > li:before {
       content: "" counter(lst-ctn-kix_6oj34jhvgchu-2, lower-roman) ". ";
@@ -159,7 +159,7 @@ const howToWriteACombinationResume = `<html>
       content: "" counter(lst-ctn-kix_6oj34jhvgchu-6, decimal) ". ";
     }
     .lst-kix_9h7pn4rpasti-8 > li:before {
-      content: "\0025a0   ";
+      content: "\\0025a0   ";
     }
     .lst-kix_6oj34jhvgchu-8 > li:before {
       content: "" counter(lst-ctn-kix_6oj34jhvgchu-8, lower-roman) ". ";

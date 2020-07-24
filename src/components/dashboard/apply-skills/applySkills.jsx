@@ -27,7 +27,7 @@ import Extra_Info from "./tiiArrayPictures/Extra_Info.jpg";
 import BigCard from "./bigCard";
 import LittleCard from "./littleCard";
 
-import { Card, Row, Col } from "antd";
+import { Card, Row, Col, PageHeader } from "antd";
 
 import {
   BrowserRouter as Router,
@@ -40,24 +40,23 @@ import {
 } from "react-router-dom";
 import { withRouter } from "react-router";
 
-
 //Apply Skills html files
 import fillingOutAnApplication from "./tiiSkillInfo/Application/fillingOutAnApplication.js";
-//import writingACoverLetter from './tiiSkillInfo/Cover-Letters/writingACoverLetter.js'
-import howToActInAnInterview from './tiiSkillInfo/Interview/howToActInAnInterview.js';
-import introductionToInterviewing from './tiiSkillInfo/Interview/introductionToInterviewing.js';
-import mockInterviewQuestions from './tiiSkillInfo/Interview/mockInterviewQuestions.js';
-import whatToDoBeforeAndAfterTheInterview from './tiiSkillInfo/Interview/whatToDoBeforeAndAfterTheInterview.js';
-import whatToSayInAnInterview from './tiiSkillInfo/Interview/whatToSayInAnInterview.js';
-import lettersOfReccomendation from './tiiSkillInfo/Letters of Recommendation/lettersOfReccomendation.js';
-import additonalResources from './tiiSkillInfo/Other/additionalResources.js';
-import choosingYourResume from './tiiSkillInfo/Resume Creation/choosingYourResume.js';
-//import combinationResumeExamples from './tiiSkillInfo/Resume Creation/combinationResumeExamples.js';
-//import functionalResumeExample from './tiiSkillInfo/Resume Creation/functionalResumeExample.js';
-//import howToWriteACombinationResume from './tiiSkillInfo/Resume Creation/howToWriteACombinationResume.js';
-//import howToWriteAFunctionalResume from './tiiSkillInfo/Resume Creation/howToWriteAFunctionalResume.js';
-//import reverseChronologicalResumeExample from './tiiSkillInfo/Resume Creation/reverseChronologicalResumeExample.js';
-import whatShouldIIncludeOnMyResume from './tiiSkillInfo/Resume Creation/whatShouldIIncludeOnMyResume.js';
+import writingACoverLetter from "./tiiSkillInfo/Cover-Letters/writingACoverLetter.js";
+import howToActInAnInterview from "./tiiSkillInfo/Interview/howToActInAnInterview.js";
+import introductionToInterviewing from "./tiiSkillInfo/Interview/introductionToInterviewing.js";
+import mockInterviewQuestions from "./tiiSkillInfo/Interview/mockInterviewQuestions.js";
+import whatToDoBeforeAndAfterTheInterview from "./tiiSkillInfo/Interview/whatToDoBeforeAndAfterTheInterview.js";
+import whatToSayInAnInterview from "./tiiSkillInfo/Interview/whatToSayInAnInterview.js";
+import lettersOfReccomendation from "./tiiSkillInfo/Letters of Recommendation/lettersOfReccomendation.js";
+import additonalResources from "./tiiSkillInfo/Other/additionalResources.js";
+import choosingYourResume from "./tiiSkillInfo/Resume Creation/choosingYourResume.js";
+import combinationResumeExamples from "./tiiSkillInfo/Resume Creation/combinationResumeExamples.js";
+import functionalResumeExample from "./tiiSkillInfo/Resume Creation/functionalResumeExample.js";
+import howToWriteACombinationResume from "./tiiSkillInfo/Resume Creation/howToWriteACombinationResume.js";
+import howToWriteAFunctionalResume from "./tiiSkillInfo/Resume Creation/howToWriteAFunctionalResume.js";
+import reverseChronologicalResumeExample from "./tiiSkillInfo/Resume Creation/reverseChronologicalResumeExample.js";
+import whatShouldIIncludeOnMyResume from "./tiiSkillInfo/Resume Creation/whatShouldIIncludeOnMyResume.js";
 
 const resumeSkills = [
   [
@@ -80,37 +79,49 @@ const resumeSkills = [
     Writing_Reverse_Chronological,
     "Writing a Reverse Chronological Resume",
     "15 minutes",
-    "If you’ve had prior job experiences, read on to learn how to create a reverse chronological resume."
+    "If you’ve had prior job experiences, read on to learn how to create a reverse chronological resume.",
+    "#",
+    ""
   ],
   [
     Writing_Functional_Resume,
     "Writing a Functional Resume",
     "15 minutes",
-    "If you don’t have any prior work experience, don’t fret. Read on to learn how to create a functional resume."
+    "If you don’t have any prior work experience, don’t fret. Read on to learn how to create a functional resume.",
+    "writing-a-functional-resume",
+    howToWriteAFunctionalResume
   ],
   [
     Writing_Combination_Resume,
     "Writing a Combination Resume",
     "15 minutes",
-    "If you want to show your skills AND work experience, a combination resume may be for you. Learn how to create a combination resume."
+    "If you want to show your skills AND work experience, a combination resume may be for you. Learn how to create a combination resume.",
+    "writing-a-combination-resume",
+    howToWriteACombinationResume
   ],
   [
     Reverse_Chron_Resume_Example,
     "Reverse Chronological Resume Example",
     "15 minutes",
-    "Take a look at what a reverse chronological resume could look like."
+    "Take a look at what a reverse chronological resume could look like.",
+    "reverse-chronological-resume-example",
+    reverseChronologicalResumeExample
   ],
   [
     Funct_Resume_Example,
     "Functional Resume Example",
     "15 minutes",
-    "Take a look at what a functional resume could look like."
+    "Take a look at what a functional resume could look like.",
+    "functional-resume-example",
+    functionalResumeExample
   ],
   [
     Comb_Resume_Example,
     "Combination Resume Example",
     "15 minutes",
-    "Take a look at what a combination resume could look like."
+    "Take a look at what a combination resume could look like.",
+    "combination-resume-example",
+    combinationResumeExamples
   ]
 ];
 const interviewSkills = [
@@ -120,7 +131,7 @@ const interviewSkills = [
     "10 minutes",
     "Prepare yourself for a job interview by reviewing what you should (and shouldn’t) say.",
     "what-to-say-in-an-interview",
-    whatToSayInAnInterview,
+    whatToSayInAnInterview
   ],
   [
     How_to_act_Interview,
@@ -129,7 +140,6 @@ const interviewSkills = [
     "There are many Do’s and Do NOT’s in job interviews. Learn more about the various facets of the interview process so you can land your internship.",
     "how-to-act-in-an-interview",
     howToActInAnInterview
-
   ],
   [
     Before_After_Interview,
@@ -138,7 +148,6 @@ const interviewSkills = [
     "Give yourself an edge in the interview process by preparing before it begins and making yourself more memorable afterwards.",
     "what-to-do-before-and-after-the-interview",
     whatToDoBeforeAndAfterTheInterview
-
   ],
   [
     Mock_Interview_Questions,
@@ -147,7 +156,6 @@ const interviewSkills = [
     "12 questions that you might be asked during an interview.",
     "mock-interview-questions",
     mockInterviewQuestions
-
   ]
 ];
 const writtenSkills = [
@@ -165,7 +173,7 @@ const writtenSkills = [
     "10 minutes",
     "A quick tutorial explaining cover letters and how to write them.",
     "cover-letter",
-
+    writingACoverLetter
   ],
   [
     Extra_Info,
@@ -177,13 +185,19 @@ const writtenSkills = [
   ]
 ];
 
+const SkillsContainer = styled.div`
+  background: white;
+  border-radius: 10px;
+  padding: 3%;
+`;
+
 class ApplySkills extends Component {
   constructor(props) {
     super(props);
     this.handleClick = this.handleClick.bind(this);
     this.state = {
       pageContent: fillingOutAnApplication
-    }
+    };
   }
   render() {
     let { pageContent } = this.state;
@@ -199,7 +213,7 @@ class ApplySkills extends Component {
         <Route exact path="/dashboard/apply-skills/">
           <h1 className="module-name">Get Started</h1>
           <BigCard
-            link="#"
+            link="/dashboard/apply-skills/filling-out-an-application"
             cover={GettingStarted}
             title="Why do I need an internship?"
             description="Curious about why you would need an internship? Check out our
@@ -217,8 +231,9 @@ class ApplySkills extends Component {
                 title={module[1]}
                 readTime={module[2]}
                 description={module[3]}
-                onClick={() => { this.handleClick(module[5]) }}
-
+                onClick={() => {
+                  this.handleClick(module[5]);
+                }}
               />
             ))}
           </Row>
@@ -231,7 +246,9 @@ class ApplySkills extends Component {
                 title={module[1]}
                 readTime={module[2]}
                 description={module[3]}
-                onClick={() => { this.handleClick(module[5]) }}
+                onClick={() => {
+                  this.handleClick(module[5]);
+                }}
               />
             ))}
           </Row>
@@ -244,33 +261,98 @@ class ApplySkills extends Component {
                 title={module[1]}
                 readTime={module[2]}
                 description={module[3]}
-                onClick={() => { this.handleClick(module[5]) }}
-
+                onClick={() => {
+                  this.handleClick(module[5]);
+                }}
               />
             ))}
           </Row>
         </Route>
 
-
-
-
-        <Route exact path={`/dashboard/apply-skills/:pageID`}>
-          <div dangerouslySetInnerHTML={{ __html: pageContent }}></div>
+        {/*
+         * Big Card Route
+         */}
+        <Route exact path="/dashboard/apply-skills/filling-out-an-application">
+          <SkillsContainer>
+            <Link to="/dashboard/apply-skills/">
+              <PageHeader
+                className="site-page-header"
+                onBack={() => null}
+                title="Back to Apply Skills"
+              />
+            </Link>
+            <div
+              dangerouslySetInnerHTML={{ __html: fillingOutAnApplication }}
+            ></div>
+          </SkillsContainer>
         </Route>
 
+        {/*
+         * Mapped routes for resume skills
+         */}
 
+        {resumeSkills.map(module => (
+          <Route exact path={"/dashboard/apply-skills/" + module[4]}>
+            <SkillsContainer>
+              <Link to="/dashboard/apply-skills/">
+                <PageHeader
+                  className="site-page-header"
+                  onBack={() => null}
+                  title="Back to Apply Skills"
+                />
+              </Link>
+              <div
+                className="container"
+                dangerouslySetInnerHTML={{ __html: module[5] }}
+              ></div>
+            </SkillsContainer>
+          </Route>
+        ))}
 
+        {/*
+         * Mapped routes for interview skills
+         */}
+        {interviewSkills.map(module => (
+          <Route exact path={"/dashboard/apply-skills/" + module[4]}>
+            <SkillsContainer>
+              <Link to="/dashboard/apply-skills/">
+                <PageHeader
+                  className="site-page-header"
+                  onBack={() => null}
+                  title="Back to Apply Skills"
+                />
+              </Link>
+              <div dangerouslySetInnerHTML={{ __html: module[5] }}></div>
+            </SkillsContainer>
+          </Route>
+        ))}
 
+        {/*
+         * Mapped routes for written skills
+         */}
+        {writtenSkills.map(module => (
+          <Route exact path={"/dashboard/apply-skills/" + module[4]}>
+            <SkillsContainer>
+              <Link to="/dashboard/apply-skills/">
+                <PageHeader
+                  className="site-page-header"
+                  onBack={() => null}
+                  title="Back to Apply Skills"
+                />
+              </Link>
+              <div dangerouslySetInnerHTML={{ __html: module[5] }}></div>
+            </SkillsContainer>
+          </Route>
+        ))}
       </div>
     );
   }
 
-  handleClick = (content) => {
+  handleClick = content => {
     this.setState({
       pageContent: content
-    })
-  }
-
+    });
+  };
 }
 
 export default withRouter(ApplySkills);
