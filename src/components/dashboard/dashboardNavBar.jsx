@@ -17,25 +17,23 @@ const MenuItemStyle = {
 class DashboardNavBar extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      current: this.getCurrentKey()
-    };
   }
 
   /**
-   * 
+   *
    * Displaying Current Page
-   * 
+   *
    */
   getCurrentKey = () => {
-    let defaultKey = window.location.pathname;
+    let defaultKey = this.props.location.pathname;
+    console.log(defaultKey);
     if (defaultKey === "/") {
       return "my-internships";
+    } else if (defaultKey.includes("add-companies")) {
+      return "add-companies";
+    } else {
+      return "apply-skills"
     }
-    console.log(defaultKey);
-    let newDefaultKey = defaultKey.replace("/dashboard/", "");
-    console.log(newDefaultKey);
-    return newDefaultKey;
   };
 
   render() {
@@ -44,14 +42,14 @@ class DashboardNavBar extends Component {
         <Menu
           className="dashboard-nav"
           onClick={this.handleClick}
-          defaultSelectedKeys={[this.state.current]}
+          defaultSelectedKeys={[this.getCurrentKey()]}
           style={{ backgroundColor: "#F5F5F5" }}
           mode="horizontal"
         >
           {/**
-           * 
+           *
            * Link to My Internships Page
-           * 
+           *
            */}
           <Menu.Item style={MenuItemStyle} key="my-internships">
             <Link to="/dashboard/my-internships">My Internships</Link>
@@ -59,9 +57,9 @@ class DashboardNavBar extends Component {
 
 
           {/**
-           * 
+           *
            * Link to Company Search Page
-           * 
+           *
            */}
           <Menu.Item style={MenuItemStyle} key="add-companies">
             <Link to="/dashboard/add-companies">Add Companies</Link>
@@ -69,9 +67,9 @@ class DashboardNavBar extends Component {
 
 
           {/**
-           * 
+           *
            * Link to Apply Skills Page
-           * 
+           *
            */}
           <Menu.Item style={MenuItemStyle} key="apply-skills">
             <Link to="/dashboard/apply-skills">Apply Skills</Link>
