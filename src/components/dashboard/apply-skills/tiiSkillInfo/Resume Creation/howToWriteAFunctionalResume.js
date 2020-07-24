@@ -99,7 +99,7 @@ const howToWriteAFunctionalResume = `<html>
       list-style-type: none;
     }
     .lst-kix_qq304sgl3vgw-1 > li:before {
-      content: "\0025cb   ";
+      content: "\\0025cb   ";
     }
     ol.lst-kix_t9sctjcftonp-4.start {
       counter-reset: lst-ctn-kix_t9sctjcftonp-4 0;
@@ -123,19 +123,19 @@ const howToWriteAFunctionalResume = `<html>
       list-style-type: none;
     }
     .lst-kix_qq304sgl3vgw-0 > li:before {
-      content: "\0025cf   ";
+      content: "\\0025cf   ";
     }
     .lst-kix_qq304sgl3vgw-4 > li:before {
-      content: "\0025cb   ";
+      content: "\\0025cb   ";
     }
     .lst-kix_3a7z6vwsnt30-1 > li {
       counter-increment: lst-ctn-kix_3a7z6vwsnt30-1;
     }
     .lst-kix_qq304sgl3vgw-3 > li:before {
-      content: "\0025cf   ";
+      content: "\\0025cf   ";
     }
     .lst-kix_qq304sgl3vgw-2 > li:before {
-      content: "\0025a0   ";
+      content: "\\0025a0   ";
     }
     ol.lst-kix_t9sctjcftonp-3 {
       list-style-type: none;
@@ -150,13 +150,13 @@ const howToWriteAFunctionalResume = `<html>
       list-style-type: none;
     }
     .lst-kix_qq304sgl3vgw-7 > li:before {
-      content: "\0025cb   ";
+      content: "\\0025cb   ";
     }
     ol.lst-kix_t9sctjcftonp-7.start {
       counter-reset: lst-ctn-kix_t9sctjcftonp-7 0;
     }
     .lst-kix_qq304sgl3vgw-8 > li:before {
-      content: "\0025a0   ";
+      content: "\\0025a0   ";
     }
     ol.lst-kix_t9sctjcftonp-0.start {
       counter-reset: lst-ctn-kix_t9sctjcftonp-0 0;
@@ -174,7 +174,7 @@ const howToWriteAFunctionalResume = `<html>
       list-style-type: none;
     }
     .lst-kix_qq304sgl3vgw-5 > li:before {
-      content: "\0025a0   ";
+      content: "\\0025a0   ";
     }
     ol.lst-kix_t9sctjcftonp-7 {
       list-style-type: none;
@@ -201,7 +201,7 @@ const howToWriteAFunctionalResume = `<html>
       list-style-type: none;
     }
     .lst-kix_qq304sgl3vgw-6 > li:before {
-      content: "\0025cf   ";
+      content: "\\0025cf   ";
     }
     ol.lst-kix_3a7z6vwsnt30-8.start {
       counter-reset: lst-ctn-kix_3a7z6vwsnt30-8 0;

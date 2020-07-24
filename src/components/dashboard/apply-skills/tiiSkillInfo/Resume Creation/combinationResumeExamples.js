@@ -9,25 +9,25 @@ const combinationResumeExamples = `<html>
       list-style-type: none;
     }
     .lst-kix_f0cn4d8d19si-7 > li:before {
-      content: "\0025cb   ";
+      content: "\\0025cb   ";
     }
     .lst-kix_sq8yxfxtyw5m-1 > li:before {
-      content: "\0025cb   ";
+      content: "\\0025cb   ";
     }
     .lst-kix_f0cn4d8d19si-6 > li:before {
-      content: "\0025cf   ";
+      content: "\\0025cf   ";
     }
     .lst-kix_sq8yxfxtyw5m-2 > li:before {
-      content: "\0025a0   ";
+      content: "\\0025a0   ";
     }
     .lst-kix_f0cn4d8d19si-0 > li:before {
-      content: "\0025cf   ";
+      content: "\\0025cf   ";
     }
     .lst-kix_f0cn4d8d19si-8 > li:before {
-      content: "\0025a0   ";
+      content: "\\0025a0   ";
     }
     .lst-kix_sq8yxfxtyw5m-3 > li:before {
-      content: "\0025cf   ";
+      content: "\\0025cf   ";
     }
     ul.lst-kix_hcmxvxksgi1c-5 {
       list-style-type: none;
@@ -48,7 +48,7 @@ const combinationResumeExamples = `<html>
       list-style-type: none;
     }
     .lst-kix_sq8yxfxtyw5m-0 > li:before {
-      content: "\0025cf   ";
+      content: "\\0025cf   ";
     }
     ul.lst-kix_hcmxvxksgi1c-2 {
       list-style-type: none;
@@ -60,43 +60,43 @@ const combinationResumeExamples = `<html>
       list-style-type: none;
     }
     .lst-kix_dwt5equjo88q-1 > li:before {
-      content: "\0025cb   ";
+      content: "\\0025cb   ";
     }
     .lst-kix_dwt5equjo88q-0 > li:before {
-      content: "\0025cf   ";
+      content: "\\0025cf   ";
     }
     .lst-kix_dwt5equjo88q-2 > li:before {
-      content: "\0025a0   ";
+      content: "\\0025a0   ";
     }
     .lst-kix_dwt5equjo88q-3 > li:before {
-      content: "\0025cf   ";
+      content: "\\0025cf   ";
     }
     .lst-kix_jzeh4keglue9-7 > li:before {
-      content: "\0025cb   ";
+      content: "\\0025cb   ";
     }
     .lst-kix_jzeh4keglue9-8 > li:before {
-      content: "\0025a0   ";
+      content: "\\0025a0   ";
     }
     .lst-kix_dwt5equjo88q-8 > li:before {
-      content: "\0025a0   ";
+      content: "\\0025a0   ";
     }
     .lst-kix_dwt5equjo88q-7 > li:before {
-      content: "\0025cb   ";
+      content: "\\0025cb   ";
     }
     ul.lst-kix_sq8yxfxtyw5m-8 {
       list-style-type: none;
     }
     .lst-kix_dwt5equjo88q-5 > li:before {
-      content: "\0025a0   ";
+      content: "\\0025a0   ";
     }
     ul.lst-kix_sq8yxfxtyw5m-6 {
       list-style-type: none;
     }
     .lst-kix_dwt5equjo88q-4 > li:before {
-      content: "\0025cb   ";
+      content: "\\0025cb   ";
     }
     .lst-kix_dwt5equjo88q-6 > li:before {
-      content: "\0025cf   ";
+      content: "\\0025cf   ";
     }
     ul.lst-kix_sq8yxfxtyw5m-7 {
       list-style-type: none;
@@ -159,7 +159,7 @@ const combinationResumeExamples = `<html>
       list-style-type: none;
     }
     .lst-kix_jzeh4keglue9-6 > li:before {
-      content: "\0025cf   ";
+      content: "\\0025cf   ";
     }
     ul.lst-kix_f0cn4d8d19si-1 {
       list-style-type: none;
@@ -168,43 +168,43 @@ const combinationResumeExamples = `<html>
       list-style-type: none;
     }
     .lst-kix_jzeh4keglue9-5 > li:before {
-      content: "\0025a0   ";
+      content: "\\0025a0   ";
     }
     .lst-kix_hcmxvxksgi1c-8 > li:before {
-      content: "\0025a0   ";
+      content: "\\0025a0   ";
     }
     ul.lst-kix_jzeh4keglue9-8 {
       list-style-type: none;
     }
     .lst-kix_jzeh4keglue9-4 > li:before {
-      content: "\0025cb   ";
+      content: "\\0025cb   ";
     }
     .lst-kix_hcmxvxksgi1c-6 > li:before {
-      content: "\0025cf   ";
+      content: "\\0025cf   ";
     }
     .lst-kix_jzeh4keglue9-1 > li:before {
-      content: "\0025cb   ";
+      content: "\\0025cb   ";
     }
     .lst-kix_jzeh4keglue9-3 > li:before {
-      content: "\0025cf   ";
+      content: "\\0025cf   ";
     }
     .lst-kix_hcmxvxksgi1c-3 > li:before {
-      content: "\0025cf   ";
+      content: "\\0025cf   ";
     }
     .lst-kix_hcmxvxksgi1c-7 > li:before {
-      content: "\0025cb   ";
+      content: "\\0025cb   ";
     }
     .lst-kix_jzeh4keglue9-2 > li:before {
-      content: "\0025a0   ";
+      content: "\\0025a0   ";
     }
     .lst-kix_hcmxvxksgi1c-4 > li:before {
-      content: "\0025cb   ";
+      content: "\\0025cb   ";
     }
     .lst-kix_hcmxvxksgi1c-5 > li:before {
-      content: "\0025a0   ";
+      content: "\\0025a0   ";
     }
     .lst-kix_jzeh4keglue9-0 > li:before {
-      content: "\0025cf   ";
+      content: "\\0025cf   ";
     }
     ul.lst-kix_dwt5equjo88q-3 {
       list-style-type: none;
@@ -216,13 +216,13 @@ const combinationResumeExamples = `<html>
       list-style-type: none;
     }
     .lst-kix_f0cn4d8d19si-1 > li:before {
-      content: "\0025cb   ";
+      content: "\\0025cb   ";
     }
     .lst-kix_sq8yxfxtyw5m-4 > li:before {
-      content: "\0025cb   ";
+      content: "\\0025cb   ";
     }
     .lst-kix_sq8yxfxtyw5m-6 > li:before {
-      content: "\0025cf   ";
+      content: "\\0025cf   ";
     }
     ul.lst-kix_dwt5equjo88q-4 {
       list-style-type: none;
@@ -234,40 +234,40 @@ const combinationResumeExamples = `<html>
       list-style-type: none;
     }
     .lst-kix_f0cn4d8d19si-2 > li:before {
-      content: "\0025a0   ";
+      content: "\\0025a0   ";
     }
     .lst-kix_sq8yxfxtyw5m-5 > li:before {
-      content: "\0025a0   ";
+      content: "\\0025a0   ";
     }
     ul.lst-kix_dwt5equjo88q-8 {
       list-style-type: none;
     }
     .lst-kix_hcmxvxksgi1c-2 > li:before {
-      content: "\0025a0   ";
+      content: "\\0025a0   ";
     }
     .lst-kix_f0cn4d8d19si-3 > li:before {
-      content: "\0025cf   ";
+      content: "\\0025cf   ";
     }
     .lst-kix_f0cn4d8d19si-5 > li:before {
-      content: "\0025a0   ";
+      content: "\\0025a0   ";
     }
     .lst-kix_sq8yxfxtyw5m-8 > li:before {
-      content: "\0025a0   ";
+      content: "\\0025a0   ";
     }
     .lst-kix_hcmxvxksgi1c-0 > li:before {
-      content: "\0025cf   ";
+      content: "\\0025cf   ";
     }
     .lst-kix_hcmxvxksgi1c-1 > li:before {
-      content: "\0025cb   ";
+      content: "\\0025cb   ";
     }
     ul.lst-kix_dwt5equjo88q-1 {
       list-style-type: none;
     }
     .lst-kix_f0cn4d8d19si-4 > li:before {
-      content: "\0025cb   ";
+      content: "\\0025cb   ";
     }
     .lst-kix_sq8yxfxtyw5m-7 > li:before {
-      content: "\0025cb   ";
+      content: "\\0025cb   ";
     }
     ul.lst-kix_dwt5equjo88q-0 {
       list-style-type: none;
