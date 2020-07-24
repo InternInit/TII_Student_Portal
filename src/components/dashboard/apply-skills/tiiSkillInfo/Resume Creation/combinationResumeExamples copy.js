@@ -2,10 +2,7 @@ const combinationResumeExamples = `<html>
 <head>
   <meta content="text/html; charset=UTF-8" http-equiv="content-type" />
   <style type="text/css">
-  margin-left:36px;
-  .list{
-    text-align:left;
-  }
+ 
   .list{
     text-align:left;
     margin-left:12px;

@@ -287,6 +287,7 @@ class ApplySkills extends Component {
           </SkillsContainer>
         </Route>
 
+
         {/*
          * Mapped routes for resume skills
          */}
@@ -327,6 +328,9 @@ class ApplySkills extends Component {
           </Route>
         ))}
 
+
+
+
         {/*
          * Mapped routes for written skills
          */}
@@ -344,6 +348,9 @@ class ApplySkills extends Component {
             </SkillsContainer>
           </Route>
         ))}
+
+
+
       </div>
     );
   }
