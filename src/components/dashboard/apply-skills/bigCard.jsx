@@ -16,7 +16,7 @@ function BigCard(props) {
       <Card
         style={{ width: "100%", borderRadius: "15px", border: "none" }}
         cover={
-          <img className="apply-skills-big-card-cover" src={props.cover} />
+          <img className="apply-skills-big-card-cover" src={props.cover} style={{ pointerEvents: 'none' }} />
         }
         hoverable
       >
