@@ -25,7 +25,10 @@
     "react-scripts": "3.4.1",
     "redux": "^4.0.5",
     "styled-components": "^5.1.0",
-    "underscore": "^1.10.2"
+    "underscore": "^1.10.2",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -49,5 +52,7 @@
       "last 1 safari version"
     ]
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "html-loader": "^1.1.0"
+  }
 }
