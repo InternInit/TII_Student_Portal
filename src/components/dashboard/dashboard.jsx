@@ -93,6 +93,7 @@ class Dashboard extends Component {
                 />
 
                 <Route path="/dashboard/my-internships" exact>
+                  {window.scrollTo(0, 0)}
                   <ApplicationProgress />
                   <PinCompany />
                   <ActiveApplications />

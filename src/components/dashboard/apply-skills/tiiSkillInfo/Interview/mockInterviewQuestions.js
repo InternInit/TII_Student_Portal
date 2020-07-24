@@ -144,7 +144,7 @@ const mockInterviewQuestions = `
         text-decoration: none;
         vertical-align: baseline;
         font-size: 26pt;
-        font-family: "Arial";
+        font-family: "Roboto";
         font-style: normal;
       }
       .c9 {
@@ -162,7 +162,7 @@ const mockInterviewQuestions = `
         text-decoration: none;
         vertical-align: baseline;
         font-size: 11pt;
-        font-family: "Arial";
+        font-family: "Roboto";
         font-style: normal;
       }
       .c5 {
@@ -206,7 +206,7 @@ const mockInterviewQuestions = `
         color: #000000;
         font-size: 26pt;
         padding-bottom: 3pt;
-        font-family: "Arial";
+        font-family: "Roboto";
         line-height: 1.15;
         page-break-after: avoid;
         orphans: 2;
@@ -218,7 +218,7 @@ const mockInterviewQuestions = `
         color: #666666;
         font-size: 15pt;
         padding-bottom: 16pt;
-        font-family: "Arial";
+        font-family: "Roboto";
         line-height: 1.15;
         page-break-after: avoid;
         orphans: 2;
@@ -228,20 +228,20 @@ const mockInterviewQuestions = `
       li {
         color: #000000;
         font-size: 11pt;
-        font-family: "Arial";
+        font-family: "Roboto";
       }
       p {
         margin: 0;
         color: #000000;
         font-size: 11pt;
-        font-family: "Arial";
+        font-family: "Roboto";
       }
       h1 {
         padding-top: 20pt;
         color: #000000;
         font-size: 20pt;
         padding-bottom: 6pt;
-        font-family: "Arial";
+        font-family: "Roboto";
         line-height: 1.15;
         page-break-after: avoid;
         orphans: 2;
@@ -253,7 +253,7 @@ const mockInterviewQuestions = `
         color: #000000;
         font-size: 16pt;
         padding-bottom: 6pt;
-        font-family: "Arial";
+        font-family: "Roboto";
         line-height: 1.15;
         page-break-after: avoid;
         orphans: 2;
@@ -265,7 +265,7 @@ const mockInterviewQuestions = `
         color: #434343;
         font-size: 14pt;
         padding-bottom: 4pt;
-        font-family: "Arial";
+        font-family: "Roboto";
         line-height: 1.15;
         page-break-after: avoid;
         orphans: 2;
@@ -277,7 +277,7 @@ const mockInterviewQuestions = `
         color: #666666;
         font-size: 12pt;
         padding-bottom: 4pt;
-        font-family: "Arial";
+        font-family: "Roboto";
         line-height: 1.15;
         page-break-after: avoid;
         orphans: 2;
@@ -289,7 +289,7 @@ const mockInterviewQuestions = `
         color: #666666;
         font-size: 11pt;
         padding-bottom: 4pt;
-        font-family: "Arial";
+        font-family: "Roboto";
         line-height: 1.15;
         page-break-after: avoid;
         orphans: 2;
@@ -301,7 +301,7 @@ const mockInterviewQuestions = `
         color: #666666;
         font-size: 11pt;
         padding-bottom: 4pt;
-        font-family: "Arial";
+        font-family: "Roboto";
         line-height: 1.15;
         page-break-after: avoid;
         font-style: italic;
