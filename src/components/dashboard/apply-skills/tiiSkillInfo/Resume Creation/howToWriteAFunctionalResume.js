@@ -23,7 +23,7 @@ const howToWriteAFunctionalResume = `<html>
   color:#000000;
   margin-top:24px;
   }
-  
+
   .header{
     width:70%;
     font-size: 36px;
@@ -33,7 +33,7 @@ const howToWriteAFunctionalResume = `<html>
     font-family:Roboto;
     }
 
-    
+
     .header2{
       display:flex;
       font-size:24px;
@@ -72,8 +72,8 @@ margin-left:15%;
 <div class="body">
   <p class="header">How to Write a Functional Resume</p>
   <p class="hcaption">No resume has a perfect formula that must be followed or else you will not be hired, there are just some things that you need to include. Here we will examine writing a functional resume.</p>
-   <ol class="info" start="1">
-    <li class="header2">Name</li>
+   <ol class="header2" start="1">
+    <li>Name</li>
   </ol>
   <p class="info">Of course, you need your name. It usually goes at the top of the resume in big letters. First and last.</p>
   <ol class="header2" start="2">
@@ -84,19 +84,19 @@ margin-left:15%;
     <li >Resume Summary/Resume Objective</li>
   </ol>
   <p class="info">
-    
+
       This is where you start going into your qualifications. This includes a short paragraph where you summarize all of your qualifications. Remember to connect these qualifications to why you are perfect for the company, and why the
       company is perfect for you.
-    
+
   </p>
   <ol class="header2" start="4">
     <li >Skills</li>
   </ol>
   <p class="info">
-    
+
       This is the bulk of your resume. It includes a list of your skills relevant to an internship. It is always good to say a skill you have and back it up with evidence of that skill (Example: Teamwork obtained from being on the
       softball team). Of course, do not forget to connect these skills to why it would make you a good intern. If you need help, refer to &ldquo;What Should I Include on my Resume?&rdquo;
-    
+
   </p>
   <ol class="header2" start="5">
     <li >Education</li>
@@ -106,9 +106,9 @@ margin-left:15%;
     <li >Awards</li>
   </ol>
   <p class="info">
-    
+
       You can include a section of awards you have achieved as well. If you do not have any, that is okay, the place you are interviewing will know you are just a high school student and have not had many opportunities to get any.
-    
+
   </p>
   <p ></p>
   <p class="tips">Some tips </p>
@@ -120,7 +120,7 @@ margin-left:15%;
   <p ></p>
   <p class="conclusion">We provided example resumes for each template on the classroom if you would like to refer to them.</p>
    <p class="conclusion">
-    <span>Also, many sites online will make a resume for you if you input your information. We won&rsquo;t blame you if you choose to use one. 
+    <span>Also, many sites online will make a resume for you if you input your information. We won&rsquo;t blame you if you choose to use one.
     <span class="c10"><a class="c11" href="https://www.google.com/url?q=https://resumegenius.com/&amp;sa=D&amp;ust=1595442780278000&amp;usg=AOvVaw14ZNjml4fuza5cazIp7qz_">Here</a>&nbsp;is a good one we found.
   </p>
   </div>

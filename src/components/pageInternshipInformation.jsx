@@ -32,10 +32,13 @@ import { withRouter } from "react-router";
 import TiiNav from "./TiiNav";
 
 //Redux
-import { connect } from 'react-redux';
-import { updateCompletionState, updateCompletionChecklist } from '../redux/actions'
+import { connect } from "react-redux";
+import {
+  updateCompletionState,
+  updateCompletionChecklist
+} from "../redux/actions";
 
-import _ from 'lodash'
+import _ from "lodash";
 
 //Object Destructuring
 const { Option } = Select;
@@ -122,7 +125,7 @@ const daysOfTheWeek = [
   "Saturday"
 ];
 const timesOfTheDay = ["Mornings", "Afternoons", "Evenings"];
-const paidOrUnpaid = ["Yes", "No", "It doesn't matter"];
+const paidOrUnpaid = ["Yes", "No"];
 const industry = [
   "General Business",
   "Consulting",
@@ -319,13 +322,13 @@ const mapStateToProps = state => {
   return {
     completionState: state.completionState,
     completionChecklist: state.completionChecklist
-  }
-}
+  };
+};
 
 const mapDispatchToProps = {
   updateCompletionState,
   updateCompletionChecklist
-}
+};
 
 class PageInternshipInformation extends Component {
   constructor(props) {
@@ -384,7 +387,7 @@ class PageInternshipInformation extends Component {
             <Row gutter={formGutter}>
               <Col span={halfSpan}>
                 <Form.Item {...formItemProps.phoneNumber}>
-                  <Input />
+                  <Input placeholder="(XXX)XXX-XXXX" />
                 </Form.Item>
               </Col>
 
@@ -602,30 +605,37 @@ class PageInternshipInformation extends Component {
   }
 
   onValuesChange = () => {
-    let allValues = this.formRef.current.getFieldsValue()
-    delete allValues["Weighted GPA"]
+    let allValues = this.formRef.current.getFieldsValue();
+    delete allValues["Weighted GPA"];
 
     let completedCount = 0;
     let checklist = [];
     for (var field in allValues) {
       if (allValues.hasOwnProperty(field)) {
         let item = {};
-        item.key = field
-        if (typeof allValues[field] !== 'undefined' && allValues[field] !== "") {
+        item.key = field;
+        if (
+          typeof allValues[field] !== "undefined" &&
+          allValues[field] !== ""
+        ) {
           completedCount++;
-          item.completed = true
+          item.completed = true;
         } else {
-          item.completed = false
+          item.completed = false;
         }
         //console.log(item)
-        checklist.push(item)
+        checklist.push(item);
       }
     }
-    let completionPercentage = parseFloat((completedCount/Object.keys(allValues).length).toFixed(2));
-    if (completionPercentage != this.props.completionState[0]) this.props.updateCompletionState(0,completionPercentage)
+    let completionPercentage = parseFloat(
+      (completedCount / Object.keys(allValues).length).toFixed(2)
+    );
+    if (completionPercentage != this.props.completionState[0])
+      this.props.updateCompletionState(0, completionPercentage);
 
-    if (!_.isEqual(checklist, this.props.completionChecklist[0])) this.props.updateCompletionChecklist(0, checklist)
-  }
+    if (!_.isEqual(checklist, this.props.completionChecklist[0]))
+      this.props.updateCompletionChecklist(0, checklist);
+  };
 
   onFinish = values => {
     console.log("FinishedPageInternship:", values);
@@ -637,7 +647,6 @@ class PageInternshipInformation extends Component {
   updateFieldData = async () => {
     const values = await this.formRef.current.getFieldsValue();
     this.props.updateData(values, "0");
-
   };
 
   customRequestResume = ({ onSuccess, onError, file }) => {
@@ -713,7 +722,9 @@ class PageInternshipInformation extends Component {
   };
 }
 
-export default withRouter(connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(PageInternshipInformation));
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(PageInternshipInformation)
+);

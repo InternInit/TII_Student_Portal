@@ -51,7 +51,9 @@ class SubmissionSuccess extends Component {
           recycle={false}
           numberOfPieces={500}
         />
-        <SubmissionHeading>You Did It!</SubmissionHeading>
+        <SubmissionHeading>
+          You Did It!
+        </SubmissionHeading>
         <p>
           Congratulations! Give yourself a pat on the back. You deserve it. Your
           application was sent to all the available internship openings in the

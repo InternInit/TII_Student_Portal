@@ -7,10 +7,13 @@ import "../App.css";
 import { withRouter } from "react-router";
 
 //Redux
-import { connect } from 'react-redux';
-import { updateCompletionState, updateCompletionChecklist } from '../redux/actions'
+import { connect } from "react-redux";
+import {
+  updateCompletionState,
+  updateCompletionChecklist
+} from "../redux/actions";
 
-import _ from 'lodash'
+import _ from "lodash";
 
 //Object Destructuring
 const { TextArea } = Input;
@@ -28,13 +31,13 @@ const mapStateToProps = state => {
   return {
     completionState: state.completionState,
     completionChecklist: state.completionChecklist
-  }
-}
+  };
+};
 
 const mapDispatchToProps = {
   updateCompletionState,
   updateCompletionChecklist
-}
+};
 
 class PageEssays extends React.Component {
   formRef = React.createRef();
@@ -66,7 +69,10 @@ class PageEssays extends React.Component {
       <div style={{ marginTop: "40px", width: "100%" }}>
         <Spin size="large" spinning={!this.state.loaded}>
           <h1>Written Work</h1>
-          <p>Real people are reading your application. Show them that real people are applying through your writing!</p>
+          <p>
+            Real people are reading your application. Show them that real people
+            are applying through your writing!
+          </p>
 
           <Form
             name="pageEssays"
@@ -84,10 +90,13 @@ class PageEssays extends React.Component {
             <Form.Item
               key="industryEssay"
               name="Why This Industry Essay"
-              label={this.boldify("Why do you want to apply to the industries you selected?")}
+              label={this.boldify(
+                "Why do you want to apply to the industries you selected?"
+              )}
+              extra="1000 Character Limit"
               rules={this.validationRules("response")}
             >
-              <TextArea autoSize={{ minRows: 5 }} />
+              <TextArea autoSize={{ minRows: 5 }} maxlength={1000} />
             </Form.Item>
 
             {/**leadership response */}
@@ -97,9 +106,10 @@ class PageEssays extends React.Component {
               label={this.boldify(
                 "What are your leadership roles in your extracurriculars and what have they taught you?"
               )}
+              extra="1000 Character Limit"
               rules={this.validationRules("response")}
             >
-              <TextArea autoSize={{ minRows: 5 }} />
+              <TextArea autoSize={{ minRows: 5 }} maxlength={1000} />
             </Form.Item>
 
             {/**extra information response */}
@@ -109,21 +119,19 @@ class PageEssays extends React.Component {
               label={this.boldify(
                 "Is there anything more about you that we should know?"
               )}
+              extra="1000 Character Limit"
               rules={this.validationRules("response")}
             >
-              <TextArea autoSize={{ minRows: 5 }} />
+              <TextArea autoSize={{ minRows: 5 }} maxlength={1000} />
             </Form.Item>
 
-
-
-
-
-
-            <div style={{
-              display: 'flex',
-              flexDirection: 'row',
-              justifyContent: 'space-evenly'
-            }}>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "space-evenly"
+              }}
+            >
               {/**Cover Letter */}
               <Form.Item
                 name="Cover Letter"
@@ -165,11 +173,6 @@ class PageEssays extends React.Component {
               </Form.Item>
             </div>
 
-
-
-
-
-
             {/*Save and Continue or Next*/}
             <Form.Item>
               <Button
@@ -205,33 +208,40 @@ class PageEssays extends React.Component {
   ];
 
   onValuesChange = () => {
-    let allValues = this.formRef.current.getFieldsValue()
-    console.log(allValues)
-    delete allValues["Cover Letter"]
-    delete allValues.Portfolio
+    let allValues = this.formRef.current.getFieldsValue();
+    console.log(allValues);
+    delete allValues["Cover Letter"];
+    delete allValues.Portfolio;
 
     let completedCount = 0;
     let checklist = [];
     for (var field in allValues) {
       if (allValues.hasOwnProperty(field)) {
         let item = {};
-        item.key = field
-        if (typeof allValues[field] !== 'undefined' && allValues[field] !== "") {
+        item.key = field;
+        if (
+          typeof allValues[field] !== "undefined" &&
+          allValues[field] !== ""
+        ) {
           completedCount++;
-          item.completed = true
+          item.completed = true;
         } else {
-          item.completed = false
+          item.completed = false;
         }
         //console.log(item)
-        checklist.push(item)
+        checklist.push(item);
       }
     }
-    console.log(this.props)
-    let completionPercentage = parseFloat((completedCount / Object.keys(allValues).length).toFixed(2));
-    if (completionPercentage != this.props.completionState[2]) this.props.updateCompletionState(2, completionPercentage)
+    console.log(this.props);
+    let completionPercentage = parseFloat(
+      (completedCount / Object.keys(allValues).length).toFixed(2)
+    );
+    if (completionPercentage != this.props.completionState[2])
+      this.props.updateCompletionState(2, completionPercentage);
 
-    if (!_.isEqual(checklist, this.props.completionChecklist[2])) this.props.updateCompletionChecklist(2, checklist)
-  }
+    if (!_.isEqual(checklist, this.props.completionChecklist[2]))
+      this.props.updateCompletionChecklist(2, checklist);
+  };
 
   onFinish = values => {
     console.log("FinishedPageEssays:", values);
@@ -244,7 +254,6 @@ class PageEssays extends React.Component {
     const values = await this.formRef.current.getFieldsValue();
 
     this.props.updateData(values, "2");
-
   };
 
   backHandler = () => {
@@ -337,15 +346,15 @@ class PageEssays extends React.Component {
                 fileListCL[i].status = "done";
               }
               this.setState({ fileListCL: fileListCL });
-            } catch { }
+            } catch {}
             try {
               let fileListPortfolio = parsedData.Portfolio.fileList;
               for (var i = 0; i < fileListPortfolio.length; i++) {
                 fileListPortfolio[i].status = "done";
               }
               this.setState({ fileListPortfolio: fileListPortfolio });
-            } catch (e) { }
-          } catch (e) { }
+            } catch (e) {}
+          } catch (e) {}
         }
         this.setState({ loaded: true });
       });
@@ -363,7 +372,9 @@ class PageEssays extends React.Component {
     this.props.history.push(path);
   };
 }
-export default withRouter(connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(PageEssays));
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(PageEssays)
+);

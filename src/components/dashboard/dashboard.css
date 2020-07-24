@@ -78,6 +78,10 @@
   margin-bottom: 15px;
 }
 
+.apply-skills-banner {
+  width: 70%;
+}
+
 .container {
   background: white;
   border-radius: 10px;

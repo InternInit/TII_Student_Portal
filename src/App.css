@@ -123,7 +123,7 @@ h2 {
   }
 }
 
-.profile-button-style{
+.profile-button-style {
   font-size: 16px;
   border-radius: 2px;
   width: 200px;
@@ -132,4 +132,24 @@ h2 {
   align-self: center;
   align-items: center;
   justify-content: center;
+}
+
+/*
+************************************************************
+                        Ant Design Override
+************************************************************
+*/
+
+/*
+ * Brightened Required Star
+ */
+.ant-form-item-label > label.ant-form-item-required::before {
+  display: inline-block;
+  margin-right: 4px;
+  color: #f5222d;
+  font-weight: bold;
+  font-size: 14px;
+  font-family: SimSun, sans-serif;
+  line-height: 1;
+  content: "*";
 }

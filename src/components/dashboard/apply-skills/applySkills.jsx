@@ -302,6 +302,7 @@ class ApplySkills extends Component {
                   title="Back to Apply Skills"
                 />
               </Link>
+              <img className="apply-skills-banner" src={module[0]} />
               <div
                 className="container"
                 dangerouslySetInnerHTML={{ __html: module[5] }}

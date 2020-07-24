@@ -23,10 +23,13 @@ import { BrowserRouter as Router, Link } from "react-router-dom";
 import { withRouter } from "react-router";
 
 //Redux
-import { connect } from 'react-redux';
-import { updateCompletionState, updateCompletionChecklist } from '../redux/actions'
+import { connect } from "react-redux";
+import {
+  updateCompletionState,
+  updateCompletionChecklist
+} from "../redux/actions";
 
-import _ from 'lodash'
+import _ from "lodash";
 
 //Object Destructuring
 const { Option } = Select;
@@ -66,11 +69,7 @@ const race = [
   "Asian",
   "Native Hawaiian/Other Pacific Islander"
 ];
-const latinx = [
-  "Yes, I AM Hispanic/Latinx",
-  "No, I am NOT Hispanic/Latinx"
-
-];
+const latinx = ["Yes, I AM Hispanic/Latinx", "No, I am NOT Hispanic/Latinx"];
 const allStates = [
   "Alabama",
   "Alaska",
@@ -137,13 +136,13 @@ const mapStateToProps = state => {
   return {
     completionState: state.completionState,
     completionChecklist: state.completionChecklist
-  }
-}
+  };
+};
 
 const mapDispatchToProps = {
   updateCompletionState,
   updateCompletionChecklist
-}
+};
 
 class PagePersonal extends Component {
   constructor(props) {
@@ -155,12 +154,14 @@ class PagePersonal extends Component {
     loaded: false
   };
 
-  validationRules = (required, inputName, type, pattern) => [
+  validationRules = (required, inputName, type, pattern, min, max) => [
     {
       required: required,
       message: "Please input your " + inputName,
       type: type,
-      pattern: pattern
+      pattern: pattern,
+      min: min,
+      max: max
     }
   ];
 
@@ -280,15 +281,23 @@ class PagePersonal extends Component {
                   key="age"
                   label={this.boldify("Age")}
                   name="Age"
-                  rules={this.validationRules(true, "age", "number")}
+                  rules={this.validationRules(
+                    true,
+                    "age",
+                    "number",
+                    null,
+                    0,
+                    100
+                  )}
                 >
                   <InputNumber style={{ width: "100%" }} />
                 </Form.Item>
               </Col>
             </Row>
-            <p style={{ paddingBottom: '24px', marginTop: '-12px' }}>
-              Fill out only what you're comfortable with, but understand that missing factors could weaken your application.
-          </p>
+            <p style={{ paddingBottom: "24px", marginTop: "-12px" }}>
+              Fill out only what you're comfortable with, but understand that
+              missing factors could weaken your application.
+            </p>
             <h1>Please Input Your Educational History</h1>
 
             <Form.List name="Education">
@@ -477,33 +486,40 @@ class PagePersonal extends Component {
   }
 
   onValuesChange = () => {
-    let allValues = this.formRef.current.getFieldsValue()
-    console.log(allValues)
-    delete allValues["Is Latinx"]
-    delete allValues.Race
+    let allValues = this.formRef.current.getFieldsValue();
+    console.log(allValues);
+    delete allValues["Is Latinx"];
+    delete allValues.Race;
 
     let completedCount = 0;
     let checklist = [];
     for (var field in allValues) {
       if (allValues.hasOwnProperty(field)) {
         let item = {};
-        item.key = field
-        if (typeof allValues[field] !== 'undefined' && allValues[field] !== "") {
+        item.key = field;
+        if (
+          typeof allValues[field] !== "undefined" &&
+          allValues[field] !== ""
+        ) {
           completedCount++;
-          item.completed = true
+          item.completed = true;
         } else {
-          item.completed = false
+          item.completed = false;
         }
         //console.log(item)
-        checklist.push(item)
+        checklist.push(item);
       }
     }
-    console.log(this.props)
-    let completionPercentage = parseFloat((completedCount / Object.keys(allValues).length).toFixed(2));
-    if (completionPercentage != this.props.completionState[1]) this.props.updateCompletionState(1, completionPercentage)
+    console.log(this.props);
+    let completionPercentage = parseFloat(
+      (completedCount / Object.keys(allValues).length).toFixed(2)
+    );
+    if (completionPercentage != this.props.completionState[1])
+      this.props.updateCompletionState(1, completionPercentage);
 
-    if (!_.isEqual(checklist, this.props.completionChecklist[1])) this.props.updateCompletionChecklist(1, checklist)
-  }
+    if (!_.isEqual(checklist, this.props.completionChecklist[1]))
+      this.props.updateCompletionChecklist(1, checklist);
+  };
 
   onFinish = values => {
     console.log("FinishedPersonalPage:", values);
@@ -516,7 +532,6 @@ class PagePersonal extends Component {
     const values = await this.formRef.current.getFieldsValue();
 
     this.props.updateData(values, "1");
-
   };
 
   backHandler = () => {
@@ -556,7 +571,9 @@ class PagePersonal extends Component {
   };
 }
 
-export default withRouter(connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(PagePersonal));
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(PagePersonal)
+);
