@@ -1,8 +1,9 @@
 const completionStateReducer = (state = [0,0,0,0], action) => {
   switch (action.type) {
     case 'UPDATE_COMPLETION_STATE':
-      state[action.page] = action.completionPercentage
-      return state
+      let newState = state.slice()
+      newState[action.page] = action.completionPercentage
+      return newState
     case 'BATCH_UPDATE_COMPLETION_STATE':
       return action.completionState
     default:

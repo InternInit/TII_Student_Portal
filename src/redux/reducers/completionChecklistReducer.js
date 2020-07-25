@@ -36,8 +36,9 @@ const defaultState = [
 const completionChecklistReducer = (state = defaultState, action) => {
   switch (action.type) {
     case "UPDATE_COMPLETION_CHECKLIST":
-      state[action.page] = action.completionChecklist;
-      return state;
+      let newState = state.slice()
+      newState[action.page] = action.completionChecklist;
+      return newState;
     case "BATCH_UPDATE_COMPLETION_CHECKLIST":
       return action.completionChecklist;
     default:
