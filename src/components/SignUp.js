@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Input, Button } from 'antd';
+import { Input, Button, Form } from 'antd';
 
 //CSS Styled Components
 const Container = styled.div`
@@ -67,31 +67,40 @@ class SignUp extends React.Component {
                         Create a New Account
                       </Banner>
                     <div style={{ width: '70%', }}>
-                        <Label style={{ marginTop: '24px' }}>
-                            Username
+                        <Form>
+                            <Label style={{ marginTop: '24px' }}>
+                                Username
                     </Label>
-                        <Input />
-                        <Label style={{ marginTop: '12px' }}>
-                            Password
+                            <Form.Item name="username">
+                                <Input />
+                            </Form.Item>
+                            <Label style={{ marginTop: '-8px' }}>
+                                Password
                     </Label>
-                        <Input.Password />
-                        <Label style={{ marginTop: '12px' }}>
-                            Display Name
+                            <Form.Item name="password">
+                                <Input.Password />
+                            </Form.Item>
+                            <Label style={{ marginTop: '-8px' }}>
+                                Display Name
                     </Label>
-                        <Input />
-                        <Label style={{ marginTop: '12px' }}>
-                            E-Mail
+                            <Form.Item name="display-name">
+                                <Input />
+                            </Form.Item>
+                            <Label style={{ marginTop: '-8px' }}>
+                                E-Mail
                         </Label>
-                        <Input />
+                            <Form.Item name="e-mail">
+                                <Input />
+                            </Form.Item>
 
 
 
-                        <div style={{ marginTop: ' 32px', display: 'flex', justifyContent: 'flex-end' }}>
-                            <Button className="profile-button-style" type='primary' >
-                                Sign Up
+                            <div style={{ marginTop: ' 26px', display: 'flex', justifyContent: 'flex-end' }}>
+                                <Button className="profile-button-style" type='primary' >
+                                    Sign Up
                         </Button>
-                        </div>
-
+                            </div>
+                        </Form>
                     </div>
                 </Container>
             </Background >)

@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Input, Button } from 'antd';
+import { Input, Button, Form } from 'antd';
 
 import { Link } from 'react-router-dom';
 import SignUp from './SignUp';
@@ -54,6 +54,7 @@ display:flex;
 text-align:left;
 font-weight:500;
 width:80%;
+margin-top:-19px;
 `
 class LogIn extends React.Component {
     constructor(props) {
@@ -70,27 +71,33 @@ class LogIn extends React.Component {
                         The Internship Initiative (TII)
                     </Banner>
                     <div style={{ width: '70%', }}>
-                        <Label style={{ marginTop: '24px' }}>
-                            Username
-                    </Label>
-                        <Input />
-                        <Label style={{ marginTop: '12px' }}>
-                            Password
-                    </Label>
-                        <Input.Password />
-                        <ForgotPass>
-                            Forgot Password
-                        </ForgotPass>
+                        <Form>
+                            <Label style={{ marginTop: '24px' }}>
+                                Username
+                            </Label>
+                            <Form.Item name="username">
+                                <Input />
+                            </Form.Item>
+                            <Label style={{ marginTop: '12px' }}>
+                                Password
+                            </Label>
+                            <Form.Item name="password">
+                                <Input.Password />
+                            </Form.Item>
+                            <ForgotPass>
+                                Forgot Password
+                                    </ForgotPass>
 
-                        <div style={{ marginTop: '18px', display: 'flex', justifyContent: 'center' }}>
-                            <Button className="profile-button-style" type='primary' >
-                                Log In
-                        </Button>
-                        </div>
-                        <Label style={{ marginTop: '24%' }}>
-                            Don't have an account?
+                            <div style={{ marginTop: '18px', display: 'flex', justifyContent: 'center' }}>
+                                <Button className="profile-button-style" type='primary' >
+                                    Log In
+                                    </Button>
+                            </div>
+                            <Label style={{ marginTop: '24%' }}>
+                                Don't have an account?
                             <Link > Sign up here</Link>
-                        </Label>
+                            </Label>
+                        </Form>
                     </div>
                 </Container>
             </Background >)
