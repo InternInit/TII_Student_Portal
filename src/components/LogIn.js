@@ -18,9 +18,10 @@ border-radius: 8px;
 `
 
 const Background = styled.div`
-background-image:url('https://storage.needpix.com/rsynced_images/blob-655237_1280.png');
+background:radial-gradient(109.93% 109.93% at 50% 50%, #40A9FF 0%, rgba(133, 161, 200, 0.479167) 79.69%, rgba(255, 255, 255, 0) 100%), #FFFFFF;
 width:100%;
 height:100%;
+//background-image:url('https://storage.needpix.com/rsynced_images/blob-655237_1280.png');
 background-position:center;
 background-size:fill;
 background-color:#fafafa;
