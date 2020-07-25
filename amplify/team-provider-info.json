@@ -10,6 +10,11 @@
             "StackName": "amplify-tiireactapp-dev-174005",
             "StackId": "arn:aws:cloudformation:us-east-1:403174816125:stack/amplify-tiireactapp-dev-174005/68720640-cebf-11ea-ba29-0a1f955da693",
             "AmplifyAppId": "duwhb32evy3qj"
+        },
+        "categories": {
+            "auth": {
+                "tiireactapp43a5d781": {}
+            }
         }
     }
 }

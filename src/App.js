@@ -56,6 +56,11 @@ import pageInternshipInformation from "./components/pageInternshipInformation.js
 import devConfigurationFile from "./configuration_dev.json";
 import prodConfigurationFile from "./configuration_prod.json";
 
+//Amplify
+import Amplify, { Auth } from 'aws-amplify';
+import awsconfig from './aws-exports';
+Amplify.configure(awsconfig);
+
 let configurationFile = {};
 if (!process.env.NODE_ENV || process.env.NODE_ENV === "development") {
   configurationFile = devConfigurationFile;
@@ -512,7 +517,7 @@ class App extends Component {
           </header>
           <ReactSwitch>
             <Route path="/dashboard" render={() => <Dashboard />} />
-            <Route path="/how-to-apply" exact component={LogIn} />
+            <Route path="/how-to-apply" exact component={SignUp} />
             <Route path="/edit-profile" exact component={EditProfile} />
             <Route path="/apply">{this.AppContainer()}</Route>
             <Route
