@@ -22,6 +22,10 @@ import HowtoApply from "./components/HowtoApply";
 import SubmissionSuccess from "./components/submissionSuccess";
 import newStudent from './components/newStudent.jsx';
 import EditProfile from './components/EditProfile.js';
+
+import LogIn from './components/LogIn.js';
+import SignUp from './components/SignUp.js';
+
 //CSS Imports
 import "./App.css";
 
@@ -490,7 +494,7 @@ class App extends Component {
           </header>
           <ReactSwitch>
             <Route path="/dashboard" render={() => <Dashboard />} />
-            <Route path="/how-to-apply" exact component={HowtoApply} />
+            <Route path="/how-to-apply" exact component={SignUp} />
             <Route path="/edit-profile" exact component={EditProfile} />
             <Route path="/apply">{this.AppContainer()}</Route>
             <Route

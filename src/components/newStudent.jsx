@@ -50,12 +50,11 @@ const Background = styled.div`
   height:100%;
   background-position:center;
   background-size:cover;
-  background-color:green;
+  background-color:#fafafa;
   position:fixed;
   display:flex;
   flex-direction:column;
   align-items:center;
-
 `
 
 const Caption = styled.div`

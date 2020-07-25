@@ -285,12 +285,12 @@ class EditProfile extends React.Component {
                         confirmLoading={confirmLoading}
                         onCancel={this.handleCancel}
                     >
-                        <Input placeholder='Enter Current password' type='password' />
-                        <ChangeInfo style={{ marginLeft: '2px' }}>
+                        <Input placeholder='Enter Current password' type="password" />
+                        <ChangeInfo >
                             Forgot Password
                         </ChangeInfo>
-                        <Input placeholder='Enter New password' style={{ marginTop: '14px' }} />
-                        <Input placeholder='Confirm New password' style={{ marginTop: '12px' }} />
+                        <Input.Password placeholder='Enter New password' style={{ marginTop: '14px' }} />
+                        <Input.Password placeholder='Confirm New password' style={{ marginTop: '12px' }} />
                     </Modal>
 
 

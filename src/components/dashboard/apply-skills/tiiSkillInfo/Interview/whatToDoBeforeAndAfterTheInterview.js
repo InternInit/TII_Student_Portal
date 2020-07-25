@@ -74,7 +74,7 @@ margin-left:15%;
   <p class="info">
     After your interview, it is a great idea to send them a thank you email. You can thank you for their time in the process, and if you can, mention something you talked about. A little goes a long way!
   </p>
-  <div>
+  </div>
 
 </body>
 </html>

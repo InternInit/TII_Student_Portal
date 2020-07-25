@@ -11,7 +11,7 @@ import { withRouter } from "react-router-dom";
 import { Menu, Dropdown, Layout } from "antd";
 
 const Banner = styled.div`
-  background-color: #8fc3d1;
+  background-color: #BAE7FF;
   padding: 55px;
   font-size: 36px;
   color: white;

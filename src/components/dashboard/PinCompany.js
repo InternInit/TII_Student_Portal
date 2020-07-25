@@ -40,6 +40,7 @@ class PinCompany extends Component {
                                 name={pinnedCompany.name}
                                 industry={pinnedCompany.industry}
                                 logo={pinnedCompany.logo}
+                                companyid={pinnedCompany.id}
                             />
 
                         </div>

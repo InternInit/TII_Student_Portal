@@ -281,6 +281,8 @@ class ApplySkills extends Component {
                 title="Back to Apply Skills"
               />
             </Link>
+            {window.scrollTo(0, 0)}
+
             <div
               dangerouslySetInnerHTML={{ __html: fillingOutAnApplication }}
             ></div>
@@ -302,6 +304,8 @@ class ApplySkills extends Component {
                   title="Back to Apply Skills"
                 />
               </Link>
+              {window.scrollTo(0, 0)}
+
               <img className="apply-skills-banner" src={module[0]} />
               <div
                 className="container"
@@ -324,6 +328,8 @@ class ApplySkills extends Component {
                   title="Back to Apply Skills"
                 />
               </Link>
+              {window.scrollTo(0, 0)}
+
               <div dangerouslySetInnerHTML={{ __html: module[5] }}></div>
             </SkillsContainer>
           </Route>
@@ -345,6 +351,7 @@ class ApplySkills extends Component {
                   title="Back to Apply Skills"
                 />
               </Link>
+              {window.scrollTo(0, 0)}
               <div dangerouslySetInnerHTML={{ __html: module[5] }}></div>
             </SkillsContainer>
           </Route>

@@ -108,14 +108,7 @@ const mapDispatchToProps = {
   updateCompletionState
 };
 
-// BUG: THIS NEEDS TO BE REPLACED BY THE REACT STORE
-let pinnedCompanies = [
-  { name: "This", industry: "Computer Science", status: "pending" },
-  { name: "is", industry: "Computer Science", status: "accepted" },
-  { name: "Pinned", industry: "Computer Science", status: "rejected" },
-  { name: "Company", industry: "Consulting", status: "accepted" },
-  { name: "Grubhub", industry: "Real Estate", status: "pending" }
-];
+
 
 class ApplicationProgress extends Component {
   constructor(props) {
@@ -174,6 +167,7 @@ class ApplicationProgress extends Component {
          * Application Progress
          *
          */}
+
         <h1 className="module-name">Application Progress</h1>
         <ModuleContainer>
           {percentComplete.map((section, index) => (

@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Collapse, Button } from 'antd';
+import { Link } from 'react-router-dom'
 const { Panel } = Collapse;
 
 
@@ -61,7 +62,7 @@ class Companytab extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            label: <CLabel name={this.props.name} industry={this.props.industry} />,
+            label: <CLabel name={this.props.name} industry={this.props.industry} companyid={this.props.companyid} />,
 
         }
     }
@@ -89,7 +90,7 @@ class Companytab extends React.Component {
                     {/**
                      * Dropdown
                      */}
-                    <DroppedView />
+                    <DroppedView companyid={this.props.companyid} />
                 </Panel>
             </Collapse >
         )
@@ -134,6 +135,7 @@ class CLabel extends React.Component {
 //Dropped View of the Company Tab
 class DroppedView extends React.Component {
     render() {
+        let { companyid } = this.props;
         return (
             <Row style={{
                 justifyContent: 'space-evenly',
@@ -153,15 +155,17 @@ class DroppedView extends React.Component {
                 {/**
                      * Company Information Button 
                      */}
-                <Button
-                    className='button-style'
-                    style={{
-                        backgroundColor: '#52C41A',
-                        color: 'white'
-                    }}
-                >
-                    Company Information
+                <Link to={`/dashboard/add-companies/company-information/${companyid}`}>
+                    <Button
+                        className='button-style'
+                        style={{
+                            backgroundColor: '#52C41A',
+                            color: 'white'
+                        }}
+                    >
+                        Company Information
                     </Button>
+                </Link>
 
 
                 {/**

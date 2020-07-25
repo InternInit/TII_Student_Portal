@@ -115,7 +115,8 @@ class AddCompanies extends React.Component {
       return company.name.toLowerCase().indexOf(search.toLowerCase()) !== -1;
     });
     return (
-      <div style={{ paddingBottom: "50%" }}>
+      < div style={{ paddingBottom: "50%" }
+      }>
         <h1 className="module-name" ref={this.myRef}>
           Search Companies
         </h1>
