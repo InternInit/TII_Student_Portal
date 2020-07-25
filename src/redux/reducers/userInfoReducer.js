@@ -1,14 +1,17 @@
 const userInfoReducer = (state = {username:"",avatar:"",email:""}, action) => {
   switch (action.type) {
     case 'UPDATE_USER_NAME':
-      state.username = action.username
-      return state
+      return Object.assign({}, state, {
+        username: action.username
+      })
     case 'UPDATE_AVATAR':
-      state.avatar = action.avater
-      return state
+      return Object.assign({}, state, {
+        avatar: action.avatar
+      })
     case 'UPDATE_EMAIL':
-      state.email = action.email
-      return state
+      return Object.assign({}, state, {
+        email: action.email
+      })
     default:
       return state
   }

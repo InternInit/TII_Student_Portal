@@ -28,6 +28,7 @@ if(app.config.get("ENV") == "development"):
     password = "1blet7j9ldoj678qk5mskc1oq8e8em02ttftnkvp4ougqc2mf3qc"
     redirect_uri = "http://localhost:3000"
     tokenUrl = "https://interninit.auth.us-east-1.amazoncognito.com/oauth2/token"
+    claimsUrl = "https://interninit.auth.us-east-1.amazoncognito.com/oauth2/userInfo"
     logoutUrl = "https://interninit.auth.us-east-1.amazoncognito.com/login?response_type=code&client_id=12ar1kqn0474torm00iisksbtv&redirect_uri=http://localhost:3000"
     tokenAuthBytes = (username + ":" + password).encode("ascii")
     tokenAuth = base64.b64encode(tokenAuthBytes).decode("ascii")
@@ -40,11 +41,11 @@ elif(app.config.get("ENV") == "production"):
     password = "bpuroud7lcqo5t3eomd6nvsspthu83c7e9taik2cqentf4f0o6g"
     redirect_uri = "https://apply.interninit.com"
     tokenUrl = "https://auth.interninit.com/oauth2/token"
+    claimsUrl = "https://auth.interninit.com/oauth2/userInfo"
     logoutUrl = "https://auth.interninit.com/login?response_type=code&client_id=3og5ph16taqf598bchokdfs1r2&redirect_uri=https://apply.interninit.com"
     tokenAuthBytes = (username + ":" + password).encode("ascii")
     tokenAuth = base64.b64encode(tokenAuthBytes).decode("ascii")
 
-jwtUrl = "https://jzvyvnvxld.execute-api.us-east-1.amazonaws.com/beta/auth"
 
 @app.route("/api/")
 def root():
@@ -125,15 +126,15 @@ def refresh():
 def get_headers():
     headers = request.headers
     auth_header = headers.get("Authorization")
-    req = requests.get(jwtUrl, headers={"Authorization":auth_header})
-    return jsonify(json.loads(req.text)["headers"]["claims"])
+    req = requests.get(claimsUrl, headers={"Authorization":auth_header})
+    print(req.text)
+    return jsonify(json.loads(req.text))
 
 @app.route("/api/auth/exchange")
 def exchange():
     auth = "Basic " + str(tokenAuth)
     refresh = request.cookies.get("refresh_token")
     req = requests.post(tokenUrl, headers={"Authorization":auth,"Content-Type":"application/x-www-form-urlencoded"}, data={"grant_type" : "refresh_token", "client_id":username, "refresh_token":refresh})
-    #print(req.text)
     response = jsonify(req.text)
     return response
 

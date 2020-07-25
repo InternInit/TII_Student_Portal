@@ -194,7 +194,8 @@ class App extends Component {
             this.inMemoryToken = {
               token: data.id_token,
               expiry: data.expires_in,
-              refresh: data.refresh_token
+              refresh: data.refresh_token,
+              access: data.access_token
             };
             console.log(this.inMemoryToken);
           } else {
@@ -235,7 +236,8 @@ class App extends Component {
           this.inMemoryToken = {
             token: data.id_token,
             expiry: data.expires_in,
-            refresh: data.refresh_token
+            refresh: data.refresh_token,
+            access: data.access_token
           };
           console.log(this.inMemoryToken);
         } else {
@@ -245,7 +247,7 @@ class App extends Component {
   };
 
   getHeaders = async () => {
-    let token = await this.getJwt()
+    let token = await this.getAccess()
     fetch('/api/auth/getheaders', {
       method: 'GET', // or 'PUT'
       headers: {
@@ -256,7 +258,7 @@ class App extends Component {
       .then(data => {
         console.log('Success:', data);
         this.props.updateEmail(data.email)
-        this.props.updateUserName(data["cognito:username"])
+        this.props.updateUserName(data.username)
       })
   }
 
@@ -279,6 +281,22 @@ class App extends Component {
           }, 10);
         } else {
           resolve(app.inMemoryToken.token);
+        }
+      }
+      checkToken();
+    });
+  };
+
+  getAccess = () => {
+    return new Promise((resolve, reject) => {
+      var app = this;
+      function checkToken() {
+        if (app.inMemoryToken === undefined) {
+          setTimeout(() => {
+            checkToken();
+          }, 10);
+        } else {
+          resolve(app.inMemoryToken.access);
         }
       }
       checkToken();
