@@ -46,7 +46,6 @@ elif(app.config.get("ENV") == "production"):
     tokenAuthBytes = (username + ":" + password).encode("ascii")
     tokenAuth = base64.b64encode(tokenAuthBytes).decode("ascii")
 
-jwtUrl = "https://jzvyvnvxld.execute-api.us-east-1.amazonaws.com/beta/auth"
 
 @app.route("/api/")
 def root():
