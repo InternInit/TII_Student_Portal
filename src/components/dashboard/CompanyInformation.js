@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Divider, Breadcrumb } from 'antd'
+import { Divider, Breadcrumb, Avatar } from 'antd'
+import { TeamOutlined } from '@ant-design/icons'
 
 const ModuleContainer = styled.div`
   background: white;
@@ -10,10 +11,11 @@ const ModuleContainer = styled.div`
   margin-top:10px;
 `;
 const Image = styled.img`
-width:40px;
-height:40px;
 background-color:blue;
-border-radius:20px;
+width:450px;
+height:225px;
+border-radius:8px;
+ 
 `
 
 const Caption = styled.div`
@@ -76,7 +78,7 @@ function CompanyInformation() {
                 display: 'flex',
                 flexDirection: 'row',
             }}>
-                <Image src="" alt="Logo" style={{ marginTop: '10px' }} />
+                <Avatar size={40} icon={<TeamOutlined />} src="" style={{ marginTop: '10px' }} />
                 <Header style={{
                     fontSize: '36px',
                     textAlign: 'left',
@@ -136,12 +138,12 @@ function CompanyInformation() {
                 marginBottom: '45px'
             }}>
                 <Row>
-                    <Image src="" alt="Logo" style={{ marginTop: '10px', width: '500px', height: '250px', borderRadius: '8px' }} />
+                    <Image src="" alt="Logo" style={{ marginTop: '10px' }} />
                     <Caption> Image of Company</Caption>
                 </Row>
 
                 <Row>
-                    <Image src="" alt="Logo" style={{ marginTop: '10px', width: '500px', height: '250px', borderRadius: '8px' }} />
+                    <Image src="" alt="Logo" style={{ marginTop: '10px' }} />
                     <Caption> Image of Company</Caption>
                 </Row>
             </Row>

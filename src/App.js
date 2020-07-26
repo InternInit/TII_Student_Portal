@@ -117,13 +117,12 @@ class App extends Component {
     this.refresh();
     this.getCachedCompletionState();
     this.getHeaders();
-    this.interval = setInterval(() => this.resize(), 500);
-    return () => clearInterval(this.interval);
+    window.addEventListener('resize', this.resize);
   }
 
   componentWillUnmount() {
     //This is here because I don't know if the return statement will work lol
-    clearInterval(this.interval);
+    window.removeEventListener('resize', this.resize);
   }
 
   inMemoryToken;

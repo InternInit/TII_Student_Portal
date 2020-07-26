@@ -2,7 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import QueueAnim from "rc-queue-anim";
 import { Link } from 'react-router-dom'
-import { Button } from 'antd';
+import { Button, Avatar } from 'antd';
+import { TeamOutlined } from '@ant-design/icons';
 
 const CompanyTitle = styled.div`
   font-size: 32px;
@@ -52,16 +53,6 @@ const Image = styled.img`
   height: 200px;
   background-color: blue;
   border-radius: 10px;
-`;
-
-const Logo = styled.img`
-  width: 36px;
-  height: 36px;
-  object-fit: fill;
-  background-color: blue;
-  margin-left: 8%;
-  margin-bottom: 14px;
-  border-radius:6px;
 `;
 
 const TabContainer = styled.div`
@@ -148,7 +139,7 @@ class CLabel extends React.Component {
                 }}
               >
                 {/**company logo */}
-                <Logo src={logo} alt="Logo" />
+                <Avatar size={36} shape="square" icon={<TeamOutlined />} src={logo} style={{ marginLeft: '8%', marginBottom: '14px' }} />
 
                 {/**company name and job */}
                 <Col
