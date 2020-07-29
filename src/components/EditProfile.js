@@ -8,10 +8,11 @@ import {
     notification,
     message,
     Upload,
+    Avatar
 } from 'antd';
 
 import { withRouter } from "react-router";
-import { CloseOutlined } from '@ant-design/icons'
+import { CloseOutlined, UserOutlined } from '@ant-design/icons'
 
 import { connect } from "react-redux";
 
@@ -23,8 +24,7 @@ align-items:center;
   border-radius: 10px;
   padding: 3%;
   width:70%;
-
-`;
+ `;
 
 
 const Heading = styled.div`
@@ -47,14 +47,6 @@ margin-top:40px;
 padding-bottom:36px;
 `
 
-const Image = styled.img`
-width:54px;
-height:54px;
-background-color:blue;
-border-radius:27px;
-margin-left:24px;
-margin-top:24px;
-`
 
 const UserInfo = styled.div`
 display:flex;
@@ -184,7 +176,7 @@ class EditProfile extends React.Component {
                      *
                      */}
                         <Row style={{ alignSelf: 'flex-start', display: 'flex' }}>
-                            <Image src="" alt="Logo" />
+                            <Avatar size={54} icon={<UserOutlined />} src="" style={{ marginLeft: '24px', marginTop: '24px' }} />
                             <Header style={{
                                 fontSize: '36px',
                                 marginLeft: '15px',
@@ -204,8 +196,7 @@ class EditProfile extends React.Component {
                         </h2>
                         <Row style={{
                             display: 'flex',
-                            justifyContent: 'space-between',
-                            width: '65%'
+                            justifyContent: 'space-evenly',
                         }}>
 
                             {/**
@@ -222,7 +213,6 @@ class EditProfile extends React.Component {
                                 <Button type='primary' className='profile-button-style'>
                                     Change Profile Picture
                                 </Button>
-
                             </Upload>
                             <Button className='profile-button-style'>
                                 Remove Current
@@ -331,7 +321,7 @@ class EditProfile extends React.Component {
                         alignSelf: 'flex-end',
                         justifyContent: 'space-between',
                         width: '45%',
-                        marginTop: '23px'
+                        marginTop: '24px'
                     }}>
                         <Button className='profile-button-style'>
                             Cancel
