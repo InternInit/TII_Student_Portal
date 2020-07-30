@@ -22,16 +22,14 @@ class TiiNav extends React.Component {
     switch (this.props.location.pathname) {
       case "/apply/internship-info":
         return Array.from("1");
-        break;
       case "/apply/personal":
         return Array.from("2");
-        break;
       case "/apply/written-work":
         return Array.from("3");
-        break;
       case "/apply/references":
         return Array.from("4");
-        break;
+      default:
+        return Array.from("1");
     }
   }
 
@@ -249,6 +247,8 @@ class TiiNav extends React.Component {
               this.setState({ ReferencesButton: <TeamOutlined /> })
             }
           }
+          break;
+        default:
           break;
 
       }

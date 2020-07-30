@@ -7,6 +7,8 @@ import SignUp from './SignUp';
 
 import { Auth } from 'aws-amplify';
 
+import { withRouter } from "react-router";
+
 
 //CSS Styled Components
 const Container = styled.div`
@@ -115,6 +117,8 @@ class LogIn extends React.Component {
         const session = await Auth.currentSession()
         console.log(session)
 
+        this.props.history.push("/dashboard");
+
       } catch (error) {
         console.log('error signing up:', error);
       }
@@ -123,4 +127,4 @@ class LogIn extends React.Component {
 
 
 }
-export default LogIn;
+export default withRouter(LogIn);
