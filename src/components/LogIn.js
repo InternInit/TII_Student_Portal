@@ -5,6 +5,9 @@ import { Input, Button, Form } from 'antd';
 import { Link } from 'react-router-dom';
 import SignUp from './SignUp';
 
+import { Auth } from 'aws-amplify';
+
+
 //CSS Styled Components
 const Container = styled.div`
 display:flex;
@@ -71,7 +74,7 @@ class LogIn extends React.Component {
                         The Internship Initiative (TII)
                     </Banner>
                     <div style={{ width: '70%', }}>
-                        <Form>
+                        <Form onFinish={this.handleSubmit}>
                             <Label style={{ marginTop: '24px' }}>
                                 Username
                             </Label>
@@ -89,7 +92,7 @@ class LogIn extends React.Component {
                                     </ForgotPass>
 
                             <div style={{ marginTop: '18px', display: 'flex', justifyContent: 'center' }}>
-                                <Button className="profile-button-style" type='primary' >
+                                <Button className="profile-button-style" type='primary' htmlType='submit'>
                                     Log In
                                     </Button>
                             </div>
@@ -101,6 +104,21 @@ class LogIn extends React.Component {
                     </div>
                 </Container>
             </Background >)
+    }
+
+    handleSubmit = async(values) => {
+      let { username, password } = values
+      console.log(values)
+      try {
+        const user = await Auth.signIn(username, password);
+
+        const session = await Auth.currentSession()
+        console.log(session)
+
+      } catch (error) {
+        console.log('error signing up:', error);
+      }
+
     }
 
 

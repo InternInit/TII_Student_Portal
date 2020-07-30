@@ -106,9 +106,7 @@ class SignUp extends React.Component {
     }
 
     handleSubmit = async(values) => {
-      console.log(values)
       let { username, password, email, displayName } = values
-      console.log(email)
       try {
         const user = await Auth.signUp({
             username,
@@ -117,14 +115,12 @@ class SignUp extends React.Component {
               email
             }
         });
-        console.log({ user });
-        let cred = await Auth.currentCredentials();
-        console.log(cred)
+
+        //TODO: Redirect to email verification page.
+
       } catch (error) {
         console.log('error signing up:', error);
       }
-
-
 
     }
 
