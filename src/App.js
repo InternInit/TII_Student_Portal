@@ -511,7 +511,7 @@ class App extends Component {
           </header>
           <ReactSwitch>
             <Route path="/dashboard" render={() => <Dashboard />} />
-            <Route path="/how-to-apply" exact component={SignUp} />
+            <Route path="/how-to-apply" exact component={HowtoApply} />
             <Route path="/edit-profile" exact component={EditProfile} />
             <Route path="/apply">{this.AppContainer()}</Route>
             <Route

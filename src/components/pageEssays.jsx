@@ -145,7 +145,7 @@ class PageEssays extends React.Component {
                   onChange={this.onChangeCL}
                   fileList={this.state.fileListCL}
                 >
-                  <h1 style={{ color: "blue" }}>
+                  <h1 style={{ color: "#69c0ff" }}>
                     <InboxOutlined />
                   </h1>
                   <h5>Click or Drag Files to Upload Here</h5>
@@ -165,7 +165,7 @@ class PageEssays extends React.Component {
                   onChange={this.onChangePortfolio}
                   fileList={this.state.fileListPortfolio}
                 >
-                  <h1 style={{ color: "blue" }}>
+                  <h1 style={{ color: "#69c0ff" }}>
                     <InboxOutlined />
                   </h1>
                   <h5>Click or Drag Files to Upload Here</h5>
@@ -346,15 +346,15 @@ class PageEssays extends React.Component {
                 fileListCL[i].status = "done";
               }
               this.setState({ fileListCL: fileListCL });
-            } catch {}
+            } catch { }
             try {
               let fileListPortfolio = parsedData.Portfolio.fileList;
               for (var i = 0; i < fileListPortfolio.length; i++) {
                 fileListPortfolio[i].status = "done";
               }
               this.setState({ fileListPortfolio: fileListPortfolio });
-            } catch (e) {}
-          } catch (e) {}
+            } catch (e) { }
+          } catch (e) { }
         }
         this.setState({ loaded: true });
       });
