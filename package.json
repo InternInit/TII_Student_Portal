@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@ant-design/icons": "^4.0.6",
+    "@aws-amplify/ui-react": "^0.2.13",
     "@sentry/browser": "^5.18.0",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
