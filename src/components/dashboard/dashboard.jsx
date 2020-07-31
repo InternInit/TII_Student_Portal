@@ -15,6 +15,7 @@ import Companytab from "./Companytab.js";
 import ApplicationProgress from "./applicationProgress.jsx";
 import ApplySkills from "./apply-skills/applySkills";
 import NewStudent from "../newStudent";
+import EmailConfirmation from "../emailConfirmation";
 
 //React Routing
 import {
@@ -76,7 +77,7 @@ class Dashboard extends Component {
               padding: "30px",
               justifyContent: "center",
               backgroundColor: "#F5F5F5",
-              minHeight: "100vh",
+              minHeight: "100vh"
             }}
           >
             <PageContainer>

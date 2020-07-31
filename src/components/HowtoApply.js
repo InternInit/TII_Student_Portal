@@ -153,7 +153,7 @@ class HowtoApply extends React.Component {
                 selectedKeys="5"
                 style={{
                   backgroundColor: "#F5F5F5",
-                  border: "0"
+                  border: "0",
                 }}
               >
                 <Menu.Item

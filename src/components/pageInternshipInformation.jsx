@@ -585,7 +585,7 @@ class PageInternshipInformation extends Component {
                 onChange={this.onChange}
                 fileList={this.state.fileList}
               >
-                <h1 style={{ color: "blue" }}>
+                <h1 style={{ color: "#69c0ff" }}>
                   <InboxOutlined />
                 </h1>
                 <h5>Click or Drag Files to Upload Here</h5>
