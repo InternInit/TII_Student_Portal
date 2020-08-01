@@ -16,6 +16,7 @@
     "json-loader": "^0.5.7",
     "lodash": "^4.17.19",
     "rc-queue-anim": "^1.8.5",
+    "postcss": "^7.0.32",
     "react": "^16.13.1",
     "react-confetti": "^6.0.0",
     "react-dom": "^16.13.1",
