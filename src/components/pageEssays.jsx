@@ -96,7 +96,7 @@ class PageEssays extends React.Component {
               extra="1000 Character Limit"
               rules={this.validationRules("response")}
             >
-              <TextArea autoSize={{ minRows: 5 }} maxlength={1000} />
+              <TextArea autoSize={{ minRows: 5, maxRows: 10 }} maxlength={1000} />
             </Form.Item>
 
             {/**leadership response */}
@@ -109,7 +109,7 @@ class PageEssays extends React.Component {
               extra="1000 Character Limit"
               rules={this.validationRules("response")}
             >
-              <TextArea autoSize={{ minRows: 5 }} maxlength={1000} />
+              <TextArea autoSize={{ minRows: 5, maxRows: 10 }} maxlength={1000} />
             </Form.Item>
 
             {/**extra information response */}
@@ -122,7 +122,7 @@ class PageEssays extends React.Component {
               extra="1000 Character Limit"
               rules={this.validationRules("response")}
             >
-              <TextArea autoSize={{ minRows: 5 }} maxlength={1000} />
+              <TextArea autoSize={{ minRows: 5, maxRows: 10 }} maxlength={1000} />
             </Form.Item>
 
             <div
