@@ -6,7 +6,6 @@ import { Collapse, Checkbox, Pagination } from "antd";
 import { Col as AntCol, Row as AntRow } from "antd";
 import QueueAnim from "rc-queue-anim";
 import { withRouter } from "react-router";
-import { filter } from "underscore";
 
 
 const { Search } = Input;
