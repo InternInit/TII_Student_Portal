@@ -55,6 +55,10 @@ const TabContainer = styled.div`
   padding-top: 5px;
   //border: solid 0.5px #d9d9d9;
   background-color: white;
+
+  border: 1px solid #d9d9d9;
+  box-shadow: 1px 1px 5px -4px;
+  
 `;
 const mapping = [
     "this single item in the array is allowing me to use the queue animations lol"

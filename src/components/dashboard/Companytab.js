@@ -20,21 +20,7 @@ color:#262626;
 padding-top:2px;
 margin-bottom:4px;
 `
-const Button1 = styled.div`
-color:white;
-background-color:green;
-font-size:18px;
-border-radius:2px;
-width:336px;
-height:36px;
-display:flex;
-align-self:center;
-align-items:center;
-justify-content:center;
-:hover{
-    cursor:pointer;
-}
-`
+
 
 const Col = styled.div`
 display:flex;
@@ -58,6 +44,7 @@ border-radius:6px;
 `
 
 
+
 class Companytab extends React.Component {
     constructor(props) {
         super(props);
@@ -71,7 +58,8 @@ class Companytab extends React.Component {
         return (
             //Collapse Tab
             <Collapse defaultActiveKey={['0']} expandIconPosition='right'
-                style={{ borderRadius: '8px', border: '0' }}
+                style={{ borderRadius: '8px', border: '1', boxShadow: '1px 1px 5px -4px' }}
+
             >
                 {
                     //Dropdown Panel view
@@ -83,7 +71,8 @@ class Companytab extends React.Component {
                         justifyContent: 'center',
                         display: 'flex',
                         backgroundColor: 'white',
-                        border: '0'
+                        border: '1',
+                        boxShadow: '1px 1px 5px -4px'
                     }}
                     onClick={this.onClick}
                 >

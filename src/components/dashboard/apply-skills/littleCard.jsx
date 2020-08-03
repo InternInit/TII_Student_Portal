@@ -20,7 +20,6 @@ function LittleCard(props) {
             width: "100%",
             height: "375px",
             borderRadius: "15px",
-            border: "none",
             display: "inline-block",
           }}
           cover={
