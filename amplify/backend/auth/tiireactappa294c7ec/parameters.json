@@ -1,8 +1,8 @@
 {
-    "identityPoolName": "tiireactapp43a5d781_identitypool_43a5d781",
+    "identityPoolName": "tiireactappa294c7ec_identitypool_a294c7ec",
     "allowUnauthenticatedIdentities": false,
-    "resourceNameTruncated": "tiirea43a5d781",
-    "userPoolName": "tiireactapp43a5d781_userpool_43a5d781",
+    "resourceNameTruncated": "tiireaa294c7ec",
+    "userPoolName": "tiireactappa294c7ec_userpool_a294c7ec",
     "autoVerifiedAttributes": [
         "email"
     ],
@@ -18,7 +18,8 @@
     "passwordPolicyMinLength": 8,
     "passwordPolicyCharacters": [],
     "requiredAttributes": [
-        "email"
+        "email",
+        "name"
     ],
     "userpoolClientGenerateSecret": true,
     "userpoolClientRefreshTokenValidity": 30,
@@ -28,10 +29,10 @@
     "userpoolClientReadAttributes": [
         "email"
     ],
-    "userpoolClientLambdaRole": "tiirea43a5d781_userpoolclient_lambda_role",
+    "userpoolClientLambdaRole": "tiireaa294c7ec_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
-    "sharedId": "43a5d781",
-    "resourceName": "tiireactapp43a5d781",
+    "sharedId": "a294c7ec",
+    "resourceName": "tiireactappa294c7ec",
     "authSelections": "identityPoolAndUserPool",
     "authRoleArn": {
         "Fn::GetAtt": [
@@ -46,6 +47,11 @@
         ]
     },
     "useDefault": "default",
+    "triggers": "{}",
     "userPoolGroupList": [],
+    "parentStack": {
+        "Ref": "AWS::StackId"
+    },
+    "permissions": [],
     "dependsOn": []
 }

@@ -5,6 +5,11 @@
 			"providerPlugin": "awscloudformation",
 			"dependsOn": [],
 			"customAuth": false
+		},
+		"tiireactappa294c7ec": {
+			"service": "Cognito",
+			"providerPlugin": "awscloudformation",
+			"dependsOn": []
 		}
 	}
 }

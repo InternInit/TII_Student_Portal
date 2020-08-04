@@ -2,6 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 import { Input, Button, Form } from 'antd';
 
+import { Link } from 'react-router-dom';
+
+
 import { Auth } from 'aws-amplify';
 
 //CSS Styled Components
@@ -84,7 +87,7 @@ class SignUp extends React.Component {
                             <Label style={{ marginTop: '-8px' }}>
                                 Display Name
                             </Label>
-                            <Form.Item name="displayName">
+                            <Form.Item name="name">
                                 <Input />
                             </Form.Item>
                             <Label style={{ marginTop: '-8px' }}>
@@ -97,8 +100,9 @@ class SignUp extends React.Component {
                             <div style={{ marginTop: ' 26px', display: 'flex', justifyContent: 'flex-end' }}>
                                 <Button className="profile-button-style" type='primary' htmlType='submit'>
                                     Sign Up
-                        </Button>
+                                </Button>
                             </div>
+
                         </Form>
                     </div>
                 </Container>
@@ -106,13 +110,14 @@ class SignUp extends React.Component {
     }
 
     handleSubmit = async(values) => {
-      let { username, password, email, displayName } = values
+      let { username, password, email, name } = values
       try {
         const user = await Auth.signUp({
             username,
             password,
             attributes: {
-              email
+              email,
+              name
             }
         });
 

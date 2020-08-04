@@ -68,6 +68,10 @@ class LogIn extends React.Component {
 
         }
     }
+
+    componentDidMount(){
+      console.log(this.props)
+    }
     render() {
         return (
             <Background >
@@ -100,7 +104,7 @@ class LogIn extends React.Component {
                             </div>
                             <Label style={{ marginTop: '24%' }}>
                                 Don't have an account?
-                            <Link > Sign up here</Link>
+                            <Link to="/signup"> Sign up here</Link>
                             </Label>
                         </Form>
                     </div>
@@ -112,7 +116,7 @@ class LogIn extends React.Component {
       let { username, password } = values
       try {
         const user = await Auth.signIn(username, password);
-        //let session = await Auth.currentSession();
+        this.props.newAuth();
 
         this.props.history.push("/dashboard");
 

@@ -121,7 +121,6 @@ class App extends Component {
     console.log("mounted");
     this.newAuth();
     this.getCachedCompletionState();
-    //this.getHeaders();
     window.addEventListener('resize', this.resize);
   }
 
@@ -131,10 +130,8 @@ class App extends Component {
   }
 
   inMemoryToken;
-  authParam = "absasd";
 
   newAuth = async () => {
-
     Auth.currentSession()
       .then((session) => {
         console.log(session)
@@ -152,10 +149,6 @@ class App extends Component {
         //window.location.href = "how-to-apply"
         //TODO: Redirect to the Login route
       });
-
-
-      //this.props.updateEmail(data.email)
-
   }
 
   updateData = (values, origin) => {
@@ -438,8 +431,10 @@ class App extends Component {
           </header>
           <ReactSwitch>
             <Route path="/dashboard" render={() => <Dashboard />} />
-            <Route path="/how-to-apply" exact component={LogIn} />
+            <Route path="/how-to-apply" exact component={HowtoApply} />
             <Route path="/edit-profile" exact component={EditProfile} />
+            <Route path="/login" render={props => <LogIn newAuth={this.newAuth}/>} />
+            <Route path="/signup" exact component={SignUp} />
             <Route path="/apply">{this.AppContainer()}</Route>
             <Route
               path="/submission-success"
@@ -451,7 +446,6 @@ class App extends Component {
               exact
               render={props => {
                 return (
-                  (this.authParam = props.location.search),
                   <Redirect to="/dashboard/my-internships" />
                 );
               }}
