@@ -119,9 +119,9 @@ class App extends Component {
 
   componentDidMount() {
     console.log("mounted");
-    this.refresh();
+    this.newAuth();
     this.getCachedCompletionState();
-    this.getHeaders();
+    //this.getHeaders();
     window.addEventListener('resize', this.resize);
   }
 
@@ -132,6 +132,31 @@ class App extends Component {
 
   inMemoryToken;
   authParam = "absasd";
+
+  newAuth = async () => {
+
+    Auth.currentSession()
+      .then((session) => {
+        console.log(session)
+        this.inMemoryToken = {
+          token: session.idToken.jwtToken,
+          expiry: session.idToken.payload.exp,
+          refresh: session.refreshToken.token,
+          access: session.accessToken.jwtToken
+        };
+        console.log(this.inMemoryToken)
+        this.props.updateUserName(session.accessToken.payload.username)
+      })
+      .catch((error) => {
+        console.log("Session Error: " + error)
+        //window.location.href = "how-to-apply"
+        //TODO: Redirect to the Login route
+      });
+
+
+      //this.props.updateEmail(data.email)
+
+  }
 
   updateData = (values, origin) => {
     if (
@@ -180,99 +205,11 @@ class App extends Component {
     }
   };
 
-  auth = () => {
-    try {
-      var authCode = this.authParam.split("=")[1];
-      fetch("/api/auth", {
-        method: "POST",
-        headers: {
-          "Content-Type": "text/plain"
-        },
-        body: authCode
-      })
-        .then(response => response.json())
-        .then(data => {
-          if (data !== "Invalid Grant") {
-            data = JSON.parse(data);
+  logout = async () => {
+    Auth.signOut()
+      .then(() => console.log("Signed Out"))
+      .catch(() => console.log("Could Not Sign Out"));
 
-            this.inMemoryToken = {
-              token: data.id_token,
-              expiry: data.expires_in,
-              refresh: data.refresh_token,
-              access: data.access_token
-            };
-            console.log(this.inMemoryToken);
-          } else {
-            window.location.href = configurationFile.authUrl;
-          }
-        });
-    } catch (e) {
-      window.location.href = configurationFile.authUrl;
-    }
-  };
-
-  refresh = () => {
-    fetch("/api/auth/refresh")
-      .then(response => response.json())
-      .then(data => {
-        if (data == null) {
-          //Exchange Auth
-          //Store JWT in memory
-          //Store Refresh Token
-          this.auth();
-        } else {
-          //Check for JWT
-          if (typeof this.inMemoryToken == "undefined") {
-            console.log("I should probably exchange refresh for JWT");
-            this.exchange();
-          }
-        }
-      });
-  };
-
-  exchange = () => {
-    console.log("Exchanging");
-    fetch("/api/auth/exchange")
-      .then(response => response.json())
-      .then(data => {
-        data = JSON.parse(data);
-        if (data.error !== "invalid_grant") {
-          this.inMemoryToken = {
-            token: data.id_token,
-            expiry: data.expires_in,
-            refresh: data.refresh_token,
-            access: data.access_token
-          };
-          console.log(this.inMemoryToken);
-        } else {
-          this.logout();
-        }
-      });
-  };
-
-  getHeaders = async () => {
-    let token = await this.getAccess()
-    fetch('/api/auth/getheaders', {
-      method: 'GET', // or 'PUT'
-      headers: {
-        'Authorization': "Bearer " + token,
-      }
-    })
-      .then(response => response.json())
-      .then(data => {
-        console.log('Success:', data);
-        this.props.updateEmail(data.email)
-        this.props.updateUserName(data.username)
-      })
-  }
-
-  logout = () => {
-    fetch("/api/logout")
-      .then(response => response.json())
-      .then(data => {
-        console.log(typeof data);
-        window.location.href = data;
-      });
   };
 
   getJwt = () => {
@@ -285,22 +222,6 @@ class App extends Component {
           }, 10);
         } else {
           resolve(app.inMemoryToken.token);
-        }
-      }
-      checkToken();
-    });
-  };
-
-  getAccess = () => {
-    return new Promise((resolve, reject) => {
-      var app = this;
-      function checkToken() {
-        if (app.inMemoryToken === undefined) {
-          setTimeout(() => {
-            checkToken();
-          }, 10);
-        } else {
-          resolve(app.inMemoryToken.access);
         }
       }
       checkToken();
@@ -343,6 +264,7 @@ class App extends Component {
       .then(data => {
         let parsedRecv = JSON.parse(data);
         if (parsedRecv != "No Info") {
+          console.log(parsedRecv)
           let recvCompletionState = parsedRecv[1];
           let recvCompletionChecklist = parsedRecv[2];
           this.props.batchUpdateCompletionState(recvCompletionState);

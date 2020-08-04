@@ -110,17 +110,14 @@ class LogIn extends React.Component {
 
     handleSubmit = async(values) => {
       let { username, password } = values
-      console.log(values)
       try {
         const user = await Auth.signIn(username, password);
-
-        const session = await Auth.currentSession()
-        console.log(session)
+        //let session = await Auth.currentSession();
 
         this.props.history.push("/dashboard");
 
       } catch (error) {
-        console.log('error signing up:', error);
+        console.log('error signing in:', error);
       }
 
     }
