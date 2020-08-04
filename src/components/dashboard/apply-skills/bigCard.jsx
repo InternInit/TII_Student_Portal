@@ -14,7 +14,7 @@ function BigCard(props) {
   return (
     <Link to={props.link}>
       <Card
-        style={{ width: "100%", borderRadius: "15px", border: "none" }}
+        style={{ width: "100%", borderRadius: "15px" }}
         cover={
           <img className="apply-skills-big-card-cover" src={props.cover} style={{ pointerEvents: 'none' }} />
         }

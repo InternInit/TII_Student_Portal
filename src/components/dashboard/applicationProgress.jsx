@@ -22,6 +22,10 @@ const ModuleContainer = styled.div`
   background: white;
   border-radius: 10px;
   padding: 3%;
+
+  border: 1px solid #d9d9d9;
+  box-shadow: 1px 1px 5px -4px;
+
 `;
 
 /*
