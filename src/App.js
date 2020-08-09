@@ -20,11 +20,13 @@ import PageNotFound from "./components/pageNotFound";
 import Dashboard from "./components/dashboard/dashboard.jsx";
 import HowtoApply from "./components/HowtoApply";
 import SubmissionSuccess from "./components/submissionSuccess";
-import newStudent from './components/newStudent.jsx';
-import EditProfile from './components/EditProfile.js';
+import newStudent from "./components/newStudent.jsx";
+import EditProfile from "./components/EditProfile.js";
 
-import LogIn from './components/LogIn.js';
-import SignUp from './components/SignUp.js';
+import LogIn from "./components/LogIn.js";
+import SignUp from "./components/SignUp.js";
+
+import Joyride from "react-joyride";
 
 //CSS Imports
 import "./App.css";
@@ -66,7 +68,7 @@ if (!process.env.NODE_ENV || process.env.NODE_ENV === "development") {
   console.error = noop;
 }
 
-function noop() { }
+function noop() {}
 
 //Declarations
 const { Header, Content, Footer, Sider } = Layout;
@@ -108,7 +110,20 @@ class App extends Component {
       wHeight: window.innerHeight,
       isCollapsed: false,
       page: 0,
-      submissionState: true
+      submissionState: true,
+      steps: [
+        {
+          target: ".first-step",
+          title: "Build your profile",
+          content: "Get started by building your custom internship profile."
+        },
+        {
+          target: ".second-step",
+          title: "Your Profile",
+          content:
+            "Complete each section of the standard application and then press submit when you're ready. You can change your responses at any time."
+        }
+      ]
     };
   }
 
@@ -117,12 +132,12 @@ class App extends Component {
     this.refresh();
     this.getCachedCompletionState();
     this.getHeaders();
-    window.addEventListener('resize', this.resize);
+    window.addEventListener("resize", this.resize);
   }
 
   componentWillUnmount() {
     //This is here because I don't know if the return statement will work lol
-    window.removeEventListener('resize', this.resize);
+    window.removeEventListener("resize", this.resize);
   }
 
   inMemoryToken;
@@ -246,20 +261,20 @@ class App extends Component {
   };
 
   getHeaders = async () => {
-    let token = await this.getAccess()
-    fetch('/api/auth/getheaders', {
-      method: 'GET', // or 'PUT'
+    let token = await this.getAccess();
+    fetch("/api/auth/getheaders", {
+      method: "GET", // or 'PUT'
       headers: {
-        'Authorization': "Bearer " + token,
+        Authorization: "Bearer " + token
       }
     })
       .then(response => response.json())
       .then(data => {
-        console.log('Success:', data);
-        this.props.updateEmail(data.email)
-        this.props.updateUserName(data.username)
-      })
-  }
+        console.log("Success:", data);
+        this.props.updateEmail(data.email);
+        this.props.updateUserName(data.username);
+      });
+  };
 
   logout = () => {
     fetch("/api/logout")
@@ -319,13 +334,46 @@ class App extends Component {
         Source: JSON.parse(JSON.stringify(source))
       },
       body: fd
-    }).then(response => { });
+    }).then(response => {});
   };
 
   getCachedCompletionState = async () => {
     let token = await this.getJwt();
     //TODO: Implement a better way of defaulting
-    let defaultChecklist = [[{ 'key': 'First Name', 'completed': false }, { 'key': 'Last Name', 'completed': false }, { 'key': 'Phone Number', 'completed': false }, { 'key': 'Email', 'completed': false }, { 'key': 'Address', 'completed': false }, { 'key': 'City', 'completed': false }, { 'key': 'State', 'completed': false }, { 'key': 'Zip Code', 'completed': false }, { 'key': 'Year Of Graduation', 'completed': false }, { 'key': 'Interested Industries', 'completed': false }, { 'key': 'Unweighted GPA', 'completed': false }, { 'key': 'Relevant Courses', 'completed': false }, { 'key': 'Extracurriculars', 'completed': false }, { 'key': 'Willing Work Days', 'completed': false }, { 'key': 'Willing Work Times', 'completed': false }, { 'key': 'Starting/Ending Dates', 'completed': false }, { 'key': 'Paid/Unpaid Preference', 'completed': false }, { 'key': 'Resume', 'completed': false }], [{ 'key': 'Gender', 'completed': false }, { 'key': 'Age', 'completed': false }, { 'key': 'Education', 'completed': false }], [{ 'key': 'Why This Industry Essay', 'completed': false }, { 'key': 'Leadership Roles Essay', 'completed': false }, { 'key': 'Extra Essay', 'completed': false }, { 'key': 'Cover Letter', 'completed': false }], [{ 'key': 'Reference', 'completed': false }]]
+    let defaultChecklist = [
+      [
+        { key: "First Name", completed: false },
+        { key: "Last Name", completed: false },
+        { key: "Phone Number", completed: false },
+        { key: "Email", completed: false },
+        { key: "Address", completed: false },
+        { key: "City", completed: false },
+        { key: "State", completed: false },
+        { key: "Zip Code", completed: false },
+        { key: "Year Of Graduation", completed: false },
+        { key: "Interested Industries", completed: false },
+        { key: "Unweighted GPA", completed: false },
+        { key: "Relevant Courses", completed: false },
+        { key: "Extracurriculars", completed: false },
+        { key: "Willing Work Days", completed: false },
+        { key: "Willing Work Times", completed: false },
+        { key: "Starting/Ending Dates", completed: false },
+        { key: "Paid/Unpaid Preference", completed: false },
+        { key: "Resume", completed: false }
+      ],
+      [
+        { key: "Gender", completed: false },
+        { key: "Age", completed: false },
+        { key: "Education", completed: false }
+      ],
+      [
+        { key: "Why This Industry Essay", completed: false },
+        { key: "Leadership Roles Essay", completed: false },
+        { key: "Extra Essay", completed: false },
+        { key: "Cover Letter", completed: false }
+      ],
+      [{ key: "Reference", completed: false }]
+    ];
 
     fetch("/api/get_user_data", {
       method: "POST",
@@ -341,10 +389,10 @@ class App extends Component {
           let recvCompletionState = parsedRecv[1];
           let recvCompletionChecklist = parsedRecv[2];
           this.props.batchUpdateCompletionState(recvCompletionState);
-          this.props.batchUpdateCompletionChecklist(recvCompletionChecklist)
+          this.props.batchUpdateCompletionChecklist(recvCompletionChecklist);
         } else {
           this.props.batchUpdateCompletionState([0, 0, 0, 0]);
-          this.props.batchUpdateCompletionChecklist(defaultChecklist)
+          this.props.batchUpdateCompletionChecklist(defaultChecklist);
         }
       });
   };
@@ -497,17 +545,14 @@ class App extends Component {
     );
   };
 
-
-
   render() {
     return (
       <div className="App">
+        <Joyride steps={this.state.steps} />
         {this.resize()}
         <Router>
           <header>
-            <Navbar
-              logout={this.logout}
-            />
+            <Navbar logout={this.logout} />
           </header>
           <ReactSwitch>
             <Route path="/dashboard" render={() => <Dashboard />} />

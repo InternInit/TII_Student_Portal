@@ -359,7 +359,7 @@ class PageInternshipInformation extends Component {
     return (
       <div style={{ marginTop: "40px" }}>
         <Spin size="large" spinning={!this.state.loaded}>
-          <h1>Internship Information</h1>
+          <h1 className="second-step">Internship Information</h1>
           <br />
 
           <Form
