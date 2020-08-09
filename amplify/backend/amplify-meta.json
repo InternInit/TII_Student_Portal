@@ -21,7 +21,7 @@
                 "s3TemplateURL": "https://s3.amazonaws.com/amplify-tiireactapp-dev-174005-deployment/amplify-cfn-templates/auth/tiireactappa294c7ec-cloudformation-template.yml",
                 "logicalId": "authtiireactappa294c7ec"
             },
-            "lastPushTimeStamp": "2020-08-04T04:14:03.981Z",
+            "lastPushTimeStamp": "2020-08-07T03:30:49.059Z",
             "output": {
                 "AppClientSecret": "185v8pm2h0eudj4qvj2877d49l12lffvdho7t7voovi7l5afos0l",
                 "UserPoolId": "us-east-1_3jQ8qJ99t",
