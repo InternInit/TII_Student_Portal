@@ -30,6 +30,7 @@ yarn-error.log*
 /backend/__pycache__
 /env
 /virtual-environment
+*.pyc
 
 #amplify
 amplify/\#current-cloud-backend
