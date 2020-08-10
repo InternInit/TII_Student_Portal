@@ -467,8 +467,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Joyride steps={this.state.steps}
-        />
+        {/*<Joyride steps={this.state.steps}*/}
         {this.resize()}
         <Router>
           <header>

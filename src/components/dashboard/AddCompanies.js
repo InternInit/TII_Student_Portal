@@ -19,16 +19,15 @@ const thirdSpan = standardSpan / 3;
 const Row = styled.div`
   padding-bottom: 4vh;
 
-  margin-top:5vh;
+  margin-top: 5vh;
 
   display: flex;
   flex-direction: row;
   align-items: flex-start;
 
-  background-color:#f0f0f0;
-  border:1px solid #bfbfbf;
-  border-radius:2vh;
-
+  background-color: #f0f0f0;
+  border: 1px solid #bfbfbf;
+  border-radius: 2vh;
 `;
 
 const industry = [
@@ -185,7 +184,7 @@ class AddCompanies extends React.Component {
          * Filter by industries Collapse Tab
          *
          */}
-        <Row style={{ width: "100%" }}>
+        <AntRow style={{ width: "100%", marginBottom: "10px" }}>
           <Collapse defaultActiveKey={["0"]} expandIconPosition="right">
             <Panel header="Filter by Industry">
               <AntRow gutter={formGutter}>
@@ -220,7 +219,7 @@ class AddCompanies extends React.Component {
               </AntRow>
             </Panel>
           </Collapse>
-        </Row>
+        </AntRow>
 
         {/**
          *
