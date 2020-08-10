@@ -1,17 +1,21 @@
 import React, { Component } from "react";
 import styled from "styled-components";
+
 import "../../App.css";
 import "./dashboard.css";
 import "antd/dist/antd.css";
+
 import Checklist from "./checklist.jsx";
-import { Progress, Button } from "antd";
+import { Progress, Button, Row, Col } from "antd";
 import { CheckCircleTwoTone } from "@ant-design/icons";
 import QueueAnim from "rc-queue-anim";
 import { withRouter } from "react-router";
+import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { updateCompletionState } from "../../redux/actions";
 import Companytab from "./Companytab.js";
 import ActiveAppCompanytab from "./ActiveAppCompanytab.js";
+
 
 /*
 
@@ -25,7 +29,6 @@ const ModuleContainer = styled.div`
 
   border: 1px solid #d9d9d9;
   box-shadow: 1px 1px 5px -4px;
-
 `;
 
 /*
@@ -78,6 +81,16 @@ const ViewChecklist = styled.p`
   color: #1890ff;
 `;
 
+const DescriptorText = styled.span`
+  float: left;
+  width: 100%
+  font-family: Lato;
+  font-weight: bold;
+  font-size: 24px;
+
+  color: black;
+`;
+
 /*
 ******************************************
 PERCENT COMPLETION ARRAY
@@ -111,8 +124,6 @@ const mapStateToProps = state => {
 const mapDispatchToProps = {
   updateCompletionState
 };
-
-
 
 class ApplicationProgress extends Component {
   constructor(props) {
@@ -166,6 +177,51 @@ class ApplicationProgress extends Component {
   render() {
     return (
       <React.Fragment>
+        {/**
+         *
+         * Application Reminder
+         *
+         */}
+
+        {this.props.completionState.every(item => item === 0) ? (
+          <ModuleContainer style={{ marginTop: "3%" }}>
+            <Row>
+              <Col
+                span={20}
+                style={{
+                  float: "left"
+                }}
+              >
+                <DescriptorText  >
+                  Let's get started on your first application!
+                </DescriptorText>
+              </Col>
+              <Col
+                span={4}
+                style={{
+                  verticalAlign: "center",
+                  display: "flex",
+                  justifyContents: "center",
+                  alignItems: "center"
+                }}
+              >
+                <Button
+                  className="first-step"
+                  type="primary"
+                  size="large"
+                  style={{
+                    fontSize: "16px",
+                    fontWeight: "bold",
+                    width: "100%"
+                  }}
+                >
+                  <Link to="/apply">Build my Profile</Link>
+                </Button>
+              </Col>
+            </Row>
+          </ModuleContainer>
+        ) : null}
+
         {/**
          *
          * Application Progress

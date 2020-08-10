@@ -13,11 +13,12 @@ import {
 //React Routing
 import { BrowserRouter as Router, Link } from "react-router-dom";
 import { withRouter } from "react-router";
-import _ from 'lodash';
+import _ from "lodash";
+
+import JoyRide from 'react-joyride';
 
 
 class TiiNav extends React.Component {
-
   getInitialHighlight = () => {
     switch (this.props.location.pathname) {
       case "/apply/internship-info":
@@ -31,19 +32,15 @@ class TiiNav extends React.Component {
       default:
         return Array.from("1");
     }
-  }
-
+  };
 
   componentDidUpdate(prevProps, prevState) {
     this.handleUpdate();
   }
 
-
   componentDidMount() {
     this.getInitialHighlight();
   }
-
-
 
   constructor(props) {
     super(props);
@@ -54,7 +51,6 @@ class TiiNav extends React.Component {
       PersonalComplete: false,
       EssayComplete: false,
       ReferencesComplete: false,
-
 
       //icons
       InternButton: <ContainerOutlined />,
@@ -75,7 +71,10 @@ class TiiNav extends React.Component {
         backgroundColor: "ghostwhite"
       },
 
-      modFlag: false
+      modFlag: false,
+
+
+
     };
   }
 
@@ -85,11 +84,10 @@ class TiiNav extends React.Component {
       InternButton,
       PersonalButton,
       EssayButton,
-      ReferencesButton,
+      ReferencesButton
     } = this.state;
     let { SubmitButton } = this.state;
     return (
-
       <Sider //styling the sider
         style={{
           position: "fixed",
@@ -98,12 +96,10 @@ class TiiNav extends React.Component {
           margin: "10px",
           marginTop: "8.5%"
         }}
-
         //Collapsing
         collapsed={this.props.isCollapsed}
       >
-
-        <Menu //Navigation Panel
+        <Menu
           theme="light"
           mode="inline"
           defaultSelectedKeys={this.getInitialHighlight()}
@@ -113,7 +109,6 @@ class TiiNav extends React.Component {
             key="1"
             onClick={() => {
               this.routeChange("/apply/internship-info");
-
             }}
           >
             {InternButton}
@@ -165,7 +160,7 @@ class TiiNav extends React.Component {
             onClick={this.handleSubmit} //checks other states before allowing submit
           >
             {SubmitButton}
-            <span>Submit</span>
+            <span >Submit</span>
           </Menu.Item>
         </Menu>
       </Sider>
@@ -173,7 +168,7 @@ class TiiNav extends React.Component {
   }
 
   handleSubmit = () => {
-    let status = this.props.completionState
+    let status = this.props.completionState;
 
     if (_.isEqual(status, [1, 1, 1, 1])) {
       // checks to see if all forms are completed
@@ -184,7 +179,7 @@ class TiiNav extends React.Component {
         description: "Your results have been submitted",
         icon: <CheckOutlined style={{ color: "green" }} />
       });
-      this.props.onSubmit({}, -1)
+      this.props.onSubmit({}, -1);
       this.routeChange("/submission-success");
     } else {
       notification.open({
@@ -193,58 +188,84 @@ class TiiNav extends React.Component {
         icon: <CloseOutlined style={{ color: "red" }} />
       });
     }
-
-
   };
 
-
-
-  handleUpdate = (e) => {
+  handleUpdate = e => {
     let completionState = this.props.completionState;
 
     for (var i = 0; i < completionState.length; i++) {
       switch (i) {
         case 0:
           if (completionState[i] === 1) {
-            if (this.state.InternButton.type.render.displayName !== "CheckOutlined") {
-              this.setState({ InternButton: <CheckOutlined style={{ color: "green" }} /> })
+            if (
+              this.state.InternButton.type.render.displayName !==
+              "CheckOutlined"
+            ) {
+              this.setState({
+                InternButton: <CheckOutlined style={{ color: "green" }} />
+              });
             }
           } else {
-            if (this.state.InternButton.type.render.displayName !== "ContainerOutlined") {
-              this.setState({ InternButton: <ContainerOutlined /> })
+            if (
+              this.state.InternButton.type.render.displayName !==
+              "ContainerOutlined"
+            ) {
+              this.setState({ InternButton: <ContainerOutlined /> });
             }
           }
           break;
         case 1:
           if (completionState[i] === 1) {
-            if (this.state.PersonalButton.type.render.displayName !== "CheckOutlined") {
-              this.setState({ PersonalButton: <CheckOutlined style={{ color: "green" }} /> })
+            if (
+              this.state.PersonalButton.type.render.displayName !==
+              "CheckOutlined"
+            ) {
+              this.setState({
+                PersonalButton: <CheckOutlined style={{ color: "green" }} />
+              });
             }
           } else {
-            if (this.state.PersonalButton.type.render.displayName !== "UserOutlined") {
-              this.setState({ PersonalButton: <UserOutlined /> })
+            if (
+              this.state.PersonalButton.type.render.displayName !==
+              "UserOutlined"
+            ) {
+              this.setState({ PersonalButton: <UserOutlined /> });
             }
           }
           break;
         case 2:
           if (completionState[i] === 1) {
-            if (this.state.EssayButton.type.render.displayName !== "CheckOutlined") {
-              this.setState({ EssayButton: <CheckOutlined style={{ color: "green" }} /> })
+            if (
+              this.state.EssayButton.type.render.displayName !== "CheckOutlined"
+            ) {
+              this.setState({
+                EssayButton: <CheckOutlined style={{ color: "green" }} />
+              });
             }
           } else {
-            if (this.state.EssayButton.type.render.displayName !== "EditOutlined") {
-              this.setState({ EssayButton: <EditOutlined /> })
+            if (
+              this.state.EssayButton.type.render.displayName !== "EditOutlined"
+            ) {
+              this.setState({ EssayButton: <EditOutlined /> });
             }
           }
           break;
         case 3:
           if (completionState[i] === 1) {
-            if (this.state.ReferencesButton.type.render.displayName !== "CheckOutlined") {
-              this.setState({ ReferencesButton: <CheckOutlined style={{ color: "green" }} /> })
+            if (
+              this.state.ReferencesButton.type.render.displayName !==
+              "CheckOutlined"
+            ) {
+              this.setState({
+                ReferencesButton: <CheckOutlined style={{ color: "green" }} />
+              });
             }
           } else {
-            if (this.state.ReferencesButton.type.render.displayName !== "TeamOutlined") {
-              this.setState({ ReferencesButton: <TeamOutlined /> })
+            if (
+              this.state.ReferencesButton.type.render.displayName !==
+              "TeamOutlined"
+            ) {
+              this.setState({ ReferencesButton: <TeamOutlined /> });
             }
           }
           break;
@@ -252,11 +273,8 @@ class TiiNav extends React.Component {
           break;
 
       }
-
     }
   };
-
-
 
   routeChange = path => {
     if (path === "/apply/internship-info") {

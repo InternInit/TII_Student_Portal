@@ -359,7 +359,7 @@ class PageInternshipInformation extends Component {
     return (
       <div style={{ marginTop: "40px" }}>
         <Spin size="large" spinning={!this.state.loaded}>
-          <h1>Internship Information</h1>
+          <h1 className="second-step">Internship Information</h1>
           <br />
 
           <Form
@@ -443,41 +443,6 @@ class PageInternshipInformation extends Component {
               </Col>
             </Row>
 
-            {/*Industry*/}
-            <Row gutter={formGutter}>
-              <Col span={standardSpan}>
-                <Form.Item {...formItemProps.industry}>
-                  <Checkbox.Group>
-                    <Row gutter={checkGutter}>
-                      {industry.map(industry => (
-                        <Col span={thirdSpan}>
-                          <Checkbox
-                            key={industry}
-                            value={industry}
-                            style={{
-                              lineHeight: "32px"
-                            }}
-                          >
-                            {industry}
-                          </Checkbox>
-                        </Col>
-                      ))}
-                      <Col span={thirdSpan}>
-                        <Checkbox
-                          value={this.state.otherIndustry}
-                          style={{
-                            lineHeight: "32px"
-                          }}
-                        >
-                          Other
-                          <Input onChange={this.handleChange} />
-                        </Checkbox>
-                      </Col>
-                    </Row>
-                  </Checkbox.Group>
-                </Form.Item>
-              </Col>
-            </Row>
 
             {/*Unweighted and Weighted GPAs*/}
             <Row gutter={formGutter}>
