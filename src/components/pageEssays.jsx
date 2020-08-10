@@ -291,7 +291,7 @@ class PageEssays extends React.Component {
     let completionPercentage = parseFloat(
       (completedCount / Object.keys(allValues).length).toFixed(2)
     );
-    if (completionPercentage != this.props.completionState[2])
+    if (completionPercentage !== this.props.completionState[2])
       this.props.updateCompletionState(2, completionPercentage);
 
     if (!_.isEqual(checklist, this.props.completionChecklist[2]))
@@ -431,14 +431,14 @@ class PageEssays extends React.Component {
 
             try {
               let fileListCL = parsedData["Cover Letter"].fileList;
-              for (var i = 0; i < fileListCL.length; i++) {
+              for (let i = 0; i < fileListCL.length; i++) {
                 fileListCL[i].status = "done";
               }
               this.setState({ fileListCL: fileListCL });
             } catch { }
             try {
               let fileListPortfolio = parsedData.Portfolio.fileList;
-              for (var i = 0; i < fileListPortfolio.length; i++) {
+              for (let i = 0; i < fileListPortfolio.length; i++) {
                 fileListPortfolio[i].status = "done";
               }
               this.setState({ fileListPortfolio: fileListPortfolio });

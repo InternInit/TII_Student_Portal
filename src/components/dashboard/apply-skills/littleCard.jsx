@@ -1,9 +1,7 @@
 //React Imports
-import React, { Component } from "react";
-import styled from "styled-components";
+import React from "react";
 import "../../../App.css";
 import "../dashboard.css";
-import GettingStarted from "./GettingStarted.jpg";
 
 import { Card, Col } from "antd";
 
@@ -23,7 +21,7 @@ function LittleCard(props) {
             display: "inline-block",
           }}
           cover={
-            <img className="apply-skills-little-card-cover" src={props.cover} style={{ pointerEvents: 'none' }} />
+            <img className="apply-skills-little-card-cover" src={props.cover} style={{ pointerEvents: 'none' }} alt="cover" />
           }
           hoverable
         >

@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import styled from "styled-components";
 import "../../App.css";
 import "./dashboard.css";
 import "antd/dist/antd.css";
@@ -16,9 +15,7 @@ const MenuItemStyle = {
 };
 
 class DashboardNavBar extends Component {
-  constructor(props) {
-    super(props);
-  }
+
 
   /**
    *

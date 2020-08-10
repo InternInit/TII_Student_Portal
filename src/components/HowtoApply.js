@@ -10,6 +10,9 @@ import { withRouter } from "react-router-dom";
 
 import { Menu, Layout } from "antd";
 
+
+
+
 const Heading = styled.div`
   font-size: 28px;
   padding-bottom: 10px;
@@ -19,6 +22,7 @@ const Heading = styled.div`
   justify-content: align-left;
   margin-top: 70px;
 `;
+
 
 const Text = styled.div`
   padding: 5px;
@@ -54,6 +58,8 @@ const Caption = styled.p`
 `;
 
 const { Content, Header } = Layout;
+
+
 
 //THIS IS BEING TESTED INSTEAD OF INTERNSHIPINFORMATION, MAKE SURE TO CHANGE ROUTE BACK WHEN FINISHED!
 
@@ -120,7 +126,7 @@ class HowtoApply extends React.Component {
                 selectedKeys="5"
                 style={{
                   backgroundColor: "#F5F5F5",
-                  border: "0"
+                  border: "0",
                 }}
               >
                 <Menu.Item

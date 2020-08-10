@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import styled from "styled-components";
 import QueueAnim from "rc-queue-anim";
 import Companytab from "./Companytab.js";
 
@@ -13,9 +12,6 @@ let pinnedCompanies = [
 ];
 
 class PinCompany extends Component {
-  constructor(props) {
-    super(props);
-  }
 
   render() {
     return (

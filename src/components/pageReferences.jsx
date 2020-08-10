@@ -333,7 +333,7 @@ class PageReferences extends Component {
       }
     }
     let completionPercentage = parseFloat((completedCount / Object.keys(allValues).length).toFixed(2));
-    if (completionPercentage != this.props.completionState[3]) this.props.updateCompletionState(3, completionPercentage)
+    if (completionPercentage !== this.props.completionState[3]) this.props.updateCompletionState(3, completionPercentage)
 
     if (!_.isEqual(checklist, this.props.completionChecklist[3])) this.props.updateCompletionChecklist(3, checklist)
   }
