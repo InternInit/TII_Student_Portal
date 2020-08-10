@@ -1,10 +1,8 @@
 import React, { Component } from "react";
 
-//Logo Import
-import logo from "./logo.svg";
 
 //Ant Design Imports
-import { Layout, Switch, Button } from "antd";
+import { Layout, } from "antd";
 
 //Styled Component Imports
 import styled from "styled-components";
@@ -33,12 +31,9 @@ import "./App.css";
 //React Routing
 import {
   BrowserRouter as Router,
-  Link,
   Route,
   Switch as ReactSwitch,
   Redirect,
-  useRouteMatch as match,
-  useParams
 } from "react-router-dom";
 
 //Redux
@@ -52,7 +47,6 @@ import {
   batchUpdateCompletionChecklist
 } from "./redux/actions";
 
-import pageInternshipInformation from "./components/pageInternshipInformation.jsx";
 
 import devConfigurationFile from "./configuration_dev.json";
 import prodConfigurationFile from "./configuration_prod.json";
@@ -75,7 +69,7 @@ if (!process.env.NODE_ENV || process.env.NODE_ENV === "development") {
 function noop() { }
 
 //Declarations
-const { Header, Content, Footer, Sider } = Layout;
+const { Content, } = Layout;
 
 //Styles
 const PageContainer = styled.div`
@@ -153,7 +147,7 @@ class App extends Component {
       })
       .catch((error) => {
         console.log("Session Error: " + error)
-        if (window.location.href.split("/")[3] != "login") {
+        if (window.location.href.split("/")[3] !== "login") {
           window.location.href = window.location.href.split("/").slice(0, 3).join("/") + "/login"
 
         }
@@ -163,7 +157,7 @@ class App extends Component {
 
   updateData = (values, origin) => {
     if (
-      this.state.submissionState == true &&
+      this.state.submissionState === true &&
       typeof this.inMemoryToken != "undefined"
     ) {
       fetch("/api/update_user_data", {
@@ -181,13 +175,13 @@ class App extends Component {
         .then(data => {
           console.log("Sent: " + data);
         });
-    } else if (this.state.submissionState == false) {
+    } else if (this.state.submissionState === false) {
       console.log("Submission disabled");
     }
   };
 
   onSubmit = (values, origin) => {
-    if (this.state.submissionState == true) {
+    if (this.state.submissionState === true) {
       fetch("/api/update_user_data", {
         method: "POST",
         headers: {
@@ -203,7 +197,7 @@ class App extends Component {
         .then(data => {
           console.log(data);
         });
-    } else if (this.state.submissionState == false) {
+    } else if (this.state.submissionState === false) {
       console.log("Submission disabled");
     }
   };
@@ -298,7 +292,7 @@ class App extends Component {
       .then(response => response.json())
       .then(data => {
         let parsedRecv = JSON.parse(data);
-        if (parsedRecv != "No Info") {
+        if (parsedRecv !== "No Info") {
           console.log(parsedRecv)
           let recvCompletionState = parsedRecv[1];
           let recvCompletionChecklist = parsedRecv[2];
