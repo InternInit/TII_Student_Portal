@@ -128,7 +128,8 @@ class App extends Component {
           content:
             "Complete each section of the standard application and then press submit when you're ready. You can change your responses at any time."
         }
-      ]
+      ],
+      authorized: false
     };
   }
 
@@ -162,8 +163,11 @@ class App extends Component {
       })
       .catch((error) => {
         console.log("Session Error: " + error)
-        //window.location.href = "how-to-apply"
-        //TODO: Redirect to the Login route
+        if(window.location.href.split("/")[3] != "login"){
+          window.location.href = window.location.href.split("/").slice(0,3).join("/") + "/login"
+
+        }
+        //TODO: Update to a more elegant solution
       });
   }
 
