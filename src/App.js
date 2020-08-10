@@ -270,7 +270,6 @@ class App extends Component {
         { key: "State", completed: false },
         { key: "Zip Code", completed: false },
         { key: "Year Of Graduation", completed: false },
-        { key: "Interested Industries", completed: false },
         { key: "Unweighted GPA", completed: false },
         { key: "Relevant Courses", completed: false },
         { key: "Extracurriculars", completed: false },
