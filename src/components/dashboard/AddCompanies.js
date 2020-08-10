@@ -19,10 +19,18 @@ const thirdSpan = standardSpan / 3;
 
 
 const Row = styled.div`
-  margin-bottom: 22px;
+  padding-bottom: 4vh;
+
+  margin-top:5vh;
+
   display: flex;
   flex-direction: row;
   align-items: flex-start;
+
+  background-color:#f0f0f0;
+  border:1px solid #bfbfbf;
+  border-radius:2vh;
+
 `;
 
 
@@ -116,6 +124,46 @@ class AddCompanies extends React.Component {
     return (
       < div style={{ paddingBottom: "50%" }
       }>
+        {/**
+         *
+         * Filter by industries Collapse Tab
+         *
+         */}
+        <Row style={{ width: '100%' }} >
+
+          <AntRow gutter={formGutter}>
+            <AntCol span={standardSpan}>
+              <h1 style={{ marginTop: '4vh', marginBottom: '4vh' }}>Check all industries you are applying for</h1>
+              <Checkbox.Group
+                onChange={value => this.filterIndustries(value)}
+              >
+                <AntRow gutter={checkGutter}>
+                  {industry.map(industry => (
+                    <AntCol span={thirdSpan}
+                      style={{
+                        display: 'flex',
+                        alignItems: 'flex-start',
+                      }}>
+
+                      <Checkbox
+                        key={industry}
+                        value={industry}
+                        style={{
+                          lineHeight: "32px",
+                          marginLeft: '25%'
+
+                        }}
+                      >
+                        {industry}
+                      </Checkbox>
+                    </AntCol>
+                  ))}
+                </AntRow>
+              </Checkbox.Group>
+            </AntCol>
+          </AntRow>
+
+        </Row>
         <h1 className="module-name" ref={this.myRef}>
           Search Companies
         </h1>
@@ -136,48 +184,7 @@ class AddCompanies extends React.Component {
 
 
 
-        {/**
-         *
-         * Filter by industries Collapse Tab
-         *
-         */}
-        <Row style={{ width: '100%' }} >
-          <Collapse defaultActiveKey={["0"]} expandIconPosition="right"
-          >
-            <Panel header="Filter by Industry">
-              <AntRow gutter={formGutter}>
-                <AntCol span={standardSpan}>
-                  <Checkbox.Group
-                    onChange={value => this.filterIndustries(value)}
-                  >
-                    <AntRow gutter={checkGutter}>
-                      {industry.map(industry => (
-                        <AntCol span={thirdSpan}
-                          style={{
-                            display: 'flex',
-                            alignItems: 'flex-start',
-                          }}>
 
-                          <Checkbox
-                            key={industry}
-                            value={industry}
-                            style={{
-                              lineHeight: "32px",
-                              marginLeft: '25%'
-
-                            }}
-                          >
-                            {industry}
-                          </Checkbox>
-                        </AntCol>
-                      ))}
-                    </AntRow>
-                  </Checkbox.Group>
-                </AntCol>
-              </AntRow>
-            </Panel>
-          </Collapse>
-        </Row>
 
 
 

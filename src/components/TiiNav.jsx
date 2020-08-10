@@ -15,6 +15,9 @@ import { BrowserRouter as Router, Link } from "react-router-dom";
 import { withRouter } from "react-router";
 import _ from "lodash";
 
+import JoyRide from 'react-joyride';
+
+
 class TiiNav extends React.Component {
   getInitialHighlight = () => {
     switch (this.props.location.pathname) {
@@ -70,7 +73,10 @@ class TiiNav extends React.Component {
         backgroundColor: "ghostwhite"
       },
 
-      modFlag: false
+      modFlag: false,
+
+
+
     };
   }
 
@@ -102,7 +108,6 @@ class TiiNav extends React.Component {
           selectedKeys={this.getInitialHighlight()}
         >
           <Menu.Item
-            className="second-step"
             key="1"
             onClick={() => {
               this.routeChange("/apply/internship-info");
@@ -157,7 +162,7 @@ class TiiNav extends React.Component {
             onClick={this.handleSubmit} //checks other states before allowing submit
           >
             {SubmitButton}
-            <span>Submit</span>
+            <span >Submit</span>
           </Menu.Item>
         </Menu>
       </Sider>

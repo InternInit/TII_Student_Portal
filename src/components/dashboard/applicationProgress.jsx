@@ -16,6 +16,7 @@ import { updateCompletionState } from "../../redux/actions";
 import Companytab from "./Companytab.js";
 import ActiveAppCompanytab from "./ActiveAppCompanytab.js";
 
+
 /*
 
 Container to hold all the progress bars
@@ -191,7 +192,7 @@ class ApplicationProgress extends Component {
                   float: "left"
                 }}
               >
-                <DescriptorText>
+                <DescriptorText  >
                   Let's get started on your first application!
                 </DescriptorText>
               </Col>
@@ -245,11 +246,11 @@ class ApplicationProgress extends Component {
                 {this.props.completionState[index] < 1 ? (
                   Math.floor(this.props.completionState[index] * 100) + "%"
                 ) : (
-                  <CheckCircleTwoTone
-                    style={{ fontSize: "24px" }}
-                    twoToneColor="#52c41a"
-                  />
-                )}
+                    <CheckCircleTwoTone
+                      style={{ fontSize: "24px" }}
+                      twoToneColor="#52c41a"
+                    />
+                  )}
               </PercentHeader>
 
               {/**

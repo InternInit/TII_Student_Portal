@@ -68,7 +68,7 @@ if (!process.env.NODE_ENV || process.env.NODE_ENV === "development") {
   console.error = noop;
 }
 
-function noop() {}
+function noop() { }
 
 //Declarations
 const { Header, Content, Footer, Sider } = Layout;
@@ -334,7 +334,7 @@ class App extends Component {
         Source: JSON.parse(JSON.stringify(source))
       },
       body: fd
-    }).then(response => {});
+    }).then(response => { });
   };
 
   getCachedCompletionState = async () => {
@@ -548,7 +548,8 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Joyride steps={this.state.steps} />
+        <Joyride steps={this.state.steps}
+        />
         {this.resize()}
         <Router>
           <header>
