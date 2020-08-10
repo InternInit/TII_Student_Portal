@@ -4,7 +4,6 @@ import {
   Select,
   Input,
   Button,
-
   DatePicker,
   Radio,
   Upload,
@@ -12,10 +11,7 @@ import {
   Spin
 } from "antd";
 import { Row, Col } from "antd";
-import {
-  InboxOutlined
-} from "@ant-design/icons";
-
+import { InboxOutlined } from "@ant-design/icons";
 
 import "antd/dist/antd.css";
 import "../App.css";
@@ -121,7 +117,6 @@ const daysOfTheWeek = [
 const timesOfTheDay = ["Mornings", "Afternoons", "Evenings"];
 const paidOrUnpaid = ["Yes", "No"];
 
-
 //Validation Rules (Required questions)
 const validationRules = (required, inputName, type, pattern) => [
   {
@@ -135,11 +130,10 @@ const validationRules = (required, inputName, type, pattern) => [
 //The best function to exist within this app
 const boldify = text => <strong>{text}</strong>;
 
-
 /**
- * 
+ *
  * All form questions
- * 
+ *
  */
 const formItemProps = {
   totalForm: {
@@ -300,9 +294,9 @@ const formItemProps = {
 };
 
 /**
- * 
+ *
  * Upload Files Parameters
- * 
+ *
  */
 const props = {
   name: "file",
@@ -312,7 +306,7 @@ const props = {
 };
 
 /**
- * 
+ *
  * Checks Nav Panel state (is completed)
  *
  */
@@ -324,15 +318,14 @@ const mapStateToProps = state => {
 };
 
 /**
- * 
+ *
  * Updates completion state
- * 
+ *
  */
 const mapDispatchToProps = {
   updateCompletionState,
   updateCompletionChecklist
 };
-
 
 class PageInternshipInformation extends Component {
   constructor(props) {
@@ -368,9 +361,9 @@ class PageInternshipInformation extends Component {
           <br />
 
           {/**
-           * 
+           *
            * Application Form
-           * 
+           *
            */}
           <Form
             {...formItemProps.totalForm}
@@ -378,12 +371,11 @@ class PageInternshipInformation extends Component {
             ref={this.formRef}
             onValuesChange={this.onValuesChange}
           >
-
             {/**
- * 
- * First Row (First and Last Name)
- * 
- */}
+             *
+             * First Row (First and Last Name)
+             *
+             */}
             <Row name="first" gutter={formGutter}>
               <Col span={halfSpan}>
                 <Form.Item {...formItemProps.firstName}>
@@ -399,9 +391,9 @@ class PageInternshipInformation extends Component {
             </Row>
 
             {/**
-             * 
+             *
              * Phone Number and Email
-             * 
+             *
              */}
             <Row gutter={formGutter}>
               <Col span={halfSpan}>
@@ -418,9 +410,9 @@ class PageInternshipInformation extends Component {
             </Row>
 
             {/**
-             * 
+             *
              * Address Line
-             * 
+             *
              */}
             <Row gutter={formGutter}>
               <Col span={standardSpan}>
@@ -431,9 +423,9 @@ class PageInternshipInformation extends Component {
             </Row>
 
             {/**
-             * 
+             *
              * Address City, State, ZIP
-             * 
+             *
              */}
             <Row gutter={formGutter}>
               <Col span={thirdSpan}>
@@ -461,11 +453,10 @@ class PageInternshipInformation extends Component {
               </Col>
             </Row>
 
-
             {/**
-             * 
+             *
              * Year of Graduation
-             * 
+             *
              */}
             <Row gutter={formGutter}>
               <Col span={standardSpan}>
@@ -475,11 +466,10 @@ class PageInternshipInformation extends Component {
               </Col>
             </Row>
 
-
             {/**
-             * 
+             *
              * Weighted and Unweighted GPAs
-             * 
+             *
              */}
             <Row gutter={formGutter}>
               <Col span={halfSpan}>
@@ -494,11 +484,10 @@ class PageInternshipInformation extends Component {
               </Col>
             </Row>
 
-
             {/**
-             * 
+             *
              * Relevant Courses
-             * 
+             *
              */}
             <Row gutter={formGutter}>
               <Col span={standardSpan}>
@@ -510,7 +499,6 @@ class PageInternshipInformation extends Component {
                 </Form.Item>
               </Col>
             </Row>
-
 
             {/**
             Extracurriculars
@@ -527,11 +515,10 @@ class PageInternshipInformation extends Component {
               </Col>
             </Row>
 
-
             {/**
-             * 
+             *
              * Day and Time Willing to Work
-             * 
+             *
              */}
             <Row gutter={formGutter}>
               <Col span={halfSpan}>
@@ -564,11 +551,10 @@ class PageInternshipInformation extends Component {
               </Col>
             </Row>
 
-
             {/**
-             * 
+             *
              * Start and End Date
-             * 
+             *
              */}
             <Row gutter={formGutter}>
               <Col span={standardSpan}>
@@ -578,11 +564,10 @@ class PageInternshipInformation extends Component {
               </Col>
             </Row>
 
-
             {/**
-             * 
+             *
              * Willing to work Paid/Unpaid
-             * 
+             *
              */}
             <Row gutter={formGutter}>
               <Col span={standardSpan}>
@@ -599,9 +584,9 @@ class PageInternshipInformation extends Component {
             </Row>
 
             {/**
-             * 
+             *
              * Upload Resume
-             * 
+             *
              */}
             <Form.Item {...formItemProps.resume}>
               <Dragger
@@ -619,9 +604,9 @@ class PageInternshipInformation extends Component {
             </Form.Item>
 
             {/**
-             * 
+             *
              * "Save and Continue" Button
-             * 
+             *
              */}
             <Form.Item>
               <Button className="next-button" type="primary" htmlType="submit">
@@ -635,10 +620,10 @@ class PageInternshipInformation extends Component {
   }
 
   /**
- * 
- * When Values are Changed
- * 
- */
+   *
+   * When Values are Changed
+   *
+   */
   onValuesChange = () => {
     let allValues = this.formRef.current.getFieldsValue();
     delete allValues["Weighted GPA"];
@@ -665,7 +650,7 @@ class PageInternshipInformation extends Component {
     let completionPercentage = parseFloat(
       (completedCount / Object.keys(allValues).length).toFixed(2)
     );
-    if (completionPercentage != this.props.completionState[0])
+    if (completionPercentage !== this.props.completionState[0])
       this.props.updateCompletionState(0, completionPercentage);
 
     if (!_.isEqual(checklist, this.props.completionChecklist[0]))
@@ -673,10 +658,10 @@ class PageInternshipInformation extends Component {
   };
 
   /**
-* 
-* On Finish
-* 
-*/
+   *
+   * On Finish
+   *
+   */
   onFinish = values => {
     console.log("FinishedPageInternship:", values);
     this.props.updateCompletionState(0, 1.0);
@@ -684,23 +669,21 @@ class PageInternshipInformation extends Component {
     this.routeChange("/apply/personal");
   };
 
-
   /**
-* 
-* Upload User Data
-* 
-*/
+   *
+   * Upload User Data
+   *
+   */
   updateFieldData = async () => {
     const values = await this.formRef.current.getFieldsValue();
     this.props.updateData(values, "0");
   };
 
-
   /**
-* 
-* Load Resume
-* 
-*/
+   *
+   * Load Resume
+   *
+   */
   customRequestResume = ({ onSuccess, onError, file }) => {
     setTimeout(() => {
       onSuccess(file);
@@ -713,10 +696,10 @@ class PageInternshipInformation extends Component {
   };
 
   /**
-* 
-* File upload function
-* 
-*/
+   *
+   * File upload function
+   *
+   */
   onChange = info => {
     const { status } = info.file;
     if (status === "removed") {
@@ -735,12 +718,11 @@ class PageInternshipInformation extends Component {
     this.props.updateData(this.formRef.current.getFieldsValue(), "0");
   };
 
-
   /**
-* 
-* Load user data (forms already filled out)
-* 
-*/
+   *
+   * Load user data (forms already filled out)
+   *
+   */
   getUserData = async () => {
     let token = await this.props.getJwt();
     fetch("/api/get_user_data", {
@@ -778,12 +760,11 @@ class PageInternshipInformation extends Component {
       });
   };
 
-
   /**
-* 
-* Route Changing (React Router)
-* 
-*/
+   *
+   * Route Changing (React Router)
+   *
+   */
   routeChange = path => {
     console.log(path);
     this.props.clickTwo();
