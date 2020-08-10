@@ -135,6 +135,9 @@ class ApplicationProgress extends Component {
       referencesChecklist: false
     };
   }
+  componentDidMount(){
+    console.log(this.props)
+  }
 
   handleClick = section => {
     const {
@@ -149,25 +152,21 @@ class ApplicationProgress extends Component {
         this.setState({
           internshipInfoChecklist: !internshipInfoChecklist
         });
-        console.log(this.state);
         break;
       case "Personal":
         this.setState({
           personalChecklist: !personalChecklist
         });
-        console.log(this.state);
         break;
       case "Essays":
         this.setState({
           essayChecklist: !essayChecklist
         });
-        console.log(this.state);
         break;
       case "References":
         this.setState({
           referencesChecklist: !referencesChecklist
         });
-        console.log(this.state);
         break;
       default:
         break;
@@ -272,6 +271,7 @@ class ApplicationProgress extends Component {
 
               {/**
                * Checklist Text
+               *<a onClick={() => this.handleClick(section[0])}>
                */}
               <ViewChecklist>
                 <a onClick={() => this.handleClick(section[0])}>
