@@ -1,5 +1,4 @@
 import React from "react";
-import styled from "styled-components";
 import { Input } from "antd";
 import SearchCompanytab from "./SearchCompanytab.js";
 import { Collapse, Checkbox, Pagination, Form, Button } from "antd";
@@ -15,20 +14,6 @@ const formGutter = [16, 16];
 const checkGutter = [8, 8];
 const standardSpan = 24;
 const thirdSpan = standardSpan / 3;
-
-const Row = styled.div`
-  padding-bottom: 4vh;
-
-  margin-top: 5vh;
-
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-
-  background-color: #f0f0f0;
-  border: 1px solid #bfbfbf;
-  border-radius: 2vh;
-`;
 
 const industry = [
   "General Business",
@@ -100,7 +85,7 @@ class AddCompanies extends React.Component {
 
   render() {
     let { search, mergedIndustry } = this.state;
-    let { companies, page } = this.state;
+    let { page } = this.state;
 
     //Filtering function for industries
     let industrySearch = Info.filter(company => {

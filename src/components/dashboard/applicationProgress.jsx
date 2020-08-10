@@ -270,7 +270,7 @@ class ApplicationProgress extends Component {
                *<a onClick={() => this.handleClick(section[0])}>
                */}
               <ViewChecklist>
-                <a onClick={() => this.handleClick(section[0])}>
+                <a href="#" onClick={() => this.handleClick(section[0])}>
                   View Checklist
                 </a>
               </ViewChecklist>

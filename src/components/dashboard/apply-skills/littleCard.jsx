@@ -18,10 +18,15 @@ function LittleCard(props) {
             width: "100%",
             height: "375px",
             borderRadius: "15px",
-            display: "inline-block",
+            display: "inline-block"
           }}
           cover={
-            <img className="apply-skills-little-card-cover" src={props.cover} style={{ pointerEvents: 'none' }} alt="cover" />
+            <img
+              className="apply-skills-little-card-cover"
+              src={props.cover}
+              style={{ pointerEvents: "none" }}
+              alt="cover"
+            />
           }
           hoverable
         >
