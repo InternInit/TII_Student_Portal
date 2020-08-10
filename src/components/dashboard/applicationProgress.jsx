@@ -16,6 +16,7 @@ import { updateCompletionState } from "../../redux/actions";
 import Companytab from "./Companytab.js";
 import ActiveAppCompanytab from "./ActiveAppCompanytab.js";
 
+
 /*
 
 Container to hold all the progress bars
@@ -134,6 +135,9 @@ class ApplicationProgress extends Component {
       referencesChecklist: false
     };
   }
+  componentDidMount(){
+    console.log(this.props)
+  }
 
   handleClick = section => {
     const {
@@ -148,25 +152,21 @@ class ApplicationProgress extends Component {
         this.setState({
           internshipInfoChecklist: !internshipInfoChecklist
         });
-        console.log(this.state);
         break;
       case "Personal":
         this.setState({
           personalChecklist: !personalChecklist
         });
-        console.log(this.state);
         break;
       case "Essays":
         this.setState({
           essayChecklist: !essayChecklist
         });
-        console.log(this.state);
         break;
       case "References":
         this.setState({
           referencesChecklist: !referencesChecklist
         });
-        console.log(this.state);
         break;
       default:
         break;
@@ -191,7 +191,7 @@ class ApplicationProgress extends Component {
                   float: "left"
                 }}
               >
-                <DescriptorText>
+                <DescriptorText  >
                   Let's get started on your first application!
                 </DescriptorText>
               </Col>
@@ -245,11 +245,11 @@ class ApplicationProgress extends Component {
                 {this.props.completionState[index] < 1 ? (
                   Math.floor(this.props.completionState[index] * 100) + "%"
                 ) : (
-                  <CheckCircleTwoTone
-                    style={{ fontSize: "24px" }}
-                    twoToneColor="#52c41a"
-                  />
-                )}
+                    <CheckCircleTwoTone
+                      style={{ fontSize: "24px" }}
+                      twoToneColor="#52c41a"
+                    />
+                  )}
               </PercentHeader>
 
               {/**
@@ -271,6 +271,7 @@ class ApplicationProgress extends Component {
 
               {/**
                * Checklist Text
+               *<a onClick={() => this.handleClick(section[0])}>
                */}
               <ViewChecklist>
                 <a onClick={() => this.handleClick(section[0])}>

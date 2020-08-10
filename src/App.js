@@ -58,6 +58,11 @@ import pageInternshipInformation from "./components/pageInternshipInformation.js
 import devConfigurationFile from "./configuration_dev.json";
 import prodConfigurationFile from "./configuration_prod.json";
 
+//Amplify
+import Amplify, { Auth } from 'aws-amplify';
+import awsconfig from './aws-exports';
+Amplify.configure(awsconfig);
+
 let configurationFile = {};
 if (!process.env.NODE_ENV || process.env.NODE_ENV === "development") {
   configurationFile = devConfigurationFile;
@@ -68,7 +73,7 @@ if (!process.env.NODE_ENV || process.env.NODE_ENV === "development") {
   console.error = noop;
 }
 
-function noop() {}
+function noop() { }
 
 //Declarations
 const { Header, Content, Footer, Sider } = Layout;
@@ -118,16 +123,16 @@ class App extends Component {
           content:
             "Check out our comprehensive how to apply page to start building your application!"
         }
-      ]
+      ],
+      authorized: false
     };
   }
 
   componentDidMount() {
     console.log("mounted");
-    this.refresh();
+    this.newAuth();
     this.getCachedCompletionState();
-    this.getHeaders();
-    window.addEventListener("resize", this.resize);
+    window.addEventListener('resize', this.resize);
   }
 
   componentWillUnmount() {
@@ -136,7 +141,30 @@ class App extends Component {
   }
 
   inMemoryToken;
-  authParam = "absasd";
+
+  newAuth = async () => {
+    Auth.currentSession()
+      .then((session) => {
+        console.log(session)
+        this.inMemoryToken = {
+          token: session.idToken.jwtToken,
+          expiry: session.idToken.payload.exp,
+          refresh: session.refreshToken.token,
+          access: session.accessToken.jwtToken
+        };
+        console.log(this.inMemoryToken)
+        this.props.updateUserName(session.accessToken.payload.username)
+        this.props.updateEmail(session.idToken.payload.email)
+      })
+      .catch((error) => {
+        console.log("Session Error: " + error)
+        if(window.location.href.split("/")[3] != "login"){
+          window.location.href = window.location.href.split("/").slice(0,3).join("/") + "/login"
+
+        }
+        //TODO: Update to a more elegant solution
+      });
+  }
 
   updateData = (values, origin) => {
     if (
@@ -185,99 +213,11 @@ class App extends Component {
     }
   };
 
-  auth = () => {
-    try {
-      var authCode = this.authParam.split("=")[1];
-      fetch("/api/auth", {
-        method: "POST",
-        headers: {
-          "Content-Type": "text/plain"
-        },
-        body: authCode
-      })
-        .then(response => response.json())
-        .then(data => {
-          if (data !== "Invalid Grant") {
-            data = JSON.parse(data);
+  logout = async () => {
+    Auth.signOut()
+      .then(() => console.log("Signed Out"))
+      .catch(() => console.log("Could Not Sign Out"));
 
-            this.inMemoryToken = {
-              token: data.id_token,
-              expiry: data.expires_in,
-              refresh: data.refresh_token,
-              access: data.access_token
-            };
-            console.log(this.inMemoryToken);
-          } else {
-            window.location.href = configurationFile.authUrl;
-          }
-        });
-    } catch (e) {
-      window.location.href = configurationFile.authUrl;
-    }
-  };
-
-  refresh = () => {
-    fetch("/api/auth/refresh")
-      .then(response => response.json())
-      .then(data => {
-        if (data == null) {
-          //Exchange Auth
-          //Store JWT in memory
-          //Store Refresh Token
-          this.auth();
-        } else {
-          //Check for JWT
-          if (typeof this.inMemoryToken == "undefined") {
-            console.log("I should probably exchange refresh for JWT");
-            this.exchange();
-          }
-        }
-      });
-  };
-
-  exchange = () => {
-    console.log("Exchanging");
-    fetch("/api/auth/exchange")
-      .then(response => response.json())
-      .then(data => {
-        data = JSON.parse(data);
-        if (data.error !== "invalid_grant") {
-          this.inMemoryToken = {
-            token: data.id_token,
-            expiry: data.expires_in,
-            refresh: data.refresh_token,
-            access: data.access_token
-          };
-          console.log(this.inMemoryToken);
-        } else {
-          this.logout();
-        }
-      });
-  };
-
-  getHeaders = async () => {
-    let token = await this.getAccess();
-    fetch("/api/auth/getheaders", {
-      method: "GET", // or 'PUT'
-      headers: {
-        Authorization: "Bearer " + token
-      }
-    })
-      .then(response => response.json())
-      .then(data => {
-        console.log("Success:", data);
-        this.props.updateEmail(data.email);
-        this.props.updateUserName(data.username);
-      });
-  };
-
-  logout = () => {
-    fetch("/api/logout")
-      .then(response => response.json())
-      .then(data => {
-        console.log(typeof data);
-        window.location.href = data;
-      });
   };
 
   getJwt = () => {
@@ -290,22 +230,6 @@ class App extends Component {
           }, 10);
         } else {
           resolve(app.inMemoryToken.token);
-        }
-      }
-      checkToken();
-    });
-  };
-
-  getAccess = () => {
-    return new Promise((resolve, reject) => {
-      var app = this;
-      function checkToken() {
-        if (app.inMemoryToken === undefined) {
-          setTimeout(() => {
-            checkToken();
-          }, 10);
-        } else {
-          resolve(app.inMemoryToken.access);
         }
       }
       checkToken();
@@ -329,7 +253,7 @@ class App extends Component {
         Source: JSON.parse(JSON.stringify(source))
       },
       body: fd
-    }).then(response => {});
+    }).then(response => { });
   };
 
   getCachedCompletionState = async () => {
@@ -346,7 +270,6 @@ class App extends Component {
         { key: "State", completed: false },
         { key: "Zip Code", completed: false },
         { key: "Year Of Graduation", completed: false },
-        { key: "Interested Industries", completed: false },
         { key: "Unweighted GPA", completed: false },
         { key: "Relevant Courses", completed: false },
         { key: "Extracurriculars", completed: false },
@@ -381,6 +304,7 @@ class App extends Component {
       .then(data => {
         let parsedRecv = JSON.parse(data);
         if (parsedRecv != "No Info") {
+          console.log(parsedRecv)
           let recvCompletionState = parsedRecv[1];
           let recvCompletionChecklist = parsedRecv[2];
           this.props.batchUpdateCompletionState(recvCompletionState);
@@ -543,6 +467,8 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        <Joyride steps={this.state.steps}
+        />
         {this.resize()}
         <Router>
           <header>
@@ -552,6 +478,8 @@ class App extends Component {
             <Route path="/dashboard" render={() => <Dashboard />} />
             <Route path="/how-to-apply" exact component={HowtoApply} />
             <Route path="/edit-profile" exact component={EditProfile} />
+            <Route path="/login" render={props => <LogIn newAuth={this.newAuth}/>} />
+            <Route path="/signup" exact component={SignUp} />
             <Route path="/apply">{this.AppContainer()}</Route>
             <Route
               path="/submission-success"
@@ -563,7 +491,6 @@ class App extends Component {
               exact
               render={props => {
                 return (
-                  (this.authParam = props.location.search),
                   <Redirect to="/dashboard/my-internships" />
                 );
               }}

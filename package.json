@@ -3,6 +3,8 @@
   "version": "1.1.2-beta",
   "private": true,
   "dependencies": {
+    "@aws-amplify/ui-react": "^0.2.13",
+    "aws-amplify": "^3.0.22",
     "@ant-design/icons": "^4.2.1",
     "@sentry/browser": "^5.20.1",
     "@testing-library/jest-dom": "^5.11.2",

@@ -2,6 +2,11 @@ import React from 'react';
 import styled from 'styled-components';
 import { Input, Button, Form } from 'antd';
 
+import { Link } from 'react-router-dom';
+
+
+import { Auth } from 'aws-amplify';
+
 //CSS Styled Components
 const Container = styled.div`
 display:flex;
@@ -18,7 +23,6 @@ const Background = styled.div`
 background:radial-gradient(109.93% 109.93% at 50% 50%, #40A9FF 0%, rgba(133, 161, 200, 0.479167) 79.69%, rgba(255, 255, 255, 0) 100%), #FFFFFF;
   width:100%;
   height:100%;
-  background-image:url('https://storage.needpix.com/rsynced_images/blob-655237_1280.png');
   background-position:center;
   background-size:fill;
   background-color:#fafafa;
@@ -67,44 +71,64 @@ class SignUp extends React.Component {
                         Create a New Account
                       </Banner>
                     <div style={{ width: '70%', }}>
-                        <Form>
+                        <Form onFinish={this.handleSubmit}>
                             <Label style={{ marginTop: '24px' }}>
                                 Username
-                    </Label>
+                            </Label>
                             <Form.Item name="username">
                                 <Input />
                             </Form.Item>
                             <Label style={{ marginTop: '-8px' }}>
                                 Password
-                    </Label>
+                            </Label>
                             <Form.Item name="password">
                                 <Input.Password />
                             </Form.Item>
                             <Label style={{ marginTop: '-8px' }}>
                                 Display Name
-                    </Label>
-                            <Form.Item name="display-name">
+                            </Label>
+                            <Form.Item name="name">
                                 <Input />
                             </Form.Item>
                             <Label style={{ marginTop: '-8px' }}>
                                 E-Mail
                         </Label>
-                            <Form.Item name="e-mail">
+                            <Form.Item name="email">
                                 <Input />
                             </Form.Item>
 
-
-
                             <div style={{ marginTop: ' 26px', display: 'flex', justifyContent: 'flex-end' }}>
-                                <Button className="profile-button-style" type='primary' >
+                                <Button className="profile-button-style" type='primary' htmlType='submit'>
                                     Sign Up
-                        </Button>
+                                </Button>
                             </div>
+
                         </Form>
                     </div>
                 </Container>
             </Background >)
     }
+
+    handleSubmit = async(values) => {
+      let { username, password, email, name } = values
+      try {
+        const user = await Auth.signUp({
+            username,
+            password,
+            attributes: {
+              email,
+              name
+            }
+        });
+
+        //TODO: Redirect to email verification page.
+
+      } catch (error) {
+        console.log('error signing up:', error);
+      }
+
+    }
+
 
 
 }

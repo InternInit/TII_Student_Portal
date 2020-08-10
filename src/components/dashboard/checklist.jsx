@@ -85,10 +85,8 @@ function parseChecklist(checklist, page) {
         completed = true;
       }
       newChecklist.push({ key: "Internship Info", completed: completed });
-      newChecklist.push(parsedChecklist[17]);
+      newChecklist.push(parsedChecklist[16]);
       parsedChecklist = newChecklist;
-      break;
-    default:
       break;
   }
   return parsedChecklist;

@@ -17,10 +17,18 @@ const standardSpan = 24;
 const thirdSpan = standardSpan / 3;
 
 const Row = styled.div`
-  margin-bottom: 22px;
+  padding-bottom: 4vh;
+
+  margin-top:5vh;
+
   display: flex;
   flex-direction: row;
   align-items: flex-start;
+
+  background-color:#f0f0f0;
+  border:1px solid #bfbfbf;
+  border-radius:2vh;
+
 `;
 
 const industry = [

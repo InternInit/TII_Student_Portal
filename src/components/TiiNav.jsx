@@ -15,21 +15,22 @@ import { BrowserRouter as Router, Link } from "react-router-dom";
 import { withRouter } from "react-router";
 import _ from "lodash";
 
+import JoyRide from 'react-joyride';
+
+
 class TiiNav extends React.Component {
   getInitialHighlight = () => {
     switch (this.props.location.pathname) {
       case "/apply/internship-info":
         return Array.from("1");
-        break;
       case "/apply/personal":
         return Array.from("2");
-        break;
       case "/apply/written-work":
         return Array.from("3");
-        break;
       case "/apply/references":
         return Array.from("4");
-        break;
+      default:
+        return Array.from("1");
     }
   };
 
@@ -70,7 +71,10 @@ class TiiNav extends React.Component {
         backgroundColor: "ghostwhite"
       },
 
-      modFlag: false
+      modFlag: false,
+
+
+
     };
   }
 
@@ -157,7 +161,7 @@ class TiiNav extends React.Component {
             onClick={this.handleSubmit} //checks other states before allowing submit
           >
             {SubmitButton}
-            <span>Submit</span>
+            <span >Submit</span>
           </Menu.Item>
         </Menu>
       </Sider>
@@ -266,6 +270,9 @@ class TiiNav extends React.Component {
             }
           }
           break;
+        default:
+          break;
+
       }
     }
   };

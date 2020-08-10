@@ -31,7 +31,6 @@ class DashboardNavBar extends Component {
    */
   getCurrentKey = () => {
     let defaultKey = this.props.location.pathname;
-    console.log(defaultKey);
     if (
       defaultKey === "/dashboard" ||
       defaultKey.includes("my-internships") ||

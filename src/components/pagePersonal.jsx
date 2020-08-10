@@ -487,7 +487,6 @@ class PagePersonal extends Component {
 
   onValuesChange = () => {
     let allValues = this.formRef.current.getFieldsValue();
-    console.log(allValues);
     delete allValues["Is Latinx"];
     delete allValues.Race;
 
@@ -510,7 +509,6 @@ class PagePersonal extends Component {
         checklist.push(item);
       }
     }
-    console.log(this.props);
     let completionPercentage = parseFloat(
       (completedCount / Object.keys(allValues).length).toFixed(2)
     );

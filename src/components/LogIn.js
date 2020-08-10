@@ -5,6 +5,11 @@ import { Input, Button, Form } from 'antd';
 import { Link } from 'react-router-dom';
 import SignUp from './SignUp';
 
+import { Auth } from 'aws-amplify';
+
+import { withRouter } from "react-router";
+
+
 //CSS Styled Components
 const Container = styled.div`
 display:flex;
@@ -63,6 +68,10 @@ class LogIn extends React.Component {
 
         }
     }
+
+    componentDidMount(){
+      console.log(this.props)
+    }
     render() {
         return (
             <Background >
@@ -71,7 +80,7 @@ class LogIn extends React.Component {
                         The Internship Initiative (TII)
                     </Banner>
                     <div style={{ width: '70%', }}>
-                        <Form>
+                        <Form onFinish={this.handleSubmit}>
                             <Label style={{ marginTop: '24px' }}>
                                 Username
                             </Label>
@@ -89,13 +98,13 @@ class LogIn extends React.Component {
                                     </ForgotPass>
 
                             <div style={{ marginTop: '18px', display: 'flex', justifyContent: 'center' }}>
-                                <Button className="profile-button-style" type='primary' >
+                                <Button className="profile-button-style" type='primary' htmlType='submit'>
                                     Log In
                                     </Button>
                             </div>
                             <Label style={{ marginTop: '24%' }}>
                                 Don't have an account?
-                            <Link > Sign up here</Link>
+                            <Link to="/signup"> Sign up here</Link>
                             </Label>
                         </Form>
                     </div>
@@ -103,6 +112,20 @@ class LogIn extends React.Component {
             </Background >)
     }
 
+    handleSubmit = async(values) => {
+      let { username, password } = values
+      try {
+        const user = await Auth.signIn(username, password);
+        this.props.newAuth();
+
+        this.props.history.push("/dashboard");
+
+      } catch (error) {
+        console.log('error signing in:', error);
+      }
+
+    }
+
 
 }
-export default LogIn;
+export default withRouter(LogIn);

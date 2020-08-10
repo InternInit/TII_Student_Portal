@@ -209,7 +209,6 @@ class PageEssays extends React.Component {
 
   onValuesChange = () => {
     let allValues = this.formRef.current.getFieldsValue();
-    console.log(allValues);
     delete allValues["Cover Letter"];
     delete allValues.Portfolio;
 
@@ -232,7 +231,6 @@ class PageEssays extends React.Component {
         checklist.push(item);
       }
     }
-    console.log(this.props);
     let completionPercentage = parseFloat(
       (completedCount / Object.keys(allValues).length).toFixed(2)
     );
