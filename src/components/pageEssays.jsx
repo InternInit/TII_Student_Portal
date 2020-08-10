@@ -34,6 +34,11 @@ const mapStateToProps = state => {
   };
 };
 
+/**
+ * 
+ * Updates User states
+ * 
+ */
 const mapDispatchToProps = {
   updateCompletionState,
   updateCompletionChecklist
@@ -67,6 +72,11 @@ class PageEssays extends React.Component {
   render() {
     return (
       <div style={{ marginTop: "40px", width: "100%" }}>
+        {  /**
+               * 
+               * Spinning Wheel while information loads
+               * 
+               */}
         <Spin size="large" spinning={!this.state.loaded}>
           <h1>Written Work</h1>
           <p>
@@ -74,6 +84,11 @@ class PageEssays extends React.Component {
             are applying through your writing!
           </p>
 
+          {  /**
+               * 
+               * Written Work Form
+               * 
+               */}
           <Form
             name="pageEssays"
             initialValues={{
@@ -86,7 +101,13 @@ class PageEssays extends React.Component {
             ref={this.formRef}
             onValuesChange={this.onValuesChange}
           >
-            {/**Industry response */}
+
+
+            {  /**
+               * 
+               * Industry Response
+               * 
+               */}
             <Form.Item
               key="industryEssay"
               name="Why This Industry Essay"
@@ -99,7 +120,12 @@ class PageEssays extends React.Component {
               <TextArea autoSize={{ minRows: 5, maxRows: 10 }} maxlength={1000} />
             </Form.Item>
 
-            {/**leadership response */}
+
+            {  /**
+               * 
+               * Leadership Question
+               * 
+               */}
             <Form.Item
               key="leadership"
               name="Leadership Roles Essay"
@@ -112,7 +138,12 @@ class PageEssays extends React.Component {
               <TextArea autoSize={{ minRows: 5, maxRows: 10 }} maxlength={1000} />
             </Form.Item>
 
-            {/**extra information response */}
+
+            {  /**
+               * 
+               * "Additional Information
+               * 
+               */}
             <Form.Item
               key="extra"
               name="Extra Essay"
@@ -132,7 +163,13 @@ class PageEssays extends React.Component {
                 justifyContent: "space-evenly"
               }}
             >
-              {/**Cover Letter */}
+
+
+              {  /**
+               * 
+               * Cover Letter Upload
+               * 
+               */}
               <Form.Item
                 name="Cover Letter"
                 key="CoverLetter"
@@ -152,7 +189,12 @@ class PageEssays extends React.Component {
                 </Dragger>
               </Form.Item>
 
-              {/**Portfolio */}
+
+              {  /**
+               * 
+               * Portfolio Upload
+               * 
+               */}
               <Form.Item
                 name="Portfolio"
                 key="Portfolio"
@@ -173,7 +215,11 @@ class PageEssays extends React.Component {
               </Form.Item>
             </div>
 
-            {/*Save and Continue or Next*/}
+            {  /**
+               * 
+               * "Back/Save and Continue" Buttons
+               * 
+               */}
             <Form.Item>
               <Button
                 className="back-button"
@@ -199,6 +245,11 @@ class PageEssays extends React.Component {
     console.log(this.state);
   };
 
+  /**
+   * 
+   * Requires input on form items
+   * 
+   */
   validationRules = (inputName, type) => [
     {
       required: true,
@@ -207,6 +258,12 @@ class PageEssays extends React.Component {
     }
   ];
 
+
+  /**
+   * 
+   * Updates user data when values are changes
+   * 
+   */
   onValuesChange = () => {
     let allValues = this.formRef.current.getFieldsValue();
     delete allValues["Cover Letter"];
@@ -241,6 +298,11 @@ class PageEssays extends React.Component {
       this.props.updateCompletionChecklist(2, checklist);
   };
 
+  /**
+* 
+* On Finish Function
+* 
+*/
   onFinish = values => {
     console.log("FinishedPageEssays:", values);
     this.props.updateCompletionState(2, 1.0);
@@ -259,6 +321,12 @@ class PageEssays extends React.Component {
     this.routeChange("/apply/personal");
   };
 
+
+  /**
+* 
+* Upload Cover Letter
+* 
+*/
   customRequestCL = ({ onSuccess, onError, file }) => {
     setTimeout(() => {
       onSuccess(file);
@@ -270,6 +338,12 @@ class PageEssays extends React.Component {
     }, 100);
   };
 
+
+  /**
+* 
+* File Upload Function
+* 
+*/
   onChangeCL = info => {
     const { status } = info.file;
     if (status === "removed") {
@@ -289,6 +363,11 @@ class PageEssays extends React.Component {
     this.props.updateData(this.formRef.current.getFieldsValue(), "2");
   };
 
+  /**
+   * 
+   * Changing Portfolio?
+   * 
+   */
   customRequestPortfolio = ({ onSuccess, onError, file }) => {
     setTimeout(() => {
       onSuccess(file);
@@ -300,6 +379,12 @@ class PageEssays extends React.Component {
     }, 100);
   };
 
+
+  /**
+   * 
+   * File Upload function
+   * 
+   */
   onChangePortfolio = info => {
     const { status } = info.file;
     if (status === "removed") {
@@ -319,6 +404,12 @@ class PageEssays extends React.Component {
     this.props.updateData(this.formRef.current.getFieldsValue(), "2");
   };
 
+
+  /**
+* 
+* Get User Data
+* 
+*/
   getUserData = async () => {
     let token = await this.props.getJwt();
     fetch("/api/get_user_data", {
@@ -358,8 +449,16 @@ class PageEssays extends React.Component {
       });
   };
 
+
+  //BOLDIFY!!!
   boldify = text => <strong>{text}</strong>;
 
+
+  /**
+* 
+* Route Change (React Router)
+* 
+*/
   routeChange = path => {
     console.log(path);
     if (path === "/apply/personal") {

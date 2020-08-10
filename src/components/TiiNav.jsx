@@ -1,6 +1,7 @@
 import React from "react";
 import { Layout, Menu, notification } from "antd";
 
+//Ant D Icons
 import {
   CheckOutlined,
   CloseOutlined,
@@ -11,14 +12,18 @@ import {
 } from "@ant-design/icons";
 
 //React Routing
-import { BrowserRouter as Router, Link } from "react-router-dom";
+import { BrowserRouter as Router } from "react-router-dom";
 import { withRouter } from "react-router";
 import _ from "lodash";
 
-import JoyRide from 'react-joyride';
 
 
 class TiiNav extends React.Component {
+  /**
+   * 
+   * Nav Panel selected tab
+   * 
+   */
   getInitialHighlight = () => {
     switch (this.props.location.pathname) {
       case "/apply/internship-info":
@@ -79,6 +84,11 @@ class TiiNav extends React.Component {
   }
 
   render() {
+    /**
+     * 
+     * Initializing states and constants
+     * 
+     */
     const { Sider } = Layout;
     let {
       InternButton,
@@ -87,35 +97,59 @@ class TiiNav extends React.Component {
       ReferencesButton
     } = this.state;
     let { SubmitButton } = this.state;
+
     return (
-      <Sider //styling the sider
+      /**
+           * 
+           * Sider Layout (AntD)
+           * 
+           */
+      < Sider //styling the sider
         style={{
           position: "fixed",
           overflow: "initial",
           width: "207px",
           margin: "10px",
           marginTop: "8.5%"
-        }}
+        }
+        }
         //Collapsing
         collapsed={this.props.isCollapsed}
       >
-        <Menu
+        {/**
+           * 
+           * Nav Panel Menu (AntD)
+           * 
+           */}
+        < Menu
           theme="light"
           mode="inline"
           defaultSelectedKeys={this.getInitialHighlight()}
           selectedKeys={this.getInitialHighlight()}
         >
-          <Menu.Item
+
+          {/**
+           * 
+           * Internship Information Tab
+           * 
+           */}
+          < Menu.Item
             key="1"
             onClick={() => {
               this.routeChange("/apply/internship-info");
             }}
           >
             {InternButton}
-            <span>Internship Info</span>
-          </Menu.Item>
+            < span > Internship Info</span >
+          </Menu.Item >
 
-          <Menu.Item
+
+          {/**
+           * 
+           * Personal Information Tab
+           * 
+           */}
+          < Menu.Item
             key="2"
             onClick={() => {
               this.routeChange("/apply/personal");
@@ -123,33 +157,50 @@ class TiiNav extends React.Component {
           >
             {PersonalButton}
 
-            <span>Personal</span>
-          </Menu.Item>
+            < span > Personal</span >
+          </Menu.Item >
 
-          <Menu.Item
+
+          {/**
+           * 
+           * Written Work Tab
+           * 
+           */}
+          < Menu.Item
             key="3"
             onClick={() => {
               this.routeChange("/apply/written-work");
             }}
           >
             {EssayButton}
-            <Router>
+            < Router >
               <span>Written Work</span>
-            </Router>
-          </Menu.Item>
+            </Router >
+          </Menu.Item >
 
-          <Menu.Item
+          {/**
+           * 
+           * References Tab
+           * 
+           */}
+          < Menu.Item
             key="4"
             onClick={() => {
               this.routeChange("/apply/references");
             }}
           >
             {ReferencesButton}
-            <Router>
+            < Router >
               <span>References</span>
-            </Router>
-          </Menu.Item>
-          <Menu.Item
+            </Router >
+          </Menu.Item >
+
+          {/**
+           * 
+           * Submit Button Menu Item
+           * 
+           */}
+          < Menu.Item
             className="third-step"
             style={{
               marginTop: "100%",
@@ -161,13 +212,19 @@ class TiiNav extends React.Component {
             onClick={this.handleSubmit} //checks other states before allowing submit
           >
             {SubmitButton}
-            <span >Submit</span>
-          </Menu.Item>
-        </Menu>
-      </Sider>
+            < span > Submit</span >
+          </Menu.Item >
+        </Menu >
+      </Sider >
     );
   }
 
+
+  /**
+  * 
+  * Handles submission of all application forms
+  * 
+  */
   handleSubmit = () => {
     let status = this.props.completionState;
 
@@ -191,6 +248,12 @@ class TiiNav extends React.Component {
     }
   };
 
+
+  /**
+  * 
+  * Handle Update function
+  * 
+  */
   handleUpdate = e => {
     let completionState = this.props.completionState;
 
@@ -277,6 +340,12 @@ class TiiNav extends React.Component {
     }
   };
 
+
+  /**
+   * 
+   * Route Change function (React Routing)
+   * 
+   */
   routeChange = path => {
     if (path === "/apply/internship-info") {
       this.props.clickOne();
@@ -289,5 +358,7 @@ class TiiNav extends React.Component {
     }
     this.props.history.push(path);
   };
+
+
 }
 export default withRouter(TiiNav);
