@@ -158,6 +158,7 @@ class App extends Component {
         };
         console.log(this.inMemoryToken)
         this.props.updateUserName(session.accessToken.payload.username)
+        this.props.updateEmail(session.idToken.payload.email)
       })
       .catch((error) => {
         console.log("Session Error: " + error)
