@@ -15,7 +15,6 @@ import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
 import "antd/dist/antd.css";
 import "../App.css";
 
-
 //React Routing
 import { withRouter } from "react-router";
 
@@ -128,7 +127,6 @@ const allStates = [
   "Wyoming"
 ];
 
-
 const mapStateToProps = state => {
   return {
     completionState: state.completionState,
@@ -141,7 +139,6 @@ const mapDispatchToProps = {
   updateCompletionChecklist
 };
 
-
 class PagePersonal extends Component {
   constructor(props) {
     super(props);
@@ -152,11 +149,10 @@ class PagePersonal extends Component {
     loaded: false
   };
 
-
   /**
-   * 
+   *
    * Requires Form to be filled
-   * 
+   *
    */
   validationRules = (required, inputName, type, pattern, min, max) => [
     {
@@ -185,11 +181,10 @@ class PagePersonal extends Component {
   render() {
     return (
       <div style={{ width: "100%", marginTop: "40px" }}>
-
         {/**
-         * 
+         *
          * Loading wheel while information is being pulled from backend
-         * 
+         *
          */}
 
         <Spin size="large" spinning={!this.state.loaded}>
@@ -206,12 +201,10 @@ class PagePersonal extends Component {
             ref={this.formRef}
             onValuesChange={this.onValuesChange}
           >
-
-
             {/**
-             * 
+             *
              * Enter Gender Form
-             * 
+             *
              */}
             <Row gutter={formGutter}>
               <Col span={standardSpan}>
@@ -232,11 +225,10 @@ class PagePersonal extends Component {
               </Col>
             </Row>
 
-
             {/**
-             * 
+             *
              * Enter Race/Ethnicity
-             * 
+             *
              */}
             <Row gutter={formGutter}>
               <Col span={standardSpan}>
@@ -266,11 +258,10 @@ class PagePersonal extends Component {
               </Col>
             </Row>
 
-
             {/**
-             * 
+             *
              * Enter Latina/X
-             * 
+             *
              */}
             <Row gutter={formGutter}>
               <Col span={standardSpan}>
@@ -297,11 +288,10 @@ class PagePersonal extends Component {
               </Col>
             </Row>
 
-
             {/**
-             * 
+             *
              * Enter Age Form
-             * 
+             *
              */}
             <Row gutter={formGutter}>
               <Col span={standardSpan}>
@@ -323,11 +313,10 @@ class PagePersonal extends Component {
               </Col>
             </Row>
 
-
             {/**
-             * 
+             *
              * Only Fill out What you feel confortable filling out
-             * 
+             *
              */}
             <p style={{ paddingBottom: "24px", marginTop: "-12px" }}>
               Fill out only what you're comfortable with, but understand that
@@ -335,16 +324,16 @@ class PagePersonal extends Component {
             </p>
 
             {/**
-             * 
+             *
              * Education History
-             * 
+             *
              */}
             <h1>Please Input Your Educational History</h1>
 
             {/**
-             * 
+             *
              * School Box
-             * 
+             *
              */}
             <Form.List name="Education">
               {(fields, { add, remove }) => {
@@ -374,11 +363,10 @@ class PagePersonal extends Component {
 
                           <h2>School {index + 1}</h2>
 
-
                           {/**
-                           * 
+                           *
                            * School Name
-                           * 
+                           *
                            */}
                           <Form.Item
                             {...field}
@@ -395,11 +383,10 @@ class PagePersonal extends Component {
                             <Input placeholder="School name" />
                           </Form.Item>
 
-
                           {/**
-                           * 
+                           *
                            * School Addresss Line
-                           * 
+                           *
                            */}
                           <Row gutter={addressGutter}>
                             <Col span={standardSpan}>
@@ -420,9 +407,9 @@ class PagePersonal extends Component {
                           </Row>
 
                           {/**
-                           * 
+                           *
                            * School Address (CITY, STATE, ZIP)
-                           * 
+                           *
                            */}
                           <Row gutter={addressGutter}>
                             <Col span={thirdSpan}>
@@ -470,11 +457,10 @@ class PagePersonal extends Component {
                             </Col>
                           </Row>
 
-
                           {/**
-                           * 
+                           *
                            * Course Concentration
-                           * 
+                           *
                            */}
                           <Row gutter={formGutter}>
                             <Col span={halfSpan}>
@@ -510,12 +496,11 @@ class PagePersonal extends Component {
                       </div>
                     ))}
 
-
                     {/**
-                           * 
-                           * Add School Button
-                           * 
-                           */}
+                     *
+                     * Add School Button
+                     *
+                     */}
                     <Form.Item>
                       <Button
                         type="dashed"
@@ -537,13 +522,11 @@ class PagePersonal extends Component {
               }}
             </Form.List>
 
-
-
             {/**
-                           * 
-                           * Previous/Save Buttons
-                           * 
-                           */}
+             *
+             * Previous/Save Buttons
+             *
+             */}
             <Form.Item>
               <Button
                 className="back-button"
@@ -563,11 +546,10 @@ class PagePersonal extends Component {
     );
   }
 
-
   /**
-   * 
+   *
    * Updates user data when values are changes
-   * 
+   *
    */
   onValuesChange = () => {
     let allValues = this.formRef.current.getFieldsValue();
@@ -596,19 +578,18 @@ class PagePersonal extends Component {
     let completionPercentage = parseFloat(
       (completedCount / Object.keys(allValues).length).toFixed(2)
     );
-    if (completionPercentage != this.props.completionState[1])
+    if (completionPercentage !== this.props.completionState[1])
       this.props.updateCompletionState(1, completionPercentage);
 
     if (!_.isEqual(checklist, this.props.completionChecklist[1]))
       this.props.updateCompletionChecklist(1, checklist);
   };
 
-
   /**
- * 
- * Handles form application completion
- * 
- */
+   *
+   * Handles form application completion
+   *
+   */
   onFinish = values => {
     console.log("FinishedPersonalPage:", values);
     this.props.updateCompletionState(1, 1.0);
@@ -616,31 +597,27 @@ class PagePersonal extends Component {
     this.routeChange("/apply/written-work");
   };
 
-
-
   updateFieldData = async () => {
     const values = await this.formRef.current.getFieldsValue();
 
     this.props.updateData(values, "1");
   };
 
-
   /**
- * 
- * Handles "Back" Button
- * 
- */
+   *
+   * Handles "Back" Button
+   *
+   */
   backHandler = () => {
     this.props.updateData(this.formRef.current.getFieldsValue(), "1");
     this.routeChange("/apply/internship-info");
   };
 
-
   /**
-* 
-* Get User Data
-* 
-*/
+   *
+   * Get User Data
+   *
+   */
   getUserData = async () => {
     let token = await this.props.getJwt();
     fetch("/api/get_user_data", {
@@ -662,12 +639,11 @@ class PagePersonal extends Component {
       });
   };
 
-
   /**
-* 
-* Changes Route (React Router)
-* 
-*/
+   *
+   * Changes Route (React Router)
+   *
+   */
   routeChange = path => {
     console.log(path);
     if (path === "/apply/written-work") {

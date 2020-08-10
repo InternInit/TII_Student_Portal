@@ -8,11 +8,7 @@ import "../App.css";
 //Ant Design Imports
 import { Menu } from "antd";
 import { Avatar } from "antd";
-import {
-  UserOutlined,
-  LogoutOutlined,
-  AppstoreOutlined
-} from "@ant-design/icons";
+import { UserOutlined, LogoutOutlined } from "@ant-design/icons";
 
 //Logo Import
 import Logo from "../TII-logo.png";
