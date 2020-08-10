@@ -157,6 +157,7 @@ class EditProfile extends React.Component {
                     justifyContent: "center",
                     backgroundColor: "#F5F5F5",
                     minHeight: "100vh",
+                    minWidth: '850px'
                 }}
             >
 
@@ -197,6 +198,7 @@ class EditProfile extends React.Component {
                         <Row style={{
                             display: 'flex',
                             justifyContent: 'space-evenly',
+                            width: '60%',
                         }}>
 
                             {/**
@@ -319,14 +321,15 @@ class EditProfile extends React.Component {
                      */}
                     <Row style={{
                         alignSelf: 'flex-end',
-                        justifyContent: 'space-between',
-                        width: '45%',
+                        justifyContent: 'space-evenly',
+                        width: '50%',
                         marginTop: '24px'
                     }}>
                         <Button className='profile-button-style'>
                             Cancel
                         </Button>
-                        <Button className='profile-button-style' type='primary'>
+
+                        <Button className='profile-button-style' type='primary' style={{ marginLeft: '2vh' }}>
                             Save
                         </Button>
                     </Row>

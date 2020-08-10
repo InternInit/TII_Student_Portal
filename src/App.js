@@ -26,7 +26,6 @@ import EditProfile from "./components/EditProfile.js";
 import LogIn from "./components/LogIn.js";
 import SignUp from "./components/SignUp.js";
 
-import Joyride from "react-joyride";
 
 //CSS Imports
 import "./App.css";
@@ -87,6 +86,9 @@ const PageContainer = styled.div`
   justifycontent: center;
   background-color: white;
   border-radius: 10px;
+
+  flex-direction:column;
+  align-items:center;
 `;
 
 const mapStateToProps = state => {
@@ -116,14 +118,7 @@ class App extends Component {
       isCollapsed: false,
       page: 0,
       submissionState: true,
-      steps: [
-        {
-          target: ".first-step",
-          title: "Learn How to Apply",
-          content:
-            "Check out our comprehensive how to apply page to start building your application!"
-        }
-      ],
+
       authorized: false
     };
   }
@@ -158,8 +153,8 @@ class App extends Component {
       })
       .catch((error) => {
         console.log("Session Error: " + error)
-        if(window.location.href.split("/")[3] != "login"){
-          window.location.href = window.location.href.split("/").slice(0,3).join("/") + "/login"
+        if (window.location.href.split("/")[3] != "login") {
+          window.location.href = window.location.href.split("/").slice(0, 3).join("/") + "/login"
 
         }
         //TODO: Update to a more elegant solution
@@ -467,7 +462,6 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        {/*<Joyride steps={this.state.steps}*/}
         {this.resize()}
         <Router>
           <header>
@@ -477,7 +471,7 @@ class App extends Component {
             <Route path="/dashboard" render={() => <Dashboard />} />
             <Route path="/how-to-apply" exact component={HowtoApply} />
             <Route path="/edit-profile" exact component={EditProfile} />
-            <Route path="/login" render={props => <LogIn newAuth={this.newAuth}/>} />
+            <Route path="/login" render={props => <LogIn newAuth={this.newAuth} />} />
             <Route path="/signup" exact component={SignUp} />
             <Route path="/apply">{this.AppContainer()}</Route>
             <Route
