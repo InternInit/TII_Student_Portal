@@ -29,13 +29,7 @@ import LittleCard from "./littleCard";
 
 import { Row, PageHeader } from "antd";
 
-import {
-  Link,
-  Route,
-  Redirect,
-  useRouteMatch as match,
-
-} from "react-router-dom";
+import { Link, Route, Redirect } from "react-router-dom";
 import { withRouter } from "react-router";
 
 //Apply Skills html files
@@ -286,7 +280,6 @@ class ApplySkills extends Component {
           </SkillsContainer>
         </Route>
 
-
         {/*
          * Mapped routes for resume skills
          */}
@@ -303,7 +296,11 @@ class ApplySkills extends Component {
               </Link>
               {window.scrollTo(0, 0)}
 
-              <img className="apply-skills-banner" src={module[0]} alt="banner" />
+              <img
+                className="apply-skills-banner"
+                src={module[0]}
+                alt="banner"
+              />
               <div
                 className="container"
                 dangerouslySetInnerHTML={{ __html: module[5] }}
@@ -332,9 +329,6 @@ class ApplySkills extends Component {
           </Route>
         ))}
 
-
-
-
         {/*
          * Mapped routes for written skills
          */}
@@ -353,9 +347,6 @@ class ApplySkills extends Component {
             </SkillsContainer>
           </Route>
         ))}
-
-
-
       </div>
     );
   }

@@ -75,6 +75,9 @@ const ViewChecklist = styled.p`
   line-height: 16px;
   align-items: center;
   color: #1890ff;
+  :hover {
+    cursor: pointer;
+  }
 `;
 
 const DescriptorText = styled.span`
@@ -269,10 +272,8 @@ class ApplicationProgress extends Component {
                * Checklist Text
                *<a onClick={() => this.handleClick(section[0])}>
                */}
-              <ViewChecklist>
-                <a href="#" onClick={() => this.handleClick(section[0])}>
-                  View Checklist
-                </a>
+              <ViewChecklist onClick={() => this.handleClick(section[0])}>
+                View Checklist
               </ViewChecklist>
 
               {/**
