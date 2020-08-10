@@ -102,7 +102,6 @@ class TiiNav extends React.Component {
           selectedKeys={this.getInitialHighlight()}
         >
           <Menu.Item
-            className="second-step"
             key="1"
             onClick={() => {
               this.routeChange("/apply/internship-info");
@@ -147,6 +146,7 @@ class TiiNav extends React.Component {
             </Router>
           </Menu.Item>
           <Menu.Item
+            className="third-step"
             style={{
               marginTop: "100%",
               display: "flex",

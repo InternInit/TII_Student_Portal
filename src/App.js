@@ -114,14 +114,9 @@ class App extends Component {
       steps: [
         {
           target: ".first-step",
-          title: "Build your profile",
-          content: "Get started by building your custom internship profile."
-        },
-        {
-          target: ".second-step",
-          title: "Your Profile",
+          title: "Learn How to Apply",
           content:
-            "Complete each section of the standard application and then press submit when you're ready. You can change your responses at any time."
+            "Check out our comprehensive how to apply page to start building your application!"
         }
       ]
     };
@@ -548,7 +543,6 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Joyride steps={this.state.steps} />
         {this.resize()}
         <Router>
           <header>

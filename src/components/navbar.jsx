@@ -105,6 +105,7 @@ class Navbar extends Component {
         </Menu.Item>
         <Menu.Item
           key="how-to-apply"
+          className="first-step"
           onClick={() => {
             this.routeChange("/how-to-apply");
           }}
@@ -121,7 +122,8 @@ class Navbar extends Component {
           title={<Avatar className="navbar-avatar-icon" src={MenuAvatar} />}
           style={avatarStyle}
         >
-          <Menu.Item key="edit-profile"
+          <Menu.Item
+            key="edit-profile"
             onClick={() => {
               this.routeChange("/edit-profile");
             }}

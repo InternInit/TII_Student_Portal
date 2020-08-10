@@ -18,6 +18,8 @@ import {
   InboxOutlined
 } from "@ant-design/icons";
 
+import Joyride from "react-joyride";
+
 import "antd/dist/antd.css";
 import "../App.css";
 
@@ -229,7 +231,7 @@ const formItemProps = {
   },
   industry: {
     key: "industry",
-    label: boldify("What industry are you applying to?"),
+    label: boldify("What industries are you interested in?"),
     name: "Interested Industries",
     rules: [
       {
@@ -359,7 +361,7 @@ class PageInternshipInformation extends Component {
     return (
       <div style={{ marginTop: "40px" }}>
         <Spin size="large" spinning={!this.state.loaded}>
-          <h1 className="second-step">Internship Information</h1>
+          <h1>Internship Information</h1>
           <br />
 
           <Form

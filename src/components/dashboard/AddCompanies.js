@@ -1,12 +1,11 @@
-import React, { } from "react";
+import React from "react";
 import styled from "styled-components";
 import { Input } from "antd";
 import SearchCompanytab from "./SearchCompanytab.js";
-import { Collapse, Checkbox, Pagination } from "antd";
+import { Collapse, Checkbox, Pagination, Form, Button } from "antd";
 import { Col as AntCol, Row as AntRow } from "antd";
 import QueueAnim from "rc-queue-anim";
 import { withRouter } from "react-router";
-
 
 const { Search } = Input;
 const { Panel } = Collapse;
@@ -17,14 +16,12 @@ const checkGutter = [8, 8];
 const standardSpan = 24;
 const thirdSpan = standardSpan / 3;
 
-
 const Row = styled.div`
   margin-bottom: 22px;
   display: flex;
   flex-direction: row;
   align-items: flex-start;
 `;
-
 
 const industry = [
   "General Business",
@@ -73,10 +70,8 @@ let Info = [
   { name: "Hahahaha", industry: "Biotechnology" },
   { name: "WHOOOOOO", industry: "Consulting" },
   { name: "Company Name", industry: "Finance or Accounting" },
-  { name: "lets GO", industry: "Political" },
+  { name: "lets GO", industry: "Political" }
 ];
-
-
 
 class AddCompanies extends React.Component {
   constructor(props) {
@@ -86,16 +81,14 @@ class AddCompanies extends React.Component {
       search: "",
       industries: industry,
       companies: [],
-      page: '0',
+      page: "0",
       mergedIndustry:
-        "General BusinessConsultingFinance or AccountingMedia or TellecommunicationsReal EstateEngineeringScience ResearchComputer ScienceBiotechnologyVocationalPoliticalMarketing",
-
+        "General BusinessConsultingFinance or AccountingMedia or TellecommunicationsReal EstateEngineeringScience ResearchComputer ScienceBiotechnologyVocationalPoliticalMarketing"
     };
     this.searchCompany = this.searchCompany.bind(this);
     this.filterIndustries = this.filterIndustries.bind(this);
     this.mergeIndustries = this.mergeIndustries.bind(this);
     this.handlePageChange = this.handlePageChange.bind(this);
-
   }
 
   render() {
@@ -105,7 +98,8 @@ class AddCompanies extends React.Component {
     //Filtering function for industries
     let industrySearch = Info.filter(company => {
       return (
-        mergedIndustry.toLowerCase().indexOf(company.industry.toLowerCase()) !== -1
+        mergedIndustry.toLowerCase().indexOf(company.industry.toLowerCase()) !==
+        -1
       );
     });
 
@@ -114,8 +108,53 @@ class AddCompanies extends React.Component {
       return company.name.toLowerCase().indexOf(search.toLowerCase()) !== -1;
     });
     return (
-      < div style={{ paddingBottom: "50%" }
-      }>
+      <div style={{ paddingBottom: "50%" }}>
+        <h1 className="module-name">Apply to an Entire Industry</h1>
+        <Form>
+          <Collapse defaultActiveKey={["0"]} expandIconPosition="right">
+            <Panel
+              header={
+                <strong>
+                  Choose an entire industry to submit your application to.
+                </strong>
+              }
+            >
+              <AntRow gutter={formGutter}>
+                <AntCol span={standardSpan}>
+                  <Checkbox.Group>
+                    <AntRow gutter={checkGutter}>
+                      {industry.map(industry => (
+                        <AntCol
+                          span={thirdSpan}
+                          style={{
+                            display: "flex",
+                            alignItems: "flex-start"
+                          }}
+                        >
+                          <Checkbox
+                            key={industry}
+                            value={industry}
+                            style={{
+                              lineHeight: "32px",
+                              marginLeft: "25%"
+                            }}
+                          >
+                            {industry}
+                          </Checkbox>
+                        </AntCol>
+                      ))}
+                    </AntRow>
+                  </Checkbox.Group>
+                </AntCol>
+              </AntRow>
+              <AntRow>
+                <Button type="primary" style={{ margin: "auto" }}>
+                  Submit to Industries
+                </Button>
+              </AntRow>
+            </Panel>
+          </Collapse>
+        </Form>
         <h1 className="module-name" ref={this.myRef}>
           Search Companies
         </h1>
@@ -130,20 +169,16 @@ class AddCompanies extends React.Component {
           allowClear="true"
           size="large"
           onChange={value => this.searchCompany(value)}
-          style={{ width: "100%", marginBottom: "20px", marginTop: '8px' }}
+          style={{ width: "100%", marginBottom: "20px", marginTop: "8px" }}
         />
-
-
-
 
         {/**
          *
          * Filter by industries Collapse Tab
          *
          */}
-        <Row style={{ width: '100%' }} >
-          <Collapse defaultActiveKey={["0"]} expandIconPosition="right"
-          >
+        <Row style={{ width: "100%" }}>
+          <Collapse defaultActiveKey={["0"]} expandIconPosition="right">
             <Panel header="Filter by Industry">
               <AntRow gutter={formGutter}>
                 <AntCol span={standardSpan}>
@@ -152,19 +187,19 @@ class AddCompanies extends React.Component {
                   >
                     <AntRow gutter={checkGutter}>
                       {industry.map(industry => (
-                        <AntCol span={thirdSpan}
+                        <AntCol
+                          span={thirdSpan}
                           style={{
-                            display: 'flex',
-                            alignItems: 'flex-start',
-                          }}>
-
+                            display: "flex",
+                            alignItems: "flex-start"
+                          }}
+                        >
                           <Checkbox
                             key={industry}
                             value={industry}
                             style={{
                               lineHeight: "32px",
-                              marginLeft: '25%'
-
+                              marginLeft: "25%"
                             }}
                           >
                             {industry}
@@ -178,9 +213,6 @@ class AddCompanies extends React.Component {
             </Panel>
           </Collapse>
         </Row>
-
-
-
 
         {/**
          *
@@ -200,18 +232,16 @@ class AddCompanies extends React.Component {
                 location="filler"
                 companyid={company.id}
               />
-
-
             </div>
           ))}
         </QueueAnim>
-        <Pagination current={parseInt(page) + 1} total={filteredInfo.length} onChange={pageChange => this.handlePageChange(pageChange - 1)} pageSize={20} />
-
-
-
-
-
-      </div >
+        <Pagination
+          current={parseInt(page) + 1}
+          total={filteredInfo.length}
+          onChange={pageChange => this.handlePageChange(pageChange - 1)}
+          pageSize={20}
+        />
+      </div>
     );
   }
 
@@ -221,8 +251,9 @@ class AddCompanies extends React.Component {
         method: "GET",
         headers: {
           "x-rapidapi-host": "rawg-video-games-database.p.rapidapi.com",
-          "x-rapidapi-key": "24cc20e856msh686f79ed61d6951p112e88jsn8082d8031701",
-          "entries": 109
+          "x-rapidapi-key":
+            "24cc20e856msh686f79ed61d6951p112e88jsn8082d8031701",
+          entries: 109
         }
       })
         .then(response => {
@@ -235,38 +266,30 @@ class AddCompanies extends React.Component {
           console.log(err);
         });
     }
-    console.log(this.state.companies)
-  }
-
+    console.log(this.state.companies);
+  };
 
   //handles pagination bar change
-  handlePageChange = (pageChange) => {
-    this.setState({ page: pageChange * 20 })
-    window.scrollTo(0, this.myRef.current.offsetTop - 25)
-  }
-
+  handlePageChange = pageChange => {
+    this.setState({ page: pageChange * 20 });
+    window.scrollTo(0, this.myRef.current.offsetTop - 25);
+  };
 
   //Handles search bar changes
-  searchCompany = (event) => {
+  searchCompany = event => {
     this.setState({ search: event.target.value.substring(0, 20), page: 0 });
-  }
-
-
+  };
 
   //Filtering industry checkboxes
-  filterIndustries = (event) => {
+  filterIndustries = event => {
     this.setState({ industries: event }, this.stateCallback);
-  }
-
-
+  };
 
   //Logging info in console
   stateCallback = () => {
     console.log(this.state.industries);
     this.mergeIndustries();
-  }
-
-
+  };
 
   //Sending information to filter function
   mergeIndustries = () => {
@@ -285,8 +308,6 @@ class AddCompanies extends React.Component {
           "General BusinessBusinessConsultingFinance or AccountingMedia or TellecommunicationsReal EstateEngineeringScience ResearchComputer ScienceBiotechnologyVocationalPoliticalMarketing"
       });
     }
-  }
-
-
+  };
 }
 export default withRouter(AddCompanies);
