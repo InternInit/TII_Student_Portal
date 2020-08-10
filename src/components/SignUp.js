@@ -4,8 +4,10 @@ import { Input, Button, Form } from 'antd';
 
 import { Link } from 'react-router-dom';
 
-
 import { Auth } from 'aws-amplify';
+
+import { withRouter } from "react-router";
+
 
 //CSS Styled Components
 const Container = styled.div`
@@ -120,7 +122,7 @@ class SignUp extends React.Component {
               name
             }
         });
-
+        this.props.history.push("/dashboard");
         //TODO: Redirect to email verification page.
 
       } catch (error) {
@@ -132,4 +134,4 @@ class SignUp extends React.Component {
 
 
 }
-export default SignUp;
+export default withRouter(SignUp);
