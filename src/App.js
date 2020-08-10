@@ -86,6 +86,9 @@ const PageContainer = styled.div`
   justifycontent: center;
   background-color: white;
   border-radius: 10px;
+
+  flex-direction:column;
+  align-items:center;
 `;
 
 const mapStateToProps = state => {
