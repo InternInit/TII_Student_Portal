@@ -331,7 +331,7 @@ class PageEssays extends React.Component {
       .then(response => response.json())
       .then(data => {
         let parsedRecv = JSON.parse(data);
-        let parsedData = parsedRecv[0];
+        let parsedData = parsedRecv.formData;
         if (parsedData !== "No Info") {
           try {
             console.log(parsedData);

@@ -305,8 +305,8 @@ class App extends Component {
         let parsedRecv = JSON.parse(data);
         if (parsedRecv != "No Info") {
           console.log(parsedRecv)
-          let recvCompletionState = parsedRecv[1];
-          let recvCompletionChecklist = parsedRecv[2];
+          let recvCompletionState = parsedRecv.completionState;
+          let recvCompletionChecklist = parsedRecv.completionChecklist;
           this.props.batchUpdateCompletionState(recvCompletionState);
           this.props.batchUpdateCompletionChecklist(recvCompletionChecklist);
         } else {
