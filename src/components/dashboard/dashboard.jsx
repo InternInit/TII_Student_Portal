@@ -55,6 +55,7 @@ const { Header, Content, Footer, Sider } = Layout;
 
 const mapStateToProps = state => {
   return {
+    userInfo: state.userInfo,
     completionState: state.completionState
   };
 };
@@ -81,7 +82,7 @@ class Dashboard extends Component {
             }}
           >
             <PageContainer>
-              <WelcomeHeader>Welcome Kevin</WelcomeHeader>
+              <WelcomeHeader>Welcome {this.props.userInfo.username}</WelcomeHeader>
               <DashboardNavBar />
               <hr />
               <ReactSwitch>
