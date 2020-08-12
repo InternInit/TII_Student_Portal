@@ -10,8 +10,8 @@ from sentry_sdk.integrations.flask import FlaskIntegration
 app = Flask(__name__)
 
 
-cacheApiUrl = "https://jzvyvnvxld.execute-api.us-east-1.amazonaws.com/beta/cache"
-uploadApiUrl = "https://jzvyvnvxld.execute-api.us-east-1.amazonaws.com/beta/upload"
+cacheApiUrl = "https://jzvyvnvxld.execute-api.us-east-1.amazonaws.com/{stage}/cache"
+uploadApiUrl = "https://jzvyvnvxld.execute-api.us-east-1.amazonaws.com/{stage}/upload"
 
 testUrl = "https://webhook.site/2d399065-ea56-45ea-b6a0-e19da9c75caa"
 
@@ -24,14 +24,8 @@ logoutUrl = ""
 
 
 if(app.config.get("ENV") == "development"):
-    username = "12ar1kqn0474torm00iisksbtv"
-    password = "1blet7j9ldoj678qk5mskc1oq8e8em02ttftnkvp4ougqc2mf3qc"
-    redirect_uri = "http://localhost:3000"
-    tokenUrl = "https://interninit.auth.us-east-1.amazoncognito.com/oauth2/token"
-    claimsUrl = "https://interninit.auth.us-east-1.amazoncognito.com/oauth2/userInfo"
-    logoutUrl = "https://interninit.auth.us-east-1.amazoncognito.com/login?response_type=code&client_id=12ar1kqn0474torm00iisksbtv&redirect_uri=http://localhost:3000"
-    tokenAuthBytes = (username + ":" + password).encode("ascii")
-    tokenAuth = base64.b64encode(tokenAuthBytes).decode("ascii")
+    cacheApiUrl = cacheApiUrl.format(stage="dev")
+    uploadApiUrl = uploadApiUrl.format(stage="dev")
 elif(app.config.get("ENV") == "production"):
     sentry_sdk.init(
     dsn="https://8537ba8551334943a20d5b615f267b36@o412197.ingest.sentry.io/5288579",
@@ -45,7 +39,8 @@ elif(app.config.get("ENV") == "production"):
     logoutUrl = "https://auth.interninit.com/login?response_type=code&client_id=3og5ph16taqf598bchokdfs1r2&redirect_uri=https://apply.interninit.com"
     tokenAuthBytes = (username + ":" + password).encode("ascii")
     tokenAuth = base64.b64encode(tokenAuthBytes).decode("ascii")
-
+    cacheApiUrl = cacheApiUrl.format(stage="prod")
+    uploadApiUrl = uploadApiUrl.format(stage="prod")
 
 @app.route("/api/")
 def root():
@@ -53,10 +48,11 @@ def root():
 
 @app.route("/api/get_user_data", methods=["POST"])
 def get_user_data():
+    print(cacheApiUrl)
     page = request.get_data().decode("utf-8")
-    token = request.headers.get("Authorization").split(" ")[1]
-    params={"page":page, "token":token}
-    req = requests.get(cacheApiUrl, params=params)
+    token = request.headers.get("Authorization")
+    params={"page":page}
+    req = requests.get(cacheApiUrl, headers = {"Authorization" : token}, params=params)
     return jsonify(req.text)
 
 
