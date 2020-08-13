@@ -1,9 +1,7 @@
 //React Imports
-import React, { Component } from "react";
-import styled from "styled-components";
+import React from "react";
 import "../../../App.css";
 import "../dashboard.css";
-import GettingStarted from "./GettingStarted.jpg";
 
 import { Card } from "antd";
 
@@ -16,7 +14,7 @@ function BigCard(props) {
       <Card
         style={{ width: "100%", borderRadius: "15px" }}
         cover={
-          <img className="apply-skills-big-card-cover" src={props.cover} style={{ pointerEvents: 'none' }} />
+          <img className="apply-skills-big-card-cover" src={props.cover} style={{ pointerEvents: 'none' }} alt="cover" />
         }
         hoverable
       >

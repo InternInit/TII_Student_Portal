@@ -1,10 +1,8 @@
 import React, { Component } from "react";
 
-//Logo Import
-import logo from "./logo.svg";
 
 //Ant Design Imports
-import { Layout, Switch, Button } from "antd";
+import { Layout, } from "antd";
 
 //Styled Component Imports
 import styled from "styled-components";
@@ -26,7 +24,6 @@ import EditProfile from "./components/EditProfile.js";
 import LogIn from "./components/LogIn.js";
 import SignUp from "./components/SignUp.js";
 
-import Joyride from "react-joyride";
 
 //CSS Imports
 import "./App.css";
@@ -34,12 +31,9 @@ import "./App.css";
 //React Routing
 import {
   BrowserRouter as Router,
-  Link,
   Route,
   Switch as ReactSwitch,
   Redirect,
-  useRouteMatch as match,
-  useParams
 } from "react-router-dom";
 
 //Redux
@@ -53,7 +47,6 @@ import {
   batchUpdateCompletionChecklist
 } from "./redux/actions";
 
-import pageInternshipInformation from "./components/pageInternshipInformation.jsx";
 
 import devConfigurationFile from "./configuration_dev.json";
 import prodConfigurationFile from "./configuration_prod.json";
@@ -76,7 +69,7 @@ if (!process.env.NODE_ENV || process.env.NODE_ENV === "development") {
 function noop() { }
 
 //Declarations
-const { Header, Content, Footer, Sider } = Layout;
+const { Content, } = Layout;
 
 //Styles
 const PageContainer = styled.div`
@@ -87,6 +80,9 @@ const PageContainer = styled.div`
   justifycontent: center;
   background-color: white;
   border-radius: 10px;
+
+  flex-direction:column;
+  align-items:center;
 `;
 
 const mapStateToProps = state => {
@@ -116,14 +112,7 @@ class App extends Component {
       isCollapsed: false,
       page: 0,
       submissionState: true,
-      steps: [
-        {
-          target: ".first-step",
-          title: "Learn How to Apply",
-          content:
-            "Check out our comprehensive how to apply page to start building your application!"
-        }
-      ],
+
       authorized: false
     };
   }
@@ -158,8 +147,8 @@ class App extends Component {
       })
       .catch((error) => {
         console.log("Session Error: " + error)
-        if(window.location.href.split("/")[3] != "login"){
-          window.location.href = window.location.href.split("/").slice(0,3).join("/") + "/login"
+        if (window.location.href.split("/")[3] !== "login") {
+          window.location.href = window.location.href.split("/").slice(0, 3).join("/") + "/login"
 
         }
         //TODO: Update to a more elegant solution
@@ -168,7 +157,7 @@ class App extends Component {
 
   updateData = (values, origin) => {
     if (
-      this.state.submissionState == true &&
+      this.state.submissionState === true &&
       typeof this.inMemoryToken != "undefined"
     ) {
       fetch("/api/update_user_data", {
@@ -186,13 +175,13 @@ class App extends Component {
         .then(data => {
           console.log("Sent: " + data);
         });
-    } else if (this.state.submissionState == false) {
+    } else if (this.state.submissionState === false) {
       console.log("Submission disabled");
     }
   };
 
   onSubmit = (values, origin) => {
-    if (this.state.submissionState == true) {
+    if (this.state.submissionState === true) {
       fetch("/api/update_user_data", {
         method: "POST",
         headers: {
@@ -208,7 +197,7 @@ class App extends Component {
         .then(data => {
           console.log(data);
         });
-    } else if (this.state.submissionState == false) {
+    } else if (this.state.submissionState === false) {
       console.log("Submission disabled");
     }
   };
@@ -303,7 +292,7 @@ class App extends Component {
       .then(response => response.json())
       .then(data => {
         let parsedRecv = JSON.parse(data);
-        if (parsedRecv != "No Info") {
+        if (parsedRecv !== "No Info") {
           console.log(parsedRecv)
           let recvCompletionState = parsedRecv.completionState;
           let recvCompletionChecklist = parsedRecv.completionChecklist;
@@ -467,8 +456,6 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Joyride steps={this.state.steps}
-        />
         {this.resize()}
         <Router>
           <header>
@@ -478,7 +465,7 @@ class App extends Component {
             <Route path="/dashboard" render={() => <Dashboard />} />
             <Route path="/how-to-apply" exact component={HowtoApply} />
             <Route path="/edit-profile" exact component={EditProfile} />
-            <Route path="/login" render={props => <LogIn newAuth={this.newAuth}/>} />
+            <Route path="/login" render={props => <LogIn newAuth={this.newAuth} />} />
             <Route path="/signup" exact component={SignUp} />
             <Route path="/apply">{this.AppContainer()}</Route>
             <Route

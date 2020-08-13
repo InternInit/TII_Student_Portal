@@ -2,10 +2,11 @@ import React from 'react';
 import styled from 'styled-components';
 import { Input, Button, Form } from 'antd';
 
-import { Link } from 'react-router-dom';
-
 
 import { Auth } from 'aws-amplify';
+
+import { withRouter } from "react-router";
+
 
 //CSS Styled Components
 const Container = styled.div`
@@ -50,12 +51,7 @@ const Banner = styled.div`
 
 `;
 
-const ForgotPass = styled.a`
-display:flex;
-text-align:left;
-font-weight:500;
-width:80%;
-`
+
 class SignUp extends React.Component {
     constructor(props) {
         super(props);
@@ -109,27 +105,27 @@ class SignUp extends React.Component {
             </Background >)
     }
 
-    handleSubmit = async(values) => {
-      let { username, password, email, name } = values
-      try {
-        const user = await Auth.signUp({
-            username,
-            password,
-            attributes: {
-              email,
-              name
-            }
-        });
+    handleSubmit = async (values) => {
+        let { username, password, email, name } = values
+        try {
+            const user = await Auth.signUp({
+                username,
+                password,
+                attributes: {
+                    email,
+                    name
+                }
+            });
+            this.props.history.push("/dashboard");
+            //TODO: Redirect to email verification page.
 
-        //TODO: Redirect to email verification page.
-
-      } catch (error) {
-        console.log('error signing up:', error);
-      }
+        } catch (error) {
+            console.log('error signing up:', error);
+        }
 
     }
 
 
 
 }
-export default SignUp;
+export default withRouter(SignUp);

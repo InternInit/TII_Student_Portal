@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import { Input, Button, Form } from 'antd';
 
 import { Link } from 'react-router-dom';
-import SignUp from './SignUp';
 
 import { Auth } from 'aws-amplify';
 
@@ -69,8 +68,8 @@ class LogIn extends React.Component {
         }
     }
 
-    componentDidMount(){
-      console.log(this.props)
+    componentDidMount() {
+        console.log(this.props)
     }
     render() {
         return (
@@ -112,17 +111,17 @@ class LogIn extends React.Component {
             </Background >)
     }
 
-    handleSubmit = async(values) => {
-      let { username, password } = values
-      try {
-        const user = await Auth.signIn(username, password);
-        this.props.newAuth();
+    handleSubmit = async (values) => {
+        let { username, password } = values
+        try {
+            const user = await Auth.signIn(username, password);
+            this.props.newAuth();
 
-        this.props.history.push("/dashboard");
+            this.props.history.push("/dashboard");
 
-      } catch (error) {
-        console.log('error signing in:', error);
-      }
+        } catch (error) {
+            console.log('error signing in:', error);
+        }
 
     }
 

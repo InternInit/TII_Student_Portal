@@ -27,17 +27,9 @@ import Extra_Info from "./tiiArrayPictures/Extra_Info.jpg";
 import BigCard from "./bigCard";
 import LittleCard from "./littleCard";
 
-import { Card, Row, Col, PageHeader } from "antd";
+import { Row, PageHeader } from "antd";
 
-import {
-  BrowserRouter as Router,
-  Link,
-  Route,
-  Switch as ReactSwitch,
-  Redirect,
-  useRouteMatch as match,
-  useParams
-} from "react-router-dom";
+import { Link, Route, Redirect } from "react-router-dom";
 import { withRouter } from "react-router";
 
 //Apply Skills html files
@@ -200,7 +192,6 @@ class ApplySkills extends Component {
     };
   }
   render() {
-    let { pageContent } = this.state;
     return (
       <div>
         <Route
@@ -289,7 +280,6 @@ class ApplySkills extends Component {
           </SkillsContainer>
         </Route>
 
-
         {/*
          * Mapped routes for resume skills
          */}
@@ -306,7 +296,11 @@ class ApplySkills extends Component {
               </Link>
               {window.scrollTo(0, 0)}
 
-              <img className="apply-skills-banner" src={module[0]} />
+              <img
+                className="apply-skills-banner"
+                src={module[0]}
+                alt="banner"
+              />
               <div
                 className="container"
                 dangerouslySetInnerHTML={{ __html: module[5] }}
@@ -335,9 +329,6 @@ class ApplySkills extends Component {
           </Route>
         ))}
 
-
-
-
         {/*
          * Mapped routes for written skills
          */}
@@ -356,9 +347,6 @@ class ApplySkills extends Component {
             </SkillsContainer>
           </Route>
         ))}
-
-
-
       </div>
     );
   }

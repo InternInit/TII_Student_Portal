@@ -5,29 +5,17 @@ import "../../App.css";
 import "./dashboard.css";
 
 //Ant Design
-import { Layout, Switch, Button } from "antd";
+import { Layout } from "antd";
 
 //Custom Components
 import DashboardNavBar from "./dashboardNavBar.jsx";
 import AddCompanies from "./AddCompanies.js";
 import CompanyInformation from "./CompanyInformation.js";
-import Companytab from "./Companytab.js";
 import ApplicationProgress from "./applicationProgress.jsx";
 import ApplySkills from "./apply-skills/applySkills";
-import NewStudent from "../newStudent";
-import EmailConfirmation from "../emailConfirmation";
 
 //React Routing
-import {
-  BrowserRouter as Router,
-  Link,
-  Route,
-  Switch as ReactSwitch,
-  Redirect,
-  useRouteMatch as match,
-  useParams
-} from "react-router-dom";
-import { withRouter } from "react-router";
+import { Route, Switch as ReactSwitch, Redirect } from "react-router-dom";
 
 import { connect } from "react-redux";
 import ActiveApplications from "./ActiveApplications";
@@ -51,7 +39,7 @@ const WelcomeHeader = styled.h1`
   color: #0050b3;
 `;
 
-const { Header, Content, Footer, Sider } = Layout;
+const { Content } = Layout;
 
 const mapStateToProps = state => {
   return {

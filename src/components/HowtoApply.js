@@ -8,15 +8,9 @@ import { CheckOutlined } from "@ant-design/icons";
 //styles
 import { withRouter } from "react-router-dom";
 
-import { Menu, Dropdown, Layout } from "antd";
+import { Menu, Layout } from "antd";
 
-const Banner = styled.div`
-  background-color: #BAE7FF;
-  padding: 55px;
-  font-size: 36px;
-  color: white;
-  font-weight: normal;
-`;
+
 
 
 const Heading = styled.div`
@@ -63,30 +57,9 @@ const Caption = styled.p`
   width: 90%;
 `;
 
-const { Content, Sider, Header } = Layout;
+const { Content, Header } = Layout;
 
-const jumpTo = (
-  <Menu
-    className
-    style={{
-      display: "flex",
-      flexDirection: "column",
-      width: "300px"
-    }}
-  >
-    <Menu.Item
-      style={{
-        fontSize: "16px",
-        fontWeight: "500"
-      }}
-    >
-      Internship Information
-    </Menu.Item>
-    <Menu.Item>Personal Information</Menu.Item>
-    <Menu.Item>Written Work</Menu.Item>
-    <Menu.Item>References</Menu.Item>
-  </Menu>
-);
+
 
 //THIS IS BEING TESTED INSTEAD OF INTERNSHIPINFORMATION, MAKE SURE TO CHANGE ROUTE BACK WHEN FINISHED!
 

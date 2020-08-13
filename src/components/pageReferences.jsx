@@ -3,10 +3,8 @@ import { Form, Input, Button, Spin } from "antd";
 import { Row, Col } from "antd";
 import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
 import "../App.css";
-import styled from "styled-components";
 
 //React Routing
-import { BrowserRouter as Router, Link } from "react-router-dom";
 import { withRouter } from "react-router";
 
 //Redux
@@ -132,10 +130,20 @@ class PageReferences extends Component {
                           required={false}
                           key={field.key}
                         >
-                          {/*Minus button removes field when clicked*/}
+                          {/**
+                          * 
+                          * Minus Button removes Reference when clicked
+                          * 
+                          */}
                           {this.renderMinusButton(fields, field, remove)}
 
-                          {/**First row of reference box */}
+
+
+                          {/**
+                            * 
+                            * First Row of Reference Box
+                            * 
+                            */}
                           <Row gutter={formGutter}>
                             <Col span={halfSpan}>
                               {/**First name of Reference */}
@@ -165,7 +173,14 @@ class PageReferences extends Component {
                             </Col>
                           </Row>
 
-                          {/**Second row of the reference box */}
+
+
+                          {/**
+                              * 
+                              * Second Row of Reference Box
+                              * 
+                              */}
+
                           <Row gutter={formGutter}>
                             <Col span={halfSpan}>
                               {/**Company of Reference */}
@@ -195,7 +210,12 @@ class PageReferences extends Component {
                             </Col>
                           </Row>
 
-                          {/*SCHOOL ADDRESS CONT'D (CITY, STATE, ZIPCODE)*/}
+
+                          {/**
+                           * 
+                           * School Contact (EMAIL, PHONE NUMBER )
+                           * 
+                           */}
                           <Row gutter={formGutter}>
                             <Col span={halfSpan}>
                               <Form.Item
@@ -266,6 +286,12 @@ class PageReferences extends Component {
       </div>
     );
   }
+
+  /**
+ * 
+ * Removing a Reference
+ * 
+ */
   renderMinusButton = (fields, field, remove) => {
     return fields.length > 1 ? (
       <MinusCircleOutlined
@@ -281,6 +307,12 @@ class PageReferences extends Component {
     ) : null;
   };
 
+
+  /**
+ * 
+ * When a Reference is added
+ * 
+ */
   onValuesChange = () => {
     let allValues = this.formRef.current.getFieldsValue()
 
@@ -301,11 +333,17 @@ class PageReferences extends Component {
       }
     }
     let completionPercentage = parseFloat((completedCount / Object.keys(allValues).length).toFixed(2));
-    if (completionPercentage != this.props.completionState[3]) this.props.updateCompletionState(3, completionPercentage)
+    if (completionPercentage !== this.props.completionState[3]) this.props.updateCompletionState(3, completionPercentage)
 
     if (!_.isEqual(checklist, this.props.completionChecklist[3])) this.props.updateCompletionChecklist(3, checklist)
   }
 
+
+  /**
+   * 
+   * When "Submit" Button is pressed
+   * 
+   */
   onFinish = values => {
     console.log("FinishRefPage:", values);
     this.props.updateCompletionState(3, 1.0);
@@ -313,6 +351,11 @@ class PageReferences extends Component {
     this.routeChange("/submission-success");
   };
 
+  /**
+ * 
+ * Updates User data
+ * 
+ */
   updateFieldData = async () => {
     const values = await this.formRef.current.getFieldsValue();
 
@@ -320,17 +363,33 @@ class PageReferences extends Component {
 
   };
 
+  /**
+ * 
+ * When "Back" Button is pressed
+ * 
+ */
   backHandler = () => {
     this.props.updateData(this.formRef.current.getFieldsValue(), "3");
     this.routeChange("/apply/written-work");
   };
 
+
+  /**
+ * 
+ * Changing routes (React Router)
+ * 
+ */
   routeChange = path => {
     console.log(path);
     this.props.clickThree();
     this.props.history.push(path);
   };
 
+  /**
+   * 
+   * Retrieving user data
+   * 
+   */
   getUserData = async () => {
     let token = await this.props.getJwt();
     fetch("/api/get_user_data", {

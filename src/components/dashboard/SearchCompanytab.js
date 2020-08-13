@@ -1,27 +1,14 @@
 import React from "react";
 import styled from "styled-components";
 import QueueAnim from "rc-queue-anim";
-import { Link } from 'react-router-dom'
-import { Button, Avatar } from 'antd';
-import { TeamOutlined } from '@ant-design/icons';
-
-const CompanyTitle = styled.div`
-  font-size: 32px;
-  font-weight: bold;
-  color: black;
-  align-items: center;
-  height: 29px;
-  margin-bottom: 6px;
-`;
-
-const JobTitle = styled.div`
-  font-size: 14px;
-  font-weight: 500;
-  color: #262626;
-  margin-bottom: 10px;
-  margin-top: 6px;
-`;
-
+import { Link } from "react-router-dom";
+import { Button, Avatar } from "antd";
+import { TeamOutlined } from "@ant-design/icons";
+import {
+  CompanyTitle,
+  JobTitle,
+  TabContainer
+} from "./styledDashboardComponents";
 
 const QVCompany = styled.div`
   font-size: 18px;
@@ -42,6 +29,7 @@ const QVCaption = styled.div`
   width: 80%;
   text-align: left;
 `;
+
 const Col = styled.div`
   display: flex;
   flex-direction: column;
@@ -55,24 +43,6 @@ const Image = styled.img`
   border-radius: 10px;
 `;
 
-const TabContainer = styled.div`
-  display: flex;
-  border-radius: 8px;
-  flex-direction: row;
-  justify-content: center;
-  padding-bottom: 5px;
-  padding-top: 5px;
-  //border: solid 0.5px #d9d9d9;
-  background-color: white;
-
-  border: 1px solid #d9d9d9;
-  box-shadow: 1px 1px 5px -4px;
-  :hover {
-    transition-duration: 0.35s;
-    cursor: pointer;
-    box-shadow: 2px 2px 8px 2px rgba(0, 0, 0, 0.1);
-  }
-`;
 const mapping = [
   "this single item in the array is allowing me to use the queue animations lol"
 ];
@@ -87,23 +57,29 @@ class SearchCompanytab extends React.Component {
     this.handleClick = this.handleClick.bind(this);
   }
   render() {
-    let { name, industry, logo, image, description, location, companyid } = this.props;
+    let {
+      name,
+      industry,
+      logo,
+      image,
+      description,
+      location,
+      companyid
+    } = this.props;
     let { show } = this.state;
-    let ctab = <CLabel
-      name={name}
-      industry={industry}
-      logo={logo}
-    />;
+    let ctab = <CLabel name={name} industry={industry} logo={logo} />;
 
     if (show === true) {
-      ctab = <QuickView
-        name={name}
-        industry={industry}
-        image={image}
-        description={description}
-        location={location}
-        companyid={companyid}
-      />;
+      ctab = (
+        <QuickView
+          name={name}
+          industry={industry}
+          image={image}
+          description={description}
+          location={location}
+          companyid={companyid}
+        />
+      );
     }
 
     return (
@@ -147,7 +123,13 @@ class CLabel extends React.Component {
                 }}
               >
                 {/**company logo */}
-                <Avatar size={36} shape="square" icon={<TeamOutlined />} src={logo} style={{ marginLeft: '8%', marginBottom: '14px' }} />
+                <Avatar
+                  size={36}
+                  shape="square"
+                  icon={<TeamOutlined />}
+                  src={logo}
+                  style={{ marginLeft: "8%", marginBottom: "14px" }}
+                />
 
                 {/**company name and job */}
                 <Col
@@ -157,9 +139,7 @@ class CLabel extends React.Component {
                   }}
                 >
                   <CompanyTitle>{name}</CompanyTitle>
-                  <JobTitle style={{ paddingTop: "4px" }}>
-                    {industry}
-                  </JobTitle>
+                  <JobTitle style={{ paddingTop: "4px" }}>{industry}</JobTitle>
                 </Col>
               </div>
             </TabContainer>
@@ -178,7 +158,14 @@ Gives additional Information when hovered over
 */
 class QuickView extends React.Component {
   render() {
-    let { name, industry, image, description, location, companyid } = this.props;
+    let {
+      name,
+      industry,
+      image,
+      description,
+      location,
+      companyid
+    } = this.props;
     return (
       <QueueAnim type="scale" ease={["easeOutQuart", "easeInOutQuart"]}>
         {mapping.map((item, index) => (
@@ -186,7 +173,7 @@ class QuickView extends React.Component {
             <TabContainer
               style={{
                 padding: "24px",
-                paddingBottom: '28px'
+                paddingBottom: "28px"
               }}
             >
               {/**
@@ -201,9 +188,7 @@ class QuickView extends React.Component {
                 }}
               >
                 <QVCompany>{name}</QVCompany>
-                <QVTitle>
-                  {industry}
-                </QVTitle>
+                <QVTitle>{industry}</QVTitle>
                 <QVCompany
                   style={{
                     marginTop: "10px",
@@ -214,7 +199,7 @@ class QuickView extends React.Component {
                 </QVCompany>
 
                 <QVCaption style={{ marginTop: "4px" }}>
-                  {description.substring(0, 250) + '. . .'}
+                  {description.substring(0, 250) + ". . ."}
                 </QVCaption>
               </Col>
 
@@ -254,12 +239,19 @@ class QuickView extends React.Component {
                   </Col>
 
                   <Col>
-                    <Button className='button-style' type='primary'>Add</Button>
-
-                    <Link to={`/dashboard/add-companies/company-information/${companyid}`}>
-                      <Button style={{ marginTop: '12px', }} className='button-style'>
-                        More Details
+                    <Button className="button-style" type="primary">
+                      Add
                     </Button>
+
+                    <Link
+                      to={`/dashboard/add-companies/company-information/${companyid}`}
+                    >
+                      <Button
+                        style={{ marginTop: "12px" }}
+                        className="button-style"
+                      >
+                        More Details
+                      </Button>
                     </Link>
                   </Col>
                 </div>

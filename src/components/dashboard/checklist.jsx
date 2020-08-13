@@ -1,14 +1,9 @@
-import React, { Component } from "react";
+import React from "react";
 import styled from "styled-components";
 import "../../App.css";
 import "./dashboard.css";
 import "antd/dist/antd.css";
-import { Progress } from "antd";
-import {
-  BorderOutlined,
-  CheckOutlined,
-  CheckSquareOutlined
-} from "@ant-design/icons";
+import { BorderOutlined, CheckOutlined } from "@ant-design/icons";
 import QueueAnim from "rc-queue-anim";
 
 import { Link } from "react-router-dom";
@@ -62,31 +57,33 @@ function parseChecklist(checklist, page) {
   switch (page) {
     case 0:
       let newChecklist = [];
-      var count = 0;
+      let count = 0;
       let completed = false;
-      for (var i = 0; i < 9; i++) {
+      for (let i = 0; i < 9; i++) {
         if (parsedChecklist[i].completed) {
           count++;
         }
       }
-      if (count == 9) {
+      if (count === 9) {
         completed = true;
       }
       newChecklist.push({ key: "Contact Info", completed: completed });
       completed = false;
       count = 0;
 
-      for (var i = 9; i < 17; i++) {
+      for (let i = 9; i < 17; i++) {
         if (parsedChecklist[i].completed) {
           count++;
         }
       }
-      if (count == 8) {
+      if (count === 8) {
         completed = true;
       }
       newChecklist.push({ key: "Internship Info", completed: completed });
       newChecklist.push(parsedChecklist[16]);
       parsedChecklist = newChecklist;
+      break;
+    default:
       break;
   }
   return parsedChecklist;

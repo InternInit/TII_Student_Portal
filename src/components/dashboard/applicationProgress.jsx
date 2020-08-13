@@ -8,14 +8,10 @@ import "antd/dist/antd.css";
 import Checklist from "./checklist.jsx";
 import { Progress, Button, Row, Col } from "antd";
 import { CheckCircleTwoTone } from "@ant-design/icons";
-import QueueAnim from "rc-queue-anim";
 import { withRouter } from "react-router";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { updateCompletionState } from "../../redux/actions";
-import Companytab from "./Companytab.js";
-import ActiveAppCompanytab from "./ActiveAppCompanytab.js";
-
 
 /*
 
@@ -79,6 +75,9 @@ const ViewChecklist = styled.p`
   line-height: 16px;
   align-items: center;
   color: #1890ff;
+  :hover {
+    cursor: pointer;
+  }
 `;
 
 const DescriptorText = styled.span`
@@ -135,8 +134,8 @@ class ApplicationProgress extends Component {
       referencesChecklist: false
     };
   }
-  componentDidMount(){
-    console.log(this.props)
+  componentDidMount() {
+    console.log(this.props);
   }
 
   handleClick = section => {
@@ -191,7 +190,7 @@ class ApplicationProgress extends Component {
                   float: "left"
                 }}
               >
-                <DescriptorText  >
+                <DescriptorText>
                   Let's get started on your first application!
                 </DescriptorText>
               </Col>
@@ -245,11 +244,11 @@ class ApplicationProgress extends Component {
                 {this.props.completionState[index] < 1 ? (
                   Math.floor(this.props.completionState[index] * 100) + "%"
                 ) : (
-                    <CheckCircleTwoTone
-                      style={{ fontSize: "24px" }}
-                      twoToneColor="#52c41a"
-                    />
-                  )}
+                  <CheckCircleTwoTone
+                    style={{ fontSize: "24px" }}
+                    twoToneColor="#52c41a"
+                  />
+                )}
               </PercentHeader>
 
               {/**
@@ -273,10 +272,8 @@ class ApplicationProgress extends Component {
                * Checklist Text
                *<a onClick={() => this.handleClick(section[0])}>
                */}
-              <ViewChecklist>
-                <a onClick={() => this.handleClick(section[0])}>
-                  View Checklist
-                </a>
+              <ViewChecklist onClick={() => this.handleClick(section[0])}>
+                View Checklist
               </ViewChecklist>
 
               {/**

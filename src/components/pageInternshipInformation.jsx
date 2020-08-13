@@ -4,7 +4,6 @@ import {
   Select,
   Input,
   Button,
-  Checkbox,
   DatePicker,
   Radio,
   Upload,
@@ -12,26 +11,17 @@ import {
   Spin
 } from "antd";
 import { Row, Col } from "antd";
-import {
-  MinusCircleOutlined,
-  PlusOutlined,
-  InboxOutlined
-} from "@ant-design/icons";
-
-import Joyride from "react-joyride";
+import { InboxOutlined } from "@ant-design/icons";
 
 import "antd/dist/antd.css";
 import "../App.css";
 
 //Stream related
-import axios from "axios";
 
 import moment from "moment";
 
 //React Routing
-import { BrowserRouter as Router, Link } from "react-router-dom";
 import { withRouter } from "react-router";
-import TiiNav from "./TiiNav";
 
 //Redux
 import { connect } from "react-redux";
@@ -44,16 +34,14 @@ import _ from "lodash";
 
 //Object Destructuring
 const { Option } = Select;
-const { MonthPicker, RangePicker } = DatePicker;
+const { RangePicker } = DatePicker;
 const { Dragger } = Upload;
 
 //Formatting
 const formGutter = [16, 16];
-const checkGutter = [8, 8];
 const standardSpan = 24;
 const halfSpan = standardSpan / 2;
 const thirdSpan = standardSpan / 3;
-const quarterSpan = standardSpan / 4;
 
 //items
 const allStates = [
@@ -128,22 +116,8 @@ const daysOfTheWeek = [
 ];
 const timesOfTheDay = ["Mornings", "Afternoons", "Evenings"];
 const paidOrUnpaid = ["Yes", "No"];
-const industry = [
-  "General Business",
-  "Consulting",
-  "Finance or Accounting",
-  "Media or Tellecommunications",
-  "Real Estate",
-  "Engineering",
-  "Science Research",
-  "Computer Science",
-  "Biotechnology",
-  "Vocational",
-  "Political",
-  "Marketing"
-];
 
-//Functions
+//Validation Rules (Required questions)
 const validationRules = (required, inputName, type, pattern) => [
   {
     required: required,
@@ -153,9 +127,14 @@ const validationRules = (required, inputName, type, pattern) => [
   }
 ];
 
+//The best function to exist within this app
 const boldify = text => <strong>{text}</strong>;
 
-//Props
+/**
+ *
+ * All form questions
+ *
+ */
 const formItemProps = {
   totalForm: {
     name: "pageInternshipInformation",
@@ -313,6 +292,12 @@ const formItemProps = {
     rules: validationRules(true, "resume", "object")
   }
 };
+
+/**
+ *
+ * Upload Files Parameters
+ *
+ */
 const props = {
   name: "file",
   accept:
@@ -320,6 +305,11 @@ const props = {
   multiple: true
 };
 
+/**
+ *
+ * Checks Nav Panel state (is completed)
+ *
+ */
 const mapStateToProps = state => {
   return {
     completionState: state.completionState,
@@ -327,6 +317,11 @@ const mapStateToProps = state => {
   };
 };
 
+/**
+ *
+ * Updates completion state
+ *
+ */
 const mapDispatchToProps = {
   updateCompletionState,
   updateCompletionChecklist
@@ -353,6 +348,7 @@ class PageInternshipInformation extends Component {
     this.updateFieldData();
   }
 
+  //Renders Nav Panel
   renderNav() {
     this.props.renderNav();
   }
@@ -364,13 +360,22 @@ class PageInternshipInformation extends Component {
           <h1>Internship Information</h1>
           <br />
 
+          {/**
+           *
+           * Application Form
+           *
+           */}
           <Form
             {...formItemProps.totalForm}
             onFinish={this.onFinish}
             ref={this.formRef}
             onValuesChange={this.onValuesChange}
           >
-            {/*First and Last Name*/}
+            {/**
+             *
+             * First Row (First and Last Name)
+             *
+             */}
             <Row name="first" gutter={formGutter}>
               <Col span={halfSpan}>
                 <Form.Item {...formItemProps.firstName}>
@@ -385,7 +390,11 @@ class PageInternshipInformation extends Component {
               </Col>
             </Row>
 
-            {/*Phone Number and Email*/}
+            {/**
+             *
+             * Phone Number and Email
+             *
+             */}
             <Row gutter={formGutter}>
               <Col span={halfSpan}>
                 <Form.Item {...formItemProps.phoneNumber}>
@@ -400,7 +409,11 @@ class PageInternshipInformation extends Component {
               </Col>
             </Row>
 
-            {/*Address Line*/}
+            {/**
+             *
+             * Address Line
+             *
+             */}
             <Row gutter={formGutter}>
               <Col span={standardSpan}>
                 <Form.Item {...formItemProps.addressLine}>
@@ -409,7 +422,11 @@ class PageInternshipInformation extends Component {
               </Col>
             </Row>
 
-            {/*City, State, and ZipCode*/}
+            {/**
+             *
+             * Address City, State, ZIP
+             *
+             */}
             <Row gutter={formGutter}>
               <Col span={thirdSpan}>
                 <Form.Item {...formItemProps.city}>
@@ -436,7 +453,11 @@ class PageInternshipInformation extends Component {
               </Col>
             </Row>
 
-            {/*Year of Graduation*/}
+            {/**
+             *
+             * Year of Graduation
+             *
+             */}
             <Row gutter={formGutter}>
               <Col span={standardSpan}>
                 <Form.Item {...formItemProps.yog}>
@@ -445,8 +466,11 @@ class PageInternshipInformation extends Component {
               </Col>
             </Row>
 
-
-            {/*Unweighted and Weighted GPAs*/}
+            {/**
+             *
+             * Weighted and Unweighted GPAs
+             *
+             */}
             <Row gutter={formGutter}>
               <Col span={halfSpan}>
                 <Form.Item {...formItemProps.unweightedGPA}>
@@ -460,7 +484,11 @@ class PageInternshipInformation extends Component {
               </Col>
             </Row>
 
-            {/*Courses*/}
+            {/**
+             *
+             * Relevant Courses
+             *
+             */}
             <Row gutter={formGutter}>
               <Col span={standardSpan}>
                 <Form.Item {...formItemProps.courses}>
@@ -487,7 +515,11 @@ class PageInternshipInformation extends Component {
               </Col>
             </Row>
 
-            {/*Days and Times available for work*/}
+            {/**
+             *
+             * Day and Time Willing to Work
+             *
+             */}
             <Row gutter={formGutter}>
               <Col span={halfSpan}>
                 <Form.Item {...formItemProps.daysToWork}>
@@ -519,7 +551,11 @@ class PageInternshipInformation extends Component {
               </Col>
             </Row>
 
-            {/*Start and End dates available for work*/}
+            {/**
+             *
+             * Start and End Date
+             *
+             */}
             <Row gutter={formGutter}>
               <Col span={standardSpan}>
                 <Form.Item {...formItemProps.dateOfStartAndEnd}>
@@ -528,7 +564,11 @@ class PageInternshipInformation extends Component {
               </Col>
             </Row>
 
-            {/*Paid or Unpaid Internship Chooser*/}
+            {/**
+             *
+             * Willing to work Paid/Unpaid
+             *
+             */}
             <Row gutter={formGutter}>
               <Col span={standardSpan}>
                 <Form.Item {...formItemProps.paidUnpaid}>
@@ -543,7 +583,11 @@ class PageInternshipInformation extends Component {
               </Col>
             </Row>
 
-            {/** Resumé */}
+            {/**
+             *
+             * Upload Resume
+             *
+             */}
             <Form.Item {...formItemProps.resume}>
               <Dragger
                 {...props}
@@ -559,7 +603,11 @@ class PageInternshipInformation extends Component {
               </Dragger>
             </Form.Item>
 
-            {/*Save and Continue or Next*/}
+            {/**
+             *
+             * "Save and Continue" Button
+             *
+             */}
             <Form.Item>
               <Button className="next-button" type="primary" htmlType="submit">
                 Save and Continue
@@ -571,6 +619,11 @@ class PageInternshipInformation extends Component {
     );
   }
 
+  /**
+   *
+   * When Values are Changed
+   *
+   */
   onValuesChange = () => {
     let allValues = this.formRef.current.getFieldsValue();
     delete allValues["Weighted GPA"];
@@ -597,13 +650,18 @@ class PageInternshipInformation extends Component {
     let completionPercentage = parseFloat(
       (completedCount / Object.keys(allValues).length).toFixed(2)
     );
-    if (completionPercentage != this.props.completionState[0])
+    if (completionPercentage !== this.props.completionState[0])
       this.props.updateCompletionState(0, completionPercentage);
 
     if (!_.isEqual(checklist, this.props.completionChecklist[0]))
       this.props.updateCompletionChecklist(0, checklist);
   };
 
+  /**
+   *
+   * On Finish
+   *
+   */
   onFinish = values => {
     console.log("FinishedPageInternship:", values);
     this.props.updateCompletionState(0, 1.0);
@@ -611,11 +669,21 @@ class PageInternshipInformation extends Component {
     this.routeChange("/apply/personal");
   };
 
+  /**
+   *
+   * Upload User Data
+   *
+   */
   updateFieldData = async () => {
     const values = await this.formRef.current.getFieldsValue();
     this.props.updateData(values, "0");
   };
 
+  /**
+   *
+   * Load Resume
+   *
+   */
   customRequestResume = ({ onSuccess, onError, file }) => {
     setTimeout(() => {
       onSuccess(file);
@@ -627,6 +695,11 @@ class PageInternshipInformation extends Component {
     }, 100);
   };
 
+  /**
+   *
+   * File upload function
+   *
+   */
   onChange = info => {
     const { status } = info.file;
     if (status === "removed") {
@@ -645,6 +718,11 @@ class PageInternshipInformation extends Component {
     this.props.updateData(this.formRef.current.getFieldsValue(), "0");
   };
 
+  /**
+   *
+   * Load user data (forms already filled out)
+   *
+   */
   getUserData = async () => {
     let token = await this.props.getJwt();
     fetch("/api/get_user_data", {
@@ -688,6 +766,11 @@ class PageInternshipInformation extends Component {
       });
   };
 
+  /**
+   *
+   * Route Changing (React Router)
+   *
+   */
   routeChange = path => {
     console.log(path);
     this.props.clickTwo();

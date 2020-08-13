@@ -5,7 +5,6 @@ import {
   Input,
   Button,
   Checkbox,
-  DatePicker,
   Radio,
   InputNumber,
   Spin
@@ -16,10 +15,7 @@ import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
 import "antd/dist/antd.css";
 import "../App.css";
 
-import moment from "moment";
-
 //React Routing
-import { BrowserRouter as Router, Link } from "react-router-dom";
 import { withRouter } from "react-router";
 
 //Redux
@@ -33,7 +29,6 @@ import _ from "lodash";
 
 //Object Destructuring
 const { Option } = Select;
-const { MonthPicker, RangePicker } = DatePicker;
 
 //Formatting
 const formGutter = [16, 16];
@@ -41,7 +36,6 @@ const addressGutter = [16, 0];
 const standardSpan = 24;
 const halfSpan = standardSpan / 2;
 const thirdSpan = standardSpan / 3;
-const quarterSpan = standardSpan / 4;
 const formItemLayout = {
   labelCol: {
     xs: { span: 24 },
@@ -52,6 +46,7 @@ const formItemLayout = {
     sm: { span: 24 }
   }
 };
+
 const formItemLayoutWithOutLabel = {
   wrapperCol: {
     xs: { span: 24, offset: 0 },
@@ -154,6 +149,11 @@ class PagePersonal extends Component {
     loaded: false
   };
 
+  /**
+   *
+   * Requires Form to be filled
+   *
+   */
   validationRules = (required, inputName, type, pattern, min, max) => [
     {
       required: required,
@@ -165,11 +165,8 @@ class PagePersonal extends Component {
     }
   ];
 
+  /**Makes Text Bold */
   boldify = text => <strong>{text}</strong>;
-
-  renderFields = () => {
-    return <h1>Hello</h1>;
-  };
 
   formRef = React.createRef();
 
@@ -184,9 +181,14 @@ class PagePersonal extends Component {
   render() {
     return (
       <div style={{ width: "100%", marginTop: "40px" }}>
+        {/**
+         *
+         * Loading wheel while information is being pulled from backend
+         *
+         */}
+
         <Spin size="large" spinning={!this.state.loaded}>
           <h1>General Information</h1>
-
           <br />
           <Form
             name="pagePersonal"
@@ -199,7 +201,11 @@ class PagePersonal extends Component {
             ref={this.formRef}
             onValuesChange={this.onValuesChange}
           >
-            {/*GENDER*/}
+            {/**
+             *
+             * Enter Gender Form
+             *
+             */}
             <Row gutter={formGutter}>
               <Col span={standardSpan}>
                 <Form.Item
@@ -219,7 +225,11 @@ class PagePersonal extends Component {
               </Col>
             </Row>
 
-            {/*RACE/ETHNICITY*/}
+            {/**
+             *
+             * Enter Race/Ethnicity
+             *
+             */}
             <Row gutter={formGutter}>
               <Col span={standardSpan}>
                 <Form.Item
@@ -248,7 +258,11 @@ class PagePersonal extends Component {
               </Col>
             </Row>
 
-            {/*HISPANIC/LATINX*/}
+            {/**
+             *
+             * Enter Latina/X
+             *
+             */}
             <Row gutter={formGutter}>
               <Col span={standardSpan}>
                 <Form.Item
@@ -274,7 +288,11 @@ class PagePersonal extends Component {
               </Col>
             </Row>
 
-            {/*AGE*/}
+            {/**
+             *
+             * Enter Age Form
+             *
+             */}
             <Row gutter={formGutter}>
               <Col span={standardSpan}>
                 <Form.Item
@@ -294,12 +312,29 @@ class PagePersonal extends Component {
                 </Form.Item>
               </Col>
             </Row>
+
+            {/**
+             *
+             * Only Fill out What you feel confortable filling out
+             *
+             */}
             <p style={{ paddingBottom: "24px", marginTop: "-12px" }}>
               Fill out only what you're comfortable with, but understand that
               missing factors could weaken your application.
             </p>
+
+            {/**
+             *
+             * Education History
+             *
+             */}
             <h1>Please Input Your Educational History</h1>
 
+            {/**
+             *
+             * School Box
+             *
+             */}
             <Form.List name="Education">
               {(fields, { add, remove }) => {
                 return (
@@ -328,7 +363,11 @@ class PagePersonal extends Component {
 
                           <h2>School {index + 1}</h2>
 
-                          {/*SCHOOL NAME*/}
+                          {/**
+                           *
+                           * School Name
+                           *
+                           */}
                           <Form.Item
                             {...field}
                             key={[field.fieldKey, "schoolName"]}
@@ -344,7 +383,11 @@ class PagePersonal extends Component {
                             <Input placeholder="School name" />
                           </Form.Item>
 
-                          {/*SCHOOL ADDRESS LINE*/}
+                          {/**
+                           *
+                           * School Addresss Line
+                           *
+                           */}
                           <Row gutter={addressGutter}>
                             <Col span={standardSpan}>
                               <Form.Item
@@ -363,7 +406,11 @@ class PagePersonal extends Component {
                             </Col>
                           </Row>
 
-                          {/*SCHOOL ADDRESS CONT'D (CITY, STATE, ZIPCODE)*/}
+                          {/**
+                           *
+                           * School Address (CITY, STATE, ZIP)
+                           *
+                           */}
                           <Row gutter={addressGutter}>
                             <Col span={thirdSpan}>
                               <Form.Item
@@ -410,7 +457,11 @@ class PagePersonal extends Component {
                             </Col>
                           </Row>
 
-                          {/*COURSE CONCENTRATION AND YEARS COMPLETED*/}
+                          {/**
+                           *
+                           * Course Concentration
+                           *
+                           */}
                           <Row gutter={formGutter}>
                             <Col span={halfSpan}>
                               <Form.Item
@@ -445,6 +496,11 @@ class PagePersonal extends Component {
                       </div>
                     ))}
 
+                    {/**
+                     *
+                     * Add School Button
+                     *
+                     */}
                     <Form.Item>
                       <Button
                         type="dashed"
@@ -466,6 +522,11 @@ class PagePersonal extends Component {
               }}
             </Form.List>
 
+            {/**
+             *
+             * Previous/Save Buttons
+             *
+             */}
             <Form.Item>
               <Button
                 className="back-button"
@@ -485,6 +546,11 @@ class PagePersonal extends Component {
     );
   }
 
+  /**
+   *
+   * Updates user data when values are changes
+   *
+   */
   onValuesChange = () => {
     let allValues = this.formRef.current.getFieldsValue();
     delete allValues["Is Latinx"];
@@ -512,13 +578,18 @@ class PagePersonal extends Component {
     let completionPercentage = parseFloat(
       (completedCount / Object.keys(allValues).length).toFixed(2)
     );
-    if (completionPercentage != this.props.completionState[1])
+    if (completionPercentage !== this.props.completionState[1])
       this.props.updateCompletionState(1, completionPercentage);
 
     if (!_.isEqual(checklist, this.props.completionChecklist[1]))
       this.props.updateCompletionChecklist(1, checklist);
   };
 
+  /**
+   *
+   * Handles form application completion
+   *
+   */
   onFinish = values => {
     console.log("FinishedPersonalPage:", values);
     this.props.updateCompletionState(1, 1.0);
@@ -532,11 +603,21 @@ class PagePersonal extends Component {
     this.props.updateData(values, "1");
   };
 
+  /**
+   *
+   * Handles "Back" Button
+   *
+   */
   backHandler = () => {
     this.props.updateData(this.formRef.current.getFieldsValue(), "1");
     this.routeChange("/apply/internship-info");
   };
 
+  /**
+   *
+   * Get User Data
+   *
+   */
   getUserData = async () => {
     let token = await this.props.getJwt();
     fetch("/api/get_user_data", {
@@ -558,6 +639,11 @@ class PagePersonal extends Component {
       });
   };
 
+  /**
+   *
+   * Changes Route (React Router)
+   *
+   */
   routeChange = path => {
     console.log(path);
     if (path === "/apply/written-work") {
