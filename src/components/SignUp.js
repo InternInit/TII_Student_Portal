@@ -15,7 +15,7 @@ flex-direction:column;
 align-items:center;
 background-color:#fafafa;
 width:400px;
-height:500px;
+height: 600px;
 box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 border-radius: 8px;
 `
@@ -51,6 +51,29 @@ const Banner = styled.div`
 
 `;
 
+const validationRules = (required, inputName, type, pattern) => [
+  {
+    required: required,
+    message: "Please input your " + inputName,
+    type: type,
+    pattern: pattern
+  }
+];
+
+const confirmPassValidationRules = () => [
+
+]
+
+const signUpValidationRules = {
+  username: {
+    rules: validationRules(true, "username", "string")
+  },
+  password: {
+    //Implement Custom Validation Rules
+    rules: validationRules(true, "username", "string")
+  }
+}
+
 
 class SignUp extends React.Component {
     constructor(props) {
@@ -81,6 +104,12 @@ class SignUp extends React.Component {
                                 <Input.Password />
                             </Form.Item>
                             <Label style={{ marginTop: '-8px' }}>
+                                Confirm Password
+                            </Label>
+                            <Form.Item name="confirm-password">
+                                <Input.Password />
+                            </Form.Item>
+                            <Label style={{ marginTop: '-8px' }}>
                                 Display Name
                             </Label>
                             <Form.Item name="name">
@@ -88,12 +117,12 @@ class SignUp extends React.Component {
                             </Form.Item>
                             <Label style={{ marginTop: '-8px' }}>
                                 E-Mail
-                        </Label>
+                            </Label>
                             <Form.Item name="email">
                                 <Input />
                             </Form.Item>
 
-                            <div style={{ marginTop: ' 26px', display: 'flex', justifyContent: 'flex-end' }}>
+                            <div style={{ marginTop: ' 26px', display: 'flex', justifyContent: 'center' }}>
                                 <Button className="profile-button-style" type='primary' htmlType='submit'>
                                     Sign Up
                                 </Button>
