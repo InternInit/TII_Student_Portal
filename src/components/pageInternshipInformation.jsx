@@ -660,12 +660,17 @@ class PageInternshipInformation extends Component {
         let parsedData = parsedRecv.formData;
 
         if (parsedData !== "No Info") {
+          console.log(parsedData)
           try {
             parsedData["Starting/Ending Dates"] = [
               moment(parsedData["Starting/Ending Dates"][0]),
               moment(parsedData["Starting/Ending Dates"][1])
             ];
+          } catch (e) {
+            console.log(e);
+          }
 
+          try {
             let fileList = parsedData.Resume.fileList;
             for (var i = 0; i < fileList.length; i++) {
               fileList[i].status = "done";
@@ -675,6 +680,7 @@ class PageInternshipInformation extends Component {
           } catch (e) {
             console.log(e);
           }
+          
           this.setState({ loaded: true });
           this.formRef.current.setFieldsValue(parsedData);
         }
