@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Collapse, Button } from 'antd';
+import { Collapse, Button, Modal } from 'antd';
 import { Link } from 'react-router-dom'
 const { Panel } = Collapse;
 
@@ -166,6 +166,10 @@ class DroppedView extends React.Component {
                 >
                     Submit
                     </Button>
+
+                <Modal>
+
+                </Modal>
             </Row>
         )
     }
