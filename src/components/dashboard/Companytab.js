@@ -1,8 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Collapse, Button } from 'antd';
+import { Collapse, Button, Modal, Input, notification } from 'antd';
 import { Link } from 'react-router-dom'
+import { CheckOutlined } from '@ant-design/icons';
+
 const { Panel } = Collapse;
+const { TextArea } = Input;
+
 
 
 const CompanyTitle = styled.div`
@@ -79,7 +83,7 @@ class Companytab extends React.Component {
                     {/**
                      * Dropdown
                      */}
-                    <DroppedView companyid={this.props.companyid} />
+                    <DroppedView companyid={this.props.companyid} name={this.props.name} />
                 </Panel>
             </Collapse >
         )
@@ -123,8 +127,12 @@ class CLabel extends React.Component {
 
 //Dropped View of the Company Tab
 class DroppedView extends React.Component {
+    state = {
+        visible: false,
+    }
     render() {
-        let { companyid } = this.props;
+        let { visible } = this.state;
+        let { companyid, name } = this.props;
         return (
             <Row style={{
                 justifyContent: 'space-evenly',
@@ -137,6 +145,7 @@ class DroppedView extends React.Component {
                     */}
                 <Button
                     className='button-style'
+                    onClick={this.showModal}
                 >
                     Add Custom Response
                     </Button>
@@ -166,7 +175,39 @@ class DroppedView extends React.Component {
                 >
                     Submit
                     </Button>
+
+                <Modal visible={visible}
+                    title={"Send Custom Response to " + name}
+                    onCancel={this.cancelReponse}
+                    onOk={this.submitResponse}
+
+                    okText="Submit"
+                    width='100vh'
+                >
+
+                    <TextArea
+                        autoSize={{ minRows: 5, maxRows: 10 }}
+
+                    />
+
+                </Modal>
             </Row>
         )
+    }
+    showModal = () => {
+        this.setState({ visible: true })
+    }
+    submitResponse = () => {
+        this.setState({ visible: false })
+        notification.open({
+            //notification
+            message: "Success!",
+            description: "Your response was sent successfully.",
+            icon: <CheckOutlined style={{ color: "green" }} />
+        });
+    }
+
+    cancelReponse = () => {
+        this.setState({ visible: false })
     }
 }
