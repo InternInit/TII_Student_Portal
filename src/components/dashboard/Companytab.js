@@ -79,7 +79,7 @@ class Companytab extends React.Component {
                     {/**
                      * Dropdown
                      */}
-                    <DroppedView companyid={this.props.companyid} />
+                    <DroppedView companyid={this.props.companyid} name={this.props.name} />
                 </Panel>
             </Collapse >
         )
@@ -123,8 +123,12 @@ class CLabel extends React.Component {
 
 //Dropped View of the Company Tab
 class DroppedView extends React.Component {
+    state = {
+        visible: false,
+    }
     render() {
-        let { companyid } = this.props;
+        let { visible } = this.state;
+        let { companyid, name } = this.props;
         return (
             <Row style={{
                 justifyContent: 'space-evenly',
@@ -137,6 +141,7 @@ class DroppedView extends React.Component {
                     */}
                 <Button
                     className='button-style'
+                    onClick={this.showModal}
                 >
                     Add Custom Response
                     </Button>
@@ -167,10 +172,21 @@ class DroppedView extends React.Component {
                     Submit
                     </Button>
 
-                <Modal>
+                <Modal visible={visible}
+                    title={"Send Custom Response to " + name}
 
+                    onOk={this.submitResponse}
+                >
+                    <p>Hi</p>
                 </Modal>
             </Row>
         )
     }
+    showModal = () => {
+        this.setState({ visible: true })
+    }
+    submitResponse = () => {
+        this.setState({ visible: false })
+    }
+
 }
