@@ -14,7 +14,7 @@ const ModalContainer = styled.div`
   border-radius: 15px;
   background: white;
   padding: 30px;
-  width: 70%;
+  width: auto;
 `;
 
 const ModalHeading = styled.h1`
@@ -38,18 +38,9 @@ const HelpText = styled.p`
   text-align: center;
 `;
 
-function EmailConfirmation(props) {
+export default function EmailConfirmation(props) {
   return (
     <ModalContainer>
-      <CloseOutlined
-        style={{
-          display: "block",
-          textAlign: "right",
-          fontSize: "18px",
-          marginTop: "-5px",
-          marginRight: "-5px"
-        }}
-      />
       <span style={{ fontSize: "48px" }} alt="clapping hands">
         👏
       </span>
@@ -58,22 +49,13 @@ function EmailConfirmation(props) {
       <DescriptionText>
         We just sent a confirmation code over to {props.email}
       </DescriptionText>
-      <Form>
-        <Form.Item>
+      <Form ref={props.formRef}>
+        <Form.Item name="confirmationCode">
           <Input placeholder="Enter Code" />
         </Form.Item>
       </Form>
       <HelpText>Send me another code.</HelpText>
-      <Button
-        type="primary"
-        size="large"
-        shape="round"
-        style={{ width: "150px" }}
-      >
-        Log In
-      </Button>
+
     </ModalContainer>
   );
 }
-
-export default EmailConfirmation;

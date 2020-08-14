@@ -1,11 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Input, Button, Form, Popover, notification  } from 'antd';
+import { Input, Button, Form, Popover, notification, Modal } from 'antd';
 
 //Ant D Icons
-import { CloseOutlined } from "@ant-design/icons";
+import {
+  CloseOutlined,
+  CheckOutlined
+} from "@ant-design/icons";
 
-import { EmailConfirmation } from './emailConfirmation';
+import EmailConfirmation from './EmailConfirmation.jsx';
 
 import { Auth } from 'aws-amplify';
 
@@ -105,7 +108,18 @@ const formItemProps = {
   }
 }
 
-const openNotification = (title, description) => {
+const openSuccessfulNotification = (title, description) => {
+  notification.open({
+    message: title,
+    description: description,
+    icon: <CheckOutlined style={{ color: "green" }} />,
+    onClick: () => {
+      console.log('Notification Clicked!');
+    },
+  });
+};
+
+const openUnsuccessfulNotification = (title, description) => {
   notification.open({
     message: title,
     description: description,
@@ -120,11 +134,14 @@ class SignUp extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-
+          emailConfirmationVisible: false,
+          email: "default@email.com",
+          username: ""
         }
     }
 
     formRef = React.createRef();
+    emailFormRef = React.createRef();
 
     render() {
       const title = 'Password Policy';
@@ -242,12 +259,20 @@ class SignUp extends React.Component {
                         </Form>
                     </div>
                 </Container>
+                <Modal
+                  title="Email Confirmation"
+                  visible={this.state.emailConfirmationVisible}
+                  onOk={this.handleOk}
+                  onCancel={this.handleCancel}
+                >
+                <EmailConfirmation email={this.state.email} formRef={this.emailFormRef}/>
+                </Modal>
             </Background >)
     }
 
     handleSubmit = async (values) => {
         let { username, password, email, name } = values
-
+        this.setState({email: email, username:username})
         try {
             const user = await Auth.signUp({
                 username,
@@ -257,16 +282,49 @@ class SignUp extends React.Component {
                     name
                 }
             });
-            this.props.history.push("/dashboard");
+            this.setState({emailConfirmationVisible: true})
+            //this.props.history.push("/dashboard");
             //TODO: Redirect to email verification page.
             //Will eventually update confirmation to a modal
 
         } catch (error) {
             console.log('error signing up:', error);
-            openNotification("Signup Error", error.message)
+            openUnsuccessfulNotification("Signup Error", error.message)
         }
 
     }
+
+    handleOk = async e => {
+      const values = await this.emailFormRef.current.getFieldsValue();
+      const code = values.confirmationCode
+      console.log(values.confirmationCode);
+      const username = this.state.username
+      console.log(username)
+      try {
+        const callback = await Auth.confirmSignUp(
+          username,
+          code
+        );
+        console.log(callback)
+        openSuccessfulNotification("Success", "You will be redirected to the dashboard in a bit.")
+        this.props.history.push("/dashboard")
+      } catch (error) {
+        console.log(error)
+        openUnsuccessfulNotification("Confirmation Code Error", "Sorry, we couldnt confirm that code.")
+
+      }
+
+      this.setState({
+        emailConfirmationVisible: false,
+      });
+    };
+
+    handleCancel = e => {
+      console.log(e);
+      this.setState({
+        emailConfirmationVisible: false,
+      });
+    };
 
 
 
