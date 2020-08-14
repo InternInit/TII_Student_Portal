@@ -161,7 +161,7 @@ class EditProfile extends React.Component {
               <Avatar
                 size={54}
                 icon={<UserOutlined />}
-                src=""
+                src="https://www.happierhuman.com/wp-content/uploads/2018/10/how-to-be-happy.jpg"
                 style={{ marginLeft: "24px", marginTop: "24px" }}
               />
               <Header

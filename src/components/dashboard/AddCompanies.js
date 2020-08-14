@@ -74,7 +74,7 @@ class AddCompanies extends React.Component {
       search: "",
       visible: false,
       industries: industry,
-      sendingIndustries: " ",
+      sendingIndustries: [],
       companies: [],
       page: "0",
       mergedIndustry:
@@ -163,11 +163,10 @@ class AddCompanies extends React.Component {
           okText="Confirm"
           title="Confirm Industries"
         >
-          <p>Your application will be sent to the following industries:
+          <p>
+            <strong>Your application will be sent to the following industries:</strong>
           </p>
-          <p style={{ whiteSpace: 'pre-line' }}>
-            {this.state.sendingIndustries}
-          </p>
+          {this.state.sendingIndustries.map(industry => <p>{industry}</p>)}
 
           {/**Map the industries here */}
         </Modal>
@@ -276,9 +275,7 @@ class AddCompanies extends React.Component {
 
   addConfirmIndustry = (event) => {
     let { sendingIndustries } = this.state;
-
-    this.setState({ sendingIndustries: event + "\n" })
-
+    this.setState({ sendingIndustries: event  })
   }
 
 
