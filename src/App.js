@@ -466,7 +466,7 @@ class App extends Component {
             <Route path="/how-to-apply" exact component={HowtoApply} />
             <Route path="/edit-profile" exact component={EditProfile} />
             <Route path="/login" render={props => <LogIn newAuth={this.newAuth} />} />
-            <Route path="/signup" exact component={SignUp} />
+            <Route path="/signup" render={props => <SignUp newAuth={this.newAuth} />} />
             <Route path="/apply">{this.AppContainer()}</Route>
             <Route
               path="/submission-success"
