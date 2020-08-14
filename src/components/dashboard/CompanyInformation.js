@@ -12,7 +12,7 @@ const ModuleContainer = styled.div`
 `;
 const Image = styled.img`
 background-color:blue;
-width:450px;
+width:65vh;
 height:225px;
 border-radius:8px;
  
@@ -281,7 +281,7 @@ function CompanyInformation() {
                  */}
             <Row>
                 <Header >
-                    Website
+                    E-Mail
                     </Header>
                 <Caption>
                     Email@gmail.com
@@ -317,12 +317,11 @@ function CompanyInformation() {
                     display: 'flex',
                     flexDirection: 'row',
                     justifyContent: 'space-evenly',
-                    width: '20%'
                 }}>
-                    <Image src="" alt="Logo" style={{ marginTop: '10px' }} />
-                    <Image src="" alt="Logo" style={{ marginTop: '10px' }} />
-                    <Image src="" alt="Logo" style={{ marginTop: '10px' }} />
-                    <Image src="" alt="Logo" style={{ marginTop: '10px' }} />
+                    <Avatar size={36} src="" alt="Logo" style={{ marginTop: '10px' }} />
+                    <Avatar size={36} src="" alt="Logo" style={{ marginTop: '10px', marginLeft: '10px' }} />
+                    <Avatar size={36} src="" alt="Logo" style={{ marginTop: '10px', marginLeft: '10px' }} />
+                    <Avatar size={36} src="" alt="Logo" style={{ marginTop: '10px', marginLeft: '10px' }} />
 
                 </Row>
             </Row>
