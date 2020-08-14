@@ -172,7 +172,7 @@ class EditProfile extends React.Component {
                   padding: "0px"
                 }}
               >
-                {displayname}
+                {this.props.userInfo.username}
               </Header>
             </Row>
 
@@ -260,8 +260,6 @@ class EditProfile extends React.Component {
             confirmLoading={confirmLoading}
             onCancel={this.handleCancel}
           >
-            <Input placeholder="Enter Current password" type="password" />
-            <ChangeInfo>Forgot Password</ChangeInfo>
             <Input.Password
               placeholder="Enter New password"
               style={{ marginTop: "14px" }}
