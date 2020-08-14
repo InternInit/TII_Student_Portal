@@ -7,6 +7,9 @@ import {
   TabContainer
 } from "./styledDashboardComponents";
 
+import { Avatar } from 'antd';
+import { TeamOutlined } from '@ant-design/icons';
+
 const PendingTab = styled.div`
   font-size: 18px;
   font-weight: 600;
@@ -65,7 +68,13 @@ function ActiveAppCompanytab(props) {
               }}
             >
               {/**company logo */}
-              <Logo src={logo} alt="Logo" />
+              <Avatar
+                size={36}
+                shape="square"
+                icon={<TeamOutlined />}
+                src={" "}
+                style={{ marginLeft: "8%", marginBottom: "14px" }}
+              />
 
               {/**company name and job */}
               <Col

@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Collapse, Button, Modal, Input, notification } from 'antd';
+import { Collapse, Button, Modal, Input, notification, Avatar } from 'antd';
 import { Link } from 'react-router-dom'
-import { CheckOutlined } from '@ant-design/icons';
+import { CheckOutlined, TeamOutlined } from '@ant-design/icons';
 
 const { Panel } = Collapse;
 const { TextArea } = Input;
@@ -108,7 +108,13 @@ class CLabel extends React.Component {
                 }}>
 
                     {/**company logo */}
-                    <Image src='' alt='Logo' />
+                    <Avatar
+                        size={36}
+                        shape="square"
+                        icon={<TeamOutlined />}
+                        src={" "}
+                        style={{ marginLeft: "8%", marginBottom: "14px" }}
+                    />
 
                     {/**company name and job */}
                     <Col style={{

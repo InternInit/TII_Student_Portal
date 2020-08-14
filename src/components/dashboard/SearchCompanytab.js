@@ -39,7 +39,7 @@ const Col = styled.div`
 const Image = styled.img`
   width: 400px;
   height: 200px;
-  background-color: blue;
+  background-color:#d9d9d9;
   border-radius: 10px;
 `;
 

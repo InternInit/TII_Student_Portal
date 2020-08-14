@@ -11,7 +11,7 @@ const ModuleContainer = styled.div`
   margin-top:10px;
 `;
 const Image = styled.img`
-background-color:blue;
+background-color:#d9d9d9;
 width:65vh;
 height:225px;
 border-radius:8px;
@@ -43,7 +43,7 @@ const Row = styled.div`
  `
 
 
-function CompanyInformation() {
+function CompanyInformation(props) {
     window.scrollTo(0, 0)
     return (<React.Fragment>
         {/**
@@ -141,8 +141,8 @@ function CompanyInformation() {
                     <Image src="" alt="Logo" style={{ marginTop: '10px' }} />
                     <Caption> Image of Company</Caption>
                 </Row>
-
                 <Row>
+
                     <Image src="" alt="Logo" style={{ marginTop: '10px' }} />
                     <Caption> Image of Company</Caption>
                 </Row>
