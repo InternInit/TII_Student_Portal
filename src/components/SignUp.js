@@ -136,7 +136,8 @@ class SignUp extends React.Component {
         this.state = {
           emailConfirmationVisible: false,
           email: "default@email.com",
-          username: ""
+          username: "",
+          password: ""
         }
     }
 
@@ -272,7 +273,7 @@ class SignUp extends React.Component {
 
     handleSubmit = async (values) => {
         let { username, password, email, name } = values
-        this.setState({email: email, username:username})
+        this.setState({email: email, username:username, password:password})
         try {
             const user = await Auth.signUp({
                 username,
@@ -299,6 +300,7 @@ class SignUp extends React.Component {
       const code = values.confirmationCode
       console.log(values.confirmationCode);
       const username = this.state.username
+      const password = this.state.password
       console.log(username)
       try {
         const callback = await Auth.confirmSignUp(
@@ -307,6 +309,12 @@ class SignUp extends React.Component {
         );
         console.log(callback)
         openSuccessfulNotification("Success", "You will be redirected to the dashboard in a bit.")
+        Auth.signOut()
+          .then(() => console.log("Signed Out"))
+          .catch(() => console.log("Could Not Sign Out"));
+
+        const user = await Auth.signIn(username, password);
+        this.props.newAuth();
         this.props.history.push("/dashboard")
       } catch (error) {
         console.log(error)
