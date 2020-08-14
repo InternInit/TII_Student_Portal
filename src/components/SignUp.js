@@ -5,6 +5,8 @@ import { Input, Button, Form, Popover, notification  } from 'antd';
 //Ant D Icons
 import { CloseOutlined } from "@ant-design/icons";
 
+import { EmailConfirmation } from './emailConfirmation';
+
 import { Auth } from 'aws-amplify';
 
 import { withRouter } from "react-router";
@@ -257,7 +259,7 @@ class SignUp extends React.Component {
             });
             this.props.history.push("/dashboard");
             //TODO: Redirect to email verification page.
-            //Open confirmation Modal maybe???
+            //Will eventually update confirmation to a modal
 
         } catch (error) {
             console.log('error signing up:', error);
