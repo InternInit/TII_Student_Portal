@@ -1,7 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Input, Button, Form, Popover  } from 'antd';
+import { Input, Button, Form, Popover, notification  } from 'antd';
 
+//Ant D Icons
+import { CloseOutlined } from "@ant-design/icons";
 
 import { Auth } from 'aws-amplify';
 
@@ -15,7 +17,8 @@ flex-direction:column;
 align-items:center;
 background-color:#fafafa;
 width:400px;
-height: 600px;
+height: auto;
+padding-bottom: 20px;
 box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 border-radius: 8px;
 `
@@ -70,10 +73,6 @@ const validationRules = (required, inputName, type, pattern) => [
   }
 ];
 
-const confirmPassValidationRules = () => [
-
-]
-
 const formItemProps = {
   username: {
     rules: validationRules(true, "username", "string")
@@ -98,8 +97,22 @@ const formItemProps = {
             },
           }),
         ]
+  },
+  email: {
+    rules: validationRules(true, "email", "email")
   }
 }
+
+const openNotification = (title, description) => {
+  notification.open({
+    message: title,
+    description: description,
+    icon: <CloseOutlined style={{ color: "red" }} />,
+    onClick: () => {
+      console.log('Notification Clicked!');
+    },
+  });
+};
 
 class SignUp extends React.Component {
     constructor(props) {
@@ -230,16 +243,9 @@ class SignUp extends React.Component {
             </Background >)
     }
 
-    formatPasswordValidateError = (errors: Array<string>) => {
-
-    }
-
     handleSubmit = async (values) => {
         let { username, password, email, name } = values
 
-        console.log(this.formatPasswordValidateError())
-
-        /*
         try {
             const user = await Auth.signUp({
                 username,
@@ -251,11 +257,13 @@ class SignUp extends React.Component {
             });
             this.props.history.push("/dashboard");
             //TODO: Redirect to email verification page.
+            //Open confirmation Modal maybe???
 
         } catch (error) {
             console.log('error signing up:', error);
+            openNotification("Signup Error", error.message)
         }
-        */
+
     }
 
 
