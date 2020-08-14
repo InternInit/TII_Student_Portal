@@ -2,10 +2,11 @@ import React from "react";
 import { Input } from "antd";
 import SearchCompanytab from "./SearchCompanytab.js";
 import { Collapse, Checkbox, Pagination, Form, Button } from "antd";
-import { Col as AntCol, Row as AntRow, Modal } from "antd";
+import { Col as AntCol, Row as AntRow, Modal, notification } from "antd";
 import QueueAnim from "rc-queue-anim";
 import { withRouter } from "react-router";
 import { values } from "underscore";
+import { CheckOutlined } from '@ant-design/icons';
 
 const { Search } = Input;
 const { Panel } = Collapse;
@@ -270,12 +271,17 @@ class AddCompanies extends React.Component {
   }
   confirmIndustry = () => {
     this.setState({ visible: false })
-
+    notification.open({
+      //notification
+      message: "Success!",
+      description: "Your applicant was sent.",
+      icon: <CheckOutlined style={{ color: "green" }} />
+    });
   }
 
   addConfirmIndustry = (event) => {
     let { sendingIndustries } = this.state;
-    this.setState({ sendingIndustries: event  })
+    this.setState({ sendingIndustries: event })
   }
 
 

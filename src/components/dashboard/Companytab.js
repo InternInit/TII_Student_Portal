@@ -1,8 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Collapse, Button, Modal } from 'antd';
+import { Collapse, Button, Modal, Input, notification } from 'antd';
 import { Link } from 'react-router-dom'
+import { CheckOutlined } from '@ant-design/icons';
+
 const { Panel } = Collapse;
+const { TextArea } = Input;
+
 
 
 const CompanyTitle = styled.div`
@@ -174,10 +178,18 @@ class DroppedView extends React.Component {
 
                 <Modal visible={visible}
                     title={"Send Custom Response to " + name}
-
+                    onCancel={this.cancelReponse}
                     onOk={this.submitResponse}
+
+                    okText="Submit"
+                    width='100vh'
                 >
-                    <p>Hi</p>
+
+                    <TextArea
+                        autoSize={{ minRows: 5, maxRows: 10 }}
+
+                    />
+
                 </Modal>
             </Row>
         )
@@ -187,6 +199,15 @@ class DroppedView extends React.Component {
     }
     submitResponse = () => {
         this.setState({ visible: false })
+        notification.open({
+            //notification
+            message: "Success!",
+            description: "Your response was sent successfully.",
+            icon: <CheckOutlined style={{ color: "green" }} />
+        });
     }
 
+    cancelReponse = () => {
+        this.setState({ visible: false })
+    }
 }
