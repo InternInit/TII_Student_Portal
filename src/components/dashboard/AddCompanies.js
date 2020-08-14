@@ -2,9 +2,10 @@ import React from "react";
 import { Input } from "antd";
 import SearchCompanytab from "./SearchCompanytab.js";
 import { Collapse, Checkbox, Pagination, Form, Button } from "antd";
-import { Col as AntCol, Row as AntRow } from "antd";
+import { Col as AntCol, Row as AntRow, Modal } from "antd";
 import QueueAnim from "rc-queue-anim";
 import { withRouter } from "react-router";
+import { values } from "underscore";
 
 const { Search } = Input;
 const { Panel } = Collapse;
@@ -71,7 +72,9 @@ class AddCompanies extends React.Component {
     this.myRef = React.createRef();
     this.state = {
       search: "",
+      visible: false,
       industries: industry,
+      sendingIndustries: " ",
       companies: [],
       page: "0",
       mergedIndustry:
@@ -85,7 +88,7 @@ class AddCompanies extends React.Component {
 
   render() {
     let { search, mergedIndustry } = this.state;
-    let { page } = this.state;
+    let { page, visible } = this.state;
 
     //Filtering function for industries
     let industrySearch = Info.filter(company => {
@@ -113,7 +116,7 @@ class AddCompanies extends React.Component {
             >
               <AntRow gutter={formGutter}>
                 <AntCol span={standardSpan}>
-                  <Checkbox.Group>
+                  <Checkbox.Group onChange={(value) => this.addConfirmIndustry(value)}>
                     <AntRow gutter={checkGutter}>
                       {industry.map(industry => (
                         <AntCol
@@ -140,13 +143,36 @@ class AddCompanies extends React.Component {
                 </AntCol>
               </AntRow>
               <AntRow>
-                <Button type="primary" style={{ margin: "auto" }}>
+                <Button type="primary" style={{ margin: "auto" }} onClick={this.showModal}>
                   Submit to Industries
                 </Button>
               </AntRow>
             </Panel>
           </Collapse>
         </Form>
+        {/**
+ * 
+ * MODAL FOR CONFIRMING INDUSTRIES
+ * 
+ */}
+        <Modal
+          visible={visible}
+          width={'100vh'}
+          onCancel={this.cancelModal}
+          onOk={this.confirmIndustry}
+          okText="Confirm"
+          title="Confirm Industries"
+        >
+          <p>Your application will be sent to the following industries:
+          </p>
+          <p style={{ whiteSpace: 'pre-line' }}>
+            {this.state.sendingIndustries}
+          </p>
+
+          {/**Map the industries here */}
+        </Modal>
+
+
         <h1 className="module-name" ref={this.myRef}>
           Search Companies
         </h1>
@@ -233,9 +259,28 @@ class AddCompanies extends React.Component {
           onChange={pageChange => this.handlePageChange(pageChange - 1)}
           pageSize={20}
         />
-      </div>
+      </div >
     );
   }
+
+  showModal = () => {
+    this.setState({ visible: true })
+  }
+  cancelModal = () => {
+    this.setState({ visible: false })
+  }
+  confirmIndustry = () => {
+    this.setState({ visible: false })
+
+  }
+
+  addConfirmIndustry = (event) => {
+    let { sendingIndustries } = this.state;
+
+    this.setState({ sendingIndustries: event + "\n" })
+
+  }
+
 
   componentDidMount = () => {
     for (let i = 1; i < 109; i++) {
