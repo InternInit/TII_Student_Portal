@@ -71,7 +71,7 @@ class Dashboard extends Component {
           >
             <PageContainer>
               <WelcomeHeader>Welcome {this.props.userInfo.username}</WelcomeHeader>
-              <DashboardNavBar version={this.props.version} />
+              <DashboardNavBar version={this.props.userInfo.version} />
               <hr />
               <ReactSwitch>
                 <Route
@@ -91,7 +91,7 @@ class Dashboard extends Component {
                 <Route
                   path="/dashboard/add-companies"
                   exact
-                  render={() => <AddCompanies version={this.props.version}/>}
+                  render={() => <AddCompanies version={this.props.userInfo.version}/>}
                 />
 
                 <Route

@@ -42,6 +42,7 @@ import {
   updateUserName,
   updateAvatar,
   updateEmail,
+  updateVersion,
   updateCompletionState,
   batchUpdateCompletionState,
   batchUpdateCompletionChecklist
@@ -97,6 +98,7 @@ const mapDispatchToProps = {
   updateUserName,
   updateAvatar,
   updateEmail,
+  updateVersion,
   updateCompletionState,
   batchUpdateCompletionState,
   batchUpdateCompletionChecklist
@@ -169,7 +171,8 @@ class App extends Component {
             "Bearer " + JSON.parse(JSON.stringify(this.inMemoryToken.token)),
           "Content-Type": "text/plain",
           "Completion-State": JSON.stringify(this.props.completionState),
-          "Completion-Checklist": JSON.stringify(this.props.completionChecklist)
+          "Completion-Checklist": JSON.stringify(this.props.completionChecklist),
+          "Version" : JSON.stringify(this.props.userInfo.version)
         },
         body: JSON.stringify(values) + "#" + origin
       })
@@ -184,6 +187,7 @@ class App extends Component {
 
   onSubmit = (values, origin) => {
     if (this.state.submissionState === true) {
+      this.props.updateVersion(this.props.userInfo.version + 1)
       fetch("/api/update_user_data", {
         method: "POST",
         headers: {
@@ -192,7 +196,7 @@ class App extends Component {
           "Content-Type": "text/plain",
           "Completion-State": JSON.stringify(this.props.completionState),
           "Completion-Checklist": JSON.stringify(this.props.completionChecklist),
-          "Version" : JSON.stringify(this.state.version + 1)
+          "Version" : JSON.stringify(this.props.userInfo.version)
         },
         body: JSON.stringify(values) + "#" + origin + "#" + "submit"
       })
@@ -217,7 +221,7 @@ class App extends Component {
 
   getJwt = () => {
     return new Promise((resolve, reject) => {
-      var app = this;
+      let app = this;
       function checkToken() {
         if (app.inMemoryToken === undefined) {
           setTimeout(() => {
@@ -304,11 +308,11 @@ class App extends Component {
           let recvCompletionChecklist = parsedRecv.completionChecklist;
           this.props.batchUpdateCompletionState(recvCompletionState);
           this.props.batchUpdateCompletionChecklist(recvCompletionChecklist);
-          this.setState({version: parsedRecv.version})
+          this.props.updateVersion(parsedRecv.version);
         } else {
           this.props.batchUpdateCompletionState([0, 0, 0, 0]);
           this.props.batchUpdateCompletionChecklist(defaultChecklist);
-          this.setState({version: 0})
+          this.props.updateVersion(0);
         }
       });
   };

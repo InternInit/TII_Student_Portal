@@ -19,6 +19,13 @@ export const updateEmail = email => {
   };
 };
 
+export const updateVersion = version => {
+  return {
+    type: "UPDATE_VERSION",
+    version
+  };
+};
+
 export const updateCompletionState = (page, completionPercentage) => {
   return {
     type: "UPDATE_COMPLETION_STATE",
