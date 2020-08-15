@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "../../App.css";
 import "./dashboard.css";
 import "antd/dist/antd.css";
-import { Menu } from "antd";
+import { Menu, message } from "antd";
 import { Link } from "react-router-dom";
 import { withRouter } from "react-router";
 
@@ -11,12 +11,10 @@ const MenuItemStyle = {
   fontSize: 24,
   fontFamily: "Lato",
   fontWeight: "bold",
-  textAlign: "center"
+  textAlign: "center",
 };
 
 class DashboardNavBar extends Component {
-
-
   /**
    *
    * Displaying Current Page
@@ -42,7 +40,6 @@ class DashboardNavBar extends Component {
       <React.Fragment>
         <Menu
           className="dashboard-nav"
-          onClick={this.handleClick}
           defaultSelectedKeys={[this.getCurrentKey()]}
           style={{ backgroundColor: "#F5F5F5" }}
           mode="horizontal"
@@ -62,10 +59,12 @@ class DashboardNavBar extends Component {
            * Link to Company Search Page
            *
            */}
-
-          <Menu.Item style={MenuItemStyle} disabled={this.props.version < 1} key="add-companies">
-            {window.scrollTo(0, 0)}
-            <Link to="/dashboard/add-companies">Add Companies</Link>
+          <Menu.Item
+            style={MenuItemStyle}
+            /*disabled={this.props.version < 1}*/
+            key="add-companies"
+          >
+              <Link to="/dashboard/add-companies">Add Companies</Link>
           </Menu.Item>
 
           {/**

@@ -91,7 +91,7 @@ class Dashboard extends Component {
                 <Route
                   path="/dashboard/add-companies"
                   exact
-                  component={AddCompanies}
+                  render={() => <AddCompanies version={this.props.version}/>}
                 />
 
                 <Route

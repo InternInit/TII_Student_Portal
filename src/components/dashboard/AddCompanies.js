@@ -1,4 +1,6 @@
 import React from "react";
+import styled from "styled-components";
+
 import { Input } from "antd";
 import SearchCompanytab from "./SearchCompanytab.js";
 import { Collapse, Checkbox, Pagination, Form, Button } from "antd";
@@ -7,6 +9,7 @@ import QueueAnim from "rc-queue-anim";
 import { withRouter } from "react-router";
 import { values } from "underscore";
 import { CheckOutlined } from '@ant-design/icons';
+import CompleteApplication from "./CompleteApplication.gif";
 
 const { Search } = Input;
 const { Panel } = Collapse;
@@ -16,6 +19,26 @@ const formGutter = [16, 16];
 const checkGutter = [8, 8];
 const standardSpan = 24;
 const thirdSpan = standardSpan / 3;
+
+const ModuleContainer = styled.div`
+  background: white;
+  border-radius: 10px;
+  padding: 3%;
+  margin-top: 2vh;
+
+  border: 1px solid #d9d9d9;
+  box-shadow: 1px 1px 5px -4px;
+`;
+
+const DescriptorText = styled.span`
+  float: left;
+  width: 100%
+  font-family: Lato;
+  font-weight: bold;
+  font-size: 24px;
+
+  color: black;
+`;
 
 const industry = [
   "General Business",
@@ -124,6 +147,12 @@ class AddCompanies extends React.Component {
 
     return (
       <div style={{ paddingBottom: "50%" }}>
+        {this.props.version < 1 ? <ModuleContainer>
+          <AntRow>
+          <DescriptorText style={{margin: "auto"}}>Please fill out your application first</DescriptorText>
+          </AntRow>
+        </ModuleContainer> : 
+        <React.Fragment>
         <h1 className="module-name">Apply to an Entire Industry</h1>
         <Form>
           <Collapse defaultActiveKey={["0"]} expandIconPosition="right">
@@ -278,6 +307,8 @@ class AddCompanies extends React.Component {
           onChange={pageChange => this.handlePageChange(pageChange - 1)}
           pageSize={20}
         />
+        </React.Fragment>}
+        
       </div >
     );
   }

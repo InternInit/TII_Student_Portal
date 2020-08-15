@@ -114,7 +114,7 @@ class App extends Component {
       submissionState: true,
 
       authorized: false,
-      version: 2
+      version: 0
     };
   }
 
