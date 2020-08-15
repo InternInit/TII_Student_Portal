@@ -87,6 +87,7 @@ class AddCompanies extends React.Component {
     this.handlePageChange = this.handlePageChange.bind(this);
   }
 
+
   render() {
     let { search, mergedIndustry } = this.state;
     let { page, visible } = this.state;
@@ -152,9 +153,9 @@ class AddCompanies extends React.Component {
           </Collapse>
         </Form>
         {/**
- * 
+ *
  * MODAL FOR CONFIRMING INDUSTRIES
- * 
+ *
  */}
         <Modal
           visible={visible}
@@ -244,10 +245,10 @@ class AddCompanies extends React.Component {
                 key={company.name}
                 name={company.name}
                 industry={company.industry}
-                logo="filler"
-                image="filler"
-                description="filler"
-                location="filler"
+                logo="asss"
+                image="aaaa"
+                description="abcd"
+                location="abcd"
                 companyid={company.id}
               />
             </div>
@@ -285,30 +286,17 @@ class AddCompanies extends React.Component {
   }
 
 
-  componentDidMount = () => {
-    for (let i = 1; i < 109; i++) {
-      fetch("https://rawg-video-games-database.p.rapidapi.com/games/" + i, {
-        method: "GET",
-        headers: {
-          "x-rapidapi-host": "rawg-video-games-database.p.rapidapi.com",
-          "x-rapidapi-key":
-            "24cc20e856msh686f79ed61d6951p112e88jsn8082d8031701",
-          entries: 109
-        }
-      })
-        .then(response => {
-          return response.json();
-        })
-        .then(result => {
-          this.state.companies.push(result);
-        })
-        .catch(err => {
-          console.log(err);
-        });
-    }
-    console.log(this.state.companies);
+  componentDidMount (){
+    this.getBusinesses()
   };
 
+  getBusinesses = () => {
+    fetch("/api/get_businesses")
+    .then(response => response.json())
+    .then(data => {
+      console.log(JSON.parse(data).hits.hits)
+    })
+  }
   //handles pagination bar change
   handlePageChange = pageChange => {
     this.setState({ page: pageChange * 20 });

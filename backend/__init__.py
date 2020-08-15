@@ -140,5 +140,10 @@ def logout():
     resp.delete_cookie("refresh_token")
     return resp
 
+@app.route("/api/get_businesses")
+def get_businesses():
+    req = requests.get("https://search-demo-matchmaker-cvpgbysybccgp4c3wmp6n3opau.us-east-1.es.amazonaws.com/business/_search", headers={'Content-Type' : 'application/json'}, data='{"query":{"match_all":{} },"size" : 50}')
+    return jsonify(req.text)
+
 if __name__ == "__main__":
     app.run(debug=True)

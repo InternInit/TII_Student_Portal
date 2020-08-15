@@ -127,7 +127,6 @@ class CLabel extends React.Component {
                   size={36}
                   shape="square"
                   icon={<TeamOutlined />}
-                  src={logo}
                   style={{ marginLeft: "8%", marginBottom: "14px" }}
                 />
 
