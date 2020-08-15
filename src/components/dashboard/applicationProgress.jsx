@@ -210,7 +210,7 @@ class ApplicationProgress extends Component {
                   style={{
                     fontSize: "16px",
                     fontWeight: "bold",
-                    width: "100%"
+                    width: "200px"
                   }}
                 >
                   <Link to="/apply">Build my Profile</Link>
@@ -244,11 +244,11 @@ class ApplicationProgress extends Component {
                 {this.props.completionState[index] < 1 ? (
                   Math.floor(this.props.completionState[index] * 100) + "%"
                 ) : (
-                  <CheckCircleTwoTone
-                    style={{ fontSize: "24px" }}
-                    twoToneColor="#52c41a"
-                  />
-                )}
+                    <CheckCircleTwoTone
+                      style={{ fontSize: "24px" }}
+                      twoToneColor="#52c41a"
+                    />
+                  )}
               </PercentHeader>
 
               {/**
