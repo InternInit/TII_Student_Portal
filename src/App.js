@@ -113,7 +113,8 @@ class App extends Component {
       page: 0,
       submissionState: true,
 
-      authorized: false
+      authorized: false,
+      version: 2
     };
   }
 
@@ -121,6 +122,7 @@ class App extends Component {
     console.log("mounted");
     this.newAuth();
     this.getCachedCompletionState();
+    console.log(this.state)
     window.addEventListener('resize', this.resize);
   }
 
@@ -189,7 +191,8 @@ class App extends Component {
             "Bearer " + JSON.parse(JSON.stringify(this.inMemoryToken.token)),
           "Content-Type": "text/plain",
           "Completion-State": JSON.stringify(this.props.completionState),
-          "Completion-Checklist": JSON.stringify(this.props.completionChecklist)
+          "Completion-Checklist": JSON.stringify(this.props.completionChecklist),
+          "Version" : JSON.stringify(this.state.version + 1)
         },
         body: JSON.stringify(values) + "#" + origin + "#" + "submit"
       })
@@ -298,9 +301,11 @@ class App extends Component {
           let recvCompletionChecklist = parsedRecv.completionChecklist;
           this.props.batchUpdateCompletionState(recvCompletionState);
           this.props.batchUpdateCompletionChecklist(recvCompletionChecklist);
+          this.setState({version: parsedRecv.version})
         } else {
           this.props.batchUpdateCompletionState([0, 0, 0, 0]);
           this.props.batchUpdateCompletionChecklist(defaultChecklist);
+          this.setState({version: 0})
         }
       });
   };
@@ -462,7 +467,7 @@ class App extends Component {
             <Navbar logout={this.logout} />
           </header>
           <ReactSwitch>
-            <Route path="/dashboard" render={() => <Dashboard />} />
+            <Route path="/dashboard" render={props => <Dashboard version={this.state.version}/>} />
             <Route path="/how-to-apply" exact component={HowtoApply} />
             <Route path="/edit-profile" exact component={EditProfile} />
             <Route path="/login" render={props => <LogIn newAuth={this.newAuth} />} />

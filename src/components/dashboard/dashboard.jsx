@@ -71,7 +71,7 @@ class Dashboard extends Component {
           >
             <PageContainer>
               <WelcomeHeader>Welcome {this.props.userInfo.username}</WelcomeHeader>
-              <DashboardNavBar />
+              <DashboardNavBar version={this.props.version} />
               <hr />
               <ReactSwitch>
                 <Route

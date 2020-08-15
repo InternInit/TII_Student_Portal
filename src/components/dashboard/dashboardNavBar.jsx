@@ -63,7 +63,7 @@ class DashboardNavBar extends Component {
            *
            */}
 
-          <Menu.Item style={MenuItemStyle} key="add-companies">
+          <Menu.Item style={MenuItemStyle} disabled={this.props.version < 1} key="add-companies">
             {window.scrollTo(0, 0)}
             <Link to="/dashboard/add-companies">Add Companies</Link>
           </Menu.Item>
