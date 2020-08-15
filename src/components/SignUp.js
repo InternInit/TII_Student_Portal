@@ -284,9 +284,6 @@ class SignUp extends React.Component {
                 }
             });
             this.setState({emailConfirmationVisible: true})
-            //this.props.history.push("/dashboard");
-            //TODO: Redirect to email verification page.
-            //Will eventually update confirmation to a modal
 
         } catch (error) {
             console.log('error signing up:', error);

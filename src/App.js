@@ -209,7 +209,10 @@ class App extends Component {
     Auth.signOut()
       .then(() => console.log("Signed Out"))
       .catch(() => console.log("Could Not Sign Out"));
+    if (window.location.href.split("/")[3] !== "login") {
+      window.location.href = window.location.href.split("/").slice(0, 3).join("/") + "/login"
 
+    }
   };
 
   getJwt = () => {

@@ -1,8 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Input, Button, Form } from 'antd';
+import { Input, Button, Form, notification } from 'antd';
 
 import { Link } from 'react-router-dom';
+
+//Ant D Icons
+import {
+  CloseOutlined,
+  CheckOutlined
+} from "@ant-design/icons";
 
 import { Auth } from 'aws-amplify';
 
@@ -60,6 +66,28 @@ font-weight:500;
 width:80%;
 margin-top:-19px;
 `
+const openSuccessfulNotification = (title, description) => {
+  notification.open({
+    message: title,
+    description: description,
+    icon: <CheckOutlined style={{ color: "green" }} />,
+    onClick: () => {
+      console.log('Notification Clicked!');
+    },
+  });
+};
+
+const openUnsuccessfulNotification = (title, description) => {
+  notification.open({
+    message: title,
+    description: description,
+    icon: <CloseOutlined style={{ color: "red" }} />,
+    onClick: () => {
+      console.log('Notification Clicked!');
+    },
+  });
+};
+
 class LogIn extends React.Component {
     constructor(props) {
         super(props);
@@ -116,11 +144,13 @@ class LogIn extends React.Component {
         try {
             const user = await Auth.signIn(username, password);
             this.props.newAuth();
+            openSuccessfulNotification("Success", "You will be redirected to the dashboard in a bit.")
 
             this.props.history.push("/dashboard");
 
         } catch (error) {
             console.log('error signing in:', error);
+            openUnsuccessfulNotification("Login Error", error.message)
         }
 
     }
