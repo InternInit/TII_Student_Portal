@@ -91,6 +91,7 @@ class AddCompanies extends React.Component {
 
 
     componentDidMount (){
+      Info = [];
       this.getBusinesses()
     };
 
