@@ -737,7 +737,7 @@ class PageInternshipInformation extends Component {
         let parsedRecv = JSON.parse(data);
         let parsedData = parsedRecv.formData;
 
-        if (parsedData !== "No Info") {
+        if (parsedRecv !== "No Info") {
           console.log(parsedData)
           try {
             parsedData["Starting/Ending Dates"] = [
@@ -758,7 +758,7 @@ class PageInternshipInformation extends Component {
           } catch (e) {
             console.log(e);
           }
-          
+
           this.setState({ loaded: true });
           this.formRef.current.setFieldsValue(parsedData);
         }

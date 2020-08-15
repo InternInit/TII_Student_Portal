@@ -131,18 +131,18 @@ class PageReferences extends Component {
                           key={field.key}
                         >
                           {/**
-                          * 
+                          *
                           * Minus Button removes Reference when clicked
-                          * 
+                          *
                           */}
                           {this.renderMinusButton(fields, field, remove)}
 
 
 
                           {/**
-                            * 
+                            *
                             * First Row of Reference Box
-                            * 
+                            *
                             */}
                           <Row gutter={formGutter}>
                             <Col span={halfSpan}>
@@ -176,9 +176,9 @@ class PageReferences extends Component {
 
 
                           {/**
-                              * 
+                              *
                               * Second Row of Reference Box
-                              * 
+                              *
                               */}
 
                           <Row gutter={formGutter}>
@@ -212,9 +212,9 @@ class PageReferences extends Component {
 
 
                           {/**
-                           * 
+                           *
                            * School Contact (EMAIL, PHONE NUMBER )
-                           * 
+                           *
                            */}
                           <Row gutter={formGutter}>
                             <Col span={halfSpan}>
@@ -288,9 +288,9 @@ class PageReferences extends Component {
   }
 
   /**
- * 
+ *
  * Removing a Reference
- * 
+ *
  */
   renderMinusButton = (fields, field, remove) => {
     return fields.length > 1 ? (
@@ -309,9 +309,9 @@ class PageReferences extends Component {
 
 
   /**
- * 
+ *
  * When a Reference is added
- * 
+ *
  */
   onValuesChange = () => {
     let allValues = this.formRef.current.getFieldsValue()
@@ -340,9 +340,9 @@ class PageReferences extends Component {
 
 
   /**
-   * 
+   *
    * When "Submit" Button is pressed
-   * 
+   *
    */
   onFinish = values => {
     console.log("FinishRefPage:", values);
@@ -352,9 +352,9 @@ class PageReferences extends Component {
   };
 
   /**
- * 
+ *
  * Updates User data
- * 
+ *
  */
   updateFieldData = async () => {
     const values = await this.formRef.current.getFieldsValue();
@@ -364,9 +364,9 @@ class PageReferences extends Component {
   };
 
   /**
- * 
+ *
  * When "Back" Button is pressed
- * 
+ *
  */
   backHandler = () => {
     this.props.updateData(this.formRef.current.getFieldsValue(), "3");
@@ -375,9 +375,9 @@ class PageReferences extends Component {
 
 
   /**
- * 
+ *
  * Changing routes (React Router)
- * 
+ *
  */
   routeChange = path => {
     console.log(path);
@@ -386,9 +386,9 @@ class PageReferences extends Component {
   };
 
   /**
-   * 
+   *
    * Retrieving user data
-   * 
+   *
    */
   getUserData = async () => {
     let token = await this.props.getJwt();
@@ -403,7 +403,7 @@ class PageReferences extends Component {
       .then(data => {
         let parsedRecv = JSON.parse(data);
         let parsedData = parsedRecv.formData;
-        if (parsedData !== "No Info") {
+        if (parsedRecv !== "No Info") {
           try {
             this.setState({ loaded: true });
             this.formRef.current.setFieldsValue(parsedData);

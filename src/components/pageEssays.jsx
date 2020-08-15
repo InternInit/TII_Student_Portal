@@ -35,9 +35,9 @@ const mapStateToProps = state => {
 };
 
 /**
- * 
+ *
  * Updates User states
- * 
+ *
  */
 const mapDispatchToProps = {
   updateCompletionState,
@@ -73,9 +73,9 @@ class PageEssays extends React.Component {
     return (
       <div style={{ marginTop: "40px", width: "100%" }}>
         {  /**
-               * 
+               *
                * Spinning Wheel while information loads
-               * 
+               *
                */}
         <Spin size="large" spinning={!this.state.loaded}>
           <h1>Written Work</h1>
@@ -85,9 +85,9 @@ class PageEssays extends React.Component {
           </p>
 
           {  /**
-               * 
+               *
                * Written Work Form
-               * 
+               *
                */}
           <Form
             name="pageEssays"
@@ -104,9 +104,9 @@ class PageEssays extends React.Component {
 
 
             {  /**
-               * 
+               *
                * Industry Response
-               * 
+               *
                */}
             <Form.Item
               key="industryEssay"
@@ -122,9 +122,9 @@ class PageEssays extends React.Component {
 
 
             {  /**
-               * 
+               *
                * Leadership Question
-               * 
+               *
                */}
             <Form.Item
               key="leadership"
@@ -140,9 +140,9 @@ class PageEssays extends React.Component {
 
 
             {  /**
-               * 
+               *
                * "Additional Information
-               * 
+               *
                */}
             <Form.Item
               key="extra"
@@ -166,9 +166,9 @@ class PageEssays extends React.Component {
 
 
               {  /**
-               * 
+               *
                * Cover Letter Upload
-               * 
+               *
                */}
               <Form.Item
                 name="Cover Letter"
@@ -191,9 +191,9 @@ class PageEssays extends React.Component {
 
 
               {  /**
-               * 
+               *
                * Portfolio Upload
-               * 
+               *
                */}
               <Form.Item
                 name="Portfolio"
@@ -216,9 +216,9 @@ class PageEssays extends React.Component {
             </div>
 
             {  /**
-               * 
+               *
                * "Back/Save and Continue" Buttons
-               * 
+               *
                */}
             <Form.Item>
               <Button
@@ -246,9 +246,9 @@ class PageEssays extends React.Component {
   };
 
   /**
-   * 
+   *
    * Requires input on form items
-   * 
+   *
    */
   validationRules = (inputName, type) => [
     {
@@ -260,9 +260,9 @@ class PageEssays extends React.Component {
 
 
   /**
-   * 
+   *
    * Updates user data when values are changes
-   * 
+   *
    */
   onValuesChange = () => {
     let allValues = this.formRef.current.getFieldsValue();
@@ -299,9 +299,9 @@ class PageEssays extends React.Component {
   };
 
   /**
-* 
+*
 * On Finish Function
-* 
+*
 */
   onFinish = values => {
     console.log("FinishedPageEssays:", values);
@@ -323,9 +323,9 @@ class PageEssays extends React.Component {
 
 
   /**
-* 
+*
 * Upload Cover Letter
-* 
+*
 */
   customRequestCL = ({ onSuccess, onError, file }) => {
     setTimeout(() => {
@@ -340,9 +340,9 @@ class PageEssays extends React.Component {
 
 
   /**
-* 
+*
 * File Upload Function
-* 
+*
 */
   onChangeCL = info => {
     const { status } = info.file;
@@ -364,9 +364,9 @@ class PageEssays extends React.Component {
   };
 
   /**
-   * 
+   *
    * Changing Portfolio?
-   * 
+   *
    */
   customRequestPortfolio = ({ onSuccess, onError, file }) => {
     setTimeout(() => {
@@ -381,9 +381,9 @@ class PageEssays extends React.Component {
 
 
   /**
-   * 
+   *
    * File Upload function
-   * 
+   *
    */
   onChangePortfolio = info => {
     const { status } = info.file;
@@ -406,9 +406,9 @@ class PageEssays extends React.Component {
 
 
   /**
-* 
+*
 * Get User Data
-* 
+*
 */
   getUserData = async () => {
     let token = await this.props.getJwt();
@@ -423,7 +423,7 @@ class PageEssays extends React.Component {
       .then(data => {
         let parsedRecv = JSON.parse(data);
         let parsedData = parsedRecv.formData;
-        if (parsedData !== "No Info") {
+        if (parsedRecv !== "No Info") {
           try {
             console.log(parsedData);
             this.setState({ loaded: true });
@@ -455,9 +455,9 @@ class PageEssays extends React.Component {
 
 
   /**
-* 
+*
 * Route Change (React Router)
-* 
+*
 */
   routeChange = path => {
     console.log(path);
