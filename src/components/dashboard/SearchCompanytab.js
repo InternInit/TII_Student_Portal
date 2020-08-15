@@ -126,7 +126,7 @@ class CLabel extends React.Component {
                 <Avatar
                   size={36}
                   shape="square"
-                  icon={<TeamOutlined />}
+                  src={this.props.logo}
                   style={{ marginLeft: "8%", marginBottom: "14px" }}
                 />
 

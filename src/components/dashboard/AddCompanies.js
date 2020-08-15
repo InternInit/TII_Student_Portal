@@ -32,7 +32,7 @@ const industry = [
   "Marketing"
 ];
 
-let Info = [
+let Businesses = [
   { name: "Apple", industry: "Computer Science" },
   { name: "Facebook", industry: "Computer Science" },
   { name: "Github", industry: "Computer Science" },
@@ -67,6 +67,8 @@ let Info = [
   { name: "lets GO", industry: "Political" }
 ];
 
+let Info = [];
+
 class AddCompanies extends React.Component {
   constructor(props) {
     super(props);
@@ -88,6 +90,20 @@ class AddCompanies extends React.Component {
   }
 
 
+    componentDidMount (){
+      this.getBusinesses()
+    };
+
+    getBusinesses = () => {
+      fetch("/api/get_businesses")
+      .then(response => response.json())
+      .then(data => {
+        JSON.parse(data).hits.hits.forEach(item => Info.push(item._source));
+        console.log(Info)
+      })
+
+    }
+
   render() {
     let { search, mergedIndustry } = this.state;
     let { page, visible } = this.state;
@@ -104,6 +120,7 @@ class AddCompanies extends React.Component {
     let filteredInfo = industrySearch.filter(company => {
       return company.name.toLowerCase().indexOf(search.toLowerCase()) !== -1;
     });
+
     return (
       <div style={{ paddingBottom: "50%" }}>
         <h1 className="module-name">Apply to an Entire Industry</h1>
@@ -245,10 +262,10 @@ class AddCompanies extends React.Component {
                 key={company.name}
                 name={company.name}
                 industry={company.industry}
-                logo="asss"
-                image="aaaa"
-                description="abcd"
-                location="abcd"
+                logo={company.avatar}
+                image={company.avatar}
+                description={company.description}
+                location={company.location}
                 companyid={company.id}
               />
             </div>
@@ -285,18 +302,6 @@ class AddCompanies extends React.Component {
     this.setState({ sendingIndustries: event })
   }
 
-
-  componentDidMount (){
-    this.getBusinesses()
-  };
-
-  getBusinesses = () => {
-    fetch("/api/get_businesses")
-    .then(response => response.json())
-    .then(data => {
-      console.log(JSON.parse(data).hits.hits)
-    })
-  }
   //handles pagination bar change
   handlePageChange = pageChange => {
     this.setState({ page: pageChange * 20 });
