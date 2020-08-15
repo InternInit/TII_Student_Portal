@@ -122,8 +122,10 @@ class AddCompanies extends React.Component {
       fetch("/api/get_businesses")
       .then(response => response.json())
       .then(data => {
-        JSON.parse(data).hits.hits.forEach(item => Info.push(item._source));
-        console.log(Info)
+        let companyArray = [];
+        JSON.parse(data).hits.hits.forEach(item => companyArray.push(item._source));
+        this.setState({ companies : companyArray })
+        console.log(this.state.companies)
       })
 
     }
@@ -133,7 +135,7 @@ class AddCompanies extends React.Component {
     let { page, visible } = this.state;
 
     //Filtering function for industries
-    let industrySearch = Info.filter(company => {
+    let industrySearch = this.state.companies.filter(company => {
       return (
         mergedIndustry.toLowerCase().indexOf(company.industry.toLowerCase()) !==
         -1
@@ -151,7 +153,7 @@ class AddCompanies extends React.Component {
           <AntRow>
           <DescriptorText style={{margin: "auto"}}>Please fill out your application first</DescriptorText>
           </AntRow>
-        </ModuleContainer> : 
+        </ModuleContainer> :
         <React.Fragment>
         <h1 className="module-name">Apply to an Entire Industry</h1>
         <Form>
@@ -308,7 +310,7 @@ class AddCompanies extends React.Component {
           pageSize={20}
         />
         </React.Fragment>}
-        
+
       </div >
     );
   }
