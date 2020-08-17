@@ -9,6 +9,8 @@ const ModuleContainer = styled.div`
   padding: 3%;
   flex-direction:column;
   margin-top:10px;
+
+  min-width:400px;
 `;
 const Image = styled.img`
 background-color:#d9d9d9;
@@ -167,7 +169,7 @@ class CompanyInformation extends React.Component {
                     <Row style={{
                         display: 'flex',
                         flexDirection: 'row',
-                        justifyContent: 'center',
+                        justifyContent: 'space-evenly',
                         marginTop: '45px',
                         marginBottom: '45px'
                     }}>
@@ -252,7 +254,7 @@ class CompanyInformation extends React.Component {
                       </Header>
                         <Caption>
                             {info.starttime} - {info.endtime}
-                      </Caption>
+                        </Caption>
                     </Row>
 
 
@@ -314,7 +316,7 @@ class CompanyInformation extends React.Component {
                       </Header>
                         <Caption>
                             {info.email}
-                      </Caption>
+                        </Caption>
                     </Row>
 
 
@@ -329,7 +331,7 @@ class CompanyInformation extends React.Component {
                       </Header>
                         <Caption>
                             {info.phonenumber}
-                      </Caption>
+                        </Caption>
                     </Row>
 
 

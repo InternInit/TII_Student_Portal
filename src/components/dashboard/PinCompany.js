@@ -2,17 +2,24 @@ import React, { Component } from "react";
 import QueueAnim from "rc-queue-anim";
 import Companytab from "./Companytab.js";
 
+import { Pagination } from 'antd'
 
 class PinCompany extends Component {
   constructor(props) {
     super(props);
+
+    this.handlePageChange = this.handlePageChange.bind(this);
+
     this.state = {
-      pinnedCompanies: []
+      pinnedCompanies: [],
+      page: '0'
     };
   }
 
 
   render() {
+    let { page } = this.state;
+    let { pinnedBusinesses, updateBusinessStatus } = this.props;
     return (
       <React.Fragment>
         {/**
@@ -28,21 +35,33 @@ class PinCompany extends Component {
           type={["right", "left"]}
           ease={["easeOutQuart", "easeInOutQuart"]}
         >
-          {this.props.pinnedBusinesses.map((pinnedCompany, index) => (
+          {pinnedBusinesses.slice(page, page + 5).map((pinnedCompany, index) => (
             <div style={{ marginBottom: "12px" }} key={index}>
               <Companytab
                 name={pinnedCompany.name}
                 industry={pinnedCompany.industry}
                 avatar={pinnedCompany.avatar}
                 companyid={pinnedCompany.id}
-                updateBusinessStatus={this.props.updateBusinessStatus}
+                updateBusinessStatus={updateBusinessStatus}
               />
             </div>
           ))}
         </QueueAnim>
+        <Pagination
+          current={parseInt(page) + 1}
+          total={pinnedBusinesses.length}
+          onChange={pageChange => this.handlePageChange(pageChange - 1)}
+          pageSize={5}
+        />
       </React.Fragment>
     );
   }
+
+  handlePageChange = (pageChange) => {
+    this.setState({ page: pageChange * 5 });
+  }
+
+
 }
 
 export default PinCompany;

@@ -177,7 +177,7 @@ class App extends Component {
           "Content-Type": "text/plain",
           "Completion-State": JSON.stringify(this.props.completionState),
           "Completion-Checklist": JSON.stringify(this.props.completionChecklist),
-          "Version" : JSON.stringify(this.props.userInfo.version)
+          "Version": JSON.stringify(this.props.userInfo.version)
         },
         body: JSON.stringify(values) + "#" + origin
       })
@@ -201,7 +201,7 @@ class App extends Component {
           "Content-Type": "text/plain",
           "Completion-State": JSON.stringify(this.props.completionState),
           "Completion-Checklist": JSON.stringify(this.props.completionChecklist),
-          "Version" : JSON.stringify(this.props.userInfo.version)
+          "Version": JSON.stringify(this.props.userInfo.version)
         },
         body: JSON.stringify(values) + "#" + origin + "#" + "submit"
       })
@@ -268,8 +268,8 @@ class App extends Component {
       method: "POST",
       headers: {
         Authorization: "Bearer " + JSON.parse(JSON.stringify(token)),
-          "Content-Type": "text/plain",
-          "businessId" : JSON.parse(JSON.stringify(businessId))
+        "Content-Type": "text/plain",
+        "businessId": JSON.parse(JSON.stringify(businessId))
       },
       body: status
     })
@@ -289,7 +289,7 @@ class App extends Component {
       method: "POST",
       headers: {
         Authorization: "Bearer " + JSON.parse(JSON.stringify(token)),
-          "Content-Type": "text/plain"
+        "Content-Type": "text/plain"
       },
       body: JSON.parse(JSON.stringify("Pinned"))
     })
@@ -307,14 +307,14 @@ class App extends Component {
       method: "POST",
       headers: {
         Authorization: "Bearer " + JSON.parse(JSON.stringify(token)),
-          "Content-Type": "text/plain"
+        "Content-Type": "text/plain"
       },
       body: JSON.parse(JSON.stringify("*"))
     })
       .then(response => response.json())
       .then(data => {
         let parsedData = JSON.parse(data)
-        this.matchBusinessesActive(JSON.stringify(parsedData[0]),parsedData[1])
+        this.matchBusinessesActive(JSON.stringify(parsedData[0]), parsedData[1])
       });
   }
 
@@ -325,7 +325,7 @@ class App extends Component {
     })
       .then(response => response.json())
       .then(data => {
-        try{
+        try {
           let matchedBusinessesArray = [];
           JSON.parse(data).hits.hits.forEach(item => matchedBusinessesArray.push(item._source));
           this.props.updatePinnedBusinesses(matchedBusinessesArray)
@@ -343,10 +343,10 @@ class App extends Component {
     })
       .then(response => response.json())
       .then(data => {
-        try{
+        try {
           let matchedBusinessesArray = [];
           JSON.parse(data).hits.hits.forEach(item => matchedBusinessesArray.push(item._source));
-          matchedBusinessesArray.forEach((item,index) => item.status = statusList[item.id])
+          matchedBusinessesArray.forEach((item, index) => item.status = statusList[item.id])
           console.log(matchedBusinessesArray)
           this.props.updateActiveApplications(matchedBusinessesArray)
         } catch (e) {

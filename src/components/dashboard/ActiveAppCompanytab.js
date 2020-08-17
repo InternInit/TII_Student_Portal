@@ -51,6 +51,15 @@ function ActiveAppCompanytab(props) {
       break;
     default:
   }
+
+  let companyName = "";
+  if (name.length >= 44) {
+    companyName = name.substring(0, 44) + "..."
+  }
+  else {
+    companyName = name;
+  }
+
   return (
     <QueueAnim type="scale" ease={["easeOutQuart", "easeInOutQuart"]}>
       {mapping.map((item, index) => (
@@ -82,7 +91,9 @@ function ActiveAppCompanytab(props) {
                   alignItems: "flex-start"
                 }}
               >
-                <CompanyTitle>{name}</CompanyTitle>
+                <CompanyTitle>
+                  {companyName}
+                </CompanyTitle>
                 <JobTitle style={{ paddingTop: "4px" }}>{industry}</JobTitle>
               </Col>
             </div>

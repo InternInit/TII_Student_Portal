@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Collapse, Button, Modal, Input, notification, Avatar } from 'antd';
+import { Collapse, Button, Modal, Input, notification, Avatar, message } from 'antd';
 import { Link } from 'react-router-dom'
 import { CheckOutlined, TeamOutlined } from '@ant-design/icons';
 
@@ -15,15 +15,17 @@ font-weight:bold;
 color:black;
 align-items: center;
 height:29px;
+margin-top:6px;
 `
 
 const JobTitle = styled.div`
 font-size:14px;
 font-weight:500;
 color:#262626;
-padding-top:2px;
+padding-top:1px;
 margin-bottom:4px;
-`
+
+ `
 
 
 const Col = styled.div`
@@ -37,23 +39,13 @@ flex-direction:row;
 `
 
 
-const Image = styled.img`
-width:36px;
-height:36px;
-object-fit:contain;
-background-color:blue;
-margin-left:3.5%;
-margin-bottom:24px;
-border-radius:6px;
-`
-
 
 
 class Companytab extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            label: <CLabel name={this.props.name} industry={this.props.industry} companyid={this.props.companyid} avatar = {this.props.avatar}/>,
+            label: <CLabel name={this.props.name} industry={this.props.industry} companyid={this.props.companyid} avatar={this.props.avatar} />,
 
         }
     }
@@ -83,7 +75,7 @@ class Companytab extends React.Component {
                     {/**
                      * Dropdown
                      */}
-                    <DroppedView companyid={this.props.companyid} name={this.props.name} updateBusinessStatus={this.props.updateBusinessStatus}/>
+                    <DroppedView companyid={this.props.companyid} name={this.props.name} updateBusinessStatus={this.props.updateBusinessStatus} />
                 </Panel>
             </Collapse >
         )
@@ -208,12 +200,7 @@ class DroppedView extends React.Component {
     }
 
     submitResponse = () => {
-        notification.open({
-            //notification
-            message: "Success!",
-            description: "Your application was successfully sent.",
-            icon: <CheckOutlined style={{ color: "green" }} />
-        });
+        message.success("Your application was sent successfully.")
         this.props.updateBusinessStatus(this.props.companyid, "Pending")
     }
 

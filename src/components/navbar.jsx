@@ -32,7 +32,8 @@ const menuStyle = {
 
 const menuItemStyle = {
   marginLeft: "20px",
-  marginRight: "20px"
+  marginRight: "20px",
+  fontWeight: '500'
 };
 
 const avatarStyle = {

@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import ActiveAppCompanytab from './ActiveAppCompanytab.js'
 import QueueAnim from "rc-queue-anim";
 
+import { Pagination } from 'antd'
+
 
 // BUG: THIS NEEDS TO BE REPLACED BY THE REACT STORE
 let pinnedCompanies = [
@@ -17,9 +19,13 @@ class ActiveApplications extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            page: '0'
         };
+        this.handlePageChange = this.handlePageChange.bind(this);
     }
     render() {
+        let { page } = this.state;
+        let { activeApplications } = this.props;
         return (
             <React.Fragment>
                 <h1 className="module-name" style={{ marginTop: "70px" }}>Active Application</h1>
@@ -27,7 +33,7 @@ class ActiveApplications extends Component {
                     type={["right", "left"]}
                     ease={["easeOutQuart", "easeInOutQuart"]}
                 >
-                    {this.props.activeApplications.filter(apps => apps.status !== "Pinned").map((pinnedCompany, index) => (
+                    {activeApplications.slice(page, page + 6).filter(apps => apps.status !== "Pinned").map((pinnedCompany, index) => (
                         <div style={{ marginBottom: "12px" }} key={index}>
 
                             <ActiveAppCompanytab
@@ -41,8 +47,17 @@ class ActiveApplications extends Component {
                         </div>
                     ))}
                 </QueueAnim>
+                <Pagination
+                    current={parseInt(page) + 1}
+                    total={activeApplications.length}
+                    onChange={pageChange => this.handlePageChange(pageChange - 1)}
+                    pageSize={6}
+                />
             </React.Fragment>
         );
+    }
+    handlePageChange = (pageChange) => {
+        this.setState({ page: pageChange * 6 });
     }
 }
 

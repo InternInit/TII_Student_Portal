@@ -9,17 +9,17 @@ import QueueAnim from "rc-queue-anim";
 import { Link } from "react-router-dom";
 
 const ChecklistBorder = styled(BorderOutlined)`
-  font-size: 18px;
+  font-size: 16px;
   font-weight: bold;
 `;
 
 const Checked = styled(CheckOutlined)`
-  fontsize: 18;
+  fontsize: 16px;
   color: green;
 `;
 
 const ChecklistText = styled.p`
-  font-size: 18px;
+  font-size: 16px;
 `;
 
 const CheckedText = styled.p`
@@ -28,17 +28,17 @@ const CheckedText = styled.p`
 
 //Wrapper component
 const ChecklistItem = styled.p`
-  font-size: 18px;
+  font-size: 16px;
   align-items: center;
-  line-height: 18px;
+  line-height: 16px;
   transition: 0.2s;
   &:hover {
     ${ChecklistBorder} {
-      font-size: 24px;
+      font-size: 18px;
       color: #1890ff;
+      line-height:18px;
       cursor: pointer;
-      font-size: 24px;
-      transition: 0.2s;
+       transition: 0.2s;
     }
     ${Checked} {
       cursor: default;
@@ -46,7 +46,8 @@ const ChecklistItem = styled.p`
     ${ChecklistText} {
       transition: 0.2s;
       color: #1890ff;
-      font-size: 24px;
+      font-size: 18px;
+      
     }
   }
 `;
@@ -117,23 +118,23 @@ export default function Checklist(props) {
                   <CheckedText>{item.key}</CheckedText>
                 </div>
               ) : (
-                <div>
-                  <Link
-                    to={`/apply/${props.linkTo}`}
-                    style={{ color: "inherit" }}
-                  >
-                    <ChecklistBorder
-                      style={{
-                        float: "left",
-                        marginRight: "7px",
-                        marginLeft: "20px",
-                        paddingRight: "6px"
-                      }}
-                    />{" "}
-                    <ChecklistText>{item.key}</ChecklistText>
-                  </Link>
-                </div>
-              )}
+                  <div>
+                    <Link
+                      to={`/apply/${props.linkTo}`}
+                      style={{ color: "inherit" }}
+                    >
+                      <ChecklistBorder
+                        style={{
+                          float: "left",
+                          marginRight: "7px",
+                          marginLeft: "20px",
+                          paddingRight: "6px"
+                        }}
+                      />{" "}
+                      <ChecklistText>{item.key}</ChecklistText>
+                    </Link>
+                  </div>
+                )}
             </ChecklistItem>
           </div>
         ))}
