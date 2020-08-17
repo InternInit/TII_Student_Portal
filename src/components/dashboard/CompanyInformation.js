@@ -42,7 +42,6 @@ const Row = styled.div`
  align-items:flex-start;
  `
 
-let info = {}
 
 
 class CompanyInformation extends React.Component {
@@ -80,7 +79,7 @@ class CompanyInformation extends React.Component {
     }
 
     render() {
-        let { info } = this.statel
+        let { info } = this.state
         if (info === null) {
             return null;
         }
