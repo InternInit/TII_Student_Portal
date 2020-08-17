@@ -328,6 +328,7 @@ class App extends Component {
           JSON.parse(data).hits.hits.forEach(item => matchedBusinessesArray.push(item._source));
           this.props.updatePinnedBusinesses(matchedBusinessesArray)
         } catch (e) {
+          console.log(data)
           console.log(e)
         }
       });
@@ -347,6 +348,7 @@ class App extends Component {
           console.log(matchedBusinessesArray)
           this.props.updateActiveApplications(matchedBusinessesArray)
         } catch (e) {
+          console.log(data)
           console.log(e)
         }
       });
