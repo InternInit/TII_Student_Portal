@@ -27,7 +27,7 @@ class ActiveApplications extends Component {
                     type={["right", "left"]}
                     ease={["easeOutQuart", "easeInOutQuart"]}
                 >
-                    {pinnedCompanies.map((pinnedCompany, index) => (
+                    {this.props.activeApplications.filter(apps => apps.status !== "Pinned").map((pinnedCompany, index) => (
                         <div style={{ marginBottom: "12px" }} key={index}>
 
                             <ActiveAppCompanytab

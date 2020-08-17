@@ -56,6 +56,8 @@ class Dashboard extends Component {
     };
   }
 
+
+
   render() {
     return (
       <React.Fragment>
@@ -84,14 +86,14 @@ class Dashboard extends Component {
 
                 <Route path="/dashboard/my-internships" exact>
                   <ApplicationProgress />
-                  <PinCompany />
-                  <ActiveApplications />
+                  <PinCompany pinnedBusinesses={this.props.userInfo.pinnedBusinesses}/>
+                  <ActiveApplications activeApplications={this.props.userInfo.activeApplications}/>
                 </Route>
 
                 <Route
                   path="/dashboard/add-companies"
                   exact
-                  render={() => <AddCompanies version={this.props.userInfo.version}/>}
+                  render={() => <AddCompanies version={this.props.userInfo.version} updateBusinessStatus={this.props.updateBusinessStatus}/>}
                 />
 
                 <Route

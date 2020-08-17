@@ -118,6 +118,8 @@ class AddCompanies extends React.Component {
       this.getBusinesses()
     };
 
+
+
     getBusinesses = () => {
       fetch("/api/get_businesses")
       .then(response => response.json())
@@ -125,7 +127,6 @@ class AddCompanies extends React.Component {
         let companyArray = [];
         JSON.parse(data).hits.hits.forEach(item => companyArray.push(item._source));
         this.setState({ companies : companyArray })
-        console.log(this.state.companies)
       })
 
     }
@@ -167,7 +168,7 @@ class AddCompanies extends React.Component {
             >
               <AntRow gutter={formGutter}>
                 <AntCol span={standardSpan}>
-                  <Checkbox.Group onChange={(value) => this.addConfirmIndustry(value)}>
+                  <Checkbox.Group onChange={(value) => {this.addConfirmIndustry(value)}}>
                     <AntRow gutter={checkGutter}>
                       {industry.map(industry => (
                         <AntCol
@@ -251,7 +252,7 @@ class AddCompanies extends React.Component {
               <AntRow gutter={formGutter}>
                 <AntCol span={standardSpan}>
                   <Checkbox.Group
-                    onChange={value => this.filterIndustries(value)}
+                    onChange={value => {this.filterIndustries(value)}}
                   >
                     <AntRow gutter={checkGutter}>
                       {industry.map(industry => (
@@ -299,6 +300,7 @@ class AddCompanies extends React.Component {
                 description={company.description}
                 location={company.location}
                 companyid={company.id}
+                updateBusinessStatus={this.props.updateBusinessStatus}
               />
             </div>
           ))}

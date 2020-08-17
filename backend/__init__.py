@@ -12,6 +12,7 @@ app = Flask(__name__)
 
 cacheApiUrl = "https://jzvyvnvxld.execute-api.us-east-1.amazonaws.com/{stage}/cache"
 uploadApiUrl = "https://jzvyvnvxld.execute-api.us-east-1.amazonaws.com/{stage}/upload"
+businessApiUrl = "https://jzvyvnvxld.execute-api.us-east-1.amazonaws.com/{stage}/business"
 
 testUrl = "https://webhook.site/2d399065-ea56-45ea-b6a0-e19da9c75caa"
 
@@ -26,6 +27,7 @@ logoutUrl = ""
 if(app.config.get("ENV") == "development"):
     cacheApiUrl = cacheApiUrl.format(stage="dev")
     uploadApiUrl = uploadApiUrl.format(stage="dev")
+    businessApiUrl = businessApiUrl.format(stage="dev")
 elif(app.config.get("ENV") == "production"):
     sentry_sdk.init(
     dsn="https://8537ba8551334943a20d5b615f267b36@o412197.ingest.sentry.io/5288579",
@@ -41,6 +43,8 @@ elif(app.config.get("ENV") == "production"):
     tokenAuth = base64.b64encode(tokenAuthBytes).decode("ascii")
     cacheApiUrl = cacheApiUrl.format(stage="prod")
     uploadApiUrl = uploadApiUrl.format(stage="prod")
+    businessApiUrl = businessApiUrl.format(stage="prod")
+
 
 @app.route("/api/")
 def root():
@@ -143,6 +147,27 @@ def logout():
 @app.route("/api/get_businesses")
 def get_businesses():
     req = requests.get("https://search-demo-matchmaker-cvpgbysybccgp4c3wmp6n3opau.us-east-1.es.amazonaws.com/business/_search", headers={'Content-Type' : 'application/json'}, data='{"query":{"match_all":{} },"size" : 50}')
+    return jsonify(req.text)
+
+@app.route("/api/match_businesses", methods=["POST"])
+def match_businesses():
+    ids = request.get_data()
+    print(ids)
+    #req = requests.get("https://search-demo-matchmaker-cvpgbysybccgp4c3wmp6n3opau.us-east-1.es.amazonaws.com/business/_search", headers={'Content-Type' : 'application/json'}, data='{"query": {"ids": {"values":' + '"' + str(ids) + '"' + '}  },  "size" : 50}')
+    req = requests.get("https://search-demo-matchmaker-cvpgbysybccgp4c3wmp6n3opau.us-east-1.es.amazonaws.com/business/_search", headers={'Content-Type' : 'application/json'}, data='{"query": {"ids": {"values":' + str(ids).replace("'",'"') + '}  },  "size" : 50}')
+    return jsonify(req.text)
+
+@app.route("/api/get_business_by_status", methods=["POST"])
+def get_business_by_status():
+    status = request.get_data().decode("UTF-8")
+    headers = request.headers
+    req = requests.get(businessApiUrl, headers = {"Authorization" : headers.get("Authorization"), "Content-Type" : headers.get("Content-Type"), "Status" : status})
+    return jsonify(req.text)
+
+@app.route("/api/update_business_status", methods=["POST"])
+def update_business_status():
+    headers = request.headers
+    req = requests.post(businessApiUrl, headers = {"Authorization" : headers.get("Authorization"), "Content-Type" : headers.get("Content-Type"), "businessId" : headers.get("businessId")}, json=request.get_data().decode("utf-8"))
     return jsonify(req.text)
 
 if __name__ == "__main__":

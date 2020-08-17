@@ -78,6 +78,7 @@ class SearchCompanytab extends React.Component {
           description={description}
           location={location}
           companyid={companyid}
+          updateBusinessStatus={this.props.updateBusinessStatus}
         />
       );
     }
@@ -156,6 +157,10 @@ Gives additional Information when hovered over
 
 */
 class QuickView extends React.Component {
+  addCompany = () => {
+    console.log(this.props)
+    this.props.updateBusinessStatus(this.props.companyid, "Pinned")
+  }
   render() {
     let {
       name,
@@ -238,7 +243,7 @@ class QuickView extends React.Component {
                   </Col>
 
                   <Col>
-                    <Button className="button-style" type="primary">
+                    <Button className="button-style" type="primary" onClick={this.addCompany}>
                       Add
                     </Button>
 

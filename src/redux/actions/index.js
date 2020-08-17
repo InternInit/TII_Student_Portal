@@ -26,6 +26,20 @@ export const updateVersion = version => {
   };
 };
 
+export const updatePinnedBusinesses = pinnedBusinesses => {
+  return {
+    type: "UPDATE_PINNED_BUSINESSES",
+    pinnedBusinesses
+  };
+};
+
+export const updateActiveApplications = activeApplications => {
+  return {
+    type: "UPDATE_ACTIVE_APPLICATIONS",
+    activeApplications
+  };
+};
+
 export const updateCompletionState = (page, completionPercentage) => {
   return {
     type: "UPDATE_COMPLETION_STATE",

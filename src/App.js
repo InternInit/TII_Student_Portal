@@ -43,6 +43,8 @@ import {
   updateAvatar,
   updateEmail,
   updateVersion,
+  updatePinnedBusinesses,
+  updateActiveApplications,
   updateCompletionState,
   batchUpdateCompletionState,
   batchUpdateCompletionChecklist
@@ -99,6 +101,8 @@ const mapDispatchToProps = {
   updateAvatar,
   updateEmail,
   updateVersion,
+  updatePinnedBusinesses,
+  updateActiveApplications,
   updateCompletionState,
   batchUpdateCompletionState,
   batchUpdateCompletionChecklist
@@ -124,7 +128,8 @@ class App extends Component {
     console.log("mounted");
     this.newAuth();
     this.getCachedCompletionState();
-    console.log(this.state)
+    this.getPinnedBusinesses();
+    this.getActiveApplications();
     window.addEventListener('resize', this.resize);
   }
 
@@ -254,6 +259,98 @@ class App extends Component {
       body: fd
     }).then(response => { });
   };
+
+  updateBusinessStatus = async (businessId, status) => {
+
+    let token = await this.getJwt();
+
+    fetch("/api/update_business_status", {
+      method: "POST",
+      headers: {
+        Authorization: "Bearer " + JSON.parse(JSON.stringify(token)),
+          "Content-Type": "text/plain",
+          "businessId" : JSON.parse(JSON.stringify(businessId))
+      },
+      body: status
+    })
+      .then(response => response.json())
+      .then(data => {
+        console.log(data);
+      });
+  }
+
+  getPinnedBusinesses = async () => {
+
+    let token = await this.getJwt();
+
+    fetch("/api/get_business_by_status", {
+      method: "POST",
+      headers: {
+        Authorization: "Bearer " + JSON.parse(JSON.stringify(token)),
+          "Content-Type": "text/plain"
+      },
+      body: JSON.parse(JSON.stringify("Pinned"))
+    })
+      .then(response => response.json())
+      .then(data => {
+        this.matchBusinessesPinned(data)
+      });
+  }
+
+  getActiveApplications = async () => {
+
+    let token = await this.getJwt();
+
+    fetch("/api/get_business_by_status", {
+      method: "POST",
+      headers: {
+        Authorization: "Bearer " + JSON.parse(JSON.stringify(token)),
+          "Content-Type": "text/plain"
+      },
+      body: JSON.parse(JSON.stringify("*"))
+    })
+      .then(response => response.json())
+      .then(data => {
+        let parsedData = JSON.parse(data)
+        this.matchBusinessesActive(JSON.stringify(parsedData[0]),parsedData[1])
+      });
+  }
+
+  matchBusinessesPinned = (businessList) => {
+    fetch("/api/match_businesses", {
+      method: "POST",
+      body: JSON.parse(JSON.stringify(businessList))
+    })
+      .then(response => response.json())
+      .then(data => {
+        try{
+          let matchedBusinessesArray = [];
+          JSON.parse(data).hits.hits.forEach(item => matchedBusinessesArray.push(item._source));
+          this.props.updatePinnedBusinesses(matchedBusinessesArray)
+        } catch (e) {
+          console.log(e)
+        }
+      });
+  }
+
+  matchBusinessesActive = (businessList, statusList) => {
+    fetch("/api/match_businesses", {
+      method: "POST",
+      body: JSON.parse(JSON.stringify(businessList))
+    })
+      .then(response => response.json())
+      .then(data => {
+        try{
+          let matchedBusinessesArray = [];
+          JSON.parse(data).hits.hits.forEach(item => matchedBusinessesArray.push(item._source));
+          matchedBusinessesArray.forEach((item,index) => item.status = statusList[item.id])
+          console.log(matchedBusinessesArray)
+          this.props.updateActiveApplications(matchedBusinessesArray)
+        } catch (e) {
+          console.log(e)
+        }
+      });
+  }
 
   getCachedCompletionState = async () => {
     let token = await this.getJwt();
@@ -474,7 +571,7 @@ class App extends Component {
             <Navbar logout={this.logout} />
           </header>
           <ReactSwitch>
-            <Route path="/dashboard" render={props => <Dashboard version={this.state.version}/>} />
+            <Route path="/dashboard" render={props => <Dashboard version={this.state.version} updateBusinessStatus={this.updateBusinessStatus} />} />
             <Route path="/how-to-apply" exact component={HowtoApply} />
             <Route path="/edit-profile" exact component={EditProfile} />
             <Route path="/login" render={props => <LogIn newAuth={this.newAuth} />} />
