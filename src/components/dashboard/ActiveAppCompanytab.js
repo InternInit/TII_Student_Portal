@@ -7,6 +7,8 @@ import {
   TabContainer
 } from "./styledDashboardComponents";
 
+import { Link } from "react-router-dom";
+
 import { Avatar } from 'antd';
 import { TeamOutlined } from '@ant-design/icons';
 
@@ -37,7 +39,7 @@ const mapping = [
 ];
 
 function ActiveAppCompanytab(props) {
-  let { name, industry, logo, status } = props;
+  let { name, companyId, industry, logo, status } = props;
   let tabColor = "";
   switch (status) {
     case "Pending":
@@ -64,6 +66,7 @@ function ActiveAppCompanytab(props) {
     <QueueAnim type="scale" ease={["easeOutQuart", "easeInOutQuart"]}>
       {mapping.map((item, index) => (
         <div key={index}>
+          <Link to={`/dashboard/add-companies/company-information/${companyId}`}>
           <TabContainer
             style={{ display: "flex", justifyContent: "space-evenly" }}
           >
@@ -99,6 +102,7 @@ function ActiveAppCompanytab(props) {
             </div>
             <PendingTab style={{ color: tabColor }}>{status}</PendingTab>
           </TabContainer>
+          </Link>
         </div>
       ))}
     </QueueAnim>

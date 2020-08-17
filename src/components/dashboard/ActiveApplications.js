@@ -16,6 +16,7 @@ class ActiveApplications extends Component {
     render() {
         let { page } = this.state;
         let { activeApplications } = this.props;
+        console.log(activeApplications);
         return (
             <React.Fragment>
                 <h1 className="module-name" style={{ marginTop: "70px" }}>Active Application</h1>
@@ -28,6 +29,7 @@ class ActiveApplications extends Component {
 
                             <ActiveAppCompanytab
                                 name={pinnedCompany.name}
+                                companyId={pinnedCompany.id}
                                 industry={pinnedCompany.industry}
                                 avatar={pinnedCompany.avatar}
                                 status={pinnedCompany.status}
