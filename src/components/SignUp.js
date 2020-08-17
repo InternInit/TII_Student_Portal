@@ -26,6 +26,8 @@ height: auto;
 padding-bottom: 20px;
 box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 border-radius: 8px;
+
+padding-bottom:24px;
 `
 
 const Background = styled.div`
@@ -88,20 +90,20 @@ const formItemProps = {
   },
   confirmPassword: {
     rules: [
-          {
-            required: true,
-            message: 'Please confirm your password!',
-          },
-          ({ getFieldValue }) => ({
-            validator(rule, value) {
-              if (!value || getFieldValue('password') === value) {
-                return Promise.resolve();
-              }
+      {
+        required: true,
+        message: 'Please confirm your password!',
+      },
+      ({ getFieldValue }) => ({
+        validator(rule, value) {
+          if (!value || getFieldValue('password') === value) {
+            return Promise.resolve();
+          }
 
-              return Promise.reject('The two passwords that you entered do not match!');
-            },
-          }),
-        ]
+          return Promise.reject('The two passwords that you entered do not match!');
+        },
+      }),
+    ]
   },
   email: {
     rules: validationRules(true, "email", "email")
@@ -131,205 +133,205 @@ const openUnsuccessfulNotification = (title, description) => {
 };
 
 class SignUp extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-          emailConfirmationVisible: false,
-          email: "default@email.com",
-          username: "",
-          password: ""
-        }
+  constructor(props) {
+    super(props);
+    this.state = {
+      emailConfirmationVisible: false,
+      email: "default@email.com",
+      username: "",
+      password: ""
     }
+  }
 
-    formRef = React.createRef();
-    emailFormRef = React.createRef();
+  formRef = React.createRef();
+  emailFormRef = React.createRef();
 
-    render() {
-      const title = 'Password Policy';
-      const passwordPolicyContent = (
-        <React.Fragment>
-          <h4>Your password should contain: </h4>
-          <ul>
-            <li>Minimum length of 8 characters</li>
-            <li>Numerical characters (0-9)</li>
-            <li>Special characters</li>
-            <li>Uppercase letter</li>
-            <li>Lowercase letter</li>
-          </ul>
-        </React.Fragment>
-      );
+  render() {
+    const title = 'Password Policy';
+    const passwordPolicyContent = (
+      <React.Fragment>
+        <h4>Your password should contain: </h4>
+        <ul>
+          <li>Minimum length of 8 characters</li>
+          <li>Numerical characters (0-9)</li>
+          <li>Special characters</li>
+          <li>Uppercase letter</li>
+          <li>Lowercase letter</li>
+        </ul>
+      </React.Fragment>
+    );
 
-        return (
-            <Background >
-                <Container style={{ marginTop: '5%' }}>
-                    <Banner style={{ marginTop: '0px', width: '100%' }}>
-                        Create a New Account
+    return (
+      <Background >
+        <Container style={{ marginTop: '5%' }}>
+          <Banner style={{ marginTop: '0px', width: '100%' }}>
+            Create a New Account
                       </Banner>
-                    <div style={{ width: '70%', }}>
-                        <Form
-                          onFinish={this.handleSubmit}
-                          ref={this.formRef}
-                        >
-                            <Label style={{ marginTop: '24px' }}>
-                                Username
+          <div style={{ width: '70%', }}>
+            <Form
+              onFinish={this.handleSubmit}
+              ref={this.formRef}
+            >
+              <Label style={{ marginTop: '24px' }}>
+                Username
                             </Label>
-                            <Form.Item
-                              {...formItemProps.username}
-                              name="username"
-                            >
-                                <Input />
-                            </Form.Item>
-                            <Label style={{ marginTop: '-8px' }}>
-                                Password
+              <Form.Item
+                {...formItemProps.username}
+                name="username"
+              >
+                <Input />
+              </Form.Item>
+              <Label style={{ marginTop: '-8px' }}>
+                Password
                             </Label>
-                            <Popover placement="right" title={title} content={passwordPolicyContent} trigger="focus">
-                            <Form.Item
-                              {...formItemProps.password}
-                              name="password"
-                              rules={[
-                                      {
-                                        required: true,
-                                        message: 'Please enter your password',
-                                      },
-                                      ({ getFieldValue }) => ({
-                                        validator(rule, value) {
-                                          let errors = schema.validate(value, {list: true})
+              <Popover placement="right" title={title} content={passwordPolicyContent} trigger="focus">
+                <Form.Item
+                  {...formItemProps.password}
+                  name="password"
+                  rules={[
+                    {
+                      required: true,
+                      message: 'Please enter your password',
+                    },
+                    ({ getFieldValue }) => ({
+                      validator(rule, value) {
+                        let errors = schema.validate(value, { list: true })
 
-                                          function getValidationMessage(errors) {
-                                            for (let i = 0; i < errors.length; i++) {
-                                              if (errors[i] === 'min') {
-                                                return 'Password length should be at least 8 characters';
-                                              } else if (errors[i] === 'lowercase') {
-                                                return 'Password should contain lowercase letters';
-                                              } else if (errors[i] === 'uppercase') {
-                                                return 'Password should contain uppercase letters';
-                                              } else if (errors[i] === 'digits') {
-                                                return 'Password should contain digits';
-                                              } else if (errors[i] === 'symbols') {
-                                                return 'Password should contain symbols';
-                                              }
-                                            }
-                                          }
+                        function getValidationMessage(errors) {
+                          for (let i = 0; i < errors.length; i++) {
+                            if (errors[i] === 'min') {
+                              return 'Password length should be at least 8 characters';
+                            } else if (errors[i] === 'lowercase') {
+                              return 'Password should contain lowercase letters';
+                            } else if (errors[i] === 'uppercase') {
+                              return 'Password should contain uppercase letters';
+                            } else if (errors[i] === 'digits') {
+                              return 'Password should contain digits';
+                            } else if (errors[i] === 'symbols') {
+                              return 'Password should contain symbols';
+                            }
+                          }
+                        }
 
-                                          if (typeof getValidationMessage(errors) == "undefined") {
-                                            return Promise.resolve();
-                                          }
+                        if (typeof getValidationMessage(errors) == "undefined") {
+                          return Promise.resolve();
+                        }
 
-                                          return Promise.reject(getValidationMessage(errors));
+                        return Promise.reject(getValidationMessage(errors));
 
-                                        },
-                                      }),
-                                    ]}
-                            >
-                                <Input.Password />
-                            </Form.Item>
-                            </Popover>
-                            <Label style={{ marginTop: '-8px' }}>
-                                Confirm Password
-                            </Label>
-                            <Form.Item
-                              {...formItemProps.confirmPassword}
-                              name="confirm-password">
-                                <Input.Password />
-                            </Form.Item>
-                            <Label style={{ marginTop: '-8px' }}>
-                                Display Name
-                            </Label>
-                            <Form.Item
-                              {...formItemProps.name}
-                              name="name"
-                            >
-                                <Input />
-                            </Form.Item>
-                            <Label style={{ marginTop: '-8px' }}>
-                                E-Mail
-                            </Label>
-                            <Form.Item
-                              {...formItemProps.email}
-                              name="email"
-                            >
-                                <Input />
-                            </Form.Item>
-
-                            <div style={{ marginTop: ' 26px', display: 'flex', justifyContent: 'center' }}>
-                                <Button className="profile-button-style" type='primary' htmlType='submit'>
-                                    Sign Up
-                                </Button>
-                            </div>
-
-                        </Form>
-                    </div>
-                </Container>
-                <Modal
-                  title="Email Confirmation"
-                  visible={this.state.emailConfirmationVisible}
-                  onOk={this.handleOk}
-                  onCancel={this.handleCancel}
+                      },
+                    }),
+                  ]}
                 >
-                <EmailConfirmation email={this.state.email} formRef={this.emailFormRef}/>
-                </Modal>
-            </Background >)
-    }
+                  <Input.Password />
+                </Form.Item>
+              </Popover>
+              <Label style={{ marginTop: '-8px' }}>
+                Confirm Password
+                            </Label>
+              <Form.Item
+                {...formItemProps.confirmPassword}
+                name="confirm-password">
+                <Input.Password />
+              </Form.Item>
+              <Label style={{ marginTop: '-8px' }}>
+                Display Name
+                            </Label>
+              <Form.Item
+                {...formItemProps.name}
+                name="name"
+              >
+                <Input />
+              </Form.Item>
+              <Label style={{ marginTop: '-8px' }}>
+                E-Mail
+                            </Label>
+              <Form.Item
+                {...formItemProps.email}
+                name="email"
+              >
+                <Input />
+              </Form.Item>
 
-    handleSubmit = async (values) => {
-        let { username, password, email, name } = values
-        this.setState({email: email, username:username, password:password})
-        try {
-            const user = await Auth.signUp({
-                username,
-                password,
-                attributes: {
-                    email,
-                    name
-                }
-            });
-            this.setState({emailConfirmationVisible: true})
+              <div style={{ marginTop: ' 26px', display: 'flex', justifyContent: 'center' }}>
+                <Button className="profile-button-style" type='primary' htmlType='submit'>
+                  Sign Up
+                                </Button>
+              </div>
 
-        } catch (error) {
-            console.log('error signing up:', error);
-            openUnsuccessfulNotification("Signup Error", error.message)
+            </Form>
+          </div>
+        </Container>
+        <Modal
+          title="Email Confirmation"
+          visible={this.state.emailConfirmationVisible}
+          onOk={this.handleOk}
+          onCancel={this.handleCancel}
+        >
+          <EmailConfirmation email={this.state.email} formRef={this.emailFormRef} />
+        </Modal>
+      </Background >)
+  }
+
+  handleSubmit = async (values) => {
+    let { username, password, email, name } = values
+    this.setState({ email: email, username: username, password: password })
+    try {
+      const user = await Auth.signUp({
+        username,
+        password,
+        attributes: {
+          email,
+          name
         }
+      });
+      this.setState({ emailConfirmationVisible: true })
+
+    } catch (error) {
+      console.log('error signing up:', error);
+      openUnsuccessfulNotification("Signup Error", error.message)
+    }
+
+  }
+
+  handleOk = async e => {
+    const values = await this.emailFormRef.current.getFieldsValue();
+    const code = values.confirmationCode
+    console.log(values.confirmationCode);
+    const username = this.state.username
+    const password = this.state.password
+    console.log(username)
+    try {
+      const callback = await Auth.confirmSignUp(
+        username,
+        code
+      );
+      console.log(callback)
+      openSuccessfulNotification("Success", "You will be redirected to the dashboard in a bit.")
+      Auth.signOut()
+        .then(() => console.log("Signed Out"))
+        .catch(() => console.log("Could Not Sign Out"));
+
+      const user = await Auth.signIn(username, password);
+      this.props.newAuth();
+      this.props.history.push("/dashboard")
+    } catch (error) {
+      console.log(error)
+      openUnsuccessfulNotification("Confirmation Code Error", "Sorry, we couldnt confirm that code.")
 
     }
 
-    handleOk = async e => {
-      const values = await this.emailFormRef.current.getFieldsValue();
-      const code = values.confirmationCode
-      console.log(values.confirmationCode);
-      const username = this.state.username
-      const password = this.state.password
-      console.log(username)
-      try {
-        const callback = await Auth.confirmSignUp(
-          username,
-          code
-        );
-        console.log(callback)
-        openSuccessfulNotification("Success", "You will be redirected to the dashboard in a bit.")
-        Auth.signOut()
-          .then(() => console.log("Signed Out"))
-          .catch(() => console.log("Could Not Sign Out"));
+    this.setState({
+      emailConfirmationVisible: false,
+    });
+  };
 
-        const user = await Auth.signIn(username, password);
-        this.props.newAuth();
-        this.props.history.push("/dashboard")
-      } catch (error) {
-        console.log(error)
-        openUnsuccessfulNotification("Confirmation Code Error", "Sorry, we couldnt confirm that code.")
-
-      }
-
-      this.setState({
-        emailConfirmationVisible: false,
-      });
-    };
-
-    handleCancel = e => {
-      console.log(e);
-      this.setState({
-        emailConfirmationVisible: false,
-      });
-    };
+  handleCancel = e => {
+    console.log(e);
+    this.setState({
+      emailConfirmationVisible: false,
+    });
+  };
 
 
 

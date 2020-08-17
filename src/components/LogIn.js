@@ -6,8 +6,8 @@ import { Link } from 'react-router-dom';
 
 //Ant D Icons
 import {
-  CloseOutlined,
-  CheckOutlined
+    CloseOutlined,
+    CheckOutlined
 } from "@ant-design/icons";
 
 import { Auth } from 'aws-amplify';
@@ -25,6 +25,8 @@ width:400px;
 height:500px;
 box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 border-radius: 8px;
+
+padding-bottom:24px;
 `
 
 const Background = styled.div`
@@ -67,25 +69,25 @@ width:80%;
 margin-top:-19px;
 `
 const openSuccessfulNotification = (title, description) => {
-  notification.open({
-    message: title,
-    description: description,
-    icon: <CheckOutlined style={{ color: "green" }} />,
-    onClick: () => {
-      console.log('Notification Clicked!');
-    },
-  });
+    notification.open({
+        message: title,
+        description: description,
+        icon: <CheckOutlined style={{ color: "green" }} />,
+        onClick: () => {
+            console.log('Notification Clicked!');
+        },
+    });
 };
 
 const openUnsuccessfulNotification = (title, description) => {
-  notification.open({
-    message: title,
-    description: description,
-    icon: <CloseOutlined style={{ color: "red" }} />,
-    onClick: () => {
-      console.log('Notification Clicked!');
-    },
-  });
+    notification.open({
+        message: title,
+        description: description,
+        icon: <CloseOutlined style={{ color: "red" }} />,
+        onClick: () => {
+            console.log('Notification Clicked!');
+        },
+    });
 };
 
 class LogIn extends React.Component {

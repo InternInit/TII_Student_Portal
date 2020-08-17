@@ -9,6 +9,9 @@ import {
   AiFillLinkedin,
 } from "react-icons/ai";
 
+import { Link } from 'react-router-dom'
+
+
 const ModuleContainer = styled.div`
   background: white;
   border-radius: 10px;
@@ -109,7 +112,9 @@ class CompanyInformation extends React.Component {
             marginLeft: "55px",
           }}
         >
-          <Breadcrumb.Item>Add Companies</Breadcrumb.Item>
+          <Link to="/dashboard/add-companies">
+            <Breadcrumb.Item>Add Companies</Breadcrumb.Item>
+          </Link>
           <Breadcrumb.Item>{info.name}</Breadcrumb.Item>
         </Breadcrumb>
 
