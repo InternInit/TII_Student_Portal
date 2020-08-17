@@ -35,6 +35,7 @@ class PinCompany extends Component {
                 industry={pinnedCompany.industry}
                 logo={pinnedCompany.logo}
                 companyid={pinnedCompany.id}
+                updateBusinessStatus={this.props.updateBusinessStatus}
               />
             </div>
           ))}

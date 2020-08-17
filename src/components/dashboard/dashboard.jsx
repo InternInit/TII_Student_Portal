@@ -86,7 +86,7 @@ class Dashboard extends Component {
 
                 <Route path="/dashboard/my-internships" exact>
                   <ApplicationProgress />
-                  <PinCompany pinnedBusinesses={this.props.userInfo.pinnedBusinesses}/>
+                  <PinCompany pinnedBusinesses={this.props.userInfo.pinnedBusinesses} updateBusinessStatus={this.props.updateBusinessStatus}/>
                   <ActiveApplications activeApplications={this.props.userInfo.activeApplications}/>
                 </Route>
 

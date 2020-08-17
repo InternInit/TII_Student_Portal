@@ -83,7 +83,7 @@ class Companytab extends React.Component {
                     {/**
                      * Dropdown
                      */}
-                    <DroppedView companyid={this.props.companyid} name={this.props.name} />
+                    <DroppedView companyid={this.props.companyid} name={this.props.name} updateBusinessStatus={this.props.updateBusinessStatus}/>
                 </Panel>
             </Collapse >
         )
@@ -157,7 +157,7 @@ class DroppedView extends React.Component {
                     </Button>
 
                 {/**
-                     * Company Information Button 
+                     * Company Information Button
                      */}
                 <Link to={`/dashboard/add-companies/company-information/${companyid}`}>
                     <Button
@@ -178,6 +178,7 @@ class DroppedView extends React.Component {
                 <Button
                     className='button-style'
                     type='primary'
+                    onClick={this.submitResponse}
                 >
                     Submit
                     </Button>
@@ -185,9 +186,9 @@ class DroppedView extends React.Component {
                 <Modal visible={visible}
                     title={"Send Custom Response to " + name}
                     onCancel={this.cancelReponse}
-                    onOk={this.submitResponse}
+                    onOk={this.okResponse}
 
-                    okText="Submit"
+                    okText="Add"
                     width='100vh'
                 >
 
@@ -203,14 +204,18 @@ class DroppedView extends React.Component {
     showModal = () => {
         this.setState({ visible: true })
     }
-    submitResponse = () => {
+    okResponse = () => {
         this.setState({ visible: false })
+    }
+
+    submitResponse = () => {
         notification.open({
             //notification
             message: "Success!",
-            description: "Your response was sent successfully.",
+            description: "Your application was successfully sent.",
             icon: <CheckOutlined style={{ color: "green" }} />
         });
+        this.props.updateBusinessStatus(this.props.companyid, "Pending")
     }
 
     cancelReponse = () => {
