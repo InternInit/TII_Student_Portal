@@ -251,7 +251,7 @@ class CompanyInformation extends React.Component {
                             Work Period
                       </Header>
                         <Caption>
-                            June 10, 2020, September 31st, 2020
+                            {info.starttime} - {info.endtime}
                       </Caption>
                     </Row>
 
@@ -298,7 +298,7 @@ class CompanyInformation extends React.Component {
                             Website
                       </Header>
                         <Caption>
-                            Click Here!
+                            {info.website}
                         </Caption>
                     </Row>
 
@@ -313,7 +313,7 @@ class CompanyInformation extends React.Component {
                             E-Mail
                       </Header>
                         <Caption>
-                            Email@gmail.com
+                            {info.email}
                       </Caption>
                     </Row>
 
@@ -328,7 +328,7 @@ class CompanyInformation extends React.Component {
                             Phone Number
                       </Header>
                         <Caption>
-                            123-456-7891
+                            {info.phonenumber}
                       </Caption>
                     </Row>
 
