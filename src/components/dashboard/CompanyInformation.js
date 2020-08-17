@@ -15,7 +15,7 @@ background-color:#d9d9d9;
 width:65vh;
 height:225px;
 border-radius:8px;
- 
+
 `
 
 const Caption = styled.div`
@@ -42,294 +42,321 @@ const Row = styled.div`
  align-items:flex-start;
  `
 
-
-function CompanyInformation(props) {
-    window.scrollTo(0, 0)
-    return (<React.Fragment>
-        {/**
-                 * 
-                 * Breadcrumb
-                 * 
-                 */}
-        <Breadcrumb style={{
-            fontSize: '24px',
-            display: 'flex',
-            flexDirection: 'row',
-            fontWeight: '500',
-            marginTop: '30px',
-            marginLeft: '55px'
-        }}>
-            <Breadcrumb.Item>
-                Add Companies
-                </Breadcrumb.Item>
-            <Breadcrumb.Item>
-                Facebook
-                </Breadcrumb.Item>
-        </Breadcrumb>
+let info = {}
 
 
-        <ModuleContainer>
-            {/**
-                 * 
-                 * Company Logo and Name
-                 * 
-                 */}
-            <Row style={{
-                display: 'flex',
-                flexDirection: 'row',
-            }}>
-                <Avatar size={40} icon={<TeamOutlined />} src="" style={{ marginTop: '10px' }} />
-                <Header style={{
-                    fontSize: '36px',
-                    textAlign: 'left',
-                    marginLeft: '15px',
-                    color: '#8C8C8C',
-                    marginTop: '0px'
-                }}>Company Name</Header>
-            </Row>
+class CompanyInformation extends React.Component{
+    constructor(props) {
+      super(props);
+      this.state = {
+        info: {}
+      };
+    }
+
+    componentDidMount(){
+      let idList = []
+      let id = window.location.href.split("/")[6]
+      idList.push(id)
+      this.matchBusinesses(JSON.stringify(idList))
+      window.scrollTo(0,0);
+    }
+
+    matchBusinesses(businessList){
+      fetch("/api/match_businesses", {
+        method: "POST",
+        body: JSON.parse(JSON.stringify(businessList))
+      })
+        .then(response => response.json())
+        .then(data => {
+          try{
+            let matchedBusinessesArray = [];
+            JSON.parse(data).hits.hits.forEach(item => matchedBusinessesArray.push(item._source));
+            //console.log(matchedBusinessesArray)
+            this.setState({info:matchedBusinessesArray[0]})
+          } catch (e) {
+            console.log(e)
+          }
+        });
+    }
+
+    render(){
+      return (
+        <React.Fragment >
+          {/**
+                   *
+                   * Breadcrumb
+                   *
+                   */}
+          <Breadcrumb style={{
+              fontSize: '24px',
+              display: 'flex',
+              flexDirection: 'row',
+              fontWeight: '500',
+              marginTop: '30px',
+              marginLeft: '55px'
+          }}>
+              <Breadcrumb.Item>
+                  Add Companies
+                  </Breadcrumb.Item>
+              <Breadcrumb.Item>
+                  {this.state.info.name}
+                  </Breadcrumb.Item>
+          </Breadcrumb>
 
 
-            {/**
-                 * 
-                 * Divider
-                 * 
-                 */}
-            <Divider >
-                <Header style={{
-                    color: '#595959',
-                    paddingBottom: '25px',
-                    marginTop: '25px'
-                }}>Company Overview
-                     </Header>
-            </Divider>
+          <ModuleContainer>
+              {/**
+                   *
+                   * Company Logo and Name
+                   *
+                   */}
+              <Row style={{
+                  display: 'flex',
+                  flexDirection: 'row',
+              }}>
+                  <Avatar size={40} src={this.state.info.avatar} style={{ marginTop: '10px' }} />
+                  <Header style={{
+                      fontSize: '36px',
+                      textAlign: 'left',
+                      marginLeft: '15px',
+                      color: '#8C8C8C',
+                      marginTop: '0px'
+                  }}>{this.state.info.name}</Header>
+              </Row>
 
 
-            {/**
-                 * 
-                 * Company Description
-                 * 
-                 */}
-            <Row>
-                <Header >
-                    Company Description
+              {/**
+                   *
+                   * Divider
+                   *
+                   */}
+              <Divider >
+                  <Header style={{
+                      color: '#595959',
+                      paddingBottom: '25px',
+                      marginTop: '25px'
+                  }}>Company Overview
+                       </Header>
+              </Divider>
+
+
+              {/**
+                   *
+                   * Company Description
+                   *
+                   */}
+              <Row>
+                  <Header >
+                      Company Description
+                      </Header>
+                  <Caption>
+                      {this.state.info.description}
+
+                      </Caption>
+              </Row>
+
+
+              {/**
+                   *
+                   * Images + Caption
+                   *
+                   */}
+              <Row style={{
+                  display: 'flex',
+                  flexDirection: 'row',
+                  justifyContent: 'center',
+                  marginTop: '45px',
+                  marginBottom: '45px'
+              }}>
+                  <Row>
+                      <Image src={this.state.info.avatar} alt="Logo" style={{ marginTop: '10px' }} />
+                  </Row>
+                  <Row>
+
+                      <Image src="https://citybizlist.com/media/images/large/1545083234_2689.jpg" alt="Logo" style={{ marginTop: '10px' }} />
+                  </Row>
+              </Row>
+
+
+              {/**
+                   *
+                   * Divider
+                   *
+                   */}
+              <Divider >
+                  <Header style={{
+                      color: '#595959',
+                      paddingBottom: '25px',
+                      marginTop: '25px'
+                  }}>Internship Information
                     </Header>
-                <Caption>
-                    Facebook is a website which allows users, who sign-up for free profiles, to connect with friends, work colleagues or people they don’t know, online.
-                    It allows users to share pictures, music, videos, and articles, as well as their own thoughts and opinions with however many people they like.
-
-                    Users send “friend requests” to people who they may – or may not – know.
-
-                    Facebook has over 1 billion users
-
-                    </Caption>
-            </Row>
+              </Divider>
 
 
-            {/**
-                 * 
-                 * Images + Caption
-                 * 
-                 */}
-            <Row style={{
-                display: 'flex',
-                flexDirection: 'row',
-                justifyContent: 'space-evenly',
-                marginTop: '45px',
-                marginBottom: '45px'
-            }}>
-                <Row>
-                    <Image src="" alt="Logo" style={{ marginTop: '10px' }} />
-                    <Caption> Image of Company</Caption>
-                </Row>
-                <Row>
-
-                    <Image src="" alt="Logo" style={{ marginTop: '10px' }} />
-                    <Caption> Image of Company</Caption>
-                </Row>
-            </Row>
+              {/**
+                   *
+                   * Intership Description
+                   *
+                   */}
+              <Row>
+                  <Header >
+                      Description
+                      </Header>
+                  <Caption>
+                      {this.state.info.description}
+                      </Caption>
+              </Row>
 
 
-            {/**
-                 * 
-                 * Divider
-                 * 
-                 */}
-            <Divider >
-                <Header style={{
-                    color: '#595959',
-                    paddingBottom: '25px',
-                    marginTop: '25px'
-                }}>Internship Information
-                  </Header>
-            </Divider>
+              {/**
+                   *
+                   * Location
+                   *
+                   */}
+              <Row>
+                  <Header >
+                      Location
+                      </Header>
+                  <Caption>
+                      {this.state.info.location}
+                      </Caption>
+              </Row>
 
 
-            {/**
-                 * 
-                 * Intership Description
-                 * 
-                 */}
-            <Row>
-                <Header >
-                    Description
+              {/**
+                   *
+                   * Location
+                   *
+                   */}
+              <Row>
+                  <Header >
+                      Industry
+                      </Header>
+                  <Caption>
+                      {this.state.info.industry}
+                      </Caption>
+              </Row>
+
+
+              {/**
+                   *
+                   * Work Period
+                   *
+                   */}
+              <Row>
+                  <Header >
+                      Work Period
+                      </Header>
+                  <Caption>
+                      June 10, 2020, September 31st, 2020
+                      </Caption>
+              </Row>
+
+
+              {/**
+                   *
+                   * Additional Information
+                   *
+                   */}
+              <Row style={{ marginBottom: '45px' }}>
+                  <Header >
+                      Additional Information
+                      </Header>
+                  <Caption>
+                      - AP CSA
+                      - AP CSP
+                      - Must be 18+
+                      </Caption>
+              </Row>
+
+
+              {/**
+                   *
+                   * Divider
+                   *
+                   */}
+              <Divider >
+                  <Header style={{
+                      color: '#595959',
+                      paddingBottom: '25px',
+                      marginTop: '25px'
+                  }}>Contact Information
                     </Header>
-                <Caption>
-                    looking for an object-oriented Java Developer... Java Servlets, HTML, JavaScript, AJAX, Struts, Struts2, JSF) desirable.
-                    Familiarity with Tomcat and the Java...
-                    </Caption>
-            </Row>
+              </Divider>
 
 
-            {/**
-                 * 
-                 * Location
-                 * 
-                 */}
-            <Row>
-                <Header >
-                    Location
-                    </Header>
-                <Caption>
-                    Austin, TX
-                    </Caption>
-            </Row>
+              {/**
+                   *
+                   * Website
+                   *
+                   */}
+              <Row>
+                  <Header >
+                      Website
+                      </Header>
+                        <Caption>
+                          Click Here!
+                        </Caption>
+              </Row>
 
 
-            {/**
-                 * 
-                 * Location
-                 * 
-                 */}
-            <Row>
-                <Header >
-                    Industry
-                    </Header>
-                <Caption>
-                    Industry 1, Industry 2
-                    </Caption>
-            </Row>
+              {/**
+                   *
+                   * Email
+                   *
+                   */}
+              <Row>
+                  <Header >
+                      E-Mail
+                      </Header>
+                  <Caption>
+                      Email@gmail.com
+                      </Caption>
+              </Row>
 
 
-            {/**
-                 * 
-                 * Work Period
-                 * 
-                 */}
-            <Row>
-                <Header >
-                    Work Period
-                    </Header>
-                <Caption>
-                    Start Date:1, Finish Date:10
-                    </Caption>
-            </Row>
+              {/**
+                   *
+                   * Phone Number
+                   *
+                   */}
+              <Row>
+                  <Header >
+                      Phone Number
+                      </Header>
+                  <Caption>
+                      123-456-7891
+                      </Caption>
+              </Row>
 
 
-            {/**
-                 * 
-                 * Additional Information
-                 * 
-                 */}
-            <Row style={{ marginBottom: '45px' }}>
-                <Header >
-                    Additional Information
-                    </Header>
-                <Caption>
-                    - AP CSA
-                    - AP CSP
-                    - Idk man, Python
-                    - This could also be where we post acedemic credentials or something
-                    - The company needs
-                    </Caption>
-            </Row>
+              {/**
+                   *
+                   * Links To Social
+                   *
+                   */}
+              <Row>
+                  <Header >
+                      Links
+                      </Header>
+                  <Row style={{
+                      display: 'flex',
+                      flexDirection: 'row',
+                      justifyContent: 'space-evenly',
+                  }}>
+                      <Avatar size={36} src="" alt="Logo" style={{ marginTop: '10px' }} />
+                      <Avatar size={36} src="" alt="Logo" style={{ marginTop: '10px', marginLeft: '10px' }} />
+                      <Avatar size={36} src="" alt="Logo" style={{ marginTop: '10px', marginLeft: '10px' }} />
+                      <Avatar size={36} src="" alt="Logo" style={{ marginTop: '10px', marginLeft: '10px' }} />
 
-
-            {/**
-                 * 
-                 * Divider
-                 * 
-                 */}
-            <Divider >
-                <Header style={{
-                    color: '#595959',
-                    paddingBottom: '25px',
-                    marginTop: '25px'
-                }}>Contact Information
-                  </Header>
-            </Divider>
-
-
-            {/**
-                 * 
-                 * Website
-                 * 
-                 */}
-            <Row>
-                <Header >
-                    Website
-                    </Header>
-                <Caption>
-                    Click Here!
-                    </Caption>
-            </Row>
-
-
-            {/**
-                 * 
-                 * Email
-                 * 
-                 */}
-            <Row>
-                <Header >
-                    E-Mail
-                    </Header>
-                <Caption>
-                    Email@gmail.com
-                    </Caption>
-            </Row>
-
-
-            {/**
-                 * 
-                 * Phone Number
-                 * 
-                 */}
-            <Row>
-                <Header >
-                    Phone Number
-                    </Header>
-                <Caption>
-                    123-456-7891
-                    </Caption>
-            </Row>
-
-
-            {/**
-                 * 
-                 * Links To Social
-                 * 
-                 */}
-            <Row>
-                <Header >
-                    Links
-                    </Header>
-                <Row style={{
-                    display: 'flex',
-                    flexDirection: 'row',
-                    justifyContent: 'space-evenly',
-                }}>
-                    <Avatar size={36} src="" alt="Logo" style={{ marginTop: '10px' }} />
-                    <Avatar size={36} src="" alt="Logo" style={{ marginTop: '10px', marginLeft: '10px' }} />
-                    <Avatar size={36} src="" alt="Logo" style={{ marginTop: '10px', marginLeft: '10px' }} />
-                    <Avatar size={36} src="" alt="Logo" style={{ marginTop: '10px', marginLeft: '10px' }} />
-
-                </Row>
-            </Row>
+                  </Row>
+              </Row>
 
 
 
-        </ModuleContainer>
-    </React.Fragment>)
+          </ModuleContainer>
+      </React.Fragment>)
+  }
 }
 
 export default CompanyInformation
