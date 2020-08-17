@@ -5,16 +5,6 @@ import QueueAnim from "rc-queue-anim";
 import { Pagination } from 'antd'
 
 
-// BUG: THIS NEEDS TO BE REPLACED BY THE REACT STORE
-let pinnedCompanies = [
-    { name: "This", industry: "Computer Science", status: 'Pending' },
-    { name: "is", industry: "Computer Science", status: 'Accepted' },
-    { name: "Pinned", industry: "Computer Science", status: 'Rejected' },
-    { name: "Company", industry: "Consulting", status: 'Accepted' },
-    { name: "Grubhub", industry: "Real Estate", status: 'Pending' }
-];
-
-
 class ActiveApplications extends Component {
     constructor(props) {
         super(props);

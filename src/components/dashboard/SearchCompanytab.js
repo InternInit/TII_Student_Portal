@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import QueueAnim from "rc-queue-anim";
 import { Link } from "react-router-dom";
-import { Button, Avatar } from "antd";
+import { Button, Avatar, message } from "antd";
 import { TeamOutlined } from "@ant-design/icons";
 import {
   CompanyTitle,
@@ -159,6 +159,7 @@ Gives additional Information when hovered over
 class QuickView extends React.Component {
   addCompany = () => {
     console.log(this.props)
+    message.success(`Company Pinned! 🎉`)
     this.props.updateBusinessStatus(this.props.companyid, "Pinned")
   }
   render() {
