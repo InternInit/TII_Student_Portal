@@ -151,7 +151,7 @@ def get_businesses():
 
 @app.route("/api/match_businesses", methods=["POST"])
 def match_businesses():
-    ids = request.get_data()
+    ids = request.get_data().decode("UTF-8")
     print(ids)
     #req = requests.get("https://search-demo-matchmaker-cvpgbysybccgp4c3wmp6n3opau.us-east-1.es.amazonaws.com/business/_search", headers={'Content-Type' : 'application/json'}, data='{"query": {"ids": {"values":' + '"' + str(ids) + '"' + '}  },  "size" : 50}')
     req = requests.get("https://search-demo-matchmaker-cvpgbysybccgp4c3wmp6n3opau.us-east-1.es.amazonaws.com/business/_search", headers={'Content-Type' : 'application/json'}, data='{"query": {"ids": {"values":' + str(ids).replace("'",'"') + '}  },  "size" : 50}')
