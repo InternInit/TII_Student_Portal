@@ -1,8 +1,12 @@
-const userInfoReducer = (state = {username:"",avatar:"",email:"", version:0, pinnedBusinesses:[], activeApplications:[]}, action) => {
+const userInfoReducer = (state = {username:"", displayName:"",avatar:"",email:"", version:0, pinnedBusinesses:[], activeApplications:[]}, action) => {
   switch (action.type) {
     case 'UPDATE_USER_NAME':
       return Object.assign({}, state, {
         username: action.username
+      })
+    case 'UPDATE_DISPLAY_NAME':
+      return Object.assign({}, state, {
+        displayName: action.displayName
       })
     case 'UPDATE_AVATAR':
       return Object.assign({}, state, {

@@ -40,6 +40,7 @@ import {
 import { connect } from "react-redux";
 import {
   updateUserName,
+  updateDisplayName,
   updateAvatar,
   updateEmail,
   updateVersion,
@@ -98,6 +99,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = {
   updateUserName,
+  updateDisplayName,
   updateAvatar,
   updateEmail,
   updateVersion,
@@ -152,6 +154,7 @@ class App extends Component {
         };
         console.log(this.inMemoryToken)
         this.props.updateUserName(session.accessToken.payload.username)
+        this.props.updateDisplayName(session.idToken.payload.name)
         this.props.updateEmail(session.idToken.payload.email)
       })
       .catch((error) => {

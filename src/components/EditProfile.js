@@ -8,12 +8,21 @@ import {
   notification,
   message,
   Upload,
-  Avatar
+  Avatar,
 } from "antd";
 
 import { CloseOutlined, UserOutlined } from "@ant-design/icons";
 
 import { connect } from "react-redux";
+import {
+  updateUserName,
+  updateDisplayName,
+  updateAvatar,
+  updateEmail,
+  updateVersion,
+} from "../redux/actions";
+
+import { Auth } from "aws-amplify";
 
 const ModuleContainer = styled.div`
   display: flex;
@@ -80,10 +89,18 @@ const Row = styled.div`
   display: flex;
   flex-direction: row;
 `;
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    userInfo: state.userInfo
+    userInfo: state.userInfo,
   };
+};
+
+const mapDispatchToProps = {
+  updateUserName,
+  updateDisplayName,
+  updateAvatar,
+  updateEmail,
+  updateVersion,
 };
 
 class EditProfile extends React.Component {
@@ -112,13 +129,12 @@ class EditProfile extends React.Component {
       visible: false,
       confirmLoading: false,
       passwordVisible: false,
-      loading: false
+      loading: false,
     };
   }
 
   render() {
     let {
-      displayname,
       password,
       phoneNumber,
       schoolCode,
@@ -128,8 +144,12 @@ class EditProfile extends React.Component {
       modalTitle,
       visible,
       confirmLoading,
-      passwordVisible
+      passwordVisible,
     } = this.state;
+
+    let username = this.props.userInfo.username;
+    let displayname = this.props.userInfo.displayName;
+    let email = this.props.userInfo.email;
 
     let displayPassword = password.replace(/./g, "*");
     return (
@@ -140,7 +160,7 @@ class EditProfile extends React.Component {
           justifyContent: "center",
           backgroundColor: "#F5F5F5",
           minHeight: "100vh",
-          minWidth: "850px"
+          minWidth: "850px",
         }}
       >
         <ModuleContainer>
@@ -161,7 +181,7 @@ class EditProfile extends React.Component {
               <Avatar
                 size={54}
                 icon={<UserOutlined />}
-                src="https://www.happierhuman.com/wp-content/uploads/2018/10/how-to-be-happy.jpg"
+                src=""
                 style={{ marginLeft: "24px", marginTop: "24px" }}
               />
               <Header
@@ -169,10 +189,10 @@ class EditProfile extends React.Component {
                   fontSize: "36px",
                   marginLeft: "15px",
                   marginTop: "24px",
-                  padding: "0px"
+                  padding: "0px",
                 }}
               >
-                {this.props.userInfo.username}
+                {username}
               </Header>
             </Row>
 
@@ -186,7 +206,7 @@ class EditProfile extends React.Component {
               style={{
                 display: "flex",
                 justifyContent: "space-evenly",
-                width: "60%"
+                width: "60%",
               }}
             >
               {/**
@@ -214,7 +234,7 @@ class EditProfile extends React.Component {
            *
            */}
           <UserInfo style={{ marginTop: "36px" }}>
-            Display Name: <Info>{this.props.userInfo.username} </Info>
+            Display Name: <Info>{displayname} </Info>
           </UserInfo>
           <ChangeInfo onClick={() => this.showModal("Display Name")}>
             Change display name
@@ -228,7 +248,7 @@ class EditProfile extends React.Component {
           </ChangeInfo>
 
           <UserInfo>
-            E-mail: <Info>{this.props.userInfo.email}</Info>
+            E-mail: <Info>{email}</Info>
           </UserInfo>
           <ChangeInfo onClick={() => this.showModal("E-Mail")}>
             Change e-mail
@@ -286,8 +306,8 @@ class EditProfile extends React.Component {
               placeholder={"Enter New " + modalTitle}
               allowClear="true"
               value={currentMValue}
-              onChange={value => this.handleEnter(value)}
-              onSearch={value => this.handleEnter(value)}
+              onChange={(value) => this.handleEnter(value)}
+              onSearch={(value) => this.handleEnter(value)}
             />
           </Modal>
 
@@ -301,7 +321,7 @@ class EditProfile extends React.Component {
               alignSelf: "flex-end",
               justifyContent: "space-evenly",
               width: "50%",
-              marginTop: "24px"
+              marginTop: "24px",
             }}
           >
             <Button className="profile-button-style">Cancel</Button>
@@ -319,46 +339,61 @@ class EditProfile extends React.Component {
     );
   }
 
+  updateAttributes = async (attrName, attrValue) => {
+    Auth.currentAuthenticatedUser()
+      .then((user) => {
+        let attrObj = {};
+        attrObj[attrName] = attrValue;
+        return Auth.updateUserAttributes(user, attrObj);
+      })
+      .then((data) => console.log(data))
+      .catch((err) => console.log(err));
+  };
+
   /**
    *
    * Displays Modal
    *
    */
-  showModal = info => {
-    let { displayname, email, schoolCode, phoneNumber } = this.state;
+  showModal = (info) => {
+    let { schoolCode, phoneNumber } = this.state;
+    let username = this.props.userInfo.username;
+    let displayname = this.props.userInfo.displayName;
+    let email = this.props.userInfo.email;
+
     switch (info) {
       case "Display Name":
         this.setState({
           currentMValue: displayname,
           visible: true,
-          modalTitle: info
+          modalTitle: info,
         });
         break;
       case "Password":
         this.setState({
           passwordVisible: true,
-          modalTitle: info
+          modalTitle: info,
         });
         break;
       case "E-Mail":
         this.setState({
           currentMValue: email,
           visible: true,
-          modalTitle: info
+          modalTitle: info,
         });
         break;
       case "Phone Number":
         this.setState({
           currentMValue: phoneNumber,
           visible: true,
-          modalTitle: info
+          modalTitle: info,
         });
         break;
       case "School Code":
         this.setState({
           currentMValue: schoolCode,
           visible: true,
-          modalTitle: info
+          modalTitle: info,
         });
         break;
       default:
@@ -371,13 +406,13 @@ class EditProfile extends React.Component {
    *Handles "OK" button on modal
    *
    */
-  handleOk = modalTitle => {
+  handleOk = (modalTitle) => {
     let {
       changeName,
       changeCode,
       changeEmail,
       changeNumber,
-      changePassword
+      changePassword,
     } = this.state;
     this.setState({ confirmLoading: true });
     setTimeout(() => {
@@ -391,44 +426,45 @@ class EditProfile extends React.Component {
         notification.open({
           message: "Error.",
           description: "Please enter new " + modalTitle,
-          icon: <CloseOutlined style={{ color: "red" }} />
+          icon: <CloseOutlined style={{ color: "red" }} />,
         });
         this.setState({ confirmLoading: false });
       } else {
         switch (modalTitle) {
           case "Display Name":
             this.setState({
-              displayname: changeName,
               visible: false,
-              confirmLoading: false
+              confirmLoading: false,
             });
+            this.updateAttributes("name", changeName);
+            this.props.updateDisplayName(changeName);
             break;
           case "E-Mail":
             this.setState({
               email: changeEmail,
               visible: false,
-              confirmLoading: false
+              confirmLoading: false,
             });
             break;
           case "Phone Number":
             this.setState({
               phoneNumber: changeNumber,
               visible: false,
-              confirmLoading: false
+              confirmLoading: false,
             });
             break;
           case "School Code":
             this.setState({
               schoolCode: changeCode,
               visible: false,
-              confirmLoading: false
+              confirmLoading: false,
             });
             break;
           case "Password":
             this.setState({
               password: changePassword,
               passwordVisible: false,
-              confirmLoading: false
+              confirmLoading: false,
             });
             break;
           default:
@@ -452,7 +488,7 @@ class EditProfile extends React.Component {
       changeCode: schoolCode,
       changePassword: password,
       visible: false,
-      passwordVisible: false
+      passwordVisible: false,
     });
   };
 
@@ -461,37 +497,37 @@ class EditProfile extends React.Component {
    *Handles changing profile information
    *
    */
-  handleEnter = event => {
+  handleEnter = (event) => {
     let { modalTitle } = this.state;
     switch (modalTitle) {
       case "Display Name":
         this.setState({
           changeName: event.target.value,
-          currentMValue: event.target.value
+          currentMValue: event.target.value,
         });
         break;
       case "Password":
         this.setState({
           changePassword: event.target.value,
-          currentMValue: event.target.value
+          currentMValue: event.target.value,
         });
         break;
       case "E-Mail":
         this.setState({
           changeEmail: event.target.value,
-          currentMValue: event.target.value
+          currentMValue: event.target.value,
         });
         break;
       case "Phone Number":
         this.setState({
           changeNumber: event.target.value,
-          currentMValue: event.target.value
+          currentMValue: event.target.value,
         });
         break;
       case "School Code":
         this.setState({
           changeCode: event.target.value,
-          currentMValue: event.target.value
+          currentMValue: event.target.value,
         });
         break;
       default:
@@ -505,7 +541,7 @@ class EditProfile extends React.Component {
    *
    */
 
-  handleChange = info => {
+  handleChange = (info) => {
     if (info.file.status === "uploading") {
       this.setState({ loading: true });
       return;
@@ -516,7 +552,7 @@ class EditProfile extends React.Component {
     }
   };
 }
-export default connect(mapStateToProps)(EditProfile);
+export default connect(mapStateToProps, mapDispatchToProps)(EditProfile);
 
 function beforeUpload(file) {
   const isJpgOrPng = file.type === "image/jpeg" || file.type === "image/png";

@@ -5,6 +5,13 @@ export const updateUserName = username => {
   };
 };
 
+export const updateDisplayName = displayName => {
+  return {
+    type: "UPDATE_DISPLAY_NAME",
+    displayName
+  };
+};
+
 export const updateAvatar = avatar => {
   return {
     type: "UPDATE_AVATAR",
