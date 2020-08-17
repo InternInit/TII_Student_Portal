@@ -45,318 +45,322 @@ const Row = styled.div`
 let info = {}
 
 
-class CompanyInformation extends React.Component{
+class CompanyInformation extends React.Component {
     constructor(props) {
-      super(props);
-      this.state = {
-        info: {}
-      };
+        super(props);
+        this.state = {
+            info: {}
+        };
     }
 
-    componentDidMount(){
-      let idList = []
-      let id = window.location.href.split("/")[6]
-      idList.push(id)
-      this.matchBusinesses(JSON.stringify(idList))
-      window.scrollTo(0,0);
+    componentDidMount() {
+        let idList = []
+        let id = window.location.href.split("/")[6]
+        idList.push(id)
+        this.matchBusinesses(JSON.stringify(idList))
+        window.scrollTo(0, 0);
     }
 
-    matchBusinesses(businessList){
-      fetch("/api/match_businesses", {
-        method: "POST",
-        body: JSON.parse(JSON.stringify(businessList))
-      })
-        .then(response => response.json())
-        .then(data => {
-          try{
-            let matchedBusinessesArray = [];
-            JSON.parse(data).hits.hits.forEach(item => matchedBusinessesArray.push(item._source));
-            //console.log(matchedBusinessesArray)
-            this.setState({info:matchedBusinessesArray[0]})
-          } catch (e) {
-            console.log(e)
-          }
-        });
+    matchBusinesses(businessList) {
+        fetch("/api/match_businesses", {
+            method: "POST",
+            body: JSON.parse(JSON.stringify(businessList))
+        })
+            .then(response => response.json())
+            .then(data => {
+                try {
+                    let matchedBusinessesArray = [];
+                    JSON.parse(data).hits.hits.forEach(item => matchedBusinessesArray.push(item._source));
+                    //console.log(matchedBusinessesArray)
+                    this.setState({ info: matchedBusinessesArray[0] })
+                } catch (e) {
+                    console.log(e)
+                }
+            });
     }
 
-    render(){
-      return (
-        <React.Fragment >
-          {/**
+    render() {
+        let { info } = this.statel
+        if (info === null) {
+            return null;
+        }
+        return (
+            <React.Fragment >
+                {/**
                    *
                    * Breadcrumb
                    *
                    */}
-          <Breadcrumb style={{
-              fontSize: '24px',
-              display: 'flex',
-              flexDirection: 'row',
-              fontWeight: '500',
-              marginTop: '30px',
-              marginLeft: '55px'
-          }}>
-              <Breadcrumb.Item>
-                  Add Companies
+                <Breadcrumb style={{
+                    fontSize: '24px',
+                    display: 'flex',
+                    flexDirection: 'row',
+                    fontWeight: '500',
+                    marginTop: '30px',
+                    marginLeft: '55px'
+                }}>
+                    <Breadcrumb.Item>
+                        Add Companies
                   </Breadcrumb.Item>
-              <Breadcrumb.Item>
-                  {this.state.info.name}
-                  </Breadcrumb.Item>
-          </Breadcrumb>
+                    <Breadcrumb.Item>
+                        {info.name}
+                    </Breadcrumb.Item>
+                </Breadcrumb>
 
 
-          <ModuleContainer>
-              {/**
+                <ModuleContainer>
+                    {/**
                    *
                    * Company Logo and Name
                    *
                    */}
-              <Row style={{
-                  display: 'flex',
-                  flexDirection: 'row',
-              }}>
-                  <Avatar size={40} src={this.state.info.avatar} style={{ marginTop: '10px' }} />
-                  <Header style={{
-                      fontSize: '36px',
-                      textAlign: 'left',
-                      marginLeft: '15px',
-                      color: '#8C8C8C',
-                      marginTop: '0px'
-                  }}>{this.state.info.name}</Header>
-              </Row>
+                    <Row style={{
+                        display: 'flex',
+                        flexDirection: 'row',
+                    }}>
+                        <Avatar size={40} src={info.avatar} style={{ marginTop: '10px' }} />
+                        <Header style={{
+                            fontSize: '36px',
+                            textAlign: 'left',
+                            marginLeft: '15px',
+                            color: '#8C8C8C',
+                            marginTop: '0px'
+                        }}>{info.name}</Header>
+                    </Row>
 
 
-              {/**
+                    {/**
                    *
                    * Divider
                    *
                    */}
-              <Divider >
-                  <Header style={{
-                      color: '#595959',
-                      paddingBottom: '25px',
-                      marginTop: '25px'
-                  }}>Company Overview
+                    <Divider >
+                        <Header style={{
+                            color: '#595959',
+                            paddingBottom: '25px',
+                            marginTop: '25px'
+                        }}>Company Overview
                        </Header>
-              </Divider>
+                    </Divider>
 
 
-              {/**
+                    {/**
                    *
                    * Company Description
                    *
                    */}
-              <Row>
-                  <Header >
-                      Company Description
+                    <Row>
+                        <Header >
+                            Company Description
                       </Header>
-                  <Caption>
-                      {this.state.info.description}
+                        <Caption>
+                            {info.description}
 
-                      </Caption>
-              </Row>
+                        </Caption>
+                    </Row>
 
 
-              {/**
+                    {/**
                    *
                    * Images + Caption
                    *
                    */}
-              <Row style={{
-                  display: 'flex',
-                  flexDirection: 'row',
-                  justifyContent: 'center',
-                  marginTop: '45px',
-                  marginBottom: '45px'
-              }}>
-                  <Row>
-                      <Image src={this.state.info.avatar} alt="Logo" style={{ marginTop: '10px' }} />
-                  </Row>
-                  <Row>
+                    <Row style={{
+                        display: 'flex',
+                        flexDirection: 'row',
+                        justifyContent: 'center',
+                        marginTop: '45px',
+                        marginBottom: '45px'
+                    }}>
+                        <Row>
+                            <Image src={info.avatar} alt="Logo" style={{ marginTop: '10px' }} />
+                        </Row>
+                        <Row>
 
-                      <Image src="https://citybizlist.com/media/images/large/1545083234_2689.jpg" alt="Logo" style={{ marginTop: '10px' }} />
-                  </Row>
-              </Row>
+                            <Image src="https://citybizlist.com/media/images/large/1545083234_2689.jpg" alt="Logo" style={{ marginTop: '10px' }} />
+                        </Row>
+                    </Row>
 
 
-              {/**
+                    {/**
                    *
                    * Divider
                    *
                    */}
-              <Divider >
-                  <Header style={{
-                      color: '#595959',
-                      paddingBottom: '25px',
-                      marginTop: '25px'
-                  }}>Internship Information
+                    <Divider >
+                        <Header style={{
+                            color: '#595959',
+                            paddingBottom: '25px',
+                            marginTop: '25px'
+                        }}>Internship Information
                     </Header>
-              </Divider>
+                    </Divider>
 
 
-              {/**
+                    {/**
                    *
                    * Intership Description
                    *
                    */}
-              <Row>
-                  <Header >
-                      Description
+                    <Row>
+                        <Header >
+                            Description
                       </Header>
-                  <Caption>
-                      {this.state.info.description}
-                      </Caption>
-              </Row>
+                        <Caption>
+                            {info.description}
+                        </Caption>
+                    </Row>
 
 
-              {/**
+                    {/**
                    *
                    * Location
                    *
                    */}
-              <Row>
-                  <Header >
-                      Location
+                    <Row>
+                        <Header >
+                            Location
                       </Header>
-                  <Caption>
-                      {this.state.info.location}
-                      </Caption>
-              </Row>
+                        <Caption>
+                            {info.location}
+                        </Caption>
+                    </Row>
 
 
-              {/**
+                    {/**
                    *
                    * Location
                    *
                    */}
-              <Row>
-                  <Header >
-                      Industry
+                    <Row>
+                        <Header >
+                            Industry
                       </Header>
-                  <Caption>
-                      {this.state.info.industry}
-                      </Caption>
-              </Row>
+                        <Caption>
+                            {info.industry}
+                        </Caption>
+                    </Row>
 
 
-              {/**
+                    {/**
                    *
                    * Work Period
                    *
                    */}
-              <Row>
-                  <Header >
-                      Work Period
+                    <Row>
+                        <Header >
+                            Work Period
                       </Header>
-                  <Caption>
-                      June 10, 2020, September 31st, 2020
+                        <Caption>
+                            June 10, 2020, September 31st, 2020
                       </Caption>
-              </Row>
+                    </Row>
 
 
-              {/**
+                    {/**
                    *
                    * Additional Information
                    *
                    */}
-              <Row style={{ marginBottom: '45px' }}>
-                  <Header >
-                      Additional Information
+                    <Row style={{ marginBottom: '45px' }}>
+                        <Header >
+                            Additional Information
                       </Header>
-                  <Caption>
-                      - AP CSA
-                      - AP CSP
-                      - Must be 18+
+                        <Caption>
+                            - AP CSA
+                            - AP CSP
+                            - Must be 18+
                       </Caption>
-              </Row>
+                    </Row>
 
 
-              {/**
+                    {/**
                    *
                    * Divider
                    *
                    */}
-              <Divider >
-                  <Header style={{
-                      color: '#595959',
-                      paddingBottom: '25px',
-                      marginTop: '25px'
-                  }}>Contact Information
+                    <Divider >
+                        <Header style={{
+                            color: '#595959',
+                            paddingBottom: '25px',
+                            marginTop: '25px'
+                        }}>Contact Information
                     </Header>
-              </Divider>
+                    </Divider>
 
 
-              {/**
+                    {/**
                    *
                    * Website
                    *
                    */}
-              <Row>
-                  <Header >
-                      Website
+                    <Row>
+                        <Header >
+                            Website
                       </Header>
                         <Caption>
-                          Click Here!
+                            Click Here!
                         </Caption>
-              </Row>
+                    </Row>
 
 
-              {/**
+                    {/**
                    *
                    * Email
                    *
                    */}
-              <Row>
-                  <Header >
-                      E-Mail
+                    <Row>
+                        <Header >
+                            E-Mail
                       </Header>
-                  <Caption>
-                      Email@gmail.com
+                        <Caption>
+                            Email@gmail.com
                       </Caption>
-              </Row>
+                    </Row>
 
 
-              {/**
+                    {/**
                    *
                    * Phone Number
                    *
                    */}
-              <Row>
-                  <Header >
-                      Phone Number
+                    <Row>
+                        <Header >
+                            Phone Number
                       </Header>
-                  <Caption>
-                      123-456-7891
+                        <Caption>
+                            123-456-7891
                       </Caption>
-              </Row>
+                    </Row>
 
 
-              {/**
+                    {/**
                    *
                    * Links To Social
                    *
                    */}
-              <Row>
-                  <Header >
-                      Links
+                    <Row>
+                        <Header >
+                            Links
                       </Header>
-                  <Row style={{
-                      display: 'flex',
-                      flexDirection: 'row',
-                      justifyContent: 'space-evenly',
-                  }}>
-                      <Avatar size={36} src="" alt="Logo" style={{ marginTop: '10px' }} />
-                      <Avatar size={36} src="" alt="Logo" style={{ marginTop: '10px', marginLeft: '10px' }} />
-                      <Avatar size={36} src="" alt="Logo" style={{ marginTop: '10px', marginLeft: '10px' }} />
-                      <Avatar size={36} src="" alt="Logo" style={{ marginTop: '10px', marginLeft: '10px' }} />
+                        <Row style={{
+                            display: 'flex',
+                            flexDirection: 'row',
+                            justifyContent: 'space-evenly',
+                        }}>
+                            <Avatar size={36} src="" alt="Logo" style={{ marginTop: '10px' }} />
+                            <Avatar size={36} src="" alt="Logo" style={{ marginTop: '10px', marginLeft: '10px' }} />
+                            <Avatar size={36} src="" alt="Logo" style={{ marginTop: '10px', marginLeft: '10px' }} />
+                            <Avatar size={36} src="" alt="Logo" style={{ marginTop: '10px', marginLeft: '10px' }} />
 
-                  </Row>
-              </Row>
+                        </Row>
+                    </Row>
 
 
 
-          </ModuleContainer>
-      </React.Fragment>)
-  }
+                </ModuleContainer>
+            </React.Fragment>)
+    }
 }
 
 export default CompanyInformation

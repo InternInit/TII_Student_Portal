@@ -26,9 +26,10 @@ yarn-error.log*
 #Custom config files
 #flaskEnvSetup.sh
 
-#Python
+#Python 
 /backend/__pycache__
 /env
+/venv
 /virtual-environment
 *.pyc
 
