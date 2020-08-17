@@ -2,6 +2,12 @@ import React from "react";
 import styled from "styled-components";
 import { Divider, Breadcrumb, Avatar } from "antd";
 import { TeamOutlined } from "@ant-design/icons";
+import {
+  AiFillFacebook,
+  AiFillTwitterSquare,
+  AiFillInstagram,
+  AiFillLinkedin,
+} from "react-icons/ai";
 
 const ModuleContainer = styled.div`
   background: white;
@@ -320,29 +326,25 @@ class CompanyInformation extends React.Component {
                 justifyContent: "space-evenly",
               }}
             >
-              <Avatar
+              <AiFillFacebook
                 size={36}
-                src=""
-                alt="Logo"
-                style={{ marginTop: "10px" }}
+                alt="facebook"
+                style={{ marginTop: "10px", color: "#3b5998" }}
               />
-              <Avatar
+              <AiFillTwitterSquare
                 size={36}
-                src=""
-                alt="Logo"
-                style={{ marginTop: "10px", marginLeft: "10px" }}
+                alt="facebook"
+                style={{ marginTop: "10px", color: "#1DA1F2" }}
               />
-              <Avatar
+              <AiFillInstagram
                 size={36}
-                src=""
-                alt="Logo"
-                style={{ marginTop: "10px", marginLeft: "10px" }}
+                alt="facebook"
+                style={{ marginTop: "10px", color: "#5851DB" }}
               />
-              <Avatar
+              <AiFillLinkedin
                 size={36}
-                src=""
-                alt="Logo"
-                style={{ marginTop: "10px", marginLeft: "10px" }}
+                alt="facebook"
+                style={{ marginTop: "10px", color: "#0e76a8" }}
               />
             </Row>
           </Row>
