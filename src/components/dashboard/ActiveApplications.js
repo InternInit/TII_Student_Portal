@@ -33,7 +33,7 @@ class ActiveApplications extends Component {
                             <ActiveAppCompanytab
                                 name={pinnedCompany.name}
                                 industry={pinnedCompany.industry}
-                                logo={pinnedCompany.logo}
+                                avatar={pinnedCompany.avatar}
                                 status={pinnedCompany.status}
                             />
 

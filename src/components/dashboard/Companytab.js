@@ -53,7 +53,7 @@ class Companytab extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            label: <CLabel name={this.props.name} industry={this.props.industry} companyid={this.props.companyid} />,
+            label: <CLabel name={this.props.name} industry={this.props.industry} companyid={this.props.companyid} avatar = {this.props.avatar}/>,
 
         }
     }
@@ -111,8 +111,7 @@ class CLabel extends React.Component {
                     <Avatar
                         size={36}
                         shape="square"
-                        icon={<TeamOutlined />}
-                        src={" "}
+                        src={this.props.avatar}
                         style={{ marginLeft: "8%", marginBottom: "14px" }}
                     />
 

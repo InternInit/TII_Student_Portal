@@ -71,8 +71,7 @@ function ActiveAppCompanytab(props) {
               <Avatar
                 size={36}
                 shape="square"
-                icon={<TeamOutlined />}
-                src={" "}
+                src={props.avatar}
                 style={{ marginLeft: "8%", marginBottom: "14px" }}
               />
 

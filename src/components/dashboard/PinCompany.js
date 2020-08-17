@@ -33,7 +33,7 @@ class PinCompany extends Component {
               <Companytab
                 name={pinnedCompany.name}
                 industry={pinnedCompany.industry}
-                logo={pinnedCompany.logo}
+                avatar={pinnedCompany.avatar}
                 companyid={pinnedCompany.id}
                 updateBusinessStatus={this.props.updateBusinessStatus}
               />
