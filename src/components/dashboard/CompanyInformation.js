@@ -54,6 +54,13 @@ const Row = styled.div`
   align-items: flex-start;
 `;
 
+/*
+=================================================================
+
+                          SOCIAL  ICONS
+
+=================================================================
+*/
 const Facebook = styled(AiFillFacebook)`
   margin-top: 10px;
   color: #3b5998;
@@ -147,12 +154,11 @@ class CompanyInformation extends React.Component {
          */}
         <Breadcrumb
           style={{
-            fontSize: "24px",
+            fontSize: "18px",
             display: "flex",
             flexDirection: "row",
             fontWeight: "500",
             marginTop: "30px",
-            marginLeft: "55px",
           }}
         >
           <Link to="/dashboard/add-companies">
