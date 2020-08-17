@@ -45,7 +45,14 @@ const Header = styled.div`
   font-size: 28px;
   font-weight: 500;
   color: #595959;
-  margin-top: 50px;
+  margin-top: 30px;
+`;
+
+const SectionHeader = styled.span`
+  font-size: 36px;
+  font-weight: 500;
+  color: black;
+  
 `;
 
 const Row = styled.div`
@@ -177,6 +184,7 @@ class CompanyInformation extends React.Component {
             style={{
               display: "flex",
               flexDirection: "row",
+              marginBottom: "40px"
             }}
           >
             <Avatar size={40} src={info.avatar} style={{ marginTop: "10px" }} />
@@ -199,7 +207,7 @@ class CompanyInformation extends React.Component {
            *
            */}
           <Divider>
-            <Header
+            <SectionHeader
               style={{
                 color: "#595959",
                 paddingBottom: "25px",
@@ -207,7 +215,7 @@ class CompanyInformation extends React.Component {
               }}
             >
               Company Overview
-            </Header>
+            </SectionHeader>
           </Divider>
 
           {/**
@@ -231,7 +239,7 @@ class CompanyInformation extends React.Component {
               flexDirection: "row",
               justifyContent: "space-evenly",
               marginTop: "45px",
-              marginBottom: "45px",
+              marginBottom: "70px",
             }}
           >
             <Row>
@@ -256,15 +264,15 @@ class CompanyInformation extends React.Component {
            *
            */}
           <Divider>
-            <Header
+            <SectionHeader
               style={{
                 color: "#595959",
                 paddingBottom: "25px",
-                marginTop: "25px",
+                marginTop: "40px",
               }}
             >
               Internship Information
-            </Header>
+            </SectionHeader>
           </Divider>
 
           {/**
@@ -325,7 +333,7 @@ class CompanyInformation extends React.Component {
            *
            */}
           <Divider>
-            <Header
+            <SectionHeader
               style={{
                 color: "#595959",
                 paddingBottom: "25px",
@@ -333,7 +341,7 @@ class CompanyInformation extends React.Component {
               }}
             >
               Contact Information
-            </Header>
+            </SectionHeader>
           </Divider>
 
           {/**
