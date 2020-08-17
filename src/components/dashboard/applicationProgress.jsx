@@ -106,22 +106,22 @@ const percentComplete = [
     "#e6f7ff",
     "#1890ff",
     "internshipInfoChecklist",
-    "internship-info"
+    "internship-info",
   ],
   ["Personal", "#fff7e6", "#fa8c16", "personalChecklist", "personal"],
   ["Essays", "#fcffe6", "#a0d911", "essayChecklist", "written-work"],
-  ["References", "#f9f0ff", "#722ed1", "referencesChecklist", "references"]
+  ["References", "#f9f0ff", "#722ed1", "referencesChecklist", "references"],
 ];
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     completionState: state.completionState,
-    completionChecklist: state.completionChecklist
+    completionChecklist: state.completionChecklist,
   };
 };
 
 const mapDispatchToProps = {
-  updateCompletionState
+  updateCompletionState,
 };
 
 class ApplicationProgress extends Component {
@@ -131,40 +131,40 @@ class ApplicationProgress extends Component {
       internshipInfoChecklist: false,
       personalChecklist: false,
       essayChecklist: false,
-      referencesChecklist: false
+      referencesChecklist: false,
     };
   }
   componentDidMount() {
     console.log(this.props);
   }
 
-  handleClick = section => {
+  handleClick = (section) => {
     const {
       internshipInfoChecklist,
       personalChecklist,
       essayChecklist,
-      referencesChecklist
+      referencesChecklist,
     } = this.state;
 
     switch (section) {
       case "Internship Information":
         this.setState({
-          internshipInfoChecklist: !internshipInfoChecklist
+          internshipInfoChecklist: !internshipInfoChecklist,
         });
         break;
       case "Personal":
         this.setState({
-          personalChecklist: !personalChecklist
+          personalChecklist: !personalChecklist,
         });
         break;
       case "Essays":
         this.setState({
-          essayChecklist: !essayChecklist
+          essayChecklist: !essayChecklist,
         });
         break;
       case "References":
         this.setState({
-          referencesChecklist: !referencesChecklist
+          referencesChecklist: !referencesChecklist,
         });
         break;
       default:
@@ -181,13 +181,13 @@ class ApplicationProgress extends Component {
          *
          */}
 
-        {this.props.completionState.every(item => item === 0) ? (
+        {this.props.completionState.every((item) => item === 0) ? (
           <ModuleContainer style={{ marginTop: "3%" }}>
             <Row>
               <Col
                 span={20}
                 style={{
-                  float: "left"
+                  float: "left",
                 }}
               >
                 <DescriptorText>
@@ -200,7 +200,7 @@ class ApplicationProgress extends Component {
                   verticalAlign: "center",
                   display: "flex",
                   justifyContents: "center",
-                  alignItems: "center"
+                  alignItems: "center",
                 }}
               >
                 <Button
@@ -210,7 +210,7 @@ class ApplicationProgress extends Component {
                   style={{
                     fontSize: "16px",
                     fontWeight: "bold",
-                    width: "200px"
+                    width: "200px",
                   }}
                 >
                   <Link to="/apply">Build my Profile</Link>
@@ -244,11 +244,11 @@ class ApplicationProgress extends Component {
                 {this.props.completionState[index] < 1 ? (
                   Math.floor(this.props.completionState[index] * 100) + "%"
                 ) : (
-                    <CheckCircleTwoTone
-                      style={{ fontSize: "24px" }}
-                      twoToneColor="#52c41a"
-                    />
-                  )}
+                  <CheckCircleTwoTone
+                    style={{ fontSize: "24px" }}
+                    twoToneColor="#52c41a"
+                  />
+                )}
               </PercentHeader>
 
               {/**
@@ -297,8 +297,5 @@ class ApplicationProgress extends Component {
 }
 
 export default withRouter(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(ApplicationProgress)
+  connect(mapStateToProps, mapDispatchToProps)(ApplicationProgress)
 );

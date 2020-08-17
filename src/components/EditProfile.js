@@ -112,15 +112,13 @@ class EditProfile extends React.Component {
 
     this.state = {
       displayname: "Kevin Tucker",
-      password: "kevinpassword",
+      password: "passwordholder",
       email: "21lub@nsboroschools.net",
-      phoneNumber: "774 415 4004",
       schoolCode: "12345",
 
       changeName: "Kevin Tucker",
-      changePassword: "kevinpassword",
+      changePassword: "passwordholder",
       changeEmail: "21lub@nsboroschools.net",
-      changeNumber: "774 415 4004",
       changeCode: "2345",
 
       currentMValue: "",
@@ -136,7 +134,6 @@ class EditProfile extends React.Component {
   render() {
     let {
       password,
-      phoneNumber,
       schoolCode,
 
       currentMValue,
@@ -255,13 +252,6 @@ class EditProfile extends React.Component {
           </ChangeInfo>
 
           <UserInfo>
-            Phone Number: <Info>{phoneNumber}</Info>
-          </UserInfo>
-          <ChangeInfo onClick={() => this.showModal("Phone Number")}>
-            Change phone number
-          </ChangeInfo>
-
-          <UserInfo>
             School Code: <Info>{schoolCode}</Info>
           </UserInfo>
           <ChangeInfo onClick={() => this.showModal("School Code")}>
@@ -356,7 +346,7 @@ class EditProfile extends React.Component {
    *
    */
   showModal = (info) => {
-    let { schoolCode, phoneNumber } = this.state;
+    let { schoolCode } = this.state;
     let username = this.props.userInfo.username;
     let displayname = this.props.userInfo.displayName;
     let email = this.props.userInfo.email;
@@ -382,13 +372,6 @@ class EditProfile extends React.Component {
           modalTitle: info,
         });
         break;
-      case "Phone Number":
-        this.setState({
-          currentMValue: phoneNumber,
-          visible: true,
-          modalTitle: info,
-        });
-        break;
       case "School Code":
         this.setState({
           currentMValue: schoolCode,
@@ -407,20 +390,13 @@ class EditProfile extends React.Component {
    *
    */
   handleOk = (modalTitle) => {
-    let {
-      changeName,
-      changeCode,
-      changeEmail,
-      changeNumber,
-      changePassword,
-    } = this.state;
+    let { changeName, changeCode, changeEmail, changePassword } = this.state;
     this.setState({ confirmLoading: true });
     setTimeout(() => {
       if (
         changeName === "" ||
         changeCode === "" ||
         changeEmail === "" ||
-        changeNumber === "" ||
         changePassword === ""
       ) {
         notification.open({
@@ -445,13 +421,8 @@ class EditProfile extends React.Component {
               visible: false,
               confirmLoading: false,
             });
-            break;
-          case "Phone Number":
-            this.setState({
-              phoneNumber: changeNumber,
-              visible: false,
-              confirmLoading: false,
-            });
+            this.updateAttributes("email", changeEmail);
+            this.props.updateEmail(changeEmail);
             break;
           case "School Code":
             this.setState({
@@ -484,7 +455,6 @@ class EditProfile extends React.Component {
     this.setState({
       changeName: displayname,
       changeEmail: email,
-      changeNumber: phoneNumber,
       changeCode: schoolCode,
       changePassword: password,
       visible: false,
@@ -518,12 +488,6 @@ class EditProfile extends React.Component {
           currentMValue: event.target.value,
         });
         break;
-      case "Phone Number":
-        this.setState({
-          changeNumber: event.target.value,
-          currentMValue: event.target.value,
-        });
-        break;
       case "School Code":
         this.setState({
           changeCode: event.target.value,
@@ -552,6 +516,7 @@ class EditProfile extends React.Component {
     }
   };
 }
+
 export default connect(mapStateToProps, mapDispatchToProps)(EditProfile);
 
 function beforeUpload(file) {

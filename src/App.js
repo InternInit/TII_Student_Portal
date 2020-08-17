@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 
-
 //Ant Design Imports
-import { Layout, } from "antd";
+import { Layout } from "antd";
 
 //Styled Component Imports
 import styled from "styled-components";
@@ -23,7 +22,6 @@ import EditProfile from "./components/EditProfile.js";
 
 import LogIn from "./components/LogIn.js";
 import SignUp from "./components/SignUp.js";
-
 
 //CSS Imports
 import "./App.css";
@@ -48,16 +46,15 @@ import {
   updateActiveApplications,
   updateCompletionState,
   batchUpdateCompletionState,
-  batchUpdateCompletionChecklist
+  batchUpdateCompletionChecklist,
 } from "./redux/actions";
-
 
 import devConfigurationFile from "./configuration_dev.json";
 import prodConfigurationFile from "./configuration_prod.json";
 
 //Amplify
-import Amplify, { Auth } from 'aws-amplify';
-import awsconfig from './aws-exports';
+import Amplify, { Auth } from "aws-amplify";
+import awsconfig from "./aws-exports";
 Amplify.configure(awsconfig);
 
 let configurationFile = {};
@@ -70,10 +67,10 @@ if (!process.env.NODE_ENV || process.env.NODE_ENV === "development") {
   console.error = noop;
 }
 
-function noop() { }
+function noop() {}
 
 //Declarations
-const { Content, } = Layout;
+const { Content } = Layout;
 
 //Styles
 const PageContainer = styled.div`
@@ -85,15 +82,15 @@ const PageContainer = styled.div`
   background-color: white;
   border-radius: 10px;
 
-  flex-direction:column;
-  align-items:center;
+  flex-direction: column;
+  align-items: center;
 `;
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     completionState: state.completionState,
     completionChecklist: state.completionChecklist,
-    userInfo: state.userInfo
+    userInfo: state.userInfo,
   };
 };
 
@@ -107,7 +104,7 @@ const mapDispatchToProps = {
   updateActiveApplications,
   updateCompletionState,
   batchUpdateCompletionState,
-  batchUpdateCompletionChecklist
+  batchUpdateCompletionChecklist,
 };
 
 class App extends Component {
@@ -122,7 +119,7 @@ class App extends Component {
       submissionState: true,
 
       authorized: false,
-      version: 0
+      version: 0,
     };
   }
 
@@ -132,7 +129,7 @@ class App extends Component {
     this.getCachedCompletionState();
     this.getPinnedBusinesses();
     this.getActiveApplications();
-    window.addEventListener('resize', this.resize);
+    window.addEventListener("resize", this.resize);
   }
 
   componentWillUnmount() {
@@ -145,27 +142,27 @@ class App extends Component {
   newAuth = async () => {
     Auth.currentSession()
       .then((session) => {
-        console.log(session)
+        console.log(session);
         this.inMemoryToken = {
           token: session.idToken.jwtToken,
           expiry: session.idToken.payload.exp,
           refresh: session.refreshToken.token,
-          access: session.accessToken.jwtToken
+          access: session.accessToken.jwtToken,
         };
-        console.log(this.inMemoryToken)
-        this.props.updateUserName(session.accessToken.payload.username)
-        this.props.updateDisplayName(session.idToken.payload.name)
-        this.props.updateEmail(session.idToken.payload.email)
+        console.log(this.inMemoryToken);
+        this.props.updateUserName(session.accessToken.payload.username);
+        this.props.updateDisplayName(session.idToken.payload.name);
+        this.props.updateEmail(session.idToken.payload.email);
       })
       .catch((error) => {
-        console.log("Session Error: " + error)
+        console.log("Session Error: " + error);
         if (window.location.href.split("/")[3] !== "login") {
-          window.location.href = window.location.href.split("/").slice(0, 3).join("/") + "/login"
-
+          window.location.href =
+            window.location.href.split("/").slice(0, 3).join("/") + "/login";
         }
         //TODO: Update to a more elegant solution
       });
-  }
+  };
 
   updateData = (values, origin) => {
     if (
@@ -179,13 +176,15 @@ class App extends Component {
             "Bearer " + JSON.parse(JSON.stringify(this.inMemoryToken.token)),
           "Content-Type": "text/plain",
           "Completion-State": JSON.stringify(this.props.completionState),
-          "Completion-Checklist": JSON.stringify(this.props.completionChecklist),
-          "Version": JSON.stringify(this.props.userInfo.version)
+          "Completion-Checklist": JSON.stringify(
+            this.props.completionChecklist
+          ),
+          Version: JSON.stringify(this.props.userInfo.version),
         },
-        body: JSON.stringify(values) + "#" + origin
+        body: JSON.stringify(values) + "#" + origin,
       })
-        .then(response => response.json())
-        .then(data => {
+        .then((response) => response.json())
+        .then((data) => {
           console.log("Sent: " + data);
         });
     } else if (this.state.submissionState === false) {
@@ -195,7 +194,7 @@ class App extends Component {
 
   onSubmit = (values, origin) => {
     if (this.state.submissionState === true) {
-      this.props.updateVersion(this.props.userInfo.version + 1)
+      this.props.updateVersion(this.props.userInfo.version + 1);
       fetch("/api/update_user_data", {
         method: "POST",
         headers: {
@@ -203,13 +202,15 @@ class App extends Component {
             "Bearer " + JSON.parse(JSON.stringify(this.inMemoryToken.token)),
           "Content-Type": "text/plain",
           "Completion-State": JSON.stringify(this.props.completionState),
-          "Completion-Checklist": JSON.stringify(this.props.completionChecklist),
-          "Version": JSON.stringify(this.props.userInfo.version)
+          "Completion-Checklist": JSON.stringify(
+            this.props.completionChecklist
+          ),
+          Version: JSON.stringify(this.props.userInfo.version),
         },
-        body: JSON.stringify(values) + "#" + origin + "#" + "submit"
+        body: JSON.stringify(values) + "#" + origin + "#" + "submit",
       })
-        .then(response => response.json())
-        .then(data => {
+        .then((response) => response.json())
+        .then((data) => {
           console.log(data);
         });
     } else if (this.state.submissionState === false) {
@@ -222,8 +223,8 @@ class App extends Component {
       .then(() => console.log("Signed Out"))
       .catch(() => console.log("Could Not Sign Out"));
     if (window.location.href.split("/")[3] !== "login") {
-      window.location.href = window.location.href.split("/").slice(0, 3).join("/") + "/login"
-
+      window.location.href =
+        window.location.href.split("/").slice(0, 3).join("/") + "/login";
     }
   };
 
@@ -257,14 +258,13 @@ class App extends Component {
       method: "POST",
       headers: {
         Authorization: "Bearer " + JSON.parse(JSON.stringify(token)),
-        Source: JSON.parse(JSON.stringify(source))
+        Source: JSON.parse(JSON.stringify(source)),
       },
-      body: fd
-    }).then(response => { });
+      body: fd,
+    }).then((response) => {});
   };
 
   updateBusinessStatus = async (businessId, status) => {
-
     let token = await this.getJwt();
 
     fetch("/api/update_business_status", {
@@ -272,92 +272,99 @@ class App extends Component {
       headers: {
         Authorization: "Bearer " + JSON.parse(JSON.stringify(token)),
         "Content-Type": "text/plain",
-        "businessId": JSON.parse(JSON.stringify(businessId))
+        businessId: JSON.parse(JSON.stringify(businessId)),
       },
-      body: status
+      body: status,
     })
-      .then(response => response.json())
-      .then(data => {
+      .then((response) => response.json())
+      .then((data) => {
         console.log(data);
         this.getPinnedBusinesses();
         this.getActiveApplications();
       });
-  }
+  };
 
   getPinnedBusinesses = async () => {
-
     let token = await this.getJwt();
 
     fetch("/api/get_business_by_status", {
       method: "POST",
       headers: {
         Authorization: "Bearer " + JSON.parse(JSON.stringify(token)),
-        "Content-Type": "text/plain"
+        "Content-Type": "text/plain",
       },
-      body: JSON.parse(JSON.stringify("Pinned"))
+      body: JSON.parse(JSON.stringify("Pinned")),
     })
-      .then(response => response.json())
-      .then(data => {
-        this.matchBusinessesPinned(data)
+      .then((response) => response.json())
+      .then((data) => {
+        this.matchBusinessesPinned(data);
       });
-  }
+  };
 
   getActiveApplications = async () => {
-
     let token = await this.getJwt();
 
     fetch("/api/get_business_by_status", {
       method: "POST",
       headers: {
         Authorization: "Bearer " + JSON.parse(JSON.stringify(token)),
-        "Content-Type": "text/plain"
+        "Content-Type": "text/plain",
       },
-      body: JSON.parse(JSON.stringify("*"))
+      body: JSON.parse(JSON.stringify("*")),
     })
-      .then(response => response.json())
-      .then(data => {
-        let parsedData = JSON.parse(data)
-        this.matchBusinessesActive(JSON.stringify(parsedData[0]), parsedData[1])
+      .then((response) => response.json())
+      .then((data) => {
+        let parsedData = JSON.parse(data);
+        this.matchBusinessesActive(
+          JSON.stringify(parsedData[0]),
+          parsedData[1]
+        );
       });
-  }
+  };
 
   matchBusinessesPinned = (businessList) => {
     fetch("/api/match_businesses", {
       method: "POST",
-      body: JSON.parse(JSON.stringify(businessList))
+      body: JSON.parse(JSON.stringify(businessList)),
     })
-      .then(response => response.json())
-      .then(data => {
+      .then((response) => response.json())
+      .then((data) => {
         try {
           let matchedBusinessesArray = [];
-          JSON.parse(data).hits.hits.forEach(item => matchedBusinessesArray.push(item._source));
-          this.props.updatePinnedBusinesses(matchedBusinessesArray)
+          JSON.parse(data).hits.hits.forEach((item) =>
+            matchedBusinessesArray.push(item._source)
+          );
+          this.props.updatePinnedBusinesses(matchedBusinessesArray);
         } catch (e) {
-          console.log(data)
-          console.log(e)
+          console.log(data);
+          console.log(e);
         }
       });
-  }
+  };
 
   matchBusinessesActive = (businessList, statusList) => {
     fetch("/api/match_businesses", {
       method: "POST",
-      body: JSON.parse(JSON.stringify(businessList))
+      body: JSON.parse(JSON.stringify(businessList)),
     })
-      .then(response => response.json())
-      .then(data => {
+      .then((response) => response.json())
+      .then((data) => {
         try {
           let matchedBusinessesArray = [];
-          JSON.parse(data).hits.hits.forEach(item => matchedBusinessesArray.push(item._source));
-          matchedBusinessesArray.forEach((item, index) => item.status = statusList[item.id])
-          console.log(matchedBusinessesArray)
-          this.props.updateActiveApplications(matchedBusinessesArray)
+          JSON.parse(data).hits.hits.forEach((item) =>
+            matchedBusinessesArray.push(item._source)
+          );
+          matchedBusinessesArray.forEach(
+            (item, index) => (item.status = statusList[item.id])
+          );
+          console.log(matchedBusinessesArray);
+          this.props.updateActiveApplications(matchedBusinessesArray);
         } catch (e) {
-          console.log(data)
-          console.log(e)
+          console.log(data);
+          console.log(e);
         }
       });
-  }
+  };
 
   getCachedCompletionState = async () => {
     let token = await this.getJwt();
@@ -380,34 +387,34 @@ class App extends Component {
         { key: "Willing Work Times", completed: false },
         { key: "Starting/Ending Dates", completed: false },
         { key: "Paid/Unpaid Preference", completed: false },
-        { key: "Resume", completed: false }
+        { key: "Resume", completed: false },
       ],
       [
         { key: "Gender", completed: false },
         { key: "Age", completed: false },
-        { key: "Education", completed: false }
+        { key: "Education", completed: false },
       ],
       [
         { key: "Why This Industry Essay", completed: false },
         { key: "Leadership Roles Essay", completed: false },
         { key: "Extra Essay", completed: false },
-        { key: "Cover Letter", completed: false }
+        { key: "Cover Letter", completed: false },
       ],
-      [{ key: "Reference", completed: false }]
+      [{ key: "Reference", completed: false }],
     ];
 
     fetch("/api/get_user_data", {
       method: "POST",
       headers: {
-        Authorization: "Bearer " + JSON.parse(JSON.stringify(token))
+        Authorization: "Bearer " + JSON.parse(JSON.stringify(token)),
       },
-      body: 0
+      body: 0,
     })
-      .then(response => response.json())
-      .then(data => {
+      .then((response) => response.json())
+      .then((data) => {
         let parsedRecv = JSON.parse(data);
         if (parsedRecv !== "No Info") {
-          console.log(parsedRecv)
+          console.log(parsedRecv);
           let recvCompletionState = parsedRecv.completionState;
           let recvCompletionChecklist = parsedRecv.completionChecklist;
           this.props.batchUpdateCompletionState(recvCompletionState);
@@ -455,7 +462,7 @@ class App extends Component {
               padding: "30px",
               justifyContent: "center",
               backgroundColor: "#ededed",
-              minHeight: "100vh"
+              minHeight: "100vh",
             }}
           >
             {this.RenderedPages()}
@@ -473,17 +480,17 @@ class App extends Component {
             <Route
               path="/apply"
               exact
-              render={props => {
+              render={(props) => {
                 return (
                   (this.authParam = props.location.search),
-                  <Redirect to="/apply/internship-info" />
+                  (<Redirect to="/apply/internship-info" />)
                 );
               }}
             />
 
             <Route
               path="/apply/internship-info"
-              render={props => (
+              render={(props) => (
                 <PageInternshipInformation
                   {...props}
                   clickTwo={this.clickTwo}
@@ -497,7 +504,7 @@ class App extends Component {
 
             <Route
               path="/apply/personal"
-              render={props => (
+              render={(props) => (
                 <PagePersonal
                   {...props}
                   clickOne={this.clickOne}
@@ -511,7 +518,7 @@ class App extends Component {
 
             <Route
               path="/apply/written-work"
-              render={props => (
+              render={(props) => (
                 <PageEssays
                   {...props}
                   clickTwo={this.clickTwo}
@@ -526,7 +533,7 @@ class App extends Component {
 
             <Route
               path="/apply/references"
-              render={props => (
+              render={(props) => (
                 <PageReferences
                   {...props}
                   clickThree={this.clickThree}
@@ -540,10 +547,10 @@ class App extends Component {
 
             <Route
               path="/apply/*"
-              render={props => {
+              render={(props) => {
                 return (
                   (this.authParam = props.location.search),
-                  <Redirect to="/apply/internship-info/" />
+                  (<Redirect to="/apply/internship-info/" />)
                 );
               }}
             />
@@ -578,11 +585,25 @@ class App extends Component {
             <Navbar logout={this.logout} />
           </header>
           <ReactSwitch>
-            <Route path="/dashboard" render={props => <Dashboard version={this.state.version} updateBusinessStatus={this.updateBusinessStatus} />} />
+            <Route
+              path="/dashboard"
+              render={(props) => (
+                <Dashboard
+                  version={this.state.version}
+                  updateBusinessStatus={this.updateBusinessStatus}
+                />
+              )}
+            />
             <Route path="/how-to-apply" exact component={HowtoApply} />
             <Route path="/edit-profile" exact component={EditProfile} />
-            <Route path="/login" render={props => <LogIn newAuth={this.newAuth} />} />
-            <Route path="/signup" render={props => <SignUp newAuth={this.newAuth} />} />
+            <Route
+              path="/login"
+              render={(props) => <LogIn newAuth={this.newAuth} />}
+            />
+            <Route
+              path="/signup"
+              render={(props) => <SignUp newAuth={this.newAuth} />}
+            />
             <Route path="/apply">{this.AppContainer()}</Route>
             <Route
               path="/submission-success"
@@ -592,13 +613,11 @@ class App extends Component {
             <Route
               path="/"
               exact
-              render={props => {
-                return (
-                  <Redirect to="/dashboard/my-internships" />
-                );
+              render={(props) => {
+                return <Redirect to="/dashboard/my-internships" />;
               }}
             />
-            <Route path="*" render={props => <PageNotFound {...props} />} />
+            <Route path="*" render={(props) => <PageNotFound {...props} />} />
           </ReactSwitch>
         </Router>
       </div>
@@ -606,7 +625,4 @@ class App extends Component {
   }
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);
