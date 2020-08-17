@@ -8,9 +8,9 @@ import {
   AiFillInstagram,
   AiFillLinkedin,
 } from "react-icons/ai";
+import { FaInstagram } from "react-icons/fa";
 
-import { Link } from 'react-router-dom'
-
+import { Link } from "react-router-dom";
 
 const ModuleContainer = styled.div`
   background: white;
@@ -52,6 +52,49 @@ const Row = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+`;
+
+const Facebook = styled(AiFillFacebook)`
+  margin-top: 10px;
+  color: #3b5998;
+  :hover {
+    cursor: pointer;
+  }
+`;
+
+const Twitter = styled(AiFillTwitterSquare)`
+  margin-top: 10px;
+  margin-right: 4px;
+  color: #1da1f2;
+  :hover {
+    cursor: pointer;
+  }
+`;
+
+const Instagram = styled(FaInstagram)`
+  margin-top: 14px;
+  margin-right: 4px;
+  color: white;
+  border-radius: 4px;
+  background: radial-gradient(
+    circle at 30% 107%,
+    #fdf497 0%,
+    #fdf497 5%,
+    #fd5949 45%,
+    #d6249f 60%,
+    #285aeb 90%
+  );
+  :hover {
+    cursor: pointer;
+  }
+`;
+
+const LinkedIn = styled(AiFillLinkedin)`
+  margin-top: 10px;
+  color: #0e76a8;
+  :hover {
+    cursor: pointer;
+  }
 `;
 
 class CompanyInformation extends React.Component {
@@ -331,26 +374,10 @@ class CompanyInformation extends React.Component {
                 justifyContent: "space-evenly",
               }}
             >
-              <AiFillFacebook
-                size={36}
-                alt="facebook"
-                style={{ marginTop: "10px", color: "#3b5998" }}
-              />
-              <AiFillTwitterSquare
-                size={36}
-                alt="facebook"
-                style={{ marginTop: "10px", color: "#1DA1F2" }}
-              />
-              <AiFillInstagram
-                size={36}
-                alt="facebook"
-                style={{ marginTop: "10px", color: "#5851DB" }}
-              />
-              <AiFillLinkedin
-                size={36}
-                alt="facebook"
-                style={{ marginTop: "10px", color: "#0e76a8" }}
-              />
+              <Facebook size={36} alt="facebook" />
+              <Twitter size={36} alt="twitter" />
+              <Instagram size={28} alt="instagram" />
+              <LinkedIn size={36} alt="linkedin" />
             </Row>
           </Row>
         </ModuleContainer>
