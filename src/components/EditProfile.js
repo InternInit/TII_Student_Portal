@@ -23,11 +23,6 @@ import {
 } from "../redux/actions";
 
 import { Auth } from "aws-amplify";
-import AWS from "aws-sdk";
-
-//Filestream handlers/helpers
-import fs from "fs";
-import path from "path";
 
 const ModuleContainer = styled.div`
   display: flex;
@@ -107,9 +102,6 @@ const mapDispatchToProps = {
   updateEmail,
   updateVersion,
 };
-
-const s3 = new AWS.S3();
-const filePath = "./{userId}/profile";
 
 class EditProfile extends React.Component {
   constructor(props) {
