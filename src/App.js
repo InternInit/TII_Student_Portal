@@ -41,6 +41,7 @@ import {
   updateDisplayName,
   updateAvatar,
   updateEmail,
+  updateId,
   updateVersion,
   updatePinnedBusinesses,
   updateActiveApplications,
@@ -99,6 +100,7 @@ const mapDispatchToProps = {
   updateDisplayName,
   updateAvatar,
   updateEmail,
+  updateId,
   updateVersion,
   updatePinnedBusinesses,
   updateActiveApplications,
@@ -153,6 +155,10 @@ class App extends Component {
         this.props.updateUserName(session.accessToken.payload.username);
         this.props.updateDisplayName(session.idToken.payload.name);
         this.props.updateEmail(session.idToken.payload.email);
+        this.props.updateId(session.idToken.payload.sub);
+        let id = session.idToken.payload.sub;
+        let s3MediaBucket = `https://tii-intern-media.s3.amazonaws.com/${id}/profile_picture`;
+        this.props.updateAvatar(s3MediaBucket);
       })
       .catch((error) => {
         console.log("Session Error: " + error);
@@ -582,7 +588,7 @@ class App extends Component {
         {this.resize()}
         <Router>
           <header>
-            <Navbar logout={this.logout} />
+            <Navbar logout={this.logout} userInfo={this.props.userInfo} />
           </header>
           <ReactSwitch>
             <Route

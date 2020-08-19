@@ -147,6 +147,7 @@ class EditProfile extends React.Component {
     let username = this.props.userInfo.username;
     let displayname = this.props.userInfo.displayName;
     let email = this.props.userInfo.email;
+    let id = this.props.id;
 
     let displayPassword = password.replace(/./g, "*");
     return (
@@ -178,7 +179,7 @@ class EditProfile extends React.Component {
               <Avatar
                 size={54}
                 icon={<UserOutlined />}
-                src=""
+                src={this.props.userInfo.avatar}
                 style={{ marginLeft: "24px", marginTop: "24px" }}
               />
               <Header
@@ -521,6 +522,20 @@ class EditProfile extends React.Component {
   customUploadRequest = ({ onSuccess, onError, file }) => {
     setTimeout(() => {
       onSuccess(file);
+      const fd = new FormData();
+      fd.append("file", file);
+
+      let id = this.props.userInfo.id;
+
+      fetch("/api/upload_user_profile_picture", {
+        method: "POST",
+        headers: {
+          Subject: id,
+        },
+        body: fd,
+      }).then((response) => {
+        console.log(response);
+      });
     }, 100);
   };
 }

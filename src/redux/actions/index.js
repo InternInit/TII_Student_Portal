@@ -1,49 +1,56 @@
-export const updateUserName = username => {
+export const updateUserName = (username) => {
   return {
     type: "UPDATE_USER_NAME",
-    username
+    username,
   };
 };
 
-export const updateDisplayName = displayName => {
+export const updateDisplayName = (displayName) => {
   return {
     type: "UPDATE_DISPLAY_NAME",
-    displayName
+    displayName,
   };
 };
 
-export const updateAvatar = avatar => {
+export const updateAvatar = (avatar) => {
   return {
     type: "UPDATE_AVATAR",
-    avatar
+    avatar,
   };
 };
 
-export const updateEmail = email => {
+export const updateEmail = (email) => {
   return {
     type: "UPDATE_EMAIL",
-    email
+    email,
   };
 };
 
-export const updateVersion = version => {
+export const updateId = (id) => {
+  return {
+    type: "UPDATE_ID",
+    id,
+  };
+};
+
+export const updateVersion = (version) => {
   return {
     type: "UPDATE_VERSION",
-    version
+    version,
   };
 };
 
-export const updatePinnedBusinesses = pinnedBusinesses => {
+export const updatePinnedBusinesses = (pinnedBusinesses) => {
   return {
     type: "UPDATE_PINNED_BUSINESSES",
-    pinnedBusinesses
+    pinnedBusinesses,
   };
 };
 
-export const updateActiveApplications = activeApplications => {
+export const updateActiveApplications = (activeApplications) => {
   return {
     type: "UPDATE_ACTIVE_APPLICATIONS",
-    activeApplications
+    activeApplications,
   };
 };
 
@@ -51,14 +58,14 @@ export const updateCompletionState = (page, completionPercentage) => {
   return {
     type: "UPDATE_COMPLETION_STATE",
     page,
-    completionPercentage
+    completionPercentage,
   };
 };
 
-export const batchUpdateCompletionState = completionState => {
+export const batchUpdateCompletionState = (completionState) => {
   return {
     type: "BATCH_UPDATE_COMPLETION_STATE",
-    completionState
+    completionState,
   };
 };
 
@@ -66,27 +73,27 @@ export const updateCompletionChecklist = (page, completionChecklist) => {
   return {
     type: "UPDATE_COMPLETION_CHECKLIST",
     page,
-    completionChecklist
+    completionChecklist,
   };
 };
 
-export const batchUpdateCompletionChecklist = completionChecklist => {
+export const batchUpdateCompletionChecklist = (completionChecklist) => {
   return {
     type: "BATCH_UPDATE_COMPLETION_CHECKLIST",
-    completionChecklist
+    completionChecklist,
   };
 };
 
-export const finishTutorial = tutorialStatus => {
+export const finishTutorial = (tutorialStatus) => {
   return {
     type: "FINISH_TUTORIAL",
-    tutorialStatus
+    tutorialStatus,
   };
 };
 
-export const restartTutorial = tutorialStatus => {
+export const restartTutorial = (tutorialStatus) => {
   return {
     type: "RESTART_TUTORIAL",
-    tutorialStatus
+    tutorialStatus,
   };
 };

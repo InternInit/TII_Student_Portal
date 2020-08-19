@@ -5,11 +5,12 @@ import os
 import base64
 import sentry_sdk
 from sentry_sdk.integrations.flask import FlaskIntegration
+import boto3
 
-#main = Blueprint("main",__name__)
 app = Flask(__name__)
 
-
+s3 = boto3.resource('s3')
+s3_client = boto3.client('s3')
 cacheApiUrl = "https://jzvyvnvxld.execute-api.us-east-1.amazonaws.com/{stage}/cache"
 uploadApiUrl = "https://jzvyvnvxld.execute-api.us-east-1.amazonaws.com/{stage}/upload"
 businessApiUrl = "https://jzvyvnvxld.execute-api.us-east-1.amazonaws.com/{stage}/business"
@@ -22,6 +23,7 @@ password = ""
 redirect_uri = ""
 tokenUrl = ""
 logoutUrl = ""
+mediaBucketName = "tii-intern-media"
 
 
 if(app.config.get("ENV") == "development"):
@@ -98,6 +100,16 @@ def upload_user_files():
     print(req.text)
     return req.text,req.status_code
     '''
+
+@app.route("/api/upload_user_profile_picture", methods=["POST"])
+def upload_user_profile_picture():
+    req = request.files
+    headers = request.headers
+    data = req.get("file")
+
+    resp = s3.Bucket(mediaBucketName).put_object(ACL="public-read", Key=headers.get("Subject") + "/profile_picture", Body=data)
+    print(resp)
+    return "Yay"
 
 @app.route("/api/auth", methods=["POST"])
 def auth():

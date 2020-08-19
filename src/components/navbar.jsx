@@ -27,18 +27,18 @@ const MenuAvatar =
   "https://www.happierhuman.com/wp-content/uploads/2018/10/how-to-be-happy.jpg";
 const menuStyle = {
   textAlign: "left",
-  marginLeft: "60px"
+  marginLeft: "60px",
 };
 
 const menuItemStyle = {
   marginLeft: "20px",
   marginRight: "20px",
-  fontWeight: '500'
+  fontWeight: "500",
 };
 
 const avatarStyle = {
   float: "right",
-  marginRight: "60px"
+  marginRight: "60px",
 };
 
 //==========================================================
@@ -51,7 +51,7 @@ class Navbar extends Component {
     super(props);
     this.routeChange = this.routeChange.bind(this);
     this.state = {
-      current: this.getCurrentKey()
+      current: this.getCurrentKey(),
     };
   }
 
@@ -71,14 +71,14 @@ class Navbar extends Component {
   };
 
   //Click Handler
-  handleClick = e => {
+  handleClick = (e) => {
     console.log("click ", e);
     this.setState({
-      current: e.key
+      current: e.key,
     });
   };
 
-  routeChange = path => {
+  routeChange = (path) => {
     this.props.history.push(path);
   };
 
@@ -116,7 +116,13 @@ class Navbar extends Component {
 
         <SubMenu
           key="navbar-avatar"
-          title={<Avatar className="navbar-avatar-icon" src={MenuAvatar} />}
+          title={
+            <Avatar
+              className="navbar-avatar-icon"
+              src={this.props.userInfo.avatar}
+              icon={<UserOutlined />}
+            />
+          }
           style={avatarStyle}
         >
           <Menu.Item
