@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
 import {
@@ -23,6 +23,11 @@ import {
 } from "../redux/actions";
 
 import { Auth } from "aws-amplify";
+import AWS from "aws-sdk";
+
+//Filestream handlers/helpers
+import fs from "fs";
+import path from "path";
 
 const ModuleContainer = styled.div`
   display: flex;
@@ -102,6 +107,9 @@ const mapDispatchToProps = {
   updateEmail,
   updateVersion,
 };
+
+const s3 = new AWS.S3();
+const filePath = "./{userId}/profile";
 
 class EditProfile extends React.Component {
   constructor(props) {
@@ -213,9 +221,10 @@ class EditProfile extends React.Component {
                */}
               <Upload
                 listType="text"
-                action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+                customRequest={this.customUploadRequest}
                 beforeUpload={beforeUpload}
                 onChange={this.handleChange}
+                showUploadList={false}
               >
                 <Button type="primary" className="profile-button-style">
                   Change Profile Picture
@@ -514,6 +523,13 @@ class EditProfile extends React.Component {
       // Get this url from response in real world.
       this.setState({ loading: false });
     }
+    console.log(this.state);
+  };
+
+  customUploadRequest = ({ onSuccess, onError, file }) => {
+    setTimeout(() => {
+      onSuccess(file);
+    }, 100);
   };
 }
 
