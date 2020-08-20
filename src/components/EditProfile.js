@@ -223,7 +223,12 @@ class EditProfile extends React.Component {
                   Change Profile Picture
                 </Button>
               </Upload>
-              <Button className="profile-button-style">Remove Current</Button>
+              <Button
+                className="profile-button-style"
+                onClick={this.customRemoveRequest}
+              >
+                Remove Current
+              </Button>
             </Row>
           </ProfileBox>
 
@@ -519,6 +524,20 @@ class EditProfile extends React.Component {
     console.log(this.state);
   };
 
+  customRemoveRequest = () => {
+    setTimeout(() => {
+      let id = this.props.userInfo.id;
+
+      fetch("/api/remove_user_profile_picture", {
+        headers: {
+          Subject: id,
+        },
+      })
+        .then((response) => {})
+        .then((data) => {});
+    }, 100);
+  };
+
   customUploadRequest = ({ onSuccess, onError, file }) => {
     setTimeout(() => {
       onSuccess(file);
@@ -533,9 +552,9 @@ class EditProfile extends React.Component {
           Subject: id,
         },
         body: fd,
-      }).then((response) => {
-        console.log(response);
-      });
+      })
+        .then((response) => {})
+        .then((data) => {});
     }, 100);
   };
 }

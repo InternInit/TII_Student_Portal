@@ -108,8 +108,14 @@ def upload_user_profile_picture():
     data = req.get("file")
 
     resp = s3.Bucket(mediaBucketName).put_object(ACL="public-read", Key=headers.get("Subject") + "/profile_picture", Body=data)
-    print(resp)
-    return "Yay"
+    return "Ok"
+
+@app.route("/api/remove_user_profile_picture")
+def remove_user_profile_picture():
+    req = request.files
+    headers = request.headers
+    resp = s3.Bucket(mediaBucketName).delete_objects(Delete={'Objects':[{'Key':headers.get("Subject") + "/profile_picture"}]})
+    return "Ok"
 
 @app.route("/api/auth", methods=["POST"])
 def auth():

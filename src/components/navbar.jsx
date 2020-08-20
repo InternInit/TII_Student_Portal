@@ -118,6 +118,7 @@ class Navbar extends Component {
           key="navbar-avatar"
           title={
             <Avatar
+              size={25}
               className="navbar-avatar-icon"
               src={this.props.userInfo.avatar}
               icon={<UserOutlined />}
