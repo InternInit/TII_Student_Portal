@@ -218,6 +218,7 @@ class EditProfile extends React.Component {
                 beforeUpload={beforeUpload}
                 onChange={this.handleChange}
                 showUploadList={false}
+                accept=".jpg, .jpeg, image/jpeg, .png, image/png"
               >
                 <Button type="primary" className="profile-button-style">
                   Change Profile Picture
@@ -521,7 +522,6 @@ class EditProfile extends React.Component {
       // Get this url from response in real world.
       this.setState({ loading: false });
     }
-    console.log(this.state);
   };
 
   customRemoveRequest = () => {
