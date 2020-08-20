@@ -9,6 +9,8 @@ import {
   message,
   Upload,
   Avatar,
+  Form,
+  Popover,
 } from "antd";
 
 import { CloseOutlined, UserOutlined } from "@ant-design/icons";
@@ -89,6 +91,13 @@ const Row = styled.div`
   display: flex;
   flex-direction: row;
 `;
+
+const passwordValidator = require("password-validator");
+
+const schema = new passwordValidator();
+
+schema.is().min(8).has().uppercase().has().lowercase().has().digits();
+
 const mapStateToProps = (state) => {
   return {
     userInfo: state.userInfo,
@@ -150,6 +159,21 @@ class EditProfile extends React.Component {
     let id = this.props.id;
 
     let displayPassword = password.replace(/./g, "*");
+
+    const title = "Password Policy";
+    const passwordPolicyContent = (
+      <React.Fragment>
+        <h4>Your password should contain: </h4>
+        <ul>
+          <li>Minimum length of 8 characters</li>
+          <li>Numerical characters (0-9)</li>
+          <li>Special characters</li>
+          <li>Uppercase letter</li>
+          <li>Lowercase letter</li>
+        </ul>
+      </React.Fragment>
+    );
+
     return (
       <div
         style={{
@@ -278,14 +302,83 @@ class EditProfile extends React.Component {
             confirmLoading={confirmLoading}
             onCancel={this.handleCancel}
           >
-            <Input.Password
-              placeholder="Enter New password"
-              style={{ marginTop: "14px" }}
-            />
-            <Input.Password
-              placeholder="Confirm New password"
-              style={{ marginTop: "12px" }}
-            />
+            <Form>
+              <Popover
+                placement="right"
+                title={title}
+                content={passwordPolicyContent}
+                trigger="focus"
+              >
+                <Form.Item
+                  name="password"
+                  rules={[
+                    {
+                      required: true,
+                      message: "Please enter your password",
+                    },
+                    ({ getFieldValue }) => ({
+                      validator(rule, value) {
+                        let errors = schema.validate(value, { list: true });
+
+                        function getValidationMessage(errors) {
+                          for (let i = 0; i < errors.length; i++) {
+                            if (errors[i] === "min") {
+                              return "Password length should be at least 8 characters";
+                            } else if (errors[i] === "lowercase") {
+                              return "Password should contain lowercase letters";
+                            } else if (errors[i] === "uppercase") {
+                              return "Password should contain uppercase letters";
+                            } else if (errors[i] === "digits") {
+                              return "Password should contain digits";
+                            } else if (errors[i] === "symbols") {
+                              return "Password should contain symbols";
+                            }
+                          }
+                        }
+
+                        if (
+                          typeof getValidationMessage(errors) == "undefined"
+                        ) {
+                          return Promise.resolve();
+                        }
+
+                        return Promise.reject(getValidationMessage(errors));
+                      },
+                    }),
+                  ]}
+                >
+                  <Input.Password
+                    placeholder="Enter New password"
+                    style={{ marginTop: "14px" }}
+                  />
+                </Form.Item>
+              </Popover>
+              <Form.Item
+                name="confirm-password"
+                rules={[
+                  {
+                    required: true,
+                    message: "Please confirm your password!",
+                  },
+                  ({ getFieldValue }) => ({
+                    validator(rule, value) {
+                      if (!value || getFieldValue("password") === value) {
+                        return Promise.resolve();
+                      }
+
+                      return Promise.reject(
+                        "The two passwords that you entered do not match!"
+                      );
+                    },
+                  }),
+                ]}
+              >
+                <Input.Password
+                  placeholder="Confirm New password"
+                  style={{ marginTop: "12px" }}
+                />
+              </Form.Item>
+            </Form>
           </Modal>
 
           {/**
