@@ -9,7 +9,9 @@ import boto3
 
 app = Flask(__name__)
 
-s3 = boto3.resource('s3')
+#THIS IS TERRIBLE AND EXTREMEMLY UNSAFE. REMOVE AND DELETE IAM USER AS SOON AS CDN IS SETUP
+s3 = boto3.resource('s3', region_name='us-east-1', aws_access_key_id="AKIAV3XYXPF66BDYMHFC", aws_secret_access_key="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")
+
 s3_client = boto3.client('s3')
 cacheApiUrl = "https://jzvyvnvxld.execute-api.us-east-1.amazonaws.com/{stage}/cache"
 uploadApiUrl = "https://jzvyvnvxld.execute-api.us-east-1.amazonaws.com/{stage}/upload"
