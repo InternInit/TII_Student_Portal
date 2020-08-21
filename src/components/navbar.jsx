@@ -114,6 +114,12 @@ class Navbar extends Component {
           <Link to="/apply/internship-info">Apply</Link>
         </Menu.Item>
 
+        <Menu.Item key="FAQ" style={menuItemStyle}>
+          <Link to="/frequently-asked-questions">FAQ</Link>
+        </Menu.Item>
+
+
+
         <SubMenu
           key="navbar-avatar"
           title={

@@ -271,8 +271,9 @@ class ApplySkills extends Component {
                 onBack={() => null}
                 title="Back to Apply Skills"
               />
+              {window.scrollTo(0, 0)}
+
             </Link>
-            {window.scrollTo(0, 0)}
 
             <div
               dangerouslySetInnerHTML={{ __html: fillingOutAnApplication }}
