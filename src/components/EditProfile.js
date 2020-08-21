@@ -449,17 +449,7 @@ class EditProfile extends React.Component {
               width: "50%",
               marginTop: "24px",
             }}
-          >
-            <Button className="profile-button-style">Cancel</Button>
-
-            <Button
-              className="profile-button-style"
-              type="primary"
-              style={{ marginLeft: "2vh" }}
-            >
-              Save
-            </Button>
-          </Row>
+          ></Row>
         </ModuleContainer>
       </div>
     );
