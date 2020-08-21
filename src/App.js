@@ -19,6 +19,7 @@ import HowtoApply from "./components/HowtoApply";
 import SubmissionSuccess from "./components/submissionSuccess";
 import newStudent from "./components/newStudent.jsx";
 import EditProfile from "./components/EditProfile.js";
+import FAQPage from './components/FAQ/FAQPage';
 
 import LogIn from "./components/LogIn.js";
 import SignUp from "./components/SignUp.js";
@@ -68,7 +69,7 @@ if (!process.env.NODE_ENV || process.env.NODE_ENV === "development") {
   console.error = noop;
 }
 
-function noop() {}
+function noop() { }
 
 //Declarations
 const { Content } = Layout;
@@ -267,7 +268,7 @@ class App extends Component {
         Source: JSON.parse(JSON.stringify(source)),
       },
       body: fd,
-    }).then((response) => {});
+    }).then((response) => { });
   };
 
   updateBusinessStatus = async (businessId, status) => {
@@ -601,6 +602,7 @@ class App extends Component {
               )}
             />
             <Route path="/how-to-apply" exact component={HowtoApply} />
+            <Route path="/frequently-asked-questions" exact component={FAQPage} />
             <Route path="/edit-profile" exact component={EditProfile} />
             <Route
               path="/login"
