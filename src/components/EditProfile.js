@@ -140,6 +140,8 @@ class EditProfile extends React.Component {
     };
   }
 
+  formRef = React.createRef();
+
   render() {
     let {
       password,
@@ -298,11 +300,44 @@ class EditProfile extends React.Component {
           <Modal
             title="Change Password"
             visible={passwordVisible}
-            onOk={this.handleOk}
+            onOk={() => this.handleOk(modalTitle)}
             confirmLoading={confirmLoading}
             onCancel={this.handleCancel}
           >
-            <Form>
+            <Form ref={this.formRef}>
+              <Form.Item
+                name="oldPassword"
+                rules={[
+                  {
+                    required: true,
+                    message: "Please enter your old password",
+                  },
+                  ({ getFieldValue }) => ({
+                    validator(rule, value) {
+                      let errors = schema.validate(value, { list: true });
+
+                      function getValidationMessage(errors) {
+                        for (let i = 0; i < errors.length; i++) {
+                          if (errors[i] === "min") {
+                            return "Password length should be at least 8 characters";
+                          }
+                        }
+                      }
+
+                      if (typeof getValidationMessage(errors) == "undefined") {
+                        return Promise.resolve();
+                      }
+
+                      return Promise.reject(getValidationMessage(errors));
+                    },
+                  }),
+                ]}
+              >
+                <Input.Password
+                  placeholder="Enter Old Password"
+                  style={{ marginTop: "12px" }}
+                />
+              </Form.Item>
               <Popover
                 placement="right"
                 title={title}
@@ -310,7 +345,7 @@ class EditProfile extends React.Component {
                 trigger="focus"
               >
                 <Form.Item
-                  name="password"
+                  name="newPassword"
                   rules={[
                     {
                       required: true,
@@ -348,13 +383,13 @@ class EditProfile extends React.Component {
                   ]}
                 >
                   <Input.Password
-                    placeholder="Enter New password"
+                    placeholder="Enter New Password"
                     style={{ marginTop: "14px" }}
                   />
                 </Form.Item>
               </Popover>
               <Form.Item
-                name="confirm-password"
+                name="confirmPassword"
                 rules={[
                   {
                     required: true,
@@ -362,7 +397,7 @@ class EditProfile extends React.Component {
                   },
                   ({ getFieldValue }) => ({
                     validator(rule, value) {
-                      if (!value || getFieldValue("password") === value) {
+                      if (!value || getFieldValue("newPassword") === value) {
                         return Promise.resolve();
                       }
 
@@ -439,6 +474,10 @@ class EditProfile extends React.Component {
       })
       .then((data) => console.log(data))
       .catch((err) => console.log(err));
+  };
+
+  changePassword = async (oldPwd, newPwd) => {
+    let errored = false;
   };
 
   /**
@@ -533,11 +572,39 @@ class EditProfile extends React.Component {
             });
             break;
           case "Password":
-            this.setState({
-              password: changePassword,
-              passwordVisible: false,
-              confirmLoading: false,
-            });
+            this.formRef.current
+              .validateFields()
+              .then((values) => {
+                Auth.currentAuthenticatedUser()
+                  .then((user) => {
+                    return Auth.changePassword(
+                      user,
+                      values.oldPassword,
+                      values.newPassword
+                    );
+                    //throw "Fake Auth Error";
+                  })
+                  .then((data) => {
+                    console.log(data);
+                    this.setState({
+                      password: changePassword,
+                      passwordVisible: false,
+                      confirmLoading: false,
+                    });
+                    message.success("Success! Your password has been changed");
+                  })
+                  .catch((err) => {
+                    console.log(err);
+                    message.error(err.message);
+                  });
+              })
+              .catch((error) => {
+                this.setState({ confirmLoading: false });
+                console.log(error);
+                message.error(
+                  "Ensure your new password meets all specifications"
+                );
+              });
             break;
           default:
             break;
