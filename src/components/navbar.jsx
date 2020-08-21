@@ -100,6 +100,11 @@ class Navbar extends Component {
         <Menu.Item key="dashboard" style={menuItemStyle}>
           <Link to="/dashboard">Dashboard</Link>
         </Menu.Item>
+
+        <Menu.Item key="apply" style={menuItemStyle}>
+          <Link to="/apply/internship-info">Apply</Link>
+        </Menu.Item>
+
         <Menu.Item
           key="how-to-apply"
           className="first-step"
@@ -109,9 +114,6 @@ class Navbar extends Component {
           style={menuItemStyle}
         >
           How to Apply
-        </Menu.Item>
-        <Menu.Item key="apply" style={menuItemStyle}>
-          <Link to="/apply/internship-info">Apply</Link>
         </Menu.Item>
 
         <Menu.Item key="FAQ" style={menuItemStyle}>

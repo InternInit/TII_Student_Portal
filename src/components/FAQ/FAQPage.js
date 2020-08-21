@@ -39,7 +39,7 @@ const PageStyle = {
 }
 
 const Question = styled.span`
-font-size: 24px;
+font-size: 22px;
 font-weight:500;
 color:#000000;
 
@@ -49,7 +49,7 @@ const Response = styled.span`
 font-size:16px;
 font-weight:0;
 color:#434343;
-
+ 
 white-space:pre-line;
 `
 
@@ -63,6 +63,29 @@ const QuestionArray = [
         "question": "How long will my profile be in the database? (i.e. Profile expiration date)",
         "answer": "We will keep sending your application to businesses for as long as you are in high school or until you delete your profile. You can always update your profile with more relevant information."
     },
+    {
+        "question": "How is my information being handled?",
+        "answer": "As high schoolers, we know the importance of handling user data responsibly and ethically. This is why we have a minimalist approach when asking for information; we only ask what is essential to a job application. However, if you don’t feel comfortable with providing even this information, we don’t require you to. \n\nFor the information we do receive, it is being managed securly and responsibly."
+    },
+    {
+        "question": "How will I know when I’m matched with a business?",
+        "answer": "Once a business decides to move forward with your application, then they will reach out to you via the contact information provided in your application."
+    },
+    {
+        "question": "Is this really free?",
+        "answer": "100%. We don’t have any hidden fees and we don’t sell your data. If we’re trying to level the playing field by reducing barriers to internship opportunities, it wouldn’t make sense for us to create a price barrier for students. The way we generate revenue is through charging a small service fee for businesses."
+    },
+    {
+        "question": "How many businesses can I apply to?",
+        "answer": "As many as are in our database. What’s better? You only have to use one application.\n\nAmazing right?"
+    },
+    {
+        "question": "What if I don’t know how to make a resume, cover letter, etc.?",
+        "answer": "We anticipated this question and created a compilation of educational resources to answer your specific questions in our APPLY SKILLS Tab. There, you will find different articles covering topics from resumes to interview prep. to help you strengthen your application. "
+    },
+
+
+
 ]
 
 
@@ -97,8 +120,8 @@ class FAQPage extends React.Component {
                         >
 
                             {QuestionArray.map(list => (
-                                <Collapse expandIconPosition='right' style={{ marginBottom: '2vh' }}>
-                                    <Panel header={<Question>{list.question}</Question>} style={{ textAlign: 'left' }}>
+                                <Collapse expandIconPosition='right' style={{ marginBottom: '8vh', border: '0', backgroundColor: '#f5f5f5' }}>
+                                    <Panel header={<Question>{list.question}</Question>} style={{ textAlign: 'left', border: '0', }}>
                                         <Response>{list.answer}</Response>
                                     </Panel>
                                 </Collapse>
