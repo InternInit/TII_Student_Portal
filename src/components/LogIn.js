@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Input, Button, Form, notification } from 'antd';
+import subtle_white_feathers from "../subtle_white_feathers.png";
 
 import { Link } from 'react-router-dom';
 

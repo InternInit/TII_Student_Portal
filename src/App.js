@@ -19,7 +19,7 @@ import HowtoApply from "./components/HowtoApply";
 import SubmissionSuccess from "./components/submissionSuccess";
 import newStudent from "./components/newStudent.jsx";
 import EditProfile from "./components/EditProfile.js";
-import FAQPage from './components/FAQ/FAQPage';
+import FAQPage from "./components/FAQ/FAQPage";
 
 import LogIn from "./components/LogIn.js";
 import SignUp from "./components/SignUp.js";
@@ -69,7 +69,7 @@ if (!process.env.NODE_ENV || process.env.NODE_ENV === "development") {
   console.error = noop;
 }
 
-function noop() { }
+function noop() {}
 
 //Declarations
 const { Content } = Layout;
@@ -268,7 +268,7 @@ class App extends Component {
         Source: JSON.parse(JSON.stringify(source)),
       },
       body: fd,
-    }).then((response) => { });
+    }).then((response) => {});
   };
 
   updateBusinessStatus = async (businessId, status) => {
@@ -588,9 +588,12 @@ class App extends Component {
       <div className="App">
         {this.resize()}
         <Router>
-          <header>
-            <Navbar logout={this.logout} userInfo={this.props.userInfo} />
-          </header>
+          {window.location.pathname.includes("login") ||
+          window.location.pathname.includes("signup") ? null : (
+            <header>
+              <Navbar logout={this.logout} userInfo={this.props.userInfo} />
+            </header>
+          )}
           <ReactSwitch>
             <Route
               path="/dashboard"
@@ -601,9 +604,6 @@ class App extends Component {
                 />
               )}
             />
-            <Route path="/how-to-apply" exact component={HowtoApply} />
-            <Route path="/frequently-asked-questions" exact component={FAQPage} />
-            <Route path="/edit-profile" exact component={EditProfile} />
             <Route
               path="/login"
               render={(props) => <LogIn newAuth={this.newAuth} />}
@@ -612,6 +612,13 @@ class App extends Component {
               path="/signup"
               render={(props) => <SignUp newAuth={this.newAuth} />}
             />
+            <Route path="/how-to-apply" exact component={HowtoApply} />
+            <Route
+              path="/frequently-asked-questions"
+              exact
+              component={FAQPage}
+            />
+            <Route path="/edit-profile" exact component={EditProfile} />
             <Route path="/apply">{this.AppContainer()}</Route>
             <Route
               path="/submission-success"
