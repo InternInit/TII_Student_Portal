@@ -43,9 +43,10 @@ font-size: 22px;
 font-weight:500;
 color:#000000;
 
+ 
 `
 
-const Response = styled.span`
+const ResponseText = styled.div`
 font-size:16px;
 font-weight:0;
 color:#434343;
@@ -120,8 +121,8 @@ class FAQPage extends React.Component {
                         >
 
                             {QuestionArray.map(list => (
-                                <Collapse expandIconPosition='right' style={{ marginBottom: '8vh', border: '0', backgroundColor: '#f5f5f5' }}>
-                                    <Panel header={<Question>{list.question}</Question>} style={{ textAlign: 'left', border: '0', }}>
+                                <Collapse expandIconPosition='right' style={{ marginBottom: '8vh' }}>
+                                    <Panel header={<Question>{list.question}</Question>} style={{ textAlign: 'left', backgroundColor: '#f0f0f0' }}>
                                         <Response>{list.answer}</Response>
                                     </Panel>
                                 </Collapse>
@@ -139,3 +140,11 @@ class FAQPage extends React.Component {
 
 }
 export default FAQPage;
+
+function Response(props) {
+    return (
+        <ResponseText >
+            {props.children}
+        </ResponseText>
+    )
+}
