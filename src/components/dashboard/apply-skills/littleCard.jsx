@@ -16,7 +16,7 @@ function LittleCard(props) {
           className="apply-skills-little-card"
           style={{
             width: "100%",
-            height: "375px",
+            minHeight: "375px",
             borderRadius: "15px",
             display: "inline-block"
           }}
