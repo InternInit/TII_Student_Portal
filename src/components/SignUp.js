@@ -1,6 +1,16 @@
 import React from "react";
 import styled from "styled-components";
-import { Input, Button, Form, Popover, notification, Modal } from "antd";
+import {
+  Input,
+  Button,
+  Form,
+  Popover,
+  notification,
+  Modal,
+  Checkbox,
+} from "antd";
+import { Container, Background, Label, Banner } from "./StyledComponents/SignupLogin";
+
 
 //Ant D Icons
 import { CloseOutlined, CheckOutlined } from "@ant-design/icons";
@@ -10,57 +20,6 @@ import EmailConfirmation from "./EmailConfirmation.jsx";
 import { Auth } from "aws-amplify";
 
 import { withRouter } from "react-router";
-
-//CSS Styled Components
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: #fafafa;
-  width: 400px;
-  height: auto;
-  padding-bottom: 20px;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  border-radius: 8px;
-
-  padding-bottom: 24px;
-`;
-
-const Background = styled.div`
-  background: radial-gradient(
-      109.93% 109.93% at 50% 50%,
-      #40a9ff 0%,
-      rgba(133, 161, 200, 0.479167) 79.69%,
-      rgba(255, 255, 255, 0) 100%
-    ),
-    #ffffff;
-  width: 100%;
-  height: 100%;
-  background-position: center;
-  background-size: fill;
-  background-color: #fafafa;
-  position: fixed;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
-
-const Label = styled.div`
-  font-size: 16px;
-  font-weight: 500;
-  text-align: left;
-  padding-bottom: 8px;
-`;
-
-const Banner = styled.div`
-  background-color: #bae7ff;
-  padding: 18px;
-  font-size: 32px;
-  color: white;
-  font-weight: normal;
-  border-top-right-radius: 8px;
-  border-top-left-radius: 8px;
-`;
 
 const passwordValidator = require("password-validator");
 
@@ -161,7 +120,7 @@ class SignUp extends React.Component {
 
     return (
       <Background>
-        <Container style={{ marginTop: "5%" }}>
+        <Container style={{ marginTop: "7%" }}>
           <Banner style={{ marginTop: "0px", width: "100%" }}>
             Create a New Account
           </Banner>
@@ -171,7 +130,7 @@ class SignUp extends React.Component {
               <Form.Item {...formItemProps.username} name="username">
                 <Input />
               </Form.Item>
-              <Label style={{ marginTop: "-8px" }}>Password</Label>
+              <Label>Password</Label>
               <Popover
                 placement="right"
                 title={title}
@@ -220,37 +179,43 @@ class SignUp extends React.Component {
                   <Input.Password />
                 </Form.Item>
               </Popover>
-              <Label style={{ marginTop: "-8px" }}>Confirm Password</Label>
+              <Label>Confirm Password</Label>
               <Form.Item
                 {...formItemProps.confirmPassword}
                 name="confirm-password"
               >
                 <Input.Password />
               </Form.Item>
-              <Label style={{ marginTop: "-8px" }}>Display Name</Label>
+              <Label>Display Name</Label>
               <Form.Item {...formItemProps.name} name="name">
                 <Input />
               </Form.Item>
-              <Label style={{ marginTop: "-8px" }}>E-Mail</Label>
+              <Label>E-Mail</Label>
               <Form.Item {...formItemProps.email} name="email">
                 <Input />
               </Form.Item>
-
-              <div
-                style={{
-                  marginTop: " 26px",
-                  display: "flex",
-                  justifyContent: "center",
-                }}
+              <Form.Item
+                rules={[{
+                  required: true,
+                  message:
+                    "Please read the Terms and Conditions and Privacy Agreement",
+                }]}
+                name="termsAndConditions"
+                onChange={this.onChecked}
+                style={{ textAlign: "left" }}
               >
+                <Checkbox autoFocus={true}>
+                  I agree to the Terms and Conditions and Privacy Agreement
+                </Checkbox>
+              </Form.Item>
                 <Button
                   className="profile-button-style"
                   type="primary"
                   htmlType="submit"
+                  style={{width: "100%"}}
                 >
                   Sign Up
                 </Button>
-              </div>
             </Form>
           </div>
         </Container>
