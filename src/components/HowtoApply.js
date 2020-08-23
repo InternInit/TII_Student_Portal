@@ -13,7 +13,7 @@ import { Menu, Layout } from "antd";
 
 
 
-const Heading = styled.div`
+const Heading = styled.span`
   font-size: 28px;
   padding-bottom: 10px;
   padding-top: 10px;
@@ -24,21 +24,25 @@ const Heading = styled.div`
 `;
 
 
-const Text = styled.div`
+const Text = styled.span`
   padding: 5px;
   font-weight: normal;
   display: flex;
   width: 90%;
   font-size: 18px;
-  justify-content: align-left;
-  padding-left: 30px;
-`;
-const Bullet = styled.div`
+   padding-left: 30px;
+
+
+  text-align:left;
+  `;
+const Bullet = styled.span`
   font-weight: normal;
   display: flex;
   font-size: 18px;
-  justify-content: align-left;
-  padding-left: 50px;
+   padding-left: 50px;
+
+   text-align:left;
+
 `;
 const Image = styled.img`
   border-radius: 20px;
@@ -49,12 +53,15 @@ const Image = styled.img`
   pointer-events: none;
 `;
 const Caption = styled.p`
-  padding: 20px;
+  padding-top: 20px;
   font-weight: normal;
   display: flex;
   font-size: 18px;
-  justify-content: align-left;
+  justify-content: center;
   width: 90%;
+
+ 
+   align-self:center;
 `;
 
 const { Content, Header } = Layout;
