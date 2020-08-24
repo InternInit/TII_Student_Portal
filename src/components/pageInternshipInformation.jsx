@@ -355,7 +355,7 @@ class PageInternshipInformation extends Component {
 
   render() {
     return (
-      <div style={{ marginTop: "40px" }}>
+      <div style={{ marginTop: "40px", width: "80%"}}>
         <Spin size="large" spinning={!this.state.loaded}>
           <h1>Internship Information</h1>
           <br />

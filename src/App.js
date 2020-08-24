@@ -78,10 +78,12 @@ const { Content } = Layout;
 const PageContainer = styled.div`
   display: flex;
   width: 70%;
-  padding-left: 5%;
-  padding-right: 5%;
+  padding-left: 2%;
+  padding-right: 2%;
   justifycontent: center;
   background-color: white;
+  border: 1px solid #d9d9d9;
+  box-shadow: 0 0 6px -4px;
   border-radius: 10px;
 
   flex-direction: column;
