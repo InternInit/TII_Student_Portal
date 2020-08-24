@@ -8,10 +8,12 @@ import {
   Radio,
   Upload,
   message,
-  Spin
+  Spin,
+  Popover,
 } from "antd";
 import { Row, Col } from "antd";
 import { InboxOutlined } from "@ant-design/icons";
+import { InfoCircle } from "./StyledComponents/InternshipForms";
 
 import "antd/dist/antd.css";
 import "../App.css";
@@ -22,12 +24,14 @@ import moment from "moment";
 
 //React Routing
 import { withRouter } from "react-router";
+import { Link } from "react-router-dom";
+
 
 //Redux
 import { connect } from "react-redux";
 import {
   updateCompletionState,
-  updateCompletionChecklist
+  updateCompletionChecklist,
 } from "../redux/actions";
 
 import _ from "lodash";
@@ -103,7 +107,7 @@ const allStates = [
   "Washington",
   "West Virginia",
   "Wisconsin",
-  "Wyoming"
+  "Wyoming",
 ];
 const daysOfTheWeek = [
   "Sunday",
@@ -112,7 +116,7 @@ const daysOfTheWeek = [
   "Wednesday",
   "Thursday",
   "Friday",
-  "Saturday"
+  "Saturday",
 ];
 const timesOfTheDay = ["Mornings", "Afternoons", "Evenings"];
 const paidOrUnpaid = ["Yes", "No"];
@@ -123,12 +127,22 @@ const validationRules = (required, inputName, type, pattern) => [
     required: required,
     message: "Please input your " + inputName,
     type: type,
-    pattern: pattern
-  }
+    pattern: pattern,
+  },
 ];
 
 //The best function to exist within this app
-const boldify = text => <strong>{text}</strong>;
+const boldify = (text, info = false, popoverText) =>
+  !info ? (
+    <strong>{text}</strong>
+  ) : (
+    <React.Fragment>
+      <strong>{text}</strong>
+      <Popover style={{ width: "10px" }} title={text} content={popoverText}>
+        <InfoCircle size={12} />
+      </Popover>
+    </React.Fragment>
+  );
 
 /**
  *
@@ -139,23 +153,27 @@ const formItemProps = {
   totalForm: {
     name: "pageInternshipInformation",
     layout: "vertical",
-    align: "left"
+    align: "left",
   },
   firstName: {
     key: "firstName",
     label: boldify("First Name"),
     name: "First Name",
-    rules: validationRules(true, "first name", "string")
+    rules: validationRules(true, "first name", "string"),
   },
   lastName: {
     key: "lastName",
     label: boldify("Last Name"),
     name: "Last Name",
-    rules: validationRules(true, "last name", "string")
+    rules: validationRules(true, "last name", "string"),
   },
   phoneNumber: {
     key: "phoneNumber",
-    label: boldify("Phone Number"),
+    label: boldify(
+      "Phone Number",
+      true,
+      "Your phone number is a key method that companies will use to communicate with you."
+    ),
     name: "Phone Number",
     extra: "Please input your phone number without any formatting.",
     rules: validationRules(
@@ -163,13 +181,17 @@ const formItemProps = {
       "phone number",
       "string",
       /^(1?([-\s]?\(?\d{3}\)?)[-\s]?)(\d{3})([-\s]?\d{4})$/
-    )
+    ),
   },
   email: {
     key: "email",
-    label: boldify("Email"),
+    label: boldify(
+      "Email",
+      true,
+      "Your email is a key method that companies will use to communicate with you."
+    ),
     name: "Email",
-    rules: validationRules(true, "email", "email")
+    rules: validationRules(true, "email", "email"),
   },
   addressLine: {
     key: "addressLine",
@@ -180,7 +202,7 @@ const formItemProps = {
       "address",
       "string",
       /\d{1,3}.?\d{0,3}\s[a-zA-Z]{2,30}\s[a-zA-Z]{2,15}/
-    )
+    ),
   },
   city: {
     key: "city",
@@ -190,38 +212,31 @@ const formItemProps = {
       "city",
       "string",
       /^[a-zA-Z]+(?:[\s-][a-zA-Z]+)*$/
-    )
+    ),
   },
   livingState: {
     key: "state",
     name: "State",
-    rules: validationRules(true, "state")
+    rules: validationRules(true, "state"),
   },
   zip: {
     key: "zip",
     name: "Zip Code",
-    rules: validationRules(true, "zip code", "string", /^\d{5}$/)
+    rules: validationRules(true, "zip code", "string", /^\d{5}$/),
   },
   yog: {
     key: "yog",
     label: boldify("Year of graduation"),
     name: "Year of Graduation",
-    rules: validationRules(true, "year of graduation", "string", /^\d{4}$/)
-  },
-  industry: {
-    key: "industry",
-    label: boldify("What industries are you interested in?"),
-    name: "Interested Industries",
-    rules: [
-      {
-        required: true,
-        message: "Please input your industries of choice"
-      }
-    ]
+    rules: validationRules(true, "year of graduation", "string", /^\d{4}$/),
   },
   unweightedGPA: {
     key: "unweightedGPA",
-    label: boldify("What is your unweighted GPA?"),
+    label: boldify(
+      "What is your unweighted GPA?",
+      true,
+      "Your unweighted GPA does not include the difficulty of your class"
+    ),
     name: "Unweighted GPA",
     rules: validationRules(
       true,
@@ -229,11 +244,22 @@ const formItemProps = {
       "string",
       /^(([0-3]\.\d{1,2})|([4]\.[0]{1,2})|([0-4]))$/
     ),
-    extra: "Your GPA should be out of 4.0"
+    extra: "Your GPA should be out of 4.0",
   },
   weightedGPA: {
     key: "weightedGPA",
-    label: boldify("What is your weighted GPA (optional)?"),
+    label: boldify(
+      "What is your weighted GPA (optional)?",
+      true,
+      <React.Fragment>
+        <p>
+          Your weighted GPA takes into factor your school's unique grading scale
+          <br />
+          and the grade you received in that class.
+        </p>
+        <p>Ex: 4.43/5.0 </p>
+      </React.Fragment>
+    ),
     name: "Weighted GPA",
     extra: "Indicate your weighted GPA over the scale",
     rules: validationRules(
@@ -241,56 +267,173 @@ const formItemProps = {
       "weighted GPA",
       "string",
       /^(\d+(\.\d+)?)\/(\d+(\.\d+)?)$/
-    )
+    ),
   },
   courses: {
     key: "courses",
-    label: boldify("Relevant courses to your industry."),
+    label: boldify(
+      "Relevant courses to your industry.",
+      true,
+      <React.Fragment>
+        <p>
+          Relevant courses are any courses you've taken
+          <br />
+          which you think are helpful for your application
+          <br />
+          to a specific position or industry
+        </p>
+        <p>
+          Ex: If I am applying for an internship in,
+          <br />
+          <strong>business</strong>, I might add classes such as
+          <br />
+          <em>accounting, business finance, </em>
+          <br />
+          <em> management essentials.</em>
+        </p>
+      </React.Fragment>
+    ),
     name: "Relevant Courses",
     rules: validationRules(true, "relevant courses"),
     extra:
-      "Separate each entry with a comma and a space, and capitalize the AP/IB for your AP/IB Classes"
+      "Separate each entry with a comma and a space, and capitalize the AP/IB for your AP/IB Classes",
   },
   extracurriculars: {
     key: "extracurriculars",
-    label: boldify("Extracurricular Activities"),
+    label: boldify(
+      "Extracurricular Activities",
+      true,
+      <React.Fragment>
+        <p>
+          Your extracurricular activities demonstrate
+          <br />
+          how you spend your time outside classes and
+          <br />
+          what your interests are. These activities can
+          <br />
+          show a business why you are particularly qualified
+          <br />
+          for their specific internship position
+        </p>
+        <p>
+          Ex: If I am applying for an internship in,
+          <br />
+          <strong>business</strong>, I might include activities
+          <br />
+          such as <em>FBLA, Student Council Treasurer,</em>
+          <br />
+          <em>Investment Club</em>
+        </p>
+      </React.Fragment>
+    ),
     name: "Extracurriculars",
     rules: validationRules(true, "extracurricular activities"),
     extra:
-      "Separate each entry with a comma and a space, and in parentheses, show how long you spent on the activity."
+      "Separate each entry with a comma and a space, and in parentheses, show how long you spent on the activity.",
   },
   daysToWork: {
     key: "daysToWork",
-    label: boldify("What days are you willing to work?"),
+    label: boldify(
+      "What days are you willing to work?",
+      true,
+      <React.Fragment>
+        <p>What days can you spend on your internship?</p>
+        <p>
+          Make sure that your only put in times you are
+          <br />
+          sure that you can make.
+        </p>
+      </React.Fragment>
+    ),
     name: "Willing Work Days",
-    rules: validationRules(true, "optimal days to work", "array")
+    rules: validationRules(true, "optimal days to work", "array"),
   },
   timesToWork: {
     key: "timesToWork",
-    label: boldify("What times are you willing to work?"),
+    label: boldify(
+      "What times are you willing to work?",
+      true,
+      <React.Fragment>
+        <p>
+          What times of the day can you spend on your
+          <br />
+          internship?
+        </p>
+        <p>
+          Make sure that your only put in times you are
+          <br />
+          sure that you can make.
+        </p>
+      </React.Fragment>
+    ),
     name: "Willing Work Times",
-    rules: validationRules(true, "times available to work", "array")
+    rules: validationRules(true, "times available to work", "array"),
   },
   dateOfStartAndEnd: {
     key: "dateOfStartAndEnd",
     name: "Starting/Ending Dates",
     label: boldify(
-      "When can you start working and when do you need to stop working?"
+      "When can you start working and when do you need to stop working?",
+      true,
+      <React.Fragment>
+        <p>
+          This is the range of times when you can expect to take on an
+          internship.
+        </p>
+        <p>These times narrow down which internships you are available for.</p>
+      </React.Fragment>
     ),
-    rules: validationRules(true, "available dates of work", "array")
+    rules: validationRules(true, "available dates of work", "array"),
   },
   paidUnpaid: {
     key: "paidUnpaid",
     name: "Paid/Unpaid Preference",
-    label: boldify("Are you willing to work unpaid?"),
-    rules: validationRules(true, "preference for pay")
+    label: boldify(
+      "Are you willing to work unpaid?",
+      true,
+      <React.Fragment>
+        <p>Are you willing to take on an unpaid internship?</p>
+        <p>
+          If you answer <em>no</em>, then your application will only
+          <br />
+          be sent to companies with paid positions
+        </p>
+        <p>
+          If you answer <em>yes</em>, your application will be sent to
+          <br />
+          companies with paid AND unpaid positions. If you
+          <br />
+          take on an unpaid position, you will need to
+          <br />
+          arrange for academic credit.
+        </p>
+      </React.Fragment>
+    ),
+    rules: validationRules(true, "preference for pay"),
   },
   resume: {
     key: "resume",
     name: "Resume",
-    label: boldify("Resumé (.doc, .docx, .pdf)"),
-    rules: validationRules(true, "resume", "object")
-  }
+    label: boldify(
+      "Resumé (.doc, .docx, .pdf)",
+      true,
+      <React.Fragment>
+        <p>Your resumé is a brief summary of your work experience,
+        <br />
+          skills, or any other relevant items that you can't cover
+          <br />
+          through the application.
+        </p>
+        <p>If you are unsure of what to upload, check out our free
+        <br />
+          <Link to="/dashboard/apply-skills">apply skills course</Link> to learn how to write a stunning
+          <br />
+          resumé.
+        </p>
+      </React.Fragment>
+    ),
+    rules: validationRules(true, "resume", "object"),
+  },
 };
 
 /**
@@ -302,7 +445,7 @@ const props = {
   name: "file",
   accept:
     ".doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document, .pdf, application/pdf",
-  multiple: true
+  multiple: true,
 };
 
 /**
@@ -310,10 +453,10 @@ const props = {
  * Checks Nav Panel state (is completed)
  *
  */
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     completionState: state.completionState,
-    completionChecklist: state.completionChecklist
+    completionChecklist: state.completionChecklist,
   };
 };
 
@@ -324,7 +467,7 @@ const mapStateToProps = state => {
  */
 const mapDispatchToProps = {
   updateCompletionState,
-  updateCompletionChecklist
+  updateCompletionChecklist,
 };
 
 class PageInternshipInformation extends Component {
@@ -335,7 +478,7 @@ class PageInternshipInformation extends Component {
   state = {
     otherIndustry: "",
     fileList: [],
-    loaded: false
+    loaded: false,
   };
 
   formRef = React.createRef();
@@ -355,7 +498,7 @@ class PageInternshipInformation extends Component {
 
   render() {
     return (
-      <div style={{ marginTop: "40px", width: "80%"}}>
+      <div style={{ marginTop: "40px", width: "80%" }}>
         <Spin size="large" spinning={!this.state.loaded}>
           <h1>Internship Information</h1>
           <br />
@@ -378,7 +521,7 @@ class PageInternshipInformation extends Component {
              */}
             <Row name="first" gutter={formGutter}>
               <Col span={halfSpan}>
-                <Form.Item {...formItemProps.firstName} >
+                <Form.Item {...formItemProps.firstName}>
                   <Input />
                 </Form.Item>
               </Col>
@@ -437,7 +580,7 @@ class PageInternshipInformation extends Component {
               <Col span={thirdSpan}>
                 <Form.Item {...formItemProps.livingState}>
                   <Select placeholder="State">
-                    {allStates.map(state => (
+                    {allStates.map((state) => (
                       <Option key={state} value={state}>
                         {state}
                       </Option>
@@ -527,7 +670,7 @@ class PageInternshipInformation extends Component {
                     mode="multiple"
                     placeholder="Please select the days where you can work"
                   >
-                    {daysOfTheWeek.map(day => (
+                    {daysOfTheWeek.map((day) => (
                       <Option key={day} value={day}>
                         {day}
                       </Option>
@@ -541,7 +684,7 @@ class PageInternshipInformation extends Component {
                     mode="multiple"
                     placeholder="Please select the times when you can work"
                   >
-                    {timesOfTheDay.map(time => (
+                    {timesOfTheDay.map((time) => (
                       <Option key={time} value={time}>
                         {time}
                       </Option>
@@ -573,7 +716,7 @@ class PageInternshipInformation extends Component {
               <Col span={standardSpan}>
                 <Form.Item {...formItemProps.paidUnpaid}>
                   <Radio.Group>
-                    {paidOrUnpaid.map(choice => (
+                    {paidOrUnpaid.map((choice) => (
                       <Radio key={choice} value={choice}>
                         {choice}
                       </Radio>
@@ -662,7 +805,7 @@ class PageInternshipInformation extends Component {
    * On Finish
    *
    */
-  onFinish = values => {
+  onFinish = (values) => {
     console.log("FinishedPageInternship:", values);
     this.props.updateCompletionState(0, 1.0);
     this.props.updateData(values, "0");
@@ -700,7 +843,7 @@ class PageInternshipInformation extends Component {
    * File upload function
    *
    */
-  onChange = info => {
+  onChange = (info) => {
     const { status } = info.file;
     if (status === "removed") {
       let currentFileList = this.state.fileList;
@@ -728,21 +871,21 @@ class PageInternshipInformation extends Component {
     fetch("/api/get_user_data", {
       method: "POST",
       headers: {
-        Authorization: "Bearer " + JSON.parse(JSON.stringify(token))
+        Authorization: "Bearer " + JSON.parse(JSON.stringify(token)),
       },
-      body: 0
+      body: 0,
     })
-      .then(response => response.json())
-      .then(data => {
+      .then((response) => response.json())
+      .then((data) => {
         let parsedRecv = JSON.parse(data);
         let parsedData = parsedRecv.formData;
 
         if (parsedRecv !== "No Info") {
-          console.log(parsedData)
+          console.log(parsedData);
           try {
             parsedData["Starting/Ending Dates"] = [
               moment(parsedData["Starting/Ending Dates"][0]),
-              moment(parsedData["Starting/Ending Dates"][1])
+              moment(parsedData["Starting/Ending Dates"][1]),
             ];
           } catch (e) {
             console.log(e);
@@ -771,7 +914,7 @@ class PageInternshipInformation extends Component {
    * Route Changing (React Router)
    *
    */
-  routeChange = path => {
+  routeChange = (path) => {
     console.log(path);
     this.props.clickTwo();
     this.props.history.push(path);
@@ -779,8 +922,5 @@ class PageInternshipInformation extends Component {
 }
 
 export default withRouter(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(PageInternshipInformation)
+  connect(mapStateToProps, mapDispatchToProps)(PageInternshipInformation)
 );
