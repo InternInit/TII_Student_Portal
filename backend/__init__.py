@@ -5,16 +5,13 @@ import os
 import base64
 import sentry_sdk
 from sentry_sdk.integrations.flask import FlaskIntegration
-import boto3
 
 app = Flask(__name__)
-
-#THIS IS TERRIBLE AND EXTREMEMLY UNSAFE. REMOVE AND DELETE IAM USER AS SOON AS CDN IS SETUP
-s3 = boto3.resource('s3', region_name='us-east-1', aws_access_key_id="AKIAV3XYXPF66BDYMHFC", aws_secret_access_key="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")
 
 cacheApiUrl = "https://jzvyvnvxld.execute-api.us-east-1.amazonaws.com/{stage}/cache"
 uploadApiUrl = "https://jzvyvnvxld.execute-api.us-east-1.amazonaws.com/{stage}/upload"
 businessApiUrl = "https://jzvyvnvxld.execute-api.us-east-1.amazonaws.com/{stage}/business"
+profileApiUrl = "https://jzvyvnvxld.execute-api.us-east-1.amazonaws.com/{stage}/profile"
 
 testUrl = "https://webhook.site/2d399065-ea56-45ea-b6a0-e19da9c75caa"
 
@@ -31,6 +28,7 @@ if(app.config.get("ENV") == "development"):
     cacheApiUrl = cacheApiUrl.format(stage="dev")
     uploadApiUrl = uploadApiUrl.format(stage="dev")
     businessApiUrl = businessApiUrl.format(stage="dev")
+    profileApiUrl = profileApiUrl.format(stage="dev")
 elif(app.config.get("ENV") == "production"):
     sentry_sdk.init(
     dsn="https://8537ba8551334943a20d5b615f267b36@o412197.ingest.sentry.io/5288579",
@@ -47,7 +45,7 @@ elif(app.config.get("ENV") == "production"):
     cacheApiUrl = cacheApiUrl.format(stage="prod")
     uploadApiUrl = uploadApiUrl.format(stage="prod")
     businessApiUrl = businessApiUrl.format(stage="prod")
-
+    profileApiUrl = profileApiUrl.format(stage="prod")
 
 @app.route("/api/")
 def root():
@@ -108,14 +106,18 @@ def upload_user_profile_picture():
     headers = request.headers
     data = req.get("file")
 
-    resp = s3.Bucket(mediaBucketName).put_object(ACL="public-read", Key=headers.get("Subject") + "/profile_picture", Body=data)
+    res = requests.post(url=profileApiUrl,
+                    data=data,
+                    headers = {"Content-Type" : "application/octet-stream",
+                               "Subject" : headers.get("Subject")})
     return "Ok"
 
 @app.route("/api/remove_user_profile_picture")
 def remove_user_profile_picture():
     req = request.files
     headers = request.headers
-    resp = s3.Bucket(mediaBucketName).delete_objects(Delete={'Objects':[{'Key':headers.get("Subject") + "/profile_picture"}]})
+    res = requests.delete(url=profileApiUrl,
+                    headers = {"Subject" : headers.get("Subject")})
     return "Ok"
 
 @app.route("/api/auth", methods=["POST"])
