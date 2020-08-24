@@ -15,6 +15,8 @@ color:black;
 align-items: center;
 min-height:29px;
 margin-top:6px;
+
+text-align:left;
 `
 
 const JobTitle = styled.div`

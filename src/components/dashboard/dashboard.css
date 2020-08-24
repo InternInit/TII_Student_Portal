@@ -203,7 +203,7 @@ FONT SIZES
 }
 
 
-@media only screen and (max-width: 800px) {
+@media only screen and (max-width: 810px) {
   .button-style {
     font-size: 14px;
     width: 16vw;
@@ -255,4 +255,55 @@ FONT SIZES
   .fourteenFont{
     font-size:12px;
   }
+}
+
+
+/*APPLY SKILLS STYLING*/
+@media only screen and (max-width: 810px) {
+/* Stylings for cover image in large education cards */
+.apply-skills-big-card-cover {
+  height: 300px;
+    border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+.apply-skills-big-card-title {
+  font-size: 36px;
+   }
+
+.apply-skills-big-card-time {
+    font-size: 18px;
+   margin-top: -16px;
+  margin-bottom: 8px;
+}
+
+.apply-skills-big-card-content {
+  font-size: 14px;
+   margin-top: -8px;
+}
+
+/* Styling for little cards */
+.apply-skills-little-card-cover {
+  height: 200px;
+ }
+
+.apply-skills-little-card-title {
+  font-size: 18px;
+ }
+
+.apply-skills-little-card-content {
+  font-size: 12px;
+   margin-top: -8px;
+}
+
+.apply-skills-little-card-time {
+   font-size: 14px;
+   margin-top: -8px;
+  margin-bottom: 12px;
+}
+
+ 
+
+
+
 }

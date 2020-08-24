@@ -204,7 +204,7 @@ background-color:#8fc3d1;
 }
 
 
-@media only screen and (max-width: 800px) {
+@media only screen and (max-width: 810px) {
 
   .seventyTwoFont{
     font-size:56px;
@@ -240,6 +240,12 @@ background-color:#8fc3d1;
     padding-bottom:42px;
     
      }
+
+     .profile-button-style {
+      font-size: 12px;
+       width: 90%;
+      height: 24px;
+      }
 }
 
 

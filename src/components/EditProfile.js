@@ -26,6 +26,10 @@ import {
 
 import { Auth } from "aws-amplify";
 
+import '../App.css'
+import './dashboard/dashboard.css'
+
+
 const ModuleContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -37,8 +41,7 @@ const ModuleContainer = styled.div`
 `;
 
 const Heading = styled.div`
-  font-size: 28px;
-  font-weight: bold;
+   font-weight: bold;
   display: flex;
   justify-content: align-left;
   color: #595959;
@@ -59,16 +62,14 @@ const UserInfo = styled.div`
   text-align: left;
   flex-direction: row;
   align-items: center;
-  font-size: 18px;
-  font-weight: 500;
+   font-weight: 500;
   color: #262626;
   width: 80%;
   margin-top: 28px;
 `;
 
 const Info = styled.div`
-  font-size: 18px;
-  font-weight: 500;
+   font-weight: 500;
   color: #595959;
   margin-left: 12px;
 `;
@@ -81,8 +82,7 @@ const ChangeInfo = styled.a`
 `;
 
 const Header = styled.div`
-  font-size: 28px;
-  font-weight: 500;
+   font-weight: 500;
   color: #595959;
   margin-top: 50px;
 `;
@@ -188,7 +188,7 @@ class EditProfile extends React.Component {
         }}
       >
         <ModuleContainer>
-          <Heading style={{ marginLeft: "18px" }}>Profile Details</Heading>
+          <Heading style={{ marginLeft: "18px" }} className="twentyEightFont">Profile Details</Heading>
 
           {/**
            *
@@ -208,13 +208,13 @@ class EditProfile extends React.Component {
                 src={this.props.userInfo.avatar}
                 style={{ marginLeft: "24px", marginTop: "24px" }}
               />
-              <Header
+              <Header className="twentyEightFont"
                 style={{
-                  fontSize: "36px",
                   marginLeft: "15px",
                   marginTop: "24px",
                   padding: "0px",
                 }}
+                className='thirtySixFont'
               >
                 {username}
               </Header>
@@ -264,29 +264,29 @@ class EditProfile extends React.Component {
            * User Information
            *
            */}
-          <UserInfo style={{ marginTop: "36px" }}>
-            Display Name: <Info>{displayname} </Info>
+          <UserInfo style={{ marginTop: "36px" }} className="eighteenFont">
+            Display Name:  <Info className="eighteenFont">{displayname} </Info>
           </UserInfo>
           <ChangeInfo onClick={() => this.showModal("Display Name")}>
             Change display name
           </ChangeInfo>
 
-          <UserInfo>
-            Password: <Info>{displayPassword}</Info>
+          <UserInfo className="eighteenFont">
+            Password:  <Info className="eighteenFont">{displayPassword}</Info>
           </UserInfo>
           <ChangeInfo onClick={() => this.showModal("Password")}>
             Change password
           </ChangeInfo>
 
-          <UserInfo>
-            E-mail: <Info>{email}</Info>
+          <UserInfo className="eighteenFont">
+            E-mail:  <Info className="eighteenFont">{email}</Info>
           </UserInfo>
           <ChangeInfo onClick={() => this.showModal("E-Mail")}>
             Change e-mail
           </ChangeInfo>
 
-          <UserInfo>
-            School Code: <Info>{schoolCode}</Info>
+          <UserInfo className="eighteenFont">
+            School Code:  <Info className="eighteenFont">{schoolCode}</Info>
           </UserInfo>
           <ChangeInfo onClick={() => this.showModal("School Code")}>
             Change School Code
