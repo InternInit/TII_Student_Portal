@@ -17,7 +17,7 @@ const ContentStyle = {
     height: "100%",
     flexDirection: "column",
     alignItems: "center",
-    backgroundColor: "#F5F5F5"
+    backgroundColor: "#eff4f5"
 }
 
 const PageStyle = {
@@ -108,9 +108,9 @@ class FAQPage extends React.Component {
                         >
 
                             {QuestionArray.map(list => (
-                                <Collapse expandIconPosition='right' style={{ marginBottom: '8vh' }}>
-                                    <Panel header={<Question className="twentyTwoFont">{list.question}</Question>} style={{ textAlign: 'left', backgroundColor: '#f0f0f0' }}>
-                                        <Response className="sixteenFont">{list.answer}</Response>
+                                <Collapse bordered={false} expandIconPosition='right' style={{ marginBottom: '8vh' }}>
+                                    <Panel header={<Question>{list.question}</Question>} style={{ textAlign: 'left', backgroundColor: '#f0f0f0' }}>
+                                        <Response>{list.answer}</Response>
                                     </Panel>
                                 </Collapse>
 

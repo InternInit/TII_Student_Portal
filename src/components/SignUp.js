@@ -120,7 +120,7 @@ class SignUp extends React.Component {
 
     return (
       <Background>
-        <Container >
+        <Container style={{ marginTop: "5%" }}>
           <Banner style={{ marginTop: "0px", width: "100%" }}>
             Create a New Account
           </Banner>
