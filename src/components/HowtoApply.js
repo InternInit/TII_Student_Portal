@@ -29,8 +29,7 @@ const Text = styled.span`
   font-weight: normal;
   display: flex;
   width: 90%;
-  font-size: 18px;
-   padding-left: 30px;
+    padding-left: 30px;
 
 
   text-align:left;
@@ -38,8 +37,7 @@ const Text = styled.span`
 const Bullet = styled.span`
   font-weight: normal;
   display: flex;
-  font-size: 18px;
-   padding-left: 50px;
+    padding-left: 50px;
 
    text-align:left;
 
@@ -56,8 +54,7 @@ const Caption = styled.p`
   padding-top: 20px;
   font-weight: normal;
   display: flex;
-  font-size: 18px;
-  justify-content: center;
+   justify-content: center;
   width: 90%;
 
  
@@ -87,16 +84,7 @@ class HowtoApply extends React.Component {
     return (
       <Layout>
         <Header
-
-          className="thirtySixFont"
-          style={{
-            backgroundColor: " #8fc3d1",
-            paddingTop: "55px",
-            paddingBottom: "55px",
-            color: "white",
-            fontWeight: "normal",
-            height: "180px"
-          }}
+          className="FAQBanner"
         >
           How to Apply
         </Header>
@@ -139,10 +127,8 @@ class HowtoApply extends React.Component {
                 }}
               >
                 <Menu.Item
-                  style={{
-                    fontSize: "18px",
-                    fontWeight: "500"
-                  }}
+                  className="eighteenFont"
+                  style={{ fontWeight: "500" }}
                   onClick={() => {
                     window.scrollTo(0, this.Internref.current.offsetTop);
                   }}
@@ -150,10 +136,8 @@ class HowtoApply extends React.Component {
                   Internship Information
                 </Menu.Item>
                 <Menu.Item
-                  style={{
-                    fontSize: "18px",
-                    fontWeight: "500"
-                  }}
+                  className="eighteenFont"
+                  style={{ fontWeight: "500" }}
                   onClick={() => {
                     window.scrollTo(0, this.Personalref.current.offsetTop);
                   }}
@@ -161,10 +145,8 @@ class HowtoApply extends React.Component {
                   Personal Information
                 </Menu.Item>
                 <Menu.Item
-                  style={{
-                    fontSize: "18px",
-                    fontWeight: "500"
-                  }}
+                  className="eighteenFont"
+                  style={{ fontWeight: "500" }}
                   onClick={() => {
                     window.scrollTo(0, this.Writtenref.current.offsetTop);
                   }}
@@ -172,10 +154,8 @@ class HowtoApply extends React.Component {
                   Written Work
                 </Menu.Item>
                 <Menu.Item
-                  style={{
-                    fontSize: "18px",
-                    fontWeight: "500"
-                  }}
+                  className="eighteenFont"
+                  style={{ fontWeight: "500" }}
                   onClick={() => {
                     window.scrollTo(0, this.Referenceref.current.offsetTop);
                   }}
@@ -184,25 +164,25 @@ class HowtoApply extends React.Component {
                 </Menu.Item>
               </Menu>
 
-              <Heading>It's Simple!</Heading>
-              <Text>
+              <Heading className="twentyEightFont">It's Simple!</Heading>
+              <Text className="eighteenFont">
                 Fill out the information form found on the 'Apply' tab. When
                 filling out the form, make sure to:
               </Text>
 
-              <Bullet>
+              <Bullet className="eighteenFont">
                 - Be specific, give us as much information as you can.
               </Bullet>
-              <Bullet>
+              <Bullet className="eighteenFont">
                 - Make sure to fill out all the necessary forms so we can
                 fulfill company requirements
               </Bullet>
-              <Bullet>- Be honest, write about yourself</Bullet>
-              <Bullet>- Submit when everything is filled out!</Bullet>
+              <Bullet className="eighteenFont">- Be honest, write about yourself</Bullet>
+              <Bullet className="eighteenFont">- Submit when everything is filled out!</Bullet>
 
               {/**Things you will Need */}
-              <Heading style={{ marginTop: "90px" }}>Things you need</Heading>
-              <Text>
+              <Heading style={{ marginTop: "90px" }} className="twentyEightFont">Things you need</Heading>
+              <Text className="eighteenFont">
                 In order to apply, make sure you have the following information:
               </Text>
               <Bullet style={{ marginTop: "15px" }}>
@@ -211,74 +191,74 @@ class HowtoApply extends React.Component {
                 />
                 Weighted and Unweighted Grade Point Average (GPA)
               </Bullet>
-              <Bullet>
+              <Bullet className="eighteenFont">
                 <CheckOutlined
                   style={{ color: "green", paddingRight: "10px" }}
                 />
                 List of interested industries (Ie. Finance or Biotechnology)
               </Bullet>
-              <Bullet>
+              <Bullet className="eighteenFont">
                 <CheckOutlined
                   style={{ color: "green", paddingRight: "10px" }}
                 />
                 List of relevant courses taken
               </Bullet>
-              <Bullet>
+              <Bullet className="eighteenFont">
                 <CheckOutlined
                   style={{ color: "green", paddingRight: "10px" }}
                 />
                 List of extracurricular activities
               </Bullet>
-              <Bullet>
+              <Bullet className="eighteenFont">
                 <CheckOutlined
                   style={{ color: "green", paddingRight: "10px" }}
                 />
                 Year of Graduation (Must be at least a high school Sophomore to
                 high school Senior)
               </Bullet>
-              <Bullet>
+              <Bullet className="eighteenFont">
                 <CheckOutlined
                   style={{ color: "green", paddingRight: "10px" }}
                 />
                 Availability to work
               </Bullet>
-              <Bullet>
+              <Bullet className="eighteenFont">
                 <CheckOutlined
                   style={{ color: "green", paddingRight: "10px" }}
                 />
                 Resumé or CV
               </Bullet>
-              <Bullet>
+              <Bullet className="eighteenFont">
                 <CheckOutlined
                   style={{ color: "green", paddingRight: "10px" }}
                 />
                 List Item
               </Bullet>
-              <Bullet>
+              <Bullet className="eighteenFont">
                 <CheckOutlined
                   style={{ color: "green", paddingRight: "10px" }}
                 />
                 Cover Letter (Optional)
               </Bullet>
-              <Bullet>
+              <Bullet className="eighteenFont">
                 <CheckOutlined
                   style={{ color: "green", paddingRight: "10px" }}
                 />
                 Letters of Recommendation (1 required, but 2 is advised)
               </Bullet>
-              <Bullet>
+              <Bullet className="eighteenFont">
                 <CheckOutlined
                   style={{ color: "green", paddingRight: "10px" }}
                 />
                 Transcript
               </Bullet>
-              <Bullet>
+              <Bullet className="eighteenFont">
                 <CheckOutlined
                   style={{ color: "green", paddingRight: "10px" }}
                 />
                 School Profile
               </Bullet>
-              <Bullet>
+              <Bullet className="eighteenFont">
                 <CheckOutlined
                   style={{ color: "green", paddingRight: "10px" }}
                 />
@@ -286,11 +266,11 @@ class HowtoApply extends React.Component {
               </Bullet>
 
               {/**Internship Information */}
-              <Heading ref={this.Internref}>Internship Information</Heading>
+              <Heading ref={this.Internref} className="twentyEightFont">Internship Information</Heading>
               <div style={{ backgroundColor: "#ededed", width: "100%" }}>
                 <Image src={Internshipimg} alt="internshipinfo" />
               </div>
-              <Caption>
+              <Caption className="eighteenFont">
                 This is where you will fill out information regarding your
                 preferences and desires in internships. For example, if you
                 wanted to apply for a company in the Real Estate industry or can
@@ -299,11 +279,11 @@ class HowtoApply extends React.Component {
               </Caption>
 
               {/**Personal Information */}
-              <Heading ref={this.Personalref}>Personal Information</Heading>
+              <Heading ref={this.Personalref} className="twentyEightFont">Personal Information</Heading>
               <div style={{ backgroundColor: "#ededed", width: "100%" }}>
                 <Image src={Personalimg} alt="Personal" />
               </div>
-              <Caption>
+              <Caption className="eighteenFont">
                 In the 'General Information' tab, you will give us personal
                 information about yourself. This includes, gender, race, and
                 educational history. Please note that you do not have to fill
@@ -312,11 +292,11 @@ class HowtoApply extends React.Component {
               </Caption>
 
               {/**Written Work */}
-              <Heading ref={this.Writtenref}>Written Work</Heading>
+              <Heading ref={this.Writtenref} className="twentyEightFont">Written Work</Heading>
               <div style={{ backgroundColor: "#ededed", width: "100%" }}>
                 <Image src={Writtenimg} alt="Personal" />
               </div>
-              <Caption>
+              <Caption className="eighteenFont">
                 Please will tell us more about yourself! Let us know why a
                 company should give you an intern, and what you would bring to
                 their facility. Remember to be specific and answer in complete
@@ -325,11 +305,11 @@ class HowtoApply extends React.Component {
               </Caption>
 
               {/**References */}
-              <Heading ref={this.Referenceref}> References </Heading>
+              <Heading ref={this.Referenceref} className="twentyEightFont"> References </Heading>
               <div style={{ backgroundColor: "#ededed", width: "100%" }}>
                 <Image src={Referencesimg} alt="Personal" />
               </div>
-              <Caption>
+              <Caption className="eighteenFont">
                 This is what our reference tab looks like. Here, you can add or
                 delete references as you please. A reference could be someone
                 you worked with in the past, or a trusted adult. They serve to

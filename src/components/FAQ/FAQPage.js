@@ -7,16 +7,9 @@ import { withRouter } from "react-router-dom";
 
 import { Menu, Layout, Collapse } from "antd";
 
+import '../../App.css'
 
-const BannerStyle = {
-    backgroundColor: " #13C2C2",
-    paddingTop: "55px",
-    paddingBottom: "55px",
-    fontSize: "36px",
-    color: "white",
-    fontWeight: "normal",
-    height: "180px",
-}
+
 
 const ContentStyle = {
     display: "flex",
@@ -39,16 +32,12 @@ const PageStyle = {
 }
 
 const Question = styled.span`
-font-size: 22px;
-font-weight:500;
+ font-weight:500;
 color:#000000;
-
- 
 `
 
 const ResponseText = styled.div`
-font-size:16px;
-font-weight:0;
+ font-weight:0;
 color:#434343;
  
 white-space:pre-line;
@@ -107,9 +96,7 @@ class FAQPage extends React.Component {
     render() {
         return (
             <Layout>
-                <Header
-                    style={BannerStyle}
-                >
+                <Header className="FAQBanner" style={{ backgroundColor: '#13C2C2' }}>
                     Frequently Asked Questions
         </Header>
                 <Layout>
@@ -122,8 +109,8 @@ class FAQPage extends React.Component {
 
                             {QuestionArray.map(list => (
                                 <Collapse expandIconPosition='right' style={{ marginBottom: '8vh' }}>
-                                    <Panel header={<Question>{list.question}</Question>} style={{ textAlign: 'left', backgroundColor: '#f0f0f0' }}>
-                                        <Response>{list.answer}</Response>
+                                    <Panel header={<Question className="twentyTwoFont">{list.question}</Question>} style={{ textAlign: 'left', backgroundColor: '#f0f0f0' }}>
+                                        <Response className="sixteenFont">{list.answer}</Response>
                                     </Panel>
                                 </Collapse>
 
@@ -134,7 +121,7 @@ class FAQPage extends React.Component {
 
                 </Layout>
 
-            </Layout>
+            </Layout >
         );
     }
 

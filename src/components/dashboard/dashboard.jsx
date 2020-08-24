@@ -31,8 +31,7 @@ const PageContainer = styled.div`
 
 const WelcomeHeader = styled.h1`
   text-align: center;
-  font-size: 72px;
-  font-family: Lato;
+   font-family: Lato;
   font-weight: bold;
   margin-ottom: 3%;
 
@@ -72,7 +71,7 @@ class Dashboard extends Component {
             }}
           >
             <PageContainer>
-              <WelcomeHeader>Welcome {this.props.userInfo.username}</WelcomeHeader>
+              <WelcomeHeader className="seventyTwoFont">Welcome {this.props.userInfo.username}</WelcomeHeader>
               <DashboardNavBar version={this.props.userInfo.version} />
               <hr />
               <ReactSwitch>

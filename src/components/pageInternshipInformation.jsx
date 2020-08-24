@@ -378,7 +378,7 @@ class PageInternshipInformation extends Component {
              */}
             <Row name="first" gutter={formGutter}>
               <Col span={halfSpan}>
-                <Form.Item {...formItemProps.firstName}>
+                <Form.Item {...formItemProps.firstName} >
                   <Input />
                 </Form.Item>
               </Col>

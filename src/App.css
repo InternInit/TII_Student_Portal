@@ -158,9 +158,14 @@ h2 {
 }
 
 
+
 /**
 FONT SIZES 
 */
+
+.seventyTwoFont{
+  font-size:72px;
+}
 
 .thirtySixFont{
   font-size:36px;
@@ -171,16 +176,70 @@ FONT SIZES
   font-size:28px;
 }
 
+.twentyTwoFont{
+  font-size:22px;
+}
+
+.eighteenFont{
+  font-size:18px;
+}
+
+.sixteenFont{
+  font-size:16px;
+}
+
+
+
+.FAQBanner{
+height:180px;
+  font-size:36px;
+font-weight:normal;
+
+color:white;
+
+padding-top:55px;
+padding-bottom:55px;
+
+background-color:#8fc3d1;
+}
+
+
 @media only screen and (max-width: 800px) {
+
+  .seventyTwoFont{
+    font-size:56px;
+  }
+
   .thirtySixFont{
     font-size:28px;
   }
 
 
   .twentyEightFont{
-    font-size:22px;
+    font-size:20px;
   }
 
+  .twentyTwoFont{
+    font-size:16px;
+  }
+
+  .eighteenFont{
+    font-size:14px;
+  }
+
+  .sixteenFont{
+    font-size: 12px;
+  }
+
+  .FAQBanner{
+    height:154px;
+      font-size:28px;
+     
+     
+    padding-top:42px;
+    padding-bottom:42px;
+    
+     }
 }
 
 
