@@ -113,23 +113,23 @@ class AddCompanies extends React.Component {
   }
 
 
-    componentDidMount (){
-      Info = [];
-      this.getBusinesses()
-    };
+  componentDidMount() {
+    Info = [];
+    this.getBusinesses()
+  };
 
 
 
-    getBusinesses = () => {
-      fetch("/api/get_businesses")
+  getBusinesses = () => {
+    fetch("/api/get_businesses")
       .then(response => response.json())
       .then(data => {
         let companyArray = [];
         JSON.parse(data).hits.hits.forEach(item => companyArray.push(item._source));
-        this.setState({ companies : companyArray })
+        this.setState({ companies: companyArray })
       })
 
-    }
+  }
 
   render() {
     let { search, mergedIndustry } = this.state;
@@ -152,166 +152,166 @@ class AddCompanies extends React.Component {
       <div style={{ paddingBottom: "50%" }}>
         {this.props.version < 1 ? <ModuleContainer>
           <AntRow>
-          <DescriptorText style={{margin: "auto"}}>Please fill out your application first</DescriptorText>
+            <DescriptorText style={{ margin: "auto" }}>Please fill out your application first</DescriptorText>
           </AntRow>
         </ModuleContainer> :
-        <React.Fragment>
-        <h1 className="module-name">Apply to an Entire Industry</h1>
-        <Form>
-          <Collapse defaultActiveKey={["0"]} expandIconPosition="right">
-            <Panel
-              header={
-                <strong>
-                  Choose an entire industry to submit your application to.
+          <React.Fragment>
+            <h1 className="module-name">Apply to an Entire Industry</h1>
+            <Form>
+              <Collapse defaultActiveKey={["0"]} expandIconPosition="right">
+                <Panel
+                  header={
+                    <strong>
+                      Choose an entire industry to submit your application to.
                 </strong>
-              }
-            >
-              <AntRow gutter={formGutter}>
-                <AntCol span={standardSpan}>
-                  <Checkbox.Group onChange={(value) => {this.addConfirmIndustry(value)}}>
-                    <AntRow gutter={checkGutter}>
-                      {industry.map(industry => (
-                        <AntCol
-                          span={thirdSpan}
-                          style={{
-                            display: "flex",
-                            alignItems: "flex-start"
-                          }}
-                        >
-                          <Checkbox
-                            key={industry}
-                            value={industry}
-                            style={{
-                              lineHeight: "32px",
-                              marginLeft: "25%"
-                            }}
-                          >
-                            {industry}
-                          </Checkbox>
-                        </AntCol>
-                      ))}
-                    </AntRow>
-                  </Checkbox.Group>
-                </AntCol>
-              </AntRow>
-              <AntRow>
-                <Button type="primary" style={{ margin: "auto" }} onClick={this.showModal}>
-                  Submit to Industries
+                  }
+                >
+                  <AntRow gutter={formGutter}>
+                    <AntCol span={standardSpan}>
+                      <Checkbox.Group onChange={(value) => { this.addConfirmIndustry(value) }}>
+                        <AntRow gutter={checkGutter}>
+                          {industry.map(industry => (
+                            <AntCol
+                              span={thirdSpan}
+                              style={{
+                                display: "flex",
+                                alignItems: "flex-start"
+                              }}
+                            >
+                              <Checkbox
+                                key={industry}
+                                value={industry}
+                                style={{
+                                  lineHeight: "32px",
+                                  marginLeft: "25%"
+                                }}
+                              >
+                                {industry}
+                              </Checkbox>
+                            </AntCol>
+                          ))}
+                        </AntRow>
+                      </Checkbox.Group>
+                    </AntCol>
+                  </AntRow>
+                  <AntRow>
+                    <Button type="primary" style={{ margin: "auto" }} onClick={this.showModal}>
+                      Send my application to these industries
                 </Button>
-              </AntRow>
-            </Panel>
-          </Collapse>
-        </Form>
-        {/**
+                  </AntRow>
+                </Panel>
+              </Collapse>
+            </Form>
+            {/**
  *
  * MODAL FOR CONFIRMING INDUSTRIES
  *
  */}
-        <Modal
-          visible={visible}
-          width={'100vh'}
-          onCancel={this.cancelModal}
-          onOk={this.confirmIndustry}
-          okText="Confirm"
-          title="Confirm Industries"
-        >
-          <p>
-            <strong>Your application will be sent to the following industries:</strong>
-          </p>
-          {this.state.sendingIndustries.map(industry => <p>{industry}</p>)}
+            <Modal
+              visible={visible}
+              width={'100vh'}
+              onCancel={this.cancelModal}
+              onOk={this.confirmIndustry}
+              okText="Confirm"
+              title="Confirm Industries"
+            >
+              <p>
+                <strong>Your application will be sent to the following industries:</strong>
+              </p>
+              {this.state.sendingIndustries.map(industry => <p>{industry}</p>)}
 
-          {/**Map the industries here */}
-        </Modal>
+              {/**Map the industries here */}
+            </Modal>
 
 
-        <h1 className="module-name" ref={this.myRef}>
-          Search Companies
+            <h1 className="module-name" ref={this.myRef}>
+              Search Companies
         </h1>
 
-        {/**
+            {/**
          *
          * Search bar
          *
          */}
-        <Search
-          placeholder="Search Company Name"
-          allowClear="true"
-          size="large"
-          onChange={value => this.searchCompany(value)}
-          style={{ width: "100%", marginBottom: "20px", marginTop: "8px" }}
-        />
+            <Search
+              placeholder="Search Company Name"
+              allowClear="true"
+              size="large"
+              onChange={value => this.searchCompany(value)}
+              style={{ width: "100%", marginBottom: "20px", marginTop: "8px" }}
+            />
 
-        {/**
+            {/**
          *
          * Filter by industries Collapse Tab
          *
          */}
-        <AntRow style={{ width: "100%", marginBottom: "10px" }}>
-          <Collapse defaultActiveKey={["0"]} expandIconPosition="right">
-            <Panel header="Filter by Industry">
-              <AntRow gutter={formGutter}>
-                <AntCol span={standardSpan}>
-                  <Checkbox.Group
-                    onChange={value => {this.filterIndustries(value)}}
-                  >
-                    <AntRow gutter={checkGutter}>
-                      {industry.map(industry => (
-                        <AntCol
-                          span={thirdSpan}
-                          style={{
-                            display: "flex",
-                            alignItems: "flex-start"
-                          }}
-                        >
-                          <Checkbox
-                            key={industry}
-                            value={industry}
-                            style={{
-                              lineHeight: "32px",
-                              marginLeft: "25%"
-                            }}
-                          >
-                            {industry}
-                          </Checkbox>
-                        </AntCol>
-                      ))}
-                    </AntRow>
-                  </Checkbox.Group>
-                </AntCol>
-              </AntRow>
-            </Panel>
-          </Collapse>
-        </AntRow>
+            <AntRow style={{ width: "100%", marginBottom: "10px" }}>
+              <Collapse defaultActiveKey={["0"]} expandIconPosition="right">
+                <Panel header="Filter by Industry">
+                  <AntRow gutter={formGutter}>
+                    <AntCol span={standardSpan}>
+                      <Checkbox.Group
+                        onChange={value => { this.filterIndustries(value) }}
+                      >
+                        <AntRow gutter={checkGutter}>
+                          {industry.map(industry => (
+                            <AntCol
+                              span={thirdSpan}
+                              style={{
+                                display: "flex",
+                                alignItems: "flex-start"
+                              }}
+                            >
+                              <Checkbox
+                                key={industry}
+                                value={industry}
+                                style={{
+                                  lineHeight: "32px",
+                                  marginLeft: "25%"
+                                }}
+                              >
+                                {industry}
+                              </Checkbox>
+                            </AntCol>
+                          ))}
+                        </AntRow>
+                      </Checkbox.Group>
+                    </AntCol>
+                  </AntRow>
+                </Panel>
+              </Collapse>
+            </AntRow>
 
-        {/**
+            {/**
          *
          * Mapping of search results
          *
          */}
-        <QueueAnim type="scale" ease={["easeOutQuart", "easeInOutQuart"]}>
-          {filteredInfo.slice(page, page + 20).map((company, index) => (
-            <div style={{ marginBottom: "12px" }} key={index}>
-              <SearchCompanytab
-                key={company.name}
-                name={company.name}
-                industry={company.industry}
-                logo={company.avatar}
-                image={company.avatar}
-                description={company.description}
-                location={company.location}
-                companyid={company.id}
-                updateBusinessStatus={this.props.updateBusinessStatus}
-              />
-            </div>
-          ))}
-        </QueueAnim>
-        <Pagination
-          current={parseInt(page) + 1}
-          total={filteredInfo.length}
-          onChange={pageChange => this.handlePageChange(pageChange - 1)}
-          pageSize={20}
-        />
-        </React.Fragment>}
+            <QueueAnim type="scale" ease={["easeOutQuart", "easeInOutQuart"]}>
+              {filteredInfo.slice(page, page + 20).map((company, index) => (
+                <div style={{ marginBottom: "12px" }} key={index}>
+                  <SearchCompanytab
+                    key={company.name}
+                    name={company.name}
+                    industry={company.industry}
+                    logo={company.avatar}
+                    image={company.avatar}
+                    description={company.description}
+                    location={company.location}
+                    companyid={company.id}
+                    updateBusinessStatus={this.props.updateBusinessStatus}
+                  />
+                </div>
+              ))}
+            </QueueAnim>
+            <Pagination
+              current={parseInt(page) + 1}
+              total={filteredInfo.length}
+              onChange={pageChange => this.handlePageChange(pageChange - 1)}
+              pageSize={20}
+            />
+          </React.Fragment>}
 
       </div >
     );

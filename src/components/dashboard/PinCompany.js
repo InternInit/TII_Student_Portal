@@ -52,7 +52,7 @@ class PinCompany extends Component {
          *
          */}
         <h1 className="module-name" style={{ marginTop: "70px" }}>
-          Pinned Companies
+          Added Companies
         </h1>
         {pinnedBusinesses.length < 1 ?
           <ModuleContainer>

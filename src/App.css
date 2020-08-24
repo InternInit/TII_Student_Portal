@@ -156,3 +156,33 @@ h2 {
   line-height: 1;
   content: "*";
 }
+
+
+/**
+FONT SIZES 
+*/
+
+.thirtySixFont{
+  font-size:36px;
+}
+
+
+.twentyEightFont{
+  font-size:28px;
+}
+
+@media only screen and (max-width: 800px) {
+  .thirtySixFont{
+    font-size:28px;
+  }
+
+
+  .twentyEightFont{
+    font-size:22px;
+  }
+
+}
+
+
+
+

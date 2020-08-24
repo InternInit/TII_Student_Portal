@@ -10,12 +10,12 @@ import { withRouter } from "react-router-dom";
 
 import { Menu, Layout } from "antd";
 
+import '../App.css'
 
 
 
 const Heading = styled.span`
-  font-size: 28px;
-  padding-bottom: 10px;
+   padding-bottom: 10px;
   padding-top: 10px;
   font-weight: bold;
   display: flex;
@@ -87,11 +87,12 @@ class HowtoApply extends React.Component {
     return (
       <Layout>
         <Header
+
+          className="thirtySixFont"
           style={{
             backgroundColor: " #8fc3d1",
             paddingTop: "55px",
             paddingBottom: "55px",
-            fontSize: "36px",
             color: "white",
             fontWeight: "normal",
             height: "180px"
@@ -120,6 +121,7 @@ class HowtoApply extends React.Component {
             >
               {/**Jump to Section */}
               <Heading
+                className="twentyEightFont"
                 style={{
                   display: "flex",
                   justifyContent: "center",

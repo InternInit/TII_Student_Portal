@@ -171,7 +171,7 @@ class DroppedView extends React.Component {
                     type='primary'
                     onClick={this.submitResponse}
                 >
-                    Submit
+                    Submit Application
                     </Button>
 
                 <Modal visible={visible}

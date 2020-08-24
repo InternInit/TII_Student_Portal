@@ -45,7 +45,7 @@ class ActiveApplications extends Component {
 
         return (
             <React.Fragment>
-                <h1 className="module-name" style={{ marginTop: "70px" }}>Active Application</h1>
+                <h1 className="module-name" style={{ marginTop: "70px" }}>Active Applications</h1>
 
                 {activeApplications.length < 1 ?
                     <ModuleContainer>
