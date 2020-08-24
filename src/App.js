@@ -286,6 +286,10 @@ class App extends Component {
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
+        //Placeholder behavior to pinpoint memoization bug
+        //#########################################
+        this.props.updatePinnedBusinesses([]);
+        //#########################################
         this.getPinnedBusinesses();
         this.getActiveApplications();
       });
@@ -304,6 +308,7 @@ class App extends Component {
     })
       .then((response) => response.json())
       .then((data) => {
+        console.log(data);
         this.matchBusinessesPinned(data);
       });
   };
