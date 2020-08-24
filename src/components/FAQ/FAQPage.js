@@ -109,8 +109,8 @@ class FAQPage extends React.Component {
 
                             {QuestionArray.map(list => (
                                 <Collapse bordered={false} expandIconPosition='right' style={{ marginBottom: '8vh' }}>
-                                    <Panel header={<Question>{list.question}</Question>} style={{ textAlign: 'left', backgroundColor: '#f0f0f0' }}>
-                                        <Response>{list.answer}</Response>
+                                    <Panel header={<Question className="eighteenFont">{list.question}</Question>} style={{ textAlign: 'left', backgroundColor: '#f0f0f0' }}>
+                                        <Response >{list.answer}</Response>
                                     </Panel>
                                 </Collapse>
 
@@ -130,7 +130,7 @@ export default FAQPage;
 
 function Response(props) {
     return (
-        <ResponseText >
+        <ResponseText className="sixteenFont">
             {props.children}
         </ResponseText>
     )
