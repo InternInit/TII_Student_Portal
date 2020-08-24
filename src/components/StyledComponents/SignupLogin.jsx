@@ -22,6 +22,7 @@ export const Background = styled.div`
       rgba(255, 255, 255, 0) 100%
     ),
     #ffffff;
+    
   width: 100%;
   height: 100%;
   background-position: center;
@@ -31,6 +32,7 @@ export const Background = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content:center;
 `;
 
 export const Label = styled.div`

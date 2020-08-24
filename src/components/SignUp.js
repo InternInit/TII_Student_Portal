@@ -120,7 +120,7 @@ class SignUp extends React.Component {
 
     return (
       <Background>
-        <Container style={{ marginTop: "7%" }}>
+        <Container >
           <Banner style={{ marginTop: "0px", width: "100%" }}>
             Create a New Account
           </Banner>
@@ -208,13 +208,13 @@ class SignUp extends React.Component {
                   I agree to the Terms and Conditions and Privacy Agreement
                 </Checkbox>
               </Form.Item>
-                <Button
-                  className="profile-button-style"
-                  type="primary"
-                  htmlType="submit"
-                  style={{width: "100%"}}
-                >
-                  Sign Up
+              <Button
+                className="profile-button-style"
+                type="primary"
+                htmlType="submit"
+                style={{ width: "100%" }}
+              >
+                Sign Up
                 </Button>
             </Form>
           </div>

@@ -57,11 +57,11 @@ class LogIn extends React.Component {
   componentDidMount() {
     console.log(this.props);
   }
-  
+
   render() {
     return (
       <Background>
-        <Container style={{ marginTop: "10%" }}>
+        <Container >
           <Banner style={{ marginTop: "0px" }}>
             The Internship Initiative (TII)
           </Banner>
@@ -81,7 +81,7 @@ class LogIn extends React.Component {
                 type="primary"
                 htmlType="submit"
                 style={{
-                    /*ORDER MATTERS DON'T SWITCH*/
+                  /*ORDER MATTERS DON'T SWITCH*/
 
                   margin: "auto",
                   marginTop: "30px"
