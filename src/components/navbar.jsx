@@ -28,6 +28,7 @@ const MenuAvatar =
 const menuStyle = {
   textAlign: "left",
   marginLeft: "60px",
+
 };
 
 const menuItemStyle = {
@@ -87,7 +88,7 @@ class Navbar extends Component {
 
     let { isMobile } = this.state;
 
-    if (isMobile) {
+    if (isMobile || window.innerWidth <= 810) {
       return <Menu
         className="main-navbar"
         onClick={this.handleClick}

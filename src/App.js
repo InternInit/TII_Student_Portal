@@ -473,8 +473,8 @@ class App extends Component {
               display: "flex",
               padding: "30px",
               justifyContent: "center",
-              backgroundColor: "#ededed",
-              minHeight: "100vh",
+              backgroundColor: "#eff4f5",
+              minHeight: "100vh"
             }}
           >
             {this.RenderedPages()}

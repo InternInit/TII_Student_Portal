@@ -66,8 +66,10 @@ class Dashboard extends Component {
               display: "flex",
               padding: "30px",
               justifyContent: "center",
-              backgroundColor: "#F5F5F5",
+              backgroundColor: "#eff4f5",
               minHeight: "100vh",
+
+              minWidth: '610px'
             }}
           >
             <PageContainer>
