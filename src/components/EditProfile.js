@@ -683,8 +683,8 @@ class EditProfile extends React.Component {
           Subject: id,
         },
       })
-        .then((response) => {})
-        .then((data) => {});
+        .then((response) => { })
+        .then((data) => { });
     }, 100);
   };
 
@@ -703,8 +703,8 @@ class EditProfile extends React.Component {
         },
         body: fd,
       })
-        .then((response) => {})
-        .then((data) => {});
+        .then((response) => { })
+        .then((data) => { });
     }, 100);
   };
 }

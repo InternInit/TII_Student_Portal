@@ -13,8 +13,7 @@ import { Avatar } from 'antd';
 import { TeamOutlined } from '@ant-design/icons';
 
 const PendingTab = styled.div`
-  font-size: 18px;
-  font-weight: 600;
+   font-weight: 600;
   display: flex;
   align-self: center;
 `;
@@ -67,41 +66,41 @@ function ActiveAppCompanytab(props) {
       {mapping.map((item, index) => (
         <div key={index}>
           <Link to={`/dashboard/add-companies/company-information/${companyId}`}>
-          <TabContainer
-            style={{ display: "flex", justifyContent: "space-evenly" }}
-          >
-            {/**Company Logo + Name + Position */}
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                width: "80%",
-                alignItems: "center"
-              }}
+            <TabContainer
+              style={{ display: "flex", justifyContent: "space-evenly" }}
             >
-              {/**company logo */}
-              <Avatar
-                size={36}
-                shape="square"
-                src={props.avatar}
-                style={{ marginLeft: "8%", marginBottom: "14px" }}
-              />
-
-              {/**company name and job */}
-              <Col
+              {/**Company Logo + Name + Position */}
+              <div
                 style={{
-                  marginLeft: "30px",
-                  alignItems: "flex-start"
+                  display: "flex",
+                  flexDirection: "row",
+                  width: "80%",
+                  alignItems: "center"
                 }}
               >
-                <CompanyTitle>
-                  {companyName}
-                </CompanyTitle>
-                <JobTitle style={{ paddingTop: "4px" }}>{industry}</JobTitle>
-              </Col>
-            </div>
-            <PendingTab style={{ color: tabColor }}>{status}</PendingTab>
-          </TabContainer>
+                {/**company logo */}
+                <Avatar
+                  size={36}
+                  shape="square"
+                  src={props.avatar}
+                  style={{ marginLeft: "8%", marginBottom: "14px" }}
+                />
+
+                {/**company name and job */}
+                <Col
+                  style={{
+                    marginLeft: "30px",
+                    alignItems: "flex-start"
+                  }}
+                >
+                  <CompanyTitle className='thirtytwoFont'>
+                    {companyName}
+                  </CompanyTitle>
+                  <JobTitle style={{ paddingTop: "4px" }} className='fourteenFont'>{industry}</JobTitle>
+                </Col>
+              </div>
+              <PendingTab style={{ color: tabColor }} className='eighteenFont'>{status}</PendingTab>
+            </TabContainer>
           </Link>
         </div>
       ))}

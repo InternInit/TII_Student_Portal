@@ -22,8 +22,7 @@ const DescriptorText = styled.span`
   width: 100%
   font-family: Lato;
   font-weight: bold;
-  font-size: 24px;
-
+ 
   color: black;
 `;
 
@@ -50,7 +49,7 @@ class ActiveApplications extends Component {
                 {activeApplications.length < 1 ?
                     <ModuleContainer>
                         <AntRow>
-                            <DescriptorText style={{ margin: "auto" }}>You do not have any awaiting applications.</DescriptorText>
+                            <DescriptorText style={{ margin: "auto" }} className="twentyFourFont">You do not have any awaiting applications.</DescriptorText>
                         </AntRow>
                     </ModuleContainer> :
 

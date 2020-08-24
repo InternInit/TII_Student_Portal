@@ -11,20 +11,21 @@ import {
 } from "./styledDashboardComponents";
 
 const QVCompany = styled.div`
-  font-size: 18px;
-  font-weight: normal;
+   font-weight: normal;
   color: #262626;
+
+  text-align:left;
 `;
 
 const QVTitle = styled.div`
-  font-size: 24px;
-  font-weight: bold;
+   font-weight: bold;
   color: black;
+
+  text-align:left;
 `;
 
 const QVCaption = styled.div`
-  font-size: 18px;
-  font-weight: normal;
+   font-weight: normal;
   color: #262626;
   width: 80%;
   text-align: left;
@@ -37,11 +38,10 @@ const Col = styled.div`
 `;
 
 const Image = styled.img`
-  width: 400px;
-  height: 200px;
-  background-color:#d9d9d9;
+    background-color:#d9d9d9;
   border-radius: 10px;
-`;
+
+ `;
 
 const mapping = [
   "this single item in the array is allowing me to use the queue animations lol"
@@ -52,7 +52,7 @@ class SearchCompanytab extends React.Component {
     super(props);
     this.state = {
       show: false
-    };
+    }
 
     this.handleClick = this.handleClick.bind(this);
   }
@@ -79,6 +79,8 @@ class SearchCompanytab extends React.Component {
           location={location}
           companyid={companyid}
           updateBusinessStatus={this.props.updateBusinessStatus}
+
+
         />
       );
     }
@@ -96,6 +98,8 @@ class SearchCompanytab extends React.Component {
   handleClick = () => {
     this.setState({ show: !this.state.show });
   };
+
+
 }
 export default SearchCompanytab;
 
@@ -106,8 +110,17 @@ Standard View of the Tab.
 */
 
 class CLabel extends React.Component {
+
   render() {
     let { name, industry, logo } = this.props;
+
+    let companyName = "";
+    if (name.length >= 44) {
+      companyName = name.substring(0, 44) + "..."
+    }
+    else {
+      companyName = name;
+    }
     return (
       <QueueAnim type="scale" ease={["easeOutQuart", "easeInOutQuart"]}>
         {mapping.map((item, index) => (
@@ -138,8 +151,8 @@ class CLabel extends React.Component {
                     alignItems: "flex-start"
                   }}
                 >
-                  <CompanyTitle>{name}</CompanyTitle>
-                  <JobTitle style={{ paddingTop: "4px" }}>{industry}</JobTitle>
+                  <CompanyTitle className='thirtytwoFont'>{companyName}</CompanyTitle>
+                  <JobTitle style={{ paddingTop: "4px" }} className='fourteenFont'>{industry}</JobTitle>
                 </Col>
               </div>
             </TabContainer>
@@ -157,11 +170,14 @@ Gives additional Information when hovered over
 
 */
 class QuickView extends React.Component {
+
+
   addCompany = () => {
     console.log(this.props)
     message.success(`Company Pinned! 🎉`)
     this.props.updateBusinessStatus(this.props.companyid, "Pinned")
   }
+
   render() {
     let {
       name,
@@ -171,8 +187,11 @@ class QuickView extends React.Component {
       location,
       companyid
     } = this.props;
+
+
     return (
       <QueueAnim type="scale" ease={["easeOutQuart", "easeInOutQuart"]}>
+        {this.resize}
         {mapping.map((item, index) => (
           <div key={index}>
             <TabContainer
@@ -192,9 +211,9 @@ class QuickView extends React.Component {
                   marginLeft: "10%"
                 }}
               >
-                <QVCompany>{name}</QVCompany>
-                <QVTitle>{industry}</QVTitle>
-                <QVCompany
+                <QVCompany className="twentyFourFont">{name}</QVCompany>
+                <QVTitle className="eighteenFont">{industry}</QVTitle>
+                <QVCompany className="eighteenFont"
                   style={{
                     marginTop: "10px",
                     fontWeight: "500"
@@ -203,7 +222,7 @@ class QuickView extends React.Component {
                   Description
                 </QVCompany>
 
-                <QVCaption style={{ marginTop: "4px" }}>
+                <QVCaption className="eighteenFont" style={{ marginTop: "4px" }}>
                   {description.substring(0, 250) + ". . ."}
                 </QVCaption>
               </Col>
@@ -220,7 +239,7 @@ class QuickView extends React.Component {
                   width: "50%"
                 }}
               >
-                <Image src={image} alt="Company Visual" />
+                <Image src={image} alt="Company Visual" className="companyIMG" />
 
                 <div
                   style={{
@@ -231,14 +250,12 @@ class QuickView extends React.Component {
                   }}
                 >
                   <Col
-                    style={{
-                      marginRight: "5%"
-                    }}
+                    className="companyLocation"
                   >
-                    <QVCompany style={{ fontWeight: "500" }}>
+                    <QVCompany className="eighteenFont" style={{ fontWeight: "500" }}>
                       Location
                     </QVCompany>
-                    <QVCaption style={{ textAlign: "center", width: "150px" }}>
+                    <QVCaption style={{ textAlign: "center", }} >
                       {location}
                     </QVCaption>
                   </Col>
@@ -267,4 +284,8 @@ class QuickView extends React.Component {
       </QueueAnim>
     );
   }
+
+
+
+
 }

@@ -34,23 +34,20 @@ const Image = styled.img`
 const Caption = styled.div`
   display: flex;
   text-align: left;
-  font-size: 18px;
-  font-weight: normal;
+   font-weight: normal;
   color: #262626;
   width: 80%;
   margin-top: 10px;
 `;
 
 const Header = styled.div`
-  font-size: 28px;
-  font-weight: 500;
+   font-weight: 500;
   color: #595959;
   margin-top: 30px;
 `;
 
 const SectionHeader = styled.span`
-  font-size: 36px;
-  font-weight: 500;
+   font-weight: 500;
   color: black;
   
 `;
@@ -161,12 +158,13 @@ class CompanyInformation extends React.Component {
          */}
         <Breadcrumb
           style={{
-            fontSize: "18px",
             display: "flex",
             flexDirection: "row",
             fontWeight: "500",
             marginTop: "30px",
           }}
+
+          className="eighteenFont"
         >
           <Link to="/dashboard/add-companies">
             <Breadcrumb.Item>Add Companies</Breadcrumb.Item>
@@ -184,18 +182,20 @@ class CompanyInformation extends React.Component {
             style={{
               display: "flex",
               flexDirection: "row",
-              marginBottom: "40px"
+              marginBottom: "40px",
+
+              alignItems: 'center'
             }}
           >
             <Avatar size={40} src={info.avatar} style={{ marginTop: "10px" }} />
             <Header
               style={{
-                fontSize: "36px",
                 textAlign: "left",
                 marginLeft: "15px",
                 color: "#8C8C8C",
                 marginTop: "0px",
               }}
+              className='thirtySixFont'
             >
               {info.name}
             </Header>
@@ -213,6 +213,8 @@ class CompanyInformation extends React.Component {
                 paddingBottom: "25px",
                 marginTop: "25px",
               }}
+
+              className='thirtySixFont'
             >
               Company Overview
             </SectionHeader>
@@ -224,8 +226,8 @@ class CompanyInformation extends React.Component {
            *
            */}
           <Row>
-            <Header>Company Description</Header>
-            <Caption>{info.description}</Caption>
+            <Header className='twentyEightFont'>Company Description</Header>
+            <Caption className='eighteenFont'>{info.description}</Caption>
           </Row>
 
           {/**
@@ -270,6 +272,8 @@ class CompanyInformation extends React.Component {
                 paddingBottom: "25px",
                 marginTop: "40px",
               }}
+              className='thirtySixFont'
+
             >
               Internship Information
             </SectionHeader>
@@ -281,8 +285,8 @@ class CompanyInformation extends React.Component {
            *
            */}
           <Row>
-            <Header>Description</Header>
-            <Caption>{info.description}</Caption>
+            <Header className='twentyEightFont'>Description</Header>
+            <Caption className='eighteenFont'>{info.description}</Caption>
           </Row>
 
           {/**
@@ -291,8 +295,8 @@ class CompanyInformation extends React.Component {
            *
            */}
           <Row>
-            <Header>Location</Header>
-            <Caption>{info.location}</Caption>
+            <Header className='twentyEightFont'>Location</Header>
+            <Caption className='eighteenFont'>{info.location}</Caption>
           </Row>
 
           {/**
@@ -301,8 +305,8 @@ class CompanyInformation extends React.Component {
            *
            */}
           <Row>
-            <Header>Industry</Header>
-            <Caption>{info.industry}</Caption>
+            <Header className='twentyEightFont'>Industry</Header>
+            <Caption className='eighteenFont'>{info.industry}</Caption>
           </Row>
 
           {/**
@@ -311,8 +315,8 @@ class CompanyInformation extends React.Component {
            *
            */}
           <Row>
-            <Header>Work Period</Header>
-            <Caption>
+            <Header className='twentyEightFont'>Work Period</Header>
+            <Caption className='eighteenFont'>
               {info.starttime} - {info.endtime}
             </Caption>
           </Row>
@@ -323,8 +327,8 @@ class CompanyInformation extends React.Component {
            *
            */}
           <Row style={{ marginBottom: "45px" }}>
-            <Header>Additional Information</Header>
-            <Caption>- AP CSA - AP CSP - Must be 18+</Caption>
+            <Header className='twentyEightFont'>Additional Information</Header>
+            <Caption className='eighteenFont'>- AP CSA - AP CSP - Must be 18+</Caption>
           </Row>
 
           {/**
@@ -339,6 +343,8 @@ class CompanyInformation extends React.Component {
                 paddingBottom: "25px",
                 marginTop: "25px",
               }}
+              className='thirtySixFont'
+
             >
               Contact Information
             </SectionHeader>
@@ -350,8 +356,8 @@ class CompanyInformation extends React.Component {
            *
            */}
           <Row>
-            <Header>Website</Header>
-            <Caption>{info.website}</Caption>
+            <Header className='twentyEightFont'>Website</Header>
+            <Caption className='eighteenFont'>{info.website}</Caption>
           </Row>
 
           {/**
@@ -360,8 +366,8 @@ class CompanyInformation extends React.Component {
            *
            */}
           <Row>
-            <Header>E-Mail</Header>
-            <Caption>{info.email}</Caption>
+            <Header className='twentyEightFont'>E-Mail</Header>
+            <Caption className='eighteenFont'>{info.email}</Caption>
           </Row>
 
           {/**
@@ -370,8 +376,8 @@ class CompanyInformation extends React.Component {
            *
            */}
           <Row>
-            <Header>Phone Number</Header>
-            <Caption>{info.phonenumber}</Caption>
+            <Header className='twentyEightFont'>Phone Number</Header>
+            <Caption className='eighteenFont'>{info.phonenumber}</Caption>
           </Row>
 
           {/**
@@ -380,7 +386,7 @@ class CompanyInformation extends React.Component {
            *
            */}
           <Row>
-            <Header>Links</Header>
+            <Header className='twentyEightFont'>Links</Header>
             <Row
               style={{
                 display: "flex",

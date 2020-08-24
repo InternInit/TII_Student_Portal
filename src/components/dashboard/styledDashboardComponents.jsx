@@ -6,17 +6,17 @@ import styled from "styled-components";
 ==============================================================================
 **/
 export const CompanyTitle = styled.div`
-  font-size: 32px;
-  font-weight: bold;
+   font-weight: bold;
   color: black;
   align-items: center;
-  height: 29px;
-  margin-bottom: 6px;
+  min-height: 29px;
+  margin-bottom: -2vh;
+
+  text-align:left;
 `;
 
 export const JobTitle = styled.div`
-  font-size: 14px;
-  font-weight: 500;
+   font-weight: 500;
   color: #262626;
   margin-bottom: 10px;
   margin-top: 6px;

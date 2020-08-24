@@ -56,8 +56,7 @@ const PercentHeader = styled.h2`
   float: right;
 
   font-weight: bold;
-  font-size: 18px;
-`;
+ `;
 
 /*
 
@@ -71,8 +70,7 @@ const ViewChecklist = styled.p`
   font-family: Roboto;
   font-style: italic;
   font-weight: normal;
-  font-size: 14px;
-  line-height: 16px;
+   line-height: 16px;
   align-items: center;
   color: #1890ff;
   :hover {
@@ -85,8 +83,7 @@ const DescriptorText = styled.span`
   width: 100%
   font-family: Lato;
   font-weight: bold;
-  font-size: 24px;
-
+ 
   color: black;
 `;
 
@@ -190,7 +187,7 @@ class ApplicationProgress extends Component {
                   float: "left",
                 }}
               >
-                <DescriptorText>
+                <DescriptorText className="twentyFourFont">
                   Let's get started on your first application!
                 </DescriptorText>
               </Col>
@@ -233,7 +230,7 @@ class ApplicationProgress extends Component {
               {/**
                * Progress Bar Name
                */}
-              <ProgressHeader key={section[0] + "pheader"}>
+              <ProgressHeader key={section[0] + "pheader"} className="eighteenFont">
                 {section[0]}
               </ProgressHeader>
 
@@ -244,11 +241,11 @@ class ApplicationProgress extends Component {
                 {this.props.completionState[index] < 1 ? (
                   Math.floor(this.props.completionState[index] * 100) + "%"
                 ) : (
-                  <CheckCircleTwoTone
-                    style={{ fontSize: "24px" }}
-                    twoToneColor="#52c41a"
-                  />
-                )}
+                    <CheckCircleTwoTone
+                      style={{ fontSize: "24px" }}
+                      twoToneColor="#52c41a"
+                    />
+                  )}
               </PercentHeader>
 
               {/**
@@ -272,7 +269,7 @@ class ApplicationProgress extends Component {
                * Checklist Text
                *<a onClick={() => this.handleClick(section[0])}>
                */}
-              <ViewChecklist onClick={() => this.handleClick(section[0])}>
+              <ViewChecklist onClick={() => this.handleClick(section[0])} >
                 View Checklist
               </ViewChecklist>
 
@@ -285,6 +282,7 @@ class ApplicationProgress extends Component {
                     checklist={this.props.completionChecklist}
                     page={index}
                     linkTo={section[4]}
+
                   />
                 ) : null}
               </div>

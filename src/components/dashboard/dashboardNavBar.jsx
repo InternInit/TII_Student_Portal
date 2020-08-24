@@ -8,7 +8,6 @@ import { withRouter } from "react-router";
 
 const MenuItemStyle = {
   width: "30%",
-  fontSize: 24,
   fontFamily: "Lato",
   fontWeight: "bold",
   textAlign: "center",
@@ -50,7 +49,7 @@ class DashboardNavBar extends Component {
            *
            */}
 
-          <Menu.Item style={MenuItemStyle} key="my-internships">
+          <Menu.Item style={MenuItemStyle} key="my-internships" className="twentyFourFont">
             <Link to="/dashboard/my-internships">My Internships</Link>
           </Menu.Item>
 
@@ -61,10 +60,11 @@ class DashboardNavBar extends Component {
            */}
           <Menu.Item
             style={MenuItemStyle}
+            className="twentyFourFont"
             /*disabled={this.props.version < 1}*/
             key="add-companies"
           >
-              <Link to="/dashboard/add-companies">Add Companies</Link>
+            <Link to="/dashboard/add-companies">Add Companies</Link>
           </Menu.Item>
 
           {/**
@@ -73,7 +73,7 @@ class DashboardNavBar extends Component {
            *
            */}
 
-          <Menu.Item style={MenuItemStyle} key="apply-skills">
+          <Menu.Item style={MenuItemStyle} key="apply-skills" className="twentyFourFont">
             <Link to="/dashboard/apply-skills">Apply Skills</Link>
           </Menu.Item>
         </Menu>

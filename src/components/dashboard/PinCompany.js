@@ -22,8 +22,7 @@ const DescriptorText = styled.span`
   width: 100%
   font-family: Lato;
   font-weight: bold;
-  font-size: 24px;
-
+ 
   color: black;
 `;
 
@@ -57,7 +56,7 @@ class PinCompany extends Component {
         {pinnedBusinesses.length < 1 ?
           <ModuleContainer>
             <AntRow>
-              <DescriptorText style={{ margin: "auto" }}>You have not added any companies yet.</DescriptorText>
+              <DescriptorText style={{ margin: "auto" }} className='twentyFourFont'>You have not added any companies yet.</DescriptorText>
             </AntRow>
           </ModuleContainer> :
 

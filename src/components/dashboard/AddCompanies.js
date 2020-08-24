@@ -183,8 +183,11 @@ class AddCompanies extends React.Component {
                                 value={industry}
                                 style={{
                                   lineHeight: "32px",
-                                  marginLeft: "25%"
+                                  marginLeft: "25%",
+
+                                  textAlign: 'left'
                                 }}
+                                className="sixteenFont"
                               >
                                 {industry}
                               </Checkbox>
@@ -268,8 +271,11 @@ class AddCompanies extends React.Component {
                                 value={industry}
                                 style={{
                                   lineHeight: "32px",
-                                  marginLeft: "25%"
+                                  marginLeft: "25%",
+
+                                  textAlign: 'left'
                                 }}
+                                className="sixteenFont"
                               >
                                 {industry}
                               </Checkbox>
