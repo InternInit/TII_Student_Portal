@@ -28,6 +28,7 @@ import BigCard from "./bigCard";
 import LittleCard from "./littleCard";
 
 import { Row, PageHeader } from "antd";
+import { Transition, Spring } from "react-spring/renderprops";
 
 import { Link, Route, Redirect } from "react-router-dom";
 import { withRouter } from "react-router";
@@ -57,7 +58,7 @@ const resumeSkills = [
     "5 minutes",
     "Find out which resume style works best for you.",
     "choosing-your-resume",
-    choosingYourResume
+    choosingYourResume,
   ],
   [
     What_To_Include_On_Resume,
@@ -65,7 +66,7 @@ const resumeSkills = [
     "25 minutes",
     "How to decide what to include on your resume.",
     "what-should-i-include-on-my-resume",
-    whatShouldIIncludeOnMyResume
+    whatShouldIIncludeOnMyResume,
   ],
   [
     Writing_Reverse_Chronological,
@@ -73,7 +74,7 @@ const resumeSkills = [
     "15 minutes",
     "If you’ve had prior job experiences, read on to learn how to create a reverse chronological resume.",
     "#",
-    ""
+    "",
   ],
   [
     Writing_Functional_Resume,
@@ -81,7 +82,7 @@ const resumeSkills = [
     "15 minutes",
     "If you don’t have any prior work experience, don’t fret. Read on to learn how to create a functional resume.",
     "writing-a-functional-resume",
-    howToWriteAFunctionalResume
+    howToWriteAFunctionalResume,
   ],
   [
     Writing_Combination_Resume,
@@ -89,7 +90,7 @@ const resumeSkills = [
     "15 minutes",
     "If you want to show your skills AND work experience, a combination resume may be for you. Learn how to create a combination resume.",
     "writing-a-combination-resume",
-    howToWriteACombinationResume
+    howToWriteACombinationResume,
   ],
   [
     Reverse_Chron_Resume_Example,
@@ -97,7 +98,7 @@ const resumeSkills = [
     "15 minutes",
     "Take a look at what a reverse chronological resume could look like.",
     "reverse-chronological-resume-example",
-    reverseChronologicalResumeExample
+    reverseChronologicalResumeExample,
   ],
   [
     Funct_Resume_Example,
@@ -105,7 +106,7 @@ const resumeSkills = [
     "15 minutes",
     "Take a look at what a functional resume could look like.",
     "functional-resume-example",
-    functionalResumeExample
+    functionalResumeExample,
   ],
   [
     Comb_Resume_Example,
@@ -113,8 +114,8 @@ const resumeSkills = [
     "15 minutes",
     "Take a look at what a combination resume could look like.",
     "combination-resume-example",
-    combinationResumeExamples
-  ]
+    combinationResumeExamples,
+  ],
 ];
 const interviewSkills = [
   [
@@ -123,7 +124,7 @@ const interviewSkills = [
     "10 minutes",
     "Prepare yourself for a job interview by reviewing what you should (and shouldn’t) say.",
     "what-to-say-in-an-interview",
-    whatToSayInAnInterview
+    whatToSayInAnInterview,
   ],
   [
     How_to_act_Interview,
@@ -131,7 +132,7 @@ const interviewSkills = [
     "10 minutes",
     "There are many Do’s and Do NOT’s in job interviews. Learn more about the various facets of the interview process so you can land your internship.",
     "how-to-act-in-an-interview",
-    howToActInAnInterview
+    howToActInAnInterview,
   ],
   [
     Before_After_Interview,
@@ -139,7 +140,7 @@ const interviewSkills = [
     "7 minutes",
     "Give yourself an edge in the interview process by preparing before it begins and making yourself more memorable afterwards.",
     "what-to-do-before-and-after-the-interview",
-    whatToDoBeforeAndAfterTheInterview
+    whatToDoBeforeAndAfterTheInterview,
   ],
   [
     Mock_Interview_Questions,
@@ -147,8 +148,8 @@ const interviewSkills = [
     "10 minutes",
     "12 questions that you might be asked during an interview.",
     "mock-interview-questions",
-    mockInterviewQuestions
-  ]
+    mockInterviewQuestions,
+  ],
 ];
 const writtenSkills = [
   [
@@ -157,7 +158,7 @@ const writtenSkills = [
     "20 minutes",
     "What is a letter of recommendation, and how do you get one? These questions (among many others) will all be answered in this quick guide.",
     "letter-of-reccomendation",
-    lettersOfReccomendation
+    lettersOfReccomendation,
   ],
   [
     Cover_Letter,
@@ -165,7 +166,7 @@ const writtenSkills = [
     "10 minutes",
     "A quick tutorial explaining cover letters and how to write them.",
     "cover-letter",
-    writingACoverLetter
+    writingACoverLetter,
   ],
   [
     Extra_Info,
@@ -173,8 +174,8 @@ const writtenSkills = [
     "2 minutes",
     "Just in case we missed something, here are some outside resources we recommend to answer your questions.",
     "additional-resources",
-    additonalResources
-  ]
+    additonalResources,
+  ],
 ];
 
 const SkillsContainer = styled.div`
@@ -188,9 +189,14 @@ class ApplySkills extends Component {
     super(props);
     this.handleClick = this.handleClick.bind(this);
     this.state = {
-      pageContent: fillingOutAnApplication
+      pageContent: fillingOutAnApplication,
     };
   }
+
+  componentDidUpdate() {
+      window.scrollTo(0, 0)
+  }
+
   render() {
     return (
       <div>
@@ -204,6 +210,7 @@ class ApplySkills extends Component {
         <Route exact path="/dashboard/apply-skills/">
           <h1 className="module-name">Get Started</h1>
           <BigCard
+            key="getting-started"
             link="/dashboard/apply-skills/filling-out-an-application"
             cover={GettingStarted}
             title="Why do I need an internship?"
@@ -215,8 +222,9 @@ class ApplySkills extends Component {
 
           <h1 className="module-name">Build your resumé</h1>
           <Row gutter={[32, 32]}>
-            {resumeSkills.map(module => (
+            {resumeSkills.map((module) => (
               <LittleCard
+                key={module[4]}
                 link={module[4]}
                 cover={module[0]}
                 title={module[1]}
@@ -230,8 +238,9 @@ class ApplySkills extends Component {
           </Row>
           <h1 className="module-name">Ace your Interview</h1>
           <Row gutter={[32, 32]}>
-            {interviewSkills.map(module => (
+            {interviewSkills.map((module) => (
               <LittleCard
+                key={module[4]}
                 link={module[4]}
                 cover={module[0]}
                 title={module[1]}
@@ -245,8 +254,9 @@ class ApplySkills extends Component {
           </Row>
           <h1 className="module-name">Master the Written Work</h1>
           <Row gutter={[32, 32]}>
-            {writtenSkills.map(module => (
+            {writtenSkills.map((module) => (
               <LittleCard
+                key={module[4]}
                 link={module[4]}
                 cover={module[0]}
                 title={module[1]}
@@ -264,97 +274,160 @@ class ApplySkills extends Component {
          * Big Card Route
          */}
         <Route exact path="/dashboard/apply-skills/filling-out-an-application">
-          <SkillsContainer>
-            <Link to="/dashboard/apply-skills/">
-              <PageHeader
-                className="site-page-header"
-                onBack={() => null}
-                title="Back to Apply Skills"
-              />
-              {window.scrollTo(0, 0)}
+          <Transition
+            items={SkillsContainer}
+            from={{ opacity: 0 }}
+            enter={{ opacity: 1 }}
+            leave={{ opacity: 0 }}
+          >
+            {(SkillsContainer) =>
+              SkillsContainer &&
+              ((props) => (
+                <SkillsContainer>
+                  <Link to="/dashboard/apply-skills/">
+                    <PageHeader
+                      className="site-page-header"
+                      onBack={() => null}
+                      title="Back to Apply Skills"
+                    />
+                    {window.scrollTo(0, 0)}
+                  </Link>
 
-            </Link>
-
-            <div
-              dangerouslySetInnerHTML={{ __html: fillingOutAnApplication }}
-            ></div>
-          </SkillsContainer>
+                  <div
+                    dangerouslySetInnerHTML={{
+                      __html: fillingOutAnApplication,
+                    }}
+                  ></div>
+                </SkillsContainer>
+              ))
+            }
+          </Transition>
         </Route>
 
         {/*
          * Mapped routes for resume skills
          */}
 
-        {resumeSkills.map(module => (
+        {resumeSkills.map((module) => (
           <Route exact path={"/dashboard/apply-skills/" + module[4]}>
-            <SkillsContainer>
-              <Link to="/dashboard/apply-skills/">
-                <PageHeader
-                  className="site-page-header"
-                  onBack={() => null}
-                  title="Back to Apply Skills"
-                />
-              </Link>
-              {window.scrollTo(0, 0)}
+            <Transition
+              items={SkillsContainer}
+              from={{ opacity: 0 }}
+              enter={{ opacity: 1 }}
+              leave={{ opacity: 0 }}
+            >
+              {(SkillsContainer) =>
+                SkillsContainer &&
+                ((props) => (
+                  <SkillsContainer key={module[4]} style={props}>
+                    <Link to="/dashboard/apply-skills/">
+                      <PageHeader
+                        className="site-page-header"
+                        onBack={() => null}
+                        title="Back to Apply Skills"
+                      />
+                    </Link>
 
-              <img
-                className="apply-skills-banner"
-                src={module[0]}
-                alt="banner"
-              />
-              <div
-                className="container"
-                dangerouslySetInnerHTML={{ __html: module[5] }}
-              ></div>
-            </SkillsContainer>
+                    <img
+                      className="apply-skills-banner"
+                      src={module[0]}
+                      alt="banner"
+                    />
+                    <div
+                      className="container"
+                      dangerouslySetInnerHTML={{ __html: module[5] }}
+                    ></div>
+                  </SkillsContainer>
+                ))
+              }
+            </Transition>
           </Route>
         ))}
 
         {/*
          * Mapped routes for interview skills
          */}
-        {interviewSkills.map(module => (
+        {interviewSkills.map((module) => (
           <Route exact path={"/dashboard/apply-skills/" + module[4]}>
-            <SkillsContainer>
-              <Link to="/dashboard/apply-skills/">
-                <PageHeader
-                  className="site-page-header"
-                  onBack={() => null}
-                  title="Back to Apply Skills"
-                />
-              </Link>
-              {window.scrollTo(0, 0)}
+            <Transition
+              items={SkillsContainer}
+              from={{ opacity: 0 }}
+              enter={{ opacity: 1 }}
+              leave={{ opacity: 0 }}
+            >
+              {(SkillsContainer) =>
+                SkillsContainer &&
+                ((props) => (
+                  <SkillsContainer key={module[4]} style={props}>
+                    <Link to="/dashboard/apply-skills/">
+                      <PageHeader
+                        className="site-page-header"
+                        onBack={() => null}
+                        title="Back to Apply Skills"
+                      />
+                    </Link>
 
-              <div dangerouslySetInnerHTML={{ __html: module[5] }}></div>
-            </SkillsContainer>
+                    <img
+                      className="apply-skills-banner"
+                      src={module[0]}
+                      alt="banner"
+                    />
+                    <div
+                      className="container"
+                      dangerouslySetInnerHTML={{ __html: module[5] }}
+                    ></div>
+                  </SkillsContainer>
+                ))
+              }
+            </Transition>
           </Route>
         ))}
 
         {/*
          * Mapped routes for written skills
          */}
-        {writtenSkills.map(module => (
+        {writtenSkills.map((module) => (
           <Route exact path={"/dashboard/apply-skills/" + module[4]}>
-            <SkillsContainer>
-              <Link to="/dashboard/apply-skills/">
-                <PageHeader
-                  className="site-page-header"
-                  onBack={() => null}
-                  title="Back to Apply Skills"
-                />
-              </Link>
-              {window.scrollTo(0, 0)}
-              <div dangerouslySetInnerHTML={{ __html: module[5] }}></div>
-            </SkillsContainer>
+            <Transition
+              items={SkillsContainer}
+              from={{ opacity: 0 }}
+              enter={{ opacity: 1 }}
+              leave={{ opacity: 0 }}
+            >
+              {(SkillsContainer) =>
+                SkillsContainer &&
+                ((props) => (
+                  <SkillsContainer key={module[4]} style={props}>
+                    <Link to="/dashboard/apply-skills/">
+                      <PageHeader
+                        className="site-page-header"
+                        onBack={() => null}
+                        title="Back to Apply Skills"
+                      />
+                    </Link>
+
+                    <img
+                      className="apply-skills-banner"
+                      src={module[0]}
+                      alt="banner"
+                    />
+                    <div
+                      className="container"
+                      dangerouslySetInnerHTML={{ __html: module[5] }}
+                    ></div>
+                  </SkillsContainer>
+                ))
+              }
+            </Transition>
           </Route>
         ))}
       </div>
     );
   }
 
-  handleClick = content => {
+  handleClick = (content) => {
     this.setState({
-      pageContent: content
+      pageContent: content,
     });
   };
 }
