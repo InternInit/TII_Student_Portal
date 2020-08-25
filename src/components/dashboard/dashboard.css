@@ -133,6 +133,15 @@ hr {
   color: #1f1f1f;
 }
 
+.dashboard-nav.ant-menu-horizontal {
+  line-height: 46px;
+  white-space: nowrap;
+  border: 0;
+  border-bottom: 0px;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
 /*
 ============================================================
                     Education Card Overrides

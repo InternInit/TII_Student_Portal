@@ -5,7 +5,7 @@ import "../../App.css";
 import "./dashboard.css";
 
 //Ant Design
-import { Layout } from "antd";
+import { Layout, Divider } from "antd";
 
 //Custom Components
 import DashboardNavBar from "./dashboardNavBar.jsx";
@@ -75,7 +75,7 @@ class Dashboard extends Component {
             <PageContainer>
               <WelcomeHeader className="seventyTwoFont">Welcome {this.props.userInfo.username}</WelcomeHeader>
               <DashboardNavBar version={this.props.userInfo.version} />
-              <hr />
+              <Divider style={{backgroundColor: "#d4dadd", marginTop: "15px"}}/>
               <ReactSwitch>
                 <Route
                   path="/dashboard"
