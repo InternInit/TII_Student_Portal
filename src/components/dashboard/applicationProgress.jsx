@@ -83,6 +83,8 @@ const DescriptorText = styled.span`
   width: 100%
   font-family: Lato;
   font-weight: bold;
+
+  text-align:left;
  
   color: black;
 `;
@@ -179,7 +181,7 @@ class ApplicationProgress extends Component {
          */}
 
         {this.props.completionState.every((item) => item === 0) ? (
-          <ModuleContainer style={{ marginTop: "3%" }}>
+          <ModuleContainer style={{ marginTop: "3%", width: '100%' }}>
             <Row>
               <Col
                 span={20}
@@ -201,14 +203,13 @@ class ApplicationProgress extends Component {
                 }}
               >
                 <Button
-                  className="first-step"
                   type="primary"
                   size="large"
                   style={{
-                    fontSize: "16px",
                     fontWeight: "bold",
                     width: "200px",
                   }}
+                  className='sixteenFont'
                 >
                   <Link to="/apply">Build my Profile</Link>
                 </Button>

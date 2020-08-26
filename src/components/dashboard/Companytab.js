@@ -14,17 +14,19 @@ const CompanyTitle = styled.div`
 color:black;
 align-items: center;
 min-height:29px;
-margin-top:6px;
-
+ 
 text-align:left;
+
+margin-top:-2vh;
+padding-top:4px;
 `
 
 const JobTitle = styled.div`
  font-weight:500;
 color:#262626;
-padding-top:1vh;
-margin-bottom:4px;
 
+ margin-top:-.5vh;  
+ padding-bottom:4px;
  `
 
 

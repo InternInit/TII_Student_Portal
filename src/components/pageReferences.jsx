@@ -1,7 +1,9 @@
 import React, { Component } from "react";
-import { Form, Input, Button, Spin } from "antd";
+import { Form, Input, Button, Spin, Popover } from "antd";
 import { Row, Col } from "antd";
-import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
+import { MinusCircleOutlined, PlusOutlined, } from "@ant-design/icons";
+import { InfoCircle } from "./StyledComponents/InternshipForms";
+
 import "../App.css";
 
 //React Routing
@@ -43,7 +45,17 @@ const validationRules = (required, inputName, type, pattern) => [
     pattern: pattern
   }
 ];
-const boldify = text => <strong>{text}</strong>;
+const boldify = (text, info = false, popoverText) =>
+  !info ? (
+    <strong>{text}</strong>
+  ) : (
+      <React.Fragment>
+        <strong>{text}</strong>
+        <Popover style={{ width: "10px" }} title={text} content={popoverText}>
+          <InfoCircle size={12} />
+        </Popover>
+      </React.Fragment>
+    );
 
 //Props
 const formItemProps = {

@@ -7,10 +7,12 @@ import {
   Checkbox,
   Radio,
   InputNumber,
-  Spin
+  Spin,
+  Popover
 } from "antd";
 import { Row, Col } from "antd";
 import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
+import { InfoCircle } from "./StyledComponents/InternshipForms";
 
 import "antd/dist/antd.css";
 import "../App.css";
@@ -139,6 +141,9 @@ const mapDispatchToProps = {
   updateCompletionChecklist
 };
 
+
+
+
 class PagePersonal extends Component {
   constructor(props) {
     super(props);
@@ -149,6 +154,17 @@ class PagePersonal extends Component {
     loaded: false
   };
 
+  boldify = (text, info = false, popoverText) =>
+    !info ? (
+      <strong>{text}</strong>
+    ) : (
+        <React.Fragment>
+          <strong>{text}</strong>
+          <Popover style={{ width: "10px" }} title={text} content={popoverText}>
+            <InfoCircle size={12} />
+          </Popover>
+        </React.Fragment>
+      );
   /**
    *
    * Requires Form to be filled
@@ -166,7 +182,6 @@ class PagePersonal extends Component {
   ];
 
   /**Makes Text Bold */
-  boldify = text => <strong>{text}</strong>;
 
   formRef = React.createRef();
 
@@ -211,7 +226,8 @@ class PagePersonal extends Component {
                 <Form.Item
                   key="gender"
                   name="Gender"
-                  label={this.boldify("What is your gender?")}
+                  label={this.boldify("What is your gender?", true,
+                    <React.Fragment>What gender do you identify as?<br /><br /> You do not have to answer if you do not want to.</React.Fragment>)}
                   rules={this.validationRules(true, "gender")}
                 >
                   <Radio.Group>
@@ -234,7 +250,11 @@ class PagePersonal extends Component {
               <Col span={standardSpan}>
                 <Form.Item
                   key="race"
-                  label={this.boldify("Race/Ethnicity")}
+                  label={this.boldify("Race/Ethnicity", true,
+                    <React.Fragment>
+                      You do not have to answer this question, but this information <br />could be usefule for preventing discrimation in the hiring process.
+                  </React.Fragment>
+                  )}
                   name="Race"
                   extra="Check all that apply"
                 >
@@ -267,7 +287,11 @@ class PagePersonal extends Component {
               <Col span={standardSpan}>
                 <Form.Item
                   key="latinx"
-                  label={this.boldify("If you are Hispanic/Latinx")}
+                  label={this.boldify("If you are Hispanic/Latinx", true,
+                    <React.Fragment>
+                      You do not have to answer this question, but this information <br />could be usefule for preventing discrimation in the hiring process.
+                  </React.Fragment>
+                  )}
                   name="Is Latinx"
                 >
                   <Checkbox.Group>
@@ -466,7 +490,11 @@ class PagePersonal extends Component {
                             <Col span={halfSpan}>
                               <Form.Item
                                 key={[field.fieldKey, "courseConcentration"]}
-                                label={this.boldify("Course Concentration")}
+                                label={this.boldify("Course Concentration", true, <React.Fragment>
+                                  What subjects did you focus on at this school?
+                                  <br /><br />
+Ex: If I took multiple STEM courses at this school,<br /> I would include subjects like <em>Chemistry, Biology,</em> etc.
+                                </React.Fragment>)}
                                 name={[field.name, "Course Concentration"]}
                                 rules={this.validationRules(
                                   "course concentration"
@@ -479,7 +507,11 @@ class PagePersonal extends Component {
                             <Col span={halfSpan}>
                               <Form.Item
                                 key={[field.fieldKey, "yearsCompleted"]}
-                                label={this.boldify("Years Completed")}
+                                label={this.boldify("Years Completed", true,
+                                  <React.Fragment>
+                                    The number of years you spend at a school gives<br /> companies a time reference for your course concentration.
+                                </React.Fragment>
+                                )}
                                 name={[field.name, "Years Completed"]}
                                 rules={this.validationRules(
                                   true,
