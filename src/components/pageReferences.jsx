@@ -64,10 +64,10 @@ const formItemProps = {
     align: "left",
     className: "pageReferences"
   },
-  inputField: function (required, field, label, name, validationType, pattern) {
+  inputField: function (required, field, label, name, validationType, pattern, popoverText, showPopOver) {
     return {
       key: [field.fieldKey, name],
-      label: boldify(label),
+      label: boldify(label, showPopOver, popoverText),
       name: [field.name, name],
       rules: validationRules(
         required,
@@ -201,7 +201,13 @@ class PageReferences extends Component {
                                   true,
                                   field,
                                   "School/Company",
-                                  "School/Company"
+                                  "School/Company",
+                                  null,
+                                  null,
+                                  <React.Fragment>
+                                    The reference's organization give company's insight into your past experiences.
+                                  </React.Fragment>,
+                                  true
                                 )}
                               >
                                 <Input />
@@ -214,7 +220,15 @@ class PageReferences extends Component {
                                   true,
                                   field,
                                   "Title",
-                                  "Title"
+                                  "Title",
+                                  null,
+                                  null,
+                                  <React.Fragment>
+                                    The title of a reference is important because it provides<br />
+                                    companies with information on your interactions with <br />
+                                    those in past expereinces.
+                                  </React.Fragment>,
+                                  true
                                 )}
                               >
                                 <Input />
@@ -237,7 +251,12 @@ class PageReferences extends Component {
                                   "Phone Number",
                                   "Phone Number",
                                   "string",
-                                  /^(1?([-\s]?\(?\d{3}\)?)[-\s]?)(\d{3})([-\s]?\d{4})$/
+                                  /^(1?([-\s]?\(?\d{3}\)?)[-\s]?)(\d{3})([-\s]?\d{4})$/,
+
+                                  <React.Fragment>
+                                    The reference's phone number is a key method that companies will use to contact them.
+                                  </React.Fragment>,
+                                  true
                                 )}
                                 extra="Please input your phone number without any formatting."
                               >
@@ -251,7 +270,12 @@ class PageReferences extends Component {
                                   field,
                                   "Email",
                                   "Email",
-                                  "email"
+                                  "email",
+                                  null,
+                                  <React.Fragment>
+                                    The reference's email is a key method that companies will use to contact them.
+                                  </React.Fragment>,
+                                  true
                                 )}
                               >
                                 <Input />
