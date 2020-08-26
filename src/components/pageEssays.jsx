@@ -1,16 +1,18 @@
 import React from "react";
-import { Form, Input, Button, message, Upload, Spin } from "antd";
+import { Form, Input, Button, message, Upload, Spin, Popover } from "antd";
 import { InboxOutlined } from "@ant-design/icons";
+import { InfoCircle } from "./StyledComponents/InternshipForms";
 import "../App.css";
 
 //React Routing
 import { withRouter } from "react-router";
+import { Link } from "react-router-dom";
 
 //Redux
 import { connect } from "react-redux";
 import {
   updateCompletionState,
-  updateCompletionChecklist
+  updateCompletionChecklist,
 } from "../redux/actions";
 
 import _ from "lodash";
@@ -24,13 +26,13 @@ const props = {
   name: "file",
   accept:
     ".doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document, .pdf, application/pdf",
-  multiple: true
+  multiple: true,
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     completionState: state.completionState,
-    completionChecklist: state.completionChecklist
+    completionChecklist: state.completionChecklist,
   };
 };
 
@@ -41,14 +43,14 @@ const mapStateToProps = state => {
  */
 const mapDispatchToProps = {
   updateCompletionState,
-  updateCompletionChecklist
+  updateCompletionChecklist,
 };
 
 class PageEssays extends React.Component {
   formRef = React.createRef();
 
   state = {
-    loaded: false
+    loaded: false,
   };
 
   componentDidMount() {
@@ -66,17 +68,17 @@ class PageEssays extends React.Component {
 
   state = {
     fileListCL: [],
-    fileListPortfolio: []
+    fileListPortfolio: [],
   };
 
   render() {
     return (
       <div style={{ marginTop: "40px", width: "100%" }}>
-        {  /**
-               *
-               * Spinning Wheel while information loads
-               *
-               */}
+        {/**
+         *
+         * Spinning Wheel while information loads
+         *
+         */}
         <Spin size="large" spinning={!this.state.loaded}>
           <h1>Written Work</h1>
           <p>
@@ -84,15 +86,15 @@ class PageEssays extends React.Component {
             are applying through your writing!
           </p>
 
-          {  /**
-               *
-               * Written Work Form
-               *
-               */}
+          {/**
+           *
+           * Written Work Form
+           *
+           */}
           <Form
             name="pageEssays"
             initialValues={{
-              remember: true
+              remember: true,
             }}
             layout="vertical"
             align="left"
@@ -101,71 +103,132 @@ class PageEssays extends React.Component {
             ref={this.formRef}
             onValuesChange={this.onValuesChange}
           >
-
-
-            {  /**
-               *
-               * Industry Response
-               *
-               */}
+            {/**
+             *
+             * Industry Response
+             *
+             */}
             <Form.Item
               key="industryEssay"
               name="Why This Industry Essay"
               label={this.boldify(
-                "Why do you want to apply to the industries you selected?"
+                "What industries are you interested in and why?",
+                true,
+                <React.Fragment>
+                  <p>
+                    This is your chance to show why you are a great fit for
+                    <br />
+                    internships in your industries of interest.
+                  </p>
+                  <p>
+                    Ex: If you are interested in biotechnology, you could write
+                    <br />
+                    about why biotechnology is a career you're interested in,
+                    <br />
+                    how your classes may have influenced your decision, or
+                    <br />
+                    anything else you think will be helpful for the companies in
+                    <br />
+                    the industries you are applying to.
+                  </p>
+                </React.Fragment>
               )}
               extra="1000 Character Limit"
               rules={this.validationRules("response")}
             >
-              <TextArea autoSize={{ minRows: 5, maxRows: 10 }} maxlength={1000} />
+              <TextArea
+                autoSize={{ minRows: 5, maxRows: 10 }}
+                maxlength={1000}
+              />
             </Form.Item>
 
-
-            {  /**
-               *
-               * Leadership Question
-               *
-               */}
+            {/**
+             *
+             * Leadership Question
+             *
+             */}
             <Form.Item
               key="leadership"
               name="Leadership Roles Essay"
               label={this.boldify(
-                "What are your leadership roles in your extracurriculars and what have they taught you?"
+                "What are your leadership roles in your extracurriculars and what have they taught you?",
+                true,
+                <React.Fragment>
+                  <p>
+                    This question aims to reveal what activities you spend the
+                    most time in and the specific
+                    <br />
+                    skills you've learned from each one.
+                  </p>
+                  <p>
+                    Ex: You could write about one particular activity that has
+                    had a large impact on you,
+                    <br />
+                    several activities which have together influenced your life,
+                    or how being a leader at
+                    <br />
+                    school can make you a better intern.{" "}
+                    <em>There's no right or wrong answer.</em>
+                  </p>
+                </React.Fragment>
               )}
               extra="1000 Character Limit"
               rules={this.validationRules("response")}
             >
-              <TextArea autoSize={{ minRows: 5, maxRows: 10 }} maxlength={1000} />
+              <TextArea
+                autoSize={{ minRows: 5, maxRows: 10 }}
+                maxlength={1000}
+              />
             </Form.Item>
 
-
-            {  /**
-               *
-               * "Additional Information
-               *
-               */}
+            {/**
+             *
+             * "Additional Information
+             *
+             */}
             <Form.Item
               key="extra"
               name="Extra Essay"
               label={this.boldify(
-                "Is there anything more about you that we should know?"
+                "Is there anything more about you that we should know?",
+                true,
+                <React.Fragment>
+                  <p>
+                    This is an open ended response area where you can write
+                    <br />
+                    about anything. Really.
+                  </p>
+                  <p>
+                    If you saw want to explain a situation concerning your
+                    grades
+                    <br />
+                    or activites, feel free to fill it in here. If there's
+                    another story
+                    <br />
+                    or skill that you think will improve your chances, feel free
+                    to
+                    <br />
+                    write about it. The options are limitless!
+                  </p>
+                </React.Fragment>
               )}
               extra="1000 Character Limit"
               rules={this.validationRules("response")}
             >
-              <TextArea autoSize={{ minRows: 5, maxRows: 10 }} maxlength={1000} />
+              <TextArea
+                autoSize={{ minRows: 5, maxRows: 10 }}
+                maxlength={1000}
+              />
             </Form.Item>
 
             <div
               style={{
                 display: "flex",
                 flexDirection: "row",
-                justifyContent: "space-evenly"
+                justifyContent: "space-evenly",
               }}
             >
-
-
-              {  /**
+              {/**
                *
                * Cover Letter Upload
                *
@@ -173,7 +236,31 @@ class PageEssays extends React.Component {
               <Form.Item
                 name="Cover Letter"
                 key="CoverLetter"
-                label={this.boldify("Cover Letter (Optional)")}
+                label={this.boldify(
+                  "Cover Letter (Optional)",
+                  true,
+                  <React.Fragment>
+                    <p>
+                      The cover letter is completely optional, and is moreso
+                      <br />
+                      there in case you wanted to add more to your response
+                      <br />
+                      that you couldn't fit for the{" "}
+                      <em>"Industries of Interest"</em>
+                      <br />
+                      response.
+                    </p>
+                    <p>
+                      If you're interested in writing a cover letter, we've got
+                      a
+                      <br />
+                      <Link to="/dashboard/apply-skills/cover-letter">
+                        course module
+                      </Link>{" "}
+                      on writing the perfect cover letter.
+                    </p>
+                  </React.Fragment>
+                )}
               >
                 <Dragger
                   {...props}
@@ -189,8 +276,7 @@ class PageEssays extends React.Component {
                 </Dragger>
               </Form.Item>
 
-
-              {  /**
+              {/**
                *
                * Portfolio Upload
                *
@@ -198,7 +284,24 @@ class PageEssays extends React.Component {
               <Form.Item
                 name="Portfolio"
                 key="Portfolio"
-                label={this.boldify("Portfolio (Optional)")}
+                label={this.boldify(
+                  "Portfolio (Optional)",
+                  true,
+                  <React.Fragment>
+                    <p>
+                      Your portfolio is any document/pdf/slideshow that shows
+                      <br />
+                      something special about you that you can't fit into the
+                      <br />
+                      response areas
+                    </p>
+                    <p>
+                      Example items: class presentation, speech, research paper,
+                      <br />
+                      art, article, essay, debate case, patent, design, etc.
+                    </p>
+                  </React.Fragment>
+                )}
               >
                 <Dragger
                   {...props}
@@ -215,11 +318,11 @@ class PageEssays extends React.Component {
               </Form.Item>
             </div>
 
-            {  /**
-               *
-               * "Back/Save and Continue" Buttons
-               *
-               */}
+            {/**
+             *
+             * "Back/Save and Continue" Buttons
+             *
+             */}
             <Form.Item>
               <Button
                 className="back-button"
@@ -240,7 +343,7 @@ class PageEssays extends React.Component {
   }
   //Functions
   //THIS NEEDS TO BE FIXED ASAP!!!
-  handleChange = event => {
+  handleChange = (event) => {
     this.setState({ otherIndustry: event.target.value });
     console.log(this.state);
   };
@@ -254,10 +357,9 @@ class PageEssays extends React.Component {
     {
       required: true,
       message: "Please input your " + inputName,
-      type: type
-    }
+      type: type,
+    },
   ];
-
 
   /**
    *
@@ -299,11 +401,11 @@ class PageEssays extends React.Component {
   };
 
   /**
-*
-* On Finish Function
-*
-*/
-  onFinish = values => {
+   *
+   * On Finish Function
+   *
+   */
+  onFinish = (values) => {
     console.log("FinishedPageEssays:", values);
     this.props.updateCompletionState(2, 1.0);
     this.props.updateData(values, "2");
@@ -321,12 +423,11 @@ class PageEssays extends React.Component {
     this.routeChange("/apply/personal");
   };
 
-
   /**
-*
-* Upload Cover Letter
-*
-*/
+   *
+   * Upload Cover Letter
+   *
+   */
   customRequestCL = ({ onSuccess, onError, file }) => {
     setTimeout(() => {
       onSuccess(file);
@@ -338,13 +439,12 @@ class PageEssays extends React.Component {
     }, 100);
   };
 
-
   /**
-*
-* File Upload Function
-*
-*/
-  onChangeCL = info => {
+   *
+   * File Upload Function
+   *
+   */
+  onChangeCL = (info) => {
     const { status } = info.file;
     if (status === "removed") {
       let currentFileList = this.state.fileListCL;
@@ -379,13 +479,12 @@ class PageEssays extends React.Component {
     }, 100);
   };
 
-
   /**
    *
    * File Upload function
    *
    */
-  onChangePortfolio = info => {
+  onChangePortfolio = (info) => {
     const { status } = info.file;
     if (status === "removed") {
       let currentFileList = this.state.fileListPortfolio;
@@ -404,23 +503,22 @@ class PageEssays extends React.Component {
     this.props.updateData(this.formRef.current.getFieldsValue(), "2");
   };
 
-
   /**
-*
-* Get User Data
-*
-*/
+   *
+   * Get User Data
+   *
+   */
   getUserData = async () => {
     let token = await this.props.getJwt();
     fetch("/api/get_user_data", {
       method: "POST",
       headers: {
-        Authorization: "Bearer " + JSON.parse(JSON.stringify(token))
+        Authorization: "Bearer " + JSON.parse(JSON.stringify(token)),
       },
-      body: 2
+      body: 2,
     })
-      .then(response => response.json())
-      .then(data => {
+      .then((response) => response.json())
+      .then((data) => {
         let parsedRecv = JSON.parse(data);
         let parsedData = parsedRecv.formData;
         if (parsedRecv !== "No Info") {
@@ -435,31 +533,39 @@ class PageEssays extends React.Component {
                 fileListCL[i].status = "done";
               }
               this.setState({ fileListCL: fileListCL });
-            } catch { }
+            } catch {}
             try {
               let fileListPortfolio = parsedData.Portfolio.fileList;
               for (let i = 0; i < fileListPortfolio.length; i++) {
                 fileListPortfolio[i].status = "done";
               }
               this.setState({ fileListPortfolio: fileListPortfolio });
-            } catch (e) { }
-          } catch (e) { }
+            } catch (e) {}
+          } catch (e) {}
         }
         this.setState({ loaded: true });
       });
   };
 
-
   //BOLDIFY!!!
-  boldify = text => <strong>{text}</strong>;
-
+  boldify = (text, info = false, popoverText) =>
+    !info ? (
+      <strong>{text}</strong>
+    ) : (
+      <React.Fragment>
+        <strong>{text}</strong>
+        <Popover style={{ width: "10px" }} title={text} content={popoverText}>
+          <InfoCircle size={12} />
+        </Popover>
+      </React.Fragment>
+    );
 
   /**
-*
-* Route Change (React Router)
-*
-*/
-  routeChange = path => {
+   *
+   * Route Change (React Router)
+   *
+   */
+  routeChange = (path) => {
     console.log(path);
     if (path === "/apply/personal") {
       this.props.clickTwo();
@@ -470,8 +576,5 @@ class PageEssays extends React.Component {
   };
 }
 export default withRouter(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(PageEssays)
+  connect(mapStateToProps, mapDispatchToProps)(PageEssays)
 );
