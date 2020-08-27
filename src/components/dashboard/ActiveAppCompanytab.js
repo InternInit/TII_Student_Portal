@@ -24,15 +24,6 @@ const Col = styled.div`
   align-items: center;
 `;
 
-const Logo = styled.img`
-  width: 36px;
-  height: 36px;
-  object-fit: fill;
-  background-color: blue;
-  margin-left: 4.5%;
-  margin-bottom: 14px;
-  border-radius: 6px;
-`;
 const mapping = [
   "this single item in the array is allowing me to use the queue animations lol"
 ];

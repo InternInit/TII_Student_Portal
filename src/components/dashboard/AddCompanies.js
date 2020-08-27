@@ -161,7 +161,7 @@ class AddCompanies extends React.Component {
               <Collapse defaultActiveKey={["0"]} expandIconPosition="right">
                 <Panel
                   header={
-                    <strong>
+                    <strong style={{ fontWeight: '500', }} className='sixteenFont'>
                       Choose an entire industry to submit your application to.
                 </strong>
                   }
@@ -187,7 +187,6 @@ class AddCompanies extends React.Component {
 
                                   textAlign: 'left'
                                 }}
-                                className="sixteenFont"
                               >
                                 {industry}
                               </Checkbox>
@@ -249,9 +248,12 @@ class AddCompanies extends React.Component {
          * Filter by industries Collapse Tab
          *
          */}
-            <AntRow style={{ width: "100%", marginBottom: "10px" }}>
+            <AntRow style={{ width: "100%", marginBottom: "3vh" }}>
               <Collapse defaultActiveKey={["0"]} expandIconPosition="right">
-                <Panel header="Filter by Industry">
+                <Panel header={
+                  <strong style={{ fontWeight: '500', }} className='sixteenFont'>
+                    Filter by Industry
+                  </strong>}>
                   <AntRow gutter={formGutter}>
                     <AntCol span={standardSpan}>
                       <Checkbox.Group
@@ -275,7 +277,6 @@ class AddCompanies extends React.Component {
 
                                   textAlign: 'left'
                                 }}
-                                className="sixteenFont"
                               >
                                 {industry}
                               </Checkbox>

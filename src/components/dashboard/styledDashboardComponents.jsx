@@ -17,7 +17,7 @@ export const CompanyTitle = styled.div`
 
 export const JobTitle = styled.div`
    font-weight: 500;
-  color: #262626;
+  color: #722ed1;
   margin-bottom: 10px;
   margin-top: 6px;
 `;
