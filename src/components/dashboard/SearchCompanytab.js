@@ -11,15 +11,15 @@ import {
 } from "./styledDashboardComponents";
 
 const QVCompany = styled.div`
-  font-weight: normal;
+  font-weight: bold;
   color: #262626;
 
   text-align: left;
 `;
 
 const QVTitle = styled.div`
-  font-weight: bold;
-  color: black;
+  font-weight: 500;
+  color: #262626;
 
   text-align: left;
 `;
@@ -222,7 +222,7 @@ class QuickView extends React.Component {
                 </QVCompany>
 
                 <QVCaption
-                  className="eighteenFont"
+                  className="sixteenFont"
                   style={{ marginTop: "4px" }}
                 >
                   {description.substring(0, 250) + ". . ."}
@@ -262,7 +262,7 @@ class QuickView extends React.Component {
                     >
                       Location
                     </QVCompany>
-                    <QVCaption style={{ textAlign: "center" }}>
+                    <QVCaption style={{ textAlign: "center" }} className="sixteenFont">
                       {location}
                     </QVCaption>
                   </Col>

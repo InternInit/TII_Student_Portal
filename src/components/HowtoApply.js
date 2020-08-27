@@ -113,7 +113,8 @@ class HowtoApply extends React.Component {
                 style={{
                   display: "flex",
                   justifyContent: "center",
-                  marginTop: "35px"
+                  marginTop: "35px",
+                  color: '#262626'
                 }}
               >
                 Jump to Section
@@ -122,8 +123,10 @@ class HowtoApply extends React.Component {
                 mode="horizontal"
                 selectedKeys="5"
                 style={{
-                  backgroundColor: "#F5F5F5",
+                  backgroundColor: "#f5f5f5",
                   border: "0",
+                  justifyContent: 'center',
+                  display: 'flex'
                 }}
               >
                 <Menu.Item
@@ -185,7 +188,7 @@ class HowtoApply extends React.Component {
               <Text className="eighteenFont">
                 In order to apply, make sure you have the following information:
               </Text>
-              <Bullet style={{ marginTop: "15px" }}>
+              <Bullet style={{ marginTop: "15px" }} className="eighteenFont">
                 <CheckOutlined
                   style={{ color: "green", paddingRight: "10px" }}
                 />
