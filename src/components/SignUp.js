@@ -1,5 +1,4 @@
 import React from "react";
-import styled from "styled-components";
 import {
   Input,
   Button,
@@ -9,8 +8,12 @@ import {
   Modal,
   Checkbox,
 } from "antd";
-import { Container, Background, Label, Banner } from "./StyledComponents/SignupLogin";
-
+import {
+  Container,
+  Background,
+  Label,
+  Banner,
+} from "./StyledComponents/SignupLogin";
 
 //Ant D Icons
 import { CloseOutlined, CheckOutlined } from "@ant-design/icons";
@@ -195,11 +198,13 @@ class SignUp extends React.Component {
                 <Input />
               </Form.Item>
               <Form.Item
-                rules={[{
-                  required: true,
-                  message:
-                    "Please read the Terms and Conditions and Privacy Agreement",
-                }]}
+                rules={[
+                  {
+                    required: true,
+                    message:
+                      "Please read the Terms and Conditions and Privacy Agreement",
+                  },
+                ]}
                 name="termsAndConditions"
                 onChange={this.onChecked}
                 style={{ textAlign: "left" }}
@@ -215,7 +220,7 @@ class SignUp extends React.Component {
                 style={{ width: "100%" }}
               >
                 Sign Up
-                </Button>
+              </Button>
             </Form>
           </div>
         </Container>
