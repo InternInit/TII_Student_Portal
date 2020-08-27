@@ -17,7 +17,7 @@ min-height:29px;
  
 text-align:left;
 
-margin-top:-2vh;
+margin-top:-10px;
 padding-top:4px;
 `
 
@@ -25,7 +25,7 @@ const JobTitle = styled.div`
  font-weight:500;
 color:#722ed1;
 
- margin-top:-.5vh;  
+ margin-top:-2px;  
  padding-bottom:4px;
  `
 

@@ -19,7 +19,7 @@ const QVCompany = styled.div`
 
 const QVTitle = styled.div`
   font-weight: 500;
-  color: #262626;
+  color: #722ed1;
 
   text-align: left;
 `;
@@ -27,9 +27,9 @@ const QVTitle = styled.div`
 const QVCaption = styled.div`
   font-weight: normal;
   color: #262626;
-  width: 80%;
+  width: 95%;
   text-align: left;
-`;
+  `;
 
 const Col = styled.div`
   display: flex;
@@ -69,13 +69,19 @@ class SearchCompanytab extends React.Component {
     let { show } = this.state;
     let ctab = <CLabel name={name} industry={industry} logo={logo} />;
 
+    let showDescription = description;
+    if (description.length >= 250) {
+      showDescription = description.substring(0, 250) + '. . .'
+    }
+
+
     if (show === true) {
       ctab = (
         <QuickView
           name={name}
           industry={industry}
           image={image}
-          description={description}
+          description={showDescription}
           location={location}
           companyid={companyid}
           updateBusinessStatus={this.props.updateBusinessStatus}
@@ -206,7 +212,7 @@ class QuickView extends React.Component {
               <Col
                 style={{
                   alignItems: "flex-start",
-                  marginLeft: "10%",
+                  marginLeft: "5%",
                 }}
               >
                 <QVCompany className="twentyFourFont">{name}</QVCompany>
@@ -225,9 +231,11 @@ class QuickView extends React.Component {
                   className="sixteenFont"
                   style={{ marginTop: "4px" }}
                 >
-                  {description.substring(0, 250) + ". . ."}
+                  {description}
                 </QVCaption>
               </Col>
+
+
 
               {/**
                *
@@ -237,7 +245,7 @@ class QuickView extends React.Component {
               <Col
                 style={{
                   alignItems: "flex-end",
-                  marginRight: "10%",
+                  marginRight: "5%",
                   width: "50%",
                 }}
               >
@@ -252,10 +260,10 @@ class QuickView extends React.Component {
                     display: "flex",
                     marginTop: "5%",
                     justifyContent: "space-between",
-                    marginRight: "5%",
+                    width: '107.5%'
                   }}
                 >
-                  <Col className="companyLocation">
+                  <Col className="companyLocation" style={{ justifyContent: 'flex-start' }}>
                     <QVCompany
                       className="eighteenFont"
                       style={{ fontWeight: "500" }}
@@ -263,11 +271,15 @@ class QuickView extends React.Component {
                       Location
                     </QVCompany>
                     <QVCaption style={{ textAlign: "center" }} className="sixteenFont">
-                      {location}
+                      {location}, state of the location
                     </QVCaption>
                   </Col>
 
-                  <Col>
+
+
+
+
+                  <Col >
                     <Button
                       className="button-style"
                       type="primary"
@@ -289,6 +301,10 @@ class QuickView extends React.Component {
                   </Col>
                 </div>
               </Col>
+
+
+
+
             </TabContainer>
           </div>
         ))}

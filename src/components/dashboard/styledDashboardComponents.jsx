@@ -10,7 +10,7 @@ export const CompanyTitle = styled.div`
   color: black;
   align-items: center;
   min-height: 29px;
-  margin-bottom: -2vh;
+  margin-bottom: -10px;
 
   text-align:left;
 `;
@@ -19,7 +19,9 @@ export const JobTitle = styled.div`
    font-weight: 500;
   color: #722ed1;
   margin-bottom: 10px;
-  margin-top: 6px;
+ 
+  margin-top:6px;  
+
 `;
 
 export const TabContainer = styled.div`
