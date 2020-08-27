@@ -201,6 +201,7 @@ class PagePersonal extends Component {
          * Loading wheel while information is being pulled from backend
          *
          */}
+        {window.scrollTo(0, 0)}
 
         <Spin size="large" spinning={!this.state.loaded}>
           <h1>General Information</h1>

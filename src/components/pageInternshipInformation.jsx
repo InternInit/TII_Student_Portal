@@ -136,13 +136,13 @@ const boldify = (text, info = false, popoverText) =>
   !info ? (
     <strong>{text}</strong>
   ) : (
-    <React.Fragment>
-      <strong>{text}</strong>
-      <Popover style={{ width: "10px" }} title={text} content={popoverText}>
-        <InfoCircle size={12} />
-      </Popover>
-    </React.Fragment>
-  );
+      <React.Fragment>
+        <strong>{text}</strong>
+        <Popover style={{ width: "10px" }} title={text} content={popoverText}>
+          <InfoCircle size={12} />
+        </Popover>
+      </React.Fragment>
+    );
 
 /**
  *
@@ -499,6 +499,7 @@ class PageInternshipInformation extends Component {
   render() {
     return (
       <div style={{ marginTop: "40px", width: "80%" }}>
+        {window.scrollTo(0, 0)}
         <Spin size="large" spinning={!this.state.loaded}>
           <h1>Internship Information</h1>
           <br />

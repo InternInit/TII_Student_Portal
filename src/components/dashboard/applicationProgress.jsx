@@ -38,9 +38,8 @@ const ProgressHeader = styled.h2`
   display: inline;
   float: left;
 
-  font-weight: bold;
-  font-size: 24px;
-  line-height: 28px;
+  font-weight: 500;
+   line-height: 28px;
   align-items: center;
 
   color: black;
@@ -82,7 +81,7 @@ const DescriptorText = styled.span`
   float: left;
   width: 100%
   font-family: Lato;
-  font-weight: bold;
+  font-weight: 500;
 
   text-align:left;
  
@@ -231,7 +230,7 @@ class ApplicationProgress extends Component {
               {/**
                * Progress Bar Name
                */}
-              <ProgressHeader key={section[0] + "pheader"} className="eighteenFont">
+              <ProgressHeader key={section[0] + "pheader"} className="twentyTwoFont">
                 {section[0]}
               </ProgressHeader>
 

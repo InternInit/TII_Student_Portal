@@ -74,6 +74,8 @@ class PageEssays extends React.Component {
   render() {
     return (
       <div style={{ marginTop: "40px", width: "100%" }}>
+        {window.scrollTo(0, 0)}
+
         {/**
          *
          * Spinning Wheel while information loads
@@ -533,15 +535,15 @@ class PageEssays extends React.Component {
                 fileListCL[i].status = "done";
               }
               this.setState({ fileListCL: fileListCL });
-            } catch {}
+            } catch { }
             try {
               let fileListPortfolio = parsedData.Portfolio.fileList;
               for (let i = 0; i < fileListPortfolio.length; i++) {
                 fileListPortfolio[i].status = "done";
               }
               this.setState({ fileListPortfolio: fileListPortfolio });
-            } catch (e) {}
-          } catch (e) {}
+            } catch (e) { }
+          } catch (e) { }
         }
         this.setState({ loaded: true });
       });
@@ -552,13 +554,13 @@ class PageEssays extends React.Component {
     !info ? (
       <strong>{text}</strong>
     ) : (
-      <React.Fragment>
-        <strong>{text}</strong>
-        <Popover style={{ width: "10px" }} title={text} content={popoverText}>
-          <InfoCircle size={12} />
-        </Popover>
-      </React.Fragment>
-    );
+        <React.Fragment>
+          <strong>{text}</strong>
+          <Popover style={{ width: "10px" }} title={text} content={popoverText}>
+            <InfoCircle size={12} />
+          </Popover>
+        </React.Fragment>
+      );
 
   /**
    *

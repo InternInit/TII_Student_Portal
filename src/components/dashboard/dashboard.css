@@ -195,8 +195,16 @@ FONT SIZES
   font-size:28px;
 }
 
+.twentySixFont{
+  font-size:26px;
+}
+
 .twentyFourFont{
   font-size:24px;
+}
+
+.twentyTwoFont{
+  font-size:22px;
 }
 
 .eighteenFont{
@@ -247,11 +255,17 @@ FONT SIZES
   font-size:20px;
 }
 
+.twentySixFont{
+  font-size:19px;
+}
+
   .twentyFourFont{
     font-size:18px;
   }
 
-
+  .twentyTwoFont{
+    font-size:16px;
+  }
 
   .eighteenFont{
     font-size:14px;

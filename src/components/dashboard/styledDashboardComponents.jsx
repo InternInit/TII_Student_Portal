@@ -6,7 +6,7 @@ import styled from "styled-components";
 ==============================================================================
 **/
 export const CompanyTitle = styled.div`
-   font-weight: bold;
+   font-weight: normal;
   color: black;
   align-items: center;
   min-height: 29px;

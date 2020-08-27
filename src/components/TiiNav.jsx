@@ -192,6 +192,7 @@ class TiiNav extends React.Component {
             {ReferencesButton}
             < Router >
               <span>References</span>
+
             </Router >
           </Menu.Item >
 

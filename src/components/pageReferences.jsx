@@ -119,6 +119,8 @@ class PageReferences extends Component {
     return (
       <div style={{ width: "100%", marginTop: "40px" }}>
         <Spin size="large" spinning={!this.state.loaded}>
+          {window.scrollTo(0, 0)}
+
           <h1> References</h1>
           <p>
             Add your reference(s) here. This could be someone who has worked with you in the past, a previous employer, teacher, coach, pastor, etc. This should not be a family member.

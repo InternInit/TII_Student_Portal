@@ -10,7 +10,7 @@ const { TextArea } = Input;
 
 
 const CompanyTitle = styled.div`
- font-weight:bold;
+ font-weight:normal;
 color:black;
 align-items: center;
 min-height:29px;
@@ -115,7 +115,7 @@ class CLabel extends React.Component {
                         alignItems: 'flex-start',
 
                     }}>
-                        <CompanyTitle className='thirtytwoFont'>{name}</CompanyTitle>
+                        <CompanyTitle className='twentySixFont'>{name}</CompanyTitle>
                         <JobTitle className='fourteenFont'>{industry}</JobTitle>
                     </Col>
                 </Row>

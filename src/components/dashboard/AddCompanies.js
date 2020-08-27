@@ -34,7 +34,7 @@ const DescriptorText = styled.span`
   float: left;
   width: 100%
   font-family: Lato;
-  font-weight: bold;
+  font-weight: 500;
   font-size: 24px;
 
   color: black;

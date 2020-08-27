@@ -145,7 +145,7 @@ class CLabel extends React.Component {
                     alignItems: "flex-start",
                   }}
                 >
-                  <CompanyTitle className="thirtytwoFont">
+                  <CompanyTitle className="twentySixFont">
                     {companyName}
                   </CompanyTitle>
                   <JobTitle

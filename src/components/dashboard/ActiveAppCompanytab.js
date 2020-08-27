@@ -93,7 +93,7 @@ function ActiveAppCompanytab(props) {
                     alignItems: "flex-start"
                   }}
                 >
-                  <CompanyTitle className='thirtytwoFont'>
+                  <CompanyTitle className='twentySixFont'>
                     {companyName}
                   </CompanyTitle>
                   <JobTitle style={{ paddingTop: "4px" }} className='fourteenFont'>{industry}</JobTitle>

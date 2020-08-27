@@ -35,20 +35,20 @@ const Caption = styled.div`
   display: flex;
   text-align: left;
    font-weight: normal;
-  color: #262626;
+  color: 000;
   width: 80%;
   margin-top: 10px;
 `;
 
 const Header = styled.div`
-   font-weight: 500;
-  color: #595959;
+   font-weight: bold;
+  color: 0000;
   margin-top: 30px;
 `;
 
 const SectionHeader = styled.span`
-   font-weight: 500;
-  color: black;
+   color: black;
+   font-weight:normal;
   
 `;
 
@@ -187,15 +187,16 @@ class CompanyInformation extends React.Component {
               alignItems: 'center'
             }}
           >
-            <Avatar size={40} src={info.avatar} style={{ marginTop: "10px" }} />
+            <Avatar size={40} src={info.avatar} />
             <Header
               style={{
                 textAlign: "left",
                 marginLeft: "15px",
                 color: "#8C8C8C",
                 marginTop: "0px",
+                fontWeight: '500'
               }}
-              className='thirtySixFont'
+              className='twentyEightFont'
             >
               {info.name}
             </Header>
@@ -226,8 +227,8 @@ class CompanyInformation extends React.Component {
            *
            */}
           <Row>
-            <Header className='twentyEightFont'>Company Description</Header>
-            <Caption className='eighteenFont'>{info.description}</Caption>
+            <Header className='twentyFourFont'>Company Description</Header>
+            <Caption className='sixteenFont'>{info.description}</Caption>
           </Row>
 
           {/**
@@ -285,8 +286,8 @@ class CompanyInformation extends React.Component {
            *
            */}
           <Row>
-            <Header className='twentyEightFont'>Description</Header>
-            <Caption className='eighteenFont'>{info.description}</Caption>
+            <Header className='twentyFourFont'>Description</Header>
+            <Caption className='sixteenFont'>{info.description}</Caption>
           </Row>
 
           {/**
@@ -295,8 +296,8 @@ class CompanyInformation extends React.Component {
            *
            */}
           <Row>
-            <Header className='twentyEightFont'>Location</Header>
-            <Caption className='eighteenFont'>{info.location}</Caption>
+            <Header className='twentyFourFont'>Location</Header>
+            <Caption className='sixteenFont'>{info.location}</Caption>
           </Row>
 
           {/**
@@ -305,8 +306,8 @@ class CompanyInformation extends React.Component {
            *
            */}
           <Row>
-            <Header className='twentyEightFont'>Industry</Header>
-            <Caption className='eighteenFont'>{info.industry}</Caption>
+            <Header className='twentyFourFont'>Industry</Header>
+            <Caption className='sixteenFont'>{info.industry}</Caption>
           </Row>
 
           {/**
@@ -315,8 +316,8 @@ class CompanyInformation extends React.Component {
            *
            */}
           <Row>
-            <Header className='twentyEightFont'>Work Period</Header>
-            <Caption className='eighteenFont'>
+            <Header className='twentyFourFont'>Work Period</Header>
+            <Caption className='sixteenFont'>
               {info.starttime} - {info.endtime}
             </Caption>
           </Row>
@@ -327,8 +328,8 @@ class CompanyInformation extends React.Component {
            *
            */}
           <Row style={{ marginBottom: "45px" }}>
-            <Header className='twentyEightFont'>Additional Information</Header>
-            <Caption className='eighteenFont'>- AP CSA - AP CSP - Must be 18+</Caption>
+            <Header className='twentyFourFont'>Additional Information</Header>
+            <Caption className='sixteenFont'>- AP CSA - AP CSP - Must be 18+</Caption>
           </Row>
 
           {/**
@@ -356,8 +357,8 @@ class CompanyInformation extends React.Component {
            *
            */}
           <Row>
-            <Header className='twentyEightFont'>Website</Header>
-            <Caption className='eighteenFont'>{info.website}</Caption>
+            <Header className='twentyFourFont'>Website</Header>
+            <Caption className='sixteenFont'>{info.website}</Caption>
           </Row>
 
           {/**
@@ -366,8 +367,8 @@ class CompanyInformation extends React.Component {
            *
            */}
           <Row>
-            <Header className='twentyEightFont'>E-Mail</Header>
-            <Caption className='eighteenFont'>{info.email}</Caption>
+            <Header className='twentyFourFont'>E-Mail</Header>
+            <Caption className='sixteenFont'>{info.email}</Caption>
           </Row>
 
           {/**
@@ -376,8 +377,8 @@ class CompanyInformation extends React.Component {
            *
            */}
           <Row>
-            <Header className='twentyEightFont'>Phone Number</Header>
-            <Caption className='eighteenFont'>{info.phonenumber}</Caption>
+            <Header className='twentyFourFont'>Phone Number</Header>
+            <Caption className='sixteenFont'>{info.phonenumber}</Caption>
           </Row>
 
           {/**
@@ -386,7 +387,7 @@ class CompanyInformation extends React.Component {
            *
            */}
           <Row>
-            <Header className='twentyEightFont'>Links</Header>
+            <Header className='twentyFourFont'>Links</Header>
             <Row
               style={{
                 display: "flex",
