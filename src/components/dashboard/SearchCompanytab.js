@@ -271,7 +271,7 @@ class QuickView extends React.Component {
                       Location
                     </QVCompany>
                     <QVCaption style={{ textAlign: "center" }} className="sixteenFont">
-                      {location}, state of the location
+                      {location}
                     </QVCaption>
                   </Col>
 
