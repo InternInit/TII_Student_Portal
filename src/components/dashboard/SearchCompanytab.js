@@ -27,8 +27,9 @@ const QVTitle = styled.div`
 const QVCaption = styled.div`
   font-weight: normal;
   color: #262626;
-  width: 95%;
-  text-align: left;
+   text-align: left;
+
+   max-width:400px;
   `;
 
 const Col = styled.div`
@@ -36,6 +37,11 @@ const Col = styled.div`
   flex-direction: column;
   align-items: center;
 `;
+
+const Row = styled.div`
+display:flex;
+flex-direction:row;
+`
 
 const Image = styled.img`
   background-color: #d9d9d9;
@@ -46,6 +52,15 @@ const Image = styled.img`
 const mapping = [
   "this single item in the array is allowing me to use the queue animations lol",
 ];
+
+const contentStyle = {
+  display: "flex",
+  flexDirection: "row",
+  width: "100%",
+  alignItems: "center",
+}
+
+
 
 class SearchCompanytab extends React.Component {
   constructor(props) {
@@ -129,12 +144,7 @@ class CLabel extends React.Component {
               {/**Company Logo + Name + Position */}
 
               <div
-                style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  width: "100%",
-                  alignItems: "center",
-                }}
+                style={contentStyle}
               >
                 {/**company logo */}
                 <Avatar
@@ -202,84 +212,75 @@ class QuickView extends React.Component {
               style={{
                 padding: "24px",
                 paddingBottom: "28px",
+                flexDirection: 'column',
+                alignItems: 'center'
+
               }}
             >
-              {/**
-               *
-               * Left Collumn
-               *
-               */}
-              <Col
-                style={{
-                  alignItems: "flex-start",
-                  marginLeft: "5%",
-                }}
-              >
+
+              <div style={{ width: '85%' }}>
+
+
+
                 <QVCompany className="twentyFourFont">{name}</QVCompany>
                 <QVTitle className="eighteenFont">{industry}</QVTitle>
-                <QVCompany
-                  className="eighteenFont"
+
+
+                <Row
                   style={{
-                    marginTop: "10px",
-                    fontWeight: "500",
+                    justifyContent: 'space-between'
                   }}
                 >
-                  Description
+                  <Col style={{ alignItems: 'flex-start' }}>
+                    <QVCompany
+                      className="eighteenFont"
+                      style={{
+                        marginTop: "10px",
+                        fontWeight: "500",
+                      }}
+                    >
+                      Description
                 </QVCompany>
 
-                <QVCaption
-                  className="sixteenFont"
-                  style={{ marginTop: "4px" }}
-                >
-                  {description}
-                </QVCaption>
-              </Col>
+                    <QVCaption
+                      className="sixteenFont"
+                      style={{ marginTop: "4px" }}
+                    >
+                      {description}
+                    </QVCaption>
+                  </Col>
+
+                  <Image
+                    src={image}
+                    alt="Company Visual"
+                    className="companyIMG"
+                  />
+
+                </Row>
 
 
 
-              {/**
-               *
-               * Right Collumn
-               *
-               */}
-              <Col
-                style={{
-                  alignItems: "flex-end",
-                  marginRight: "5%",
-                  width: "50%",
-                }}
-              >
-                <Image
-                  src={image}
-                  alt="Company Visual"
-                  className="companyIMG"
-                />
 
-                <div
-                  style={{
-                    display: "flex",
-                    marginTop: "5%",
-                    justifyContent: "space-between",
-                    width: '107.5%'
-                  }}
-                >
-                  <Col className="companyLocation" style={{ justifyContent: 'flex-start' }}>
+
+
+
+
+                <Row style={{ marginTop: '24px', width: '100%', justifyContent: 'space-between' }}>
+
+                  <div style={{ alignSelf: 'flex-start' }}>
                     <QVCompany
                       className="eighteenFont"
                       style={{ fontWeight: "500" }}
                     >
                       Location
                     </QVCompany>
-                    <QVCaption style={{ textAlign: "center" }} className="sixteenFont">
-                      {location}
-                    </QVCaption>
-                  </Col>
+                    <QVCaption className="sixteenFont">
+                      {location}, the state of a location too
+                  </QVCaption>
+                  </div>
 
 
-
-
-
-                  <Col >
+                  <div>
                     <Button
                       className="button-style"
                       type="primary"
@@ -298,12 +299,11 @@ class QuickView extends React.Component {
                         More Details
                       </Button>
                     </Link>
-                  </Col>
-                </div>
-              </Col>
+                  </div>
+                </Row>
 
 
-
+              </div>
 
             </TabContainer>
           </div>
