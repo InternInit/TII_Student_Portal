@@ -7,7 +7,7 @@
     "@aws-amplify/ui-react": "^0.2.14",
     "@sentry/browser": "^5.18.0",
     "@testing-library/jest-dom": "^5.11.2",
-    "@testing-library/react": "^9.5.0",
+    "@testing-library/react": "^10.4.9",
     "@testing-library/user-event": "^7.2.1",
     "antd": "^4.1.4",
     "aws-amplify": "^3.0.23",
