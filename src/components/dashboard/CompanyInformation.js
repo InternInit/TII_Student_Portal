@@ -15,11 +15,15 @@ import { Link } from "react-router-dom";
 const ModuleContainer = styled.div`
   background: white;
   border-radius: 10px;
-  padding: 3%;
   flex-direction: column;
   margin-top: 10px;
 
   min-width: 400px;
+  display: flex;
+  align-items:center;
+
+  padding:3%;
+
 `;
 const Image = styled.img`
   background-color: #d9d9d9;
@@ -172,235 +176,238 @@ class CompanyInformation extends React.Component {
           <Breadcrumb.Item>{info.name}</Breadcrumb.Item>
         </Breadcrumb>
 
-        <ModuleContainer>
+        <ModuleContainer >
           {/**
            *
            * Company Logo and Name
            *
            */}
-          <Row
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              marginBottom: "40px",
+          <div style={{ width: '85%', marginTop: '18px' }}>
 
-              alignItems: 'center'
-            }}
-          >
-            <Avatar size={40} src={info.avatar} />
-            <Header
+            <Row
               style={{
-                textAlign: "left",
-                marginLeft: "15px",
-                color: "#8C8C8C",
-                marginTop: "0px",
-                fontWeight: '500'
-              }}
-              className='twentyEightFont'
-            >
-              {info.name}
-            </Header>
-          </Row>
+                display: "flex",
+                flexDirection: "row",
+                marginBottom: "40px",
 
-          {/**
+                alignItems: 'center'
+              }}
+            >
+              <Avatar size={40} src={info.avatar} />
+              <Header
+                style={{
+                  textAlign: "left",
+                  marginLeft: "15px",
+                  color: "#8C8C8C",
+                  marginTop: "0px",
+                  fontWeight: '500'
+                }}
+                className='twentyEightFont'
+              >
+                {info.name}
+              </Header>
+            </Row>
+
+            {/**
            *
            * Divider
            *
            */}
-          <Divider>
-            <SectionHeader
-              style={{
-                color: "#595959",
-                paddingBottom: "25px",
-                marginTop: "25px",
-              }}
+            <Divider>
+              <SectionHeader
+                style={{
+                  color: "#595959",
+                  paddingBottom: "25px",
+                  marginTop: "25px",
+                }}
 
-              className='thirtySixFont'
-            >
-              Company Overview
+                className='thirtySixFont'
+              >
+                Company Overview
             </SectionHeader>
-          </Divider>
+            </Divider>
 
-          {/**
+            {/**
            *
            * Company Description
            *
            */}
-          <Row>
-            <Header className='twentyFourFont'>Company Description</Header>
-            <Caption className='sixteenFont'>{info.description}</Caption>
-          </Row>
+            <Row>
+              <Header className='twentyFourFont'>Company Description</Header>
+              <Caption className='sixteenFont'>{info.description}</Caption>
+            </Row>
 
-          {/**
+            {/**
            *
            * Images + Caption
            *
            */}
-          <Row
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "space-evenly",
-              marginTop: "45px",
-              marginBottom: "70px",
-            }}
-          >
-            <Row>
-              <Image
-                src={info.avatar}
-                alt="Logo"
-                style={{ marginTop: "10px" }}
-              />
-            </Row>
-            <Row>
-              <Image
-                src="https://citybizlist.com/media/images/large/1545083234_2689.jpg"
-                alt="Logo"
-                style={{ marginTop: "10px" }}
-              />
-            </Row>
-          </Row>
-
-          {/**
-           *
-           * Divider
-           *
-           */}
-          <Divider>
-            <SectionHeader
-              style={{
-                color: "#595959",
-                paddingBottom: "25px",
-                marginTop: "40px",
-              }}
-              className='thirtySixFont'
-
-            >
-              Internship Information
-            </SectionHeader>
-          </Divider>
-
-          {/**
-           *
-           * Intership Description
-           *
-           */}
-          <Row>
-            <Header className='twentyFourFont'>Description</Header>
-            <Caption className='sixteenFont'>{info.description}</Caption>
-          </Row>
-
-          {/**
-           *
-           * Location
-           *
-           */}
-          <Row>
-            <Header className='twentyFourFont'>Location</Header>
-            <Caption className='sixteenFont'>{info.location}</Caption>
-          </Row>
-
-          {/**
-           *
-           * Location
-           *
-           */}
-          <Row>
-            <Header className='twentyFourFont'>Industry</Header>
-            <Caption className='sixteenFont'>{info.industry}</Caption>
-          </Row>
-
-          {/**
-           *
-           * Work Period
-           *
-           */}
-          <Row>
-            <Header className='twentyFourFont'>Work Period</Header>
-            <Caption className='sixteenFont'>
-              {info.starttime} - {info.endtime}
-            </Caption>
-          </Row>
-
-          {/**
-           *
-           * Additional Information
-           *
-           */}
-          <Row style={{ marginBottom: "45px" }}>
-            <Header className='twentyFourFont'>Additional Information</Header>
-            <Caption className='sixteenFont'>- AP CSA - AP CSP - Must be 18+</Caption>
-          </Row>
-
-          {/**
-           *
-           * Divider
-           *
-           */}
-          <Divider>
-            <SectionHeader
-              style={{
-                color: "#595959",
-                paddingBottom: "25px",
-                marginTop: "25px",
-              }}
-              className='thirtySixFont'
-
-            >
-              Contact Information
-            </SectionHeader>
-          </Divider>
-
-          {/**
-           *
-           * Website
-           *
-           */}
-          <Row>
-            <Header className='twentyFourFont'>Website</Header>
-            <Caption className='sixteenFont'>{info.website}</Caption>
-          </Row>
-
-          {/**
-           *
-           * Email
-           *
-           */}
-          <Row>
-            <Header className='twentyFourFont'>E-Mail</Header>
-            <Caption className='sixteenFont'>{info.email}</Caption>
-          </Row>
-
-          {/**
-           *
-           * Phone Number
-           *
-           */}
-          <Row>
-            <Header className='twentyFourFont'>Phone Number</Header>
-            <Caption className='sixteenFont'>{info.phonenumber}</Caption>
-          </Row>
-
-          {/**
-           *
-           * Links To Social
-           *
-           */}
-          <Row>
-            <Header className='twentyFourFont'>Links</Header>
             <Row
               style={{
                 display: "flex",
                 flexDirection: "row",
                 justifyContent: "space-evenly",
+                marginTop: "45px",
+                marginBottom: "70px",
               }}
             >
-              <Facebook size={36} alt="facebook" />
-              <Twitter size={36} alt="twitter" />
-              <Instagram size={28} alt="instagram" />
-              <LinkedIn size={36} alt="linkedin" />
+              <Row>
+                <Image
+                  src={info.avatar}
+                  alt="Logo"
+                  style={{ marginTop: "10px" }}
+                />
+              </Row>
+              <Row>
+                <Image
+                  src="https://citybizlist.com/media/images/large/1545083234_2689.jpg"
+                  alt="Logo"
+                  style={{ marginTop: "10px" }}
+                />
+              </Row>
             </Row>
-          </Row>
+
+            {/**
+           *
+           * Divider
+           *
+           */}
+            <Divider>
+              <SectionHeader
+                style={{
+                  color: "#595959",
+                  paddingBottom: "25px",
+                  marginTop: "40px",
+                }}
+                className='thirtySixFont'
+
+              >
+                Internship Information
+            </SectionHeader>
+            </Divider>
+
+            {/**
+           *
+           * Intership Description
+           *
+           */}
+            <Row>
+              <Header className='twentyFourFont'>Description</Header>
+              <Caption className='sixteenFont'>{info.description}</Caption>
+            </Row>
+
+            {/**
+           *
+           * Location
+           *
+           */}
+            <Row>
+              <Header className='twentyFourFont'>Location</Header>
+              <Caption className='sixteenFont'>{info.location}</Caption>
+            </Row>
+
+            {/**
+           *
+           * Location
+           *
+           */}
+            <Row>
+              <Header className='twentyFourFont'>Industry</Header>
+              <Caption className='sixteenFont'>{info.industry}</Caption>
+            </Row>
+
+            {/**
+           *
+           * Work Period
+           *
+           */}
+            <Row>
+              <Header className='twentyFourFont'>Work Period</Header>
+              <Caption className='sixteenFont'>
+                {info.starttime} - {info.endtime}
+              </Caption>
+            </Row>
+
+            {/**
+           *
+           * Additional Information
+           *
+           */}
+            <Row style={{ marginBottom: "45px" }}>
+              <Header className='twentyFourFont'>Additional Information</Header>
+              <Caption className='sixteenFont'>- AP CSA - AP CSP - Must be 18+</Caption>
+            </Row>
+
+            {/**
+           *
+           * Divider
+           *
+           */}
+            <Divider>
+              <SectionHeader
+                style={{
+                  color: "#595959",
+                  paddingBottom: "25px",
+                  marginTop: "25px",
+                }}
+                className='thirtySixFont'
+
+              >
+                Contact Information
+            </SectionHeader>
+            </Divider>
+
+            {/**
+           *
+           * Website
+           *
+           */}
+            <Row>
+              <Header className='twentyFourFont'>Website</Header>
+              <Caption className='sixteenFont'>{info.website}</Caption>
+            </Row>
+
+            {/**
+           *
+           * Email
+           *
+           */}
+            <Row>
+              <Header className='twentyFourFont'>E-Mail</Header>
+              <Caption className='sixteenFont'>{info.email}</Caption>
+            </Row>
+
+            {/**
+           *
+           * Phone Number
+           *
+           */}
+            <Row>
+              <Header className='twentyFourFont'>Phone Number</Header>
+              <Caption className='sixteenFont'>{info.phonenumber}</Caption>
+            </Row>
+
+            {/**
+           *
+           * Links To Social
+           *
+           */}
+            <Row>
+              <Header className='twentyFourFont'>Links</Header>
+              <Row
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "space-evenly",
+                }}
+              >
+                <Facebook size={36} alt="facebook" />
+                <Twitter size={36} alt="twitter" />
+                <Instagram size={28} alt="instagram" />
+                <LinkedIn size={36} alt="linkedin" />
+              </Row>
+            </Row>
+          </div>
         </ModuleContainer>
       </React.Fragment>
     );
