@@ -184,7 +184,7 @@ class EditProfile extends React.Component {
           justifyContent: "center",
           backgroundColor: "#F5F5F5",
           minHeight: "100vh",
-          minWidth: "850px",
+          minWidth: "650px",
         }}
       >
         <ModuleContainer>
