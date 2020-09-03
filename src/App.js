@@ -329,6 +329,7 @@ class App extends Component {
       .then((response) => response.json())
       .then((data) => {
         let parsedData = JSON.parse(data);
+        console.log(parsedData);
         this.matchBusinessesActive(
           JSON.stringify(parsedData[0]),
           parsedData[1]
@@ -369,7 +370,7 @@ class App extends Component {
             matchedBusinessesArray.push(item._source)
           );
           matchedBusinessesArray.forEach(
-            (item, index) => (item.status = statusList[item.id])
+            (item, index) => (item.status = statusList[item.Id])
           );
           console.log(matchedBusinessesArray);
           this.props.updateActiveApplications(matchedBusinessesArray);
@@ -476,7 +477,7 @@ class App extends Component {
               padding: "30px",
               justifyContent: "center",
               backgroundColor: "#eff4f5",
-              minHeight: "100vh"
+              minHeight: "100vh",
             }}
           >
             {this.RenderedPages()}

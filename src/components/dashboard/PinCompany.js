@@ -2,9 +2,9 @@ import React, { Component } from "react";
 import QueueAnim from "rc-queue-anim";
 import Companytab from "./Companytab.js";
 
-import styled from 'styled-components'
+import styled from "styled-components";
 
-import { Pagination, Row as AntRow } from 'antd'
+import { Pagination, Row as AntRow } from "antd";
 
 const ModuleContainer = styled.div`
   background: white;
@@ -16,16 +16,14 @@ const ModuleContainer = styled.div`
   box-shadow: 1px 1px 5px -4px;
 `;
 
-
 const DescriptorText = styled.span`
   float: left;
   width: 100%
   font-family: Lato;
   font-weight: 500;
- 
+
   color: black;
 `;
-
 
 class PinCompany extends Component {
   constructor(props) {
@@ -35,10 +33,9 @@ class PinCompany extends Component {
 
     this.state = {
       pinnedCompanies: [],
-      page: '0'
+      page: "0",
     };
   }
-
 
   render() {
     let { page } = this.state;
@@ -53,47 +50,52 @@ class PinCompany extends Component {
         <h1 className="module-name" style={{ marginTop: "70px" }}>
           Added Companies
         </h1>
-        {pinnedBusinesses.length < 1 ?
+        {pinnedBusinesses.length < 1 ? (
           <ModuleContainer>
             <AntRow>
-              <DescriptorText style={{ margin: "auto" }} className='twentyFourFont'>You have not added any companies yet.</DescriptorText>
+              <DescriptorText
+                style={{ margin: "auto" }}
+                className="twentyFourFont"
+              >
+                You have not added any companies yet.
+              </DescriptorText>
             </AntRow>
-          </ModuleContainer> :
-
+          </ModuleContainer>
+        ) : (
           <React.Fragment>
             <QueueAnim
               type={["right", "left"]}
               ease={["easeOutQuart", "easeInOutQuart"]}
             >
-              {pinnedBusinesses.slice(page, page + 5).map((pinnedCompany, index) => (
-                <div style={{ marginBottom: "12px" }} key={index}>
-                  <Companytab
-                    name={pinnedCompany.name}
-                    industry={pinnedCompany.industry}
-                    avatar={pinnedCompany.avatar}
-                    companyid={pinnedCompany.id}
-                    updateBusinessStatus={updateBusinessStatus}
-                  />
-                </div>
-              ))}
+              {pinnedBusinesses
+                .slice(page, page + 5)
+                .map((pinnedCompany, index) => (
+                  <div style={{ marginBottom: "12px" }} key={index}>
+                    <Companytab
+                      name={pinnedCompany.name}
+                      industry={pinnedCompany.industry}
+                      avatar={pinnedCompany.avatar}
+                      companyid={pinnedCompany.Id}
+                      updateBusinessStatus={updateBusinessStatus}
+                    />
+                  </div>
+                ))}
             </QueueAnim>
             <Pagination
               current={parseInt(page) + 1}
               total={pinnedBusinesses.length}
-              onChange={pageChange => this.handlePageChange(pageChange - 1)}
+              onChange={(pageChange) => this.handlePageChange(pageChange - 1)}
               pageSize={5}
             />
           </React.Fragment>
-        }
+        )}
       </React.Fragment>
     );
   }
 
   handlePageChange = (pageChange) => {
     this.setState({ page: pageChange * 5 });
-  }
-
-
+  };
 }
 
 export default PinCompany;

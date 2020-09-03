@@ -21,7 +21,7 @@ const DescriptorText = styled.span`
   width: 100%
   font-family: Lato;
   font-weight: 500;
- 
+
   color: black;
 `;
 
@@ -67,7 +67,7 @@ class ActiveApplications extends Component {
                   <div style={{ marginBottom: "12px" }} key={index}>
                     <ActiveAppCompanytab
                       name={pinnedCompany.name}
-                      companyId={pinnedCompany.id}
+                      companyId={pinnedCompany.Id}
                       industry={pinnedCompany.industry}
                       avatar={pinnedCompany.avatar}
                       status={pinnedCompany.status}
