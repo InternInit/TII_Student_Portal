@@ -200,12 +200,16 @@ class SignUp extends React.Component {
               <Form.Item
                 rules={[
                   {
-                    required: true,
-                    message:
-                      "Please read the Terms and Conditions and Privacy Agreement",
+                    validator: (_, value) =>
+                      value
+                        ? Promise.resolve()
+                        : Promise.reject(
+                            "Please read the Terms and Conditions and Privacy Agreement"
+                          ),
                   },
                 ]}
                 name="termsAndConditions"
+                valuePropName="checked"
                 onChange={this.onChecked}
                 style={{ textAlign: "left" }}
               >
