@@ -70,7 +70,11 @@ class ActiveApplications extends Component {
                       companyId={pinnedCompany.Id}
                       industry={pinnedCompany.industry}
                       avatar={pinnedCompany.avatar}
-                      status={pinnedCompany.status}
+                      status={
+                        pinnedCompany.status !== "Review"
+                          ? pinnedCompany.status
+                          : "Pending"
+                      }
                     />
                   </div>
                 ))}
