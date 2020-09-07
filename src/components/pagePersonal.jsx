@@ -8,7 +8,8 @@ import {
   Radio,
   InputNumber,
   Spin,
-  Popover
+  Popover,
+  Skeleton
 } from "antd";
 import { Row, Col } from "antd";
 import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
@@ -28,6 +29,7 @@ import {
 } from "../redux/actions";
 
 import _ from "lodash";
+import SkeletonButton from "antd/lib/skeleton/Button";
 
 //Object Destructuring
 const { Option } = Select;
@@ -203,66 +205,210 @@ class PagePersonal extends Component {
          */}
         {window.scrollTo(0, 0)}
 
-        <Spin size="large" spinning={!this.state.loaded}>
-          <h1>General Information</h1>
-          <br />
-          <Form
-            name="pagePersonal"
-            initialValues={{
-              remember: true
-            }}
-            layout="vertical"
-            align="left"
-            onFinish={this.onFinish}
-            ref={this.formRef}
-            onValuesChange={this.onValuesChange}
-          >
-            {/**
-             *
-             * Enter Gender Form
-             *
-             */}
+        {!this.state.loaded ?
+          <React.Fragment>
+            <div style={{ marginBottom: '40px' }}>
+              <Skeleton.Input style={{ width: "25vw" }} size='default' />
+            </div>
+            <Row gutter={formGutter}>
+              <Col span={halfSpan}>
+                <Skeleton.Input style={{ width: '25vw' }} size='small' />
+              </Col>
+            </Row>
+
+            <Row gutter={formGutter}>
+              <Col span={halfSpan}></Col>
+              <Col span={halfSpan}></Col>
+            </Row>
+
+            <Row gutter={formGutter}>
+              <Col span={halfSpan}>
+
+                <Skeleton.Input style={{ width: '25vw' }} size='small' />
+              </Col>
+              <Col span={halfSpan}>
+                <Skeleton.Input style={{ width: '25vw' }} size='small' />
+
+              </Col>
+            </Row>
+
+            <Row gutter={formGutter}>
+              <Col span={halfSpan}>
+                <Skeleton.Input style={{ width: '25vw' }} size='small' />
+              </Col>
+              <Col span={halfSpan}>
+                <Skeleton.Input style={{ width: '25vw' }} size='small' />
+
+              </Col>
+            </Row>
+
+            <Row gutter={formGutter}>
+              <Col span={halfSpan}></Col>
+              <Col span={halfSpan}></Col>
+
+              <Col span={halfSpan}>
+                <Skeleton.Input style={{ width: '25vw' }} size='small' />
+              </Col>
+              <Col span={halfSpan}>
+                <Skeleton.Input style={{ width: '25vw' }} size='small' />
+
+              </Col>
+            </Row>
+
+
+
+            <Row gutter={formGutter}>
+              <Col span={halfSpan}>
+                <Skeleton.Input style={{ width: '25vw' }} size='small' />
+
+              </Col>
+              <Col span={halfSpan}>
+                <Skeleton.Input style={{ width: '25vw' }} size='small' />
+              </Col>
+            </Row>
+
+            <Row gutter={formGutter}>
+              <Col span={halfSpan}></Col>
+              <Col span={halfSpan}></Col>
+
+              <Col span={halfSpan}>
+                <Skeleton.Input style={{ width: '25vw' }} size='small' />
+              </Col>
+              <Col span={halfSpan}>
+                <Skeleton.Input style={{ width: '25vw' }} size='small' />
+
+              </Col>
+            </Row>
+
             <Row gutter={formGutter}>
               <Col span={standardSpan}>
-                <Form.Item
-                  key="gender"
-                  name="Gender"
-                  label={this.boldify("What is your gender?", true,
-                    <React.Fragment>What gender do you identify as?<br /><br /> You do not have to answer if you do not want to.</React.Fragment>)}
-                  rules={this.validationRules(true, "gender")}
-                >
-                  <Radio.Group>
-                    {genders.map(gender => (
-                      <Radio key={gender} value={gender}>
-                        {gender}
-                      </Radio>
-                    ))}
-                  </Radio.Group>
-                </Form.Item>
+                <Col span={halfSpan}></Col>
+                <Col span={halfSpan}></Col>
+                <Skeleton.Input style={{ width: '25vw' }} size='small' />
               </Col>
+
+
+
+              <Col span={standardSpan}>
+                <Col span={halfSpan}></Col>
+                <Col span={halfSpan}></Col>
+
+                <Skeleton.Input style={{ width: '25vw' }} size='small' />
+                <Skeleton.Input style={{ width: '25vw' }} size='small' />
+                <Skeleton.Input style={{ width: '25vw' }} size='small' />
+
+              </Col>
+
             </Row>
 
             {/**
              *
+             * "Save and Continue" Button
+             *
+             */}
+            <Form.Item>
+              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                <SkeletonButton />
+                <SkeletonButton />
+              </div>
+            </Form.Item>
+
+          </React.Fragment> :
+          <React.Fragment>
+            <h1>General Information</h1>
+            <br />
+            <Form
+              name="pagePersonal"
+              initialValues={{
+                remember: true
+              }}
+              layout="vertical"
+              align="left"
+              onFinish={this.onFinish}
+              ref={this.formRef}
+              onValuesChange={this.onValuesChange}
+            >
+              {/**
+             *
+             * Enter Gender Form
+             *
+             */}
+              <Row gutter={formGutter}>
+                <Col span={standardSpan}>
+                  <Form.Item
+                    key="gender"
+                    name="Gender"
+                    label={this.boldify("What is your gender?", true,
+                      <React.Fragment>What gender do you identify as?<br /><br /> You do not have to answer if you do not want to.</React.Fragment>)}
+                    rules={this.validationRules(true, "gender")}
+                  >
+                    <Radio.Group>
+                      {genders.map(gender => (
+                        <Radio key={gender} value={gender}>
+                          {gender}
+                        </Radio>
+                      ))}
+                    </Radio.Group>
+                  </Form.Item>
+                </Col>
+              </Row>
+
+              {/**
+             *
              * Enter Race/Ethnicity
              *
              */}
-            <Row gutter={formGutter}>
-              <Col span={standardSpan}>
-                <Form.Item
-                  key="race"
-                  label={this.boldify("Race/Ethnicity", true,
-                    <React.Fragment>
-                      You do not have to answer this question, but this information <br />could be usefule for preventing discrimation in the hiring process.
+              <Row gutter={formGutter}>
+                <Col span={standardSpan}>
+                  <Form.Item
+                    key="race"
+                    label={this.boldify("Race/Ethnicity", true,
+                      <React.Fragment>
+                        You do not have to answer this question, but this information <br />could be usefule for preventing discrimation in the hiring process.
                   </React.Fragment>
-                  )}
-                  name="Race"
-                  extra="Check all that apply"
-                >
-                  <Checkbox.Group>
-                    <Row>
-                      {race.map(ethnicity => (
-                        <Col span={halfSpan}>
+                    )}
+                    name="Race"
+                    extra="Check all that apply"
+                  >
+                    <Checkbox.Group>
+                      <Row>
+                        {race.map(ethnicity => (
+                          <Col span={halfSpan}>
+                            <Checkbox
+                              value={ethnicity}
+                              style={{
+                                lineHeight: "32px"
+                              }}
+                            >
+                              {ethnicity}
+                            </Checkbox>
+                          </Col>
+                        ))}
+                      </Row>
+                    </Checkbox.Group>
+                  </Form.Item>
+                </Col>
+              </Row>
+
+              {/**
+             *
+             * Enter Latina/X
+             *
+             */}
+              <Row gutter={formGutter}>
+                <Col span={standardSpan}>
+                  <Form.Item
+                    key="latinx"
+                    label={this.boldify("If you are Hispanic/Latinx", true,
+                      <React.Fragment>
+                        You do not have to answer this question, but this information <br />could be usefule for preventing discrimation in the hiring process.
+                  </React.Fragment>
+                    )}
+                    name="Is Latinx"
+                  >
+                    <Checkbox.Group>
+                      {latinx.map(ethnicity => (
+                        <Col>
                           <Checkbox
                             value={ethnicity}
                             style={{
@@ -273,308 +419,274 @@ class PagePersonal extends Component {
                           </Checkbox>
                         </Col>
                       ))}
-                    </Row>
-                  </Checkbox.Group>
-                </Form.Item>
-              </Col>
-            </Row>
+                    </Checkbox.Group>
+                  </Form.Item>
+                </Col>
+              </Row>
 
-            {/**
-             *
-             * Enter Latina/X
-             *
-             */}
-            <Row gutter={formGutter}>
-              <Col span={standardSpan}>
-                <Form.Item
-                  key="latinx"
-                  label={this.boldify("If you are Hispanic/Latinx", true,
-                    <React.Fragment>
-                      You do not have to answer this question, but this information <br />could be usefule for preventing discrimation in the hiring process.
-                  </React.Fragment>
-                  )}
-                  name="Is Latinx"
-                >
-                  <Checkbox.Group>
-                    {latinx.map(ethnicity => (
-                      <Col>
-                        <Checkbox
-                          value={ethnicity}
-                          style={{
-                            lineHeight: "32px"
-                          }}
-                        >
-                          {ethnicity}
-                        </Checkbox>
-                      </Col>
-                    ))}
-                  </Checkbox.Group>
-                </Form.Item>
-              </Col>
-            </Row>
-
-            {/**
+              {/**
              *
              * Enter Age Form
              *
              */}
-            <Row gutter={formGutter}>
-              <Col span={standardSpan}>
-                <Form.Item
-                  key="age"
-                  label={this.boldify("Age")}
-                  name="Age"
-                  rules={this.validationRules(
-                    true,
-                    "age",
-                    "number",
-                    null,
-                    0,
-                    100
-                  )}
-                >
-                  <InputNumber style={{ width: "100%" }} />
-                </Form.Item>
-              </Col>
-            </Row>
+              <Row gutter={formGutter}>
+                <Col span={standardSpan}>
+                  <Form.Item
+                    key="age"
+                    label={this.boldify("Age")}
+                    name="Age"
+                    rules={this.validationRules(
+                      true,
+                      "age",
+                      "number",
+                      null,
+                      0,
+                      100
+                    )}
+                  >
+                    <InputNumber style={{ width: "100%" }} />
+                  </Form.Item>
+                </Col>
+              </Row>
 
-            {/**
+              {/**
              *
              * Only Fill out What you feel confortable filling out
              *
              */}
-            <p style={{ paddingBottom: "24px", marginTop: "-12px" }}>
-              Fill out only what you're comfortable with, but understand that
-              missing factors could weaken your application.
+              <p style={{ paddingBottom: "24px", marginTop: "-12px" }}>
+                Fill out only what you're comfortable with, but understand that
+                missing factors could weaken your application.
             </p>
 
-            {/**
+              {/**
              *
              * Education History
              *
              */}
-            <h1>Please Input Your Educational History</h1>
+              <h1>Please Input Your Educational History</h1>
 
-            {/**
+              {/**
              *
              * School Box
              *
              */}
-            <Form.List name="Education">
-              {(fields, { add, remove }) => {
-                return (
-                  <div>
-                    {fields.map((field, index) => (
-                      <div className="educationBox">
-                        <Form.Item
-                          {...(index === 0
-                            ? formItemLayout
-                            : formItemLayoutWithOutLabel)}
-                          required={false}
-                          key={field.key}
-                        >
-                          {fields.length > 1 ? (
-                            <MinusCircleOutlined
-                              className="dynamic-delete-button"
-                              style={{
-                                fontSize: "18px",
-                                padding: "0 8px 0 0"
-                              }}
-                              onClick={() => {
-                                remove(field.name);
-                              }}
-                            />
-                          ) : null}
+              <Form.List name="Education">
+                {(fields, { add, remove }) => {
+                  return (
+                    <div>
+                      {fields.map((field, index) => (
+                        <div className="educationBox">
+                          <Form.Item
+                            {...(index === 0
+                              ? formItemLayout
+                              : formItemLayoutWithOutLabel)}
+                            required={false}
+                            key={field.key}
+                          >
+                            {fields.length > 1 ? (
+                              <MinusCircleOutlined
+                                className="dynamic-delete-button"
+                                style={{
+                                  fontSize: "18px",
+                                  padding: "0 8px 0 0"
+                                }}
+                                onClick={() => {
+                                  remove(field.name);
+                                }}
+                              />
+                            ) : null}
 
-                          <h2>School {index + 1}</h2>
+                            <h2>School {index + 1}</h2>
 
-                          {/**
+                            {/**
                            *
                            * School Name
                            *
                            */}
-                          <Form.Item
-                            {...field}
-                            key={[field.fieldKey, "schoolName"]}
-                            name={[field.name, "Name"]}
-                            label={this.boldify("School Name")}
-                            validateTrigger={["onChange", "onBlur"]}
-                            rules={this.validationRules(
-                              true,
-                              "school name",
-                              "string"
-                            )}
-                          >
-                            <Input placeholder="School name" />
-                          </Form.Item>
+                            <Form.Item
+                              {...field}
+                              key={[field.fieldKey, "schoolName"]}
+                              name={[field.name, "Name"]}
+                              label={this.boldify("School Name")}
+                              validateTrigger={["onChange", "onBlur"]}
+                              rules={this.validationRules(
+                                true,
+                                "school name",
+                                "string"
+                              )}
+                            >
+                              <Input placeholder="School name" />
+                            </Form.Item>
 
-                          {/**
+                            {/**
                            *
                            * School Addresss Line
                            *
                            */}
-                          <Row gutter={addressGutter}>
-                            <Col span={standardSpan}>
-                              <Form.Item
-                                key={[field.fieldKey, "schoolAddress"]}
-                                label={this.boldify("School Location")}
-                                name={[field.name, "Address"]}
-                                rules={this.validationRules(
-                                  true,
-                                  "school's address",
-                                  "string",
-                                  /\d{1,3}.?\d{0,3}\s[a-zA-Z]{2,30}\s[a-zA-Z]{2,15}/
-                                )}
-                              >
-                                <Input placeholder="Address Line" />
-                              </Form.Item>
-                            </Col>
-                          </Row>
+                            <Row gutter={addressGutter}>
+                              <Col span={standardSpan}>
+                                <Form.Item
+                                  key={[field.fieldKey, "schoolAddress"]}
+                                  label={this.boldify("School Location")}
+                                  name={[field.name, "Address"]}
+                                  rules={this.validationRules(
+                                    true,
+                                    "school's address",
+                                    "string",
+                                    /\d{1,3}.?\d{0,3}\s[a-zA-Z]{2,30}\s[a-zA-Z]{2,15}/
+                                  )}
+                                >
+                                  <Input placeholder="Address Line" />
+                                </Form.Item>
+                              </Col>
+                            </Row>
 
-                          {/**
+                            {/**
                            *
                            * School Address (CITY, STATE, ZIP)
                            *
                            */}
-                          <Row gutter={addressGutter}>
-                            <Col span={thirdSpan}>
-                              <Form.Item
-                                key={[field.fieldKey, "city"]}
-                                name={[field.name, "City"]}
-                                rules={this.validationRules(
-                                  true,
-                                  "city",
-                                  "string",
-                                  /^[a-zA-Z]+(?:[\s-][a-zA-Z]+)*$/
-                                )}
-                              >
-                                <Input placeholder="City" />
-                              </Form.Item>
-                            </Col>
-                            <Col span={thirdSpan}>
-                              <Form.Item
-                                key={[field.fieldKey, "state"]}
-                                name={[field.name, "State"]}
-                                rules={this.validationRules(true, "state")}
-                              >
-                                <Select placeholder="State">
-                                  {allStates.map(state => (
-                                    <Option key={state} value={state}>
-                                      {state}
-                                    </Option>
-                                  ))}
-                                </Select>
-                              </Form.Item>
-                            </Col>
-                            <Col span={thirdSpan}>
-                              <Form.Item
-                                key={[field.fieldKey, "zip"]}
-                                name={[field.name, "Zip Code"]}
-                                rules={this.validationRules(
-                                  true,
-                                  "zip code",
-                                  "string",
-                                  /^\d{5}$/
-                                )}
-                              >
-                                <Input placeholder="Zip Code" />
-                              </Form.Item>
-                            </Col>
-                          </Row>
+                            <Row gutter={addressGutter}>
+                              <Col span={thirdSpan}>
+                                <Form.Item
+                                  key={[field.fieldKey, "city"]}
+                                  name={[field.name, "City"]}
+                                  rules={this.validationRules(
+                                    true,
+                                    "city",
+                                    "string",
+                                    /^[a-zA-Z]+(?:[\s-][a-zA-Z]+)*$/
+                                  )}
+                                >
+                                  <Input placeholder="City" />
+                                </Form.Item>
+                              </Col>
+                              <Col span={thirdSpan}>
+                                <Form.Item
+                                  key={[field.fieldKey, "state"]}
+                                  name={[field.name, "State"]}
+                                  rules={this.validationRules(true, "state")}
+                                >
+                                  <Select placeholder="State">
+                                    {allStates.map(state => (
+                                      <Option key={state} value={state}>
+                                        {state}
+                                      </Option>
+                                    ))}
+                                  </Select>
+                                </Form.Item>
+                              </Col>
+                              <Col span={thirdSpan}>
+                                <Form.Item
+                                  key={[field.fieldKey, "zip"]}
+                                  name={[field.name, "Zip Code"]}
+                                  rules={this.validationRules(
+                                    true,
+                                    "zip code",
+                                    "string",
+                                    /^\d{5}$/
+                                  )}
+                                >
+                                  <Input placeholder="Zip Code" />
+                                </Form.Item>
+                              </Col>
+                            </Row>
 
-                          {/**
+                            {/**
                            *
                            * Course Concentration
                            *
                            */}
-                          <Row gutter={formGutter}>
-                            <Col span={halfSpan}>
-                              <Form.Item
-                                key={[field.fieldKey, "courseConcentration"]}
-                                label={this.boldify("Course Concentration", true, <React.Fragment>
-                                  What subjects did you focus on at this school?
+                            <Row gutter={formGutter}>
+                              <Col span={halfSpan}>
+                                <Form.Item
+                                  key={[field.fieldKey, "courseConcentration"]}
+                                  label={this.boldify("Course Concentration", true, <React.Fragment>
+                                    What subjects did you focus on at this school?
                                   <br /><br />
 Ex: If I took multiple STEM courses at this school,<br /> I would include subjects like <em>Chemistry, Biology,</em> etc.
                                 </React.Fragment>)}
-                                name={[field.name, "Course Concentration"]}
-                                rules={this.validationRules(
-                                  "course concentration"
-                                )}
-                                small="What is the thesis of your high shool career?"
-                              >
-                                <Input placeholder="(e.g.) Finance, Biology, etc." />
-                              </Form.Item>
-                            </Col>
-                            <Col span={halfSpan}>
-                              <Form.Item
-                                key={[field.fieldKey, "yearsCompleted"]}
-                                label={this.boldify("Years Completed", true,
-                                  <React.Fragment>
-                                    The number of years you spend at a school gives<br /> companies a time reference for your course concentration.
+                                  name={[field.name, "Course Concentration"]}
+                                  rules={this.validationRules(
+                                    "course concentration"
+                                  )}
+                                  small="What is the thesis of your high shool career?"
+                                >
+                                  <Input placeholder="(e.g.) Finance, Biology, etc." />
+                                </Form.Item>
+                              </Col>
+                              <Col span={halfSpan}>
+                                <Form.Item
+                                  key={[field.fieldKey, "yearsCompleted"]}
+                                  label={this.boldify("Years Completed", true,
+                                    <React.Fragment>
+                                      The number of years you spend at a school gives<br /> companies a time reference for your course concentration.
                                 </React.Fragment>
-                                )}
-                                name={[field.name, "Years Completed"]}
-                                rules={this.validationRules(
-                                  true,
-                                  "years completed",
-                                  "string",
-                                  /^\d{1,3}$/
-                                )}
-                              >
-                                <Input />
-                              </Form.Item>
-                            </Col>
-                          </Row>
-                        </Form.Item>
-                      </div>
-                    ))}
+                                  )}
+                                  name={[field.name, "Years Completed"]}
+                                  rules={this.validationRules(
+                                    true,
+                                    "years completed",
+                                    "string",
+                                    /^\d{1,3}$/
+                                  )}
+                                >
+                                  <Input />
+                                </Form.Item>
+                              </Col>
+                            </Row>
+                          </Form.Item>
+                        </div>
+                      ))}
 
-                    {/**
+                      {/**
                      *
                      * Add School Button
                      *
                      */}
-                    <Form.Item>
-                      <Button
-                        type="dashed"
-                        size="large"
-                        onClick={() => {
-                          add();
-                        }}
-                        style={{
-                          width: "100%",
-                          marginTop: "10px",
-                          marginBottom: "30px"
-                        }}
-                      >
-                        <PlusOutlined /> Add School
+                      <Form.Item>
+                        <Button
+                          type="dashed"
+                          size="large"
+                          onClick={() => {
+                            add();
+                          }}
+                          style={{
+                            width: "100%",
+                            marginTop: "10px",
+                            marginBottom: "30px"
+                          }}
+                        >
+                          <PlusOutlined /> Add School
                       </Button>
-                    </Form.Item>
-                  </div>
-                );
-              }}
-            </Form.List>
+                      </Form.Item>
+                    </div>
+                  );
+                }}
+              </Form.List>
 
-            {/**
+              {/**
              *
              * Previous/Save Buttons
              *
              */}
-            <Form.Item>
-              <Button
-                className="back-button"
-                type="primary"
-                htmlType="button"
-                onClick={this.backHandler}
-              >
-                Previous
+              <Form.Item>
+                <Button
+                  className="back-button"
+                  type="primary"
+                  htmlType="button"
+                  onClick={this.backHandler}
+                >
+                  Previous
               </Button>
-              <Button className="next-button" type="primary" htmlType="submit">
-                Save and Continue
+                <Button className="next-button" type="primary" htmlType="submit">
+                  Save and Continue
               </Button>
-            </Form.Item>
-          </Form>
-        </Spin>
+              </Form.Item>
+            </Form>
+          </React.Fragment>
+        }
       </div>
     );
   }
