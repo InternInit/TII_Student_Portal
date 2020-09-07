@@ -163,8 +163,6 @@ class AddCompanies extends React.Component {
       excludedBusinesses.push(business.Id)
     );
 
-    //console.log(excludedBusinesses);
-
     filteredInfo = filteredInfo.filter(
       (company) => excludedBusinesses.indexOf(company.Id) === -1
     );
@@ -382,7 +380,7 @@ class AddCompanies extends React.Component {
     notification.open({
       //notification
       message: "Success!",
-      description: "Your applicant was sent.",
+      description: "Your application was sent.",
       icon: <CheckOutlined style={{ color: "green" }} />,
     });
   };
