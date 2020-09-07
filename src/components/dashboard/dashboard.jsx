@@ -105,6 +105,10 @@ class Dashboard extends Component {
                     <AddCompanies
                       version={this.props.userInfo.version}
                       updateBusinessStatus={this.props.updateBusinessStatus}
+                      pinnedBusinesses={this.props.userInfo.pinnedBusinesses}
+                      activeApplications={
+                        this.props.userInfo.activeApplications
+                      }
                     />
                   )}
                 />

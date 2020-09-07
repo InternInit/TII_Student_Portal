@@ -125,6 +125,15 @@ class AddCompanies extends React.Component {
         JSON.parse(data).hits.hits.forEach((item) =>
           companyArray.push(item._source)
         );
+        let excludedBusinesses = [];
+        this.props.pinnedBusinesses.forEach((business) =>
+          excludedBusinesses.push(business.Id)
+        );
+        this.props.activeApplications.forEach((business) =>
+          excludedBusinesses.push(business.Id)
+        );
+        console.log(excludedBusinesses);
+        //companyArray.filter((company) => )
         this.setState({ companies: companyArray });
       });
   };
@@ -145,6 +154,20 @@ class AddCompanies extends React.Component {
     let filteredInfo = industrySearch.filter((company) => {
       return company.name.toLowerCase().indexOf(search.toLowerCase()) !== -1;
     });
+
+    let excludedBusinesses = [];
+    this.props.pinnedBusinesses.forEach((business) =>
+      excludedBusinesses.push(business.Id)
+    );
+    this.props.activeApplications.forEach((business) =>
+      excludedBusinesses.push(business.Id)
+    );
+
+    //console.log(excludedBusinesses);
+
+    filteredInfo = filteredInfo.filter(
+      (company) => excludedBusinesses.indexOf(company.Id) === -1
+    );
 
     return (
       <div style={{ paddingBottom: "50%" }}>
