@@ -26,9 +26,14 @@ import {
 
 import { Auth } from "aws-amplify";
 
-import '../App.css'
-import './dashboard/dashboard.css'
+import "../App.css";
+import "./dashboard/dashboard.css";
 
+//============================================================================================================
+//
+//                                      Styled Components
+//
+//============================================================================================================
 
 const ModuleContainer = styled.div`
   display: flex;
@@ -41,7 +46,7 @@ const ModuleContainer = styled.div`
 `;
 
 const Heading = styled.div`
-   font-weight: bold;
+  font-weight: bold;
   display: flex;
   justify-content: align-left;
   color: #595959;
@@ -62,14 +67,14 @@ const UserInfo = styled.div`
   text-align: left;
   flex-direction: row;
   align-items: center;
-   font-weight: 500;
+  font-weight: 500;
   color: #262626;
   width: 80%;
   margin-top: 28px;
 `;
 
 const Info = styled.div`
-   font-weight: 500;
+  font-weight: 500;
   color: #595959;
   margin-left: 12px;
 `;
@@ -82,7 +87,7 @@ const ChangeInfo = styled.a`
 `;
 
 const Header = styled.div`
-   font-weight: 500;
+  font-weight: 500;
   color: #595959;
   margin-top: 50px;
 `;
@@ -112,6 +117,12 @@ const mapDispatchToProps = {
   updateVersion,
 };
 
+function getBase64(img, callback) {
+  const reader = new FileReader();
+  reader.addEventListener("load", () => callback(reader.result));
+  reader.readAsDataURL(img);
+}
+
 class EditProfile extends React.Component {
   constructor(props) {
     super(props);
@@ -120,10 +131,8 @@ class EditProfile extends React.Component {
     this.handleEnter = this.handleEnter.bind(this);
 
     this.state = {
-      displayname: "Kevin Tucker",
       password: "passwordholder",
-      email: "21lub@nsboroschools.net",
-      schoolCode: "12345",
+      schoolCode: "",
 
       changeName: "Kevin Tucker",
       changePassword: "passwordholder",
@@ -188,7 +197,9 @@ class EditProfile extends React.Component {
         }}
       >
         <ModuleContainer>
-          <Heading style={{ marginLeft: "18px" }} className="twentyEightFont">Profile Details</Heading>
+          <Heading style={{ marginLeft: "18px" }} className="twentyEightFont">
+            Profile Details
+          </Heading>
 
           {/**
            *
@@ -208,13 +219,14 @@ class EditProfile extends React.Component {
                 src={this.props.userInfo.avatar}
                 style={{ marginLeft: "24px", marginTop: "24px" }}
               />
-              <Header className="twentyEightFont"
+              <Header
+                className="twentyEightFont"
                 style={{
                   marginLeft: "15px",
                   marginTop: "24px",
                   padding: "0px",
                 }}
-                className='thirtySixFont'
+                className="thirtySixFont"
               >
                 {username}
               </Header>
@@ -265,28 +277,28 @@ class EditProfile extends React.Component {
            *
            */}
           <UserInfo style={{ marginTop: "36px" }} className="eighteenFont">
-            Display Name:  <Info className="eighteenFont">{displayname} </Info>
+            Display Name: <Info className="eighteenFont">{displayname} </Info>
           </UserInfo>
           <ChangeInfo onClick={() => this.showModal("Display Name")}>
             Change display name
           </ChangeInfo>
 
           <UserInfo className="eighteenFont">
-            Password:  <Info className="eighteenFont">{displayPassword}</Info>
+            Password: <Info className="eighteenFont">{displayPassword}</Info>
           </UserInfo>
           <ChangeInfo onClick={() => this.showModal("Password")}>
             Change password
           </ChangeInfo>
 
           <UserInfo className="eighteenFont">
-            E-mail:  <Info className="eighteenFont">{email}</Info>
+            E-mail: <Info className="eighteenFont">{email}</Info>
           </UserInfo>
           <ChangeInfo onClick={() => this.showModal("E-Mail")}>
             Change e-mail
           </ChangeInfo>
 
           <UserInfo className="eighteenFont">
-            School Code:  <Info className="eighteenFont">{schoolCode}</Info>
+            School Code: <Info className="eighteenFont">{schoolCode}</Info>
           </UserInfo>
           <ChangeInfo onClick={() => this.showModal("School Code")}>
             Change School Code
@@ -671,6 +683,10 @@ class EditProfile extends React.Component {
     if (info.file.status === "done") {
       // Get this url from response in real world.
       this.setState({ loading: false });
+      //Encode the file path for reactive display
+      getBase64(info.file.originFileObj, (imageUrl) =>
+        this.props.updateAvatar(imageUrl)
+      );
     }
   };
 
@@ -683,8 +699,8 @@ class EditProfile extends React.Component {
           Subject: id,
         },
       })
-        .then((response) => { })
-        .then((data) => { });
+        .then((response) => {})
+        .then((data) => {});
     }, 100);
   };
 
@@ -703,8 +719,8 @@ class EditProfile extends React.Component {
         },
         body: fd,
       })
-        .then((response) => { })
-        .then((data) => { });
+        .then((response) => {})
+        .then((data) => {});
     }, 100);
   };
 }
