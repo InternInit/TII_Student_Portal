@@ -10,6 +10,7 @@ import {
   message,
   Spin,
   Popover,
+  Skeleton,
 } from "antd";
 import { Row, Col } from "antd";
 import { InboxOutlined } from "@ant-design/icons";
@@ -521,12 +522,14 @@ class PageInternshipInformation extends Component {
              *
              */}
             <Row name="first" gutter={formGutter}>
-              <Col span={halfSpan}>
-                <Form.Item {...formItemProps.firstName}>
-                  <Input />
-                </Form.Item>
-              </Col>
-
+              {this.state.loaded ?
+                <Skeleton width="50%" /> :
+                <Col span={halfSpan}>
+                  <Form.Item {...formItemProps.firstName}>
+                    <Input />
+                  </Form.Item>
+                </Col>
+              }
               <Col span={halfSpan}>
                 <Form.Item {...formItemProps.lastName}>
                   <Input />
