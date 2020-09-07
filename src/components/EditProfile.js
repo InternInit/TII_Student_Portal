@@ -702,6 +702,7 @@ class EditProfile extends React.Component {
         .then((response) => {})
         .then((data) => {});
     }, 100);
+    this.props.updateAvatar(null);
   };
 
   customUploadRequest = ({ onSuccess, onError, file }) => {
