@@ -31,7 +31,7 @@ const PageContainer = styled.div`
 
 const WelcomeHeader = styled.h1`
   text-align: center;
-   font-family: Lato;
+  font-family: Lato;
   font-weight: bold;
   margin-ottom: 3%;
 
@@ -40,10 +40,10 @@ const WelcomeHeader = styled.h1`
 
 const { Content } = Layout;
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     userInfo: state.userInfo,
-    completionState: state.completionState
+    completionState: state.completionState,
   };
 };
 
@@ -51,11 +51,9 @@ class Dashboard extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      info: ""
+      info: "",
     };
   }
-
-
 
   render() {
     return (
@@ -69,13 +67,17 @@ class Dashboard extends Component {
               backgroundColor: "#eff4f5",
               minHeight: "100vh",
 
-              minWidth: '610px'
+              minWidth: "610px",
             }}
           >
             <PageContainer>
-              <WelcomeHeader className="seventyTwoFont">Welcome {this.props.userInfo.username}</WelcomeHeader>
+              <WelcomeHeader className="seventyTwoFont">
+                Welcome {this.props.userInfo.displayName}
+              </WelcomeHeader>
               <DashboardNavBar version={this.props.userInfo.version} />
-              <Divider style={{backgroundColor: "#d4dadd", marginTop: "15px"}}/>
+              <Divider
+                style={{ backgroundColor: "#d4dadd", marginTop: "15px" }}
+              />
               <ReactSwitch>
                 <Route
                   path="/dashboard"
@@ -87,14 +89,24 @@ class Dashboard extends Component {
 
                 <Route path="/dashboard/my-internships" exact>
                   <ApplicationProgress />
-                  <PinCompany pinnedBusinesses={this.props.userInfo.pinnedBusinesses} updateBusinessStatus={this.props.updateBusinessStatus} />
-                  <ActiveApplications activeApplications={this.props.userInfo.activeApplications} />
+                  <PinCompany
+                    pinnedBusinesses={this.props.userInfo.pinnedBusinesses}
+                    updateBusinessStatus={this.props.updateBusinessStatus}
+                  />
+                  <ActiveApplications
+                    activeApplications={this.props.userInfo.activeApplications}
+                  />
                 </Route>
 
                 <Route
                   path="/dashboard/add-companies"
                   exact
-                  render={() => <AddCompanies version={this.props.userInfo.version} updateBusinessStatus={this.props.updateBusinessStatus} />}
+                  render={() => (
+                    <AddCompanies
+                      version={this.props.userInfo.version}
+                      updateBusinessStatus={this.props.updateBusinessStatus}
+                    />
+                  )}
                 />
 
                 <Route
