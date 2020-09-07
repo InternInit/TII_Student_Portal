@@ -64,7 +64,7 @@ class Dashboard extends Component {
               display: "flex",
               padding: "30px",
               justifyContent: "center",
-              backgroundColor: "#eff4f5",
+              backgroundColor: "#EBEFF2",
               minHeight: "100vh",
 
               minWidth: "610px",

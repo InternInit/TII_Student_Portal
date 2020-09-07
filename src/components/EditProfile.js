@@ -11,9 +11,12 @@ import {
   Avatar,
   Form,
   Popover,
+  Badge,
+  Row as AntRow,
+  Col as AntCol,
 } from "antd";
 
-import { CloseOutlined, UserOutlined } from "@ant-design/icons";
+import { CloseOutlined, UserOutlined, EditOutlined } from "@ant-design/icons";
 
 import { connect } from "react-redux";
 import {
@@ -36,20 +39,19 @@ import "./dashboard/dashboard.css";
 //============================================================================================================
 
 const ModuleContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   background: white;
   border-radius: 10px;
-  padding: 3%;
+  padding: 5% 10% 5% 10%;
   width: 70%;
 `;
 
 const Heading = styled.div`
   font-weight: bold;
+  font-family: Lato;
+  font-size: 36px;
   display: flex;
-  justify-content: align-left;
-  color: #595959;
+  justify-content: center;
+  color: black;
 `;
 
 const ProfileBox = styled.div`
@@ -197,54 +199,52 @@ class EditProfile extends React.Component {
         }}
       >
         <ModuleContainer>
-          <Heading style={{ marginLeft: "18px" }} className="twentyEightFont">
-            Profile Details
-          </Heading>
+          <Heading className="twentyEightFont">Profile Details</Heading>
 
           {/**
            *
            * Box with Profile Picture
            *
            */}
-          <ProfileBox>
-            {/**
-             *
-             * Picture + Name
-             *
-             */}
-            <Row style={{ alignSelf: "flex-start", display: "flex" }}>
-              <Avatar
-                size={54}
-                icon={<UserOutlined />}
-                src={this.props.userInfo.avatar}
-                style={{ marginLeft: "24px", marginTop: "24px" }}
-              />
-              <Header
-                className="twentyEightFont"
-                style={{
-                  marginLeft: "15px",
-                  marginTop: "24px",
-                  padding: "0px",
-                }}
-                className="thirtySixFont"
+          {/**
+           *
+           * Picture + Name
+           *
+           */}
+          <AntRow
+            style={{ float: "left", width: "100%", backgroundColor: "white" }}
+          >
+            <AntCol span={4}>
+                  
+              <Upload
+                listType="text"
+                customRequest={this.customUploadRequest}
+                beforeUpload={beforeUpload}
+                onChange={this.handleChange}
+                showUploadList={false}
+                accept=".jpg, .jpeg, image/jpeg, .png, image/png"
               >
-                {username}
-              </Header>
-            </Row>
+                <Avatar
+                    size={90}
+                    icon={<UserOutlined />}
+                    src={this.props.userInfo.avatar}
+                  />
+              </Upload>
+            </AntCol>
+            <AntCol style={{ textAlign: "left" }} span={20}>
+              <h1>{username}</h1>
+              <Button shape="round">Change Profile Picture</Button>
+              <Header className="twentyEightFont">{username}</Header>
+            </AntCol>
+          </AntRow>
 
-            {/**
-             *
-             * Change Profile Picture
-             *
-             */}
-            <h2 style={{ fontWeight: "500" }}>Change Profile Picture</h2>
-            <Row
-              style={{
-                display: "flex",
-                justifyContent: "space-evenly",
-                width: "60%",
-              }}
-            >
+          {/**
+           *
+           * Change Profile Picture
+           *
+           */}
+          <AntRow style={{ width: "100%" }}>
+            <AntCol span={24}>
               {/**
                *
                * Buttons to add picture/remove current
@@ -268,41 +268,59 @@ class EditProfile extends React.Component {
               >
                 Remove Current
               </Button>
-            </Row>
-          </ProfileBox>
+            </AntCol>
+          </AntRow>
 
           {/**
            *
            * User Information
            *
            */}
-          <UserInfo style={{ marginTop: "36px" }} className="eighteenFont">
-            Display Name: <Info className="eighteenFont">{displayname} </Info>
-          </UserInfo>
-          <ChangeInfo onClick={() => this.showModal("Display Name")}>
-            Change display name
-          </ChangeInfo>
+          <AntRow>
+            <AntCol span={24}>
+              <UserInfo style={{ marginTop: "36px" }} className="eighteenFont">
+                Display Name:{" "}
+                <Info className="eighteenFont">{displayname} </Info>
+              </UserInfo>
+              <ChangeInfo onClick={() => this.showModal("Display Name")}>
+                Change display name
+              </ChangeInfo>
+            </AntCol>
+          </AntRow>
 
-          <UserInfo className="eighteenFont">
-            Password: <Info className="eighteenFont">{displayPassword}</Info>
-          </UserInfo>
-          <ChangeInfo onClick={() => this.showModal("Password")}>
-            Change password
-          </ChangeInfo>
+          <AntRow>
+            <AntCol span={24}>
+              <UserInfo className="eighteenFont">
+                Password:{" "}
+                <Info className="eighteenFont">{displayPassword}</Info>
+              </UserInfo>
+              <ChangeInfo onClick={() => this.showModal("Password")}>
+                Change password
+              </ChangeInfo>
+            </AntCol>
+          </AntRow>
 
-          <UserInfo className="eighteenFont">
-            E-mail: <Info className="eighteenFont">{email}</Info>
-          </UserInfo>
-          <ChangeInfo onClick={() => this.showModal("E-Mail")}>
-            Change e-mail
-          </ChangeInfo>
+          <AntRow>
+            <AntCol span={24}>
+              <UserInfo className="eighteenFont">
+                E-mail: <Info className="eighteenFont">{email}</Info>
+              </UserInfo>
+              <ChangeInfo onClick={() => this.showModal("E-Mail")}>
+                Change e-mail
+              </ChangeInfo>
+            </AntCol>
+          </AntRow>
 
-          <UserInfo className="eighteenFont">
-            School Code: <Info className="eighteenFont">{schoolCode}</Info>
-          </UserInfo>
-          <ChangeInfo onClick={() => this.showModal("School Code")}>
-            Change School Code
-          </ChangeInfo>
+          <AntRow justify="start">
+            <AntCol span={24}>
+              <UserInfo className="eighteenFont">
+                School Code: <Info className="eighteenFont">{schoolCode}</Info>
+              </UserInfo>
+              <ChangeInfo onClick={() => this.showModal("School Code")}>
+                Change School Code
+              </ChangeInfo>
+            </AntCol>
+          </AntRow>
 
           {/**
            *
