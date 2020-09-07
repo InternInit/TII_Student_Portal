@@ -10,6 +10,7 @@ import {
   message,
   Spin,
   Popover,
+  Skeleton,
 } from "antd";
 import { Row, Col } from "antd";
 import { InboxOutlined } from "@ant-design/icons";
@@ -35,6 +36,9 @@ import {
 } from "../redux/actions";
 
 import _ from "lodash";
+import SkeletonInput from "antd/lib/skeleton/Input";
+import SkeletonButton from "antd/lib/skeleton/Button";
+import SkeletonImage from "antd/lib/skeleton/Image";
 
 //Object Destructuring
 const { Option } = Select;
@@ -498,39 +502,20 @@ class PageInternshipInformation extends Component {
 
   render() {
     return (
-      <div style={{ marginTop: "40px", width: "80%" }}>
+      <div style={{ width: "100%", marginTop: "40px" }}>
         {window.scrollTo(0, 0)}
-        <Spin size="large" spinning={!this.state.loaded}>
-          <h1>Internship Information</h1>
-          <br />
-
-          {/**
-           *
-           * Application Form
-           *
-           */}
-          <Form
-            {...formItemProps.totalForm}
-            onFinish={this.onFinish}
-            ref={this.formRef}
-            onValuesChange={this.onValuesChange}
-          >
-            {/**
-             *
-             * First Row (First and Last Name)
-             *
-             */}
-            <Row name="first" gutter={formGutter}>
+        {!this.state.loaded ?
+          <React.Fragment>
+            <div style={{ marginBottom: '40px' }}>
+              <Skeleton.Input style={{ width: "25vw" }} size='default' />
+            </div>
+            <Row gutter={formGutter}>
               <Col span={halfSpan}>
-                <Form.Item {...formItemProps.firstName}>
-                  <Input />
-                </Form.Item>
+                <Skeleton.Input style={{ width: '25vw' }} size='small' />
               </Col>
 
               <Col span={halfSpan}>
-                <Form.Item {...formItemProps.lastName}>
-                  <Input />
-                </Form.Item>
+                <Skeleton.Input style={{ width: '25vw' }} size='small' />
               </Col>
             </Row>
 
@@ -541,15 +526,13 @@ class PageInternshipInformation extends Component {
              */}
             <Row gutter={formGutter}>
               <Col span={halfSpan}>
-                <Form.Item {...formItemProps.phoneNumber}>
-                  <Input placeholder="(XXX)XXX-XXXX" />
-                </Form.Item>
+                <Skeleton.Input style={{ width: '25vw' }} size='small' />
+
               </Col>
 
               <Col span={halfSpan}>
-                <Form.Item {...formItemProps.email}>
-                  <Input />
-                </Form.Item>
+                <Skeleton.Input style={{ width: '25vw' }} size='small' />
+
               </Col>
             </Row>
 
@@ -560,9 +543,8 @@ class PageInternshipInformation extends Component {
              */}
             <Row gutter={formGutter}>
               <Col span={standardSpan}>
-                <Form.Item {...formItemProps.addressLine}>
-                  <Input placeholder="Address Line" />
-                </Form.Item>
+                <Skeleton.Input style={{ width: '25vw' }} size='small' />
+
               </Col>
             </Row>
 
@@ -573,27 +555,16 @@ class PageInternshipInformation extends Component {
              */}
             <Row gutter={formGutter}>
               <Col span={thirdSpan}>
-                <Form.Item {...formItemProps.city}>
-                  <Input placeholder="City" />
-                </Form.Item>
+                <Skeleton.Input style={{ width: '16vw' }} size='small' />
               </Col>
 
               <Col span={thirdSpan}>
-                <Form.Item {...formItemProps.livingState}>
-                  <Select placeholder="State">
-                    {allStates.map((state) => (
-                      <Option key={state} value={state}>
-                        {state}
-                      </Option>
-                    ))}
-                  </Select>
-                </Form.Item>
+                <Skeleton.Input style={{ width: '16vw' }} size='small' />
+
               </Col>
 
               <Col span={thirdSpan}>
-                <Form.Item {...formItemProps.zip}>
-                  <Input placeholder="Zip Code" />
-                </Form.Item>
+                <Skeleton.Input style={{ width: '16vw' }} size='small' />
               </Col>
             </Row>
 
@@ -604,9 +575,7 @@ class PageInternshipInformation extends Component {
              */}
             <Row gutter={formGutter}>
               <Col span={standardSpan}>
-                <Form.Item {...formItemProps.yog}>
-                  <Input placeholder="(e.g.) 2021, 2022, etc." />
-                </Form.Item>
+                <Skeleton.Input style={{ width: '25vw' }} size='small' />
               </Col>
             </Row>
 
@@ -617,14 +586,11 @@ class PageInternshipInformation extends Component {
              */}
             <Row gutter={formGutter}>
               <Col span={halfSpan}>
-                <Form.Item {...formItemProps.unweightedGPA}>
-                  <Input placeholder="4.0" />
-                </Form.Item>
+                <Skeleton.Input style={{ width: '25vw' }} size='small' />
               </Col>
               <Col span={halfSpan}>
-                <Form.Item {...formItemProps.weightedGPA}>
-                  <Input placeholder="4.7/5.0" />
-                </Form.Item>
+                <Skeleton.Input style={{ width: '25vw' }} size='small' />
+
               </Col>
             </Row>
 
@@ -635,27 +601,30 @@ class PageInternshipInformation extends Component {
              */}
             <Row gutter={formGutter}>
               <Col span={standardSpan}>
-                <Form.Item {...formItemProps.courses}>
-                  <Input.TextArea
-                    placeholder="(e.g.) Business Communications, AP Computer Science, etc."
-                    style={{ height: "100px" }}
-                  />
-                </Form.Item>
+                <Skeleton.Input style={{ width: '25vw' }} size='small' />
+
+
               </Col>
             </Row>
 
             {/**
             Extracurriculars
             CHANGE REQUIRED: Switch to a standardized input format
-          */}
+            */}
             <Row gutter={formGutter}>
-              <Col span={standardSpan}>
-                <Form.Item {...formItemProps.extracurriculars}>
-                  <Input.TextArea
-                    placeholder="(e.g.) Speech and Debate (3), DECA (4), HOSA (2), Student Council (2)"
-                    style={{ height: "100px" }}
-                  />
-                </Form.Item>
+              <Col span={halfSpan}>
+                <Skeleton.Input style={{ width: '25vw' }} size='small' />
+              </Col>
+              <Col span={halfSpan}>
+                <Skeleton.Input style={{ width: '25vw' }} size='small' />
+
+              </Col>
+              <Col span={halfSpan}>
+                <Skeleton.Input style={{ width: '25vw' }} size='small' />
+              </Col>
+              <Col span={halfSpan}>
+                <Skeleton.Input style={{ width: '25vw' }} size='small' />
+
               </Col>
             </Row>
 
@@ -666,32 +635,11 @@ class PageInternshipInformation extends Component {
              */}
             <Row gutter={formGutter}>
               <Col span={halfSpan}>
-                <Form.Item {...formItemProps.daysToWork}>
-                  <Select
-                    mode="multiple"
-                    placeholder="Please select the days where you can work"
-                  >
-                    {daysOfTheWeek.map((day) => (
-                      <Option key={day} value={day}>
-                        {day}
-                      </Option>
-                    ))}
-                  </Select>
-                </Form.Item>
+                <Skeleton.Input style={{ width: '25vw' }} size='small' />
+
               </Col>
               <Col span={halfSpan}>
-                <Form.Item {...formItemProps.timesToWork}>
-                  <Select
-                    mode="multiple"
-                    placeholder="Please select the times when you can work"
-                  >
-                    {timesOfTheDay.map((time) => (
-                      <Option key={time} value={time}>
-                        {time}
-                      </Option>
-                    ))}
-                  </Select>
-                </Form.Item>
+                <Skeleton.Input style={{ width: '25vw' }} size='small' />
               </Col>
             </Row>
 
@@ -702,9 +650,7 @@ class PageInternshipInformation extends Component {
              */}
             <Row gutter={formGutter}>
               <Col span={standardSpan}>
-                <Form.Item {...formItemProps.dateOfStartAndEnd}>
-                  <RangePicker style={{ width: "100%" }} />
-                </Form.Item>
+                <Skeleton.Input style={{ width: '25vw' }} size='small' />
               </Col>
             </Row>
 
@@ -713,39 +659,34 @@ class PageInternshipInformation extends Component {
              * Willing to work Paid/Unpaid
              *
              */}
-            <Row gutter={formGutter}>
-              <Col span={standardSpan}>
-                <Form.Item {...formItemProps.paidUnpaid}>
-                  <Radio.Group>
-                    {paidOrUnpaid.map((choice) => (
-                      <Radio key={choice} value={choice}>
-                        {choice}
-                      </Radio>
-                    ))}
-                  </Radio.Group>
-                </Form.Item>
-              </Col>
-            </Row>
+
 
             {/**
              *
              * Upload Resume
              *
              */}
-            <Form.Item {...formItemProps.resume}>
-              <Dragger
-                {...props}
-                style={{ width: "250px", height: "30px" }}
-                customRequest={this.customRequestResume}
-                onChange={this.onChange}
-                fileList={this.state.fileList}
-              >
-                <h1 style={{ color: "#69c0ff" }}>
-                  <InboxOutlined />
-                </h1>
-                <h5>Click or Drag Files to Upload Here</h5>
-              </Dragger>
-            </Form.Item>
+            <Row gutter={formGutter}>
+              <Col span={halfSpan}>
+                <Skeleton.Input style={{ width: '25vw' }} size='small' />
+              </Col>
+              <Col span={halfSpan}>
+                <Skeleton.Input style={{ width: '25vw' }} size='small' />
+
+              </Col>
+              <Col span={halfSpan}>
+                <Skeleton.Input style={{ width: '25vw' }} size='small' />
+                <Skeleton.Input style={{ width: '25vw' }} size='small' />
+                <Skeleton.Input style={{ width: '25vw' }} size='small' />
+
+              </Col>
+              <Col span={halfSpan}>
+                <Skeleton.Input style={{ width: '25vw' }} size='small' />
+                <Skeleton.Input style={{ width: '25vw' }} size='small' />
+                <Skeleton.Input style={{ width: '25vw' }} size='small' />
+
+              </Col>
+            </Row>
 
             {/**
              *
@@ -753,12 +694,274 @@ class PageInternshipInformation extends Component {
              *
              */}
             <Form.Item>
-              <Button className="next-button" type="primary" htmlType="submit">
-                Save and Continue
-              </Button>
+              <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                <SkeletonButton />
+              </div>
             </Form.Item>
-          </Form>
-        </Spin>
+
+          </React.Fragment> :
+
+          <React.Fragment>
+            <h1>Internship Information</h1>
+            <br />
+
+            {/**
+           *
+           * Application Form
+           *
+           */}
+            <Form
+              {...formItemProps.totalForm}
+              onFinish={this.onFinish}
+              ref={this.formRef}
+              onValuesChange={this.onValuesChange}
+            >
+              {/**
+             *
+             * First Row (First and Last Name)
+             *
+             */}
+              <Row name="first" gutter={formGutter}>
+                <Col span={halfSpan}>
+                  <Form.Item {...formItemProps.firstName}>
+                    <Input />
+                  </Form.Item>
+                </Col>
+
+                <Col span={halfSpan}>
+                  <Form.Item {...formItemProps.lastName}>
+                    <Input />
+                  </Form.Item>
+                </Col>
+              </Row>
+
+              {/**
+             *
+             * Phone Number and Email
+             *
+             */}
+              <Row gutter={formGutter}>
+                <Col span={halfSpan}>
+                  <Form.Item {...formItemProps.phoneNumber}>
+                    <Input placeholder="(XXX)XXX-XXXX" />
+                  </Form.Item>
+                </Col>
+
+                <Col span={halfSpan}>
+                  <Form.Item {...formItemProps.email}>
+                    <Input />
+                  </Form.Item>
+                </Col>
+              </Row>
+
+              {/**
+             *
+             * Address Line
+             *
+             */}
+              <Row gutter={formGutter}>
+                <Col span={standardSpan}>
+                  <Form.Item {...formItemProps.addressLine}>
+                    <Input placeholder="Address Line" />
+                  </Form.Item>
+                </Col>
+              </Row>
+
+              {/**
+             *
+             * Address City, State, ZIP
+             *
+             */}
+              <Row gutter={formGutter}>
+                <Col span={thirdSpan}>
+                  <Form.Item {...formItemProps.city}>
+                    <Input placeholder="City" />
+                  </Form.Item>
+                </Col>
+
+                <Col span={thirdSpan}>
+                  <Form.Item {...formItemProps.livingState}>
+                    <Select placeholder="State">
+                      {allStates.map((state) => (
+                        <Option key={state} value={state}>
+                          {state}
+                        </Option>
+                      ))}
+                    </Select>
+                  </Form.Item>
+                </Col>
+
+                <Col span={thirdSpan}>
+                  <Form.Item {...formItemProps.zip}>
+                    <Input placeholder="Zip Code" />
+                  </Form.Item>
+                </Col>
+              </Row>
+
+              {/**
+             *
+             * Year of Graduation
+             *
+             */}
+              <Row gutter={formGutter}>
+                <Col span={standardSpan}>
+                  <Form.Item {...formItemProps.yog}>
+                    <Input placeholder="(e.g.) 2021, 2022, etc." />
+                  </Form.Item>
+                </Col>
+              </Row>
+
+              {/**
+             *
+             * Weighted and Unweighted GPAs
+             *
+             */}
+              <Row gutter={formGutter}>
+                <Col span={halfSpan}>
+                  <Form.Item {...formItemProps.unweightedGPA}>
+                    <Input placeholder="4.0" />
+                  </Form.Item>
+                </Col>
+                <Col span={halfSpan}>
+                  <Form.Item {...formItemProps.weightedGPA}>
+                    <Input placeholder="4.7/5.0" />
+                  </Form.Item>
+                </Col>
+              </Row>
+
+              {/**
+             *
+             * Relevant Courses
+             *
+             */}
+              <Row gutter={formGutter}>
+                <Col span={standardSpan}>
+                  <Form.Item {...formItemProps.courses}>
+                    <Input.TextArea
+                      placeholder="(e.g.) Business Communications, AP Computer Science, etc."
+                      style={{ height: "100px" }}
+                    />
+                  </Form.Item>
+                </Col>
+              </Row>
+
+              {/**
+            Extracurriculars
+            CHANGE REQUIRED: Switch to a standardized input format
+            */}
+              <Row gutter={formGutter}>
+                <Col span={standardSpan}>
+                  <Form.Item {...formItemProps.extracurriculars}>
+                    <Input.TextArea
+                      placeholder="(e.g.) Speech and Debate (3), DECA (4), HOSA (2), Student Council (2)"
+                      style={{ height: "100px" }}
+                    />
+                  </Form.Item>
+                </Col>
+              </Row>
+
+              {/**
+             *
+             * Day and Time Willing to Work
+             *
+             */}
+              <Row gutter={formGutter}>
+                <Col span={halfSpan}>
+                  <Form.Item {...formItemProps.daysToWork}>
+                    <Select
+                      mode="multiple"
+                      placeholder="Please select the days where you can work"
+                    >
+                      {daysOfTheWeek.map((day) => (
+                        <Option key={day} value={day}>
+                          {day}
+                        </Option>
+                      ))}
+                    </Select>
+                  </Form.Item>
+                </Col>
+                <Col span={halfSpan}>
+                  <Form.Item {...formItemProps.timesToWork}>
+                    <Select
+                      mode="multiple"
+                      placeholder="Please select the times when you can work"
+                    >
+                      {timesOfTheDay.map((time) => (
+                        <Option key={time} value={time}>
+                          {time}
+                        </Option>
+                      ))}
+                    </Select>
+                  </Form.Item>
+                </Col>
+              </Row>
+
+              {/**
+             *
+             * Start and End Date
+             *
+             */}
+              <Row gutter={formGutter}>
+                <Col span={standardSpan}>
+                  <Form.Item {...formItemProps.dateOfStartAndEnd}>
+                    <RangePicker style={{ width: "100%" }} />
+                  </Form.Item>
+                </Col>
+              </Row>
+
+              {/**
+             *
+             * Willing to work Paid/Unpaid
+             *
+             */}
+              <Row gutter={formGutter}>
+                <Col span={standardSpan}>
+                  <Form.Item {...formItemProps.paidUnpaid}>
+                    <Radio.Group>
+                      {paidOrUnpaid.map((choice) => (
+                        <Radio key={choice} value={choice}>
+                          {choice}
+                        </Radio>
+                      ))}
+                    </Radio.Group>
+                  </Form.Item>
+                </Col>
+              </Row>
+
+              {/**
+             *
+             * Upload Resume
+             *
+             */}
+              <Form.Item {...formItemProps.resume}>
+                <Dragger
+                  {...props}
+                  style={{ width: "250px", height: "30px" }}
+                  customRequest={this.customRequestResume}
+                  onChange={this.onChange}
+                  fileList={this.state.fileList}
+                >
+                  <h1 style={{ color: "#69c0ff" }}>
+                    <InboxOutlined />
+                  </h1>
+                  <h5>Click or Drag Files to Upload Here</h5>
+                </Dragger>
+              </Form.Item>
+
+              {/**
+             *
+             * "Save and Continue" Button
+             *
+             */}
+              <Form.Item>
+                <Button className="next-button" type="primary" htmlType="submit">
+                  Save and Continue
+              </Button>
+              </Form.Item>
+            </Form>
+          </React.Fragment>
+        }
+
       </div>
     );
   }
