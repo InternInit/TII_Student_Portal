@@ -17,7 +17,7 @@ const ContentStyle = {
     height: "100%",
     flexDirection: "column",
     alignItems: "center",
-    backgroundColor: "#eff4f5"
+    backgroundColor: "#EBEFF2"
 }
 
 const PageStyle = {

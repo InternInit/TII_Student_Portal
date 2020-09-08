@@ -40,7 +40,7 @@ class DashboardNavBar extends Component {
         <Menu
           className="dashboard-nav"
           defaultSelectedKeys={[this.getCurrentKey()]}
-          style={{ backgroundColor: "#eff4f5" }}
+          style={{ backgroundColor: "#EBEFF2" }}
           mode="horizontal"
         >
           {/**

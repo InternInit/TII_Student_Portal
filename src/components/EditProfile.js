@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 
 import {
@@ -11,12 +11,12 @@ import {
   Avatar,
   Form,
   Popover,
-  Badge,
   Row as AntRow,
   Col as AntCol,
 } from "antd";
 
-import { CloseOutlined, UserOutlined, EditOutlined } from "@ant-design/icons";
+import { CloseOutlined, UserOutlined, CameraOutlined } from "@ant-design/icons";
+import { FiTrash2 } from "react-icons/fi";
 
 import { connect } from "react-redux";
 import {
@@ -41,27 +41,27 @@ import "./dashboard/dashboard.css";
 const ModuleContainer = styled.div`
   background: white;
   border-radius: 10px;
-  padding: 5% 10% 5% 10%;
+  padding: 5% 7% 5% 7%;
+  border: 1px solid #e2e8ed;
+  box-shadow: 0 0 6px -4px;
   width: 70%;
 `;
 
 const Heading = styled.div`
   font-weight: bold;
   font-family: Lato;
-  font-size: 36px;
+  font-size: 28px;
   display: flex;
   justify-content: center;
-  color: black;
+  padding-bottom: 3%;
+  color: #bfbfbf;
 `;
 
-const ProfileBox = styled.div`
-  background-color: #f5f5f5;
-  width: 70%;
-  flex-direction: column;
-  align-items: center;
-  display: flex;
-  margin-top: 40px;
-  padding-bottom: 36px;
+const ProfileCard = styled.div`
+  background-color: white;
+  border-radius: 15px;
+  box-shadow: 0 0 6px -4px;
+  padding: 2%;
 `;
 
 const UserInfo = styled.div`
@@ -88,10 +88,22 @@ const ChangeInfo = styled.a`
   width: 80%;
 `;
 
-const Header = styled.div`
+const Header = styled.span`
+  display: flex;
+  justify-contents: left;
+  vertical-align: top;
+  font-size: 24px;
+  font-family: Lato;
   font-weight: 500;
+  color: #262626;
+`;
+
+const HeaderEmail = styled.span`
+  display: flex;
+  justify-content: center;
   color: #595959;
-  margin-top: 50px;
+  font-size: 12px;
+  margin-bottom: 7%;
 `;
 
 const Row = styled.div`
@@ -193,81 +205,54 @@ class EditProfile extends React.Component {
           display: "flex",
           padding: "30px",
           justifyContent: "center",
-          backgroundColor: "#F5F5F5",
+          backgroundColor: "#EBEFF2",
           minHeight: "100vh",
           minWidth: "650px",
         }}
       >
         <ModuleContainer>
-          <Heading className="twentyEightFont">Profile Details</Heading>
+          <Heading className="twentyEightFont"> My Profile</Heading>
 
           {/**
            *
            * Box with Profile Picture
            *
            */}
-          {/**
-           *
-           * Picture + Name
-           *
-           */}
-          <AntRow
-            style={{ float: "left", width: "100%", backgroundColor: "white" }}
-          >
-            <AntCol span={4}>
-                  
-              <Upload
-                listType="text"
-                customRequest={this.customUploadRequest}
-                beforeUpload={beforeUpload}
-                onChange={this.handleChange}
-                showUploadList={false}
-                accept=".jpg, .jpeg, image/jpeg, .png, image/png"
-              >
-                <Avatar
-                    size={90}
+          <AntRow>
+            <AntCol span={24}>
+              <ProfileCard>
+                <AntRow gutter={[16, 16]}>
+                  <AntCol span={4}>
+                  <Avatar
+                    size={80}
                     icon={<UserOutlined />}
                     src={this.props.userInfo.avatar}
                   />
-              </Upload>
-            </AntCol>
-            <AntCol style={{ textAlign: "left" }} span={20}>
-              <h1>{username}</h1>
-              <Button shape="round">Change Profile Picture</Button>
-              <Header className="twentyEightFont">{username}</Header>
-            </AntCol>
-          </AntRow>
-
-          {/**
-           *
-           * Change Profile Picture
-           *
-           */}
-          <AntRow style={{ width: "100%" }}>
-            <AntCol span={24}>
-              {/**
-               *
-               * Buttons to add picture/remove current
-               *
-               */}
-              <Upload
-                listType="text"
-                customRequest={this.customUploadRequest}
-                beforeUpload={beforeUpload}
-                onChange={this.handleChange}
-                showUploadList={false}
-                accept=".jpg, .jpeg, image/jpeg, .png, image/png"
-              >
-                <Button type="primary" className="profile-button-style">
-                  Change Profile Picture
-                </Button>
-              </Upload>
-              <Button
-                className="profile-button-style"
-                onClick={this.customRemoveRequest}
-              >
-                Remove Current
-              </Button>
+                  </AntCol>
+                  <AntCol span={20} style={{marginRight: "auto"}}>
+                  <Header>{username}</Header>
+                  <Upload
+                    listType="text"
+                    customRequest={this.customUploadRequest}
+                    beforeUpload={beforeUpload}
+                    onChange={this.handleChange}
+                    showUploadList={false}
+                    accept=".jpg, .jpeg, image/jpeg, .png, image/png"
+                  >
+                    <Button shape="round" type="primary">
+                      <CameraOutlined /> Change Avatar
+                    </Button>
+                  </Upload>
+                  <Button
+                    shape="circle"
+                    style={{ marginLeft: "2%"}}
+                    onClick={this.customRemoveRequest}
+                  >
+                    <FiTrash2 style={{ verticalAlign: "middle" }} size={14} />
+                  </Button>
+                  </AntCol>
+                </AntRow>
+              </ProfileCard>
             </AntCol>
           </AntRow>
 
@@ -276,6 +261,15 @@ class EditProfile extends React.Component {
            * User Information
            *
            */}
+          <Header
+            style={{
+              justifyContent: "left",
+              marginTop: "0",
+              marginBottom: "-3%",
+            }}
+          >
+            Edit Profile
+          </Header>
           <AntRow>
             <AntCol span={24}>
               <UserInfo style={{ marginTop: "36px" }} className="eighteenFont">
@@ -317,7 +311,7 @@ class EditProfile extends React.Component {
                 School Code: <Info className="eighteenFont">{schoolCode}</Info>
               </UserInfo>
               <ChangeInfo onClick={() => this.showModal("School Code")}>
-                Change School Code
+                {schoolCode ? "Change school code" : "Add school code"}
               </ChangeInfo>
             </AntCol>
           </AntRow>
