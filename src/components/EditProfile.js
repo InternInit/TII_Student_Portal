@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 
 import {
@@ -11,9 +11,15 @@ import {
   Avatar,
   Form,
   Popover,
+  Row as AntRow,
+  Col as AntCol,
+  Card,
 } from "antd";
 
-import { CloseOutlined, UserOutlined } from "@ant-design/icons";
+import { CloseOutlined, UserOutlined, CameraOutlined } from "@ant-design/icons";
+import { FaCamera } from "react-icons/fa";
+import { FiTrash2 } from "react-icons/fi";
+import EditProfileBackground from "../EditProfileBackground.jpg";
 
 import { connect } from "react-redux";
 import {
@@ -36,30 +42,21 @@ import "./dashboard/dashboard.css";
 //============================================================================================================
 
 const ModuleContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   background: white;
   border-radius: 10px;
-  padding: 3%;
+  padding: 5% 7% 5% 7%;
+  border: 1px solid #e2e8ed;
+  box-shadow: 0 0 6px -4px;
   width: 70%;
 `;
 
 const Heading = styled.div`
   font-weight: bold;
+  font-family: Lato;
+  font-size: 28px;
   display: flex;
-  justify-content: align-left;
-  color: #595959;
-`;
-
-const ProfileBox = styled.div`
-  background-color: #f5f5f5;
-  width: 70%;
-  flex-direction: column;
-  align-items: center;
-  display: flex;
-  margin-top: 40px;
-  padding-bottom: 36px;
+  justify-content: center;
+  color: #bfbfbf;
 `;
 
 const UserInfo = styled.div`
@@ -86,10 +83,24 @@ const ChangeInfo = styled.a`
   width: 80%;
 `;
 
-const Header = styled.div`
-  font-weight: 500;
+const Header = styled.span`
+  display: block;
+  text-align: center;
+  vertical-align: top;
+  font-size: 36px;
+  font-family: Lato;
+  font-weight: bold;
+  margin-left: 7vh;
+  margin-top: 20px;
+  color: #262626;
+`;
+
+const HeaderEmail = styled.span`
+  display: flex;
+  justify-content: left;
+  margin-left: 7vh;
   color: #595959;
-  margin-top: 50px;
+  font-size: 16px;
 `;
 
 const Row = styled.div`
@@ -191,177 +202,175 @@ class EditProfile extends React.Component {
           display: "flex",
           padding: "30px",
           justifyContent: "center",
-          backgroundColor: "#F5F5F5",
+          backgroundColor: "#EBEFF2",
           minHeight: "100vh",
           minWidth: "650px",
         }}
       >
-        <ModuleContainer>
-          <Heading style={{ marginLeft: "18px" }} className="twentyEightFont">
-            Profile Details
-          </Heading>
-
+        <Card
+          className="edit-profile-card"
+          style={{ width: "70%", borderRadius: "15px" }}
+          cover={
+            <img
+              className="edit-profile-card-cover"
+              src={EditProfileBackground}
+              alt="Background"
+            />
+          }
+        >
           {/**
            *
            * Box with Profile Picture
            *
            */}
-          <ProfileBox>
-            {/**
-             *
-             * Picture + Name
-             *
-             */}
-            <Row style={{ alignSelf: "flex-start", display: "flex" }}>
-              <Avatar
-                size={54}
-                icon={<UserOutlined />}
-                src={this.props.userInfo.avatar}
-                style={{ marginLeft: "24px", marginTop: "24px" }}
-              />
-              <Header
-                className="twentyEightFont"
-                style={{
-                  marginLeft: "15px",
-                  marginTop: "24px",
-                  padding: "0px",
-                }}
-                className="thirtySixFont"
-              >
-                {username}
-              </Header>
-            </Row>
-
-            {/**
-             *
-             * Change Profile Picture
-             *
-             */}
-            <h2 style={{ fontWeight: "500" }}>Change Profile Picture</h2>
-            <Row
-              style={{
-                display: "flex",
-                justifyContent: "space-evenly",
-                width: "60%",
-              }}
-            >
-              {/**
-               *
-               * Buttons to add picture/remove current
-               *
-               */}
-              <Upload
-                listType="text"
-                customRequest={this.customUploadRequest}
-                beforeUpload={beforeUpload}
-                onChange={this.handleChange}
-                showUploadList={false}
-                accept=".jpg, .jpeg, image/jpeg, .png, image/png"
-              >
-                <Button type="primary" className="profile-button-style">
-                  Change Profile Picture
-                </Button>
-              </Upload>
+          <AntRow>
+            <div>
+              <div className="edit-profile-avatar-group">
+                <Avatar
+                  className="edit-profile-avatar"
+                  size={120}
+                  icon={<UserOutlined />}
+                  src={this.props.userInfo.avatar}
+                  style={{
+                    position: "absolute",
+                    top: "130px",
+                    left: "7%",
+                    border: "2px solid white",
+                  }}
+                />
+                <Popover
+                  placement="bottom"
+                  trigger="click"
+                  content={
+                    <div>
+                      <Upload
+                        className="upload-style"
+                        listType="text"
+                        customRequest={this.customUploadRequest}
+                        beforeUpload={beforeUpload}
+                        onChange={this.handleChange}
+                        showUploadList={false}
+                        accept=".jpg, .jpeg, image/jpeg, .png, image/png"
+                      >
+                        <span className="edit-profile-avatar-selection">
+                          Upload Photo
+                        </span>
+                      </Upload>
+                      <span onClick={this.customRemoveRequest} className="edit-profile-avatar-selection">
+                        Remove Avatar
+                      </span>
+                    </div>
+                  }
+                >
+                  <div className="edit-profile-change-profile-picture">
+                    <FaCamera className="edit-profile-change-profile-picture-icon" />
+                  </div>
+                </Popover>
+                {/*</Upload>*/}
+              </div>
+              <Header>{username}</Header>
+              <HeaderEmail>Student Account</HeaderEmail>
+              {/*<div style={{margin: "auto", marginTop: "10px"}}>
+              <div style={{ display: "inline-block" }}>
+                <Upload
+                  listType="text"
+                  customRequest={this.customUploadRequest}
+                  beforeUpload={beforeUpload}
+                  onChange={this.handleChange}
+                  showUploadList={false}
+                  accept=".jpg, .jpeg, image/jpeg, .png, image/png"
+                >
+                  <Button shape="round" type="primary">
+                    <CameraOutlined /> Change Avatar
+                  </Button>
+                </Upload>
+              </div>
               <Button
-                className="profile-button-style"
+                shape="circle"
+                style={{ marginLeft: "2%", display: "inline-block" }}
                 onClick={this.customRemoveRequest}
               >
-                Remove Current
+                <FiTrash2 style={{ verticalAlign: "middle" }} size={14} />
               </Button>
-            </Row>
-          </ProfileBox>
+              </div>*/}
+            </div>
+          </AntRow>
 
           {/**
            *
            * User Information
            *
            */}
-          <UserInfo style={{ marginTop: "36px" }} className="eighteenFont">
-            Display Name: <Info className="eighteenFont">{displayname} </Info>
-          </UserInfo>
-          <ChangeInfo onClick={() => this.showModal("Display Name")}>
-            Change display name
-          </ChangeInfo>
+          <div className="edit-profile-container">
+            <AntRow>
+              <AntCol span={24}>
+                <UserInfo
+                  style={{ marginTop: "36px" }}
+                  className="eighteenFont"
+                >
+                  Display Name:{" "}
+                  <Info className="eighteenFont">{displayname} </Info>
+                </UserInfo>
+                <ChangeInfo onClick={() => this.showModal("Display Name")}>
+                  Change display name
+                </ChangeInfo>
+              </AntCol>
+            </AntRow>
 
-          <UserInfo className="eighteenFont">
-            Password: <Info className="eighteenFont">{displayPassword}</Info>
-          </UserInfo>
-          <ChangeInfo onClick={() => this.showModal("Password")}>
-            Change password
-          </ChangeInfo>
+            <AntRow>
+              <AntCol span={24}>
+                <UserInfo className="eighteenFont">
+                  Password:{" "}
+                  <Info className="eighteenFont">{displayPassword}</Info>
+                </UserInfo>
+                <ChangeInfo onClick={() => this.showModal("Password")}>
+                  Change password
+                </ChangeInfo>
+              </AntCol>
+            </AntRow>
 
-          <UserInfo className="eighteenFont">
-            E-mail: <Info className="eighteenFont">{email}</Info>
-          </UserInfo>
-          <ChangeInfo onClick={() => this.showModal("E-Mail")}>
-            Change e-mail
-          </ChangeInfo>
+            <AntRow>
+              <AntCol span={24}>
+                <UserInfo className="eighteenFont">
+                  E-mail: <Info className="eighteenFont">{email}</Info>
+                </UserInfo>
+                <ChangeInfo onClick={() => this.showModal("E-Mail")}>
+                  Change e-mail
+                </ChangeInfo>
+              </AntCol>
+            </AntRow>
 
-          <UserInfo className="eighteenFont">
-            School Code: <Info className="eighteenFont">{schoolCode}</Info>
-          </UserInfo>
-          <ChangeInfo onClick={() => this.showModal("School Code")}>
-            Change School Code
-          </ChangeInfo>
+            <AntRow justify="start">
+              <AntCol span={24}>
+                <UserInfo className="eighteenFont">
+                  School Code:{" "}
+                  <Info className="eighteenFont">{schoolCode}</Info>
+                </UserInfo>
+                <ChangeInfo onClick={() => this.showModal("School Code")}>
+                  {schoolCode ? "Change school code" : "Add school code"}
+                </ChangeInfo>
+              </AntCol>
+            </AntRow>
 
-          {/**
-           *
-           * Password Change Modal
-           *
-           */}
-          <Modal
-            title="Change Password"
-            visible={passwordVisible}
-            onOk={() => this.handleOk(modalTitle)}
-            confirmLoading={confirmLoading}
-            onCancel={this.handleCancel}
-          >
-            <Form ref={this.formRef}>
-              <Form.Item
-                name="oldPassword"
-                rules={[
-                  {
-                    required: true,
-                    message: "Please enter your old password",
-                  },
-                  ({ getFieldValue }) => ({
-                    validator(rule, value) {
-                      let errors = schema.validate(value, { list: true });
-
-                      function getValidationMessage(errors) {
-                        for (let i = 0; i < errors.length; i++) {
-                          if (errors[i] === "min") {
-                            return "Password length should be at least 8 characters";
-                          }
-                        }
-                      }
-
-                      if (typeof getValidationMessage(errors) == "undefined") {
-                        return Promise.resolve();
-                      }
-
-                      return Promise.reject(getValidationMessage(errors));
-                    },
-                  }),
-                ]}
-              >
-                <Input.Password
-                  placeholder="Enter Old Password"
-                  style={{ marginTop: "12px" }}
-                />
-              </Form.Item>
-              <Popover
-                placement="right"
-                title={title}
-                content={passwordPolicyContent}
-                trigger="focus"
-              >
+            {/**
+             *
+             * Password Change Modal
+             *
+             */}
+            <Modal
+              title="Change Password"
+              visible={passwordVisible}
+              onOk={() => this.handleOk(modalTitle)}
+              confirmLoading={confirmLoading}
+              onCancel={this.handleCancel}
+            >
+              <Form ref={this.formRef}>
                 <Form.Item
-                  name="newPassword"
+                  name="oldPassword"
                   rules={[
                     {
                       required: true,
-                      message: "Please enter your password",
+                      message: "Please enter your old password",
                     },
                     ({ getFieldValue }) => ({
                       validator(rule, value) {
@@ -371,14 +380,6 @@ class EditProfile extends React.Component {
                           for (let i = 0; i < errors.length; i++) {
                             if (errors[i] === "min") {
                               return "Password length should be at least 8 characters";
-                            } else if (errors[i] === "lowercase") {
-                              return "Password should contain lowercase letters";
-                            } else if (errors[i] === "uppercase") {
-                              return "Password should contain uppercase letters";
-                            } else if (errors[i] === "digits") {
-                              return "Password should contain digits";
-                            } else if (errors[i] === "symbols") {
-                              return "Password should contain symbols";
                             }
                           }
                         }
@@ -395,74 +396,124 @@ class EditProfile extends React.Component {
                   ]}
                 >
                   <Input.Password
-                    placeholder="Enter New Password"
-                    style={{ marginTop: "14px" }}
+                    placeholder="Enter Old Password"
+                    style={{ marginTop: "12px" }}
                   />
                 </Form.Item>
-              </Popover>
-              <Form.Item
-                name="confirmPassword"
-                rules={[
-                  {
-                    required: true,
-                    message: "Please confirm your password!",
-                  },
-                  ({ getFieldValue }) => ({
-                    validator(rule, value) {
-                      if (!value || getFieldValue("newPassword") === value) {
-                        return Promise.resolve();
-                      }
+                <Popover
+                  placement="right"
+                  title={title}
+                  content={passwordPolicyContent}
+                  trigger="focus"
+                >
+                  <Form.Item
+                    name="newPassword"
+                    rules={[
+                      {
+                        required: true,
+                        message: "Please enter your password",
+                      },
+                      ({ getFieldValue }) => ({
+                        validator(rule, value) {
+                          let errors = schema.validate(value, { list: true });
 
-                      return Promise.reject(
-                        "The two passwords that you entered do not match!"
-                      );
+                          function getValidationMessage(errors) {
+                            for (let i = 0; i < errors.length; i++) {
+                              if (errors[i] === "min") {
+                                return "Password length should be at least 8 characters";
+                              } else if (errors[i] === "lowercase") {
+                                return "Password should contain lowercase letters";
+                              } else if (errors[i] === "uppercase") {
+                                return "Password should contain uppercase letters";
+                              } else if (errors[i] === "digits") {
+                                return "Password should contain digits";
+                              } else if (errors[i] === "symbols") {
+                                return "Password should contain symbols";
+                              }
+                            }
+                          }
+
+                          if (
+                            typeof getValidationMessage(errors) == "undefined"
+                          ) {
+                            return Promise.resolve();
+                          }
+
+                          return Promise.reject(getValidationMessage(errors));
+                        },
+                      }),
+                    ]}
+                  >
+                    <Input.Password
+                      placeholder="Enter New Password"
+                      style={{ marginTop: "14px" }}
+                    />
+                  </Form.Item>
+                </Popover>
+                <Form.Item
+                  name="confirmPassword"
+                  rules={[
+                    {
+                      required: true,
+                      message: "Please confirm your password!",
                     },
-                  }),
-                ]}
-              >
-                <Input.Password
-                  placeholder="Confirm New password"
-                  style={{ marginTop: "12px" }}
-                />
-              </Form.Item>
-            </Form>
-          </Modal>
+                    ({ getFieldValue }) => ({
+                      validator(rule, value) {
+                        if (!value || getFieldValue("newPassword") === value) {
+                          return Promise.resolve();
+                        }
 
-          {/**
-           *
-           * Change information Modal (excludes Password change)
-           *
-           */}
-          <Modal
-            title={"Change " + modalTitle}
-            visible={visible}
-            onOk={() => this.handleOk(modalTitle)}
-            confirmLoading={confirmLoading}
-            onCancel={this.handleCancel}
-          >
-            <Input
-              placeholder={"Enter New " + modalTitle}
-              allowClear="true"
-              value={currentMValue}
-              onChange={(value) => this.handleEnter(value)}
-              onSearch={(value) => this.handleEnter(value)}
-            />
-          </Modal>
+                        return Promise.reject(
+                          "The two passwords that you entered do not match!"
+                        );
+                      },
+                    }),
+                  ]}
+                >
+                  <Input.Password
+                    placeholder="Confirm New password"
+                    style={{ marginTop: "12px" }}
+                  />
+                </Form.Item>
+              </Form>
+            </Modal>
 
-          {/**
-           *
-           * Save and Cancel button
-           *
-           */}
-          <Row
-            style={{
-              alignSelf: "flex-end",
-              justifyContent: "space-evenly",
-              width: "50%",
-              marginTop: "24px",
-            }}
-          ></Row>
-        </ModuleContainer>
+            {/**
+             *
+             * Change information Modal (excludes Password change)
+             *
+             */}
+            <Modal
+              title={"Change " + modalTitle}
+              visible={visible}
+              onOk={() => this.handleOk(modalTitle)}
+              confirmLoading={confirmLoading}
+              onCancel={this.handleCancel}
+            >
+              <Input
+                placeholder={"Enter New " + modalTitle}
+                allowClear="true"
+                value={currentMValue}
+                onChange={(value) => this.handleEnter(value)}
+                onSearch={(value) => this.handleEnter(value)}
+              />
+            </Modal>
+
+            {/**
+             *
+             * Save and Cancel button
+             *
+             */}
+            <Row
+              style={{
+                alignSelf: "flex-end",
+                justifyContent: "space-evenly",
+                width: "50%",
+                marginTop: "24px",
+              }}
+            ></Row>
+          </div>
+        </Card>
       </div>
     );
   }
