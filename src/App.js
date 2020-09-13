@@ -44,6 +44,7 @@ import {
   updateEmail,
   updateId,
   updateVersion,
+  updateCheckedIndustries,
   updatePinnedBusinesses,
   updateActiveApplications,
   updateCompletionState,
@@ -105,6 +106,7 @@ const mapDispatchToProps = {
   updateEmail,
   updateId,
   updateVersion,
+  updateCheckedIndustries,
   updatePinnedBusinesses,
   updateActiveApplications,
   updateCompletionState,
@@ -189,6 +191,9 @@ class App extends Component {
             this.props.completionChecklist
           ),
           Version: JSON.stringify(this.props.userInfo.version),
+          "Checked-Industries": JSON.stringify(
+            this.props.userInfo.checkedIndustries
+          ),
         },
         body: JSON.stringify(values) + "#" + origin,
       })
@@ -215,6 +220,9 @@ class App extends Component {
             this.props.completionChecklist
           ),
           Version: JSON.stringify(this.props.userInfo.version),
+          "Checked-Industries": JSON.stringify(
+            this.props.userInfo.checkedIndustries
+          ),
         },
         body: JSON.stringify(values) + "#" + origin + "#" + "submit",
       })
@@ -435,6 +443,7 @@ class App extends Component {
           this.props.batchUpdateCompletionState(recvCompletionState);
           this.props.batchUpdateCompletionChecklist(recvCompletionChecklist);
           this.props.updateVersion(parsedRecv.version);
+          this.props.updateCheckedIndustries(parsedRecv.checkedIndustries);
         } else {
           this.props.batchUpdateCompletionState([0, 0, 0, 0]);
           this.props.batchUpdateCompletionChecklist(defaultChecklist);
@@ -609,6 +618,7 @@ class App extends Component {
                 <Dashboard
                   version={this.state.version}
                   updateBusinessStatus={this.updateBusinessStatus}
+                  updateData={this.updateData}
                 />
               )}
             />
