@@ -177,6 +177,9 @@ class AddCompanies extends React.Component {
                               <Checkbox
                                 key={industry}
                                 value={industry}
+                                disabled={this.props.checkedIndustries.includes(
+                                  industry
+                                )}
                                 style={{
                                   lineHeight: "32px",
                                   marginLeft: "25%",
