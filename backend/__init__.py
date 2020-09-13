@@ -78,7 +78,7 @@ def update_user_data():
     headers = request.headers
     print(type(request.headers.get("Authorization")), request.headers.get("Authorization"))
     #req = requests.post(apiUrl, headers=request.headers,data = info)
-    req = requests.post(cacheApiUrl, headers = {"Authorization" : headers.get("Authorization"), "Completion-State" : headers.get("Completion-State"), "Completion-Checklist" : headers.get("Completion-Checklist"), "Version": headers.get("Version")}, json = info)
+    req = requests.post(cacheApiUrl, headers = {"Authorization" : headers.get("Authorization"), "Completion-State" : headers.get("Completion-State"), "Completion-Checklist" : headers.get("Completion-Checklist"), "Version": headers.get("Version"), "Checked-Industries": headers.get("Checked-Industries")}, json = info)
     return req.text
 
 @app.route("/api/upload_user_files", methods=["POST"])

@@ -55,41 +55,6 @@ const industry = [
   "Marketing",
 ];
 
-let Businesses = [
-  { name: "Apple", industry: "Computer Science" },
-  { name: "Facebook", industry: "Computer Science" },
-  { name: "Github", industry: "Computer Science" },
-  { name: "Grindr", industry: "Consulting" },
-  { name: "Grubhub", industry: "Real Estate" },
-  { name: "Hello Brandon", industry: "Media or Tellecommunications" },
-  { name: "Hubspot", industry: "Marketing" },
-  { name: "Joseph Zhang", industry: "General Business" },
-  { name: "LinkedIn", industry: "General Business" },
-  { name: "Microsoft", industry: "Computer Science" },
-  { name: "NASA", industry: "Engineering" },
-  { name: "Netflix", industry: "Media or Tellecommunications" },
-  { name: "qgy type letters", industry: "Political" },
-  { name: "Tesla", industry: "Biotechnology" },
-  { name: "Tinder", industry: "Vocational" },
-  { name: "Desk", industry: "Political" },
-  { name: "Table", industry: "Marketing" },
-  { name: "Chair", industry: "Political" },
-  { name: "Mouse", industry: "Real Estate" },
-  { name: "Mousepad", industry: "Finance or Accounting" },
-  { name: "Moniter", industry: "Media or Tellecommunications" },
-  { name: "Laptop", industry: "Consulting" },
-  { name: "Charger", industry: "Computer Science" },
-  { name: "iPhone 8", industry: "Real Estate" },
-  { name: "Brandon Lu", industry: "Engineering" },
-  { name: "dwasdwasdwas", industry: "Science Research" },
-  { name: "Poop", industry: "General Business" },
-  { name: "Hehehehe", industry: "Vocational" },
-  { name: "Hahahaha", industry: "Biotechnology" },
-  { name: "WHOOOOOO", industry: "Consulting" },
-  { name: "Company Name", industry: "Finance or Accounting" },
-  { name: "lets GO", industry: "Political" },
-];
-
 let Info = [];
 
 class AddCompanies extends React.Component {
@@ -195,6 +160,7 @@ class AddCompanies extends React.Component {
                   <AntRow gutter={formGutter}>
                     <AntCol span={standardSpan}>
                       <Checkbox.Group
+                        value={this.props.checkedIndustries}
                         onChange={(value) => {
                           this.addConfirmIndustry(value);
                         }}
@@ -211,6 +177,9 @@ class AddCompanies extends React.Component {
                               <Checkbox
                                 key={industry}
                                 value={industry}
+                                disabled={this.props.checkedIndustries.includes(
+                                  industry
+                                )}
                                 style={{
                                   lineHeight: "32px",
                                   marginLeft: "25%",
@@ -377,6 +346,7 @@ class AddCompanies extends React.Component {
   };
   confirmIndustry = () => {
     this.setState({ visible: false });
+    this.props.updateData({}, -1);
     notification.open({
       //notification
       message: "Success!",
@@ -388,6 +358,8 @@ class AddCompanies extends React.Component {
   addConfirmIndustry = (event) => {
     let { sendingIndustries } = this.state;
     this.setState({ sendingIndustries: event });
+    //console.log(event);
+    this.props.updateCheckedIndustries(event);
   };
 
   //handles pagination bar change
