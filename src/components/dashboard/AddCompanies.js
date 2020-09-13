@@ -160,7 +160,7 @@ class AddCompanies extends React.Component {
                   <AntRow gutter={formGutter}>
                     <AntCol span={standardSpan}>
                       <Checkbox.Group
-                        defaultValue={this.props.checkedIndustries}
+                        value={this.props.checkedIndustries}
                         onChange={(value) => {
                           this.addConfirmIndustry(value);
                         }}
