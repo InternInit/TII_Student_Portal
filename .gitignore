@@ -23,10 +23,7 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-#Custom config files
-#flaskEnvSetup.sh
-
-#Python
+# Python
 /backend/__pycache__
 /env
 /venv
@@ -36,7 +33,7 @@ yarn-error.log*
 /backend/virtual-environment
 *.pyc
 
-#amplify
+# Amplify
 amplify/\#current-cloud-backend
 amplify/.config/local-*
 amplify/mock-data
@@ -51,3 +48,14 @@ amplifyconfiguration.json
 amplify-build-config.json
 amplify-gradle-config.json
 amplifytools.xcconfig
+
+# VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+
+# Local History for Visual Studio Code
+.history/
