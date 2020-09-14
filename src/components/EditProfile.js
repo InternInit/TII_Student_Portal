@@ -34,6 +34,7 @@ import { Auth } from "aws-amplify";
 
 import "../App.css";
 import "./dashboard/dashboard.css";
+import "./EditProfile.scss";
 
 //============================================================================================================
 //
@@ -48,15 +49,6 @@ const ModuleContainer = styled.div`
   border: 1px solid #e2e8ed;
   box-shadow: 0 0 6px -4px;
   width: 70%;
-`;
-
-const Heading = styled.div`
-  font-weight: bold;
-  font-family: Lato;
-  font-size: 28px;
-  display: flex;
-  justify-content: center;
-  color: #bfbfbf;
 `;
 
 const UserInfo = styled.div`
@@ -239,24 +231,30 @@ class EditProfile extends React.Component {
                   }}
                 />
                 <Popover
+                  className="popover"
                   placement="bottom"
                   trigger="click"
                   content={
                     <div>
-                      <Upload
-                        className="upload-style"
-                        listType="text"
-                        customRequest={this.customUploadRequest}
-                        beforeUpload={beforeUpload}
-                        onChange={this.handleChange}
-                        showUploadList={false}
-                        accept=".jpg, .jpeg, image/jpeg, .png, image/png"
+                      <span className="edit-profile-avatar-selection">
+                        <Upload
+                          className="upload-style"
+                          listType="text"
+                          customRequest={this.customUploadRequest}
+                          beforeUpload={beforeUpload}
+                          onChange={this.handleChange}
+                          showUploadList={false}
+                          accept=".jpg, .jpeg, image/jpeg, .png, image/png"
+                        >
+                          <span className="upload-photo-custom-styles">
+                            Upload Photo
+                          </span>
+                        </Upload>
+                      </span>
+                      <span
+                        onClick={this.customRemoveRequest}
+                        className="edit-profile-avatar-selection remove-avatar"
                       >
-                        <span className="edit-profile-avatar-selection">
-                          Upload Photo
-                        </span>
-                      </Upload>
-                      <span onClick={this.customRemoveRequest} className="edit-profile-avatar-selection">
                         Remove Avatar
                       </span>
                     </div>
@@ -270,29 +268,6 @@ class EditProfile extends React.Component {
               </div>
               <Header>{username}</Header>
               <HeaderEmail>Student Account</HeaderEmail>
-              {/*<div style={{margin: "auto", marginTop: "10px"}}>
-              <div style={{ display: "inline-block" }}>
-                <Upload
-                  listType="text"
-                  customRequest={this.customUploadRequest}
-                  beforeUpload={beforeUpload}
-                  onChange={this.handleChange}
-                  showUploadList={false}
-                  accept=".jpg, .jpeg, image/jpeg, .png, image/png"
-                >
-                  <Button shape="round" type="primary">
-                    <CameraOutlined /> Change Avatar
-                  </Button>
-                </Upload>
-              </div>
-              <Button
-                shape="circle"
-                style={{ marginLeft: "2%", display: "inline-block" }}
-                onClick={this.customRemoveRequest}
-              >
-                <FiTrash2 style={{ verticalAlign: "middle" }} size={14} />
-              </Button>
-              </div>*/}
             </div>
           </AntRow>
 
