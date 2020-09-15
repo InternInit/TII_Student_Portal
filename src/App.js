@@ -45,6 +45,7 @@ import {
   updateId,
   updateVersion,
   updateCheckedIndustries,
+  updateDisabledIndustries,
   updatePinnedBusinesses,
   updateActiveApplications,
   updateCompletionState,
@@ -107,6 +108,7 @@ const mapDispatchToProps = {
   updateId,
   updateVersion,
   updateCheckedIndustries,
+  updateDisabledIndustries,
   updatePinnedBusinesses,
   updateActiveApplications,
   updateCompletionState,
@@ -192,7 +194,9 @@ class App extends Component {
           ),
           Version: JSON.stringify(this.props.userInfo.version),
           "Checked-Industries": JSON.stringify(
-            this.props.userInfo.checkedIndustries
+            this.props.userInfo.checkedIndustries.concat(
+              this.props.userInfo.disabledIndustries
+            )
           ),
         },
         body: JSON.stringify(values) + "#" + origin,
@@ -200,6 +204,12 @@ class App extends Component {
         .then((response) => response.json())
         .then((data) => {
           console.log("Sent: " + data);
+          this.props.updateDisabledIndustries(
+            this.props.userInfo.checkedIndustries.concat(
+              this.props.userInfo.disabledIndustries
+            )
+          );
+          this.props.updateCheckedIndustries([]);
         });
     } else if (this.state.submissionState === false) {
       console.log("Submission disabled");
@@ -443,7 +453,7 @@ class App extends Component {
           this.props.batchUpdateCompletionState(recvCompletionState);
           this.props.batchUpdateCompletionChecklist(recvCompletionChecklist);
           this.props.updateVersion(parsedRecv.version);
-          this.props.updateCheckedIndustries(parsedRecv.checkedIndustries);
+          this.props.updateDisabledIndustries(parsedRecv.checkedIndustries);
         } else {
           this.props.batchUpdateCompletionState([0, 0, 0, 0]);
           this.props.batchUpdateCompletionChecklist(defaultChecklist);

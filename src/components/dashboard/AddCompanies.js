@@ -177,7 +177,7 @@ class AddCompanies extends React.Component {
                               <Checkbox
                                 key={industry}
                                 value={industry}
-                                disabled={this.props.checkedIndustries.includes(
+                                disabled={this.props.disabledIndustries.includes(
                                   industry
                                 )}
                                 style={{
@@ -200,6 +200,9 @@ class AddCompanies extends React.Component {
                       type="primary"
                       style={{ margin: "auto" }}
                       onClick={this.showModal}
+                      disabled={
+                        this.props.checkedIndustries.length === 0 ? true : false
+                      }
                     >
                       Send my application to these industries
                     </Button>
@@ -225,7 +228,7 @@ class AddCompanies extends React.Component {
                   Your application will be sent to the following industries:
                 </strong>
               </p>
-              {this.state.sendingIndustries.map((industry) => (
+              {this.props.checkedIndustries.map((industry) => (
                 <p>{industry}</p>
               ))}
 
