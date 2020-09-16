@@ -9,6 +9,7 @@ const userInfoReducer = (
     pinnedBusinesses: [],
     activeApplications: [],
     checkedIndustries: [],
+    disabledIndustries: [],
   },
   action
 ) => {
@@ -48,6 +49,10 @@ const userInfoReducer = (
     case "UPDATE_CHECKED_INDUSTRIES":
       return Object.assign({}, state, {
         checkedIndustries: action.checkedIndustries,
+      });
+    case "UPDATE_DISABLED_INDUSTRIES":
+      return Object.assign({}, state, {
+        disabledIndustries: action.disabledIndustries,
       });
     default:
       return state;

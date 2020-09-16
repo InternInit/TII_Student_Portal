@@ -3,4 +3,4 @@
 SET FLASK_APP=backend
 SET FLASK_ENV=development
 SET FLASK_DEBUG=1
-python3 -m flask run
+python -m flask run

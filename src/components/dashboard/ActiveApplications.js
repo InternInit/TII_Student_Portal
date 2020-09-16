@@ -50,7 +50,7 @@ class ActiveApplications extends Component {
                 style={{ margin: "auto" }}
                 className="twentyFourFont"
               >
-                You do not have any awaiting applications.
+                You do not have any active applications.
               </DescriptorText>
             </AntRow>
           </ModuleContainer>
