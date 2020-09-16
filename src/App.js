@@ -44,6 +44,8 @@ import {
   updateEmail,
   updateId,
   updateVersion,
+  updateCheckedIndustries,
+  updateDisabledIndustries,
   updatePinnedBusinesses,
   updateActiveApplications,
   updateCompletionState,
@@ -105,6 +107,8 @@ const mapDispatchToProps = {
   updateEmail,
   updateId,
   updateVersion,
+  updateCheckedIndustries,
+  updateDisabledIndustries,
   updatePinnedBusinesses,
   updateActiveApplications,
   updateCompletionState,
@@ -189,12 +193,23 @@ class App extends Component {
             this.props.completionChecklist
           ),
           Version: JSON.stringify(this.props.userInfo.version),
+          "Checked-Industries": JSON.stringify(
+            this.props.userInfo.checkedIndustries.concat(
+              this.props.userInfo.disabledIndustries
+            )
+          ),
         },
         body: JSON.stringify(values) + "#" + origin,
       })
         .then((response) => response.json())
         .then((data) => {
           console.log("Sent: " + data);
+          this.props.updateDisabledIndustries(
+            this.props.userInfo.checkedIndustries.concat(
+              this.props.userInfo.disabledIndustries
+            )
+          );
+          this.props.updateCheckedIndustries([]);
         });
     } else if (this.state.submissionState === false) {
       console.log("Submission disabled");
@@ -215,6 +230,9 @@ class App extends Component {
             this.props.completionChecklist
           ),
           Version: JSON.stringify(this.props.userInfo.version),
+          "Checked-Industries": JSON.stringify(
+            this.props.userInfo.checkedIndustries
+          ),
         },
         body: JSON.stringify(values) + "#" + origin + "#" + "submit",
       })
@@ -435,6 +453,7 @@ class App extends Component {
           this.props.batchUpdateCompletionState(recvCompletionState);
           this.props.batchUpdateCompletionChecklist(recvCompletionChecklist);
           this.props.updateVersion(parsedRecv.version);
+          this.props.updateDisabledIndustries(parsedRecv.checkedIndustries);
         } else {
           this.props.batchUpdateCompletionState([0, 0, 0, 0]);
           this.props.batchUpdateCompletionChecklist(defaultChecklist);
@@ -476,7 +495,7 @@ class App extends Component {
               display: "flex",
               padding: "30px",
               justifyContent: "center",
-              backgroundColor: "#eff4f5",
+              backgroundColor: "#EBEFF2",
               minHeight: "100vh",
             }}
           >
@@ -609,6 +628,7 @@ class App extends Component {
                 <Dashboard
                   version={this.state.version}
                   updateBusinessStatus={this.updateBusinessStatus}
+                  updateData={this.updateData}
                 />
               )}
             />

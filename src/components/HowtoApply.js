@@ -96,7 +96,7 @@ class HowtoApply extends React.Component {
               height: "100%",
               flexDirection: "column",
               alignItems: "center",
-              backgroundColor: "#F5F5F5"
+              backgroundColor: "#EBEFF2"
             }}
           >
             <div
@@ -123,7 +123,7 @@ class HowtoApply extends React.Component {
                 mode="horizontal"
                 selectedKeys="5"
                 style={{
-                  backgroundColor: "#f5f5f5",
+                  backgroundColor: "#EBEFF2",
                   border: "0",
                   justifyContent: 'center',
                   display: 'flex'

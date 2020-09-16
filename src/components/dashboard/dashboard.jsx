@@ -18,6 +18,10 @@ import ApplySkills from "./apply-skills/applySkills";
 import { Route, Switch as ReactSwitch, Redirect } from "react-router-dom";
 
 import { connect } from "react-redux";
+import {
+  updateCheckedIndustries,
+  updateDisabledIndustries,
+} from "../../redux/actions";
 import ActiveApplications from "./ActiveApplications";
 import PinCompany from "./PinCompany";
 
@@ -47,6 +51,11 @@ const mapStateToProps = (state) => {
   };
 };
 
+const mapDispatchToProps = {
+  updateCheckedIndustries,
+  updateDisabledIndustries,
+};
+
 class Dashboard extends Component {
   constructor(props) {
     super(props);
@@ -64,7 +73,7 @@ class Dashboard extends Component {
               display: "flex",
               padding: "30px",
               justifyContent: "center",
-              backgroundColor: "#eff4f5",
+              backgroundColor: "#EBEFF2",
               minHeight: "100vh",
 
               minWidth: "610px",
@@ -109,6 +118,17 @@ class Dashboard extends Component {
                       activeApplications={
                         this.props.userInfo.activeApplications
                       }
+                      updateData={this.props.updateData}
+                      checkedIndustries={this.props.userInfo.checkedIndustries}
+                      updateCheckedIndustries={
+                        this.props.updateCheckedIndustries
+                      }
+                      disabledIndustries={
+                        this.props.userInfo.disabledIndustries
+                      }
+                      updateDisabledIndustries={
+                        this.props.updateDisabledIndustries
+                      }
                     />
                   )}
                 />
@@ -143,4 +163,4 @@ class Dashboard extends Component {
   }
 }
 
-export default connect(mapStateToProps)(Dashboard);
+export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
