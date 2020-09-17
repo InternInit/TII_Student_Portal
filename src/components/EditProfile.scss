@@ -77,19 +77,20 @@
 }
 
 .edit-profile-avatar-selection:hover {
-  color: white;
-  background: #1890ff;
   transition: 0.5s ease;
 }
 
-.edit-profile-avatar-selection:hover * {
-  color: white;
+
+
+.remove-avatar{
+  color: #f5222d;
 }
 
-.remove-avatar:hover {
-  background: #f5222d;
+.remove-avatar:hover{
+  color: #b90009f8;
 }
 
-.upload-photo-custom-styles {
-  color: #595959;
+.upload-photo-custom-styles:hover {
+  color:#1890ff;
+  transition: 0.25s ease;
 }
