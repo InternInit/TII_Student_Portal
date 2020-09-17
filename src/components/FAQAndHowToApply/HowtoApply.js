@@ -15,6 +15,7 @@ import "./FAQAndHowToApply.scss";
 
 const Heading = styled.span`
   font-weight: bold;
+  font-family: Lato;
   display: flex;
   justify-content: center;
   padding-bottom: 3%;
@@ -96,7 +97,7 @@ class HowtoApply extends React.Component {
                 paddingBottom: "10%",
               }}
             >
-              <AntRow gutter={[16, 16]} style={{marginTop: "30px"}}>
+              <AntRow gutter={[16, 32]} style={{ marginTop: "30px" }}>
                 <AntCol span={24}>
                   <div className="how-to-apply-intro-container">
                     <Heading className="twentyEightFont">It's Simple!</Heading>
@@ -216,68 +217,77 @@ class HowtoApply extends React.Component {
                     </Bullet>
                   </div>
                 </AntCol>
+
+                {/**Internship Information */}
+                <AntCol span={24}>
+                  <div className="how-to-apply-intro-container">
+                    <Heading ref={this.Internref} className="twentyEightFont">
+                      Internship Information
+                    </Heading>
+                    <div style={{ backgroundColor: "#ededed", width: "100%" }}>
+                      <Image src={Internshipimg} alt="internshipinfo" />
+                    </div>
+                    <Caption className="eighteenFont">
+                      This is where you will fill out information regarding your
+                      preferences and desires in internships. For example, if
+                      you wanted to apply for a company in the Real Estate
+                      industry or can only work on certain days, this is where
+                      you would state that information.
+                    </Caption>
+
+                    {/**Personal Information */}
+                    <Heading ref={this.Personalref} className="twentyEightFont">
+                      Personal Information
+                    </Heading>
+                    <div style={{ backgroundColor: "#ededed", width: "100%" }}>
+                      <Image src={Personalimg} alt="Personal" />
+                    </div>
+                    <Caption className="eighteenFont">
+                      In the 'General Information' tab, you will give us
+                      personal information about yourself. This includes,
+                      gender, race, and educational history. Please note that
+                      you do not have to fill out any information if you are not
+                      comfortable doing so, but it could hinder your
+                      application's reach after submission.
+                    </Caption>
+
+                    {/**Written Work */}
+                    <Heading ref={this.Writtenref} className="twentyEightFont">
+                      Written Work
+                    </Heading>
+                    <div style={{ backgroundColor: "#ededed", width: "100%" }}>
+                      <Image src={Writtenimg} alt="Personal" />
+                    </div>
+                    <Caption className="eighteenFont">
+                      Please will tell us more about yourself! Let us know why a
+                      company should give you an intern, and what you would
+                      bring to their facility. Remember to be specific and
+                      answer in complete sentences. It is also where you will
+                      give us additional information that could be useful.
+                    </Caption>
+
+                    {/**References */}
+                    <Heading
+                      ref={this.Referenceref}
+                      className="twentyEightFont"
+                    >
+                      {" "}
+                      References{" "}
+                    </Heading>
+                    <div style={{ backgroundColor: "#ededed", width: "100%" }}>
+                      <Image src={Referencesimg} alt="Personal" />
+                    </div>
+                    <Caption className="eighteenFont">
+                      This is what our reference tab looks like. Here, you can
+                      add or delete references as you please. A reference could
+                      be someone you worked with in the past, or a trusted
+                      adult. They serve to give us information regarding your
+                      past work experience, and vouche for you to hiring
+                      companies.
+                    </Caption>
+                  </div>
+                </AntCol>
               </AntRow>
-
-              {/**Internship Information */}
-              <Heading ref={this.Internref} className="twentyEightFont">
-                Internship Information
-              </Heading>
-              <div style={{ backgroundColor: "#ededed", width: "100%" }}>
-                <Image src={Internshipimg} alt="internshipinfo" />
-              </div>
-              <Caption className="eighteenFont">
-                This is where you will fill out information regarding your
-                preferences and desires in internships. For example, if you
-                wanted to apply for a company in the Real Estate industry or can
-                only work on certain days, this is where you would state that
-                information.
-              </Caption>
-
-              {/**Personal Information */}
-              <Heading ref={this.Personalref} className="twentyEightFont">
-                Personal Information
-              </Heading>
-              <div style={{ backgroundColor: "#ededed", width: "100%" }}>
-                <Image src={Personalimg} alt="Personal" />
-              </div>
-              <Caption className="eighteenFont">
-                In the 'General Information' tab, you will give us personal
-                information about yourself. This includes, gender, race, and
-                educational history. Please note that you do not have to fill
-                out any information if you are not comfortable doing so, but it
-                could hinder your application's reach after submission.
-              </Caption>
-
-              {/**Written Work */}
-              <Heading ref={this.Writtenref} className="twentyEightFont">
-                Written Work
-              </Heading>
-              <div style={{ backgroundColor: "#ededed", width: "100%" }}>
-                <Image src={Writtenimg} alt="Personal" />
-              </div>
-              <Caption className="eighteenFont">
-                Please will tell us more about yourself! Let us know why a
-                company should give you an intern, and what you would bring to
-                their facility. Remember to be specific and answer in complete
-                sentences. It is also where you will give us additional
-                information that could be useful.
-              </Caption>
-
-              {/**References */}
-              <Heading ref={this.Referenceref} className="twentyEightFont">
-                {" "}
-                References{" "}
-              </Heading>
-              <div style={{ backgroundColor: "#ededed", width: "100%" }}>
-                <Image src={Referencesimg} alt="Personal" />
-              </div>
-              <Caption className="eighteenFont">
-                This is what our reference tab looks like. Here, you can add or
-                delete references as you please. A reference could be someone
-                you worked with in the past, or a trusted adult. They serve to
-                give us information regarding your past work experience, and
-                vouche for you to hiring companies.
-              </Caption>
             </div>
           </Content>
         </Layout>

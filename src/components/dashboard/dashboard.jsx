@@ -18,10 +18,7 @@ import ApplySkills from "./apply-skills/applySkills";
 import { Route, Switch as ReactSwitch, Redirect } from "react-router-dom";
 
 import { connect } from "react-redux";
-import {
-  updateCheckedIndustries,
-  updateDisabledIndustries,
-} from "../../redux/actions";
+import { updateCheckedIndustries } from "../../redux/actions";
 import ActiveApplications from "./ActiveApplications";
 import PinCompany from "./PinCompany";
 
@@ -53,7 +50,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {
   updateCheckedIndustries,
-  updateDisabledIndustries,
 };
 
 class Dashboard extends Component {
@@ -122,12 +118,6 @@ class Dashboard extends Component {
                       checkedIndustries={this.props.userInfo.checkedIndustries}
                       updateCheckedIndustries={
                         this.props.updateCheckedIndustries
-                      }
-                      disabledIndustries={
-                        this.props.userInfo.disabledIndustries
-                      }
-                      updateDisabledIndustries={
-                        this.props.updateDisabledIndustries
                       }
                     />
                   )}
