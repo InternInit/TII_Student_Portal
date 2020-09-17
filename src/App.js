@@ -15,11 +15,11 @@ import PageEssays from "./components/pageEssays";
 import PageReferences from "./components/pageReferences";
 import PageNotFound from "./components/pageNotFound";
 import Dashboard from "./components/dashboard/dashboard.jsx";
-import HowtoApply from "./components/HowtoApply";
+import HowtoApply from "./components/FAQAndHowToApply/HowtoApply.js";
 import SubmissionSuccess from "./components/submissionSuccess";
-import newStudent from "./components/newStudent.jsx";
 import EditProfile from "./components/EditProfile.js";
-import FAQPage from "./components/FAQ/FAQPage";
+import FAQPage from "./components/FAQAndHowToApply/FAQPage";
+//import newStudent from "./components/newStudent.jsx";
 
 import LogIn from "./components/LogIn.js";
 import SignUp from "./components/SignUp.js";
