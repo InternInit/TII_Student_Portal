@@ -18,7 +18,10 @@ import ApplySkills from "./apply-skills/applySkills";
 import { Route, Switch as ReactSwitch, Redirect } from "react-router-dom";
 
 import { connect } from "react-redux";
-import { updateCheckedIndustries } from "../../redux/actions";
+import {
+  updateCheckedIndustries,
+  updateDisabledIndustries,
+} from "../../redux/actions";
 import ActiveApplications from "./ActiveApplications";
 import PinCompany from "./PinCompany";
 
@@ -36,7 +39,7 @@ const WelcomeHeader = styled.h1`
   font-weight: bold;
   margin-ottom: 3%;
 
-  color: #0050b3;
+  color: #112d4e;
 `;
 
 const { Content } = Layout;
@@ -50,6 +53,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {
   updateCheckedIndustries,
+  updateDisabledIndustries,
 };
 
 class Dashboard extends Component {
@@ -77,7 +81,7 @@ class Dashboard extends Component {
           >
             <PageContainer>
               <WelcomeHeader className="seventyTwoFont">
-                Welcome {this.props.userInfo.displayName}
+                Welcome, {this.props.userInfo.displayName}!
               </WelcomeHeader>
               <DashboardNavBar version={this.props.userInfo.version} />
               <Divider
@@ -118,6 +122,12 @@ class Dashboard extends Component {
                       checkedIndustries={this.props.userInfo.checkedIndustries}
                       updateCheckedIndustries={
                         this.props.updateCheckedIndustries
+                      }
+                      disabledIndustries={
+                        this.props.userInfo.disabledIndustries
+                      }
+                      updateDisabledIndustries={
+                        this.props.updateDisabledIndustries
                       }
                     />
                   )}

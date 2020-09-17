@@ -8,7 +8,7 @@ import {
   UserOutlined,
   EditOutlined,
   ContainerOutlined,
-  TeamOutlined
+  TeamOutlined,
 } from "@ant-design/icons";
 
 //React Routing
@@ -16,13 +16,11 @@ import { BrowserRouter as Router } from "react-router-dom";
 import { withRouter } from "react-router";
 import _ from "lodash";
 
-
-
 class TiiNav extends React.Component {
   /**
-   * 
+   *
    * Nav Panel selected tab
-   * 
+   *
    */
   getInitialHighlight = () => {
     switch (this.props.location.pathname) {
@@ -38,10 +36,6 @@ class TiiNav extends React.Component {
         return Array.from("1");
     }
   };
-
-  componentDidUpdate(prevProps, prevState) {
-    this.handleUpdate();
-  }
 
   componentDidMount() {
     this.getInitialHighlight();
@@ -63,6 +57,8 @@ class TiiNav extends React.Component {
       EssayButton: <EditOutlined />,
       ReferencesButton: <TeamOutlined />,
 
+      CheckMark: <CheckOutlined style={{ color: "green" }} />,
+
       //submission
       SubmitButton: "",
       CanSubmit: false,
@@ -73,159 +69,151 @@ class TiiNav extends React.Component {
         display: "flex",
         justifyContent: "center",
         color: "gray",
-        backgroundColor: "ghostwhite"
+        backgroundColor: "ghostwhite",
       },
 
       modFlag: false,
-
-
-
     };
   }
 
   render() {
     /**
-     * 
+     *
      * Initializing states and constants
-     * 
+     *
      */
     const { Sider } = Layout;
     let {
       InternButton,
       PersonalButton,
       EssayButton,
-      ReferencesButton
+      ReferencesButton,
+      CheckMark,
     } = this.state;
     let { SubmitButton } = this.state;
 
     return (
       /**
-           * 
-           * Sider Layout (AntD)
-           * 
-           */
-      < Sider //styling the sider
+       *
+       * Sider Layout (AntD)
+       *
+       */
+      <Sider //styling the sider
         style={{
           position: "fixed",
           overflow: "initial",
           width: "207px",
           margin: "10px",
-          marginTop: "8.5%"
-        }
-        }
+          marginTop: "8.5%",
+        }}
         //Collapsing
         collapsed={this.props.isCollapsed}
       >
         {/**
-           * 
-           * Nav Panel Menu (AntD)
-           * 
-           */}
-        < Menu
+         *
+         * Nav Panel Menu (AntD)
+         *
+         */}
+        <Menu
           theme="light"
           mode="inline"
           defaultSelectedKeys={this.getInitialHighlight()}
           selectedKeys={this.getInitialHighlight()}
         >
-
           {/**
-           * 
+           *
            * Internship Information Tab
-           * 
+           *
            */}
-          < Menu.Item
+          <Menu.Item
             key="1"
             onClick={() => {
               this.routeChange("/apply/internship-info");
             }}
           >
-            {InternButton}
-            < span > Internship Info</span >
-          </Menu.Item >
-
+            {this.props.completionState[0] == 1 ? CheckMark : InternButton}
+            <span> Internship Info</span>
+          </Menu.Item>
 
           {/**
-           * 
+           *
            * Personal Information Tab
-           * 
+           *
            */}
-          < Menu.Item
+          <Menu.Item
             key="2"
             onClick={() => {
               this.routeChange("/apply/personal");
             }}
           >
-            {PersonalButton}
+            {this.props.completionState[1] == 1 ? CheckMark : PersonalButton}
 
-            < span > Personal</span >
-          </Menu.Item >
-
+            <span> Personal</span>
+          </Menu.Item>
 
           {/**
-           * 
+           *
            * Written Work Tab
-           * 
+           *
            */}
-          < Menu.Item
+          <Menu.Item
             key="3"
             onClick={() => {
               this.routeChange("/apply/written-work");
             }}
           >
-            {EssayButton}
-            < Router >
+            {this.props.completionState[2] == 1 ? CheckMark : EssayButton}
+            <Router>
               <span>Written Work</span>
-            </Router >
-          </Menu.Item >
+            </Router>
+          </Menu.Item>
 
           {/**
-           * 
+           *
            * References Tab
-           * 
+           *
            */}
-          < Menu.Item
+          <Menu.Item
             key="4"
             onClick={() => {
               this.routeChange("/apply/references");
             }}
           >
-            {ReferencesButton}
-            < Router >
+            {this.props.completionState[3] == 1 ? CheckMark : ReferencesButton}
+            <Router>
               <span>References</span>
-
-            </Router >
-          </Menu.Item >
+            </Router>
+          </Menu.Item>
 
           {/**
-           * 
+           *
            * Submit Button Menu Item
-           * 
+           *
            */}
-          < Menu.Item
+          <Menu.Item
             className="third-step"
             style={{
               marginTop: "100%",
               display: "flex",
               alignContent: "center",
-              justifyContent: "center"
+              justifyContent: "center",
             }}
             key="5"
             onClick={this.handleSubmit} //checks other states before allowing submit
           >
             {SubmitButton}
-            < span > Submit</span >
-          </Menu.Item >
-        </Menu >
-      </Sider >
+            <span> Submit</span>
+          </Menu.Item>
+        </Menu>
+      </Sider>
     );
   }
 
-
   /**
-  * 
-  * Handles submission of all application forms
-  * 
-  */
+   *
+   * Handles submission of all application forms
+   *
+   */
   handleSubmit = () => {
     let status = this.props.completionState;
 
@@ -236,7 +224,7 @@ class TiiNav extends React.Component {
         //notification
         message: "Success.",
         description: "Your results have been submitted",
-        icon: <CheckOutlined style={{ color: "green" }} />
+        icon: <CheckOutlined style={{ color: "green" }} />,
       });
       this.props.onSubmit({}, -1);
       this.routeChange("/submission-success");
@@ -244,110 +232,17 @@ class TiiNav extends React.Component {
       notification.open({
         message: "Failed.",
         description: "You have to fill all necessary forms.",
-        icon: <CloseOutlined style={{ color: "red" }} />
+        icon: <CloseOutlined style={{ color: "red" }} />,
       });
     }
   };
 
-
   /**
-  * 
-  * Handle Update function
-  * 
-  */
-  handleUpdate = e => {
-    let completionState = this.props.completionState;
-
-    for (var i = 0; i < completionState.length; i++) {
-      switch (i) {
-        case 0:
-          if (completionState[i] === 1) {
-            if (
-              this.state.InternButton.type.render.displayName !==
-              "CheckOutlined"
-            ) {
-              this.setState({
-                InternButton: <CheckOutlined style={{ color: "green" }} />
-              });
-            }
-          } else {
-            if (
-              this.state.InternButton.type.render.displayName !==
-              "ContainerOutlined"
-            ) {
-              this.setState({ InternButton: <ContainerOutlined /> });
-            }
-          }
-          break;
-        case 1:
-          if (completionState[i] === 1) {
-            if (
-              this.state.PersonalButton.type.render.displayName !==
-              "CheckOutlined"
-            ) {
-              this.setState({
-                PersonalButton: <CheckOutlined style={{ color: "green" }} />
-              });
-            }
-          } else {
-            if (
-              this.state.PersonalButton.type.render.displayName !==
-              "UserOutlined"
-            ) {
-              this.setState({ PersonalButton: <UserOutlined /> });
-            }
-          }
-          break;
-        case 2:
-          if (completionState[i] === 1) {
-            if (
-              this.state.EssayButton.type.render.displayName !== "CheckOutlined"
-            ) {
-              this.setState({
-                EssayButton: <CheckOutlined style={{ color: "green" }} />
-              });
-            }
-          } else {
-            if (
-              this.state.EssayButton.type.render.displayName !== "EditOutlined"
-            ) {
-              this.setState({ EssayButton: <EditOutlined /> });
-            }
-          }
-          break;
-        case 3:
-          if (completionState[i] === 1) {
-            if (
-              this.state.ReferencesButton.type.render.displayName !==
-              "CheckOutlined"
-            ) {
-              this.setState({
-                ReferencesButton: <CheckOutlined style={{ color: "green" }} />
-              });
-            }
-          } else {
-            if (
-              this.state.ReferencesButton.type.render.displayName !==
-              "TeamOutlined"
-            ) {
-              this.setState({ ReferencesButton: <TeamOutlined /> });
-            }
-          }
-          break;
-        default:
-          break;
-
-      }
-    }
-  };
-
-
-  /**
-   * 
+   *
    * Route Change function (React Routing)
-   * 
+   *
    */
-  routeChange = path => {
+  routeChange = (path) => {
     if (path === "/apply/internship-info") {
       this.props.clickOne();
     } else if (path === "/apply/personal") {
@@ -359,7 +254,5 @@ class TiiNav extends React.Component {
     }
     this.props.history.push(path);
   };
-
-
 }
 export default withRouter(TiiNav);
