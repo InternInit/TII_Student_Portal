@@ -1,21 +1,19 @@
-FROM ubuntu:18.04
+# build environment
+FROM node:13.12.0-alpine as build
+WORKDIR /app
+ENV PATH /app/node_modules/.bin:$PATH
+COPY package.json ./
+COPY package-lock.json ./
+RUN npm ci --silent
+RUN npm install -g --silent
+COPY . ./
+RUN npm run build
 
-#Update apt-cache
-RUN apt-get update
+# production environment
+FROM nginx:stable-alpine
+COPY --from=build /app/build /usr/share/nginx/html
 
-#Install apache
-RUN apt-get -y install apache2
-
-#Copy React build files to htdocs of Apache
-COPY ./build/* /var/www/html/
-
-# Configure apache
-RUN echo '. /etc/apache2/envvars' > /root/run_apache.sh && \
- echo 'mkdir -p /var/run/apache2' >> /root/run_apache.sh && \
- echo 'mkdir -p /var/lock/apache2' >> /root/run_apache.sh && \ 
- echo '/usr/sbin/apache2 -D FOREGROUND' >> /root/run_apache.sh && \ 
- chmod 755 /root/run_apache.sh
+COPY nginx/nginx.conf /etc/nginx/conf.d/default.conf
 
 EXPOSE 80
-
-CMD /root/run_apache.sh
+CMD ["nginx", "-g", "daemon off;"]
