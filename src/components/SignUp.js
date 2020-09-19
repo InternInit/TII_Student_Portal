@@ -217,11 +217,11 @@ class SignUp extends React.Component {
               >
                 <Checkbox autoFocus={true}>
                   I agree to the{" "}
-                  <a href="https://interninit.com/student-terms-and-conditions/">
+                  <a href="https://interninit.com/student-terms-and-conditions/" target="_blank" rel="noopener noreferrer">
                     Terms and Conditions
                   </a>{" "}
                   and{" "}
-                  <a href="https://interninit.com/student-privacy-agreement/">
+                  <a href="https://interninit.com/student-privacy-agreement/" target="_blank" rel="noopener noreferrer">
                     {" "}
                     Privacy Agreement{" "}
                   </a>
