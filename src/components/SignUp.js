@@ -15,6 +15,8 @@ import {
   Banner,
 } from "./StyledComponents/SignupLogin";
 
+import { Link } from "react-router-dom";
+
 //Ant D Icons
 import { CloseOutlined, CheckOutlined } from "@ant-design/icons";
 
@@ -225,6 +227,10 @@ class SignUp extends React.Component {
               >
                 Sign Up
               </Button>
+              <Label style={{ marginTop: "10%" }}>
+                Already have an account?
+                <Link to="/login"> Log in here</Link>
+              </Label>
             </Form>
           </div>
         </Container>
