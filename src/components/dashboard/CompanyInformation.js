@@ -359,7 +359,15 @@ class CompanyInformation extends React.Component {
              */}
             <Row>
               <Header className="twentyFourFont">Website</Header>
-              <Caption className="sixteenFont">{info.website}</Caption>
+              <Caption className="sixteenFont">
+                <a
+                  href={info.website}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {info.website}
+                </a>
+              </Caption>
             </Row>
 
             {/**
