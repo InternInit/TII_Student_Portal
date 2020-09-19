@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Input, Button, Form, notification } from "antd";
+import { Input, Button, Form, notification, message } from "antd";
 import {
   Container,
   Background,
@@ -46,6 +46,8 @@ const openUnsuccessfulNotification = (title, description) => {
       console.log("Notification Clicked!");
     },
   });
+
+  message.info();
 };
 
 class LogIn extends React.Component {
@@ -61,7 +63,7 @@ class LogIn extends React.Component {
   render() {
     return (
       <Background>
-        <Container >
+        <Container>
           <Banner style={{ marginTop: "0px" }}>
             The Internship Initiative (TII)
           </Banner>
@@ -75,7 +77,6 @@ class LogIn extends React.Component {
               <Form.Item name="password">
                 <Input.Password />
               </Form.Item>
-              <ForgotPass>Forgot Password</ForgotPass>
               <Button
                 className="profile-button-style"
                 type="primary"
@@ -84,7 +85,7 @@ class LogIn extends React.Component {
                   /*ORDER MATTERS DON'T SWITCH*/
 
                   margin: "auto",
-                  marginTop: "30px"
+                  marginTop: "30px",
                 }}
               >
                 Log In
