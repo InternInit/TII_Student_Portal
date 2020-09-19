@@ -64,8 +64,8 @@ class LogIn extends React.Component {
     return (
       <Background>
         <Container>
-          <Banner style={{ marginTop: "0px" }}>
-            The Internship Initiative (TII)
+          <Banner style={{ marginTop: "0px", width: "100%" }}>
+            The Internship Initiative
           </Banner>
           <div style={{ width: "70%" }}>
             <Form onFinish={this.handleSubmit}>

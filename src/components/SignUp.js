@@ -116,9 +116,8 @@ class SignUp extends React.Component {
         <ul>
           <li>Minimum length of 8 characters</li>
           <li>Numerical characters (0-9)</li>
-          <li>Special characters</li>
-          <li>Uppercase letter</li>
-          <li>Lowercase letter</li>
+          <li>Uppercase letters</li>
+          <li>Lowercase letters</li>
         </ul>
       </React.Fragment>
     );
@@ -217,11 +216,19 @@ class SignUp extends React.Component {
               >
                 <Checkbox autoFocus={true}>
                   I agree to the{" "}
-                  <a href="https://interninit.com/student-terms-and-conditions/" target="_blank" rel="noopener noreferrer">
+                  <a
+                    href="https://interninit.com/student-terms-and-conditions/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     Terms and Conditions
                   </a>{" "}
                   and{" "}
-                  <a href="https://interninit.com/student-privacy-agreement/" target="_blank" rel="noopener noreferrer">
+                  <a
+                    href="https://interninit.com/student-privacy-agreement/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     {" "}
                     Privacy Agreement{" "}
                   </a>

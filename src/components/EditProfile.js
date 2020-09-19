@@ -181,9 +181,8 @@ class EditProfile extends React.Component {
         <ul>
           <li>Minimum length of 8 characters</li>
           <li>Numerical characters (0-9)</li>
-          <li>Special characters</li>
-          <li>Uppercase letter</li>
-          <li>Lowercase letter</li>
+          <li>Uppercase letters</li>
+          <li>Lowercase letters</li>
         </ul>
       </React.Fragment>
     );
