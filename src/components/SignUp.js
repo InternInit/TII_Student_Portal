@@ -216,7 +216,15 @@ class SignUp extends React.Component {
                 style={{ textAlign: "left" }}
               >
                 <Checkbox autoFocus={true}>
-                  I agree to the Terms and Conditions and Privacy Agreement
+                  I agree to the{" "}
+                  <a href="https://interninit.com/student-terms-and-conditions/">
+                    Terms and Conditions
+                  </a>{" "}
+                  and{" "}
+                  <a href="https://interninit.com/student-privacy-agreement/">
+                    {" "}
+                    Privacy Agreement{" "}
+                  </a>
                 </Checkbox>
               </Form.Item>
               <Button
