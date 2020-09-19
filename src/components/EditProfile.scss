@@ -34,7 +34,7 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  margin-left: -20px;
+  margin-left: -45px;
   margin-top: -20px;
 }
 
@@ -71,17 +71,15 @@
   transition: 0.5s ease;
 }
 
-
-
-.remove-avatar{
+.remove-avatar {
   color: #f5222d;
 }
 
-.remove-avatar:hover{
+.remove-avatar:hover {
   color: #b90009f8;
 }
 
 .upload-photo-custom-styles:hover {
-  color:#1890ff;
+  color: #1890ff;
   transition: 0.25s ease;
 }
