@@ -44,7 +44,15 @@ $panel-color: white;
   @include standard-box-shadow-hover;
 }
 
+.how-to-apply-sub-heading {
+  display: flex;
+  justify-content: left;
+}
 
+.main-header {
+  display: flex;
+  justify-content: center;
+}
 
 .faq-collapse .faq-panel {
   @include standard-box-shadow;

@@ -15,6 +15,8 @@ import {
   Banner,
 } from "./StyledComponents/SignupLogin";
 
+import { Link } from "react-router-dom";
+
 //Ant D Icons
 import { CloseOutlined, CheckOutlined } from "@ant-design/icons";
 
@@ -23,6 +25,8 @@ import EmailConfirmation from "./EmailConfirmation.jsx";
 import { Auth } from "aws-amplify";
 
 import { withRouter } from "react-router";
+
+import "./SignupLogin.scss";
 
 const passwordValidator = require("password-validator");
 
@@ -114,132 +118,172 @@ class SignUp extends React.Component {
         <ul>
           <li>Minimum length of 8 characters</li>
           <li>Numerical characters (0-9)</li>
-          <li>Special characters</li>
-          <li>Uppercase letter</li>
-          <li>Lowercase letter</li>
+          <li>Uppercase letters</li>
+          <li>Lowercase letters</li>
         </ul>
       </React.Fragment>
     );
 
     return (
-      <Background>
-        <Container style={{ marginTop: "5%" }}>
-          <Banner style={{ marginTop: "0px", width: "100%" }}>
-            Create a New Account
-          </Banner>
-          <div style={{ width: "70%" }}>
-            <Form onFinish={this.handleSubmit} ref={this.formRef}>
-              <Label style={{ marginTop: "24px" }}>Username</Label>
-              <Form.Item {...formItemProps.username} name="username">
-                <Input />
-              </Form.Item>
-              <Label>Password</Label>
-              <Popover
-                placement="right"
-                title={title}
-                content={passwordPolicyContent}
-                trigger="focus"
-              >
-                <Form.Item
-                  {...formItemProps.password}
-                  name="password"
-                  rules={[
-                    {
-                      required: true,
-                      message: "Please enter your password",
-                    },
-                    ({ getFieldValue }) => ({
-                      validator(rule, value) {
-                        let errors = schema.validate(value, { list: true });
+      <React.Fragment>
+        <Background>
+          {/*<div className="blob-style">
+            <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+              <path
+                fill="#0f4c75"
+                d="M55.5,-61.1C64.9,-46.1,60.5,-23.1,60.4,-0.2C60.2,22.7,64.2,45.5,54.8,58.3C45.5,71.2,22.7,74.1,1.7,72.4C-19.3,70.8,-38.7,64.4,-55.2,51.5C-71.7,38.7,-85.3,19.3,-82.2,3.1C-79,-13.1,-59.1,-26.1,-42.6,-41.1C-26.1,-56.2,-13.1,-73.1,5,-78.1C23.1,-83.1,46.1,-76.2,55.5,-61.1Z"
+              />
+            </svg>
+          </div>
+          <div className="blob-style">
+            <svg
+              viewBox="0 0 200 200"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fill="#0f4c75"
+                d="M37.4,-40.3C46.5,-36.9,50.6,-23.3,49.8,-11.2C49.1,0.8,43.4,11.3,38.3,24C33.3,36.7,28.7,51.7,17.9,60.5C7.1,69.3,-10,71.9,-20.3,64.4C-30.6,56.9,-34,39.3,-41.7,24.7C-49.4,10.1,-61.3,-1.4,-61.4,-12.5C-61.4,-23.6,-49.6,-34.3,-37.4,-37.2C-25.2,-40.1,-12.6,-35.1,0.8,-36C14.1,-36.9,28.3,-43.7,37.4,-40.3Z"
+              />
+            </svg>
+    </div>*/}
+          <Container style={{ marginTop: "5%", zIndex: "100" }}>
+            <Banner style={{ marginTop: "0px", width: "100%" }}>
+              Create a New Account
+            </Banner>
+            <div style={{ width: "70%" }}>
+              <Form onFinish={this.handleSubmit} ref={this.formRef}>
+                <Label style={{ marginTop: "24px" }}>Username</Label>
+                <Form.Item {...formItemProps.username} name="username">
+                  <Input />
+                </Form.Item>
+                <Label>Password</Label>
+                <Popover
+                  placement="right"
+                  title={title}
+                  content={passwordPolicyContent}
+                  trigger="focus"
+                >
+                  <Form.Item
+                    {...formItemProps.password}
+                    name="password"
+                    rules={[
+                      {
+                        required: true,
+                        message: "Please enter your password",
+                      },
+                      ({ getFieldValue }) => ({
+                        validator(rule, value) {
+                          let errors = schema.validate(value, { list: true });
 
-                        function getValidationMessage(errors) {
-                          for (let i = 0; i < errors.length; i++) {
-                            if (errors[i] === "min") {
-                              return "Password length should be at least 8 characters";
-                            } else if (errors[i] === "lowercase") {
-                              return "Password should contain lowercase letters";
-                            } else if (errors[i] === "uppercase") {
-                              return "Password should contain uppercase letters";
-                            } else if (errors[i] === "digits") {
-                              return "Password should contain digits";
-                            } else if (errors[i] === "symbols") {
-                              return "Password should contain symbols";
+                          function getValidationMessage(errors) {
+                            for (let i = 0; i < errors.length; i++) {
+                              if (errors[i] === "min") {
+                                return "Password length should be at least 8 characters";
+                              } else if (errors[i] === "lowercase") {
+                                return "Password should contain lowercase letters";
+                              } else if (errors[i] === "uppercase") {
+                                return "Password should contain uppercase letters";
+                              } else if (errors[i] === "digits") {
+                                return "Password should contain digits";
+                              } else if (errors[i] === "symbols") {
+                                return "Password should contain symbols";
+                              }
                             }
                           }
-                        }
 
-                        if (
-                          typeof getValidationMessage(errors) == "undefined"
-                        ) {
-                          return Promise.resolve();
-                        }
+                          if (
+                            typeof getValidationMessage(errors) == "undefined"
+                          ) {
+                            return Promise.resolve();
+                          }
 
-                        return Promise.reject(getValidationMessage(errors));
-                      },
-                    }),
-                  ]}
+                          return Promise.reject(getValidationMessage(errors));
+                        },
+                      }),
+                    ]}
+                  >
+                    <Input.Password />
+                  </Form.Item>
+                </Popover>
+                <Label>Confirm Password</Label>
+                <Form.Item
+                  {...formItemProps.confirmPassword}
+                  name="confirm-password"
                 >
                   <Input.Password />
                 </Form.Item>
-              </Popover>
-              <Label>Confirm Password</Label>
-              <Form.Item
-                {...formItemProps.confirmPassword}
-                name="confirm-password"
-              >
-                <Input.Password />
-              </Form.Item>
-              <Label>Display Name</Label>
-              <Form.Item {...formItemProps.name} name="name">
-                <Input />
-              </Form.Item>
-              <Label>E-Mail</Label>
-              <Form.Item {...formItemProps.email} name="email">
-                <Input />
-              </Form.Item>
-              <Form.Item
-                rules={[
-                  {
-                    validator: (_, value) =>
-                      value
-                        ? Promise.resolve()
-                        : Promise.reject(
-                            "Please read the Terms and Conditions and Privacy Agreement"
-                          ),
-                  },
-                ]}
-                name="termsAndConditions"
-                valuePropName="checked"
-                onChange={this.onChecked}
-                style={{ textAlign: "left" }}
-              >
-                <Checkbox autoFocus={true}>
-                  I agree to the Terms and Conditions and Privacy Agreement
-                </Checkbox>
-              </Form.Item>
-              <Button
-                className="profile-button-style"
-                type="primary"
-                htmlType="submit"
-                style={{ width: "100%" }}
-              >
-                Sign Up
-              </Button>
-            </Form>
-          </div>
-        </Container>
-        <Modal
-          title="Email Confirmation"
-          visible={this.state.emailConfirmationVisible}
-          onOk={this.handleOk}
-          onCancel={this.handleCancel}
-        >
-          <EmailConfirmation
-            email={this.state.email}
-            formRef={this.emailFormRef}
-          />
-        </Modal>
-      </Background>
+                <Label>Display Name</Label>
+                <Form.Item {...formItemProps.name} name="name">
+                  <Input />
+                </Form.Item>
+                <Label>E-Mail</Label>
+                <Form.Item {...formItemProps.email} name="email">
+                  <Input />
+                </Form.Item>
+                <Form.Item
+                  rules={[
+                    {
+                      validator: (_, value) =>
+                        value
+                          ? Promise.resolve()
+                          : Promise.reject(
+                              "Please read the Terms and Conditions and Privacy Agreement"
+                            ),
+                    },
+                  ]}
+                  name="termsAndConditions"
+                  valuePropName="checked"
+                  onChange={this.onChecked}
+                  style={{ textAlign: "left" }}
+                >
+                  <Checkbox autoFocus={true}>
+                    I agree to the{" "}
+                    <a
+                      href="https://interninit.com/student-terms-and-conditions/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Terms and Conditions
+                    </a>{" "}
+                    and{" "}
+                    <a
+                      href="https://interninit.com/student-privacy-agreement/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {" "}
+                      Privacy Agreement{" "}
+                    </a>
+                  </Checkbox>
+                </Form.Item>
+                <Button
+                  className="profile-button-style"
+                  type="primary"
+                  htmlType="submit"
+                  style={{ width: "100%" }}
+                >
+                  Sign Up
+                </Button>
+                <Label style={{ marginTop: "10%" }}>
+                  Already have an account?
+                  <Link to="/login"> Log in here</Link>
+                </Label>
+              </Form>
+            </div>
+          </Container>
+          <Modal
+            title="Email Confirmation"
+            visible={this.state.emailConfirmationVisible}
+            onOk={this.handleOk}
+            onCancel={this.handleCancel}
+          >
+            <EmailConfirmation
+              email={this.state.email}
+              formRef={this.emailFormRef}
+            />
+          </Modal>
+        </Background>
+      </React.Fragment>
     );
   }
 

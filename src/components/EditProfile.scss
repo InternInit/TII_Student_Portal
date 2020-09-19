@@ -18,13 +18,12 @@
   opacity: 0;
   height: 120px;
   width: 120px;
-  position: relative;
   font-size: 40px;
   font-weight: bold;
   border-radius: 50%;
   position: absolute;
   top: 130px;
-  left: 7%;
+  left: 7vh;
   color: white;
   cursor: pointer;
 }
@@ -71,17 +70,15 @@
   transition: 0.5s ease;
 }
 
-
-
-.remove-avatar{
+.remove-avatar {
   color: #f5222d;
 }
 
-.remove-avatar:hover{
+.remove-avatar:hover {
   color: #b90009f8;
 }
 
 .upload-photo-custom-styles:hover {
-  color:#1890ff;
+  color: #1890ff;
   transition: 0.25s ease;
 }

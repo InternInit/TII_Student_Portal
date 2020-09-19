@@ -21,8 +21,7 @@ const Col = styled.div`
 
 const textStyle = {
   textAlign: "left",
-  fontWeight: "500",
-  color: "white",
+  color: "white"
 };
 
 class TiiFooter extends Component {
@@ -39,7 +38,7 @@ class TiiFooter extends Component {
           }}
         >
           <Col>
-            <div style={textStyle} className="sixteenFont">
+            <div style={textStyle} className="eighteenFont bold">
               Navigate
             </div>
             <Link to="/dashboard" style={textStyle} className="fourteenFont">
@@ -53,7 +52,7 @@ class TiiFooter extends Component {
             </Link>
           </Col>
           <Col>
-            <div style={textStyle} className="sixteenFont">
+            <div style={textStyle} className="eighteenFont bold">
               Resources
             </div>
             <Link to="/how-to-apply" style={textStyle} className="fourteenFont">
@@ -76,7 +75,7 @@ class TiiFooter extends Component {
           </Col>
 
           <Col>
-            <div style={textStyle} className="sixteenFont">
+            <div style={textStyle} className="eighteenFont bold">
               Contact Us
             </div>
             <Link to="/how-to-apply" style={textStyle} className="fourteenFont">

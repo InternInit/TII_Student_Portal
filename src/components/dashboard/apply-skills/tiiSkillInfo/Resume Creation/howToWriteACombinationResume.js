@@ -129,7 +129,6 @@ margin-left:15%;
     <li class = "list">Keep it to one page.</li>
   </ul>
   <p ></p>
-  <p class="conclusion">We provided example resumes for each template on the classroom if you would like to refer to them.</p>
   <p></p>
   <p class="conclusion">
     Also, many sites online will make a resume for you if you input your information. We won&rsquo;t blame you if you choose to use one. 
@@ -138,5 +137,5 @@ margin-left:15%;
   </div>
 </body>
 </html>
-`
+`;
 export default howToWriteACombinationResume;
