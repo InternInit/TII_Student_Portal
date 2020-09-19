@@ -118,7 +118,6 @@ margin-left:15%;
     <li class = "list">Keep it to one page.</li>
   </ul>
   <p ></p>
-  <p class="conclusion">We provided example resumes for each template on the classroom if you would like to refer to them.</p>
    <p class="conclusion">
     <span>Also, many sites online will make a resume for you if you input your information. We won&rsquo;t blame you if you choose to use one.
     <span class="c10"><a class="c11" href="https://www.google.com/url?q=https://resumegenius.com/&amp;sa=D&amp;ust=1595442780278000&amp;usg=AOvVaw14ZNjml4fuza5cazIp7qz_">Here</a>&nbsp;is a good one we found.
@@ -126,5 +125,5 @@ margin-left:15%;
   </div>
 </body>
 </html>
-`
+`;
 export default howToWriteAFunctionalResume;

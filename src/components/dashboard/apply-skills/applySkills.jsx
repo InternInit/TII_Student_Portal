@@ -69,14 +69,6 @@ const resumeSkills = [
     whatShouldIIncludeOnMyResume,
   ],
   [
-    Writing_Reverse_Chronological,
-    "Writing a Reverse Chronological Resume",
-    "15 minutes",
-    "If you’ve had prior job experiences, read on to learn how to create a reverse chronological resume.",
-    "#",
-    "",
-  ],
-  [
     Writing_Functional_Resume,
     "Writing a Functional Resume",
     "15 minutes",
@@ -91,14 +83,6 @@ const resumeSkills = [
     "If you want to show your skills AND work experience, a combination resume may be for you. Learn how to create a combination resume.",
     "writing-a-combination-resume",
     howToWriteACombinationResume,
-  ],
-  [
-    Reverse_Chron_Resume_Example,
-    "Reverse Chronological Resume Example",
-    "15 minutes",
-    "Take a look at what a reverse chronological resume could look like.",
-    "reverse-chronological-resume-example",
-    reverseChronologicalResumeExample,
   ],
   [
     Funct_Resume_Example,
@@ -194,7 +178,7 @@ class ApplySkills extends Component {
   }
 
   componentDidUpdate() {
-      window.scrollTo(0, 0)
+    window.scrollTo(0, 0);
   }
 
   render() {
