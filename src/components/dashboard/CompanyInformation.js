@@ -20,10 +20,9 @@ const ModuleContainer = styled.div`
 
   min-width: 400px;
   display: flex;
-  align-items:center;
+  align-items: center;
 
-  padding:3%;
-
+  padding: 3%;
 `;
 const Image = styled.img`
   background-color: #d9d9d9;
@@ -38,22 +37,21 @@ const Image = styled.img`
 const Caption = styled.div`
   display: flex;
   text-align: left;
-   font-weight: normal;
+  font-weight: normal;
   color: 000;
   width: 80%;
   margin-top: 10px;
 `;
 
 const Header = styled.div`
-   font-weight: bold;
+  font-weight: bold;
   color: 0000;
   margin-top: 30px;
 `;
 
 const SectionHeader = styled.span`
-   color: black;
-   font-weight:normal;
-  
+  color: black;
+  font-weight: normal;
 `;
 
 const Row = styled.div`
@@ -167,7 +165,6 @@ class CompanyInformation extends React.Component {
             fontWeight: "500",
             marginTop: "30px",
           }}
-
           className="eighteenFont"
         >
           <Link to="/dashboard/add-companies">
@@ -176,43 +173,49 @@ class CompanyInformation extends React.Component {
           <Breadcrumb.Item>{info.name}</Breadcrumb.Item>
         </Breadcrumb>
 
-        <ModuleContainer >
+        <ModuleContainer>
           {/**
            *
            * Company Logo and Name
            *
            */}
-          <div style={{ width: '85%', marginTop: '18px' }}>
-
+          <div style={{ width: "85%", marginTop: "18px" }}>
             <Row
               style={{
                 display: "flex",
                 flexDirection: "row",
                 marginBottom: "40px",
 
-                alignItems: 'center'
+                alignItems: "center",
               }}
             >
-              <Avatar size={40} src={info.avatar} />
+              <Avatar
+                size={40}
+                src={info.avatar}
+                style={{
+                  width: "100px",
+                  height: "auto",
+                }}
+              />
               <Header
                 style={{
                   textAlign: "left",
                   marginLeft: "15px",
                   color: "#8C8C8C",
                   marginTop: "0px",
-                  fontWeight: '500'
+                  fontWeight: "500",
                 }}
-                className='twentyEightFont'
+                className="twentyEightFont"
               >
                 {info.name}
               </Header>
             </Row>
 
             {/**
-           *
-           * Divider
-           *
-           */}
+             *
+             * Divider
+             *
+             */}
             <Divider>
               <SectionHeader
                 style={{
@@ -220,28 +223,27 @@ class CompanyInformation extends React.Component {
                   paddingBottom: "25px",
                   marginTop: "25px",
                 }}
-
-                className='thirtySixFont'
+                className="thirtySixFont"
               >
                 Company Overview
-            </SectionHeader>
+              </SectionHeader>
             </Divider>
 
             {/**
-           *
-           * Company Description
-           *
-           */}
+             *
+             * Company Description
+             *
+             */}
             <Row>
-              <Header className='twentyFourFont'>Company Description</Header>
-              <Caption className='sixteenFont'>{info.description}</Caption>
+              <Header className="twentyFourFont">Company Description</Header>
+              <Caption className="sixteenFont">{info.description}</Caption>
             </Row>
 
             {/**
-           *
-           * Images + Caption
-           *
-           */}
+             *
+             * Images + Caption
+             *
+             */}
             <Row
               style={{
                 display: "flex",
@@ -268,10 +270,10 @@ class CompanyInformation extends React.Component {
             </Row>
 
             {/**
-           *
-           * Divider
-           *
-           */}
+             *
+             * Divider
+             *
+             */}
             <Divider>
               <SectionHeader
                 style={{
@@ -279,70 +281,71 @@ class CompanyInformation extends React.Component {
                   paddingBottom: "25px",
                   marginTop: "40px",
                 }}
-                className='thirtySixFont'
-
+                className="thirtySixFont"
               >
                 Internship Information
-            </SectionHeader>
+              </SectionHeader>
             </Divider>
 
             {/**
-           *
-           * Intership Description
-           *
-           */}
+             *
+             * Intership Description
+             *
+             */}
             <Row>
-              <Header className='twentyFourFont'>Description</Header>
-              <Caption className='sixteenFont'>{info.description}</Caption>
+              <Header className="twentyFourFont">Description</Header>
+              <Caption className="sixteenFont">{info.description}</Caption>
             </Row>
 
             {/**
-           *
-           * Location
-           *
-           */}
+             *
+             * Location
+             *
+             */}
             <Row>
-              <Header className='twentyFourFont'>Location</Header>
-              <Caption className='sixteenFont'>{info.location}</Caption>
+              <Header className="twentyFourFont">Location</Header>
+              <Caption className="sixteenFont">{info.location}</Caption>
             </Row>
 
             {/**
-           *
-           * Location
-           *
-           */}
+             *
+             * Location
+             *
+             */}
             <Row>
-              <Header className='twentyFourFont'>Industry</Header>
-              <Caption className='sixteenFont'>{info.industry}</Caption>
+              <Header className="twentyFourFont">Industry</Header>
+              <Caption className="sixteenFont">{info.industry}</Caption>
             </Row>
 
             {/**
-           *
-           * Work Period
-           *
-           */}
+             *
+             * Work Period
+             *
+             */}
             <Row>
-              <Header className='twentyFourFont'>Work Period</Header>
-              <Caption className='sixteenFont'>
+              <Header className="twentyFourFont">Work Period</Header>
+              <Caption className="sixteenFont">
                 {info.starttime} - {info.endtime}
               </Caption>
             </Row>
 
             {/**
-           *
-           * Additional Information
-           *
-           */}
+             *
+             * Additional Information
+             *
+             */}
             <Row style={{ marginBottom: "45px" }}>
-              <Header className='twentyFourFont'>Additional Information</Header>
-              <Caption className='sixteenFont'>- AP CSA - AP CSP - Must be 18+</Caption>
+              <Header className="twentyFourFont">Additional Information</Header>
+              <Caption className="sixteenFont">
+                - AP CSA - AP CSP - Must be 18+
+              </Caption>
             </Row>
 
             {/**
-           *
-           * Divider
-           *
-           */}
+             *
+             * Divider
+             *
+             */}
             <Divider>
               <SectionHeader
                 style={{
@@ -350,50 +353,49 @@ class CompanyInformation extends React.Component {
                   paddingBottom: "25px",
                   marginTop: "25px",
                 }}
-                className='thirtySixFont'
-
+                className="thirtySixFont"
               >
                 Contact Information
-            </SectionHeader>
+              </SectionHeader>
             </Divider>
 
             {/**
-           *
-           * Website
-           *
-           */}
+             *
+             * Website
+             *
+             */}
             <Row>
-              <Header className='twentyFourFont'>Website</Header>
-              <Caption className='sixteenFont'>{info.website}</Caption>
+              <Header className="twentyFourFont">Website</Header>
+              <Caption className="sixteenFont">{info.website}</Caption>
             </Row>
 
             {/**
-           *
-           * Email
-           *
-           */}
+             *
+             * Email
+             *
+             */}
             <Row>
-              <Header className='twentyFourFont'>E-Mail</Header>
-              <Caption className='sixteenFont'>{info.email}</Caption>
+              <Header className="twentyFourFont">E-Mail</Header>
+              <Caption className="sixteenFont">{info.email}</Caption>
             </Row>
 
             {/**
-           *
-           * Phone Number
-           *
-           */}
+             *
+             * Phone Number
+             *
+             */}
             <Row>
-              <Header className='twentyFourFont'>Phone Number</Header>
-              <Caption className='sixteenFont'>{info.phonenumber}</Caption>
+              <Header className="twentyFourFont">Phone Number</Header>
+              <Caption className="sixteenFont">{info.phonenumber}</Caption>
             </Row>
 
             {/**
-           *
-           * Links To Social
-           *
-           */}
+             *
+             * Links To Social
+             *
+             */}
             <Row>
-              <Header className='twentyFourFont'>Links</Header>
+              <Header className="twentyFourFont">Links</Header>
               <Row
                 style={{
                   display: "flex",
