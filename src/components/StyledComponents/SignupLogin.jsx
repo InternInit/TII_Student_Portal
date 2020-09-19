@@ -15,19 +15,21 @@ export const Container = styled.div`
 `;
 
 export const Background = styled.div`
-  background: radial-gradient(
-      109.93% 109.93% at 50% 50%,
-      #40a9ff 0%,
-      rgba(133, 161, 200, 0.479167) 79.69%,
-      rgba(255, 255, 255, 0) 100%
-    ),
-    #ffffff;
+background: radial-gradient(
+  109.93% 109.93% at 50% 50%,
+  #40a9ff 0%,
+  #0f4c75 79.69%,
+  #1b262c 100%
+),
+#ffffff;
+
+  position: relative;
+  z-index: 1;
 
   width: 100%;
   height: 100%;
   background-position: center;
   background-size: fill;
-  background-color: #fafafa;
   position: fixed;
   display: flex;
   flex-direction: column;
