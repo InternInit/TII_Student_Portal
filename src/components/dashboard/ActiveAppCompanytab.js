@@ -4,16 +4,16 @@ import QueueAnim from "rc-queue-anim";
 import {
   CompanyTitle,
   JobTitle,
-  TabContainer
+  TabContainer,
 } from "./styledDashboardComponents";
 
 import { Link } from "react-router-dom";
 
-import { Avatar } from 'antd';
-import { TeamOutlined } from '@ant-design/icons';
+import { Avatar } from "antd";
+import { TeamOutlined } from "@ant-design/icons";
 
 const PendingTab = styled.div`
-   font-weight: 600;
+  font-weight: 600;
   display: flex;
   align-self: center;
 `;
@@ -25,7 +25,7 @@ const Col = styled.div`
 `;
 
 const mapping = [
-  "this single item in the array is allowing me to use the queue animations lol"
+  "this single item in the array is allowing me to use the queue animations lol",
 ];
 
 function ActiveAppCompanytab(props) {
@@ -46,9 +46,8 @@ function ActiveAppCompanytab(props) {
 
   let companyName = "";
   if (name.length >= 44) {
-    companyName = name.substring(0, 44) + "..."
-  }
-  else {
+    companyName = name.substring(0, 44) + "...";
+  } else {
     companyName = name;
   }
 
@@ -56,7 +55,9 @@ function ActiveAppCompanytab(props) {
     <QueueAnim type="scale" ease={["easeOutQuart", "easeInOutQuart"]}>
       {mapping.map((item, index) => (
         <div key={index}>
-          <Link to={`/dashboard/add-companies/company-information/${companyId}`}>
+          <Link
+            to={`/dashboard/add-companies/company-information/${companyId}`}
+          >
             <TabContainer
               style={{ display: "flex", justifyContent: "space-evenly" }}
             >
@@ -66,7 +67,7 @@ function ActiveAppCompanytab(props) {
                   display: "flex",
                   flexDirection: "row",
                   width: "80%",
-                  alignItems: "center"
+                  alignItems: "center",
                 }}
               >
                 {/**company logo */}
@@ -74,23 +75,35 @@ function ActiveAppCompanytab(props) {
                   size={36}
                   shape="square"
                   src={props.avatar}
-                  style={{ marginLeft: "8%", marginBottom: "14px" }}
+                  style={{
+                    marginLeft: "8%",
+                    marginBottom: "14px",
+                    width: "36px",
+                    height: "auto",
+                  }}
                 />
 
                 {/**company name and job */}
                 <Col
                   style={{
                     marginLeft: "30px",
-                    alignItems: "flex-start"
+                    alignItems: "flex-start",
                   }}
                 >
-                  <CompanyTitle className='twentySixFont'>
+                  <CompanyTitle className="twentySixFont">
                     {companyName}
                   </CompanyTitle>
-                  <JobTitle style={{ paddingTop: "4px" }} className='fourteenFont'>{industry}</JobTitle>
+                  <JobTitle
+                    style={{ paddingTop: "4px" }}
+                    className="fourteenFont"
+                  >
+                    {industry}
+                  </JobTitle>
                 </Col>
               </div>
-              <PendingTab style={{ color: tabColor }} className='eighteenFont'>{status}</PendingTab>
+              <PendingTab style={{ color: tabColor }} className="eighteenFont">
+                {status}
+              </PendingTab>
             </TabContainer>
           </Link>
         </div>

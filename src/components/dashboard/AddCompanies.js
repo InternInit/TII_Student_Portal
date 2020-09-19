@@ -147,7 +147,7 @@ class AddCompanies extends React.Component {
             <h1 className="module-name">Apply to an Entire Industry</h1>
             <Form>
               <Collapse defaultActiveKey={["0"]} expandIconPosition="right">
-                <Panel
+                <Panel 
                   header={
                     <strong
                       style={{ fontWeight: "500" }}

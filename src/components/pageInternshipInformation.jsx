@@ -27,7 +27,6 @@ import moment from "moment";
 import { withRouter } from "react-router";
 import { Link } from "react-router-dom";
 
-
 //Redux
 import { connect } from "react-redux";
 import {
@@ -140,13 +139,13 @@ const boldify = (text, info = false, popoverText) =>
   !info ? (
     <strong>{text}</strong>
   ) : (
-      <React.Fragment>
-        <strong>{text}</strong>
-        <Popover style={{ width: "10px" }} title={text} content={popoverText}>
-          <InfoCircle size={12} />
-        </Popover>
-      </React.Fragment>
-    );
+    <React.Fragment>
+      <strong>{text}</strong>
+      <Popover style={{ width: "10px" }} title={text} content={popoverText}>
+        <InfoCircle size={12} />
+      </Popover>
+    </React.Fragment>
+  );
 
 /**
  *
@@ -179,7 +178,6 @@ const formItemProps = {
       "Your phone number is a key method that companies will use to communicate with you."
     ),
     name: "Phone Number",
-    extra: "Please input your phone number without any formatting.",
     rules: validationRules(
       true,
       "phone number",
@@ -422,15 +420,18 @@ const formItemProps = {
       "Resumé (.doc, .docx, .pdf)",
       true,
       <React.Fragment>
-        <p>Your resumé is a brief summary of your work experience,
-        <br />
+        <p>
+          Your resumé is a brief summary of your work experience,
+          <br />
           skills, or any other relevant items that you can't cover
           <br />
           through the application.
         </p>
-        <p>If you are unsure of what to upload, check out our free
-        <br />
-          <Link to="/dashboard/apply-skills">apply skills course</Link> to learn how to write a stunning
+        <p>
+          If you are unsure of what to upload, check out our free
+          <br />
+          <Link to="/dashboard/apply-skills">apply skills course</Link> to learn
+          how to write a stunning
           <br />
           resumé.
         </p>
@@ -504,18 +505,18 @@ class PageInternshipInformation extends Component {
     return (
       <div style={{ width: "100%", marginTop: "40px" }}>
         {window.scrollTo(0, 0)}
-        {!this.state.loaded ?
+        {!this.state.loaded ? (
           <React.Fragment>
-            <div style={{ marginBottom: '40px' }}>
-              <Skeleton.Input style={{ width: "25vw" }} size='default' />
+            <div style={{ marginBottom: "40px" }}>
+              <Skeleton.Input style={{ width: "25vw" }} size="default" />
             </div>
             <Row gutter={formGutter}>
               <Col span={halfSpan}>
-                <Skeleton.Input style={{ width: '25vw' }} size='small' />
+                <Skeleton.Input style={{ width: "25vw" }} size="small" />
               </Col>
 
               <Col span={halfSpan}>
-                <Skeleton.Input style={{ width: '25vw' }} size='small' />
+                <Skeleton.Input style={{ width: "25vw" }} size="small" />
               </Col>
             </Row>
 
@@ -526,13 +527,11 @@ class PageInternshipInformation extends Component {
              */}
             <Row gutter={formGutter}>
               <Col span={halfSpan}>
-                <Skeleton.Input style={{ width: '25vw' }} size='small' />
-
+                <Skeleton.Input style={{ width: "25vw" }} size="small" />
               </Col>
 
               <Col span={halfSpan}>
-                <Skeleton.Input style={{ width: '25vw' }} size='small' />
-
+                <Skeleton.Input style={{ width: "25vw" }} size="small" />
               </Col>
             </Row>
 
@@ -543,8 +542,7 @@ class PageInternshipInformation extends Component {
              */}
             <Row gutter={formGutter}>
               <Col span={standardSpan}>
-                <Skeleton.Input style={{ width: '25vw' }} size='small' />
-
+                <Skeleton.Input style={{ width: "25vw" }} size="small" />
               </Col>
             </Row>
 
@@ -555,16 +553,15 @@ class PageInternshipInformation extends Component {
              */}
             <Row gutter={formGutter}>
               <Col span={thirdSpan}>
-                <Skeleton.Input style={{ width: '16vw' }} size='small' />
+                <Skeleton.Input style={{ width: "16vw" }} size="small" />
               </Col>
 
               <Col span={thirdSpan}>
-                <Skeleton.Input style={{ width: '16vw' }} size='small' />
-
+                <Skeleton.Input style={{ width: "16vw" }} size="small" />
               </Col>
 
               <Col span={thirdSpan}>
-                <Skeleton.Input style={{ width: '16vw' }} size='small' />
+                <Skeleton.Input style={{ width: "16vw" }} size="small" />
               </Col>
             </Row>
 
@@ -575,7 +572,7 @@ class PageInternshipInformation extends Component {
              */}
             <Row gutter={formGutter}>
               <Col span={standardSpan}>
-                <Skeleton.Input style={{ width: '25vw' }} size='small' />
+                <Skeleton.Input style={{ width: "25vw" }} size="small" />
               </Col>
             </Row>
 
@@ -586,11 +583,10 @@ class PageInternshipInformation extends Component {
              */}
             <Row gutter={formGutter}>
               <Col span={halfSpan}>
-                <Skeleton.Input style={{ width: '25vw' }} size='small' />
+                <Skeleton.Input style={{ width: "25vw" }} size="small" />
               </Col>
               <Col span={halfSpan}>
-                <Skeleton.Input style={{ width: '25vw' }} size='small' />
-
+                <Skeleton.Input style={{ width: "25vw" }} size="small" />
               </Col>
             </Row>
 
@@ -601,9 +597,7 @@ class PageInternshipInformation extends Component {
              */}
             <Row gutter={formGutter}>
               <Col span={standardSpan}>
-                <Skeleton.Input style={{ width: '25vw' }} size='small' />
-
-
+                <Skeleton.Input style={{ width: "25vw" }} size="small" />
               </Col>
             </Row>
 
@@ -613,18 +607,16 @@ class PageInternshipInformation extends Component {
             */}
             <Row gutter={formGutter}>
               <Col span={halfSpan}>
-                <Skeleton.Input style={{ width: '25vw' }} size='small' />
+                <Skeleton.Input style={{ width: "25vw" }} size="small" />
               </Col>
               <Col span={halfSpan}>
-                <Skeleton.Input style={{ width: '25vw' }} size='small' />
-
+                <Skeleton.Input style={{ width: "25vw" }} size="small" />
               </Col>
               <Col span={halfSpan}>
-                <Skeleton.Input style={{ width: '25vw' }} size='small' />
+                <Skeleton.Input style={{ width: "25vw" }} size="small" />
               </Col>
               <Col span={halfSpan}>
-                <Skeleton.Input style={{ width: '25vw' }} size='small' />
-
+                <Skeleton.Input style={{ width: "25vw" }} size="small" />
               </Col>
             </Row>
 
@@ -635,11 +627,10 @@ class PageInternshipInformation extends Component {
              */}
             <Row gutter={formGutter}>
               <Col span={halfSpan}>
-                <Skeleton.Input style={{ width: '25vw' }} size='small' />
-
+                <Skeleton.Input style={{ width: "25vw" }} size="small" />
               </Col>
               <Col span={halfSpan}>
-                <Skeleton.Input style={{ width: '25vw' }} size='small' />
+                <Skeleton.Input style={{ width: "25vw" }} size="small" />
               </Col>
             </Row>
 
@@ -650,7 +641,7 @@ class PageInternshipInformation extends Component {
              */}
             <Row gutter={formGutter}>
               <Col span={standardSpan}>
-                <Skeleton.Input style={{ width: '25vw' }} size='small' />
+                <Skeleton.Input style={{ width: "25vw" }} size="small" />
               </Col>
             </Row>
 
@@ -660,7 +651,6 @@ class PageInternshipInformation extends Component {
              *
              */}
 
-
             {/**
              *
              * Upload Resume
@@ -668,23 +658,20 @@ class PageInternshipInformation extends Component {
              */}
             <Row gutter={formGutter}>
               <Col span={halfSpan}>
-                <Skeleton.Input style={{ width: '25vw' }} size='small' />
+                <Skeleton.Input style={{ width: "25vw" }} size="small" />
               </Col>
               <Col span={halfSpan}>
-                <Skeleton.Input style={{ width: '25vw' }} size='small' />
-
+                <Skeleton.Input style={{ width: "25vw" }} size="small" />
               </Col>
               <Col span={halfSpan}>
-                <Skeleton.Input style={{ width: '25vw' }} size='small' />
-                <Skeleton.Input style={{ width: '25vw' }} size='small' />
-                <Skeleton.Input style={{ width: '25vw' }} size='small' />
-
+                <Skeleton.Input style={{ width: "25vw" }} size="small" />
+                <Skeleton.Input style={{ width: "25vw" }} size="small" />
+                <Skeleton.Input style={{ width: "25vw" }} size="small" />
               </Col>
               <Col span={halfSpan}>
-                <Skeleton.Input style={{ width: '25vw' }} size='small' />
-                <Skeleton.Input style={{ width: '25vw' }} size='small' />
-                <Skeleton.Input style={{ width: '25vw' }} size='small' />
-
+                <Skeleton.Input style={{ width: "25vw" }} size="small" />
+                <Skeleton.Input style={{ width: "25vw" }} size="small" />
+                <Skeleton.Input style={{ width: "25vw" }} size="small" />
               </Col>
             </Row>
 
@@ -694,22 +681,21 @@ class PageInternshipInformation extends Component {
              *
              */}
             <Form.Item>
-              <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+              <div style={{ display: "flex", justifyContent: "flex-end" }}>
                 <SkeletonButton />
               </div>
             </Form.Item>
-
-          </React.Fragment> :
-
+          </React.Fragment>
+        ) : (
           <React.Fragment>
             <h1>Internship Information</h1>
             <br />
 
             {/**
-           *
-           * Application Form
-           *
-           */}
+             *
+             * Application Form
+             *
+             */}
             <Form
               {...formItemProps.totalForm}
               onFinish={this.onFinish}
@@ -717,10 +703,10 @@ class PageInternshipInformation extends Component {
               onValuesChange={this.onValuesChange}
             >
               {/**
-             *
-             * First Row (First and Last Name)
-             *
-             */}
+               *
+               * First Row (First and Last Name)
+               *
+               */}
               <Row name="first" gutter={formGutter}>
                 <Col span={halfSpan}>
                   <Form.Item {...formItemProps.firstName}>
@@ -736,10 +722,10 @@ class PageInternshipInformation extends Component {
               </Row>
 
               {/**
-             *
-             * Phone Number and Email
-             *
-             */}
+               *
+               * Phone Number and Email
+               *
+               */}
               <Row gutter={formGutter}>
                 <Col span={halfSpan}>
                   <Form.Item {...formItemProps.phoneNumber}>
@@ -755,10 +741,10 @@ class PageInternshipInformation extends Component {
               </Row>
 
               {/**
-             *
-             * Address Line
-             *
-             */}
+               *
+               * Address Line
+               *
+               */}
               <Row gutter={formGutter}>
                 <Col span={standardSpan}>
                   <Form.Item {...formItemProps.addressLine}>
@@ -768,10 +754,10 @@ class PageInternshipInformation extends Component {
               </Row>
 
               {/**
-             *
-             * Address City, State, ZIP
-             *
-             */}
+               *
+               * Address City, State, ZIP
+               *
+               */}
               <Row gutter={formGutter}>
                 <Col span={thirdSpan}>
                   <Form.Item {...formItemProps.city}>
@@ -799,10 +785,10 @@ class PageInternshipInformation extends Component {
               </Row>
 
               {/**
-             *
-             * Year of Graduation
-             *
-             */}
+               *
+               * Year of Graduation
+               *
+               */}
               <Row gutter={formGutter}>
                 <Col span={standardSpan}>
                   <Form.Item {...formItemProps.yog}>
@@ -812,10 +798,10 @@ class PageInternshipInformation extends Component {
               </Row>
 
               {/**
-             *
-             * Weighted and Unweighted GPAs
-             *
-             */}
+               *
+               * Weighted and Unweighted GPAs
+               *
+               */}
               <Row gutter={formGutter}>
                 <Col span={halfSpan}>
                   <Form.Item {...formItemProps.unweightedGPA}>
@@ -830,10 +816,10 @@ class PageInternshipInformation extends Component {
               </Row>
 
               {/**
-             *
-             * Relevant Courses
-             *
-             */}
+               *
+               * Relevant Courses
+               *
+               */}
               <Row gutter={formGutter}>
                 <Col span={standardSpan}>
                   <Form.Item {...formItemProps.courses}>
@@ -861,10 +847,10 @@ class PageInternshipInformation extends Component {
               </Row>
 
               {/**
-             *
-             * Day and Time Willing to Work
-             *
-             */}
+               *
+               * Day and Time Willing to Work
+               *
+               */}
               <Row gutter={formGutter}>
                 <Col span={halfSpan}>
                   <Form.Item {...formItemProps.daysToWork}>
@@ -897,10 +883,10 @@ class PageInternshipInformation extends Component {
               </Row>
 
               {/**
-             *
-             * Start and End Date
-             *
-             */}
+               *
+               * Start and End Date
+               *
+               */}
               <Row gutter={formGutter}>
                 <Col span={standardSpan}>
                   <Form.Item {...formItemProps.dateOfStartAndEnd}>
@@ -910,10 +896,10 @@ class PageInternshipInformation extends Component {
               </Row>
 
               {/**
-             *
-             * Willing to work Paid/Unpaid
-             *
-             */}
+               *
+               * Willing to work Paid/Unpaid
+               *
+               */}
               <Row gutter={formGutter}>
                 <Col span={standardSpan}>
                   <Form.Item {...formItemProps.paidUnpaid}>
@@ -929,10 +915,10 @@ class PageInternshipInformation extends Component {
               </Row>
 
               {/**
-             *
-             * Upload Resume
-             *
-             */}
+               *
+               * Upload Resume
+               *
+               */}
               <Form.Item {...formItemProps.resume}>
                 <Dragger
                   {...props}
@@ -949,19 +935,22 @@ class PageInternshipInformation extends Component {
               </Form.Item>
 
               {/**
-             *
-             * "Save and Continue" Button
-             *
-             */}
+               *
+               * "Save and Continue" Button
+               *
+               */}
               <Form.Item>
-                <Button className="next-button" type="primary" htmlType="submit">
+                <Button
+                  className="next-button"
+                  type="primary"
+                  htmlType="submit"
+                >
                   Save and Continue
-              </Button>
+                </Button>
               </Form.Item>
             </Form>
           </React.Fragment>
-        }
-
+        )}
       </div>
     );
   }

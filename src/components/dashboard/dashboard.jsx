@@ -39,7 +39,7 @@ const WelcomeHeader = styled.h1`
   font-weight: bold;
   margin-ottom: 3%;
 
-  color: #0050b3;
+  color: #112d4e;
 `;
 
 const { Content } = Layout;
@@ -81,7 +81,7 @@ class Dashboard extends Component {
           >
             <PageContainer>
               <WelcomeHeader className="seventyTwoFont">
-                Welcome {this.props.userInfo.displayName}
+                Welcome, {this.props.userInfo.displayName}!
               </WelcomeHeader>
               <DashboardNavBar version={this.props.userInfo.version} />
               <Divider

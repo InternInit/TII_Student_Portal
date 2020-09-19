@@ -188,19 +188,8 @@ FONT SIZES
   font-size:16px;
 }
 
-
-
-.FAQBanner{
-height:180px;
-  font-size:36px;
-font-weight:normal;
-
-color:white;
-
-padding-top:55px;
-padding-bottom:55px;
-
-background-color:#8fc3d1;
+.bold {
+  font-weight: bold;
 }
 
 

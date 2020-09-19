@@ -18,21 +18,23 @@ export const Background = styled.div`
   background: radial-gradient(
       109.93% 109.93% at 50% 50%,
       #40a9ff 0%,
-      rgba(133, 161, 200, 0.479167) 79.69%,
-      rgba(255, 255, 255, 0) 100%
+      #0f4c75 79.69%,
+      #1b262c 100%
     ),
     #ffffff;
-    
+
+  position: relative;
+  z-index: 1;
+
   width: 100%;
   height: 100%;
   background-position: center;
   background-size: fill;
-  background-color: #fafafa;
   position: fixed;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content:center;
+  justify-content: center;
 `;
 
 export const Label = styled.div`
@@ -44,7 +46,7 @@ export const Label = styled.div`
 `;
 
 export const Banner = styled.div`
-  background-color: #bae7ff;
+  background-color: #3282b8;
   padding: 18px;
   font-size: 32px;
   font-family: lato;

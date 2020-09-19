@@ -18,13 +18,12 @@
   opacity: 0;
   height: 120px;
   width: 120px;
-  position: relative;
   font-size: 40px;
   font-weight: bold;
   border-radius: 50%;
   position: absolute;
   top: 130px;
-  left: 7%;
+  left: 7vh;
   color: white;
   cursor: pointer;
 }
@@ -51,22 +50,13 @@
   margin-left: 7vh;
 }
 
-/* Removes padding styling on popovers */
-
-.popover {
-  .ant-popover-inner-content {
-    padding: 0;
-    color: rgba(0, 0, 0, 0.85);
-  }
-}
-
 .edit-profile-avatar-selection {
   display: block;
   width: 100%;
-  padding-left: 30px;
-  padding-right: 30px;
-  padding-top: 7px;
-  padding-bottom: 7px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 2px;
+  padding-bottom: 2px;
 
   text-align: center;
   font-family: Roboto;
@@ -77,19 +67,18 @@
 }
 
 .edit-profile-avatar-selection:hover {
-  color: white;
-  background: #1890ff;
   transition: 0.5s ease;
 }
 
-.edit-profile-avatar-selection:hover * {
-  color: white;
+.remove-avatar {
+  color: #f5222d;
 }
 
 .remove-avatar:hover {
-  background: #f5222d;
+  color: #b90009f8;
 }
 
-.upload-photo-custom-styles {
-  color: #595959;
+.upload-photo-custom-styles:hover {
+  color: #1890ff;
+  transition: 0.25s ease;
 }

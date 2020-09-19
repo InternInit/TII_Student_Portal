@@ -329,3 +329,7 @@ FONT SIZES
 
 
 }
+
+.rounded-borders {
+  border-radius: 15px;
+}
