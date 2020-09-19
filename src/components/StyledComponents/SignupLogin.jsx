@@ -15,13 +15,13 @@ export const Container = styled.div`
 `;
 
 export const Background = styled.div`
-background: radial-gradient(
-  109.93% 109.93% at 50% 50%,
-  #40a9ff 0%,
-  #0f4c75 79.69%,
-  #1b262c 100%
-),
-#ffffff;
+  background: radial-gradient(
+      109.93% 109.93% at 50% 50%,
+      #40a9ff 0%,
+      #0f4c75 79.69%,
+      #1b262c 100%
+    ),
+    #ffffff;
 
   position: relative;
   z-index: 1;
@@ -46,7 +46,7 @@ export const Label = styled.div`
 `;
 
 export const Banner = styled.div`
-  background-color: #bae7ff;
+  background-color: #3282b8;
   padding: 18px;
   font-size: 32px;
   font-family: lato;
