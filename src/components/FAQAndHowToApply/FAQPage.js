@@ -60,7 +60,7 @@ const QuestionArray = [
   {
     question: "How is my information being handled?",
     answer:
-      "As high schoolers, we know the importance of handling user data responsibly and ethically. This is why we have a minimalist approach when asking for information; we only ask what is essential to a job application. However, if you don’t feel comfortable with providing even this information, we don’t require you to. \n\nFor the information we do receive, it is being managed securly and responsibly.",
+      "As high schoolers, we know the importance of handling user data responsibly and ethically. This is why we have a minimalist approach when asking for information; we only ask what is essential to a job application. However, if you don’t feel comfortable with providing even this information, we don’t require you to. \n\nFor the information we do receive, it is being managed securely and responsibly.",
   },
   {
     question: "How will I know when I’m matched with a business?",
