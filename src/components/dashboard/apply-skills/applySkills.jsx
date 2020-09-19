@@ -213,11 +213,8 @@ class ApplySkills extends Component {
             key="getting-started"
             link="/dashboard/apply-skills/filling-out-an-application"
             cover={GettingStarted}
-            title="Why do I need an internship?"
-            description="Curious about why you would need an internship? Check out our
-        comprehensive overview about the benefits of high school
-        internships and how The Internship Initiative can help you get
-        one."
+            title="Filling Out an Application"
+            description="Here are some basic pointers for filling out your first application."
           />
 
           <h1 className="module-name">Build your resumé</h1>

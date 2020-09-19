@@ -226,7 +226,7 @@ class EditProfile extends React.Component {
                   style={{
                     position: "absolute",
                     top: "130px",
-                    left: "7%",
+                    left: "7vh",
                     border: "2px solid white",
                   }}
                 />

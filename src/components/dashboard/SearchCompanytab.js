@@ -9,6 +9,7 @@ import {
   JobTitle,
   TabContainer,
 } from "./styledDashboardComponents";
+import { autoShowTooltip } from "aws-amplify";
 
 const QVCompany = styled.div`
   font-weight: bold;
@@ -146,7 +147,7 @@ class CLabel extends React.Component {
                   size={36}
                   shape="square"
                   src={this.props.logo}
-                  style={{ marginLeft: "8%", marginBottom: "14px" }}
+                  style={{ marginLeft: "8%", marginBottom: "14px", width: "36px", height: "auto" }}
                 />
 
                 {/**company name and job */}

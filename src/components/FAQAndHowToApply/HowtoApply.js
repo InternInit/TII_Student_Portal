@@ -16,8 +16,6 @@ import "./FAQAndHowToApply.scss";
 const Heading = styled.span`
   font-weight: bold;
   font-family: Lato;
-  display: flex;
-  justify-content: center;
   padding-bottom: 3%;
 `;
 
@@ -100,7 +98,9 @@ class HowtoApply extends React.Component {
               <AntRow gutter={[16, 32]} style={{ marginTop: "30px" }}>
                 <AntCol span={24}>
                   <div className="how-to-apply-intro-container">
-                    <Heading className="twentyEightFont">It's Simple!</Heading>
+                    <Heading className="twentyEightFont main-header">
+                      It's Simple!
+                    </Heading>
                     <Text className="eighteenFont">
                       Fill out the information form found on the 'Apply' tab.
                       When filling out the form, make sure to:
@@ -125,7 +125,7 @@ class HowtoApply extends React.Component {
                 {/**Things you will Need */}
                 <AntCol span={24}>
                   <div className="how-to-apply-intro-container">
-                    <Heading className="twentyEightFont">
+                    <Heading className="twentyEightFont main-header">
                       Things You'll Need
                     </Heading>
                     <Text className="eighteenFont">
@@ -221,7 +221,13 @@ class HowtoApply extends React.Component {
                 {/**Internship Information */}
                 <AntCol span={24}>
                   <div className="how-to-apply-intro-container">
-                    <Heading ref={this.Internref} className="twentyEightFont">
+                    <Heading className="twentyEightFont main-header">
+                      Ace Your Application
+                    </Heading>
+                    <Heading
+                      ref={this.Internref}
+                      className="twentyTwoFont how-to-apply-sub-heading"
+                    >
                       Internship Information
                     </Heading>
                     <div style={{ backgroundColor: "#ededed", width: "100%" }}>
@@ -236,7 +242,10 @@ class HowtoApply extends React.Component {
                     </Caption>
 
                     {/**Personal Information */}
-                    <Heading ref={this.Personalref} className="twentyEightFont">
+                    <Heading
+                      ref={this.Personalref}
+                      className="twentyTwoFont how-to-apply-sub-heading"
+                    >
                       Personal Information
                     </Heading>
                     <div style={{ backgroundColor: "#ededed", width: "100%" }}>
@@ -252,7 +261,10 @@ class HowtoApply extends React.Component {
                     </Caption>
 
                     {/**Written Work */}
-                    <Heading ref={this.Writtenref} className="twentyEightFont">
+                    <Heading
+                      ref={this.Writtenref}
+                      className="twentyTwoFont how-to-apply-sub-heading"
+                    >
                       Written Work
                     </Heading>
                     <div style={{ backgroundColor: "#ededed", width: "100%" }}>
@@ -269,10 +281,9 @@ class HowtoApply extends React.Component {
                     {/**References */}
                     <Heading
                       ref={this.Referenceref}
-                      className="twentyEightFont"
+                      className="twentyTwoFont how-to-apply-sub-heading"
                     >
-                      {" "}
-                      References{" "}
+                      References
                     </Heading>
                     <div style={{ backgroundColor: "#ededed", width: "100%" }}>
                       <Image src={Referencesimg} alt="Personal" />

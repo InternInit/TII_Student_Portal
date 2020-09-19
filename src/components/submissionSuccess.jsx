@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import Confetti from "react-confetti";
 import { Button } from "antd";
+import { Link } from "react-router-dom";
 import "antd/dist/antd.css";
 import "../App.css";
 
@@ -52,24 +53,24 @@ class SubmissionSuccess extends Component {
         />
         <SubmissionHeading>You Did It!</SubmissionHeading>
         <p>
-          Congratulations! Give yourself a pat on the back. You deserve it. Your
-          application was sent to all the available internship openings in the
-          industries you selected.
+          Congratulations! Give yourself a pat on the back. You deserve it. You
+          just finished your internship application.
         </p>
         <br />
         <p>
-          If your application is selected from our database, your information
-          will be provided to the businesses that you qualify for. If the
-          business expresses interest in your application, they will reach out
-          from there.
+          To move forward, check out the <em>Add Companies</em> tab on your
+          dashboard to start sending your application to any company that you're
+          interested in.
         </p>
         <br />
         <p>Once again, congratulations and good luck!</p>
         <br />
         <ButtonContainer>
-          <Button type="primary" href="https://interninit.com">
-            Return to Home
-          </Button>
+          <Link to="/dashboard/add-companies">
+            <Button type="primary" style={{ marginBottom: "40%" }}>
+              Return to Home
+            </Button>
+          </Link>
         </ButtonContainer>
       </PageContainer>
     );
