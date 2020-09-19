@@ -147,7 +147,12 @@ class CLabel extends React.Component {
                   size={36}
                   shape="square"
                   src={this.props.logo}
-                  style={{ marginLeft: "8%", marginBottom: "14px", width: "36px", height: "auto" }}
+                  style={{
+                    marginLeft: "8%",
+                    marginBottom: "14px",
+                    width: "36px",
+                    height: "auto",
+                  }}
                 />
 
                 {/**company name and job */}
@@ -262,7 +267,7 @@ class QuickView extends React.Component {
                       Location
                     </QVCompany>
                     <QVCaption className="sixteenFont">
-                      {location}, the state of a location too
+                      {location.charAt(0).toUpperCase() + location.slice(1)}
                     </QVCaption>
                   </div>
 

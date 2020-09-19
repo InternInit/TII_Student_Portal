@@ -260,13 +260,6 @@ class CompanyInformation extends React.Component {
                   style={{ marginTop: "10px" }}
                 />
               </Row>
-              <Row>
-                <Image
-                  src="https://citybizlist.com/media/images/large/1545083234_2689.jpg"
-                  alt="Logo"
-                  style={{ marginTop: "10px" }}
-                />
-              </Row>
             </Row>
 
             {/**
