@@ -112,6 +112,9 @@ function parseChecklist(checklist, page) {
       });
       parsedChecklist = newChecklist;
       break;
+    case 3:
+      parsedChecklist[0].key = "Reference Contact Information";
+      break;
     default:
       break;
   }
