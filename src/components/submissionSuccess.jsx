@@ -58,9 +58,12 @@ class SubmissionSuccess extends Component {
         </p>
         <br />
         <p>
-          To move forward, check out the <em>Add Companies</em> tab on your
-          dashboard to start sending your application to any company that you're
-          interested in.
+          To move forward, check out the{" "}
+          <Link to="/dashboard/add-companies">
+            <em>Add Companies</em>
+          </Link>{" "}
+          tab on your dashboard to start sending your application to any company
+          that you're interested in.
         </p>
         <br />
         <p>Once again, congratulations and good luck!</p>
