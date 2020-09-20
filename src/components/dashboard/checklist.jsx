@@ -99,6 +99,19 @@ function parseChecklist(checklist, page) {
       newChecklist.push(parsedChecklist[2]);
       parsedChecklist = newChecklist;
       break;
+    case 2:
+      for (let i = 0; i < 2; i++) {
+        newChecklist.push({
+          key: "Essay #" + (i + 1).toString(),
+          completed: parsedChecklist[i].completed,
+        });
+      }
+      newChecklist.push({
+        key: "Additional Information",
+        completed: parsedChecklist[2].completed,
+      });
+      parsedChecklist = newChecklist;
+      break;
     default:
       break;
   }
