@@ -46,8 +46,6 @@ const openUnsuccessfulNotification = (title, description) => {
       console.log("Notification Clicked!");
     },
   });
-
-  message.info();
 };
 
 class LogIn extends React.Component {

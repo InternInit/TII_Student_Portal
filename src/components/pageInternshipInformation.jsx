@@ -479,6 +479,8 @@ class PageInternshipInformation extends Component {
   constructor(props) {
     super(props);
     this.routeChange = this.routeChange.bind(this);
+    this.gpaRef = React.createRef();
+    this.resumeRef = React.createRef();
   }
   state = {
     otherIndustry: "",
@@ -488,8 +490,42 @@ class PageInternshipInformation extends Component {
 
   formRef = React.createRef();
 
+  waitForRef = (ref) => {
+    return new Promise((resolve, reject) => {
+      function checkRef() {
+        if (ref.current === null) {
+          setTimeout(() => {
+            checkRef();
+          }, 10);
+        } else {
+          resolve(ref);
+        }
+      }
+      checkRef();
+    });
+  };
+
+  scrollToRef = async () => {
+    let neededRef;
+    let offset = 0;
+    let hash = this.props.location.hash;
+    if (hash === "" || hash === "#ContactInformation") {
+      window.scrollTo(0, 0);
+    } else {
+      if (hash === "#InternshipInformation") {
+        neededRef = this.gpaRef;
+      } else if (hash === "#Resume") {
+        neededRef = this.resumeRef;
+      }
+
+      let fetchedRef = await this.waitForRef(neededRef);
+      window.scrollTo(0, fetchedRef.current.offsetTop);
+    }
+  };
+
   componentDidMount() {
     this.getUserData();
+    this.scrollToRef();
   }
 
   componentWillUnmount() {
@@ -504,7 +540,6 @@ class PageInternshipInformation extends Component {
   render() {
     return (
       <div style={{ width: "100%", marginTop: "40px" }}>
-        {window.scrollTo(0, 0)}
         {!this.state.loaded ? (
           <React.Fragment>
             <div style={{ marginBottom: "40px" }}>
@@ -802,7 +837,7 @@ class PageInternshipInformation extends Component {
                * Weighted and Unweighted GPAs
                *
                */}
-              <Row gutter={formGutter}>
+              <Row gutter={formGutter} ref={this.gpaRef}>
                 <Col span={halfSpan}>
                   <Form.Item {...formItemProps.unweightedGPA}>
                     <Input placeholder="4.0" />
@@ -919,20 +954,22 @@ class PageInternshipInformation extends Component {
                * Upload Resume
                *
                */}
-              <Form.Item {...formItemProps.resume}>
-                <Dragger
-                  {...props}
-                  style={{ width: "250px", height: "30px" }}
-                  customRequest={this.customRequestResume}
-                  onChange={this.onChange}
-                  fileList={this.state.fileList}
-                >
-                  <h1 style={{ color: "#69c0ff" }}>
-                    <InboxOutlined />
-                  </h1>
-                  <h5>Click or Drag Files to Upload Here</h5>
-                </Dragger>
-              </Form.Item>
+              <div ref={this.resumeRef}>
+                <Form.Item {...formItemProps.resume}>
+                  <Dragger
+                    {...props}
+                    style={{ width: "250px", height: "30px" }}
+                    customRequest={this.customRequestResume}
+                    onChange={this.onChange}
+                    fileList={this.state.fileList}
+                  >
+                    <h1 style={{ color: "#69c0ff" }}>
+                      <InboxOutlined />
+                    </h1>
+                    <h5>Click or Drag Files to Upload Here</h5>
+                  </Dragger>
+                </Form.Item>
+              </div>
 
               {/**
                *
