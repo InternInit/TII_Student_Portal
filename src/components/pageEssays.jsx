@@ -294,7 +294,7 @@ class PageEssays extends React.Component {
                     </React.Fragment>
                   )}
                   extra={this.state.essayOneLen + "/1000 Characters"}
-                  rules={this.validationRules("response")}
+                  rules={this.validationRules(true, "response")}
                 >
                   <TextArea
                     autoSize={{ minRows: 5, maxRows: 10 }}
@@ -336,7 +336,7 @@ class PageEssays extends React.Component {
                     </React.Fragment>
                   )}
                   extra={this.state.essayTwoLen + "/1000 Characters"}
-                  rules={this.validationRules("response")}
+                  rules={this.validationRules(true, "response")}
                 >
                   <TextArea
                     autoSize={{ minRows: 5, maxRows: 10 }}
@@ -379,7 +379,7 @@ class PageEssays extends React.Component {
                     </React.Fragment>
                   )}
                   extra={this.state.essayThreeLen + "/1000 Characters"}
-                  rules={this.validationRules("response")}
+                  rules={this.validationRules(false, "response")}
                 >
                   <TextArea
                     autoSize={{ minRows: 5, maxRows: 10 }}
@@ -526,9 +526,9 @@ class PageEssays extends React.Component {
    * Requires input on form items
    *
    */
-  validationRules = (inputName, type) => [
+  validationRules = (required, inputName, type) => [
     {
-      required: true,
+      required: required,
       message: "Please enter a valid " + inputName,
       type: type,
     },
