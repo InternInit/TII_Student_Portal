@@ -23,11 +23,12 @@ COPY . ./
 #Create production build
 RUN npm run build
 
+
 # production environment
 
 #Use nginx env
-#FROM nginx:stable-alpine
-FROM tiangolo/uwsgi-nginx-flask:python3.8
+FROM nginx:stable-alpine
+#FROM tiangolo/uwsgi-nginx-flask:python3.8
 
 #Copy prod build files into htdocs
 COPY --from=build /app/build /usr/share/nginx/html
