@@ -36,9 +36,9 @@ const ChecklistItem = styled.p`
     ${ChecklistBorder} {
       font-size: 18px;
       color: #1890ff;
-      line-height:18px;
+      line-height: 18px;
       cursor: pointer;
-       transition: 0.2s;
+      transition: 0.2s;
     }
     ${Checked} {
       cursor: default;
@@ -47,7 +47,6 @@ const ChecklistItem = styled.p`
       transition: 0.2s;
       color: #1890ff;
       font-size: 18px;
-      
     }
   }
 `;
@@ -55,11 +54,11 @@ const ChecklistItem = styled.p`
 //Functionality behind Checklist
 function parseChecklist(checklist, page) {
   let parsedChecklist = checklist[page];
+  let newChecklist = [];
+  let count = 0;
+  let completed = false;
   switch (page) {
     case 0:
-      let newChecklist = [];
-      let count = 0;
-      let completed = false;
       for (let i = 0; i < 9; i++) {
         if (parsedChecklist[i].completed) {
           count++;
@@ -68,7 +67,7 @@ function parseChecklist(checklist, page) {
       if (count === 9) {
         completed = true;
       }
-      newChecklist.push({ key: "Contact Info", completed: completed });
+      newChecklist.push({ key: "Contact Information", completed: completed });
       completed = false;
       count = 0;
 
@@ -80,8 +79,24 @@ function parseChecklist(checklist, page) {
       if (count === 8) {
         completed = true;
       }
-      newChecklist.push({ key: "Internship Info", completed: completed });
+      newChecklist.push({
+        key: "Internship Information",
+        completed: completed,
+      });
       newChecklist.push(parsedChecklist[16]);
+      parsedChecklist = newChecklist;
+      break;
+    case 1:
+      for (let i = 0; i < 2; i++) {
+        if (parsedChecklist[i].completed) {
+          count++;
+        }
+      }
+      if (count === 2) {
+        completed = true;
+      }
+      newChecklist.push({ key: "Personal Information", completed: completed });
+      newChecklist.push(parsedChecklist[2]);
       parsedChecklist = newChecklist;
       break;
     default:
@@ -112,29 +127,29 @@ export default function Checklist(props) {
                       float: "left",
                       marginRight: "7px",
                       marginLeft: "20px",
-                      paddingRight: "6px"
+                      paddingRight: "6px",
                     }}
                   />
                   <CheckedText>{item.key}</CheckedText>
                 </div>
               ) : (
-                  <div>
-                    <Link
-                      to={`/apply/${props.linkTo}`}
-                      style={{ color: "inherit" }}
-                    >
-                      <ChecklistBorder
-                        style={{
-                          float: "left",
-                          marginRight: "7px",
-                          marginLeft: "20px",
-                          paddingRight: "6px"
-                        }}
-                      />{" "}
-                      <ChecklistText>{item.key}</ChecklistText>
-                    </Link>
-                  </div>
-                )}
+                <div>
+                  <Link
+                    to={`/apply/${props.linkTo}`}
+                    style={{ color: "inherit" }}
+                  >
+                    <ChecklistBorder
+                      style={{
+                        float: "left",
+                        marginRight: "7px",
+                        marginLeft: "20px",
+                        paddingRight: "6px",
+                      }}
+                    />{" "}
+                    <ChecklistText>{item.key}</ChecklistText>
+                  </Link>
+                </div>
+              )}
             </ChecklistItem>
           </div>
         ))}
