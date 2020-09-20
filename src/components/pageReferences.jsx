@@ -4,7 +4,7 @@ import { Row, Col } from "antd";
 import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
 import { InfoCircle } from "./StyledComponents/InternshipForms";
 
-import "../App.css";
+import "../App.scss";
 
 //React Routing
 import { withRouter } from "react-router";
@@ -322,6 +322,7 @@ class PageReferences extends Component {
                             <Row gutter={formGutter}>
                               <Col span={halfSpan}>
                                 <Form.Item
+                                  className="text-left"
                                   {...formItemProps.inputField(
                                     true,
                                     field,

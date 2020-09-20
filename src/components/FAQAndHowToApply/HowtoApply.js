@@ -10,7 +10,7 @@ import { withRouter } from "react-router-dom";
 
 import { Layout, Row as AntRow, Col as AntCol } from "antd";
 
-import "../../App.css";
+import "../../App.scss";
 import "./FAQAndHowToApply.scss";
 
 const Heading = styled.span`

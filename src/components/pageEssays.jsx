@@ -13,7 +13,7 @@ import {
 } from "antd";
 import { InboxOutlined } from "@ant-design/icons";
 import { InfoCircle } from "./StyledComponents/InternshipForms";
-import "../App.css";
+import "../App.scss";
 
 //React Routing
 import { withRouter } from "react-router";
@@ -264,6 +264,7 @@ class PageEssays extends React.Component {
                */}
               <div ref={this.essayOneRef}>
                 <Form.Item
+                  className="text-left"
                   key="industryEssay"
                   name="Why This Industry Essay"
                   label={this.boldify(
@@ -308,6 +309,7 @@ class PageEssays extends React.Component {
                */}
               <div ref={this.essayTwoRef}>
                 <Form.Item
+                  className="text-left"
                   key="leadership"
                   name="Leadership Roles Essay"
                   label={this.boldify(
@@ -349,6 +351,7 @@ class PageEssays extends React.Component {
                */}
               <div ref={this.additionalInfoRef}>
                 <Form.Item
+                  className="text-left"
                   key="extra"
                   name="Extra Essay"
                   label={this.boldify(

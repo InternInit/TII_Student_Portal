@@ -7,7 +7,7 @@ import { withRouter } from "react-router-dom";
 
 import { Menu, Layout, Collapse } from "antd";
 
-import "../../App.css";
+import "../../App.scss";
 import "./FAQAndHowToApply.scss";
 
 const ContentStyle = {

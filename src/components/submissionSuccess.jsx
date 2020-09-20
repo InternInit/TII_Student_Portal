@@ -4,7 +4,7 @@ import Confetti from "react-confetti";
 import { Button } from "antd";
 import { Link } from "react-router-dom";
 import "antd/dist/antd.css";
-import "../App.css";
+import "../App.scss";
 
 //Styles
 const PageContainer = styled.div`

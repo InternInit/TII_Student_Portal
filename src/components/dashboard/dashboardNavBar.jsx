@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "../../App.css";
+import "../../App.scss";
 import "./dashboard.css";
 import "antd/dist/antd.css";
 import { Menu, message} from "antd";

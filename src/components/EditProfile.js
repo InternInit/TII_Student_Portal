@@ -32,7 +32,7 @@ import {
 
 import { Auth } from "aws-amplify";
 
-import "../App.css";
+import "../App.scss";
 import "./dashboard/dashboard.css";
 import "./EditProfile.scss";
 
