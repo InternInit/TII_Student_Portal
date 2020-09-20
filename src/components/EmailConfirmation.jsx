@@ -53,7 +53,9 @@ export default function EmailConfirmation(props) {
           <Input placeholder="Enter Code" />
         </Form.Item>
       </Form>
-      <HelpText>Send me another code.</HelpText>
+      <HelpText onClick={() => props.resendConfirmCode()}>
+        <a href="#">Send me another code.</a>
+      </HelpText>
     </ModalContainer>
   );
 }
