@@ -66,10 +66,6 @@ const mapDispatchToProps = {
 class PageEssays extends React.Component {
   formRef = React.createRef();
 
-  state = {
-    loaded: false,
-  };
-
   waitForRef = (ref) => {
     return new Promise((resolve, reject) => {
       function checkRef() {
@@ -106,6 +102,7 @@ class PageEssays extends React.Component {
   componentDidMount() {
     this.getUserData();
     this.scrollToRef();
+    console.log(this.state);
   }
 
   componentWillUnmount() {
@@ -118,12 +115,16 @@ class PageEssays extends React.Component {
     this.essayOneRef = React.createRef();
     this.essayTwoRef = React.createRef();
     this.additionalInfoRef = React.createRef();
-  }
 
-  state = {
-    fileListCL: [],
-    fileListPortfolio: [],
-  };
+    this.state = {
+      loaded: false,
+      fileListCL: [],
+      fileListPortfolio: [],
+      essayOneLen: 0,
+      essayTwoLen: 0,
+      essayThreeLen: 0,
+    };
+  }
 
   render() {
     return (
@@ -292,7 +293,7 @@ class PageEssays extends React.Component {
                       </p>
                     </React.Fragment>
                   )}
-                  extra="1000 Character Limit"
+                  extra={this.state.essayOneLen + "/1000 Characters"}
                   rules={this.validationRules("response")}
                 >
                   <TextArea
@@ -334,7 +335,7 @@ class PageEssays extends React.Component {
                       </p>
                     </React.Fragment>
                   )}
-                  extra="1000 Character Limit"
+                  extra={this.state.essayTwoLen + "/1000 Characters"}
                   rules={this.validationRules("response")}
                 >
                   <TextArea
@@ -377,7 +378,7 @@ class PageEssays extends React.Component {
                       </p>
                     </React.Fragment>
                   )}
-                  extra="1000 Character Limit"
+                  extra={this.state.essayThreeLen + "/1000 Characters"}
                   rules={this.validationRules("response")}
                 >
                   <TextArea
@@ -543,6 +544,14 @@ class PageEssays extends React.Component {
     delete allValues["Cover Letter"];
     delete allValues.Portfolio;
 
+    this.setState({
+      essayOneLen: allValues["Why This Industry Essay"].length,
+    });
+    this.setState({
+      essayTwoLen: allValues["Leadership Roles Essay"].length,
+    });
+    this.setState({ essayThreeLen: allValues["Extra Essay"].length });
+
     let completedCount = 0;
     let checklist = [];
     for (var field in allValues) {
@@ -698,6 +707,16 @@ class PageEssays extends React.Component {
             console.log(parsedData);
             this.setState({ loaded: true });
             this.formRef.current.setFieldsValue(parsedData);
+
+            this.setState({
+              essayOneLen: parsedData["Why This Industry Essay"].length,
+            });
+            this.setState({
+              essayTwoLen: parsedData["Leadership Roles Essay"].length,
+            });
+            this.setState({ essayThreeLen: parsedData["Extra Essay"].length });
+
+            console.log(this.state);
 
             try {
               let fileListCL = parsedData["Cover Letter"].fileList;
