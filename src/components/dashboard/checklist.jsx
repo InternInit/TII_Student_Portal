@@ -151,7 +151,10 @@ export default function Checklist(props) {
               ) : (
                 <div>
                   <Link
-                    to={`/apply/${props.linkTo}#${item.key.replace(/\s/g, "")}`}
+                    to={`/apply/${props.linkTo}#${item.key.replace(
+                      /\s|#/g,
+                      ""
+                    )}`}
                     style={{ color: "inherit" }}
                   >
                     <ChecklistBorder
