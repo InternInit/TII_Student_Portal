@@ -21,7 +21,7 @@ const Col = styled.div`
 
 const textStyle = {
   textAlign: "left",
-  color: "white"
+  color: "white",
 };
 
 class TiiFooter extends Component {
@@ -85,12 +85,12 @@ class TiiFooter extends Component {
         </div>
         <div style={{ marginTop: "20px" }}>
           <span style={textStyle} className="sixteenFont">
-            Created by The Internship Initiative
+            Created by The Internship Initiative LLC.
           </span>
         </div>
         <div style={{ marginBottom: "30px" }}>
           <span style={textStyle} className="fourteenFont">
-            © The Internship Initiative. All rights reserved.{" "}
+            © The Internship Initiative LLC. All rights reserved.{" "}
           </span>
         </div>
       </FooterContainer>
