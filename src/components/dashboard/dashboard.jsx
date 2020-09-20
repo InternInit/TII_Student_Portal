@@ -1,7 +1,7 @@
 //React Imports
 import React, { Component } from "react";
 import styled from "styled-components";
-import "../../App.css";
+import "../../App.scss";
 import "./dashboard.css";
 
 //Ant Design

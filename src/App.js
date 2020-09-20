@@ -27,7 +27,7 @@ import LogIn from "./components/LogIn.js";
 import SignUp from "./components/SignUp.js";
 
 //CSS Imports
-import "./App.css";
+import "./App.scss";
 
 //React Routing
 import {

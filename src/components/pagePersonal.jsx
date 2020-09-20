@@ -16,7 +16,7 @@ import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
 import { InfoCircle } from "./StyledComponents/InternshipForms";
 
 import "antd/dist/antd.css";
-import "../App.css";
+import "../App.scss";
 
 //React Routing
 import { withRouter } from "react-router";
@@ -365,8 +365,9 @@ class PagePersonal extends Component {
                       </React.Fragment>
                     )}
                     rules={this.validationRules(true, "gender")}
+                    style={{textAlign: "left"}}
                   >
-                    <Radio.Group>
+                    <Radio.Group className="universal-left">
                       {genders.map((gender) => (
                         <Radio key={gender} value={gender}>
                           {gender}
@@ -398,11 +399,12 @@ class PagePersonal extends Component {
                     )}
                     name="Race"
                     extra="Check all that apply"
+                    style={{textAlign: "left"}}
                   >
                     <Checkbox.Group>
-                      <Row>
+                      <Row gutter={[64, 0]}>
                         {race.map((ethnicity) => (
-                          <Col span={halfSpan}>
+                          <Col className="universal-left" span={12}>
                             <Checkbox
                               value={ethnicity}
                               style={{
@@ -425,7 +427,7 @@ class PagePersonal extends Component {
                *
                */}
               <Row gutter={formGutter}>
-                <Col span={standardSpan}>
+                <Col span={standardSpan} className="universal-left">
                   <Form.Item
                     key="latinx"
                     label={this.boldify(
@@ -442,7 +444,7 @@ class PagePersonal extends Component {
                   >
                     <Checkbox.Group>
                       {latinx.map((ethnicity) => (
-                        <Col>
+                        <Row>
                           <Checkbox
                             value={ethnicity}
                             style={{
@@ -451,7 +453,7 @@ class PagePersonal extends Component {
                           >
                             {ethnicity}
                           </Checkbox>
-                        </Col>
+                        </Row>
                       ))}
                     </Checkbox.Group>
                   </Form.Item>
@@ -602,7 +604,10 @@ class PagePersonal extends Component {
                                   name={[field.name, "State"]}
                                   rules={this.validationRules(true, "state")}
                                 >
-                                  <Select placeholder="State">
+                                  <Select
+                                    placeholder="State"
+                                    style={{ textAlign: "left" }}
+                                  >
                                     {allStates.map((state) => (
                                       <Option key={state} value={state}>
                                         {state}

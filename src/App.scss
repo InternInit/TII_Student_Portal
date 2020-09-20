@@ -44,6 +44,15 @@ p {
   text-align: left;
 }
 
+.universal-left {
+  display: flex;
+  justify-content: left;
+}
+
+.text-left {
+  text-align: left;
+}
+
 .save-and-continue {
   float: right;
   width: 150px;

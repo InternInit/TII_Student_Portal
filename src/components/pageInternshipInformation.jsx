@@ -17,7 +17,7 @@ import { InboxOutlined } from "@ant-design/icons";
 import { InfoCircle } from "./StyledComponents/InternshipForms";
 
 import "antd/dist/antd.css";
-import "../App.css";
+import "../App.scss";
 
 //Stream related
 
@@ -233,6 +233,7 @@ const formItemProps = {
     rules: validationRules(true, "year of graduation", "string", /^\d{4}$/),
   },
   unweightedGPA: {
+    className: "text-left",
     key: "unweightedGPA",
     label: boldify(
       "What is your unweighted GPA?",
@@ -249,6 +250,7 @@ const formItemProps = {
     extra: "Your GPA should be out of 4.0",
   },
   weightedGPA: {
+    className: "text-left",
     key: "weightedGPA",
     label: boldify(
       "What is your weighted GPA (optional)?",
@@ -272,6 +274,7 @@ const formItemProps = {
     ),
   },
   courses: {
+    className: "text-left",
     key: "courses",
     label: boldify(
       "Relevant courses to your industry.",
@@ -301,6 +304,7 @@ const formItemProps = {
       "Separate each entry with a comma and a space, and capitalize the AP/IB for your AP/IB Classes",
   },
   extracurriculars: {
+    className: "text-left",
     key: "extracurriculars",
     label: boldify(
       "Extracurricular Activities",
@@ -539,7 +543,7 @@ class PageInternshipInformation extends Component {
 
   render() {
     return (
-      <div style={{ width: "100%", marginTop: "40px" }}>
+      <div style={{ width: "100%", marginTop: "40px"}}>
         {!this.state.loaded ? (
           <React.Fragment>
             <div style={{ marginBottom: "40px" }}>
@@ -938,7 +942,7 @@ class PageInternshipInformation extends Component {
               <Row gutter={formGutter}>
                 <Col span={standardSpan}>
                   <Form.Item {...formItemProps.paidUnpaid}>
-                    <Radio.Group>
+                    <Radio.Group className="universal-left">
                       {paidOrUnpaid.map((choice) => (
                         <Radio key={choice} value={choice}>
                           {choice}

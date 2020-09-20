@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 //CSS Imports
 import "antd/dist/antd.css";
-import "../App.css";
+import "../App.scss";
 
 //Ant Design
 import { Form, Input, Button, Divider } from "antd";
