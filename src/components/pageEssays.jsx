@@ -528,7 +528,7 @@ class PageEssays extends React.Component {
   validationRules = (inputName, type) => [
     {
       required: true,
-      message: "Please input your " + inputName,
+      message: "Please enter a valid " + inputName,
       type: type,
     },
   ];
