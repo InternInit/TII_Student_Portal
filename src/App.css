@@ -49,6 +49,12 @@ p {
   width: 150px;
 }
 
+.noColorLink {
+  color: white;
+  text-decoration: none;
+  background-color: none;
+}
+
 .educationBox {
   padding-left: 50px;
   padding-right: 50px;
@@ -157,86 +163,74 @@ h2 {
   content: "*";
 }
 
-
-
 /**
-FONT SIZES 
+FONT SIZES
 */
 
-.seventyTwoFont{
-  font-size:72px;
+.seventyTwoFont {
+  font-size: 72px;
 }
 
-.thirtySixFont{
-  font-size:36px;
+.thirtySixFont {
+  font-size: 36px;
 }
 
-
-.twentyEightFont{
-  font-size:28px;
+.twentyEightFont {
+  font-size: 28px;
 }
 
-.twentyTwoFont{
-  font-size:22px;
+.twentyTwoFont {
+  font-size: 22px;
 }
 
-.eighteenFont{
-  font-size:18px;
+.eighteenFont {
+  font-size: 18px;
 }
 
-.sixteenFont{
-  font-size:16px;
+.sixteenFont {
+  font-size: 16px;
 }
 
 .bold {
   font-weight: bold;
 }
 
-
 @media only screen and (max-width: 810px) {
-
-  .seventyTwoFont{
-    font-size:56px;
+  .seventyTwoFont {
+    font-size: 56px;
   }
 
-  .thirtySixFont{
-    font-size:28px;
+  .thirtySixFont {
+    font-size: 28px;
   }
 
-
-  .twentyEightFont{
-    font-size:20px;
+  .twentyEightFont {
+    font-size: 20px;
   }
 
-  .twentyTwoFont{
-    font-size:16px;
+  .twentyTwoFont {
+    font-size: 16px;
   }
 
-  .eighteenFont{
-    font-size:14px;
+  .eighteenFont {
+    font-size: 14px;
   }
 
-  .sixteenFont{
+  .sixteenFont {
     font-size: 12px;
   }
 
-  .FAQBanner{
-    height:154px;
-      font-size:28px;
-     
-     
-    padding-top:42px;
-    padding-bottom:42px;
-    
-     }
+  .FAQBanner {
+    height: 154px;
+    font-size: 28px;
 
-     .profile-button-style {
-      font-size: 12px;
-       width: 90%;
-      height: 24px;
-      }
+    padding-top: 42px;
+    padding-bottom: 42px;
+  }
+
+  .profile-button-style {
+    font-size: 12px;
+    width: 90%;
+    height: 24px;
+  }
 }
-
-
-
-

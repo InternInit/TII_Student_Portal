@@ -78,9 +78,11 @@ class TiiFooter extends Component {
             <div style={textStyle} className="eighteenFont bold">
               Contact Us
             </div>
-            <Link to="/how-to-apply" style={textStyle} className="fourteenFont">
-              Email
-            </Link>
+            <span style={textStyle} className="fourteenFont">
+              <a href="mailto:contact-us@interninit.com">
+                <div class="noColorLink">Email</div>
+              </a>
+            </span>
           </Col>
         </div>
         <div style={{ marginTop: "20px" }}>
