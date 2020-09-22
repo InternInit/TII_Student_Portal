@@ -288,9 +288,9 @@ const formItemProps = {
           to a specific position or industry
         </p>
         <p>
-          Ex: If I am applying for an internship in,
+          Ex: If you are applying for an internship in,
           <br />
-          <strong>business</strong>, I might add classes such as
+          <strong>business</strong>, you might add classes such as
           <br />
           <em>accounting, business finance, </em>
           <br />
@@ -322,9 +322,9 @@ const formItemProps = {
           for their specific internship position
         </p>
         <p>
-          Ex: If I am applying for an internship in,
+          Ex: If you are applying for an internship in,
           <br />
-          <strong>business</strong>, I might include activities
+          <strong>business</strong>, you might include activities
           <br />
           such as <em>FBLA, Student Council Treasurer,</em>
           <br />
