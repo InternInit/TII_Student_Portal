@@ -2,14 +2,24 @@ $background-color: #ebeff2;
 $emphasis-color: #005792;
 $header-text-color: #f9f7f7;
 $panel-color: white;
+@import "~rfs/scss";
 
 //Mixins
 @mixin standard-box-shadow {
   box-shadow: 1px 1px 5px -4px;
 }
+
+@mixin standard-border-radius {
+  border-radius: 15px;
+}
+
+@mixin light-border-radius {
+  border-radius: 10px;
+}
+
 @mixin standard-box-shadow-hover {
   box-shadow: 2px 2px 5px -4px;
-  transition: .3s ease;
+  transition: 0.3s ease;
 }
 
 .Banner {
@@ -24,7 +34,7 @@ $panel-color: white;
   line-height: 250px;
   vertical-align: middle;
 
-  font-size: 48px;
+  @include font-size(48px);
   font-family: Lato;
   font-weight: bold;
   color: $header-text-color;
@@ -34,9 +44,9 @@ $panel-color: white;
 
 .how-to-apply-intro-container {
   @include standard-box-shadow;
+  @include standard-border-radius;
   background-color: $panel-color;
   width: 100%;
-  border-radius: 15px;
   padding: 5% 7%;
 }
 
@@ -47,6 +57,18 @@ $panel-color: white;
 .how-to-apply-sub-heading {
   display: flex;
   justify-content: left;
+}
+
+.how-to-apply-list {
+  font-family: Roboto;
+  list-style: none;
+  padding-left: 5vh;
+
+  li:before {
+    content: "•";
+    font-size: 16px;
+    padding-right: 15px;
+  }
 }
 
 .main-header {

@@ -5,6 +5,8 @@ import Personalimg from "../../How_To_Apply/personal.JPG";
 import Writtenimg from "../../How_To_Apply/written.JPG";
 import Referencesimg from "../../How_To_Apply/reference.JPG";
 import { CheckOutlined } from "@ant-design/icons";
+import { BsApp } from "react-icons/bs";
+
 //styles
 import { withRouter } from "react-router-dom";
 
@@ -106,19 +108,17 @@ class HowtoApply extends React.Component {
                       When filling out the form, make sure to:
                     </Text>
 
-                    <Bullet className="eighteenFont">
-                      - Be specific, give us as much information as you can.
-                    </Bullet>
-                    <Bullet className="eighteenFont">
-                      - Make sure to fill out all the necessary forms so we can
-                      fulfill company requirements
-                    </Bullet>
-                    <Bullet className="eighteenFont">
-                      - Be honest, write about yourself
-                    </Bullet>
-                    <Bullet className="eighteenFont">
-                      - Submit when everything is filled out!
-                    </Bullet>
+                    <ul className="how-to-apply-list eighteenFont text-left">
+                      <li>
+                        Be specific, give us as much information as you can.
+                      </li>
+                      <li>
+                        Make sure to fill out all the necessary forms so we can
+                        fulfill company requirements
+                      </li>
+                      <li> Be honest, write about yourself</li>
+                      <li>Submit when everything is filled out!</li>
+                    </ul>
                   </div>
                 </AntCol>
 
@@ -132,89 +132,31 @@ class HowtoApply extends React.Component {
                       In order to apply, make sure you have the following
                       information:
                     </Text>
-                    <Bullet
-                      style={{ marginTop: "15px" }}
-                      className="eighteenFont"
-                    >
-                      <CheckOutlined
-                        style={{ color: "green", paddingRight: "10px" }}
-                      />
-                      Weighted and Unweighted Grade Point Average (GPA)
-                    </Bullet>
-                    <Bullet className="eighteenFont">
-                      <CheckOutlined
-                        style={{ color: "green", paddingRight: "10px" }}
-                      />
-                      List of interested industries (Ie. Finance or
-                      Biotechnology)
-                    </Bullet>
-                    <Bullet className="eighteenFont">
-                      <CheckOutlined
-                        style={{ color: "green", paddingRight: "10px" }}
-                      />
-                      List of relevant courses taken
-                    </Bullet>
-                    <Bullet className="eighteenFont">
-                      <CheckOutlined
-                        style={{ color: "green", paddingRight: "10px" }}
-                      />
-                      List of extracurricular activities
-                    </Bullet>
-                    <Bullet className="eighteenFont">
-                      <CheckOutlined
-                        style={{ color: "green", paddingRight: "10px" }}
-                      />
-                      Year of Graduation (Must be at least a high school
-                      Sophomore to high school Senior)
-                    </Bullet>
-                    <Bullet className="eighteenFont">
-                      <CheckOutlined
-                        style={{ color: "green", paddingRight: "10px" }}
-                      />
-                      Availability to work
-                    </Bullet>
-                    <Bullet className="eighteenFont">
-                      <CheckOutlined
-                        style={{ color: "green", paddingRight: "10px" }}
-                      />
-                      Resumé or CV
-                    </Bullet>
-                    <Bullet className="eighteenFont">
-                      <CheckOutlined
-                        style={{ color: "green", paddingRight: "10px" }}
-                      />
-                      List Item
-                    </Bullet>
-                    <Bullet className="eighteenFont">
-                      <CheckOutlined
-                        style={{ color: "green", paddingRight: "10px" }}
-                      />
-                      Cover Letter (Optional)
-                    </Bullet>
-                    <Bullet className="eighteenFont">
-                      <CheckOutlined
-                        style={{ color: "green", paddingRight: "10px" }}
-                      />
-                      Letters of Recommendation (1 required, but 2 is advised)
-                    </Bullet>
-                    <Bullet className="eighteenFont">
-                      <CheckOutlined
-                        style={{ color: "green", paddingRight: "10px" }}
-                      />
-                      Transcript
-                    </Bullet>
-                    <Bullet className="eighteenFont">
-                      <CheckOutlined
-                        style={{ color: "green", paddingRight: "10px" }}
-                      />
-                      School Profile
-                    </Bullet>
-                    <Bullet className="eighteenFont">
-                      <CheckOutlined
-                        style={{ color: "green", paddingRight: "10px" }}
-                      />
-                      List of Accomplishments/Achievements
-                    </Bullet>
+
+                    <ul className="how-to-apply-list eighteenFont text-left">
+                      <li>Weighted and Unweighted Grade Point Average (GPA)</li>
+                      <li>
+                        List of interested industries (Ie. Finance or
+                        Biotechnology)
+                      </li>
+                      <li>List of relevant courses taken</li>
+                      <li>List of extracurricular activities</li>
+                      <li>
+                        Year of Graduation (Must be at least a high school
+                        Sophomore to high school Senior)
+                      </li>
+                      <li>Availability to work</li>
+                      <li>Resumé or CV</li>
+                      <li>List Item</li>
+                      <li>Cover Letter (Optional)</li>
+                      <li>
+                        Letters of Recommendation (1 <em>highly</em>{" "}
+                        recommended, but 2 is advised)
+                      </li>
+                      <li>Transcript</li>
+                      <li>School Profile</li>
+                      <li>List of Accomplishments/Achievements</li>
+                    </ul>
                   </div>
                 </AntCol>
 

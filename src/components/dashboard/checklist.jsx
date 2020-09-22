@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import "../../App.scss";
-import "./dashboard.css";
+import "./dashboard.scss";
 import "antd/dist/antd.css";
 import { BorderOutlined, CheckOutlined } from "@ant-design/icons";
 import QueueAnim from "rc-queue-anim";

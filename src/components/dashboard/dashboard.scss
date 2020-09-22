@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Lato&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+@import "~rfs/scss";
 
 /*
 ============================================================
@@ -11,9 +12,10 @@
 
 /* Heading stylings for dashboard modules */
 .module-name {
+  @include font-size(28px);
   font-family: lato;
   font-weight: bold;
-  font-size: 36px;
+  //font-size: 28px;
   line-height: 43px;
   align-items: center;
   text-align: left;
@@ -174,110 +176,6 @@ hr {
 
   margin-right:5%;
  }
-
-
-
-/**
-
-FONT SIZES
-
-*/
-
-.thirtySixFont{
-  font-size:36px;
-}
-
-.thirtytwoFont{
-  font-size:32px;
-}
-
-.twentyEightFont{
-  font-size:28px;
-}
-
-.twentySixFont{
-  font-size:26px;
-}
-
-.twentyFourFont{
-  font-size:24px;
-}
-
-.twentyTwoFont{
-  font-size:22px;
-}
-
-.eighteenFont{
-  font-size:18px;
-}
-
-.sixteenFont{
-  font-size:16px;
-}
-
-.fourteenFont{
-  font-size:14px;
-}
-
-
-@media only screen and (max-width: 810px) {
-  .button-style {
-    font-size: 14px;
-    width: 16vw;
-     height: 28px;
- 
-  }
-
-
-.module-name{
-  font-size:28px;
-}
-
-.companyLocation{
-   font-size:14px;
-}
-
-.companyIMG{
-  width:100%;
-  height:50%;
-}
-
-.thirtySixFont{
-  font-size:28px;
-}
-
-.thirtytwoFont{
-  font-size:24px;
-}
-
-.twentyEightFont{
-  font-size:20px;
-}
-
-.twentySixFont{
-  font-size:19px;
-}
-
-  .twentyFourFont{
-    font-size:18px;
-  }
-
-  .twentyTwoFont{
-    font-size:16px;
-  }
-
-  .eighteenFont{
-    font-size:14px;
-  }
-
-.sixteenFont{
-  font-size:14px;
-}
-
-  .fourteenFont{
-    font-size:12px;
-  }
-}
 
 
 /*APPLY SKILLS STYLING*/
