@@ -109,15 +109,10 @@ class HowtoApply extends React.Component {
                     </Text>
 
                     <ul className="how-to-apply-list eighteenFont text-left">
-                      <li>
-                        Be specific, give us as much information as you can.
-                      </li>
-                      <li>
-                        Make sure to fill out all the necessary forms so we can
-                        fulfill company requirements
-                      </li>
-                      <li> Be honest, write about yourself</li>
-                      <li>Submit when everything is filled out!</li>
+                      <li key="1">Be specific, give us as much information as you can.</li>
+                      <li key="2">Make sure to fill out all the necessary forms so we can fulfill company requirements</li>
+                      <li key="3"> Be honest, write about yourself</li>
+                      <li key="4">Submit when everything is filled out!</li>
                     </ul>
                   </div>
                 </AntCol>
@@ -134,28 +129,19 @@ class HowtoApply extends React.Component {
                     </Text>
 
                     <ul className="how-to-apply-list eighteenFont text-left">
-                      <li>Weighted and Unweighted Grade Point Average (GPA)</li>
-                      <li>
-                        List of interested industries (Ie. Finance or
-                        Biotechnology)
-                      </li>
-                      <li>List of relevant courses taken</li>
-                      <li>List of extracurricular activities</li>
-                      <li>
-                        Year of Graduation (Must be at least a high school
-                        Sophomore to high school Senior)
-                      </li>
-                      <li>Availability to work</li>
-                      <li>Resumé or CV</li>
-                      <li>List Item</li>
-                      <li>Cover Letter (Optional)</li>
-                      <li>
-                        Letters of Recommendation (1 <em>highly</em>{" "}
-                        recommended, but 2 is advised)
-                      </li>
-                      <li>Transcript</li>
-                      <li>School Profile</li>
-                      <li>List of Accomplishments/Achievements</li>
+                      <li key="1">Weighted and Unweighted Grade Point Average (GPA)</li>
+                      <li key="2">List of interested industries (Ie. Finance or Biotechnology)</li>
+                      <li key="3">List of relevant courses taken</li>
+                      <li key="4">List of extracurricular activities</li>
+                      <li key="5">Year of Graduation (Must be at least a high school Sophomore to high school Senior)</li>
+                      <li key="6">Availability to work</li>
+                      <li key="7">Resumé or CV</li>
+                      <li key="8">List Item</li>
+                      <li key="9">Cover Letter (Optional)</li>
+                      <li key="10">Letters of Recommendation (1 <em>highly</em>{" "}recommended, but 2 is advised)</li>
+                      <li key="11">Transcript</li>
+                      <li key="12">School Profile</li>
+                      <li key="13">List of Accomplishments/Achievements</li>
                     </ul>
                   </div>
                 </AntCol>
@@ -164,7 +150,7 @@ class HowtoApply extends React.Component {
                 <AntCol span={24}>
                   <div className="how-to-apply-intro-container">
                     <Heading className="twentyEightFont main-header">
-                      Ace Your Application
+                      Application Breakdown
                     </Heading>
                     <Heading
                       ref={this.Internref}
