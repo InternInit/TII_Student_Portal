@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import "../../../App.scss";
 import "../dashboard.scss";
+import ImageWebp from "./ImageWebp";
 
 //IMAGE IMPORTS
 import GettingStarted from "./GettingStarted.jpg";
