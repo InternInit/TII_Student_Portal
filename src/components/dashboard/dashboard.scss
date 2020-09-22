@@ -5,6 +5,19 @@
 /*
 ============================================================
 ************************************************************
+                  Variables
+************************************************************
+============================================================
+*/
+
+$small-breakpoint: 600px;
+$medium-breakpoint: 768px;
+$large-breakpoint: 992px;
+$x-large-breakpoint: 1200px;
+
+/*
+============================================================
+************************************************************
                   Standard Design Changes
 ************************************************************
 ============================================================
@@ -141,7 +154,7 @@ hr {
   border: 0;
   border-bottom: 0px;
   -webkit-box-shadow: none;
-          box-shadow: none;
+  box-shadow: none;
 }
 
 /*
@@ -156,75 +169,85 @@ hr {
 .button-style {
   border-radius: 2px;
   width: 12vw;
-  min-width:150px;
+  min-width: 150px;
   height: 36px;
-  //display: flex;
-  //align-self: center;
-  //align-items: center;
-  //justify-content: center;
 }
 
-.companyIMG{
-  width:25vw;
-  height:200px;
+.add-button-style {
+  border-radius: 2px;
+  width: 30%;
+  min-width: 100px;
+  height: 36px;
+
+  margin-right: 1%;
+
+  white-space: normal;
+  word-wrap: break-word;
+
+  @media screen and (max-width: $large-breakpoint) {
+    @include font-size(14px);
+    display: inline;
+    width: 100%;
+    margin-top: 1%;
+    margin-bottom: 1%;
+  }
 }
 
-.companyLocation{
-  width:200px;
-  font-size:18px;
+.companyIMG {
+  width: 25vw;
+  height: 200px;
+}
 
-  margin-right:5%;
- }
+.companyLocation {
+  width: 200px;
+  font-size: 18px;
 
+  margin-right: 5%;
+}
 
 /*APPLY SKILLS STYLING*/
 @media only screen and (max-width: 810px) {
-/* Stylings for cover image in large education cards */
-.apply-skills-big-card-cover {
-  height: 300px;
+  /* Stylings for cover image in large education cards */
+  .apply-skills-big-card-cover {
+    height: 300px;
     border-top-left-radius: 8px;
-  border-top-right-radius: 8px;
-}
+    border-top-right-radius: 8px;
+  }
 
-.apply-skills-big-card-title {
-  font-size: 36px;
-   }
+  .apply-skills-big-card-title {
+    font-size: 36px;
+  }
 
-.apply-skills-big-card-time {
+  .apply-skills-big-card-time {
     font-size: 18px;
-   margin-top: -16px;
-  margin-bottom: 8px;
-}
+    margin-top: -16px;
+    margin-bottom: 8px;
+  }
 
-.apply-skills-big-card-content {
-  font-size: 14px;
-   margin-top: -8px;
-}
+  .apply-skills-big-card-content {
+    font-size: 14px;
+    margin-top: -8px;
+  }
 
-/* Styling for little cards */
-.apply-skills-little-card-cover {
-  height: 200px;
- }
+  /* Styling for little cards */
+  .apply-skills-little-card-cover {
+    height: 200px;
+  }
 
-.apply-skills-little-card-title {
-  font-size: 18px;
- }
+  .apply-skills-little-card-title {
+    font-size: 18px;
+  }
 
-.apply-skills-little-card-content {
-  font-size: 12px;
-   margin-top: -8px;
-}
+  .apply-skills-little-card-content {
+    font-size: 12px;
+    margin-top: -8px;
+  }
 
-.apply-skills-little-card-time {
-   font-size: 14px;
-   margin-top: -8px;
-  margin-bottom: 12px;
-}
-
- 
-
-
-
+  .apply-skills-little-card-time {
+    font-size: 14px;
+    margin-top: -8px;
+    margin-bottom: 12px;
+  }
 }
 
 .rounded-borders {
