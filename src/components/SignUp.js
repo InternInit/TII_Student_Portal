@@ -5,6 +5,7 @@ import {
   Form,
   Popover,
   notification,
+  message,
   Modal,
   Checkbox,
 } from "antd";
@@ -37,7 +38,7 @@ schema.is().min(8).has().uppercase().has().lowercase().has().digits();
 const validationRules = (required, inputName, type, pattern) => [
   {
     required: required,
-    message: "Please input your " + inputName,
+    message: "Please enter a valid " + inputName,
     type: type,
     pattern: pattern,
   },
@@ -254,7 +255,7 @@ class SignUp extends React.Component {
           </Container>
           <Modal
             className="email-modal"
-            style={{borderRadius: "5px"}}
+            style={{ borderRadius: "5px" }}
             title="Email Confirmation"
             visible={this.state.emailConfirmationVisible}
             onOk={this.handleOk}
@@ -263,6 +264,7 @@ class SignUp extends React.Component {
             <EmailConfirmation
               email={this.state.email}
               formRef={this.emailFormRef}
+              resendConfirmCode={this.resendConfirmCode}
             />
           </Modal>
         </Background>
@@ -289,6 +291,13 @@ class SignUp extends React.Component {
     }
   };
 
+  resendConfirmCode = async () => {
+    let { username } = this.state;
+    console.log(username);
+    const user = await Auth.resendSignUp(username);
+    message.success("We sent you a new confirmation code!");
+  };
+
   handleOk = async (e) => {
     const values = await this.emailFormRef.current.getFieldsValue();
     const code = values.confirmationCode;
@@ -308,6 +317,9 @@ class SignUp extends React.Component {
         .catch(() => console.log("Could Not Sign Out"));
 
       const user = await Auth.signIn(username, password);
+      this.setState({
+        emailConfirmationVisible: false,
+      });
       this.props.newAuth();
       this.props.history.push("/dashboard");
     } catch (error) {
@@ -317,10 +329,6 @@ class SignUp extends React.Component {
         "Sorry, we couldnt confirm that code."
       );
     }
-
-    this.setState({
-      emailConfirmationVisible: false,
-    });
   };
 
   handleCancel = (e) => {

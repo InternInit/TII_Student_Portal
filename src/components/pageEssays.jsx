@@ -66,10 +66,6 @@ const mapDispatchToProps = {
 class PageEssays extends React.Component {
   formRef = React.createRef();
 
-  state = {
-    loaded: false,
-  };
-
   waitForRef = (ref) => {
     return new Promise((resolve, reject) => {
       function checkRef() {
@@ -106,6 +102,7 @@ class PageEssays extends React.Component {
   componentDidMount() {
     this.getUserData();
     this.scrollToRef();
+    console.log(this.state);
   }
 
   componentWillUnmount() {
@@ -118,12 +115,16 @@ class PageEssays extends React.Component {
     this.essayOneRef = React.createRef();
     this.essayTwoRef = React.createRef();
     this.additionalInfoRef = React.createRef();
-  }
 
-  state = {
-    fileListCL: [],
-    fileListPortfolio: [],
-  };
+    this.state = {
+      loaded: false,
+      fileListCL: [],
+      fileListPortfolio: [],
+      essayOneLen: 0,
+      essayTwoLen: 0,
+      essayThreeLen: 0,
+    };
+  }
 
   render() {
     return (
@@ -292,8 +293,8 @@ class PageEssays extends React.Component {
                       </p>
                     </React.Fragment>
                   )}
-                  extra="1000 Character Limit"
-                  rules={this.validationRules("response")}
+                  extra={this.state.essayOneLen + "/1000 Characters"}
+                  rules={this.validationRules(true, "response")}
                 >
                   <TextArea
                     autoSize={{ minRows: 5, maxRows: 10 }}
@@ -334,8 +335,8 @@ class PageEssays extends React.Component {
                       </p>
                     </React.Fragment>
                   )}
-                  extra="1000 Character Limit"
-                  rules={this.validationRules("response")}
+                  extra={this.state.essayTwoLen + "/1000 Characters"}
+                  rules={this.validationRules(true, "response")}
                 >
                   <TextArea
                     autoSize={{ minRows: 5, maxRows: 10 }}
@@ -377,8 +378,8 @@ class PageEssays extends React.Component {
                       </p>
                     </React.Fragment>
                   )}
-                  extra="1000 Character Limit"
-                  rules={this.validationRules("response")}
+                  extra={this.state.essayThreeLen + "/1000 Characters"}
+                  rules={this.validationRules(false, "response")}
                 >
                   <TextArea
                     autoSize={{ minRows: 5, maxRows: 10 }}
@@ -525,9 +526,9 @@ class PageEssays extends React.Component {
    * Requires input on form items
    *
    */
-  validationRules = (inputName, type) => [
+  validationRules = (required, inputName, type) => [
     {
-      required: true,
+      required: required,
       message: "Please enter a valid " + inputName,
       type: type,
     },
@@ -542,6 +543,14 @@ class PageEssays extends React.Component {
     let allValues = this.formRef.current.getFieldsValue();
     delete allValues["Cover Letter"];
     delete allValues.Portfolio;
+
+    this.setState({
+      essayOneLen: allValues["Why This Industry Essay"].length,
+    });
+    this.setState({
+      essayTwoLen: allValues["Leadership Roles Essay"].length,
+    });
+    this.setState({ essayThreeLen: allValues["Extra Essay"].length });
 
     let completedCount = 0;
     let checklist = [];
@@ -698,6 +707,16 @@ class PageEssays extends React.Component {
             console.log(parsedData);
             this.setState({ loaded: true });
             this.formRef.current.setFieldsValue(parsedData);
+
+            this.setState({
+              essayOneLen: parsedData["Why This Industry Essay"].length,
+            });
+            this.setState({
+              essayTwoLen: parsedData["Leadership Roles Essay"].length,
+            });
+            this.setState({ essayThreeLen: parsedData["Extra Essay"].length });
+
+            console.log(this.state);
 
             try {
               let fileListCL = parsedData["Cover Letter"].fileList;
