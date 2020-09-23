@@ -768,6 +768,7 @@ class PagePersonal extends Component {
         item.key = field;
         if (
           typeof allValues[field] !== "undefined" &&
+          allValues[field] !== null &&
           allValues[field] !== ""
         ) {
           completedCount++;
