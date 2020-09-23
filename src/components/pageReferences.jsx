@@ -1,7 +1,12 @@
 import React, { Component } from "react";
-import { Form, Input, Button, Skeleton, Popover } from "antd";
+import { Form, Input, Button, Skeleton, Popover, notification } from "antd";
 import { Row, Col } from "antd";
-import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
+import {
+  CheckOutlined,
+  CloseOutlined,
+  MinusCircleOutlined,
+  PlusOutlined,
+} from "@ant-design/icons";
 import { InfoCircle } from "./StyledComponents/InternshipForms";
 
 import "../App.scss";
@@ -474,8 +479,27 @@ class PageReferences extends Component {
   onFinish = (values) => {
     console.log("FinishRefPage:", values);
     this.props.updateCompletionState(3, 1.0);
-    this.props.onSubmit(values, "3");
-    this.routeChange("/submission-success");
+
+    let status = this.props.completionState;
+
+    if (_.isEqual(status, [1, 1, 1, 1])) {
+      // checks to see if all forms are completed
+      //this.setState({ CanSubmit: true }); //sets canSubmit to true
+      notification.open({
+        //notification
+        message: "Success.",
+        description: "Your results have been submitted",
+        icon: <CheckOutlined style={{ color: "green" }} />,
+      });
+      this.props.onSubmit(values, "3");
+      this.routeChange("/submission-success");
+    } else {
+      notification.open({
+        message: "Failed.",
+        description: "You have to fill all necessary forms.",
+        icon: <CloseOutlined style={{ color: "red" }} />,
+      });
+    }
   };
 
   /**
