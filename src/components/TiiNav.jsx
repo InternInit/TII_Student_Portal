@@ -234,6 +234,32 @@ class TiiNav extends React.Component {
         description: "You have to fill all necessary forms.",
         icon: <CloseOutlined style={{ color: "red" }} />,
       });
+
+      this.goToUnfinishedPage();
+    }
+  };
+
+  goToUnfinishedPage = () => {
+    let status = this.props.completionState;
+
+    let boolStatus = status.map((item) => item < 1);
+    let routeIndex = boolStatus.indexOf(true);
+
+    switch (routeIndex) {
+      case 0:
+        this.routeChange("/apply/internship-info#validate");
+        break;
+      case 1:
+        this.routeChange("/apply/personal#validate");
+        break;
+      case 2:
+        this.routeChange("/apply/written-work#validate");
+        break;
+      case 3:
+        this.routeChange("/apply/references#validate");
+        break;
+      default:
+        break;
     }
   };
 
