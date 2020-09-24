@@ -1,0 +1,84 @@
+/*EDIT PROFILE STYLING*/
+
+/*Profile Cover*/
+.edit-profile-card-cover {
+  height: 200px;
+  object-fit: cover;
+}
+
+/* Reduces brightness of avatar */
+.edit-profile-avatar-group:hover img {
+  filter: brightness(50%);
+  transition-duration: 0.5s ease;
+  cursor: pointer;
+}
+
+/*Avatar*/
+.edit-profile-change-profile-picture {
+  opacity: 0;
+  height: 120px;
+  width: 120px;
+  font-size: 40px;
+  font-weight: bold;
+  border-radius: 50%;
+  position: absolute;
+  top: 130px;
+  left: 7vh;
+  color: white;
+  cursor: pointer;
+}
+
+/*Picture icon that appears on hover */
+.edit-profile-change-profile-picture-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-left: -20px;
+  margin-top: -20px;
+}
+
+/*Allows all hovers of the avatar to affect the icon */
+.edit-profile-avatar:hover + .edit-profile-change-profile-picture,
+.edit-profile-change-profile-picture:hover {
+  cursor: pointer;
+  opacity: 0.85;
+  transition: 0.5s ease;
+}
+
+/* Container that holds all the edit profile stuff */
+.edit-profile-container {
+  margin-left: 7vh;
+}
+
+.edit-profile-avatar-selection {
+  display: block;
+  width: 100%;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+
+  text-align: center;
+  font-family: Roboto;
+  font-weight: bold;
+  font-size: 14px;
+  color: #595959;
+  cursor: pointer;
+}
+
+.edit-profile-avatar-selection:hover {
+  transition: 0.5s ease;
+}
+
+.remove-avatar {
+  color: #f5222d;
+}
+
+.remove-avatar:hover {
+  color: #b90009f8;
+}
+
+.upload-photo-custom-styles:hover {
+  color: #1890ff;
+  transition: 0.25s ease;
+}

@@ -9,6 +9,7 @@ import {
   JobTitle,
   TabContainer,
 } from "./styledDashboardComponents";
+import { autoShowTooltip } from "aws-amplify";
 
 const QVCompany = styled.div`
   font-weight: bold;
@@ -27,10 +28,10 @@ const QVTitle = styled.div`
 const QVCaption = styled.div`
   font-weight: normal;
   color: #262626;
-   text-align: left;
+  text-align: left;
 
-   max-width:400px;
-  `;
+  max-width: 400px;
+`;
 
 const Col = styled.div`
   display: flex;
@@ -39,9 +40,9 @@ const Col = styled.div`
 `;
 
 const Row = styled.div`
-display:flex;
-flex-direction:row;
-`
+  display: flex;
+  flex-direction: row;
+`;
 
 const Image = styled.img`
   background-color: #d9d9d9;
@@ -58,9 +59,7 @@ const contentStyle = {
   flexDirection: "row",
   width: "100%",
   alignItems: "center",
-}
-
-
+};
 
 class SearchCompanytab extends React.Component {
   constructor(props) {
@@ -86,9 +85,8 @@ class SearchCompanytab extends React.Component {
 
     let showDescription = description;
     if (description.length >= 250) {
-      showDescription = description.substring(0, 250) + '. . .'
+      showDescription = description.substring(0, 250) + ". . .";
     }
-
 
     if (show === true) {
       ctab = (
@@ -143,15 +141,18 @@ class CLabel extends React.Component {
             <TabContainer>
               {/**Company Logo + Name + Position */}
 
-              <div
-                style={contentStyle}
-              >
+              <div style={contentStyle}>
                 {/**company logo */}
                 <Avatar
                   size={36}
                   shape="square"
                   src={this.props.logo}
-                  style={{ marginLeft: "8%", marginBottom: "14px" }}
+                  style={{
+                    marginLeft: "8%",
+                    marginBottom: "14px",
+                    width: "36px",
+                    height: "auto",
+                  }}
                 />
 
                 {/**company name and job */}
@@ -161,7 +162,7 @@ class CLabel extends React.Component {
                     alignItems: "flex-start",
                   }}
                 >
-                  <CompanyTitle className="twentySixFont">
+                  <CompanyTitle className="twentyFourFont">
                     {companyName}
                   </CompanyTitle>
                   <JobTitle
@@ -212,26 +213,20 @@ class QuickView extends React.Component {
               style={{
                 padding: "24px",
                 paddingBottom: "28px",
-                flexDirection: 'column',
-                alignItems: 'center'
-
+                flexDirection: "column",
+                alignItems: "center",
               }}
             >
-
-              <div style={{ width: '85%' }}>
-
-
-
+              <div style={{ width: "85%" }}>
                 <QVCompany className="twentyFourFont">{name}</QVCompany>
                 <QVTitle className="eighteenFont">{industry}</QVTitle>
 
-
                 <Row
                   style={{
-                    justifyContent: 'space-between'
+                    justifyContent: "space-between",
                   }}
                 >
-                  <Col style={{ alignItems: 'flex-start' }}>
+                  <Col style={{ alignItems: "flex-start" }}>
                     <QVCompany
                       className="eighteenFont"
                       style={{
@@ -240,7 +235,7 @@ class QuickView extends React.Component {
                       }}
                     >
                       Description
-                </QVCompany>
+                    </QVCompany>
 
                     <QVCaption
                       className="sixteenFont"
@@ -255,19 +250,16 @@ class QuickView extends React.Component {
                     alt="Company Visual"
                     className="companyIMG"
                   />
-
                 </Row>
 
-
-
-
-
-
-
-
-                <Row style={{ marginTop: '24px', width: '100%', justifyContent: 'space-between' }}>
-
-                  <div style={{ alignSelf: 'flex-start' }}>
+                <Row
+                  style={{
+                    marginTop: "24px",
+                    width: "100%",
+                    justifyContent: "space-between",
+                  }}
+                >
+                  <div style={{ alignSelf: "flex-start" }}>
                     <QVCompany
                       className="eighteenFont"
                       style={{ fontWeight: "500" }}
@@ -275,36 +267,31 @@ class QuickView extends React.Component {
                       Location
                     </QVCompany>
                     <QVCaption className="sixteenFont">
-                      {location}, the state of a location too
-                  </QVCaption>
+                      {location.charAt(0).toUpperCase() + location.slice(1)}
+                    </QVCaption>
                   </div>
-
 
                   <div>
-                    <Button
-                      className="button-style"
-                      type="primary"
-                      onClick={this.addCompany}
-                    >
-                      Add
-                    </Button>
-
-                    <Link
-                      to={`/dashboard/add-companies/company-information/${companyid}`}
-                    >
-                      <Button
-                        style={{ marginTop: "12px" }}
-                        className="button-style"
+                      <Link
+                        to={`/dashboard/add-companies/company-information/${companyid}`}
                       >
-                        More Details
+                        <Button
+                          style={{ marginTop: "12px", marginRight: "1vw" }}
+                          className="button-style eighteenFont"
+                        >
+                          More Details
+                        </Button>
+                      </Link>
+                      <Button
+                        className="button-style eighteenFont"
+                        type="primary"
+                        onClick={this.addCompany}
+                      >
+                        Add
                       </Button>
-                    </Link>
                   </div>
                 </Row>
-
-
               </div>
-
             </TabContainer>
           </div>
         ))}

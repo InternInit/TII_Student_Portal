@@ -1,0 +1,16 @@
+.blob-style {
+    z-index: 2;
+    position: absolute;
+    width: 50%;
+    top: 40%;
+}
+
+.email-modal .ant-modal-content {
+    border-radius: 15px;
+    padding: 5px;
+}
+
+.email-modal .ant-modal-header {
+    border-radius: 15px 15px 0px 0px;
+    padding: 24px 32px;
+}

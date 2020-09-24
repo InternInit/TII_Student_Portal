@@ -1,13 +1,14 @@
 import React, { Component } from "react";
-import "../../App.css";
-import "./dashboard.css";
+import "../../App.scss";
+import "./dashboard.scss";
 import "antd/dist/antd.css";
-import { Menu, message } from "antd";
+import { Menu, message} from "antd";
 import { Link } from "react-router-dom";
 import { withRouter } from "react-router";
 
 const MenuItemStyle = {
-  width: "30%",
+  width: "33.3%",
+  margin: "auto",
   fontFamily: "Lato",
   fontWeight: "bold",
   textAlign: "center",
@@ -61,7 +62,6 @@ class DashboardNavBar extends Component {
           <Menu.Item
             style={MenuItemStyle}
             className="twentyFourFont"
-            /*disabled={this.props.version < 1}*/
             key="add-companies"
           >
             <Link to="/dashboard/add-companies">Add Companies</Link>

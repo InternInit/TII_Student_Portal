@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 
-import "../../App.css";
-import "./dashboard.css";
+import "../../App.scss";
+import "./dashboard.scss";
 import "antd/dist/antd.css";
 
 import Checklist from "./checklist.jsx";

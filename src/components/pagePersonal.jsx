@@ -9,14 +9,14 @@ import {
   InputNumber,
   Spin,
   Popover,
-  Skeleton
+  Skeleton,
 } from "antd";
 import { Row, Col } from "antd";
 import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
 import { InfoCircle } from "./StyledComponents/InternshipForms";
 
 import "antd/dist/antd.css";
-import "../App.css";
+import "../App.scss";
 
 //React Routing
 import { withRouter } from "react-router";
@@ -25,7 +25,7 @@ import { withRouter } from "react-router";
 import { connect } from "react-redux";
 import {
   updateCompletionState,
-  updateCompletionChecklist
+  updateCompletionChecklist,
 } from "../redux/actions";
 
 import _ from "lodash";
@@ -43,19 +43,19 @@ const thirdSpan = standardSpan / 3;
 const formItemLayout = {
   labelCol: {
     xs: { span: 24 },
-    sm: { span: 4 }
+    sm: { span: 4 },
   },
   wrapperCol: {
     xs: { span: 24 },
-    sm: { span: 24 }
-  }
+    sm: { span: 24 },
+  },
 };
 
 const formItemLayoutWithOutLabel = {
   wrapperCol: {
     xs: { span: 24, offset: 0 },
-    sm: { span: 24, offset: 0 }
-  }
+    sm: { span: 24, offset: 0 },
+  },
 };
 
 //items
@@ -66,7 +66,7 @@ const race = [
   "Middle Eastern",
   "Native American/Native Alaskan",
   "Asian",
-  "Native Hawaiian/Other Pacific Islander"
+  "Native Hawaiian/Other Pacific Islander",
 ];
 const latinx = ["Yes, I AM Hispanic/Latinx", "No, I am NOT Hispanic/Latinx"];
 const allStates = [
@@ -128,45 +128,43 @@ const allStates = [
   "Washington",
   "West Virginia",
   "Wisconsin",
-  "Wyoming"
+  "Wyoming",
 ];
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     completionState: state.completionState,
-    completionChecklist: state.completionChecklist
+    completionChecklist: state.completionChecklist,
   };
 };
 
 const mapDispatchToProps = {
   updateCompletionState,
-  updateCompletionChecklist
+  updateCompletionChecklist,
 };
-
-
-
 
 class PagePersonal extends Component {
   constructor(props) {
     super(props);
     this.routeChange = this.routeChange.bind(this);
+    this.eduRef = React.createRef();
   }
 
   state = {
-    loaded: false
+    loaded: false,
   };
 
   boldify = (text, info = false, popoverText) =>
     !info ? (
       <strong>{text}</strong>
     ) : (
-        <React.Fragment>
-          <strong>{text}</strong>
-          <Popover style={{ width: "10px" }} title={text} content={popoverText}>
-            <InfoCircle size={12} />
-          </Popover>
-        </React.Fragment>
-      );
+      <React.Fragment>
+        <strong>{text}</strong>
+        <Popover style={{ width: "10px" }} title={text} content={popoverText}>
+          <InfoCircle size={12} />
+        </Popover>
+      </React.Fragment>
+    );
   /**
    *
    * Requires Form to be filled
@@ -175,20 +173,52 @@ class PagePersonal extends Component {
   validationRules = (required, inputName, type, pattern, min, max) => [
     {
       required: required,
-      message: "Please input your " + inputName,
+      message: "Please enter a valid " + inputName,
       type: type,
       pattern: pattern,
       min: min,
-      max: max
-    }
+      max: max,
+    },
   ];
 
   /**Makes Text Bold */
 
   formRef = React.createRef();
 
+  waitForRef = (ref) => {
+    return new Promise((resolve, reject) => {
+      function checkRef() {
+        if (ref.current === null) {
+          setTimeout(() => {
+            checkRef();
+          }, 10);
+        } else {
+          resolve(ref);
+        }
+      }
+      checkRef();
+    });
+  };
+
+  scrollToRef = async () => {
+    let neededRef;
+    let offset = 0;
+    let hash = this.props.location.hash;
+    if (hash === "" || hash === "#PersonalInformation") {
+      window.scrollTo(0, 0);
+    } else {
+      if (hash === "#Education") {
+        neededRef = this.eduRef;
+      }
+
+      let fetchedRef = await this.waitForRef(neededRef);
+      window.scrollTo(0, fetchedRef.current.offsetTop);
+    }
+  };
+
   componentDidMount() {
     this.getUserData();
+    this.scrollToRef();
   }
 
   componentWillUnmount() {
@@ -203,16 +233,15 @@ class PagePersonal extends Component {
          * Loading wheel while information is being pulled from backend
          *
          */}
-        {window.scrollTo(0, 0)}
 
-        {!this.state.loaded ?
+        {!this.state.loaded ? (
           <React.Fragment>
-            <div style={{ marginBottom: '40px' }}>
-              <Skeleton.Input style={{ width: "25vw" }} size='default' />
+            <div style={{ marginBottom: "40px" }}>
+              <Skeleton.Input style={{ width: "25vw" }} size="default" />
             </div>
             <Row gutter={formGutter}>
               <Col span={halfSpan}>
-                <Skeleton.Input style={{ width: '25vw' }} size='small' />
+                <Skeleton.Input style={{ width: "25vw" }} size="small" />
               </Col>
             </Row>
 
@@ -223,47 +252,19 @@ class PagePersonal extends Component {
 
             <Row gutter={formGutter}>
               <Col span={halfSpan}>
-
-                <Skeleton.Input style={{ width: '25vw' }} size='small' />
+                <Skeleton.Input style={{ width: "25vw" }} size="small" />
               </Col>
               <Col span={halfSpan}>
-                <Skeleton.Input style={{ width: '25vw' }} size='small' />
-
+                <Skeleton.Input style={{ width: "25vw" }} size="small" />
               </Col>
             </Row>
 
             <Row gutter={formGutter}>
               <Col span={halfSpan}>
-                <Skeleton.Input style={{ width: '25vw' }} size='small' />
+                <Skeleton.Input style={{ width: "25vw" }} size="small" />
               </Col>
               <Col span={halfSpan}>
-                <Skeleton.Input style={{ width: '25vw' }} size='small' />
-
-              </Col>
-            </Row>
-
-            <Row gutter={formGutter}>
-              <Col span={halfSpan}></Col>
-              <Col span={halfSpan}></Col>
-
-              <Col span={halfSpan}>
-                <Skeleton.Input style={{ width: '25vw' }} size='small' />
-              </Col>
-              <Col span={halfSpan}>
-                <Skeleton.Input style={{ width: '25vw' }} size='small' />
-
-              </Col>
-            </Row>
-
-
-
-            <Row gutter={formGutter}>
-              <Col span={halfSpan}>
-                <Skeleton.Input style={{ width: '25vw' }} size='small' />
-
-              </Col>
-              <Col span={halfSpan}>
-                <Skeleton.Input style={{ width: '25vw' }} size='small' />
+                <Skeleton.Input style={{ width: "25vw" }} size="small" />
               </Col>
             </Row>
 
@@ -272,11 +273,31 @@ class PagePersonal extends Component {
               <Col span={halfSpan}></Col>
 
               <Col span={halfSpan}>
-                <Skeleton.Input style={{ width: '25vw' }} size='small' />
+                <Skeleton.Input style={{ width: "25vw" }} size="small" />
               </Col>
               <Col span={halfSpan}>
-                <Skeleton.Input style={{ width: '25vw' }} size='small' />
+                <Skeleton.Input style={{ width: "25vw" }} size="small" />
+              </Col>
+            </Row>
 
+            <Row gutter={formGutter}>
+              <Col span={halfSpan}>
+                <Skeleton.Input style={{ width: "25vw" }} size="small" />
+              </Col>
+              <Col span={halfSpan}>
+                <Skeleton.Input style={{ width: "25vw" }} size="small" />
+              </Col>
+            </Row>
+
+            <Row gutter={formGutter}>
+              <Col span={halfSpan}></Col>
+              <Col span={halfSpan}></Col>
+
+              <Col span={halfSpan}>
+                <Skeleton.Input style={{ width: "25vw" }} size="small" />
+              </Col>
+              <Col span={halfSpan}>
+                <Skeleton.Input style={{ width: "25vw" }} size="small" />
               </Col>
             </Row>
 
@@ -284,21 +305,17 @@ class PagePersonal extends Component {
               <Col span={standardSpan}>
                 <Col span={halfSpan}></Col>
                 <Col span={halfSpan}></Col>
-                <Skeleton.Input style={{ width: '25vw' }} size='small' />
+                <Skeleton.Input style={{ width: "25vw" }} size="small" />
               </Col>
-
-
 
               <Col span={standardSpan}>
                 <Col span={halfSpan}></Col>
                 <Col span={halfSpan}></Col>
 
-                <Skeleton.Input style={{ width: '25vw' }} size='small' />
-                <Skeleton.Input style={{ width: '25vw' }} size='small' />
-                <Skeleton.Input style={{ width: '25vw' }} size='small' />
-
+                <Skeleton.Input style={{ width: "25vw" }} size="small" />
+                <Skeleton.Input style={{ width: "25vw" }} size="small" />
+                <Skeleton.Input style={{ width: "25vw" }} size="small" />
               </Col>
-
             </Row>
 
             {/**
@@ -307,20 +324,20 @@ class PagePersonal extends Component {
              *
              */}
             <Form.Item>
-              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+              <div style={{ display: "flex", justifyContent: "space-between" }}>
                 <SkeletonButton />
                 <SkeletonButton />
               </div>
             </Form.Item>
-
-          </React.Fragment> :
+          </React.Fragment>
+        ) : (
           <React.Fragment>
             <h1>General Information</h1>
             <br />
             <Form
               name="pagePersonal"
               initialValues={{
-                remember: true
+                remember: true,
               }}
               layout="vertical"
               align="left"
@@ -329,21 +346,29 @@ class PagePersonal extends Component {
               onValuesChange={this.onValuesChange}
             >
               {/**
-             *
-             * Enter Gender Form
-             *
-             */}
+               *
+               * Enter Gender Form
+               *
+               */}
               <Row gutter={formGutter}>
                 <Col span={standardSpan}>
                   <Form.Item
                     key="gender"
                     name="Gender"
-                    label={this.boldify("What is your gender?", true,
-                      <React.Fragment>What gender do you identify as?<br /><br /> You do not have to answer if you do not want to.</React.Fragment>)}
+                    label={this.boldify(
+                      "What is your gender?",
+                      true,
+                      <React.Fragment>
+                        What gender do you identify as?
+                        <br />
+                        <br /> You do not have to answer if you do not want to.
+                      </React.Fragment>
+                    )}
                     rules={this.validationRules(true, "gender")}
+                    style={{ textAlign: "left" }}
                   >
-                    <Radio.Group>
-                      {genders.map(gender => (
+                    <Radio.Group className="universal-left">
+                      {genders.map((gender) => (
                         <Radio key={gender} value={gender}>
                           {gender}
                         </Radio>
@@ -354,30 +379,36 @@ class PagePersonal extends Component {
               </Row>
 
               {/**
-             *
-             * Enter Race/Ethnicity
-             *
-             */}
+               *
+               * Enter Race/Ethnicity
+               *
+               */}
               <Row gutter={formGutter}>
                 <Col span={standardSpan}>
                   <Form.Item
                     key="race"
-                    label={this.boldify("Race/Ethnicity", true,
+                    label={this.boldify(
+                      "Race/Ethnicity",
+                      true,
                       <React.Fragment>
-                        You do not have to answer this question, but this information <br />could be usefule for preventing discrimation in the hiring process.
-                  </React.Fragment>
+                        You do not have to answer this question, but this
+                        information <br />
+                        could be usefule for preventing discrimation in the
+                        hiring process.
+                      </React.Fragment>
                     )}
                     name="Race"
                     extra="Check all that apply"
+                    style={{ textAlign: "left" }}
                   >
                     <Checkbox.Group>
-                      <Row>
-                        {race.map(ethnicity => (
-                          <Col span={halfSpan}>
+                      <Row gutter={[64, 0]}>
+                        {race.map((ethnicity) => (
+                          <Col className="universal-left" span={12}>
                             <Checkbox
                               value={ethnicity}
                               style={{
-                                lineHeight: "32px"
+                                lineHeight: "32px",
                               }}
                             >
                               {ethnicity}
@@ -391,33 +422,38 @@ class PagePersonal extends Component {
               </Row>
 
               {/**
-             *
-             * Enter Latina/X
-             *
-             */}
+               *
+               * Enter Latina/X
+               *
+               */}
               <Row gutter={formGutter}>
-                <Col span={standardSpan}>
+                <Col span={standardSpan} className="universal-left">
                   <Form.Item
                     key="latinx"
-                    label={this.boldify("If you are Hispanic/Latinx", true,
+                    label={this.boldify(
+                      "If you are Hispanic/Latinx",
+                      true,
                       <React.Fragment>
-                        You do not have to answer this question, but this information <br />could be usefule for preventing discrimation in the hiring process.
-                  </React.Fragment>
+                        You do not have to answer this question, but this
+                        information <br />
+                        could be usefule for preventing discrimation in the
+                        hiring process.
+                      </React.Fragment>
                     )}
                     name="Is Latinx"
                   >
                     <Checkbox.Group>
-                      {latinx.map(ethnicity => (
-                        <Col>
+                      {latinx.map((ethnicity) => (
+                        <Row>
                           <Checkbox
                             value={ethnicity}
                             style={{
-                              lineHeight: "32px"
+                              lineHeight: "32px",
                             }}
                           >
                             {ethnicity}
                           </Checkbox>
-                        </Col>
+                        </Row>
                       ))}
                     </Checkbox.Group>
                   </Form.Item>
@@ -425,10 +461,10 @@ class PagePersonal extends Component {
               </Row>
 
               {/**
-             *
-             * Enter Age Form
-             *
-             */}
+               *
+               * Enter Age Form
+               *
+               */}
               <Row gutter={formGutter}>
                 <Col span={standardSpan}>
                   <Form.Item
@@ -450,27 +486,27 @@ class PagePersonal extends Component {
               </Row>
 
               {/**
-             *
-             * Only Fill out What you feel confortable filling out
-             *
-             */}
+               *
+               * Only Fill out What you feel confortable filling out
+               *
+               */}
               <p style={{ paddingBottom: "24px", marginTop: "-12px" }}>
                 Fill out only what you're comfortable with, but understand that
                 missing factors could weaken your application.
-            </p>
+              </p>
 
               {/**
-             *
-             * Education History
-             *
-             */}
-              <h1>Please Input Your Educational History</h1>
+               *
+               * Education History
+               *
+               */}
+              <h1 ref={this.eduRef}>Please Input Your Educational History</h1>
 
               {/**
-             *
-             * School Box
-             *
-             */}
+               *
+               * School Box
+               *
+               */}
               <Form.List name="Education">
                 {(fields, { add, remove }) => {
                   return (
@@ -489,7 +525,7 @@ class PagePersonal extends Component {
                                 className="dynamic-delete-button"
                                 style={{
                                   fontSize: "18px",
-                                  padding: "0 8px 0 0"
+                                  padding: "0 8px 0 0",
                                 }}
                                 onClick={() => {
                                   remove(field.name);
@@ -500,10 +536,10 @@ class PagePersonal extends Component {
                             <h2>School {index + 1}</h2>
 
                             {/**
-                           *
-                           * School Name
-                           *
-                           */}
+                             *
+                             * School Name
+                             *
+                             */}
                             <Form.Item
                               {...field}
                               key={[field.fieldKey, "schoolName"]}
@@ -520,10 +556,10 @@ class PagePersonal extends Component {
                             </Form.Item>
 
                             {/**
-                           *
-                           * School Addresss Line
-                           *
-                           */}
+                             *
+                             * School Addresss Line
+                             *
+                             */}
                             <Row gutter={addressGutter}>
                               <Col span={standardSpan}>
                                 <Form.Item
@@ -532,7 +568,7 @@ class PagePersonal extends Component {
                                   name={[field.name, "Address"]}
                                   rules={this.validationRules(
                                     true,
-                                    "school's address",
+                                    "address",
                                     "string",
                                     /\d{1,3}.?\d{0,3}\s[a-zA-Z]{2,30}\s[a-zA-Z]{2,15}/
                                   )}
@@ -543,10 +579,10 @@ class PagePersonal extends Component {
                             </Row>
 
                             {/**
-                           *
-                           * School Address (CITY, STATE, ZIP)
-                           *
-                           */}
+                             *
+                             * School Address (CITY, STATE, ZIP)
+                             *
+                             */}
                             <Row gutter={addressGutter}>
                               <Col span={thirdSpan}>
                                 <Form.Item
@@ -568,8 +604,11 @@ class PagePersonal extends Component {
                                   name={[field.name, "State"]}
                                   rules={this.validationRules(true, "state")}
                                 >
-                                  <Select placeholder="State">
-                                    {allStates.map(state => (
+                                  <Select
+                                    placeholder="State"
+                                    style={{ textAlign: "left" }}
+                                  >
+                                    {allStates.map((state) => (
                                       <Option key={state} value={state}>
                                         {state}
                                       </Option>
@@ -594,22 +633,33 @@ class PagePersonal extends Component {
                             </Row>
 
                             {/**
-                           *
-                           * Course Concentration
-                           *
-                           */}
+                             *
+                             * Course Concentration
+                             *
+                             */}
                             <Row gutter={formGutter}>
                               <Col span={halfSpan}>
                                 <Form.Item
                                   key={[field.fieldKey, "courseConcentration"]}
-                                  label={this.boldify("Course Concentration", true, <React.Fragment>
-                                    What subjects did you focus on at this school?
-                                  <br /><br />
-Ex: If I took multiple STEM courses at this school,<br /> I would include subjects like <em>Chemistry, Biology,</em> etc.
-                                </React.Fragment>)}
+                                  label={this.boldify(
+                                    "Course Concentration",
+                                    true,
+                                    <React.Fragment>
+                                      What subjects did you focus on at this
+                                      school?
+                                      <br />
+                                      <br />
+                                      Ex: If I took multiple STEM courses at
+                                      this school,
+                                      <br /> I would include subjects like{" "}
+                                      <em>Chemistry, Biology,</em> etc.
+                                    </React.Fragment>
+                                  )}
                                   name={[field.name, "Course Concentration"]}
                                   rules={this.validationRules(
-                                    "course concentration"
+                                    true,
+                                    "course",
+                                    "string"
                                   )}
                                   small="What is the thesis of your high shool career?"
                                 >
@@ -619,15 +669,20 @@ Ex: If I took multiple STEM courses at this school,<br /> I would include subjec
                               <Col span={halfSpan}>
                                 <Form.Item
                                   key={[field.fieldKey, "yearsCompleted"]}
-                                  label={this.boldify("Years Completed", true,
+                                  label={this.boldify(
+                                    "Years Completed",
+                                    true,
                                     <React.Fragment>
-                                      The number of years you spend at a school gives<br /> companies a time reference for your course concentration.
-                                </React.Fragment>
+                                      The number of years you spend at a school
+                                      gives
+                                      <br /> companies a time reference for your
+                                      course concentration.
+                                    </React.Fragment>
                                   )}
                                   name={[field.name, "Years Completed"]}
                                   rules={this.validationRules(
                                     true,
-                                    "years completed",
+                                    "number of years",
                                     "string",
                                     /^\d{1,3}$/
                                   )}
@@ -641,10 +696,10 @@ Ex: If I took multiple STEM courses at this school,<br /> I would include subjec
                       ))}
 
                       {/**
-                     *
-                     * Add School Button
-                     *
-                     */}
+                       *
+                       * Add School Button
+                       *
+                       */}
                       <Form.Item>
                         <Button
                           type="dashed"
@@ -655,11 +710,11 @@ Ex: If I took multiple STEM courses at this school,<br /> I would include subjec
                           style={{
                             width: "100%",
                             marginTop: "10px",
-                            marginBottom: "30px"
+                            marginBottom: "30px",
                           }}
                         >
                           <PlusOutlined /> Add School
-                      </Button>
+                        </Button>
                       </Form.Item>
                     </div>
                   );
@@ -667,10 +722,10 @@ Ex: If I took multiple STEM courses at this school,<br /> I would include subjec
               </Form.List>
 
               {/**
-             *
-             * Previous/Save Buttons
-             *
-             */}
+               *
+               * Previous/Save Buttons
+               *
+               */}
               <Form.Item>
                 <Button
                   className="back-button"
@@ -679,14 +734,18 @@ Ex: If I took multiple STEM courses at this school,<br /> I would include subjec
                   onClick={this.backHandler}
                 >
                   Previous
-              </Button>
-                <Button className="next-button" type="primary" htmlType="submit">
+                </Button>
+                <Button
+                  className="next-button"
+                  type="primary"
+                  htmlType="submit"
+                >
                   Save and Continue
-              </Button>
+                </Button>
               </Form.Item>
             </Form>
           </React.Fragment>
-        }
+        )}
       </div>
     );
   }
@@ -709,6 +768,7 @@ Ex: If I took multiple STEM courses at this school,<br /> I would include subjec
         item.key = field;
         if (
           typeof allValues[field] !== "undefined" &&
+          allValues[field] !== null &&
           allValues[field] !== ""
         ) {
           completedCount++;
@@ -735,7 +795,7 @@ Ex: If I took multiple STEM courses at this school,<br /> I would include subjec
    * Handles form application completion
    *
    */
-  onFinish = values => {
+  onFinish = (values) => {
     console.log("FinishedPersonalPage:", values);
     this.props.updateCompletionState(1, 1.0);
     this.props.updateData(values, "1");
@@ -768,12 +828,12 @@ Ex: If I took multiple STEM courses at this school,<br /> I would include subjec
     fetch("/api/get_user_data", {
       method: "POST",
       headers: {
-        Authorization: "Bearer " + JSON.parse(JSON.stringify(token))
+        Authorization: "Bearer " + JSON.parse(JSON.stringify(token)),
       },
-      body: 1
+      body: 1,
     })
-      .then(response => response.json())
-      .then(data => {
+      .then((response) => response.json())
+      .then((data) => {
         let parsedRecv = JSON.parse(data);
         let parsedData = parsedRecv.formData;
         if (parsedRecv !== "No Info") {
@@ -789,7 +849,7 @@ Ex: If I took multiple STEM courses at this school,<br /> I would include subjec
    * Changes Route (React Router)
    *
    */
-  routeChange = path => {
+  routeChange = (path) => {
     console.log(path);
     if (path === "/apply/written-work") {
       this.props.clickThree();
@@ -801,8 +861,5 @@ Ex: If I took multiple STEM courses at this school,<br /> I would include subjec
 }
 
 export default withRouter(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(PagePersonal)
+  connect(mapStateToProps, mapDispatchToProps)(PagePersonal)
 );

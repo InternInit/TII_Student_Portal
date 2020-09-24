@@ -32,8 +32,9 @@ import {
 
 import { Auth } from "aws-amplify";
 
-import "../App.css";
-import "./dashboard/dashboard.css";
+import "../App.scss";
+import "./dashboard/dashboard.scss";
+import "./EditProfile.scss";
 
 //============================================================================================================
 //
@@ -48,15 +49,6 @@ const ModuleContainer = styled.div`
   border: 1px solid #e2e8ed;
   box-shadow: 0 0 6px -4px;
   width: 70%;
-`;
-
-const Heading = styled.div`
-  font-weight: bold;
-  font-family: Lato;
-  font-size: 28px;
-  display: flex;
-  justify-content: center;
-  color: #bfbfbf;
 `;
 
 const UserInfo = styled.div`
@@ -189,9 +181,8 @@ class EditProfile extends React.Component {
         <ul>
           <li>Minimum length of 8 characters</li>
           <li>Numerical characters (0-9)</li>
-          <li>Special characters</li>
-          <li>Uppercase letter</li>
-          <li>Lowercase letter</li>
+          <li>Uppercase letters</li>
+          <li>Lowercase letters</li>
         </ul>
       </React.Fragment>
     );
@@ -234,29 +225,35 @@ class EditProfile extends React.Component {
                   style={{
                     position: "absolute",
                     top: "130px",
-                    left: "7%",
+                    left: "7vh",
                     border: "2px solid white",
                   }}
                 />
                 <Popover
+                  className="popover"
                   placement="bottom"
                   trigger="click"
                   content={
                     <div>
-                      <Upload
-                        className="upload-style"
-                        listType="text"
-                        customRequest={this.customUploadRequest}
-                        beforeUpload={beforeUpload}
-                        onChange={this.handleChange}
-                        showUploadList={false}
-                        accept=".jpg, .jpeg, image/jpeg, .png, image/png"
+                      <span className="edit-profile-avatar-selection">
+                        <Upload
+                          className="upload-style"
+                          listType="text"
+                          customRequest={this.customUploadRequest}
+                          beforeUpload={beforeUpload}
+                          onChange={this.handleChange}
+                          showUploadList={false}
+                          accept=".jpg, .jpeg, image/jpeg, .png, image/png"
+                        >
+                          <span className="upload-photo-custom-styles">
+                            Upload Photo
+                          </span>
+                        </Upload>
+                      </span>
+                      <span
+                        onClick={this.customRemoveRequest}
+                        className="edit-profile-avatar-selection remove-avatar"
                       >
-                        <span className="edit-profile-avatar-selection">
-                          Upload Photo
-                        </span>
-                      </Upload>
-                      <span onClick={this.customRemoveRequest} className="edit-profile-avatar-selection">
                         Remove Avatar
                       </span>
                     </div>
@@ -270,29 +267,6 @@ class EditProfile extends React.Component {
               </div>
               <Header>{username}</Header>
               <HeaderEmail>Student Account</HeaderEmail>
-              {/*<div style={{margin: "auto", marginTop: "10px"}}>
-              <div style={{ display: "inline-block" }}>
-                <Upload
-                  listType="text"
-                  customRequest={this.customUploadRequest}
-                  beforeUpload={beforeUpload}
-                  onChange={this.handleChange}
-                  showUploadList={false}
-                  accept=".jpg, .jpeg, image/jpeg, .png, image/png"
-                >
-                  <Button shape="round" type="primary">
-                    <CameraOutlined /> Change Avatar
-                  </Button>
-                </Upload>
-              </div>
-              <Button
-                shape="circle"
-                style={{ marginLeft: "2%", display: "inline-block" }}
-                onClick={this.customRemoveRequest}
-              >
-                <FiTrash2 style={{ verticalAlign: "middle" }} size={14} />
-              </Button>
-              </div>*/}
             </div>
           </AntRow>
 
@@ -781,11 +755,10 @@ export default connect(mapStateToProps, mapDispatchToProps)(EditProfile);
 
 function beforeUpload(file) {
   const isJpgOrPng = file.type === "image/jpeg" || file.type === "image/png";
+  const isLt2M = file.size / 1024 / 1024 < 2;
   if (!isJpgOrPng) {
     message.error("You can only upload JPG/PNG file!");
-  }
-  const isLt2M = file.size / 1024 / 1024 < 2;
-  if (!isLt2M) {
+  } else if (!isLt2M) {
     message.error("Image must smaller than 2MB!");
   }
   return isJpgOrPng && isLt2M;

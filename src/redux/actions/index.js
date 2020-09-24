@@ -61,6 +61,13 @@ export const updateCheckedIndustries = (checkedIndustries) => {
   };
 };
 
+export const updateDisabledIndustries = (disabledIndustries) => {
+  return {
+    type: "UPDATE_DISABLED_INDUSTRIES",
+    disabledIndustries,
+  };
+};
+
 export const updateCompletionState = (page, completionPercentage) => {
   return {
     type: "UPDATE_COMPLETION_STATE",

@@ -105,14 +105,13 @@ margin-top:24px;
    <p class="info">
     
       For your purposes as a high school student, we recommend either functional or combination resumes as it is highly unlikely that you have earlier work experience relevant to the positions you will be applying for. Once you have
-      decided the format you would like to use, continue onto the next step in the google classroom titled &ldquo;Making your Resume&rdquo; for our guide to making one!
+      decided the format you would like to use, continue onto the next steps for our guides to making your own resume!
     
   </p>
   <p></p>
 
-   <p class="conclusion"> &emsp;&emsp;&emsp;We have also provided examples for the different resumes in the google classroom.</p>
 </div>
   </body>
 </html>
-`
+`;
 export default choosingYourResume;

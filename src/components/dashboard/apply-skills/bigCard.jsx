@@ -1,7 +1,7 @@
 //React Imports
 import React from "react";
-import "../../../App.css";
-import "../dashboard.css";
+import "../../../App.scss";
+import "../dashboard.scss";
 
 import { Card } from "antd";
 

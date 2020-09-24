@@ -1,8 +1,9 @@
 //React Imports
 import React, { Component } from "react";
 import styled from "styled-components";
-import "../../../App.css";
-import "../dashboard.css";
+import "../../../App.scss";
+import "../dashboard.scss";
+import ImageWebp from "./ImageWebp";
 
 //IMAGE IMPORTS
 import GettingStarted from "./GettingStarted.jpg";
@@ -69,14 +70,6 @@ const resumeSkills = [
     whatShouldIIncludeOnMyResume,
   ],
   [
-    Writing_Reverse_Chronological,
-    "Writing a Reverse Chronological Resume",
-    "15 minutes",
-    "If you’ve had prior job experiences, read on to learn how to create a reverse chronological resume.",
-    "#",
-    "",
-  ],
-  [
     Writing_Functional_Resume,
     "Writing a Functional Resume",
     "15 minutes",
@@ -91,14 +84,6 @@ const resumeSkills = [
     "If you want to show your skills AND work experience, a combination resume may be for you. Learn how to create a combination resume.",
     "writing-a-combination-resume",
     howToWriteACombinationResume,
-  ],
-  [
-    Reverse_Chron_Resume_Example,
-    "Reverse Chronological Resume Example",
-    "15 minutes",
-    "Take a look at what a reverse chronological resume could look like.",
-    "reverse-chronological-resume-example",
-    reverseChronologicalResumeExample,
   ],
   [
     Funct_Resume_Example,
@@ -194,7 +179,7 @@ class ApplySkills extends Component {
   }
 
   componentDidUpdate() {
-      window.scrollTo(0, 0)
+    window.scrollTo(0, 0);
   }
 
   render() {
@@ -213,11 +198,8 @@ class ApplySkills extends Component {
             key="getting-started"
             link="/dashboard/apply-skills/filling-out-an-application"
             cover={GettingStarted}
-            title="Why do I need an internship?"
-            description="Curious about why you would need an internship? Check out our
-        comprehensive overview about the benefits of high school
-        internships and how The Internship Initiative can help you get
-        one."
+            title="Filling Out an Application"
+            description="Here are some basic pointers for filling out your first application."
           />
 
           <h1 className="module-name">Build your resumé</h1>
