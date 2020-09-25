@@ -37,7 +37,7 @@ class SubmissionSuccess extends Component {
   }
 
   updateWindowDimensions() {
-    this.setState({ width: window.innerWidth, height: window.innerHeight });
+    this.setState({ width: '100vh', height: '100vh' });
   }
 
   render() {
@@ -46,7 +46,7 @@ class SubmissionSuccess extends Component {
       <PageContainer>
         <Confetti
           width={width}
-          height={height}
+          minHeight={height}
           initialVelocity={20}
           recycle={false}
           numberOfPieces={500}
