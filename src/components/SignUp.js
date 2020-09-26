@@ -5,6 +5,7 @@ import {
   Form,
   Popover,
   notification,
+  message,
   Modal,
   Checkbox,
 } from "antd";
@@ -37,7 +38,7 @@ schema.is().min(8).has().uppercase().has().lowercase().has().digits();
 const validationRules = (required, inputName, type, pattern) => [
   {
     required: required,
-    message: "Please input your " + inputName,
+    message: "Please enter a valid " + inputName,
     type: type,
     pattern: pattern,
   },
@@ -127,25 +128,6 @@ class SignUp extends React.Component {
     return (
       <React.Fragment>
         <Background>
-          {/*<div className="blob-style">
-            <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-              <path
-                fill="#0f4c75"
-                d="M55.5,-61.1C64.9,-46.1,60.5,-23.1,60.4,-0.2C60.2,22.7,64.2,45.5,54.8,58.3C45.5,71.2,22.7,74.1,1.7,72.4C-19.3,70.8,-38.7,64.4,-55.2,51.5C-71.7,38.7,-85.3,19.3,-82.2,3.1C-79,-13.1,-59.1,-26.1,-42.6,-41.1C-26.1,-56.2,-13.1,-73.1,5,-78.1C23.1,-83.1,46.1,-76.2,55.5,-61.1Z"
-              />
-            </svg>
-          </div>
-          <div className="blob-style">
-            <svg
-              viewBox="0 0 200 200"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                fill="#0f4c75"
-                d="M37.4,-40.3C46.5,-36.9,50.6,-23.3,49.8,-11.2C49.1,0.8,43.4,11.3,38.3,24C33.3,36.7,28.7,51.7,17.9,60.5C7.1,69.3,-10,71.9,-20.3,64.4C-30.6,56.9,-34,39.3,-41.7,24.7C-49.4,10.1,-61.3,-1.4,-61.4,-12.5C-61.4,-23.6,-49.6,-34.3,-37.4,-37.2C-25.2,-40.1,-12.6,-35.1,0.8,-36C14.1,-36.9,28.3,-43.7,37.4,-40.3Z"
-              />
-            </svg>
-    </div>*/}
           <Container style={{ marginTop: "5%", zIndex: "100" }}>
             <Banner style={{ marginTop: "0px", width: "100%" }}>
               Create a New Account
@@ -272,6 +254,8 @@ class SignUp extends React.Component {
             </div>
           </Container>
           <Modal
+            className="email-modal"
+            style={{ borderRadius: "5px" }}
             title="Email Confirmation"
             visible={this.state.emailConfirmationVisible}
             onOk={this.handleOk}
@@ -280,6 +264,7 @@ class SignUp extends React.Component {
             <EmailConfirmation
               email={this.state.email}
               formRef={this.emailFormRef}
+              resendConfirmCode={this.resendConfirmCode}
             />
           </Modal>
         </Background>
@@ -306,6 +291,13 @@ class SignUp extends React.Component {
     }
   };
 
+  resendConfirmCode = async () => {
+    let { username } = this.state;
+    console.log(username);
+    const user = await Auth.resendSignUp(username);
+    message.success("We sent you a new confirmation code!");
+  };
+
   handleOk = async (e) => {
     const values = await this.emailFormRef.current.getFieldsValue();
     const code = values.confirmationCode;
@@ -325,6 +317,9 @@ class SignUp extends React.Component {
         .catch(() => console.log("Could Not Sign Out"));
 
       const user = await Auth.signIn(username, password);
+      this.setState({
+        emailConfirmationVisible: false,
+      });
       this.props.newAuth();
       this.props.history.push("/dashboard");
     } catch (error) {
@@ -334,10 +329,6 @@ class SignUp extends React.Component {
         "Sorry, we couldnt confirm that code."
       );
     }
-
-    this.setState({
-      emailConfirmationVisible: false,
-    });
   };
 
   handleCancel = (e) => {

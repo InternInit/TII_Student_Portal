@@ -128,7 +128,7 @@ const paidOrUnpaid = ["Yes", "No"];
 const validationRules = (required, inputName, type, pattern) => [
   {
     required: required,
-    message: "Please input your " + inputName,
+    message: "Please enter a valid " + inputName,
     type: type,
     pattern: pattern,
   },
@@ -288,9 +288,9 @@ const formItemProps = {
           to a specific position or industry
         </p>
         <p>
-          Ex: If I am applying for an internship in,
+          Ex: If you are applying for an internship in,
           <br />
-          <strong>business</strong>, I might add classes such as
+          <strong>business</strong>, you might add classes such as
           <br />
           <em>accounting, business finance, </em>
           <br />
@@ -299,7 +299,7 @@ const formItemProps = {
       </React.Fragment>
     ),
     name: "Relevant Courses",
-    rules: validationRules(true, "relevant courses"),
+    rules: validationRules(true, "course"),
     extra:
       "Separate each entry with a comma and a space, and capitalize the AP/IB for your AP/IB Classes",
   },
@@ -322,9 +322,9 @@ const formItemProps = {
           for their specific internship position
         </p>
         <p>
-          Ex: If I am applying for an internship in,
+          Ex: If you are applying for an internship in,
           <br />
-          <strong>business</strong>, I might include activities
+          <strong>business</strong>, you might include activities
           <br />
           such as <em>FBLA, Student Council Treasurer,</em>
           <br />
@@ -333,7 +333,7 @@ const formItemProps = {
       </React.Fragment>
     ),
     name: "Extracurriculars",
-    rules: validationRules(true, "extracurricular activities"),
+    rules: validationRules(true, "extracurricular activity"),
     extra:
       "Separate each entry with a comma and a space, and in parentheses, show how long you spent on the activity.",
   },
@@ -352,7 +352,7 @@ const formItemProps = {
       </React.Fragment>
     ),
     name: "Willing Work Days",
-    rules: validationRules(true, "optimal days to work", "array"),
+    rules: validationRules(true, "day", "array"),
   },
   timesToWork: {
     key: "timesToWork",
@@ -373,7 +373,7 @@ const formItemProps = {
       </React.Fragment>
     ),
     name: "Willing Work Times",
-    rules: validationRules(true, "times available to work", "array"),
+    rules: validationRules(true, "time", "array"),
   },
   dateOfStartAndEnd: {
     key: "dateOfStartAndEnd",
@@ -543,7 +543,7 @@ class PageInternshipInformation extends Component {
 
   render() {
     return (
-      <div style={{ width: "100%", marginTop: "40px"}}>
+      <div style={{ width: "100%", marginTop: "40px" }}>
         {!this.state.loaded ? (
           <React.Fragment>
             <div style={{ marginBottom: "40px" }}>

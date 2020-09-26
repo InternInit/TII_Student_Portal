@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import styled from "styled-components";
 
 import "../../App.scss";
-import "./dashboard.css";
+import "./dashboard.scss";
 import "antd/dist/antd.css";
 
 import Checklist from "./checklist.jsx";

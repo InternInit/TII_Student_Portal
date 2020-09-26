@@ -1,5 +1,19 @@
 @import url("https://fonts.googleapis.com/css2?family=Lato&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+@import "~rfs/scss";
+
+/*
+============================================================
+************************************************************
+                  Variables
+************************************************************
+============================================================
+*/
+
+$small-breakpoint: 600px;
+$medium-breakpoint: 768px;
+$large-breakpoint: 992px;
+$x-large-breakpoint: 1200px;
 
 /*
 ============================================================
@@ -21,7 +35,7 @@
 .main-navbar.ant-menu-horizontal > .ant-menu-submenu-open,
 .main-navbar.ant-menu-horizontal > .ant-menu-item-selected {
   color: #1890ff;
-  border-bottom: 2px solid transparent;
+  border-bottom: 2px solid #1890ff;
 }
 
 /*
@@ -177,69 +191,49 @@ FONT SIZES
 */
 
 .seventyTwoFont {
-  font-size: 72px;
+  @include font-size(72px);
+}
+
+.fortyEightFont {
+  @include font-size(48px);
 }
 
 .thirtySixFont {
-  font-size: 36px;
+  @include font-size(36px);
 }
 
 .twentyEightFont {
-  font-size: 28px;
+  @include font-size(28px);
+}
+
+.twentyFourFont {
+  @include font-size(24px);
+
+  @media screen and (max-width: 480px) {
+    @include font-size(18px);
+  }
 }
 
 .twentyTwoFont {
-  font-size: 22px;
+  @include font-size(22px);
+}
+
+.twentyFont {
+  @include font-size(20px);
 }
 
 .eighteenFont {
-  font-size: 18px;
+  @include font-size(18px);
+
+  @media screen and (max-width: 480px) {
+    @include font-size(16px);
+  }
 }
 
 .sixteenFont {
-  font-size: 16px;
+  @include font-size(16px);
 }
 
 .bold {
   font-weight: bold;
-}
-
-@media only screen and (max-width: 810px) {
-  .seventyTwoFont {
-    font-size: 56px;
-  }
-
-  .thirtySixFont {
-    font-size: 28px;
-  }
-
-  .twentyEightFont {
-    font-size: 20px;
-  }
-
-  .twentyTwoFont {
-    font-size: 16px;
-  }
-
-  .eighteenFont {
-    font-size: 14px;
-  }
-
-  .sixteenFont {
-    font-size: 12px;
-  }
-
-  .FAQBanner {
-    height: 154px;
-    font-size: 28px;
-
-    padding-top: 42px;
-    padding-bottom: 42px;
-  }
-
-  .profile-button-style {
-    font-size: 12px;
-    width: 90%;
-    height: 24px;
-  }
 }

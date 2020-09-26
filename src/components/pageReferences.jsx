@@ -44,7 +44,7 @@ const formItemLayoutWithOutLabel = {
 const validationRules = (required, inputName, type, pattern) => [
   {
     required: required,
-    message: "Please input your " + inputName,
+    message: "Please enter a valid " + inputName,
     type: type,
     pattern: pattern,
   },

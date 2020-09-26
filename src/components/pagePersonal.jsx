@@ -173,7 +173,7 @@ class PagePersonal extends Component {
   validationRules = (required, inputName, type, pattern, min, max) => [
     {
       required: required,
-      message: "Please input your " + inputName,
+      message: "Please enter a valid " + inputName,
       type: type,
       pattern: pattern,
       min: min,
@@ -365,7 +365,7 @@ class PagePersonal extends Component {
                       </React.Fragment>
                     )}
                     rules={this.validationRules(true, "gender")}
-                    style={{textAlign: "left"}}
+                    style={{ textAlign: "left" }}
                   >
                     <Radio.Group className="universal-left">
                       {genders.map((gender) => (
@@ -399,7 +399,7 @@ class PagePersonal extends Component {
                     )}
                     name="Race"
                     extra="Check all that apply"
-                    style={{textAlign: "left"}}
+                    style={{ textAlign: "left" }}
                   >
                     <Checkbox.Group>
                       <Row gutter={[64, 0]}>
@@ -568,7 +568,7 @@ class PagePersonal extends Component {
                                   name={[field.name, "Address"]}
                                   rules={this.validationRules(
                                     true,
-                                    "school's address",
+                                    "address",
                                     "string",
                                     /\d{1,3}.?\d{0,3}\s[a-zA-Z]{2,30}\s[a-zA-Z]{2,15}/
                                   )}
@@ -657,7 +657,9 @@ class PagePersonal extends Component {
                                   )}
                                   name={[field.name, "Course Concentration"]}
                                   rules={this.validationRules(
-                                    "course concentration"
+                                    true,
+                                    "course",
+                                    "string"
                                   )}
                                   small="What is the thesis of your high shool career?"
                                 >
@@ -680,7 +682,7 @@ class PagePersonal extends Component {
                                   name={[field.name, "Years Completed"]}
                                   rules={this.validationRules(
                                     true,
-                                    "years completed",
+                                    "number of years",
                                     "string",
                                     /^\d{1,3}$/
                                   )}
@@ -766,6 +768,7 @@ class PagePersonal extends Component {
         item.key = field;
         if (
           typeof allValues[field] !== "undefined" &&
+          allValues[field] !== null &&
           allValues[field] !== ""
         ) {
           completedCount++;

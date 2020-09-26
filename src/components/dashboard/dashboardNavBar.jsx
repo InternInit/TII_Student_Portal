@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "../../App.scss";
-import "./dashboard.css";
+import "./dashboard.scss";
 import "antd/dist/antd.css";
 import { Menu, message} from "antd";
 import { Link } from "react-router-dom";

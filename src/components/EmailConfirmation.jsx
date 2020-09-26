@@ -41,10 +41,9 @@ const HelpText = styled.p`
 export default function EmailConfirmation(props) {
   return (
     <ModalContainer>
-      <span style={{ fontSize: "48px" }} alt="clapping hands">
-        👏
-      </span>
-      <ModalHeading>Thanks for Signing Up!</ModalHeading>
+      <ModalHeading>
+        <span alt="clapping hands">👏</span> Thanks for Signing Up!
+      </ModalHeading>
       <Divider orientation="center" />
       <DescriptionText>
         We just sent a confirmation code over to {props.email}
@@ -54,8 +53,9 @@ export default function EmailConfirmation(props) {
           <Input placeholder="Enter Code" />
         </Form.Item>
       </Form>
-      <HelpText>Send me another code.</HelpText>
-
+      <HelpText onClick={() => props.resendConfirmCode()}>
+        <a href="#">Send me another code.</a>
+      </HelpText>
     </ModalContainer>
   );
 }

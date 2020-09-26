@@ -162,7 +162,7 @@ class CLabel extends React.Component {
                     alignItems: "flex-start",
                   }}
                 >
-                  <CompanyTitle className="twentySixFont">
+                  <CompanyTitle className="twentyFourFont">
                     {companyName}
                   </CompanyTitle>
                   <JobTitle
@@ -272,24 +272,23 @@ class QuickView extends React.Component {
                   </div>
 
                   <div>
-                    <Button
-                      className="button-style"
-                      type="primary"
-                      onClick={this.addCompany}
-                    >
-                      Add
-                    </Button>
-
-                    <Link
-                      to={`/dashboard/add-companies/company-information/${companyid}`}
-                    >
-                      <Button
-                        style={{ marginTop: "12px" }}
-                        className="button-style"
+                      <Link
+                        to={`/dashboard/add-companies/company-information/${companyid}`}
                       >
-                        More Details
+                        <Button
+                          style={{ marginTop: "12px", marginRight: "1vw" }}
+                          className="button-style eighteenFont"
+                        >
+                          More Details
+                        </Button>
+                      </Link>
+                      <Button
+                        className="button-style eighteenFont"
+                        type="primary"
+                        onClick={this.addCompany}
+                      >
+                        Add
                       </Button>
-                    </Link>
                   </div>
                 </Row>
               </div>
