@@ -59,7 +59,7 @@ const formItemLayoutWithOutLabel = {
 };
 
 //items
-const genders = ["Male", "Female", "Prefer Not to Say"];
+const genders = ["Male", "Female", "Prefer Not to Say", "Other"];
 const race = [
   "Caucasian",
   "African American",
@@ -152,6 +152,7 @@ class PagePersonal extends Component {
 
   state = {
     loaded: false,
+    value: "",
   };
 
   boldify = (text, info = false, popoverText) =>
@@ -214,6 +215,12 @@ class PagePersonal extends Component {
       let fetchedRef = await this.waitForRef(neededRef);
       window.scrollTo(0, fetchedRef.current.offsetTop);
     }
+  };
+
+  onCheckChange = (e) => {
+    this.setState({
+      value: e.target.value,
+    });
   };
 
   componentDidMount() {
@@ -367,12 +374,27 @@ class PagePersonal extends Component {
                     rules={this.validationRules(true, "gender")}
                     style={{ textAlign: "left" }}
                   >
-                    <Radio.Group className="universal-left">
-                      {genders.map((gender) => (
-                        <Radio key={gender} value={gender}>
-                          {gender}
-                        </Radio>
-                      ))}
+                    <Radio.Group
+                      onChange={this.onCheckChange}
+                      className="universal-left"
+                    >
+                      {genders.map((gender) =>
+                        gender !== "Other" ? (
+                          <Radio key={gender} value={gender}>
+                            {gender}
+                          </Radio>
+                        ) : (
+                          <Radio key={gender} value={gender}>
+                            {gender}
+                            {this.state.value === "Other" ? (
+                              <Input
+                                size="small"
+                                style={{ width: 100, marginLeft: 10 }}
+                              />
+                            ) : null}
+                          </Radio>
+                        )
+                      )}
                     </Radio.Group>
                   </Form.Item>
                 </Col>
