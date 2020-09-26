@@ -118,7 +118,7 @@ class CLabel extends React.Component {
         {/**Company Logo + Name + Position */}
         <Row
           style={{
-            width: "92.5%",
+            width: "100%",
             alignItems: "center",
           }}
         >
@@ -128,7 +128,7 @@ class CLabel extends React.Component {
             shape="square"
             src={this.props.avatar}
             style={{
-              marginLeft: "8%",
+              marginLeft: "4vw",
               marginBottom: "14px",
             }}
           />
@@ -140,7 +140,7 @@ class CLabel extends React.Component {
               alignItems: "flex-start",
             }}
           >
-            <CompanyTitle className="twentySixFont">{name}</CompanyTitle>
+            <CompanyTitle className="twentyFourFont">{name}</CompanyTitle>
             <JobTitle className="fourteenFont">{industry}</JobTitle>
           </Col>
         </Row>
@@ -158,9 +158,8 @@ class DroppedView extends React.Component {
     let { visible } = this.state;
     let { companyid, name } = this.props;
     return (
-      <Row
+      <div
         style={{
-          justifyContent: "space-evenly",
           marginTop: "1%",
           paddingBottom: "8px",
         }}
@@ -168,30 +167,33 @@ class DroppedView extends React.Component {
         {/**
          * Custom Response Button
          */}
-        <Button className="button-style" onClick={this.showModal}>
+        <Button className="eighteenFont add-button-style " onClick={this.showModal}>
           Add Custom Response
         </Button>
 
         {/**
          * Company Information Button
          */}
-        <Link to={`/dashboard/add-companies/company-information/${companyid}`}>
-          <Button
-            className="button-style"
-            style={{
-              backgroundColor: "#52C41A",
-              color: "white",
-            }}
+
+        <Button
+          className="eighteenFont add-button-style "
+          style={{
+            backgroundColor: "#52C41A",
+            color: "white",
+          }}
+        >
+          <Link
+            to={`/dashboard/add-companies/company-information/${companyid}`}
           >
             Company Information
-          </Button>
-        </Link>
+          </Link>
+        </Button>
 
         {/**
          *Submit Button
          */}
         <Button
-          className="button-style"
+          className="eighteenFont add-button-style "
           type="primary"
           onClick={this.submitResponse}
         >
@@ -208,7 +210,7 @@ class DroppedView extends React.Component {
         >
           <TextArea autoSize={{ minRows: 5, maxRows: 10 }} />
         </Modal>
-      </Row>
+      </div>
     );
   }
   showModal = () => {

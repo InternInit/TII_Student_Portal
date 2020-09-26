@@ -76,7 +76,6 @@ function ActiveAppCompanytab(props) {
                   shape="square"
                   src={props.avatar}
                   style={{
-                    marginLeft: "8%",
                     marginBottom: "14px",
                     width: "36px",
                     height: "auto",
@@ -90,7 +89,7 @@ function ActiveAppCompanytab(props) {
                     alignItems: "flex-start",
                   }}
                 >
-                  <CompanyTitle className="twentySixFont">
+                  <CompanyTitle className="twentyFourFont">
                     {companyName}
                   </CompanyTitle>
                   <JobTitle

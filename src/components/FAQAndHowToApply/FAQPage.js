@@ -7,7 +7,7 @@ import { withRouter } from "react-router-dom";
 
 import { Menu, Layout, Collapse } from "antd";
 
-import "../../App.css";
+import "../../App.scss";
 import "./FAQAndHowToApply.scss";
 
 const ContentStyle = {
@@ -33,7 +33,6 @@ const PageStyle = {
 const Question = styled.span`
   font-weight: 500;
   color: #000000;
-  font-size: 20px;
   font-family: Lato;
 `;
 
@@ -110,7 +109,7 @@ class FAQPage extends React.Component {
               <Panel
                 className="faq-panel"
                 header={
-                  <Question className="eighteenFont">{list.question}</Question>
+                  <Question className="twentyTwoFont">{list.question}</Question>
                 }
                 style={{ borderRadius: "15px" }}
               >

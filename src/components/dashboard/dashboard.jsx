@@ -1,8 +1,8 @@
 //React Imports
 import React, { Component } from "react";
 import styled from "styled-components";
-import "../../App.css";
-import "./dashboard.css";
+import "../../App.scss";
+import "./dashboard.scss";
 
 //Ant Design
 import { Layout, Divider } from "antd";
@@ -80,7 +80,7 @@ class Dashboard extends Component {
             }}
           >
             <PageContainer>
-              <WelcomeHeader className="seventyTwoFont">
+              <WelcomeHeader className="fortyEightFont">
                 Welcome, {this.props.userInfo.displayName}!
               </WelcomeHeader>
               <DashboardNavBar version={this.props.userInfo.version} />

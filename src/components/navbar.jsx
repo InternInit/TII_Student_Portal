@@ -3,7 +3,7 @@ import React, { Component } from "react";
 
 //CSS Imports
 import "antd/dist/antd.css";
-import "../App.css";
+import "../App.scss";
 
 //Ant Design Imports
 import { Menu } from "antd";

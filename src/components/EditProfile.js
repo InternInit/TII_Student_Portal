@@ -32,8 +32,8 @@ import {
 
 import { Auth } from "aws-amplify";
 
-import "../App.css";
-import "./dashboard/dashboard.css";
+import "../App.scss";
+import "./dashboard/dashboard.scss";
 import "./EditProfile.scss";
 
 //============================================================================================================
@@ -755,11 +755,10 @@ export default connect(mapStateToProps, mapDispatchToProps)(EditProfile);
 
 function beforeUpload(file) {
   const isJpgOrPng = file.type === "image/jpeg" || file.type === "image/png";
+  const isLt2M = file.size / 1024 / 1024 < 2;
   if (!isJpgOrPng) {
     message.error("You can only upload JPG/PNG file!");
-  }
-  const isLt2M = file.size / 1024 / 1024 < 2;
-  if (!isLt2M) {
+  } else if (!isLt2M) {
     message.error("Image must smaller than 2MB!");
   }
   return isJpgOrPng && isLt2M;

@@ -4,7 +4,7 @@ import Confetti from "react-confetti";
 import { Button } from "antd";
 import { Link } from "react-router-dom";
 import "antd/dist/antd.css";
-import "../App.css";
+import "../App.scss";
 
 //Styles
 const PageContainer = styled.div`
@@ -37,7 +37,7 @@ class SubmissionSuccess extends Component {
   }
 
   updateWindowDimensions() {
-    this.setState({ width: window.innerWidth, height: window.innerHeight });
+    this.setState({ width: '100vh', height: '100vh' });
   }
 
   render() {
@@ -46,7 +46,7 @@ class SubmissionSuccess extends Component {
       <PageContainer>
         <Confetti
           width={width}
-          height={height}
+          minHeight={height}
           initialVelocity={20}
           recycle={false}
           numberOfPieces={500}
@@ -58,9 +58,12 @@ class SubmissionSuccess extends Component {
         </p>
         <br />
         <p>
-          To move forward, check out the <em>Add Companies</em> tab on your
-          dashboard to start sending your application to any company that you're
-          interested in.
+          To move forward, check out the{" "}
+          <Link to="/dashboard/add-companies">
+            <em>Add Companies</em>
+          </Link>{" "}
+          tab on your dashboard to start sending your application to any company
+          that you're interested in.
         </p>
         <br />
         <p>Once again, congratulations and good luck!</p>

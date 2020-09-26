@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import PageNotFoundImage from "../PageNotFoundImage.png";
-import "../App.css";
+import "../App.scss";
 
 class PageNotFound extends React.Component {
   render() {
