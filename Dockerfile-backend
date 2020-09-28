@@ -5,3 +5,5 @@ COPY ./backend/__init__.py /app/main.py
 COPY requirements.txt .
 
 RUN pip install -r requirements.txt -t /app/
+
+ENV PORT="5000"
