@@ -262,6 +262,13 @@ const formItemProps = {
           and the grade you received in that class.
         </p>
         <p>Ex: 4.43/5.0 </p>
+        <p>
+          Check out this{" "}
+          <a href="https://gpacalculator.net/high-school-gpa-calculator/">
+            GPA calculator
+          </a>{" "}
+          if you're feeling stuck
+        </p>
       </React.Fragment>
     ),
     name: "Weighted GPA",
@@ -311,15 +318,15 @@ const formItemProps = {
       true,
       <React.Fragment>
         <p>
-          Your extracurricular activities demonstrate
+          Your extracurricular activities show employers
           <br />
-          how you spend your time outside classes and
+          how you spend your time outside of the classroom
           <br />
-          what your interests are. These activities can
+          and what your interests are. These activities can
           <br />
           show a business why you are particularly qualified
           <br />
-          for their specific internship position
+          for their specific internship position.
         </p>
         <p>
           Ex: If you are applying for an internship in,
@@ -345,7 +352,7 @@ const formItemProps = {
       <React.Fragment>
         <p>What days can you spend on your internship?</p>
         <p>
-          Make sure that your only put in times you are
+          Make sure that your only put in days you are
           <br />
           sure that you can make.
         </p>
@@ -361,12 +368,12 @@ const formItemProps = {
       true,
       <React.Fragment>
         <p>
-          What times of the day can you spend on your
+          What times of the day are you available to work
           <br />
-          internship?
+          on your internship?
         </p>
         <p>
-          Make sure that your only put in times you are
+          Make sure that you only put in times you are
           <br />
           sure that you can make.
         </p>
@@ -412,6 +419,13 @@ const formItemProps = {
           take on an unpaid position, you will need to
           <br />
           arrange for academic credit.
+        </p>
+        <p>
+          <em>
+            All unpaid internship programs require interns to receive
+            <br />
+            academic credit in accordance with labor laws
+          </em>
         </p>
       </React.Fragment>
     ),
