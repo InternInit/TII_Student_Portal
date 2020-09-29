@@ -42,17 +42,19 @@ $panel-color: white;
   z-index: 1;
 }
 
-.how-to-apply-intro-container {
+.intro-container {
   @include standard-box-shadow;
   @include standard-border-radius;
   background-color: $panel-color;
   width: 100%;
   padding: 5% 7%;
+  
+  &:hover {
+    @include standard-box-shadow-hover;
+  }
 }
 
-.how-to-apply-intro-container:hover {
-  @include standard-box-shadow-hover;
-}
+
 
 .how-to-apply-sub-heading {
   display: flex;
@@ -114,4 +116,8 @@ $panel-color: white;
 .faq-page {
   background-color: $background-color;
   height: auto;
+}
+
+.faq-contact {
+  padding: 2%;
 }

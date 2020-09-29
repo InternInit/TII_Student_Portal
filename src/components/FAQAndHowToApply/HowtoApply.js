@@ -98,7 +98,7 @@ class HowtoApply extends React.Component {
             >
               <AntRow gutter={[16, 32]} style={{ marginTop: "30px" }}>
                 <AntCol span={24}>
-                  <div className="how-to-apply-intro-container">
+                  <div className="intro-container">
                     <Heading className="twentyEightFont main-header">
                       Getting Started
                     </Heading>
@@ -135,7 +135,7 @@ class HowtoApply extends React.Component {
 
                 {/**Things you will Need */}
                 <AntCol span={24}>
-                  <div className="how-to-apply-intro-container">
+                  <div className="intro-container">
                     <Heading className="twentyEightFont main-header">
                       Things You'll Need
                     </Heading>
@@ -207,7 +207,7 @@ class HowtoApply extends React.Component {
 
                 {/**Internship Information */}
                 <AntCol span={24}>
-                  <div className="how-to-apply-intro-container">
+                  <div className="intro-container">
                     <Heading className="twentyEightFont main-header">
                       Application Breakdown
                     </Heading>

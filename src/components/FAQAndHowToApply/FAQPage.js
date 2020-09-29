@@ -10,26 +10,6 @@ import { Menu, Layout, Collapse } from "antd";
 import "../../App.scss";
 import "./FAQAndHowToApply.scss";
 
-const ContentStyle = {
-  display: "flex",
-  width: "100%",
-  height: "100%",
-  flexDirection: "column",
-  alignItems: "center",
-  backgroundColor: "#EBEFF2",
-};
-
-const PageStyle = {
-  width: "60%",
-  display: "flex",
-  flexDirection: "column",
-  paddingBottom: "10%",
-
-  minHeight: "100vh",
-
-  marginTop: "7.5vh",
-};
-
 const Question = styled.span`
   font-weight: 500;
   color: #000000;
@@ -132,6 +112,12 @@ class FAQPage extends React.Component {
               </Panel>
             </Collapse>
           ))}
+          <div className="intro-container faq-contact">
+            <Question className="twentyFourFont">
+              Contact us at <a href="mailto:info@interninit.com">info@interninit.com</a> if you have any unaswered
+              questions!
+            </Question>
+          </div>
         </div>
       </div>
     );
