@@ -67,9 +67,16 @@ $panel-color: white;
   li:before {
     content: "•";
     font-size: 16px;
-    padding-right: 15px;
+    padding-right: 16px;
+  }
+
+  li {
+    list-style-position: inside;
+    text-indent: -1em;
+    padding-left: 1em;
   }
 }
+
 
 .main-header {
   display: flex;

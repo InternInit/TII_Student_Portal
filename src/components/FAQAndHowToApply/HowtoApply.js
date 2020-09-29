@@ -4,11 +4,10 @@ import Internshipimg from "../../How_To_Apply/internshipinfo.JPG";
 import Personalimg from "../../How_To_Apply/personal.JPG";
 import Writtenimg from "../../How_To_Apply/written.JPG";
 import Referencesimg from "../../How_To_Apply/reference.JPG";
-import { CheckOutlined } from "@ant-design/icons";
-import { BsApp } from "react-icons/bs";
 
 //styles
 import { withRouter } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import { Layout, Row as AntRow, Col as AntCol } from "antd";
 
@@ -101,18 +100,35 @@ class HowtoApply extends React.Component {
                 <AntCol span={24}>
                   <div className="how-to-apply-intro-container">
                     <Heading className="twentyEightFont main-header">
-                      It's Simple!
+                      Getting Started
                     </Heading>
                     <Text className="eighteenFont">
-                      Fill out the information form found on the 'Apply' tab.
-                      When filling out the form, make sure to:
+                      Your application can be found on the&nbsp;
+                      <Link to="/apply">Apply tab</Link>. When filling out your
+                      application, make sure to:
                     </Text>
 
                     <ul className="how-to-apply-list eighteenFont text-left">
-                      <li key="1">Be specific, give us as much information as you can.</li>
-                      <li key="2">Make sure to fill out all the necessary forms so we can fulfill company requirements</li>
-                      <li key="3"> Be honest, write about yourself</li>
-                      <li key="4">Submit when everything is filled out!</li>
+                      <li key="1">
+                        Be specific. Tell us as much information as you can and
+                        are comfortable with sharing.
+                      </li>
+                      <li key="2">
+                        Be honest. The best strategy we have for you is to write
+                        about who you really are. Stay true to yourself.
+                      </li>
+                      <li key="3">
+                        Make sure to fill out all the <em>required</em> forms.
+                        You will not be able to submit your application without
+                        completing all required inputs. Required inputs have red
+                        asterisks next to them.
+                      </li>
+                      <li key="4">
+                        Submit your application on the last page of the
+                        application when everything is filled out! You can
+                        always go back and update/edit your application after
+                        submitting.
+                      </li>
                     </ul>
                   </div>
                 </AntCol>
@@ -129,19 +145,62 @@ class HowtoApply extends React.Component {
                     </Text>
 
                     <ul className="how-to-apply-list eighteenFont text-left">
-                      <li key="1">Weighted and Unweighted Grade Point Average (GPA)</li>
-                      <li key="2">List of interested industries (Ie. Finance or Biotechnology)</li>
-                      <li key="3">List of relevant courses taken</li>
-                      <li key="4">List of extracurricular activities</li>
-                      <li key="5">Year of Graduation (Must be at least a high school Sophomore to high school Senior)</li>
-                      <li key="6">Availability to work</li>
-                      <li key="7">Resumé or CV</li>
-                      <li key="8">List Item</li>
-                      <li key="9">Cover Letter (Optional)</li>
-                      <li key="10">Letters of Recommendation (1 <em>highly</em>{" "}recommended, but 2 is advised)</li>
-                      <li key="11">Transcript</li>
-                      <li key="12">School Profile</li>
-                      <li key="13">List of Accomplishments/Achievements</li>
+                      <li key="1">Your weighted and unweighted GPAs</li>
+                      <li key="2">
+                        A list of industries you’re interested in. Click{" "}
+                        <Link to="/frequently-asked-questions/#industry-offerings">
+                          here
+                        </Link>{" "}
+                        to see the full list of industries we offer
+                      </li>
+                      <li key="3">
+                        A list of any relevant courses you’ve taken you think
+                        would help in a particular industry. For example, AP
+                        Microeconomics would be helpful if interested in the
+                        financial industry.
+                      </li>
+                      <li key="4">
+                        A list of the extracurricular activities you’re involved
+                        in. Be sure to know the months you joined, what you do
+                        in the club, and how much time per week you spend on it
+                        (on average).
+                      </li>
+                      <li key="5">Your expected Year of Graduation</li>
+                      <li key="6">
+                        Your work availability. How many hours per week and what
+                        days will you be able to work?
+                      </li>
+                      <li key="7">
+                        Resumé. Click{" "}
+                        <Link to="/dashboard/apply-skills/what-should-i-include-on-my-resume">
+                          here
+                        </Link>{" "}
+                        to learn how to make a resumé.
+                      </li>
+                      <li key="9">
+                        A list of any leadership roles you’ve had, and what you
+                        learned from them.
+                      </li>
+                      <li key="10">
+                        At least one <em>non-family</em> member reference.
+                      </li>
+                    </ul>
+
+                    <Text className="eighteenFont">Optional materials:</Text>
+                    <ul className="how-to-apply-list eighteenFont text-left">
+                      <li key="1">
+                        Cover letter. Click{" "}
+                        <Link to="/dashboard/apply-skills/cover-letter">
+                          {" "}
+                          here
+                        </Link>{" "}
+                        to learn how to write a cover letter.
+                      </li>
+                      <li key="2">Portfolio</li>
+                      <li key="3">
+                        Letters of Recommendation (1 <em>highly recommended</em>
+                        , but 2 is advised)
+                      </li>
                     </ul>
                   </div>
                 </AntCol>
@@ -162,11 +221,17 @@ class HowtoApply extends React.Component {
                       <Image src={Internshipimg} alt="internshipinfo" />
                     </div>
                     <Caption className="eighteenFont">
-                      This is where you will fill out information regarding your
-                      preferences and desires in internships. For example, if
-                      you wanted to apply for a company in the Real Estate
-                      industry or can only work on certain days, this is where
-                      you would state that information.
+                      This is where you will fill out information detailing the
+                      basic personal contact information employers will use to
+                      connect with you. This is also where you can share
+                      school-related information, such as your GPA, courses
+                      taken, and any extracurricular activities. You also can
+                      share your “professional side” by uploading a resumé and
+                      sharing any out-of-school extracurricular activities (in
+                      the same extracurricular input box and/or in your resumé).
+                      Lastly, this is the place to disclose when you’re
+                      available to work. You can list days of the week,
+                      time-of-day, and work dates that work for you.
                     </Caption>
 
                     {/**Personal Information */}
@@ -180,12 +245,14 @@ class HowtoApply extends React.Component {
                       <Image src={Personalimg} alt="Personal" />
                     </div>
                     <Caption className="eighteenFont">
-                      In the 'General Information' tab, you will give us
-                      personal information about yourself. This includes,
-                      gender, race, and educational history. Please note that
-                      you do not have to fill out any information if you are not
-                      comfortable doing so, but it could hinder your
-                      application's reach after submission.
+                      This section is where employers determine your eligibility
+                      to work based on your age and receive information to
+                      comply with non-discriminatory employment laws. Lastly,
+                      you can also share your educational history, such which
+                      high school(s) you attended, and what subject(s) you
+                      concentrated in. The information you provide here will not
+                      be shared with anyone without your permission and
+                      knowledge.
                     </Caption>
 
                     {/**Written Work */}
@@ -199,11 +266,22 @@ class HowtoApply extends React.Component {
                       <Image src={Writtenimg} alt="Personal" />
                     </div>
                     <Caption className="eighteenFont">
-                      Please will tell us more about yourself! Let us know why a
-                      company should give you an intern, and what you would
-                      bring to their facility. Remember to be specific and
-                      answer in complete sentences. It is also where you will
-                      give us additional information that could be useful.
+                      This section is to help bring out your character. Aside
+                      from objective data like grades, employers also care about
+                      who you are matters. After all, they don’t want to be
+                      hiring robots, and we know all applicants have something
+                      unique worth sharing. Here, we ask you to share which
+                      industry(ies) are of particular interest to you and why.
+                      We also ask you to share any leadership role(s) you’ve
+                      had/have, and what you have learned from them. There are
+                      no correct answers to these questions. Lastly, we offer
+                      the opportunity for you to share anything else you think
+                      recruiters should know about you. If you don’t have
+                      anything to share, then don’t feel obligated to write
+                      something. You can also submit an optional cover letter
+                      and portfolio along with your application. Your written
+                      responses to the prompts should be short essays no longer
+                      than 1000 characters each.
                     </Caption>
 
                     {/**References */}
@@ -217,12 +295,16 @@ class HowtoApply extends React.Component {
                       <Image src={Referencesimg} alt="Personal" />
                     </div>
                     <Caption className="eighteenFont">
-                      This is what our reference tab looks like. Here, you can
-                      add or delete references as you please. A reference could
-                      be someone you worked with in the past, or a trusted
-                      adult. They serve to give us information regarding your
-                      past work experience, and vouche for you to hiring
-                      companies.
+                      This is the last section of the application. Here, you
+                      tell us who can vouch for you. Before you list a
+                      reference, be sure to ask them if they would mind being a
+                      reference for you. Though we only require one reference,
+                      feel free to list as many as you want. However, you should
+                      only share additional references who can add new
+                      perspectives about you. For example, you shouldn’t list
+                      two of your math teachers who would share identical
+                      descriptions about you. Employers may reach out to your
+                      reference(s) to learn more about you.
                     </Caption>
                   </div>
                 </AntCol>

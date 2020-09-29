@@ -27,8 +27,7 @@ import { withRouter } from "react-router";
 //
 //==========================================================
 const { SubMenu } = Menu;
-const MenuAvatar =
-  "https://www.happierhuman.com/wp-content/uploads/2018/10/how-to-be-happy.jpg";
+
 const menuStyle = {
   textAlign: "left",
   marginLeft: "60px",
@@ -65,10 +64,13 @@ class Navbar extends Component {
       return "apply";
     }
     if (
-      window.location.pathname.includes("dashboard/") ||
+      window.location.pathname.includes("dashboard") ||
       window.location.pathname === "/"
     ) {
       return "dashboard";
+    }
+    if (window.location.pathname.includes("questions")) {
+      return "FAQ";
     }
     let defaultKey = window.location.pathname;
     let newDefaultKey = defaultKey.replace("/", "");
