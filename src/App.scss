@@ -15,6 +15,27 @@ $medium-breakpoint: 768px;
 $large-breakpoint: 992px;
 $x-large-breakpoint: 1200px;
 
+$background-color: #EBEFF2;
+$gray-two: #e2e8ed;
+
+//Mixins
+@mixin standard-box-shadow {
+  box-shadow: 1px 1px 5px -4px;
+}
+
+@mixin standard-border-radius {
+  border-radius: 15px;
+}
+
+@mixin light-border-radius {
+  border-radius: 10px;
+}
+
+@mixin standard-box-shadow-hover {
+  box-shadow: 2px 2px 5px -4px;
+  transition: 0.3s ease;
+}
+
 /*
 ============================================================
 ************************************************************
@@ -80,12 +101,27 @@ p {
 }
 
 .educationBox {
-  padding-left: 50px;
-  padding-right: 50px;
-  padding-top: 40px;
-  margin-top: 30px;
-  background-color: #ededed;
-  border-radius: 10px;
+  @include standard-box-shadow();
+  padding-left: 5%;
+  padding-right: 5%;
+  padding-top: 3%;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  background-color: $background-color;
+  border: 1px solid $gray-two;
+  border-radius: 5px;
+}
+
+.application-box-heading {
+  font-family: Lato;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.radio-styling {
+  @media screen and (max-width: $medium-breakpoint) {
+    display: block;
+  }
 }
 
 MinusCircleOutlined {

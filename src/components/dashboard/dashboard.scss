@@ -15,6 +15,24 @@ $medium-breakpoint: 768px;
 $large-breakpoint: 992px;
 $x-large-breakpoint: 1200px;
 
+//Mixins
+@mixin standard-box-shadow {
+  box-shadow: 1px 1px 5px -4px;
+}
+
+@mixin standard-border-radius {
+  border-radius: 15px;
+}
+
+@mixin light-border-radius {
+  border-radius: 10px;
+}
+
+@mixin standard-box-shadow-hover {
+  box-shadow: 2px 2px 5px -4px;
+  transition: 0.3s ease;
+}
+
 /*
 ============================================================
 ************************************************************

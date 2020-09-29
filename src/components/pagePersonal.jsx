@@ -376,7 +376,7 @@ class PagePersonal extends Component {
                   >
                     <Radio.Group
                       onChange={this.onCheckChange}
-                      className="universal-left"
+                      className="universal-left radio-styling"
                     >
                       {genders.map((gender) =>
                         gender !== "Other" ? (
@@ -555,7 +555,7 @@ class PagePersonal extends Component {
                               />
                             ) : null}
 
-                            <h2>School {index + 1}</h2>
+                            <h2 className="application-box-heading">School {index + 1}</h2>
 
                             {/**
                              *
@@ -664,7 +664,7 @@ class PagePersonal extends Component {
                                 <Form.Item
                                   key={[field.fieldKey, "courseConcentration"]}
                                   label={this.boldify(
-                                    "Course Concentration",
+                                    "Course Interests",
                                     true,
                                     <React.Fragment>
                                       What subjects did you focus on at this
