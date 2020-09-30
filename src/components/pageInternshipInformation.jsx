@@ -741,7 +741,7 @@ class PageInternshipInformation extends Component {
           </React.Fragment>
         ) : (
           <React.Fragment>
-            <h1>Internship Information</h1>
+            <h1 className="apply-header twentyEightFont">Internship Information</h1>
             <br />
 
             {/**
