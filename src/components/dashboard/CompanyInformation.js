@@ -152,7 +152,7 @@ class CompanyInformation extends React.Component {
     return splitText.slice(words).join(" ");
   };
 
-  toggle = () => this.setState(({ show: !this.state.show }));
+  toggle = () => this.setState({ show: !this.state.show });
 
   render() {
     const { info, isLoading, show } = this.state;
@@ -238,16 +238,28 @@ class CompanyInformation extends React.Component {
                  *
                  */}
                 <Row>
-                  <Spring
-                    from={{ color: "red" }}
-                    to={{
-                      color: show ? "blue" : "red"
+                  <div
+                    style={{
+                      height: "100%",
+                      alignContent: "left",
                     }}
-                    config={config.slow}
                   >
-                    {(props) => <div style={props}>{info.description}</div>}
-                  </Spring>
-                  <button onClick={this.toggle}>Read More</button>
+                    <Spring
+                      from={{ overflow: "hidden", background: "" }}
+                      to={{
+                        height: show ? "auto" : 200,
+                      }}
+                    >
+                      {(props) => (
+                        <div style={props}>
+                          {info.description}
+                        </div>
+                      )}
+                    </Spring>
+                    <button onClick={this.toggle}>
+                      {show ? "Read Less" : "Read More"}
+                    </button>
+                  </div>
                 </Row>
 
                 {/**
