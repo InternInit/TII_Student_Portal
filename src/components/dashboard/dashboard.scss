@@ -214,11 +214,10 @@ hr {
 }
 
 .company-info-read-more-button {
-  color: blue;
-  position: relative;
-  width: 100%;
-  text-align: left;
-  margin: 0;
+  margin-top: 1%;
+  font-family: Roboto;
+  background-color: transparent;
+  color: #1890ff;
 
   &:hover {
     cursor: pointer;

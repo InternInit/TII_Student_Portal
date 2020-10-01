@@ -14,7 +14,7 @@ import {
   AiFillLinkedin,
 } from "react-icons/ai";
 import { FaInstagram } from "react-icons/fa";
-import { config, Spring, Transition } from "react-spring/renderprops";
+import { CSSTransition } from "react-transition-group";
 
 import { Link } from "react-router-dom";
 
@@ -104,6 +104,8 @@ const LinkedIn = styled(AiFillLinkedin)`
 class CompanyInformation extends React.Component {
   constructor(props) {
     super(props);
+
+    this.animation = [];
 
     this.state = {
       info: {},
@@ -238,38 +240,21 @@ class CompanyInformation extends React.Component {
                  *
                  */}
                 <Row>
-                  <div
-                    style={{
-                      alignContent: "left",
-                    }}
-                  >
-                    <Transition
-                      items={show}
-                      from={{
-                        position: "relative",
-                        overflow: "hidden",
-                        height: 0,
-                      }}
-                      enter={[{ height: "auto" }]}
-                      leave={{ height: 0 }}
-                    >
-                      {(show) =>
-                        show &&
-                        ((props) => <div style={props}>{info.description}</div>)
-                      }
-                    </Transition>
-                    {/*<Spring
-                      from={{ overflow: "hidden", background: "" }}
-                      to={{
-                        height: show ? "auto" : 200,
-                      }}
-                    >
-                      {(props) => <div style={props}>{info.description}</div>}
-                    </Spring>*/}
+                  <div className="company-info-description sixteenFont">
+                    {show ? (
+                      <div>{info.description}</div>
+                    ) : (
+                      <div style={{ height: "200px", overflow: "hidden" }}>
+                        {info.description}
+                      </div>
+                    )}
                   </div>
-                  <button onClick={this.toggle}>
-                      {show ? "Read Less" : "Read More"}
-                    </button>
+                  <p
+                    className="company-info-read-more-button sixteenFont"
+                    onClick={this.toggle}
+                  >
+                    {show ? "Read Less" : "Read More"}
+                  </p>
                 </Row>
 
                 {/**
