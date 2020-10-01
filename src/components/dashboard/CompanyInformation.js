@@ -256,34 +256,6 @@ class CompanyInformation extends React.Component {
 
                 {/**
                  *
-                 * Divider
-                 *
-                 */}
-                <Divider>
-                  <SectionHeader
-                    style={{
-                      color: "#595959",
-                      paddingBottom: "25px",
-                      marginTop: "40px",
-                    }}
-                    className="thirtySixFont"
-                  >
-                    Internship Information
-                  </SectionHeader>
-                </Divider>
-
-                {/**
-                 *
-                 * Intership Description
-                 *
-                 */}
-                <Row>
-                  <Header className="twentyFourFont">Description</Header>
-                  <Caption className="sixteenFont">{info.description}</Caption>
-                </Row>
-
-                {/**
-                 *
                  * Location
                  *
                  */}
