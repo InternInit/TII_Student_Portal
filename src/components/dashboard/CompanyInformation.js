@@ -209,9 +209,6 @@ class CompanyInformation extends React.Component {
                   <Avatar
                     size={75}
                     src={info.avatar}
-                    style={{
-                      border: "2px solid black",
-                    }}
                   />
                   <div>
                     <h1 className="company-info-company-name thirtySixFont">
