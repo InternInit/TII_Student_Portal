@@ -6,16 +6,15 @@ import {
   Avatar,
   Row as AntRow,
   Col as AntCol,
+  Button,
 } from "antd";
-import { TeamOutlined } from "@ant-design/icons";
 import {
   AiFillFacebook,
   AiFillTwitterSquare,
-  AiFillInstagram,
   AiFillLinkedin,
 } from "react-icons/ai";
 import { FaInstagram } from "react-icons/fa";
-import { ReadMore, ReadMoreButton } from "@crossfield/react-read-more";
+import { Transition, Spring, animated } from "react-spring/renderprops";
 
 import { Link } from "react-router-dom";
 
@@ -105,8 +104,11 @@ const LinkedIn = styled(AiFillLinkedin)`
 class CompanyInformation extends React.Component {
   constructor(props) {
     super(props);
+
     this.state = {
       info: {},
+      isLoading: true,
+      show: false,
     };
   }
 
@@ -116,9 +118,10 @@ class CompanyInformation extends React.Component {
     idList.push(id);
     this.matchBusinesses(JSON.stringify(idList));
     window.scrollTo(0, 0);
+    console.log("Mounted and Info is:" + this.state.info.description);
   }
 
-  matchBusinesses(businessList) {
+  matchBusinesses = (businessList) => {
     fetch("/api/match_businesses", {
       method: "POST",
       body: JSON.parse(JSON.stringify(businessList)),
@@ -132,258 +135,293 @@ class CompanyInformation extends React.Component {
           );
           //console.log(matchedBusinessesArray)
           this.setState({ info: matchedBusinessesArray[0] });
+          this.setState({ isLoading: false });
         } catch (e) {
           console.log(e);
         }
       });
-  }
+  };
+
+  truncate = (text, words) => {
+    const splitText = text.split(" ");
+    return splitText.slice(0, words).join(" ");
+  };
+
+  addBack = (text, words) => {
+    const splitText = text.split(" ");
+    return splitText.slice(words).join(" ");
+  };
+
+  toggle = (e) => this.setState((state) => ({ show: !state.show }));
 
   render() {
-    const { info } = this.state;
+    const { info, isLoading, show } = this.state;
 
     if (info === null) {
       return null;
     }
-    return (
-      <React.Fragment>
-        {/**
-         *
-         * Breadcrumb
-         *
-         */}
-        <Breadcrumb
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            fontWeight: "500",
-            marginTop: "2vh",
-          }}
-          className="eighteenFont"
-        >
-          <Link to="/dashboard/add-companies">
-            <Breadcrumb.Item>Add Companies</Breadcrumb.Item>
-          </Link>
-          <Breadcrumb.Item>{info.name}</Breadcrumb.Item>
-        </Breadcrumb>
 
-        <div className="company-info-card">
-          <div className="company-info-banner">
-            <img
-              className="company-info-banner-img"
-              src={info.avatar}
-              alt={info.name}
-            ></img>
-          </div>
-          <div className="company-info-inner-content">
-            {/**
-             *
-             * Company Logo and Name
-             *
-             */}
-            <div>
-              <AntRow>
-                <Avatar
-                  size={75}
-                  src={info.avatar}
-                  style={{
-                    border: "2px solid black",
-                  }}
-                />
-                <div>
-                  <h1 className="company-info-company-name thirtySixFont">
-                    {info.name}
+    if (isLoading) {
+      console.log("Rendered loading and info is:" + info.description);
+      return <div>Loading</div>;
+    } else {
+      console.log("Rendered component and info is:" + info.description);
+      return (
+        <React.Fragment>
+          {/**
+           *
+           * Breadcrumb
+           *
+           */}
+          <Breadcrumb
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              fontWeight: "500",
+              marginTop: "2vh",
+            }}
+            className="eighteenFont"
+          >
+            <Link to="/dashboard/add-companies">
+              <Breadcrumb.Item>Add Companies</Breadcrumb.Item>
+            </Link>
+            <Breadcrumb.Item>{info.name}</Breadcrumb.Item>
+          </Breadcrumb>
+
+          <div className="company-info-card">
+            <div className="company-info-banner">
+              <img
+                className="company-info-banner-img"
+                src={info.avatar}
+                alt={info.name}
+              ></img>
+            </div>
+            <div className="company-info-inner-content">
+              {/**
+               *
+               * Company Logo and Name
+               *
+               */}
+              <div>
+                <AntRow>
+                  <Avatar
+                    size={75}
+                    src={info.avatar}
+                    style={{
+                      border: "2px solid black",
+                    }}
+                  />
+                  <div>
+                    <h1 className="company-info-company-name thirtySixFont">
+                      {info.name}
+                    </h1>
+                    <h1 className="company-info-company-location twentyTwoFont">
+                      {info.location}
+                    </h1>
+                  </div>
+                </AntRow>
+
+                {/**
+                 *
+                 * Divider
+                 *
+                 */}
+                <AntRow style={{ width: "100%" }}>
+                  <h1 className="company-info-subsection-header thirtySixFont">
+                    Company Overview
                   </h1>
-                  <h1 className="company-info-company-location twentyTwoFont">
-                    {info.location}
-                  </h1>
-                </div>
-              </AntRow>
+                </AntRow>
 
-              {/**
-               *
-               * Divider
-               *
-               */}
-              <AntRow style={{ width: "100%" }}>
-                <h1 className="company-info-subsection-header thirtySixFont">
-                  Company Overview
-                </h1>
-              </AntRow>
-
-              {/**
-               *
-               * Company Description
-               *
-               */}
-              <Row>
-                {/*
-                TO BE IMPLEMENTED
-                <ReadMore
-                  initialHeight={350}
-                  readMore={(props) => (
-                    <ReadMoreButton onClick={props.onClick}>
-                      {props.open ? "Read Less" : "Read More"}
-                    </ReadMoreButton>
-                  )}
-                  ></ReadMore>*/}
-                  <p className="sixteenFont">{info.description}</p>
-              </Row>
-
-              {/**
-               *
-               * Divider
-               *
-               */}
-              <Divider>
-                <SectionHeader
-                  style={{
-                    color: "#595959",
-                    paddingBottom: "25px",
-                    marginTop: "40px",
-                  }}
-                  className="thirtySixFont"
-                >
-                  Internship Information
-                </SectionHeader>
-              </Divider>
-
-              {/**
-               *
-               * Intership Description
-               *
-               */}
-              <Row>
-                <Header className="twentyFourFont">Description</Header>
-                <Caption className="sixteenFont">{info.description}</Caption>
-              </Row>
-
-              {/**
-               *
-               * Location
-               *
-               */}
-              <Row>
-                <Header className="twentyFourFont">Location</Header>
-                <Caption className="sixteenFont">{info.location}</Caption>
-              </Row>
-
-              {/**
-               *
-               * Location
-               *
-               */}
-              <Row>
-                <Header className="twentyFourFont">Industry</Header>
-                <Caption className="sixteenFont">{info.industry}</Caption>
-              </Row>
-
-              {/**
-               *
-               * Work Period
-               *
-               */}
-              <Row>
-                <Header className="twentyFourFont">Work Period</Header>
-                <Caption className="sixteenFont">
-                  {info.starttime} - {info.endtime}
-                </Caption>
-              </Row>
-
-              {/**
-               *
-               * Additional Information
-               *
-               */}
-              <Row style={{ marginBottom: "45px" }}>
-                <Header className="twentyFourFont">
-                  Additional Information
-                </Header>
-                <Caption className="sixteenFont">
-                  - AP CSA - AP CSP - Must be 18+
-                </Caption>
-              </Row>
-
-              {/**
-               *
-               * Divider
-               *
-               */}
-              <Divider>
-                <SectionHeader
-                  style={{
-                    color: "#595959",
-                    paddingBottom: "25px",
-                    marginTop: "25px",
-                  }}
-                  className="thirtySixFont"
-                >
-                  Contact Information
-                </SectionHeader>
-              </Divider>
-
-              {/**
-               *
-               * Website
-               *
-               */}
-              <Row>
-                <Header className="twentyFourFont">Website</Header>
-                <Caption className="sixteenFont">
-                  <a
-                    href={info.website}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    {info.website}
-                  </a>
-                </Caption>
-              </Row>
-
-              {/**
-               *
-               * Email
-               *
-               */}
-              <Row>
-                <Header className="twentyFourFont">E-Mail</Header>
-                <Caption className="sixteenFont">{info.email}</Caption>
-              </Row>
-
-              {/**
-               *
-               * Phone Number
-               *
-               */}
-              <Row>
-                <Header className="twentyFourFont">Phone Number</Header>
-                <Caption className="sixteenFont">{info.phonenumber}</Caption>
-              </Row>
-
-              {/**
-               *
-               * Links To Social
-               *
-               */}
-              <Row>
-                <Header className="twentyFourFont">Links</Header>
-                <Row
-                  style={{
-                    display: "flex",
-                    flexDirection: "row",
-                    justifyContent: "space-evenly",
-                  }}
-                >
-                  <Facebook size={36} alt="facebook" />
-                  <Twitter size={36} alt="twitter" />
-                  <Instagram size={28} alt="instagram" />
-                  <LinkedIn size={36} alt="linkedin" />
+                {/**
+                 *
+                 * Company Description
+                 *
+                 */}
+                <Row>
+                  <div className="sixteenFont">
+                    <Transition
+                      native
+                      items={this.state.show}
+                      from={{
+                        overflow: "hidden",
+                        Height: "50px",
+                      }}
+                      enter={[{ height: "auto" }]}
+                      leave={{ Height: "50px" }}
+                    >
+                      {(show) =>
+                        show &&
+                        ((props) => (
+                          <animated.div className="sixteenFont" style={props}>
+                            {info.description}
+                          </animated.div>
+                        ))
+                      }
+                    </Transition>
+                  </div>
+                  <div className="company-info-read-more">
+                  <button className="company-info-read-more-button" onClick={this.toggle}>
+                      Read More
+                  </button>
+                  </div>
                 </Row>
-              </Row>
+
+                {/**
+                 *
+                 * Divider
+                 *
+                 */}
+                <Divider>
+                  <SectionHeader
+                    style={{
+                      color: "#595959",
+                      paddingBottom: "25px",
+                      marginTop: "40px",
+                    }}
+                    className="thirtySixFont"
+                  >
+                    Internship Information
+                  </SectionHeader>
+                </Divider>
+
+                {/**
+                 *
+                 * Intership Description
+                 *
+                 */}
+                <Row>
+                  <Header className="twentyFourFont">Description</Header>
+                  <Caption className="sixteenFont">{info.description}</Caption>
+                </Row>
+
+                {/**
+                 *
+                 * Location
+                 *
+                 */}
+                <Row>
+                  <Header className="twentyFourFont">Location</Header>
+                  <Caption className="sixteenFont">{info.location}</Caption>
+                </Row>
+
+                {/**
+                 *
+                 * Location
+                 *
+                 */}
+                <Row>
+                  <Header className="twentyFourFont">Industry</Header>
+                  <Caption className="sixteenFont">{info.industry}</Caption>
+                </Row>
+
+                {/**
+                 *
+                 * Work Period
+                 *
+                 */}
+                <Row>
+                  <Header className="twentyFourFont">Work Period</Header>
+                  <Caption className="sixteenFont">
+                    {info.starttime} - {info.endtime}
+                  </Caption>
+                </Row>
+
+                {/**
+                 *
+                 * Additional Information
+                 *
+                 */}
+                <Row style={{ marginBottom: "45px" }}>
+                  <Header className="twentyFourFont">
+                    Additional Information
+                  </Header>
+                  <Caption className="sixteenFont">
+                    - AP CSA - AP CSP - Must be 18+
+                  </Caption>
+                </Row>
+
+                {/**
+                 *
+                 * Divider
+                 *
+                 */}
+                <Divider>
+                  <SectionHeader
+                    style={{
+                      color: "#595959",
+                      paddingBottom: "25px",
+                      marginTop: "25px",
+                    }}
+                    className="thirtySixFont"
+                  >
+                    Contact Information
+                  </SectionHeader>
+                </Divider>
+
+                {/**
+                 *
+                 * Website
+                 *
+                 */}
+                <Row>
+                  <Header className="twentyFourFont">Website</Header>
+                  <Caption className="sixteenFont">
+                    <a
+                      href={info.website}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {info.website}
+                    </a>
+                  </Caption>
+                </Row>
+
+                {/**
+                 *
+                 * Email
+                 *
+                 */}
+                <Row>
+                  <Header className="twentyFourFont">E-Mail</Header>
+                  <Caption className="sixteenFont">{info.email}</Caption>
+                </Row>
+
+                {/**
+                 *
+                 * Phone Number
+                 *
+                 */}
+                <Row>
+                  <Header className="twentyFourFont">Phone Number</Header>
+                  <Caption className="sixteenFont">{info.phonenumber}</Caption>
+                </Row>
+
+                {/**
+                 *
+                 * Links To Social
+                 *
+                 */}
+                <Row>
+                  <Header className="twentyFourFont">Links</Header>
+                  <Row
+                    style={{
+                      display: "flex",
+                      flexDirection: "row",
+                      justifyContent: "space-evenly",
+                    }}
+                  >
+                    <Facebook size={36} alt="facebook" />
+                    <Twitter size={36} alt="twitter" />
+                    <Instagram size={28} alt="instagram" />
+                    <LinkedIn size={36} alt="linkedin" />
+                  </Row>
+                </Row>
+              </div>
             </div>
           </div>
-        </div>
-      </React.Fragment>
-    );
+        </React.Fragment>
+      );
+    }
   }
 }
 
