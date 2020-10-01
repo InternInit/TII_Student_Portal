@@ -212,6 +212,18 @@ hr {
   font-style: normal;
   text-align: left;
 }
+
+.company-info-read-more-button {
+  color: blue;
+  position: relative;
+  width: 100%;
+  text-align: left;
+  margin: 0;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
 /*
 ============================================================
 ************************************************************

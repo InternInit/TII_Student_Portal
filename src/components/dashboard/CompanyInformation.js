@@ -14,7 +14,7 @@ import {
   AiFillLinkedin,
 } from "react-icons/ai";
 import { FaInstagram } from "react-icons/fa";
-import { Transition, Spring, animated } from "react-spring/renderprops";
+import { config, Spring } from "react-spring/renderprops";
 
 import { Link } from "react-router-dom";
 
@@ -152,7 +152,7 @@ class CompanyInformation extends React.Component {
     return splitText.slice(words).join(" ");
   };
 
-  toggle = (e) => this.setState((state) => ({ show: !state.show }));
+  toggle = () => this.setState(({ show: !this.state.show }));
 
   render() {
     const { info, isLoading, show } = this.state;
@@ -238,32 +238,16 @@ class CompanyInformation extends React.Component {
                  *
                  */}
                 <Row>
-                  <div className="sixteenFont">
-                    <Transition
-                      native
-                      items={this.state.show}
-                      from={{
-                        overflow: "hidden",
-                        Height: "50px",
-                      }}
-                      enter={[{ height: "auto" }]}
-                      leave={{ Height: "50px" }}
-                    >
-                      {(show) =>
-                        show &&
-                        ((props) => (
-                          <animated.div className="sixteenFont" style={props}>
-                            {info.description}
-                          </animated.div>
-                        ))
-                      }
-                    </Transition>
-                  </div>
-                  <div className="company-info-read-more">
-                  <button className="company-info-read-more-button" onClick={this.toggle}>
-                      Read More
-                  </button>
-                  </div>
+                  <Spring
+                    from={{ color: "red" }}
+                    to={{
+                      color: show ? "blue" : "red"
+                    }}
+                    config={config.slow}
+                  >
+                    {(props) => <div style={props}>{info.description}</div>}
+                  </Spring>
+                  <button onClick={this.toggle}>Read More</button>
                 </Row>
 
                 {/**
