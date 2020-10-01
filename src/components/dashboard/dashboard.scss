@@ -162,23 +162,26 @@ hr {
 
 .company-info-banner {
   background-color: white;
-  height: 150px;
+  height: 250px;
   width: 100%;
   border-radius: 10px 10px 0px 0px;
 
   .company-info-banner-img {
-    height: 150px;
+    height: 250px;
     width: 100%;
     object-fit: cover;
+    border-radius: 10px 10px 0px 0px;
   }
 }
 
 .company-info-inner-content {
   display: flex;
   justify-content: center;
-  padding: 8%;
+  padding-left: 7%;
+  padding-right: 7%;
+  padding-bottom: 7%;
   width: 85%;
-  margin-top: 2%;
+  margin-top: 3%;
 }
 
 .company-info-company-name {
@@ -231,14 +234,15 @@ hr {
 .company-info-sub-card {
   @include soft-box-shadow();
   @include light-border-radius();
-  padding: 3% 12%;
+  padding: 7% 12%;
   text-align: left;
 
   .sub-card-heading {
     font-family: Lato;
     font-style: normal;
     font-weight: bold;
-    text-align: left;
+    text-align: center;
+    margin-bottom: 7%;
   }
   .sub-card-sub-heading {
     font-family: Roboto;

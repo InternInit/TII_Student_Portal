@@ -257,20 +257,20 @@ class CompanyInformation extends React.Component {
                       <h1 className="sub-card-heading twentyEightFont">
                         Internship Facts
                       </h1>
-                      <h2 className="sub-card-sub-heading eighteenFont">
+                      <h2 className="sub-card-sub-heading sixteenFont">
                         Industry
                       </h2>
-                      <p className="eighteenFont">{info.industry}</p>
-                      <h2 className="sub-card-sub-heading eighteenFont">
+                      <p className="sixteenFont">{info.industry}</p>
+                      <h2 className="sub-card-sub-heading sixteenFont">
                         Work Time
                       </h2>
-                      <p className="eighteenFont">
+                      <p className="sixteenFont">
                         {info.starttime} - {info.endtime}
                       </p>
-                      <h2 className="sub-card-sub-heading eighteenFont">
+                      <h2 className="sub-card-sub-heading sixteenFont">
                         Additional Information
                       </h2>
-                      <p className="eighteenFont">
+                      <p className="sixteenFont">
                         - AP CSA - AP CSP - Must be 18+
                       </p>
                     </div>
@@ -280,20 +280,20 @@ class CompanyInformation extends React.Component {
                       <h1 className="sub-card-heading twentyEightFont">
                         Contact
                       </h1>
-                      <h2 className="sub-card-sub-heading eighteenFont">
+                      <h2 className="sub-card-sub-heading sixteenFont">
                         Website
                       </h2>
-                      <p className="eighteenFont">{info.website}</p>
-                      <h2 className="sub-card-sub-heading eighteenFont">
+                      <p className="sixteenFont">{info.website}</p>
+                      <h2 className="sub-card-sub-heading sixteenFont">
                         Email
                       </h2>
-                      <p className="eighteenFont">
+                      <p className="sixteenFont">
                         {info.email}
                       </p>
-                      <h2 className="sub-card-sub-heading eighteenFont">
+                      <h2 className="sub-card-sub-heading sixteenFont">
                         Phone Number
                       </h2>
-                      <p className="eighteenFont">
+                      <p className="sixteenFont">
                         {info.phonenumber}
                       </p>
                     </div>
