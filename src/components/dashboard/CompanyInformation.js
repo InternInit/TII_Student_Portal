@@ -14,7 +14,7 @@ import {
   AiFillLinkedin,
 } from "react-icons/ai";
 import { FaInstagram } from "react-icons/fa";
-import { config, Spring } from "react-spring/renderprops";
+import { config, Spring, Transition } from "react-spring/renderprops";
 
 import { Link } from "react-router-dom";
 
@@ -240,26 +240,36 @@ class CompanyInformation extends React.Component {
                 <Row>
                   <div
                     style={{
-                      height: "100%",
                       alignContent: "left",
                     }}
                   >
-                    <Spring
+                    <Transition
+                      items={show}
+                      from={{
+                        position: "relative",
+                        overflow: "hidden",
+                        height: 0,
+                      }}
+                      enter={[{ height: "auto" }]}
+                      leave={{ height: 0 }}
+                    >
+                      {(show) =>
+                        show &&
+                        ((props) => <div style={props}>{info.description}</div>)
+                      }
+                    </Transition>
+                    {/*<Spring
                       from={{ overflow: "hidden", background: "" }}
                       to={{
                         height: show ? "auto" : 200,
                       }}
                     >
-                      {(props) => (
-                        <div style={props}>
-                          {info.description}
-                        </div>
-                      )}
-                    </Spring>
-                    <button onClick={this.toggle}>
+                      {(props) => <div style={props}>{info.description}</div>}
+                    </Spring>*/}
+                  </div>
+                  <button onClick={this.toggle}>
                       {show ? "Read Less" : "Read More"}
                     </button>
-                  </div>
                 </Row>
 
                 {/**
