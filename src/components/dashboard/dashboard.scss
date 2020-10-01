@@ -21,6 +21,10 @@ $medium-dark-gray: #434343;
   box-shadow: 1px 1px 5px -4px;
 }
 
+@mixin soft-box-shadow {
+  box-shadow: 1px 2px 10px rgba(0, 0, 0, 0.25);
+}
+
 @mixin standard-border-radius {
   border-radius: 15px;
 }
@@ -158,12 +162,12 @@ hr {
 
 .company-info-banner {
   background-color: white;
-  height: 250px;
+  height: 150px;
   width: 100%;
   border-radius: 10px 10px 0px 0px;
 
   .company-info-banner-img {
-    height: 250px;
+    height: 150px;
     width: 100%;
     object-fit: cover;
   }
@@ -221,6 +225,26 @@ hr {
 
   &:hover {
     cursor: pointer;
+  }
+}
+
+.company-info-sub-card {
+  @include soft-box-shadow();
+  @include light-border-radius();
+  padding: 3% 12%;
+  text-align: left;
+
+  .sub-card-heading {
+    font-family: Lato;
+    font-style: normal;
+    font-weight: bold;
+    text-align: left;
+  }
+  .sub-card-sub-heading {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: bold;
+    text-align: left;
   }
 }
 /*

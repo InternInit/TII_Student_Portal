@@ -206,10 +206,7 @@ class CompanyInformation extends React.Component {
                */}
               <div>
                 <AntRow>
-                  <Avatar
-                    size={75}
-                    src={info.avatar}
-                  />
+                  <Avatar size={75} src={info.avatar} />
                   <div>
                     <h1 className="company-info-company-name thirtySixFont">
                       {info.name}
@@ -252,6 +249,76 @@ class CompanyInformation extends React.Component {
                   >
                     {show ? "Read Less" : "Read More"}
                   </p>
+                </Row>
+
+                <AntRow gutter={[32, 16]} style={{marginTop: "5%"}}>
+                  <AntCol span={12}>
+                    <div className="company-info-sub-card">
+                      <h1 className="sub-card-heading twentyEightFont">
+                        Internship Facts
+                      </h1>
+                      <h2 className="sub-card-sub-heading eighteenFont">
+                        Industry
+                      </h2>
+                      <p className="eighteenFont">{info.industry}</p>
+                      <h2 className="sub-card-sub-heading eighteenFont">
+                        Work Time
+                      </h2>
+                      <p className="eighteenFont">
+                        {info.starttime} - {info.endtime}
+                      </p>
+                      <h2 className="sub-card-sub-heading eighteenFont">
+                        Additional Information
+                      </h2>
+                      <p className="eighteenFont">
+                        - AP CSA - AP CSP - Must be 18+
+                      </p>
+                    </div>
+                  </AntCol>
+                  <AntCol span={12}>
+                    <div className="company-info-sub-card">
+                      <h1 className="sub-card-heading twentyEightFont">
+                        Contact
+                      </h1>
+                      <h2 className="sub-card-sub-heading eighteenFont">
+                        Website
+                      </h2>
+                      <p className="eighteenFont">{info.website}</p>
+                      <h2 className="sub-card-sub-heading eighteenFont">
+                        Email
+                      </h2>
+                      <p className="eighteenFont">
+                        {info.email}
+                      </p>
+                      <h2 className="sub-card-sub-heading eighteenFont">
+                        Phone Number
+                      </h2>
+                      <p className="eighteenFont">
+                        {info.phonenumber}
+                      </p>
+                    </div>
+                  </AntCol>
+                </AntRow>
+
+                {/**
+                 *
+                 * Links To Social
+                 *
+                 */}
+                <Row>
+                  <Header className="twentyFourFont">Links</Header>
+                  <AntRow
+                    style={{
+                      display: "flex",
+                      flexDirection: "row",
+                      justifyContent: "space-evenly",
+                    }}
+                  >
+                    <Facebook size={36} alt="facebook" />
+                    <Twitter size={36} alt="twitter" />
+                    <Instagram size={28} alt="instagram" />
+                    <LinkedIn size={36} alt="linkedin" />
+                  </AntRow>
                 </Row>
 
                 {/**
