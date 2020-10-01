@@ -144,16 +144,6 @@ class CompanyInformation extends React.Component {
       });
   };
 
-  truncate = (text, words) => {
-    const splitText = text.split(" ");
-    return splitText.slice(0, words).join(" ");
-  };
-
-  addBack = (text, words) => {
-    const splitText = text.split(" ");
-    return splitText.slice(words).join(" ");
-  };
-
   toggle = () => this.setState({ show: !this.state.show });
 
   render() {
