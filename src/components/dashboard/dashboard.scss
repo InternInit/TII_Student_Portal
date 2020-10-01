@@ -14,6 +14,7 @@ $small-breakpoint: 600px;
 $medium-breakpoint: 768px;
 $large-breakpoint: 992px;
 $x-large-breakpoint: 1200px;
+$medium-dark-gray: #434343;
 
 //Mixins
 @mixin standard-box-shadow {
@@ -133,6 +134,78 @@ hr {
   color: black;
 }
 
+/*
+============================================================
+                    Company Information Pages
+============================================================
+*/
+
+.company-info-card {
+  @include standard-box-shadow();
+  background: white;
+  border-radius: 10px;
+  flex-direction: column;
+  margin-top: 10px;
+
+  min-width: 400px;
+  display: flex;
+  align-items: center;
+
+  &:hover {
+    @include standard-box-shadow-hover();
+  }
+}
+
+.company-info-banner {
+  background-color: white;
+  height: 250px;
+  width: 100%;
+  border-radius: 10px 10px 0px 0px;
+
+  .company-info-banner-img {
+    height: 250px;
+    width: 100%;
+    object-fit: cover;
+  }
+}
+
+.company-info-inner-content {
+  display: flex;
+  justify-content: center;
+  padding: 8%;
+  width: 85%;
+  margin-top: 2%;
+}
+
+.company-info-company-name {
+  font-family: Lato;
+  font-style: normal;
+  font-weight: bold;
+  text-align: left;
+
+  margin-top: -1vh;
+  margin-left: 2vw;
+  margin-bottom: -1vh;
+}
+
+.company-info-company-location {
+  font-family: Roboto;
+  text-align: left;
+
+  margin-left: 2vw;
+
+  color: $medium-dark-gray;
+}
+
+.company-info-subsection-header {
+  font-family: Lato;
+  font-style: normal;
+  font-weight: bold;
+  width: 100%;
+  text-align: center;
+  margin-top: 4vh;
+  margin-bottom: 4vh;
+}
 /*
 ============================================================
 ************************************************************

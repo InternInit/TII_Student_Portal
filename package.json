@@ -5,6 +5,7 @@
   "dependencies": {
     "@ant-design/icons": "^4.2.2",
     "@aws-amplify/ui-react": "^0.2.21",
+    "@crossfield/react-read-more": "^0.2.0",
     "@sentry/browser": "^5.23.0",
     "@testing-library/jest-dom": "^5.11.2",
     "@testing-library/react": "^11.0.4",
@@ -32,6 +33,7 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "^3.4.3",
     "react-spring": "^8.0.27",
+    "read-more-react": "^1.0.10",
     "redux": "^4.0.5",
     "rfs": "^9.0.3",
     "styled-components": "^5.2.0",
