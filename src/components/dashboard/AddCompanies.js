@@ -334,6 +334,7 @@ class AddCompanies extends React.Component {
               total={filteredInfo.length}
               onChange={(pageChange) => this.handlePageChange(pageChange - 1)}
               pageSize={20}
+              style={{marginBottom: "-40%"}}
             />
           </React.Fragment>
         )}
