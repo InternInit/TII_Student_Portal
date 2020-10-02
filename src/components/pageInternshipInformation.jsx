@@ -11,10 +11,15 @@ import {
   Spin,
   Popover,
   Skeleton,
-  Grid
+  Grid,
+  Space,
 } from "antd";
 import { Row, Col } from "antd";
-import { InboxOutlined } from "@ant-design/icons";
+import {
+  InboxOutlined,
+  MinusCircleOutlined,
+  PlusOutlined,
+} from "@ant-design/icons";
 import { InfoCircle } from "./StyledComponents/InternshipForms";
 
 import "antd/dist/antd.css";
@@ -51,6 +56,24 @@ const formGutter = [16, 16];
 const standardSpan = 24;
 const halfSpan = standardSpan / 2;
 const thirdSpan = standardSpan / 3;
+
+const formItemLayout = {
+  labelCol: {
+    xs: { span: 24 },
+    sm: { span: 4 },
+  },
+  wrapperCol: {
+    xs: { span: 24 },
+    sm: { span: 24 },
+  },
+};
+
+const formItemLayoutWithOutLabel = {
+  wrapperCol: {
+    xs: { span: 24, offset: 0 },
+    sm: { span: 24, offset: 0 },
+  },
+};
 
 //items
 const allStates = [
@@ -743,7 +766,9 @@ class PageInternshipInformation extends Component {
           </React.Fragment>
         ) : (
           <React.Fragment>
-            <h1 className="apply-header twentyEightFont">Internship Information</h1>
+            <h1 className="apply-header twentyEightFont">
+              Internship Information
+            </h1>
             <br />
 
             {/**
@@ -898,6 +923,15 @@ class PageInternshipInformation extends Component {
                       style={{ height: "100px" }}
                     />
                   </Form.Item>
+                </Col>
+              </Row>
+
+              <Row gutter={formGutter}>
+                <Col span={standardSpan}>
+                  <StandardInputs
+                    name="Extracurriculars"
+                    officialName="an Extracurricular Activity"
+                  />
                 </Col>
               </Row>
 
@@ -1176,10 +1210,93 @@ const StandardInputs = (props) => {
 
   return (
     <React.Fragment>
-      <Row></Row>
+      <Form.List name="users">
+        {(fields, { add, remove }) => {
+          return (
+            <div>
+              {fields.map((field) => (
+                <div
+                  className="educationBox"
+                  key={field.key}
+                >
+                  <Row gutter={formGutter} style={{ width: "100%" }}>
+                    <Col span={6}>
+                      <Form.Item
+                        {...field}
+                        name={[field.name, "activityType"]}
+                        fieldKey={[field.fieldKey, "activityType"]}
+                      >
+                        <Input placeholder="Activity Type" />
+                      </Form.Item>
+                    </Col>
+                    <Col span={18}>
+                      <Form.Item
+                        {...field}
+                        name={[field.name, "position"]}
+                        fieldKey={[field.fieldKey, "position"]}
+                      >
+                        <Input placeholder="Position" />
+                      </Form.Item>
+                    </Col>
+                  </Row>
+                  <Row gutter={formGutter} style={{ width: "100%" }}>
+                    <Col span={standardSpan / 4}>
+                      <Form.Item
+                        {...field}
+                        name={[field.name, "activityType"]}
+                        fieldKey={[field.fieldKey, "activityType"]}
+                      >
+                        <Input placeholder="Activity Type" />
+                      </Form.Item>
+                    </Col>
+                    <Col span={(standardSpan * 3) / 4}>
+                      <Form.Item
+                        {...field}
+                        name={[field.name, "position"]}
+                        fieldKey={[field.fieldKey, "position"]}
+                      >
+                        <Input placeholder="Position" />
+                      </Form.Item>
+                    </Col>
+                  </Row>
+                  <Row>
+                    <MinusCircleOutlined
+                      onClick={() => {
+                        remove(field.name);
+                      }}
+                    />
+                  </Row>
+                </div>
+              ))}
+
+              {/**
+               *
+               * Add Field Button
+               *
+               */}
+              <Form.Item style={{ width: "100%" }}>
+                <Button
+                  type="dashed"
+                  size="large"
+                  onClick={() => {
+                    add();
+                  }}
+                  style={{
+                    width: "100%",
+                    marginTop: "10px",
+                    marginBottom: "30px",
+                  }}
+                >
+                  <PlusOutlined /> Add {props.officialName}
+                </Button>
+              </Form.Item>
+            </div>
+          );
+        }}
+      </Form.List>
     </React.Fragment>
-  )
-}
+  );
+};
 
 export default withRouter(
   connect(mapStateToProps, mapDispatchToProps)(PageInternshipInformation)
