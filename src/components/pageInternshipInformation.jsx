@@ -11,6 +11,7 @@ import {
   Spin,
   Popover,
   Skeleton,
+  Grid
 } from "antd";
 import { Row, Col } from "antd";
 import { InboxOutlined } from "@ant-design/icons";
@@ -43,6 +44,7 @@ import SkeletonImage from "antd/lib/skeleton/Image";
 const { Option } = Select;
 const { RangePicker } = DatePicker;
 const { Dragger } = Upload;
+const { useBreakpoint } = Grid;
 
 //Formatting
 const formGutter = [16, 16];
@@ -1167,6 +1169,16 @@ class PageInternshipInformation extends Component {
     this.props.clickTwo();
     this.props.history.push(path);
   };
+}
+
+const StandardInputs = (props) => {
+  const screens = useBreakpoint();
+
+  return (
+    <React.Fragment>
+      <Row></Row>
+    </React.Fragment>
+  )
 }
 
 export default withRouter(
