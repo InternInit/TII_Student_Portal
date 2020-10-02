@@ -271,7 +271,7 @@ class QuickView extends React.Component {
                     </QVCaption>
                   </div>
 
-                  <div>
+                  <div className="add-company-button-group">
                       <Link
                         to={`/dashboard/add-companies/company-information/${companyid}`}
                       >

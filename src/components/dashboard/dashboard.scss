@@ -308,6 +308,12 @@ hr {
   width: 12vw;
   min-width: 150px;
   height: 36px;
+
+  @media screen and (max-width: $medium-breakpoint) {
+    @include font-size(14px);
+    margin-top: 1%;
+    margin-bottom: 1%;
+  }
 }
 
 .add-button-style {
@@ -333,6 +339,11 @@ hr {
 .companyIMG {
   width: 25vw;
   height: 200px;
+
+  @media screen and (max-width: $medium-breakpoint) {
+    display: none;
+  }
+
 }
 
 .companyLocation {
