@@ -18,7 +18,7 @@ import {
 import Logo from "../TII-logo.png";
 
 //React Router
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { withRouter } from "react-router";
 
 //==========================================================
@@ -97,7 +97,8 @@ class Navbar extends Component {
         <Menu
           className="main-navbar"
           onClick={this.handleClick}
-          selectedKeys={[this.state.current]}
+          defaultSelectedKeys={[this.getCurrentKey()]}
+          selectedKeys={[this.getCurrentKey]}
           mode="horizontal"
           style={menuStyle}
         >
