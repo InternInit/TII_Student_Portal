@@ -87,7 +87,7 @@ class TiiFooter extends Component {
         </div>
         <div style={{ marginTop: "20px" }}>
           <span style={textStyle} className="sixteenFont">
-            Created by The Internship Initiative LLC.
+            Created by The Internship Initiative LLC
           </span>
         </div>
         <div style={{ marginBottom: "30px" }}>
