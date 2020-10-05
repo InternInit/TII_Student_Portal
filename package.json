@@ -18,7 +18,7 @@
     "json-loader": "^0.5.7",
     "node-sass": "^4.14.1",
     "password-validator": "^5.1.0",
-    "postcss": "^7.0.32",
+    "postcss": "^7.0.35",
     "rc-animate": "^3.1.1",
     "rc-queue-anim": "^1.8.5",
     "rc-tween-one": "^2.7.3",
