@@ -184,7 +184,7 @@ class CompanyInformation extends React.Component {
             <div className="company-info-banner">
               <img
                 className="company-info-banner-img"
-                src={info.avatar}
+                src={info["alt_image"]}
                 alt={info.name}
               ></img>
             </div>
