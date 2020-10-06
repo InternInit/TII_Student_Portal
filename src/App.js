@@ -88,7 +88,7 @@ const PageContainer = styled.div`
   background-color: white;
   border: 1px solid #d9d9d9;
   box-shadow: 0 0 6px -4px;
-  border-radius: 10px;
+  border-radius: 5px;
 
   flex-direction: column;
   align-items: center;

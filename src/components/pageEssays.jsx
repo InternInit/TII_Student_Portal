@@ -235,7 +235,7 @@ class PageEssays extends React.Component {
           </React.Fragment>
         ) : (
           <React.Fragment>
-            <h1>Written Work</h1>
+            <h1 className="apply-header twentyEightFont">Written Work</h1>
             <p>
               Real people are reading your application. Show them that real
               people are applying through your writing!

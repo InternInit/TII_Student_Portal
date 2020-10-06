@@ -76,18 +76,28 @@ class TiiFooter extends Component {
 
           <Col>
             <div style={textStyle} className="eighteenFont bold">
-              Contact Us
+              Follow and Connect
             </div>
             <span style={textStyle} className="fourteenFont">
               <a href="mailto:contact-us@interninit.com">
                 <div class="noColorLink">Email</div>
               </a>
             </span>
+            <span style={textStyle} className="fourteenFont">
+              <a href="https://www.instagram.com/internshipinitiative/">
+                <div class="noColorLink">Instagram</div>
+              </a>
+            </span>
+            <span style={textStyle} className="fourteenFont">
+              <a href="https://www.linkedin.com/company/the-internship-initiative-llc">
+                <div class="noColorLink">LinkedIn</div>
+              </a>
+            </span>
           </Col>
         </div>
         <div style={{ marginTop: "20px" }}>
           <span style={textStyle} className="sixteenFont">
-            Created by The Internship Initiative LLC.
+            Created by The Internship Initiative LLC
           </span>
         </div>
         <div style={{ marginBottom: "30px" }}>
