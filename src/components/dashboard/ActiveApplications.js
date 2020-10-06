@@ -29,12 +29,13 @@ class ActiveApplications extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      page: "0",
+      page: 0,
+      busPerPage: 6,
     };
     this.handlePageChange = this.handlePageChange.bind(this);
   }
   render() {
-    let { page } = this.state;
+    let { page, busPerPage } = this.state;
     let { activeApplications } = this.props;
 
     return (
@@ -61,7 +62,7 @@ class ActiveApplications extends Component {
               ease={["easeOutQuart", "easeInOutQuart"]}
             >
               {activeApplications
-                .slice(page, page + 6)
+                .slice(page * busPerPage, (page + 1) * busPerPage)
                 .filter((apps) => apps.status !== "Pinned")
                 .map((pinnedCompany, index) => (
                   <div style={{ marginBottom: "12px" }} key={index}>
@@ -81,9 +82,12 @@ class ActiveApplications extends Component {
             </QueueAnim>
             <Pagination
               current={parseInt(page) + 1}
-              total={activeApplications.length}
+              total={
+                activeApplications.filter((apps) => apps.status !== "Pinned")
+                  .length
+              }
               onChange={(pageChange) => this.handlePageChange(pageChange - 1)}
-              pageSize={6}
+              pageSize={busPerPage}
             />
           </React.Fragment>
         )}
@@ -91,7 +95,7 @@ class ActiveApplications extends Component {
     );
   }
   handlePageChange = (pageChange) => {
-    this.setState({ page: pageChange * 6 });
+    this.setState({ page: pageChange });
   };
 }
 
