@@ -32,13 +32,13 @@ class PinCompany extends Component {
     this.handlePageChange = this.handlePageChange.bind(this);
 
     this.state = {
-      pinnedCompanies: [],
-      page: "0",
+      page: 0,
+      busPerPage: 5,
     };
   }
 
   render() {
-    let { page } = this.state;
+    let { page, busPerPage } = this.state;
     let { pinnedBusinesses, updateBusinessStatus } = this.props;
     return (
       <React.Fragment>
@@ -68,7 +68,7 @@ class PinCompany extends Component {
               ease={["easeOutQuart", "easeInOutQuart"]}
             >
               {pinnedBusinesses
-                .slice(page, page + 5)
+                .slice(page * busPerPage, (page + 1) * busPerPage)
                 .map((pinnedCompany, index) => (
                   <div style={{ marginBottom: "12px" }} key={index}>
                     <Companytab
@@ -85,7 +85,7 @@ class PinCompany extends Component {
               current={parseInt(page) + 1}
               total={pinnedBusinesses.length}
               onChange={(pageChange) => this.handlePageChange(pageChange - 1)}
-              pageSize={5}
+              pageSize={busPerPage}
             />
           </React.Fragment>
         )}
@@ -94,7 +94,7 @@ class PinCompany extends Component {
   }
 
   handlePageChange = (pageChange) => {
-    this.setState({ page: pageChange * 5 });
+    this.setState({ page: pageChange });
   };
 }
 

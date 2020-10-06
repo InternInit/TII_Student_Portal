@@ -48,19 +48,9 @@ const Row = styled.div`
 class Companytab extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      label: (
-        <CLabel
-          name={this.props.name}
-          industry={this.props.industry}
-          companyid={this.props.companyid}
-          avatar={this.props.avatar}
-        />
-      ),
-    };
+    this.state = {};
   }
   render() {
-    let { label } = this.state;
     return (
       //Collapse Tab
       <Collapse
@@ -76,7 +66,14 @@ class Companytab extends React.Component {
           //Dropdown Panel view
         }
         <Panel
-          header={label}
+          header={
+            <CLabel
+              name={this.props.name}
+              industry={this.props.industry}
+              companyid={this.props.companyid}
+              avatar={this.props.avatar}
+            />
+          }
           key="1"
           style={{
             borderRadius: "08px",
@@ -167,7 +164,10 @@ class DroppedView extends React.Component {
         {/**
          * Custom Response Button
          */}
-        <Button className="eighteenFont add-button-style " onClick={this.showModal}>
+        <Button
+          className="eighteenFont add-button-style "
+          onClick={this.showModal}
+        >
           Add Custom Response
         </Button>
 
