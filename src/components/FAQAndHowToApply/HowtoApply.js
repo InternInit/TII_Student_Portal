@@ -20,11 +20,9 @@ const Heading = styled.span`
   padding-bottom: 3%;
 `;
 
-const Text = styled.span`
+const Text = styled.p`
   padding: 5px;
   font-weight: normal;
-  display: flex;
-  width: 90%;
   padding-left: 30px;
 
   text-align: left;

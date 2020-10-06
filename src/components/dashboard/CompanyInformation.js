@@ -241,7 +241,7 @@ class CompanyInformation extends React.Component {
                   </p>
                 </Row>
 
-                <AntRow gutter={[32, 16]} style={{marginTop: "5%"}}>
+                <AntRow gutter={[32, 16]} style={{ marginTop: "5%" }}>
                   <AntCol span={12}>
                     <div className="company-info-sub-card">
                       <h1 className="sub-card-heading twentyEightFont">
@@ -273,19 +273,17 @@ class CompanyInformation extends React.Component {
                       <h2 className="sub-card-sub-heading sixteenFont">
                         Website
                       </h2>
-                      <p className="sixteenFont">{info.website}</p>
+                      <p className="sixteenFont">
+                        <a href={info.website}>{info.website}</a>
+                      </p>
                       <h2 className="sub-card-sub-heading sixteenFont">
                         Email
                       </h2>
-                      <p className="sixteenFont">
-                        {info.email}
-                      </p>
+                      <p className="sixteenFont">{info.email}</p>
                       <h2 className="sub-card-sub-heading sixteenFont">
                         Phone Number
                       </h2>
-                      <p className="sixteenFont">
-                        {info.phonenumber}
-                      </p>
+                      <p className="sixteenFont">{info.phonenumber}</p>
                     </div>
                   </AntCol>
                 </AntRow>

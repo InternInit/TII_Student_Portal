@@ -12,6 +12,7 @@ import {
 import { autoShowTooltip } from "aws-amplify";
 
 const QVCompany = styled.div`
+  font-family: Lato;
   font-weight: bold;
   color: #262626;
 
@@ -26,6 +27,7 @@ const QVTitle = styled.div`
 `;
 
 const QVCaption = styled.div`
+  font-family: Roboto;
   font-weight: normal;
   color: #262626;
   text-align: left;
@@ -257,6 +259,7 @@ class QuickView extends React.Component {
                     marginTop: "24px",
                     width: "100%",
                     justifyContent: "space-between",
+                    flexWrap: "wrap"
                   }}
                 >
                   <div style={{ alignSelf: "flex-start" }}>
@@ -271,24 +274,26 @@ class QuickView extends React.Component {
                     </QVCaption>
                   </div>
 
-                  <div>
-                      <Link
-                        to={`/dashboard/add-companies/company-information/${companyid}`}
-                      >
-                        <Button
-                          style={{ marginTop: "12px", marginRight: "1vw" }}
-                          className="button-style eighteenFont"
-                        >
-                          More Details
-                        </Button>
-                      </Link>
+                  <div className="break"></div>
+
+                  <div className="add-company-button-group">
+                    <Link
+                      to={`/dashboard/add-companies/company-information/${companyid}`}
+                    >
                       <Button
+                        style={{ marginTop: "12px", marginRight: "1vw" }}
                         className="button-style eighteenFont"
-                        type="primary"
-                        onClick={this.addCompany}
                       >
-                        Add
+                        More Details
                       </Button>
+                    </Link>
+                    <Button
+                      className="button-style eighteenFont"
+                      type="primary"
+                      onClick={this.addCompany}
+                    >
+                      Add
+                    </Button>
                   </div>
                 </Row>
               </div>
