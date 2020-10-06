@@ -57,7 +57,7 @@ const whatShouldIIncludeOnMyResume = `<html>
       }
       
       .header{
-        width:70%;
+        width:100%;
         font-size: 36px;
         font-weight:bold;
         color:#262626;
@@ -82,6 +82,7 @@ const whatShouldIIncludeOnMyResume = `<html>
     color:#262626;
     margin-top:-24px;
     margin-bottom:24px;
+    text-align: left;
     }
     
     

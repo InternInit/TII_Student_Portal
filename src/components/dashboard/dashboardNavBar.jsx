@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import "../../App.scss";
 import "./dashboard.scss";
 import "antd/dist/antd.css";
-import { Menu, message} from "antd";
-import { Link } from "react-router-dom";
+import { Menu, message } from "antd";
+import { Link, NavLink } from "react-router-dom";
 import { withRouter } from "react-router";
 
 const MenuItemStyle = {
@@ -15,11 +15,19 @@ const MenuItemStyle = {
 };
 
 class DashboardNavBar extends Component {
+  constructor(props) {
+    super(props);
+  }
   /**
    *
    * Displaying Current Page
    *
    */
+
+  componentDidMount() {
+    console.log("Dashboard nav mounted");
+  }
+
   getCurrentKey = () => {
     let defaultKey = this.props.location.pathname;
     if (
@@ -40,7 +48,8 @@ class DashboardNavBar extends Component {
       <React.Fragment>
         <Menu
           className="dashboard-nav"
-          defaultSelectedKeys={[this.getCurrentKey()]}
+          defaultSelectedKeys={this.getCurrentKey()}
+          selectedKeys={this.getCurrentKey()}
           style={{ backgroundColor: "#EBEFF2" }}
           mode="horizontal"
         >
@@ -50,8 +59,12 @@ class DashboardNavBar extends Component {
            *
            */}
 
-          <Menu.Item style={MenuItemStyle} key="my-internships" className="twentyFourFont">
-            <Link to="/dashboard/my-internships">My Internships</Link>
+          <Menu.Item
+            style={MenuItemStyle}
+            key="my-internships"
+            className="twentyFourFont"
+          >
+            <NavLink to="/dashboard/my-internships">My Internships</NavLink>
           </Menu.Item>
 
           {/**
@@ -64,7 +77,7 @@ class DashboardNavBar extends Component {
             className="twentyFourFont"
             key="add-companies"
           >
-            <Link to="/dashboard/add-companies">Add Companies</Link>
+            <NavLink to="/dashboard/add-companies">Add Companies</NavLink>
           </Menu.Item>
 
           {/**
@@ -73,8 +86,12 @@ class DashboardNavBar extends Component {
            *
            */}
 
-          <Menu.Item style={MenuItemStyle} key="apply-skills" className="twentyFourFont">
-            <Link to="/dashboard/apply-skills">Apply Skills</Link>
+          <Menu.Item
+            style={MenuItemStyle}
+            key="apply-skills"
+            className="twentyFourFont"
+          >
+            <NavLink to="/dashboard/apply-skills">Apply Skills</NavLink>
           </Menu.Item>
         </Menu>
       </React.Fragment>

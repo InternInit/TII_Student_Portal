@@ -7,6 +7,7 @@ import {
   MinusCircleOutlined,
   PlusOutlined,
 } from "@ant-design/icons";
+import QueueAnim from "rc-queue-anim";
 import { InfoCircle } from "./StyledComponents/InternshipForms";
 
 import "../App.scss";
@@ -199,7 +200,7 @@ class PageReferences extends Component {
           </React.Fragment>
         ) : (
           <React.Fragment>
-            <h1> References</h1>
+            <h1 className="apply-header twentyEightFont"> References</h1>
             <p>
               Add your reference(s) here. This could be someone who has worked
               with you in the past, a previous employer, teacher, coach, pastor,
@@ -215,8 +216,9 @@ class PageReferences extends Component {
                 {(fields, { add, remove }) => {
                   return (
                     <div style={{ marginTop: "40px" }}>
+                      <QueueAnim>
                       {fields.map((field, index) => (
-                        <div className="educationBox">
+                        <div className="educationBox" key={field.key}>
                           <Form.Item
                             {...(index === 0
                               ? formItemLayout
@@ -229,7 +231,12 @@ class PageReferences extends Component {
                              * Minus Button removes Reference when clicked
                              *
                              */}
-                            {this.renderMinusButton(fields, field, remove)}
+                            {this.renderMinusButton(
+                              fields,
+                              field,
+                              remove,
+                              index
+                            )}
 
                             {/**
                              *
@@ -371,6 +378,7 @@ class PageReferences extends Component {
                           </Form.Item>
                         </div>
                       ))}
+                      </QueueAnim>
                       {/**Outside Reference Box */}
 
                       {/**Add Reference Button */}
@@ -419,18 +427,21 @@ class PageReferences extends Component {
    * Removing a Reference
    *
    */
-  renderMinusButton = (fields, field, remove) => {
+  renderMinusButton = (fields, field, remove, index) => {
     return fields.length > 1 ? (
-      <MinusCircleOutlined
-        className="dynamic-delete-button"
-        style={{
-          fontSize: "18px",
-          padding: "0 8px 0 0",
-        }}
-        onClick={() => {
-          remove(field.name);
-        }}
-      />
+      <React.Fragment>
+        <MinusCircleOutlined
+          className="dynamic-delete-button"
+          style={{
+            fontSize: "18px",
+            padding: "0 8px 0 0",
+          }}
+          onClick={() => {
+            remove(field.name);
+          }}
+        />
+        <h2 className="application-box-heading twentyTwoFont">Reference {index + 1}</h2>
+      </React.Fragment>
     ) : null;
   };
 

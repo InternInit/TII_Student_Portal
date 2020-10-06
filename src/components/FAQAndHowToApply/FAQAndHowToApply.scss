@@ -42,17 +42,19 @@ $panel-color: white;
   z-index: 1;
 }
 
-.how-to-apply-intro-container {
+.intro-container {
   @include standard-box-shadow;
   @include standard-border-radius;
   background-color: $panel-color;
   width: 100%;
   padding: 5% 7%;
+  
+  &:hover {
+    @include standard-box-shadow-hover;
+  }
 }
 
-.how-to-apply-intro-container:hover {
-  @include standard-box-shadow-hover;
-}
+
 
 .how-to-apply-sub-heading {
   display: flex;
@@ -67,9 +69,16 @@ $panel-color: white;
   li:before {
     content: "•";
     font-size: 16px;
-    padding-right: 15px;
+    padding-right: 16px;
+  }
+
+  li {
+    list-style-position: inside;
+    text-indent: -1em;
+    padding-left: 1em;
   }
 }
+
 
 .main-header {
   display: flex;
@@ -107,4 +116,8 @@ $panel-color: white;
 .faq-page {
   background-color: $background-color;
   height: auto;
+}
+
+.faq-contact {
+  padding: 2%;
 }
