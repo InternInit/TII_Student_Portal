@@ -68,7 +68,7 @@ class AddCompanies extends React.Component {
       sendingIndustries: [],
       companies: [],
       page: 0,
-      busPerPage: 20,
+      busPerPage: 10,
       mergedIndustry:
         "General BusinessConsultingFinance or AccountingMedia or TellecommunicationsReal EstateEngineeringScience ResearchComputer ScienceBiotechnologyVocationalPoliticalMarketing",
     };
@@ -315,7 +315,10 @@ class AddCompanies extends React.Component {
              */}
             <QueueAnim type="scale" ease={["easeOutQuart", "easeInOutQuart"]}>
               {filteredInfo
-                .slice(page * 20, (page + 1) * 20 - 1)
+                .slice(
+                  page * this.state.busPerPage,
+                  (page + 1) * this.state.busPerPage
+                )
                 .map((company, index) => (
                   <div style={{ marginBottom: "12px" }} key={index}>
                     <SearchCompanytab
@@ -336,7 +339,7 @@ class AddCompanies extends React.Component {
               current={parseInt(page) + 1}
               total={filteredInfo.length}
               onChange={(pageChange) => this.handlePageChange(pageChange - 1)}
-              pageSize={20}
+              pageSize={this.state.busPerPage}
               style={{ marginBottom: "-40%" }}
             />
           </React.Fragment>
