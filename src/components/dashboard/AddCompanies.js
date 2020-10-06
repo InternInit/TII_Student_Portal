@@ -147,7 +147,7 @@ class AddCompanies extends React.Component {
           <React.Fragment>
             <h1 className="module-name">Apply to an Entire Industry</h1>
             <Form>
-              <Collapse defaultActiveKey={["0"]} expandIconPosition="right">
+              <Collapse defaultActiveKey={["1"]} expandIconPosition="right">
                 <Panel
                   header={
                     <strong
