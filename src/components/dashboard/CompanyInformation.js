@@ -237,7 +237,7 @@ class CompanyInformation extends React.Component {
                     className="company-info-read-more-button sixteenFont"
                     onClick={this.toggle}
                   >
-                    {show ? "Read Less" : "Read More"}
+                    {info.description.length < 1000 ? null : show ? "Read Less" : "Read More"}
                   </p>
                 </Row>
 
