@@ -7,6 +7,7 @@ import {
   Row as AntRow,
   Col as AntCol,
   Button,
+  Skeleton
 } from "antd";
 import {
   AiFillFacebook,
@@ -155,7 +156,7 @@ class CompanyInformation extends React.Component {
 
     if (isLoading) {
       console.log("Rendered loading and info is:" + info.description);
-      return <div>Loading</div>;
+      return <Skeleton />;
     } else {
       console.log("Rendered component and info is:" + info.description);
       return (
