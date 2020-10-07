@@ -225,7 +225,7 @@ class CompanyInformation extends React.Component {
                  */}
                 <Row>
                   <div className="company-info-description sixteenFont">
-                    {show ? (
+                    {show || info.description.length < 1000 ? (
                       <div>{info.description}</div>
                     ) : (
                       <div style={{ height: "200px", overflow: "hidden" }}>
