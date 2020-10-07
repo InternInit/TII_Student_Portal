@@ -7,6 +7,7 @@ import {
   Row as AntRow,
   Col as AntCol,
   Button,
+  Skeleton
 } from "antd";
 import {
   AiFillFacebook,
@@ -155,7 +156,7 @@ class CompanyInformation extends React.Component {
 
     if (isLoading) {
       console.log("Rendered loading and info is:" + info.description);
-      return <div>Loading</div>;
+      return <Skeleton />;
     } else {
       console.log("Rendered component and info is:" + info.description);
       return (
@@ -225,7 +226,7 @@ class CompanyInformation extends React.Component {
                  */}
                 <Row>
                   <div className="company-info-description sixteenFont">
-                    {show ? (
+                    {show || info.description.length < 1000 ? (
                       <div>{info.description}</div>
                     ) : (
                       <div style={{ height: "200px", overflow: "hidden" }}>
@@ -237,7 +238,7 @@ class CompanyInformation extends React.Component {
                     className="company-info-read-more-button sixteenFont"
                     onClick={this.toggle}
                   >
-                    {show ? "Read Less" : "Read More"}
+                    {info.description.length < 1000 ? null : show ? "Read Less" : "Read More"}
                   </p>
                 </Row>
 
