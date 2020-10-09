@@ -9,6 +9,7 @@ import {
   EditOutlined,
   ContainerOutlined,
   TeamOutlined,
+  CompassOutlined
 } from "@ant-design/icons";
 
 //React Routing
@@ -31,7 +32,7 @@ class TiiNav extends React.Component {
       case "/apply/written-work":
         return Array.from("3");
       case "/apply/references":
-        return Array.from("4");
+        return Array.from("5");
       default:
         return Array.from("1");
     }
@@ -55,6 +56,7 @@ class TiiNav extends React.Component {
       InternButton: <ContainerOutlined />,
       PersonalButton: <UserOutlined />,
       EssayButton: <EditOutlined />,
+      ExtracurricularsClassesButton: <CompassOutlined />,
       ReferencesButton: <TeamOutlined />,
 
       CheckMark: <CheckOutlined style={{ color: "green" }} />,
@@ -87,6 +89,7 @@ class TiiNav extends React.Component {
       InternButton,
       PersonalButton,
       EssayButton,
+      ExtracurricularsClassesButton,
       ReferencesButton,
       CheckMark,
     } = this.state;
@@ -170,11 +173,28 @@ class TiiNav extends React.Component {
 
           {/**
            *
-           * References Tab
+           * Written Work Tab
            *
            */}
           <Menu.Item
             key="4"
+            onClick={() => {
+              this.routeChange("/apply/extracurriculars-and-classes");
+            }}
+          >
+            {this.props.completionState[4] == 1 ? CheckMark : ExtracurricularsClassesButton}
+            <Router>
+              <span>Extracurriculars/Classes</span>
+            </Router>
+          </Menu.Item>
+
+          {/**
+           *
+           * References Tab
+           *
+           */}
+          <Menu.Item
+            key="5"
             onClick={() => {
               this.routeChange("/apply/references");
             }}
