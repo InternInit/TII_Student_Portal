@@ -269,3 +269,5 @@ const Extracurriculars = (props) => {
     </React.Fragment>
   );
 };
+
+export default withRouter(PageExtracurricularsClasses);

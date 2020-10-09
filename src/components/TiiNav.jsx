@@ -31,6 +31,8 @@ class TiiNav extends React.Component {
         return Array.from("2");
       case "/apply/written-work":
         return Array.from("3");
+      case "/apply/extracurriculars-and-classes":
+        return Array.from("4");
       case "/apply/references":
         return Array.from("5");
       default:

@@ -12,6 +12,7 @@ import TiiNav from "./components/TiiNav.jsx";
 import PagePersonal from "./components/pagePersonal.jsx";
 import PageInternshipInformation from "./components/pageInternshipInformation.jsx";
 import PageEssays from "./components/pageEssays";
+import PageExtracurricularsClasses from "./components/pageExtracurricularsClasses";
 import PageReferences from "./components/pageReferences";
 import PageNotFound from "./components/pageNotFound";
 import Dashboard from "./components/dashboard/dashboard.jsx";
@@ -21,7 +22,7 @@ import EditProfile from "./components/EditProfile.js";
 import FAQPage from "./components/FAQAndHowToApply/FAQPage";
 //import newStudent from "./components/newStudent.jsx";
 
-import TiiFooter from './components/TiiFooter';
+import TiiFooter from "./components/TiiFooter";
 
 import LogIn from "./components/LogIn.js";
 import SignUp from "./components/SignUp.js";
@@ -73,7 +74,7 @@ if (!process.env.NODE_ENV || process.env.NODE_ENV === "development") {
   console.error = noop;
 }
 
-function noop() { }
+function noop() {}
 
 //Declarations
 const { Content } = Layout;
@@ -290,7 +291,7 @@ class App extends Component {
         Source: JSON.parse(JSON.stringify(source)),
       },
       body: fd,
-    }).then((response) => { });
+    }).then((response) => {});
   };
 
   updateBusinessStatus = async (businessId, status) => {
@@ -487,6 +488,10 @@ class App extends Component {
     this.setState({ page: 3 });
   };
 
+  clickFive = () => {
+    this.setState({ page: 4 });
+  };
+
   AppContainer = () => {
     return (
       <React.Fragment>
@@ -529,7 +534,7 @@ class App extends Component {
               render={(props) => (
                 <PageInternshipInformation
                   {...props}
-                  clickTwo={this.clickTwo}
+                  clickOne={this.clickOne}
                   uploadFile={this.uploadFile}
                   updateData={this.updateData}
                   getJwt={this.getJwt}
@@ -543,8 +548,7 @@ class App extends Component {
               render={(props) => (
                 <PagePersonal
                   {...props}
-                  clickOne={this.clickOne}
-                  clickThree={this.clickThree}
+                  clickTwo={this.clickTwo}
                   updateData={this.updateData}
                   getJwt={this.getJwt}
                   setCompletionState={this.setCompletionState}
@@ -557,7 +561,20 @@ class App extends Component {
               render={(props) => (
                 <PageEssays
                   {...props}
-                  clickTwo={this.clickTwo}
+                  clickThree={this.clickThree}
+                  uploadFile={this.uploadFile}
+                  updateData={this.updateData}
+                  getJwt={this.getJwt}
+                  setCompletionState={this.setCompletionState}
+                />
+              )}
+            />
+
+            <Route
+              path="/apply/extracurriculars-and-classes"
+              render={(props) => (
+                <PageExtracurricularsClasses
+                  {...props}
                   clickFour={this.clickFour}
                   uploadFile={this.uploadFile}
                   updateData={this.updateData}
@@ -572,7 +589,7 @@ class App extends Component {
               render={(props) => (
                 <PageReferences
                   {...props}
-                  clickThree={this.clickThree}
+                  clickFive={this.clickFive}
                   onSubmit={this.onSubmit}
                   updateData={this.updateData}
                   getJwt={this.getJwt}
@@ -618,11 +635,11 @@ class App extends Component {
         {this.resize()}
         <Router>
           {window.location.pathname.includes("login") ||
-            window.location.pathname.includes("signup") ? null : (
-              <header>
-                <Navbar logout={this.logout} userInfo={this.props.userInfo} />
-              </header>
-            )}
+          window.location.pathname.includes("signup") ? null : (
+            <header>
+              <Navbar logout={this.logout} userInfo={this.props.userInfo} />
+            </header>
+          )}
           <ReactSwitch>
             <Route
               path="/dashboard"
