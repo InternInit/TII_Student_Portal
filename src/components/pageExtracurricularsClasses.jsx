@@ -76,75 +76,34 @@ const formItemLayoutWithOutLabel = {
 };
 
 //items
-const allStates = [
-  "Alabama",
-  "Alaska",
-  "American Samoa",
-  "Arizona",
-  "Arkansas",
-  "California",
-  "Colorado",
-  "Connecticut",
-  "Delaware",
-  "District of Columbia",
-  "Federated States of Micronesia",
-  "Florida",
-  "Georgia",
-  "Guam",
-  "Hawaii",
-  "Idaho",
-  "Illinois",
-  "Indiana",
-  "Iowa",
-  "Kansas",
-  "Kentucky",
-  "Louisiana",
-  "Maine",
-  "Marshall Islands",
-  "Maryland",
-  "Massachusetts",
-  "Michigan",
-  "Minnesota",
-  "Mississippi",
-  "Missouri",
-  "Montana",
-  "Nebraska",
-  "Nevada",
-  "New Hampshire",
-  "New Jersey",
-  "New Mexico",
-  "New York",
-  "North Carolina",
-  "North Dakota",
-  "Northern Mariana Islands",
-  "Ohio",
-  "Oklahoma",
-  "Oregon",
-  "Palau",
-  "Pennsylvania",
-  "Puerto Rico",
-  "Rhode Island",
-  "South Carolina",
-  "South Dakota",
-  "Tennessee",
-  "Texas",
-  "Utah",
-  "Vermont",
-  "Virgin Island",
-  "Virginia",
-  "Washington",
-  "West Virginia",
-  "Wisconsin",
-  "Wyoming",
-];
-const daysOfTheWeek = [
-  "Sunday",
-  "Monday",
-  "Tuesday",
-  "Wednesday",
-  "Thursday",
-  "Friday",
-  "Saturday",
+const activityCategories = [
+  "Academic",
+  "Art",
+  "Athletics-Club",
+  "Athletics",
+  "Career-Oriented",
+  "Community Service",
+  "Technology",
+  "Cultural",
+  "Dance",
+  "Debate and Speech",
+  "Environmental",
+  "Family Responsibilities",
+  "Foreign Exchange",
+  "Journalism or Publication",
+  "Junior R.O.T.C.",
+  "LGBT",
+  "Music-Instrumental",
+  "Music-Vocal",
+  "Religious",
+  "Research",
+  "Robotics",
+  "School Spirit",
+  "Science or Math",
+  "Student Govt or Politics",
+  "Theater or Drama",
+  "Work (paid)",
+  "Other Club/Activity",
 ];
 const timesOfTheDay = ["Mornings", "Afternoons", "Evenings"];
 const paidOrUnpaid = ["Yes", "No"];
@@ -175,8 +134,14 @@ const boldify = (text, info = false, popoverText) =>
 class PageExtracurricularsClasses extends Component {
   render() {
     return (
-      <div>
-        <Extracurriculars />
+      <div style={{ width: "100%", marginTop: "40px" }}>
+        <h1 className="apply-header twentyEightFont">Personal Information</h1>
+        <Form>
+          <Extracurriculars
+            name="Extracurriculars"
+            officialName="an Extracurricular Activity"
+          />
+        </Form>
       </div>
     );
   }
@@ -189,39 +154,34 @@ const Extracurriculars = (props) => {
         {(fields, { add, remove }) => {
           return (
             <div>
-              {fields.map((field) => (
+              {fields.map((field, index) => (
                 <div className="educationBox" key={field.key}>
+                  <h2 className="application-box-heading twentyTwoFont">
+                    Activity {index + 1}
+                  </h2>
                   <Row gutter={formGutter} style={{ width: "100%" }}>
                     <Col span={6}>
                       <Form.Item
                         {...field}
+                        className="universal-left"
                         name={[field.name, "activityType"]}
                         fieldKey={[field.fieldKey, "activityType"]}
                       >
-                        <Input placeholder="Activity Type" />
+                        <Select
+                          showSearch
+                          placeholder="Category"
+                          optionFilterProp="children"
+                          style={{ textAlign: "left" }}
+                        >
+                          {activityCategories.map((category) => (
+                            <option key={category} value={category}>
+                              {category}
+                            </option>
+                          ))}
+                        </Select>
                       </Form.Item>
                     </Col>
                     <Col span={18}>
-                      <Form.Item
-                        {...field}
-                        name={[field.name, "position"]}
-                        fieldKey={[field.fieldKey, "position"]}
-                      >
-                        <Input placeholder="Position" />
-                      </Form.Item>
-                    </Col>
-                  </Row>
-                  <Row gutter={formGutter} style={{ width: "100%" }}>
-                    <Col span={standardSpan / 4}>
-                      <Form.Item
-                        {...field}
-                        name={[field.name, "activityType"]}
-                        fieldKey={[field.fieldKey, "activityType"]}
-                      >
-                        <Input placeholder="Activity Type" />
-                      </Form.Item>
-                    </Col>
-                    <Col span={(standardSpan * 3) / 4}>
                       <Form.Item
                         {...field}
                         name={[field.name, "position"]}
