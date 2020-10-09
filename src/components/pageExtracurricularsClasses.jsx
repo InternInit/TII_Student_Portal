@@ -172,92 +172,100 @@ const boldify = (text, info = false, popoverText) =>
     </React.Fragment>
   );
 
-class StandardInputs extends Component {
+class PageExtracurricularsClasses extends Component {
   render() {
     return (
-      <React.Fragment>
-        <Form.List name="users">
-          {(fields, { add, remove }) => {
-            return (
-              <div>
-                {fields.map((field) => (
-                  <div className="educationBox" key={field.key}>
-                    <Row gutter={formGutter} style={{ width: "100%" }}>
-                      <Col span={6}>
-                        <Form.Item
-                          {...field}
-                          name={[field.name, "activityType"]}
-                          fieldKey={[field.fieldKey, "activityType"]}
-                        >
-                          <Input placeholder="Activity Type" />
-                        </Form.Item>
-                      </Col>
-                      <Col span={18}>
-                        <Form.Item
-                          {...field}
-                          name={[field.name, "position"]}
-                          fieldKey={[field.fieldKey, "position"]}
-                        >
-                          <Input placeholder="Position" />
-                        </Form.Item>
-                      </Col>
-                    </Row>
-                    <Row gutter={formGutter} style={{ width: "100%" }}>
-                      <Col span={standardSpan / 4}>
-                        <Form.Item
-                          {...field}
-                          name={[field.name, "activityType"]}
-                          fieldKey={[field.fieldKey, "activityType"]}
-                        >
-                          <Input placeholder="Activity Type" />
-                        </Form.Item>
-                      </Col>
-                      <Col span={(standardSpan * 3) / 4}>
-                        <Form.Item
-                          {...field}
-                          name={[field.name, "position"]}
-                          fieldKey={[field.fieldKey, "position"]}
-                        >
-                          <Input placeholder="Position" />
-                        </Form.Item>
-                      </Col>
-                    </Row>
-                    <Row>
-                      <MinusCircleOutlined
-                        onClick={() => {
-                          remove(field.name);
-                        }}
-                      />
-                    </Row>
-                  </div>
-                ))}
-
-                {/**
-                 *
-                 * Add Field Button
-                 *
-                 */}
-                <Form.Item style={{ width: "100%" }}>
-                  <Button
-                    type="dashed"
-                    size="large"
-                    onClick={() => {
-                      add();
-                    }}
-                    style={{
-                      width: "100%",
-                      marginTop: "10px",
-                      marginBottom: "30px",
-                    }}
-                  >
-                    <PlusOutlined /> Add {props.officialName}
-                  </Button>
-                </Form.Item>
-              </div>
-            );
-          }}
-        </Form.List>
-      </React.Fragment>
+      <div>
+        <Extracurriculars />
+      </div>
     );
   }
 }
+
+const Extracurriculars = (props) => {
+  return (
+    <React.Fragment>
+      <Form.List name="users">
+        {(fields, { add, remove }) => {
+          return (
+            <div>
+              {fields.map((field) => (
+                <div className="educationBox" key={field.key}>
+                  <Row gutter={formGutter} style={{ width: "100%" }}>
+                    <Col span={6}>
+                      <Form.Item
+                        {...field}
+                        name={[field.name, "activityType"]}
+                        fieldKey={[field.fieldKey, "activityType"]}
+                      >
+                        <Input placeholder="Activity Type" />
+                      </Form.Item>
+                    </Col>
+                    <Col span={18}>
+                      <Form.Item
+                        {...field}
+                        name={[field.name, "position"]}
+                        fieldKey={[field.fieldKey, "position"]}
+                      >
+                        <Input placeholder="Position" />
+                      </Form.Item>
+                    </Col>
+                  </Row>
+                  <Row gutter={formGutter} style={{ width: "100%" }}>
+                    <Col span={standardSpan / 4}>
+                      <Form.Item
+                        {...field}
+                        name={[field.name, "activityType"]}
+                        fieldKey={[field.fieldKey, "activityType"]}
+                      >
+                        <Input placeholder="Activity Type" />
+                      </Form.Item>
+                    </Col>
+                    <Col span={(standardSpan * 3) / 4}>
+                      <Form.Item
+                        {...field}
+                        name={[field.name, "position"]}
+                        fieldKey={[field.fieldKey, "position"]}
+                      >
+                        <Input placeholder="Position" />
+                      </Form.Item>
+                    </Col>
+                  </Row>
+                  <Row>
+                    <MinusCircleOutlined
+                      onClick={() => {
+                        remove(field.name);
+                      }}
+                    />
+                  </Row>
+                </div>
+              ))}
+
+              {/**
+               *
+               * Add Field Button
+               *
+               */}
+              <Form.Item style={{ width: "100%" }}>
+                <Button
+                  type="dashed"
+                  size="large"
+                  onClick={() => {
+                    add();
+                  }}
+                  style={{
+                    width: "100%",
+                    marginTop: "10px",
+                    marginBottom: "30px",
+                  }}
+                >
+                  <PlusOutlined /> Add {props.officialName}
+                </Button>
+              </Form.Item>
+            </div>
+          );
+        }}
+      </Form.List>
+    </React.Fragment>
+  );
+};
