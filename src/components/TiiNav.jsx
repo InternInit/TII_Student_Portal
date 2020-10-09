@@ -184,7 +184,7 @@ class TiiNav extends React.Component {
           >
             {this.props.completionState[4] == 1 ? CheckMark : ExtracurricularsClassesButton}
             <Router>
-              <span>Extracurriculars/Classes</span>
+              <span>Actities/Classes</span>
             </Router>
           </Menu.Item>
 
