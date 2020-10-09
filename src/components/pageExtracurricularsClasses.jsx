@@ -13,6 +13,7 @@ import {
   Skeleton,
   Grid,
   Space,
+  InputNumber,
 } from "antd";
 import { Row, Col } from "antd";
 import {
@@ -21,6 +22,7 @@ import {
   PlusOutlined,
 } from "@ant-design/icons";
 import { InfoCircle } from "./StyledComponents/InternshipForms";
+import { Label } from "./StyledComponents/SignupLogin";
 
 import "antd/dist/antd.css";
 import "../App.scss";
@@ -50,9 +52,10 @@ const { Option } = Select;
 const { RangePicker } = DatePicker;
 const { Dragger } = Upload;
 const { useBreakpoint } = Grid;
+const { TextArea } = Input;
 
 //Formatting
-const formGutter = [16, 16];
+const formGutter = [16, 8];
 const standardSpan = 24;
 const halfSpan = standardSpan / 2;
 const thirdSpan = standardSpan / 3;
@@ -136,7 +139,7 @@ class PageExtracurricularsClasses extends Component {
     return (
       <div style={{ width: "100%", marginTop: "40px" }}>
         <h1 className="apply-header twentyEightFont">Personal Information</h1>
-        <Form>
+        <Form layout="vertical">
           <Extracurriculars
             name="Extracurriculars"
             officialName="an Extracurricular Activity"
@@ -156,9 +159,24 @@ const Extracurriculars = (props) => {
             <div>
               {fields.map((field, index) => (
                 <div className="educationBox" key={field.key}>
-                  <h2 className="application-box-heading twentyTwoFont">
-                    Activity {index + 1}
-                  </h2>
+                  <Row>
+                    {fields.length > 1 ? (
+                      <MinusCircleOutlined
+                        className="dynamic-delete-button"
+                        style={{
+                          fontSize: "18px",
+                          marginTop: "8px",
+                          marginRight: "1vw",
+                        }}
+                        onClick={() => {
+                          remove(field.name);
+                        }}
+                      />
+                    ) : null}
+                    <h2 className="application-box-heading twentyTwoFont">
+                      Activity {index + 1}
+                    </h2>
+                  </Row>
                   <Row gutter={formGutter} style={{ width: "100%" }}>
                     <Col span={6}>
                       <Form.Item
@@ -166,6 +184,7 @@ const Extracurriculars = (props) => {
                         className="universal-left"
                         name={[field.name, "activityType"]}
                         fieldKey={[field.fieldKey, "activityType"]}
+                        label={boldify("Activity Type")}
                       >
                         <Select
                           showSearch
@@ -174,29 +193,56 @@ const Extracurriculars = (props) => {
                           style={{ textAlign: "left" }}
                         >
                           {activityCategories.map((category) => (
-                            <option key={category} value={category}>
+                            <option
+                              key={category}
+                              value={category}
+                              style={{ wordWrap: "break-word" }}
+                            >
                               {category}
                             </option>
                           ))}
                         </Select>
                       </Form.Item>
                     </Col>
-                    <Col span={18}>
+                    <Col span={6}>
+                      <Form.Item
+                        {...field}
+                        className="universal-left"
+                        name={[field.name, "years-involved"]}
+                        fieldKey={[field.fieldKey, "years-involved"]}
+                        label={boldify("Years Involved")}
+                      >
+                        <InputNumber style={{ width: "100%" }} />
+                      </Form.Item>
+                    </Col>
+                    <Col span={12}>
                       <Form.Item
                         {...field}
                         name={[field.name, "position"]}
                         fieldKey={[field.fieldKey, "position"]}
+                        label={boldify("Position/Title")}
                       >
                         <Input placeholder="Position" />
                       </Form.Item>
                     </Col>
                   </Row>
-                  <Row>
-                    <MinusCircleOutlined
-                      onClick={() => {
-                        remove(field.name);
-                      }}
-                    />
+                  <Row gutter={formGutter} style={{ width: "100%" }}>
+                    <Col span={24}>
+                      <Form.Item
+                        {...field}
+                        name={[field.name, "description"]}
+                        fieldKey={[field.fieldKey, "description"]}
+                        label={boldify("Activity Description")}
+                        extra="150 characters"
+                      >
+                        <TextArea
+                          placeholder="Activity Description"
+                          autoSize={{ minRows: 2, maxRows: 4 }}
+                          maxlength={150}
+                          className="universal-left"
+                        />
+                      </Form.Item>
+                    </Col>
                   </Row>
                 </div>
               ))}
