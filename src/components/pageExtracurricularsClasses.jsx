@@ -172,9 +172,8 @@ const boldify = (text, info = false, popoverText) =>
     </React.Fragment>
   );
 
-const StandardInputs = (props) => {
-    const screens = useBreakpoint();
-  
+class StandardInputs extends Component {
+  render() {
     return (
       <React.Fragment>
         <Form.List name="users">
@@ -182,10 +181,7 @@ const StandardInputs = (props) => {
             return (
               <div>
                 {fields.map((field) => (
-                  <div
-                    className="educationBox"
-                    key={field.key}
-                  >
+                  <div className="educationBox" key={field.key}>
                     <Row gutter={formGutter} style={{ width: "100%" }}>
                       <Col span={6}>
                         <Form.Item
@@ -235,7 +231,7 @@ const StandardInputs = (props) => {
                     </Row>
                   </div>
                 ))}
-  
+
                 {/**
                  *
                  * Add Field Button
@@ -263,4 +259,5 @@ const StandardInputs = (props) => {
         </Form.List>
       </React.Fragment>
     );
-  };
+  }
+}
