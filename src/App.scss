@@ -15,8 +15,9 @@ $medium-breakpoint: 768px;
 $large-breakpoint: 992px;
 $x-large-breakpoint: 1200px;
 
-$background-color: #EBEFF2;
+$background-color: #ebeff2;
 $gray-two: #e2e8ed;
+$gray-thirteen: #425866;
 
 //Mixins
 @mixin standard-box-shadow {
@@ -110,6 +111,20 @@ p {
   background-color: $background-color;
   border: 1px solid $gray-two;
   border-radius: 5px;
+  position: relative;
+}
+
+.education-box-remove-button {
+  position: absolute;
+  top: 2vh;
+  right: 1.2vw;
+  color: $gray-thirteen;
+
+  :hover {
+    transition: 0.3s ease;
+    color: #cf1322;
+    cursor: pointer;
+  }
 }
 
 .apply-header {
@@ -120,7 +135,7 @@ p {
 .application-box-heading {
   font-family: Lato;
   font-weight: bold;
-  margin-bottom: 10px;
+  margin-bottom: 2vh;
 }
 
 .radio-styling {

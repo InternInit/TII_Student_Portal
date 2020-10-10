@@ -22,9 +22,8 @@ import {
   PlusOutlined,
 } from "@ant-design/icons";
 import { InfoCircle } from "./StyledComponents/InternshipForms";
-import { Label } from "./StyledComponents/SignupLogin";
+import { GoX } from "react-icons/go";
 
-import "antd/dist/antd.css";
 import "../App.scss";
 
 //Stream related
@@ -55,7 +54,7 @@ const { useBreakpoint } = Grid;
 const { TextArea } = Input;
 
 //Formatting
-const formGutter = [16, 8];
+const formGutter = [16, 4];
 const standardSpan = 24;
 const halfSpan = standardSpan / 2;
 const thirdSpan = standardSpan / 3;
@@ -138,12 +137,9 @@ class PageExtracurricularsClasses extends Component {
   render() {
     return (
       <div style={{ width: "100%", marginTop: "40px" }}>
-        <h1 className="apply-header twentyEightFont">Personal Information</h1>
-        <Form layout="vertical">
-          <Extracurriculars
-            name="Extracurriculars"
-            officialName="an Extracurricular Activity"
-          />
+        <h1 className="apply-header twentyEightFont">Activities and Classes</h1>
+        <Form layout="vertical" align="left">
+          <Extracurriculars />
         </Form>
       </div>
     );
@@ -161,17 +157,14 @@ const Extracurriculars = (props) => {
                 <div className="educationBox" key={field.key}>
                   <Row>
                     {fields.length > 1 ? (
-                      <MinusCircleOutlined
-                        className="dynamic-delete-button"
-                        style={{
-                          fontSize: "18px",
-                          marginTop: "8px",
-                          marginRight: "1vw",
-                        }}
-                        onClick={() => {
-                          remove(field.name);
-                        }}
-                      />
+                      <div className="education-box-remove-button">
+                        <GoX
+                          size={22}
+                          onClick={() => {
+                            remove(field.name);
+                          }}
+                        />
+                      </div>
                     ) : null}
                     <h2 className="application-box-heading twentyTwoFont">
                       Activity {index + 1}
