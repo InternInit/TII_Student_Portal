@@ -498,7 +498,7 @@ class PageEssays extends React.Component {
                   htmlType="button"
                   onClick={this.backHandler}
                 >
-                  Previous
+                  <Link to="/apply/personal">Previous</Link>
                 </Button>
                 <Button
                   className="next-button"
@@ -592,7 +592,6 @@ class PageEssays extends React.Component {
     console.log("FinishedPageEssays:", values);
     this.props.updateCompletionState(2, 1.0);
     this.props.updateData(values, "2");
-    this.routeChange("/apply/references");
   };
 
   updateFieldData = async () => {
@@ -603,7 +602,6 @@ class PageEssays extends React.Component {
 
   backHandler = () => {
     this.props.updateData(this.formRef.current.getFieldsValue(), "2");
-    this.routeChange("/apply/personal");
   };
 
   /**

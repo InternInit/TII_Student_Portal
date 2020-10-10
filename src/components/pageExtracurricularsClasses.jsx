@@ -140,6 +140,14 @@ class PageExtracurricularsClasses extends Component {
         <h1 className="apply-header twentyEightFont">Activities and Classes</h1>
         <Form layout="vertical" align="left">
           <Extracurriculars />
+          <Form.Item>
+            <Button className="back-button" type="primary" htmlType="button">
+              <Link to="/apply/written-work">Previous</Link>
+            </Button>
+            <Button className="next-button" type="primary" htmlType="submit">
+              <Link to="/apply/references">Save and Continue</Link>
+            </Button>
+          </Form.Item>
         </Form>
       </div>
     );
@@ -155,88 +163,88 @@ const Extracurriculars = (props) => {
             <div>
               {fields.map((field, index) => (
                 <div className="educationBox" key={field.key}>
-                    <Row>
-                      {fields.length > 1 ? (
-                        <div className="education-box-remove-button">
-                          <GoX
-                            size={22}
-                            onClick={() => {
-                              remove(field.name);
-                            }}
-                          />
-                        </div>
-                      ) : null}
-                      <h2 className="application-box-heading twentyTwoFont">
-                        Activity {index + 1}
-                      </h2>
-                    </Row>
-                    <Row gutter={formGutter} style={{ width: "100%" }}>
-                      <Col span={6}>
-                        <Form.Item
-                          {...field}
+                  <Row>
+                    {fields.length > 1 ? (
+                      <div className="education-box-remove-button">
+                        <GoX
+                          size={22}
+                          onClick={() => {
+                            remove(field.name);
+                          }}
+                        />
+                      </div>
+                    ) : null}
+                    <h2 className="application-box-heading twentyTwoFont">
+                      Activity {index + 1}
+                    </h2>
+                  </Row>
+                  <Row gutter={formGutter} style={{ width: "100%" }}>
+                    <Col span={6}>
+                      <Form.Item
+                        {...field}
+                        className="universal-left"
+                        name={[field.name, "activityType"]}
+                        fieldKey={[field.fieldKey, "activityType"]}
+                        label={boldify("Activity Type")}
+                      >
+                        <Select
+                          showSearch
+                          placeholder="Category"
+                          optionFilterProp="children"
+                          style={{ textAlign: "left" }}
+                        >
+                          {activityCategories.map((category) => (
+                            <option
+                              key={category}
+                              value={category}
+                              style={{ wordWrap: "break-word" }}
+                            >
+                              {category}
+                            </option>
+                          ))}
+                        </Select>
+                      </Form.Item>
+                    </Col>
+                    <Col span={6}>
+                      <Form.Item
+                        {...field}
+                        className="universal-left"
+                        name={[field.name, "years-involved"]}
+                        fieldKey={[field.fieldKey, "years-involved"]}
+                        label={boldify("Years Involved")}
+                      >
+                        <InputNumber style={{ width: "100%" }} />
+                      </Form.Item>
+                    </Col>
+                    <Col span={12}>
+                      <Form.Item
+                        {...field}
+                        name={[field.name, "position"]}
+                        fieldKey={[field.fieldKey, "position"]}
+                        label={boldify("Position/Title")}
+                      >
+                        <Input placeholder="Position" />
+                      </Form.Item>
+                    </Col>
+                  </Row>
+                  <Row gutter={formGutter} style={{ width: "100%" }}>
+                    <Col span={24}>
+                      <Form.Item
+                        {...field}
+                        name={[field.name, "description"]}
+                        fieldKey={[field.fieldKey, "description"]}
+                        label={boldify("Activity Description")}
+                        extra="150 characters"
+                      >
+                        <TextArea
+                          placeholder="Activity Description"
+                          autoSize={{ minRows: 2, maxRows: 4 }}
+                          maxlength={150}
                           className="universal-left"
-                          name={[field.name, "activityType"]}
-                          fieldKey={[field.fieldKey, "activityType"]}
-                          label={boldify("Activity Type")}
-                        >
-                          <Select
-                            showSearch
-                            placeholder="Category"
-                            optionFilterProp="children"
-                            style={{ textAlign: "left" }}
-                          >
-                            {activityCategories.map((category) => (
-                              <option
-                                key={category}
-                                value={category}
-                                style={{ wordWrap: "break-word" }}
-                              >
-                                {category}
-                              </option>
-                            ))}
-                          </Select>
-                        </Form.Item>
-                      </Col>
-                      <Col span={6}>
-                        <Form.Item
-                          {...field}
-                          className="universal-left"
-                          name={[field.name, "years-involved"]}
-                          fieldKey={[field.fieldKey, "years-involved"]}
-                          label={boldify("Years Involved")}
-                        >
-                          <InputNumber style={{ width: "100%" }} />
-                        </Form.Item>
-                      </Col>
-                      <Col span={12}>
-                        <Form.Item
-                          {...field}
-                          name={[field.name, "position"]}
-                          fieldKey={[field.fieldKey, "position"]}
-                          label={boldify("Position/Title")}
-                        >
-                          <Input placeholder="Position" />
-                        </Form.Item>
-                      </Col>
-                    </Row>
-                    <Row gutter={formGutter} style={{ width: "100%" }}>
-                      <Col span={24}>
-                        <Form.Item
-                          {...field}
-                          name={[field.name, "description"]}
-                          fieldKey={[field.fieldKey, "description"]}
-                          label={boldify("Activity Description")}
-                          extra="150 characters"
-                        >
-                          <TextArea
-                            placeholder="Activity Description"
-                            autoSize={{ minRows: 2, maxRows: 4 }}
-                            maxlength={150}
-                            className="universal-left"
-                          />
-                        </Form.Item>
-                      </Col>
-                    </Row>
+                        />
+                      </Form.Item>
+                    </Col>
+                  </Row>
                 </div>
               ))}
 

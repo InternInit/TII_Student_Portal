@@ -1093,7 +1093,6 @@ class PageInternshipInformation extends Component {
     console.log("FinishedPageInternship:", values);
     this.props.updateCompletionState(0, 1.0);
     this.props.updateData(values, "0");
-    this.routeChange("/apply/personal");
   };
 
   /**

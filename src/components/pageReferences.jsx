@@ -14,6 +14,7 @@ import "../App.scss";
 
 //React Routing
 import { withRouter } from "react-router";
+import { Link } from "react-router-dom";
 
 //Redux
 import { connect } from "react-redux";
@@ -217,167 +218,167 @@ class PageReferences extends Component {
                   return (
                     <div style={{ marginTop: "40px" }}>
                       <QueueAnim>
-                      {fields.map((field, index) => (
-                        <div className="educationBox" key={field.key}>
-                          <Form.Item
-                            {...(index === 0
-                              ? formItemLayout
-                              : formItemLayoutWithOutLabel)}
-                            required={false}
-                            key={field.key}
-                          >
-                            {/**
-                             *
-                             * Minus Button removes Reference when clicked
-                             *
-                             */}
-                            {this.renderMinusButton(
-                              fields,
-                              field,
-                              remove,
-                              index
-                            )}
+                        {fields.map((field, index) => (
+                          <div className="educationBox" key={field.key}>
+                            <Form.Item
+                              {...(index === 0
+                                ? formItemLayout
+                                : formItemLayoutWithOutLabel)}
+                              required={false}
+                              key={field.key}
+                            >
+                              {/**
+                               *
+                               * Minus Button removes Reference when clicked
+                               *
+                               */}
+                              {this.renderMinusButton(
+                                fields,
+                                field,
+                                remove,
+                                index
+                              )}
 
-                            {/**
-                             *
-                             * First Row of Reference Box
-                             *
-                             */}
-                            <Row gutter={formGutter}>
-                              <Col span={halfSpan}>
-                                {/**First name of Reference */}
-                                <Form.Item
-                                  {...formItemProps.inputField(
-                                    true,
-                                    field,
-                                    "First Name",
-                                    "First Name"
-                                  )}
-                                >
-                                  <Input />
-                                </Form.Item>
-                              </Col>
-                              <Col span={halfSpan}>
-                                {/**Last name of Reference */}
-                                <Form.Item
-                                  {...formItemProps.inputField(
-                                    true,
-                                    field,
-                                    "Last Name",
-                                    "Last Name"
-                                  )}
-                                >
-                                  <Input />
-                                </Form.Item>
-                              </Col>
-                            </Row>
+                              {/**
+                               *
+                               * First Row of Reference Box
+                               *
+                               */}
+                              <Row gutter={formGutter}>
+                                <Col span={halfSpan}>
+                                  {/**First name of Reference */}
+                                  <Form.Item
+                                    {...formItemProps.inputField(
+                                      true,
+                                      field,
+                                      "First Name",
+                                      "First Name"
+                                    )}
+                                  >
+                                    <Input />
+                                  </Form.Item>
+                                </Col>
+                                <Col span={halfSpan}>
+                                  {/**Last name of Reference */}
+                                  <Form.Item
+                                    {...formItemProps.inputField(
+                                      true,
+                                      field,
+                                      "Last Name",
+                                      "Last Name"
+                                    )}
+                                  >
+                                    <Input />
+                                  </Form.Item>
+                                </Col>
+                              </Row>
 
-                            {/**
-                             *
-                             * Second Row of Reference Box
-                             *
-                             */}
+                              {/**
+                               *
+                               * Second Row of Reference Box
+                               *
+                               */}
 
-                            <Row gutter={formGutter}>
-                              <Col span={halfSpan}>
-                                {/**Company of Reference */}
-                                <Form.Item
-                                  {...formItemProps.inputField(
-                                    true,
-                                    field,
-                                    "School/Company",
-                                    "School/Company",
-                                    null,
-                                    null,
-                                    <React.Fragment>
-                                      The reference's organization give
-                                      company's insight into your past
-                                      experiences.
-                                    </React.Fragment>,
-                                    true
-                                  )}
-                                >
-                                  <Input />
-                                </Form.Item>
-                              </Col>
-                              <Col span={halfSpan}>
-                                {/**position within company of Reference */}
-                                <Form.Item
-                                  {...formItemProps.inputField(
-                                    true,
-                                    field,
-                                    "Title",
-                                    "Title",
-                                    null,
-                                    null,
-                                    <React.Fragment>
-                                      The title of a reference is important
-                                      because it provides
-                                      <br />
-                                      companies with information on your
-                                      interactions with <br />
-                                      those in past expereinces.
-                                    </React.Fragment>,
-                                    true
-                                  )}
-                                >
-                                  <Input />
-                                </Form.Item>
-                              </Col>
-                            </Row>
+                              <Row gutter={formGutter}>
+                                <Col span={halfSpan}>
+                                  {/**Company of Reference */}
+                                  <Form.Item
+                                    {...formItemProps.inputField(
+                                      true,
+                                      field,
+                                      "School/Company",
+                                      "School/Company",
+                                      null,
+                                      null,
+                                      <React.Fragment>
+                                        The reference's organization give
+                                        company's insight into your past
+                                        experiences.
+                                      </React.Fragment>,
+                                      true
+                                    )}
+                                  >
+                                    <Input />
+                                  </Form.Item>
+                                </Col>
+                                <Col span={halfSpan}>
+                                  {/**position within company of Reference */}
+                                  <Form.Item
+                                    {...formItemProps.inputField(
+                                      true,
+                                      field,
+                                      "Title",
+                                      "Title",
+                                      null,
+                                      null,
+                                      <React.Fragment>
+                                        The title of a reference is important
+                                        because it provides
+                                        <br />
+                                        companies with information on your
+                                        interactions with <br />
+                                        those in past expereinces.
+                                      </React.Fragment>,
+                                      true
+                                    )}
+                                  >
+                                    <Input />
+                                  </Form.Item>
+                                </Col>
+                              </Row>
 
-                            {/**
-                             *
-                             * School Contact (EMAIL, PHONE NUMBER )
-                             *
-                             */}
-                            <Row gutter={formGutter}>
-                              <Col span={halfSpan}>
-                                <Form.Item
-                                  className="text-left"
-                                  {...formItemProps.inputField(
-                                    true,
-                                    field,
-                                    "Phone Number",
-                                    "Phone Number",
-                                    "string",
-                                    /^(1?([-\s]?\(?\d{3}\)?)[-\s]?)(\d{3})([-\s]?\d{4})$/,
+                              {/**
+                               *
+                               * School Contact (EMAIL, PHONE NUMBER )
+                               *
+                               */}
+                              <Row gutter={formGutter}>
+                                <Col span={halfSpan}>
+                                  <Form.Item
+                                    className="text-left"
+                                    {...formItemProps.inputField(
+                                      true,
+                                      field,
+                                      "Phone Number",
+                                      "Phone Number",
+                                      "string",
+                                      /^(1?([-\s]?\(?\d{3}\)?)[-\s]?)(\d{3})([-\s]?\d{4})$/,
 
-                                    <React.Fragment>
-                                      The reference's phone number is a key
-                                      method that companies will use to contact
-                                      them.
-                                    </React.Fragment>,
-                                    true
-                                  )}
-                                  extra="Please input your phone number without any formatting."
-                                >
-                                  <Input />
-                                </Form.Item>
-                              </Col>
-                              <Col span={halfSpan}>
-                                <Form.Item
-                                  {...formItemProps.inputField(
-                                    true,
-                                    field,
-                                    "Email",
-                                    "Email",
-                                    "email",
-                                    null,
-                                    <React.Fragment>
-                                      The reference's email is a key method that
-                                      companies will use to contact them.
-                                    </React.Fragment>,
-                                    true
-                                  )}
-                                >
-                                  <Input />
-                                </Form.Item>
-                              </Col>
-                            </Row>
-                          </Form.Item>
-                        </div>
-                      ))}
+                                      <React.Fragment>
+                                        The reference's phone number is a key
+                                        method that companies will use to
+                                        contact them.
+                                      </React.Fragment>,
+                                      true
+                                    )}
+                                    extra="Please input your phone number without any formatting."
+                                  >
+                                    <Input />
+                                  </Form.Item>
+                                </Col>
+                                <Col span={halfSpan}>
+                                  <Form.Item
+                                    {...formItemProps.inputField(
+                                      true,
+                                      field,
+                                      "Email",
+                                      "Email",
+                                      "email",
+                                      null,
+                                      <React.Fragment>
+                                        The reference's email is a key method
+                                        that companies will use to contact them.
+                                      </React.Fragment>,
+                                      true
+                                    )}
+                                  >
+                                    <Input />
+                                  </Form.Item>
+                                </Col>
+                              </Row>
+                            </Form.Item>
+                          </div>
+                        ))}
                       </QueueAnim>
                       {/**Outside Reference Box */}
 
@@ -405,7 +406,7 @@ class PageReferences extends Component {
                   htmlType="button"
                   onClick={this.backHandler}
                 >
-                  Previous
+                  <Link to="/apply/extracurriculars-and-classes">Previous</Link>
                 </Button>
                 <Button
                   className="next-button"
@@ -440,7 +441,9 @@ class PageReferences extends Component {
             remove(field.name);
           }}
         />
-        <h2 className="application-box-heading twentyTwoFont">Reference {index + 1}</h2>
+        <h2 className="application-box-heading twentyTwoFont">
+          Reference {index + 1}
+        </h2>
       </React.Fragment>
     ) : null;
   };
@@ -531,7 +534,6 @@ class PageReferences extends Component {
    */
   backHandler = () => {
     this.props.updateData(this.formRef.current.getFieldsValue(), "3");
-    this.routeChange("/apply/written-work");
   };
 
   /**

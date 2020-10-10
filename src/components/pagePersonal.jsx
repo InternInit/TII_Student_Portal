@@ -768,7 +768,7 @@ class PagePersonal extends Component {
                   htmlType="button"
                   onClick={this.backHandler}
                 >
-                  Previous
+                  <Link to="/apply/internship-info">Previous</Link>
                 </Button>
                 <Button
                   className="next-button"
@@ -836,7 +836,6 @@ class PagePersonal extends Component {
     console.log("FinishedPersonalPage:", values);
     this.props.updateCompletionState(1, 1.0);
     this.props.updateData(values, "1");
-    this.routeChange("/apply/written-work");
   };
 
   updateFieldData = async () => {
@@ -852,7 +851,6 @@ class PagePersonal extends Component {
    */
   backHandler = () => {
     this.props.updateData(this.formRef.current.getFieldsValue(), "1");
-    this.routeChange("/apply/internship-info");
   };
 
   /**
