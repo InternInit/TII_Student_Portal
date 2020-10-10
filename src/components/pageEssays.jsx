@@ -505,7 +505,9 @@ class PageEssays extends React.Component {
                   type="primary"
                   htmlType="submit"
                 >
-                  Save and Continue
+                  <Link to="/apply/extracurriculars-and-classes">
+                    Save and Continue
+                  </Link>
                 </Button>
               </Form.Item>
             </Form>

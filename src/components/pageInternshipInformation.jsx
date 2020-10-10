@@ -1036,7 +1036,7 @@ class PageInternshipInformation extends Component {
                   type="primary"
                   htmlType="submit"
                 >
-                  Save and Continue
+                  <Link to="/apply/personal">Save and Continue</Link>
                 </Button>
               </Form.Item>
             </Form>
@@ -1215,10 +1215,7 @@ const StandardInputs = (props) => {
           return (
             <div>
               {fields.map((field) => (
-                <div
-                  className="educationBox"
-                  key={field.key}
-                >
+                <div className="educationBox" key={field.key}>
                   <Row gutter={formGutter} style={{ width: "100%" }}>
                     <Col span={6}>
                       <Form.Item

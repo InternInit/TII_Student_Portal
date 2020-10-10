@@ -21,6 +21,7 @@ import "../App.scss";
 
 //React Routing
 import { withRouter } from "react-router";
+import { Link } from "react-router-dom";
 
 //Redux
 import { connect } from "react-redux";
@@ -774,7 +775,9 @@ class PagePersonal extends Component {
                   type="primary"
                   htmlType="submit"
                 >
+                  <Link to="/apply/written-work">
                   Save and Continue
+                  </Link>
                 </Button>
               </Form.Item>
             </Form>
