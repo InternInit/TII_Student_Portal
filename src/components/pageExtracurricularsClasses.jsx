@@ -125,13 +125,13 @@ const boldify = (text, info = false, popoverText) =>
   !info ? (
     <strong>{text}</strong>
   ) : (
-    <React.Fragment>
-      <strong>{text}</strong>
-      <Popover style={{ width: "10px" }} title={text} content={popoverText}>
-        <InfoCircle size={12} />
-      </Popover>
-    </React.Fragment>
-  );
+      <React.Fragment>
+        <strong>{text}</strong>
+        <Popover style={{ width: "10px" }} title={text} content={popoverText}>
+          <InfoCircle size={12} />
+        </Popover>
+      </React.Fragment>
+    );
 
 class PageExtracurricularsClasses extends Component {
   render() {
@@ -163,88 +163,96 @@ const Extracurriculars = (props) => {
             <div>
               {fields.map((field, index) => (
                 <div className="educationBox" key={field.key}>
-                  <Row>
-                    {fields.length > 1 ? (
-                      <div className="education-box-remove-button">
-                        <GoX
-                          size={22}
-                          onClick={() => {
-                            remove(field.name);
-                          }}
-                        />
-                      </div>
-                    ) : null}
-                    <h2 className="application-box-heading twentyTwoFont">
-                      Activity {index + 1}
-                    </h2>
-                  </Row>
-                  <Row gutter={formGutter} style={{ width: "100%" }}>
-                    <Col span={6}>
-                      <Form.Item
-                        {...field}
-                        className="universal-left"
-                        name={[field.name, "activityType"]}
-                        fieldKey={[field.fieldKey, "activityType"]}
-                        label={boldify("Activity Type")}
-                      >
-                        <Select
-                          showSearch
-                          placeholder="Category"
-                          optionFilterProp="children"
-                          style={{ textAlign: "left" }}
-                        >
-                          {activityCategories.map((category) => (
-                            <option
-                              key={category}
-                              value={category}
-                              style={{ wordWrap: "break-word" }}
-                            >
-                              {category}
-                            </option>
-                          ))}
-                        </Select>
-                      </Form.Item>
-                    </Col>
-                    <Col span={6}>
-                      <Form.Item
-                        {...field}
-                        className="universal-left"
-                        name={[field.name, "years-involved"]}
-                        fieldKey={[field.fieldKey, "years-involved"]}
-                        label={boldify("Years Involved")}
-                      >
-                        <InputNumber style={{ width: "100%" }} />
-                      </Form.Item>
-                    </Col>
-                    <Col span={12}>
-                      <Form.Item
-                        {...field}
-                        name={[field.name, "position"]}
-                        fieldKey={[field.fieldKey, "position"]}
-                        label={boldify("Position/Title")}
-                      >
-                        <Input placeholder="Position" />
-                      </Form.Item>
-                    </Col>
-                  </Row>
-                  <Row gutter={formGutter} style={{ width: "100%" }}>
-                    <Col span={24}>
-                      <Form.Item
-                        {...field}
-                        name={[field.name, "description"]}
-                        fieldKey={[field.fieldKey, "description"]}
-                        label={boldify("Activity Description")}
-                        extra="150 characters"
-                      >
-                        <TextArea
-                          placeholder="Activity Description"
-                          autoSize={{ minRows: 2, maxRows: 4 }}
-                          maxlength={150}
+                  <Form.Item
+                    {...(index === 0
+                      ? formItemLayout
+                      : formItemLayoutWithOutLabel)}
+                    required={false}
+                    key={field.key}
+                  >
+                    <Row>
+                      {fields.length > 1 ? (
+                        <div className="education-box-remove-button">
+                          <GoX
+                            size={22}
+                            onClick={() => {
+                              remove(field.name);
+                            }}
+                          />
+                        </div>
+                      ) : null}
+                      <h2 className="application-box-heading twentyTwoFont">
+                        Activity {index + 1}
+                      </h2>
+                    </Row>
+                    <Row gutter={formGutter} style={{ width: "100%" }}>
+                      <Col span={6}>
+                        <Form.Item
+                          {...field}
                           className="universal-left"
-                        />
-                      </Form.Item>
-                    </Col>
-                  </Row>
+                          name={[field.name, "activityType"]}
+                          fieldKey={[field.fieldKey, "activityType"]}
+                          label={boldify("Activity Type")}
+                        >
+                          <Select
+                            showSearch
+                            placeholder="Category"
+                            optionFilterProp="children"
+                            style={{ textAlign: "left" }}
+                          >
+                            {activityCategories.map((category) => (
+                              <option
+                                key={category}
+                                value={category}
+                                style={{ wordWrap: "break-word" }}
+                              >
+                                {category}
+                              </option>
+                            ))}
+                          </Select>
+                        </Form.Item>
+                      </Col>
+                      <Col span={6}>
+                        <Form.Item
+                          {...field}
+                          className="universal-left"
+                          name={[field.name, "years-involved"]}
+                          fieldKey={[field.fieldKey, "years-involved"]}
+                          label={boldify("Years Involved")}
+                        >
+                          <InputNumber style={{ width: "100%" }} />
+                        </Form.Item>
+                      </Col>
+                      <Col span={12}>
+                        <Form.Item
+                          {...field}
+                          name={[field.name, "position"]}
+                          fieldKey={[field.fieldKey, "position"]}
+                          label={boldify("Position/Title")}
+                        >
+                          <Input placeholder="Position" />
+                        </Form.Item>
+                      </Col>
+                    </Row>
+                    <Row gutter={formGutter} style={{ width: "100%" }}>
+                      <Col span={24}>
+                        <Form.Item
+                          {...field}
+                          name={[field.name, "description"]}
+                          fieldKey={[field.fieldKey, "description"]}
+                          label={boldify("Activity Description")}
+                          extra="150 characters"
+                        >
+                          <TextArea
+                            placeholder="Activity Description"
+                            autoSize={{ minRows: 2, maxRows: 4 }}
+                            maxlength={150}
+                            className="universal-left"
+                          />
+                        </Form.Item>
+                      </Col>
+                    </Row>
+                  </Form.Item>
                 </div>
               ))}
 
