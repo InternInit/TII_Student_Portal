@@ -135,11 +135,18 @@ const boldify = (text, info = false, popoverText) =>
   );
 
 class PageExtracurricularsClasses extends Component {
+  formRef = React.createRef();
+
   render() {
     return (
       <div style={{ width: "100%", marginTop: "40px" }}>
         <h1 className="apply-header twentyEightFont">Personal Information</h1>
-        <Form layout="vertical">
+        <Form
+          layout="vertical"
+          onFinish={this.onFinish}
+          ref={this.formRef}
+          onValuesChange={this.onValuesChange}
+        >
           <Extracurriculars
             name="Extracurriculars"
             officialName="an Extracurricular Activity"
@@ -148,6 +155,20 @@ class PageExtracurricularsClasses extends Component {
       </div>
     );
   }
+
+  onValuesChange = () => {
+    let allValues = this.formRef.current.getFieldsValue();
+    console.log(allValues);
+  };
+
+  /**
+   *
+   * When "Submit" Button is pressed
+   *
+   */
+  onFinish = (values) => {
+    console.log("Finished EC Page:", values);
+  };
 }
 
 const Extracurriculars = (props) => {
