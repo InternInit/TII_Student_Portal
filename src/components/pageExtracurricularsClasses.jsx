@@ -76,6 +76,8 @@ const activityCategories = [
   "Other Club/Activity",
 ];
 
+const courseLevels = ["College Prep", "Standard", "Accelerated", "Advanced", "AP", "IB", "Enriched", "Gifted", "Honors", "High Honors", "College Level", "Other"];
+
 //Validation Rules (Required questions)
 const validationRules = (required, inputName, type, pattern) => [
   {
@@ -319,7 +321,7 @@ const Courses = (props) => {
                               optionFilterProp="children"
                               style={{ textAlign: "left" }}
                             >
-                              {activityCategories.map((category) => (
+                              {courseLevels.map((category) => (
                                 <option
                                   key={category}
                                   value={category}
