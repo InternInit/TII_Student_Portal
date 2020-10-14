@@ -15,6 +15,7 @@ import QueueAnim from "rc-queue-anim";
 import { Row, Col } from "antd";
 import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
 import { InfoCircle } from "./StyledComponents/InternshipForms";
+import { GoX } from "react-icons/go";
 
 import "antd/dist/antd.css";
 import "../App.scss";
@@ -549,22 +550,21 @@ class PagePersonal extends Component {
                               required={false}
                               key={field.key}
                             >
-                              {fields.length > 1 ? (
-                                <MinusCircleOutlined
-                                  className="dynamic-delete-button"
-                                  style={{
-                                    fontSize: "18px",
-                                    padding: "0 8px 0 0",
-                                  }}
-                                  onClick={() => {
-                                    remove(field.name);
-                                  }}
-                                />
-                              ) : null}
-
-                              <h2 className="application-box-heading twentyTwoFont">
-                                School {index + 1}
-                              </h2>
+                              <Row>
+                                {fields.length > 1 ? (
+                                  <div className="education-box-remove-button">
+                                    <GoX
+                                      size={22}
+                                      onClick={() => {
+                                        remove(field.name);
+                                      }}
+                                    />
+                                  </div>
+                                ) : null}
+                                <h2 className="application-box-heading twentyTwoFont">
+                                  School {index + 1}
+                                </h2>
+                              </Row>
 
                               {/**
                                *
@@ -775,9 +775,7 @@ class PagePersonal extends Component {
                   type="primary"
                   htmlType="submit"
                 >
-                  <Link to="/apply/written-work">
-                  Save and Continue
-                  </Link>
+                  <Link to="/apply/written-work">Save and Continue</Link>
                 </Button>
               </Form.Item>
             </Form>
