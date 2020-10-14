@@ -274,7 +274,7 @@ const Extracurriculars = (props) => {
                     marginBottom: "30px",
                   }}
                 >
-                  <PlusOutlined /> Add {props.officialName}
+                  <PlusOutlined /> Add Activity
                 </Button>
               </Form.Item>
             </div>
