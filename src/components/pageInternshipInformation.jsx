@@ -913,7 +913,6 @@ class PageInternshipInformation extends Component {
 
               {/**
             Extracurriculars
-            CHANGE REQUIRED: Switch to a standardized input format
             */}
               <Row gutter={formGutter}>
                 <Col span={standardSpan}>
@@ -923,15 +922,6 @@ class PageInternshipInformation extends Component {
                       style={{ height: "100px" }}
                     />
                   </Form.Item>
-                </Col>
-              </Row>
-
-              <Row gutter={formGutter}>
-                <Col span={standardSpan}>
-                  <StandardInputs
-                    name="Extracurriculars"
-                    officialName="an Extracurricular Activity"
-                  />
                 </Col>
               </Row>
 
@@ -1203,96 +1193,6 @@ class PageInternshipInformation extends Component {
     this.props.history.push(path);
   };
 }
-
-const StandardInputs = (props) => {
-  const screens = useBreakpoint();
-
-  return (
-    <React.Fragment>
-      <Form.List name="users">
-        {(fields, { add, remove }) => {
-          return (
-            <div>
-              {fields.map((field) => (
-                <div className="educationBox" key={field.key}>
-                  <Row gutter={formGutter} style={{ width: "100%" }}>
-                    <Col span={6}>
-                      <Form.Item
-                        {...field}
-                        name={[field.name, "activityType"]}
-                        fieldKey={[field.fieldKey, "activityType"]}
-                      >
-                        <Input placeholder="Activity Type" />
-                      </Form.Item>
-                    </Col>
-                    <Col span={18}>
-                      <Form.Item
-                        {...field}
-                        name={[field.name, "position"]}
-                        fieldKey={[field.fieldKey, "position"]}
-                      >
-                        <Input placeholder="Position" />
-                      </Form.Item>
-                    </Col>
-                  </Row>
-                  <Row gutter={formGutter} style={{ width: "100%" }}>
-                    <Col span={standardSpan / 4}>
-                      <Form.Item
-                        {...field}
-                        name={[field.name, "activityType"]}
-                        fieldKey={[field.fieldKey, "activityType"]}
-                      >
-                        <Input placeholder="Activity Type" />
-                      </Form.Item>
-                    </Col>
-                    <Col span={(standardSpan * 3) / 4}>
-                      <Form.Item
-                        {...field}
-                        name={[field.name, "position"]}
-                        fieldKey={[field.fieldKey, "position"]}
-                      >
-                        <Input placeholder="Position" />
-                      </Form.Item>
-                    </Col>
-                  </Row>
-                  <Row>
-                    <MinusCircleOutlined
-                      onClick={() => {
-                        remove(field.name);
-                      }}
-                    />
-                  </Row>
-                </div>
-              ))}
-
-              {/**
-               *
-               * Add Field Button
-               *
-               */}
-              <Form.Item style={{ width: "100%" }}>
-                <Button
-                  type="dashed"
-                  size="large"
-                  onClick={() => {
-                    add();
-                  }}
-                  style={{
-                    width: "100%",
-                    marginTop: "10px",
-                    marginBottom: "30px",
-                  }}
-                >
-                  <PlusOutlined /> Add {props.officialName}
-                </Button>
-              </Form.Item>
-            </div>
-          );
-        }}
-      </Form.List>
-    </React.Fragment>
-  );
-};
 
 export default withRouter(
   connect(mapStateToProps, mapDispatchToProps)(PageInternshipInformation)
