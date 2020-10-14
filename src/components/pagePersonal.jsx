@@ -346,6 +346,16 @@ class PagePersonal extends Component {
               Personal Information
             </h1>
             <br />
+            {/**
+             *
+             * Only Fill out What you feel confortable filling out
+             *
+             */}
+            <p style={{ paddingBottom: "24px", marginTop: "-12px" }}>
+              Fill out only what you're comfortable with, but understand that
+              missing factors could weaken your application.
+            </p>
+
             <Form
               name="pagePersonal"
               initialValues={{
@@ -511,16 +521,6 @@ class PagePersonal extends Component {
                   </Form.Item>
                 </Col>
               </Row>
-
-              {/**
-               *
-               * Only Fill out What you feel confortable filling out
-               *
-               */}
-              <p style={{ paddingBottom: "24px", marginTop: "-12px" }}>
-                Fill out only what you're comfortable with, but understand that
-                missing factors could weaken your application.
-              </p>
 
               {/**
                *
