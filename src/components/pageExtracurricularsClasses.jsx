@@ -4,11 +4,6 @@ import {
   Select,
   Input,
   Button,
-  DatePicker,
-  Radio,
-  Upload,
-  message,
-  Spin,
   Popover,
   Skeleton,
   Grid,
@@ -17,8 +12,6 @@ import {
 } from "antd";
 import { Row, Col } from "antd";
 import {
-  InboxOutlined,
-  MinusCircleOutlined,
   PlusOutlined,
 } from "@ant-design/icons";
 import { InfoCircle } from "./StyledComponents/InternshipForms";
@@ -47,33 +40,11 @@ import SkeletonButton from "antd/lib/skeleton/Button";
 import SkeletonImage from "antd/lib/skeleton/Image";
 
 //Object Destructuring
-const { Option } = Select;
-const { RangePicker } = DatePicker;
-const { Dragger } = Upload;
 const { useBreakpoint } = Grid;
-const { TextArea } = Input;
 
 //Formatting
 const formGutter = [16, 4];
 const standardSpan = 24;
-const halfSpan = standardSpan / 2;
-const thirdSpan = standardSpan / 3;
-
-const formItemLayout = {
-  labelCol: {
-    xs: { span: 24 },
-  },
-  wrapperCol: {
-    xs: { span: 24 },
-  },
-};
-
-const formItemLayoutWithOutLabel = {
-  wrapperCol: {
-    xs: { span: 24, offset: 0 },
-    sm: { span: 24, offset: 0 },
-  },
-};
 
 //items
 const activityCategories = [
@@ -260,7 +231,7 @@ const Extracurriculars = (props) => {
                           label={boldify("Activity Description")}
                           extra="150 characters"
                         >
-                          <TextArea
+                          <Input.TextArea
                             placeholder="Activity Description"
                             autoSize={{ minRows: 2, maxRows: 4 }}
                             maxlength={150}
