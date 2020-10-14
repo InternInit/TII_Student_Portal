@@ -144,7 +144,6 @@ class App extends Component {
     this.getCachedCompletionState();
     this.getPinnedBusinesses();
     this.getActiveApplications();
-    this.props.finishLoading(true);
     window.addEventListener("resize", this.resize);
   }
 
@@ -466,6 +465,7 @@ class App extends Component {
           this.props.batchUpdateCompletionChecklist(defaultChecklist);
           this.props.updateVersion(0);
         }
+        this.props.finishLoading(true);
       });
   };
 
