@@ -215,7 +215,7 @@ class PageReferences extends Component {
               ref={this.formRef}
               onValuesChange={this.onValuesChange}
             >
-              <Form.List name="Reference">
+              <Form.List name="Reference" key="references">
                 {(fields, { add, remove }) => {
                   return (
                     <div style={{ marginTop: "40px" }}>

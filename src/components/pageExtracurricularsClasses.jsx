@@ -176,7 +176,7 @@ class PageExtracurricularsClasses extends Component {
 const Extracurriculars = (props) => {
   return (
     <React.Fragment>
-      <Form.List name="users">
+      <Form.List name="extracurriculars" key="extracurriculars">
         {(fields, { add, remove }) => {
           return (
             <div>
@@ -305,7 +305,7 @@ const Extracurriculars = (props) => {
 const Courses = (props) => {
   return (
     <React.Fragment>
-      <Form.List name="users">
+      <Form.List name="courses" key="courses">
         {(fields, { add, remove }) => {
           return (
             <div>
