@@ -12,7 +12,10 @@ import DashboardNavBar from "./dashboardNavBar.jsx";
 import AddCompanies from "./AddCompanies.js";
 import CompanyInformation from "./CompanyInformation.js";
 import ApplicationProgress from "./applicationProgress.jsx";
+import ActiveApplications from "./ActiveApplications";
+import PinCompany from "./PinCompany";
 import ApplySkills from "./apply-skills/applySkills";
+import MyInternships from "./myInternships";
 
 //React Routing
 import { Route, Switch as ReactSwitch, Redirect } from "react-router-dom";
@@ -22,8 +25,6 @@ import {
   updateCheckedIndustries,
   updateDisabledIndustries,
 } from "../../redux/actions";
-import ActiveApplications from "./ActiveApplications";
-import PinCompany from "./PinCompany";
 
 const PageContainer = styled.div`
   width: 90%;
@@ -97,14 +98,7 @@ class Dashboard extends Component {
                 />
 
                 <Route path="/dashboard/my-internships" exact>
-                  <ApplicationProgress />
-                  <PinCompany
-                    pinnedBusinesses={this.props.userInfo.pinnedBusinesses}
-                    updateBusinessStatus={this.props.updateBusinessStatus}
-                  />
-                  <ActiveApplications
-                    activeApplications={this.props.userInfo.activeApplications}
-                  />
+                  <MyInternships />
                 </Route>
 
                 <Route

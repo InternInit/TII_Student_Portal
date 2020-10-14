@@ -54,6 +54,7 @@ import {
   updateCompletionState,
   batchUpdateCompletionState,
   batchUpdateCompletionChecklist,
+  finishLoading
 } from "./redux/actions";
 
 import devConfigurationFile from "./configuration_dev.json";
@@ -97,6 +98,7 @@ const PageContainer = styled.div`
 
 const mapStateToProps = (state) => {
   return {
+    isLoading: state.isLoading,
     completionState: state.completionState,
     completionChecklist: state.completionChecklist,
     userInfo: state.userInfo,
@@ -117,6 +119,7 @@ const mapDispatchToProps = {
   updateCompletionState,
   batchUpdateCompletionState,
   batchUpdateCompletionChecklist,
+  finishLoading
 };
 
 class App extends Component {
@@ -141,6 +144,7 @@ class App extends Component {
     this.getCachedCompletionState();
     this.getPinnedBusinesses();
     this.getActiveApplications();
+    this.props.finishLoading(true);
     window.addEventListener("resize", this.resize);
   }
 
