@@ -11,11 +11,8 @@ import { Layout, Divider } from "antd";
 import DashboardNavBar from "./dashboardNavBar.jsx";
 import AddCompanies from "./AddCompanies.js";
 import CompanyInformation from "./CompanyInformation.js";
-import ApplicationProgress from "./applicationProgress.jsx";
-import ActiveApplications from "./ActiveApplications";
-import PinCompany from "./PinCompany";
 import ApplySkills from "./apply-skills/applySkills";
-import MyInternships from "./myInternships";
+import MyInternships from "./my-internships/myInternships";
 
 //React Routing
 import { Route, Switch as ReactSwitch, Redirect } from "react-router-dom";

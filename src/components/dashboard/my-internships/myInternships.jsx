@@ -1,7 +1,7 @@
-import React, { Component } from "react";
-import ApplicationProgress from "./applicationProgress.jsx";
-import ActiveApplications from "./ActiveApplications";
-import PinCompany from "./PinCompany";
+import React from "react";
+import ApplicationProgress from "./applicationProgress";
+import ActiveApplications from "./ActiveApplications.jsx";
+import PinCompany from "./PinCompany.jsx";
 
 import { connect } from "react-redux";
 import { withRouter } from "react-router";

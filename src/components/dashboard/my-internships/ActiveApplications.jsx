@@ -1,6 +1,6 @@
 import React, { Component } from "react";
+import ActiveAppCompanytab from "./ActiveAppCompanytab";
 import QueueAnim from "rc-queue-anim";
-import Companytab from "./Companytab.js";
 
 import styled from "styled-components";
 
@@ -25,39 +25,33 @@ const DescriptorText = styled.span`
   color: black;
 `;
 
-class PinCompany extends Component {
+class ActiveApplications extends Component {
   constructor(props) {
     super(props);
-
-    this.handlePageChange = this.handlePageChange.bind(this);
-
     this.state = {
       page: 0,
-      busPerPage: 5,
+      busPerPage: 6,
     };
+    this.handlePageChange = this.handlePageChange.bind(this);
   }
-
   render() {
     let { page, busPerPage } = this.state;
-    let { pinnedBusinesses, updateBusinessStatus } = this.props;
+    let { activeApplications } = this.props;
+
     return (
       <React.Fragment>
-        {/**
-         *
-         * Pinned Companies
-         *
-         */}
         <h1 className="module-name" style={{ marginTop: "70px" }}>
-          Added Companies
+          Active Applications
         </h1>
-        {pinnedBusinesses.length < 1 ? (
+
+        {activeApplications.length < 1 ? (
           <ModuleContainer>
             <AntRow>
               <DescriptorText
                 style={{ margin: "auto" }}
                 className="twentyFourFont"
               >
-                You have not added any companies yet.
+                You do not have any active applications.
               </DescriptorText>
             </AntRow>
           </ModuleContainer>
@@ -67,23 +61,31 @@ class PinCompany extends Component {
               type={["right", "left"]}
               ease={["easeOutQuart", "easeInOutQuart"]}
             >
-              {pinnedBusinesses
+              {activeApplications
                 .slice(page * busPerPage, (page + 1) * busPerPage)
+                .filter((apps) => apps.status !== "Pinned")
                 .map((pinnedCompany, index) => (
                   <div style={{ marginBottom: "12px" }} key={index}>
-                    <Companytab
+                    <ActiveAppCompanytab
                       name={pinnedCompany.name}
+                      companyId={pinnedCompany.Id}
                       industry={pinnedCompany.industry}
                       avatar={pinnedCompany.avatar}
-                      companyid={pinnedCompany.Id}
-                      updateBusinessStatus={updateBusinessStatus}
+                      status={
+                        pinnedCompany.status !== "Review"
+                          ? pinnedCompany.status
+                          : "Pending"
+                      }
                     />
                   </div>
                 ))}
             </QueueAnim>
             <Pagination
               current={parseInt(page) + 1}
-              total={pinnedBusinesses.length}
+              total={
+                activeApplications.filter((apps) => apps.status !== "Pinned")
+                  .length
+              }
               onChange={(pageChange) => this.handlePageChange(pageChange - 1)}
               pageSize={busPerPage}
             />
@@ -92,10 +94,9 @@ class PinCompany extends Component {
       </React.Fragment>
     );
   }
-
   handlePageChange = (pageChange) => {
     this.setState({ page: pageChange });
   };
 }
 
-export default PinCompany;
+export default ActiveApplications;

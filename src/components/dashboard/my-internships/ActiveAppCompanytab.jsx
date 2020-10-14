@@ -5,7 +5,7 @@ import {
   CompanyTitle,
   JobTitle,
   TabContainer,
-} from "./styledDashboardComponents";
+} from "../styledDashboardComponents";
 
 import { Link } from "react-router-dom";
 
