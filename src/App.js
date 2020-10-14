@@ -83,8 +83,8 @@ const { Content } = Layout;
 const PageContainer = styled.div`
   display: flex;
   width: 70%;
-  padding-left: 2%;
-  padding-right: 2%;
+  padding-left: 4.5vw;
+  padding-right: 4.5vw;
   justifycontent: center;
   background-color: white;
   border: 1px solid #d9d9d9;

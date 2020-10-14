@@ -37,6 +37,30 @@ $gray-thirteen: #425866;
   transition: 0.3s ease;
 }
 
+@mixin mt($name, $amount) {
+  .mt-#{$name} {
+    margin-top: #{$amount}vh;
+  }
+}
+
+@mixin mb($name, $amount) {
+  .mb-#{$name} {
+    margin-bottom: #{$amount}vh;
+  }
+}
+
+@mixin ml($name, $amount) {
+  .ml-#{$name} {
+    margin-left: #{$amount}vw;
+  }
+}
+
+@mixin mr($name, $amount) {
+  .mr-#{$name} {
+    margin-right: #{$amount}vw;
+  }
+}
+
 /*
 ============================================================
 ************************************************************
@@ -106,8 +130,17 @@ p {
   padding-left: 5%;
   padding-right: 5%;
   padding-top: 3%;
+  padding-bottom: 1%;
   margin-top: 20px;
   margin-bottom: 10px;
+  background-color: $background-color;
+  border: 1px solid $gray-two;
+  border-radius: 5px;
+  position: relative;
+}
+
+.new-box {
+  @include standard-box-shadow();
   background-color: $background-color;
   border: 1px solid $gray-two;
   border-radius: 5px;
@@ -303,3 +336,43 @@ FONT SIZES
 .bold {
   font-weight: bold;
 }
+
+/**
+Margins
+*/
+
+@include mt(1, 1);
+@include mt(2, 2);
+@include mt(3, 3);
+@include mt(4, 4);
+@include mt(5, 5);
+@include mt(6, 6);
+@include mt(7, 7);
+@include mt(8, 8);
+
+@include mb(1, 1);
+@include mb(2, 2);
+@include mb(3, 3);
+@include mb(4, 4);
+@include mb(5, 5);
+@include mb(6, 6);
+@include mb(7, 7);
+@include mb(8, 8);
+
+@include ml(1, 1);
+@include ml(2, 2);
+@include ml(3, 3);
+@include ml(4, 4);
+@include ml(5, 5);
+@include ml(6, 6);
+@include ml(7, 7);
+@include ml(8, 8);
+
+@include mr(1, 1);
+@include mr(2, 2);
+@include mr(3, 3);
+@include mr(4, 4);
+@include mr(5, 5);
+@include mr(6, 6);
+@include mr(7, 7);
+@include mr(8, 8);

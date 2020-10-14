@@ -544,11 +544,9 @@ class PagePersonal extends Component {
                         {fields.map((field, index) => (
                           <div className="educationBox" key={field.key}>
                             <Form.Item
-                              {...(index === 0
-                                ? formItemLayout
-                                : formItemLayoutWithOutLabel)}
                               required={false}
                               key={field.key}
+                              style={{marginBottom: "0px"}}
                             >
                               <Row>
                                 {fields.length > 1 ? (

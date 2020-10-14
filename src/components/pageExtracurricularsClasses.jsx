@@ -62,11 +62,9 @@ const thirdSpan = standardSpan / 3;
 const formItemLayout = {
   labelCol: {
     xs: { span: 24 },
-    sm: { span: 4 },
   },
   wrapperCol: {
     xs: { span: 24 },
-    sm: { span: 24 },
   },
 };
 
@@ -107,8 +105,6 @@ const activityCategories = [
   "Work (paid)",
   "Other Club/Activity",
 ];
-const timesOfTheDay = ["Mornings", "Afternoons", "Evenings"];
-const paidOrUnpaid = ["Yes", "No"];
 
 //Validation Rules (Required questions)
 const validationRules = (required, inputName, type, pattern) => [
@@ -125,13 +121,13 @@ const boldify = (text, info = false, popoverText) =>
   !info ? (
     <strong>{text}</strong>
   ) : (
-      <React.Fragment>
-        <strong>{text}</strong>
-        <Popover style={{ width: "10px" }} title={text} content={popoverText}>
-          <InfoCircle size={12} />
-        </Popover>
-      </React.Fragment>
-    );
+    <React.Fragment>
+      <strong>{text}</strong>
+      <Popover style={{ width: "10px" }} title={text} content={popoverText}>
+        <InfoCircle size={12} />
+      </Popover>
+    </React.Fragment>
+  );
 
 class PageExtracurricularsClasses extends Component {
   render() {
@@ -139,7 +135,30 @@ class PageExtracurricularsClasses extends Component {
       <div style={{ width: "100%", marginTop: "40px" }}>
         <h1 className="apply-header twentyEightFont">Activities and Classes</h1>
         <Form layout="vertical" align="left">
+          <h1 className="apply-header twentyFourFont universal-left mt-2">
+            Activities
+          </h1>
+          <p className="mb-3" style={{ marginTop: "-12px" }}>
+            Your extracurricular activities show employers how you spend your
+            time outside of the classroom and what your interests are. These
+            activities can show a business why you are particularly qualified
+            for their specific internship position.
+          </p>
+
           <Extracurriculars />
+
+          <h1 className="apply-header twentyFourFont universal-left mt-1">
+            Classes
+          </h1>
+          <p className="mb-3" style={{ marginTop: "-12px" }}>
+            Relevant courses are any courses you've taken which you think are
+            helpful for your application to a specific position or industry.
+            Only list the classes which you have taken recently or are{" "}
+            <em>specifically</em> relevant to your industries of interest.
+          </p>
+
+          <Courses />
+
           <Form.Item>
             <Button className="back-button" type="primary" htmlType="button">
               <Link to="/apply/written-work">Previous</Link>
@@ -164,11 +183,9 @@ const Extracurriculars = (props) => {
               {fields.map((field, index) => (
                 <div className="educationBox" key={field.key}>
                   <Form.Item
-                    {...(index === 0
-                      ? formItemLayout
-                      : formItemLayoutWithOutLabel)}
                     required={false}
                     key={field.key}
+                    style={{marginBottom: "0px"}}
                   >
                     <Row>
                       {fields.length > 1 ? (
@@ -275,6 +292,106 @@ const Extracurriculars = (props) => {
                   }}
                 >
                   <PlusOutlined /> Add Activity
+                </Button>
+              </Form.Item>
+            </div>
+          );
+        }}
+      </Form.List>
+    </React.Fragment>
+  );
+};
+
+const Courses = (props) => {
+  return (
+    <React.Fragment>
+      <Form.List name="users">
+        {(fields, { add, remove }) => {
+          return (
+            <div>
+              {fields.map((field, index) => (
+                <div className="educationBox" key={field.key}>
+                  <Form.Item
+                    required={false}
+                    key={field.key}
+                    style={{marginBottom: "0px"}}
+                  >
+                    <Row>
+                      {fields.length > 1 ? (
+                        <div className="education-box-remove-button">
+                          <GoX
+                            size={22}
+                            onClick={() => {
+                              remove(field.name);
+                            }}
+                          />
+                        </div>
+                      ) : null}
+                      <h2 className="application-box-heading twentyTwoFont">
+                        Class {index + 1}
+                      </h2>
+                    </Row>
+                    <Row gutter={formGutter} style={{ width: "100%" }}>
+                      <Col span={6}>
+                        <Form.Item
+                          {...field}
+                          className="universal-left"
+                          name={[field.name, "courseLevel"]}
+                          fieldKey={[field.fieldKey, "courseLevel"]}
+                          label={boldify("Course Level")}
+                        >
+                          <Select
+                            showSearch
+                            placeholder="Level"
+                            optionFilterProp="children"
+                            style={{ textAlign: "left" }}
+                          >
+                            {activityCategories.map((category) => (
+                              <option
+                                key={category}
+                                value={category}
+                                style={{ wordWrap: "break-word" }}
+                              >
+                                {category}
+                              </option>
+                            ))}
+                          </Select>
+                        </Form.Item>
+                      </Col>
+                      <Col span={18}>
+                        <Form.Item
+                          {...field}
+                          name={[field.name, "position"]}
+                          fieldKey={[field.fieldKey, "position"]}
+                          label={boldify("Course Title")}
+                        >
+                          <Input placeholder="Course Title" />
+                        </Form.Item>
+                      </Col>
+                    </Row>
+                  </Form.Item>
+                </div>
+              ))}
+
+              {/**
+               *
+               * Add Field Button
+               *
+               */}
+              <Form.Item style={{ width: "100%" }}>
+                <Button
+                  type="dashed"
+                  size="large"
+                  onClick={() => {
+                    add();
+                  }}
+                  style={{
+                    width: "100%",
+                    marginTop: "10px",
+                    marginBottom: "30px",
+                  }}
+                >
+                  <PlusOutlined /> Add Class
                 </Button>
               </Form.Item>
             </div>
