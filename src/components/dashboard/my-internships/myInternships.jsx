@@ -1,5 +1,6 @@
 import React from "react";
 import ApplicationProgress from "./applicationProgress";
+import MyInternshipSkeleton from "./myInternshipSkeleton";
 import ActiveApplications from "./ActiveApplications.jsx";
 import PinCompany from "./PinCompany.jsx";
 
@@ -17,7 +18,7 @@ const mapStateToProps = (state) => {
 const MyInternships = (props) => {
   return (
     <React.Fragment>
-      {props.finishedLoading ? (
+      {!props.finishedLoading ? (
         <>
           <ApplicationProgress />
           <PinCompany
@@ -30,7 +31,7 @@ const MyInternships = (props) => {
         </>
       ) : (
         <div>
-          <h1>Hello</h1>
+          <MyInternshipSkeleton />
         </div>
       )}
     </React.Fragment>
