@@ -53,69 +53,73 @@ class AddCompaniesSkeleton extends React.Component {
         ) : (
           <React.Fragment>
             <h1 className="module-name">Apply to an Entire Industry</h1>
-            <ModuleContainer style={{ borderRadius: "2px", padding: "1%" }}>
-              <AntRow style={{ display: "flex", justifyContent: "center" }}>
-                <Skeleton.Input size="small" style={{ width: "31vw" }} />
-              </AntRow>
-            </ModuleContainer>
+            <Collapse defaultActiveKey={["1"]} expandIconPosition="right">
+              <Panel
+                header={
+                  <strong style={{ fontWeight: "500" }} className="sixteenFont">
+                    Choose an entire industry to submit your application to.
+                  </strong>
+                }
+              ></Panel>
+            </Collapse>
 
             <h1 className="module-name" ref={this.myRef}>
               Search Companies
             </h1>
             <Search
+              placeholder="Search Company Name"
               size="large"
               style={{ width: "100%", marginBottom: "20px", marginTop: "8px" }}
             />
-            <ModuleContainer
-              style={{ borderRadius: "2px", padding: "1%", marginTop: "0" }}
-            >
-              <AntRow
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  marginTop: "0px",
-                  marginBottom: "25px",
-                }}
-              >
-                <Skeleton.Input size="small" style={{ width: "20vw" }} />
-              </AntRow>
-              <AntRow
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  marginBottom: "16px",
-                }}
-              >
-                <Skeleton.Input size="small" style={{ width: "64vw" }} />
-              </AntRow>
-              <AntRow
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  marginBottom: "16px",
-                }}
-              >
-                <Skeleton.Input size="small" style={{ width: "64vw" }} />
-              </AntRow>
-              <AntRow
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  marginBottom: "16px",
-                }}
-              >
-                <Skeleton.Input size="small" style={{ width: "64vw" }} />
-              </AntRow>
-              <AntRow
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  marginBottom: "16px",
-                }}
-              >
-                <Skeleton.Input size="small" style={{ width: "64vw" }} />
-              </AntRow>
-            </ModuleContainer>
+            <AntRow style={{ width: "100%", marginBottom: "3vh" }}>
+              <Collapse defaultActiveKey={["0"]} expandIconPosition="right">
+                <Panel
+                  header={
+                    <strong
+                      style={{ fontWeight: "500" }}
+                      className="sixteenFont"
+                    >
+                      Filter by Industry
+                    </strong>
+                  }
+                >
+                  <AntRow gutter={formGutter}>
+                    <AntCol span={standardSpan}>
+                      <Checkbox.Group
+                        onChange={(value) => {
+                          this.filterIndustries(value);
+                        }}
+                      >
+                        <AntRow gutter={checkGutter}>
+                          {industry.map((industry) => (
+                            <AntCol
+                              span={thirdSpan}
+                              style={{
+                                display: "flex",
+                                alignItems: "flex-start",
+                              }}
+                            >
+                              <Checkbox
+                                key={industry}
+                                value={industry}
+                                style={{
+                                  lineHeight: "32px",
+                                  marginLeft: "25%",
+
+                                  textAlign: "left",
+                                }}
+                              >
+                                {industry}
+                              </Checkbox>
+                            </AntCol>
+                          ))}
+                        </AntRow>
+                      </Checkbox.Group>
+                    </AntCol>
+                  </AntRow>
+                </Panel>
+              </Collapse>
+            </AntRow>
 
             <ModuleContainer style={{ padding: "1%" }}>
               <AntRow style={{ marginTop: "1%" }}>
