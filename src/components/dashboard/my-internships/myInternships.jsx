@@ -18,7 +18,7 @@ const mapStateToProps = (state) => {
 const MyInternships = (props) => {
   return (
     <React.Fragment>
-      {!props.finishedLoading ? (
+      {props.finishedLoading ? (
         <>
           <ApplicationProgress />
           <PinCompany

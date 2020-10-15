@@ -76,17 +76,37 @@ const MyInternshipSkeleton = (props) => {
         Added Companies
       </h1>
 
-      <ModuleContainer>
-        <Row>
+      <ModuleContainer style={{padding: "1%"}}>
+        <Row style={{marginTop: "1%"}}>
           <Col span={3}>
-            <Skeleton.Avatar size={56} />
+            <Skeleton.Avatar size={48} />
           </Col>
           <Col span={21}>
             <div className="universal-left" style={{ marginBottom: "7px" }}>
               <Skeleton.Input size="small" active style={{ width: "25vw" }} />
             </div>
-            <div className="universal-left" style={{ marginBottom: "0px" }}>
-              <Skeleton.Input size="small" active style={{ width: "10vw" }} />
+            <div className="universal-left" style={{ marginBottom: "0px", width: "15vw" }}>
+              <Skeleton active title={false} paragraph={{rows: 1}} />
+            </div>
+          </Col>
+        </Row>
+      </ModuleContainer>
+
+      <h1 className="module-name" style={{ marginTop: "70px" }}>
+        Active Applications
+      </h1>
+
+      <ModuleContainer style={{padding: "1%"}}>
+        <Row style={{marginTop: "1%"}}>
+          <Col span={3}>
+            <Skeleton.Avatar size={48} />
+          </Col>
+          <Col span={21}>
+            <div className="universal-left" style={{ marginBottom: "7px" }}>
+              <Skeleton.Input size="small" active style={{ width: "25vw" }} />
+            </div>
+            <div className="universal-left" style={{ marginBottom: "0px", width: "15vw" }}>
+              <Skeleton active title={false} paragraph={{rows: 1}} />
             </div>
           </Col>
         </Row>
