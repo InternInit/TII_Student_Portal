@@ -9,7 +9,7 @@ import { Layout, Divider } from "antd";
 
 //Custom Components
 import DashboardNavBar from "./dashboardNavBar.jsx";
-import AddCompanies from "./AddCompanies.js";
+import AddCompanies from "./add-companies/AddCompanies";
 import CompanyInformation from "./CompanyInformation.js";
 import ApplySkills from "./apply-skills/applySkills";
 import MyInternships from "./my-internships/myInternships";

@@ -2,14 +2,13 @@ import React from "react";
 import styled from "styled-components";
 
 import { Input } from "antd";
-import SearchCompanytab from "./SearchCompanytab.js";
+import SearchCompanytab from "../SearchCompanytab.js";
 import { Collapse, Checkbox, Pagination, Form, Button } from "antd";
 import { Col as AntCol, Row as AntRow, Modal, notification } from "antd";
 import QueueAnim from "rc-queue-anim";
 import { withRouter } from "react-router";
 import { values } from "underscore";
 import { CheckOutlined } from "@ant-design/icons";
-import CompleteApplication from "./CompleteApplication.gif";
 
 const { Search } = Input;
 const { Panel } = Collapse;
