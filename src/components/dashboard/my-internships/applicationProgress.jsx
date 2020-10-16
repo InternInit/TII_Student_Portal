@@ -1,9 +1,7 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 
-import "../../App.scss";
-import "./dashboard.scss";
-import "antd/dist/antd.css";
+import "../dashboard.scss";
 
 import Checklist from "./checklist.jsx";
 import { Progress, Button, Row, Col } from "antd";
@@ -11,7 +9,7 @@ import { CheckCircleTwoTone } from "@ant-design/icons";
 import { withRouter } from "react-router";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { updateCompletionState } from "../../redux/actions";
+import { updateCompletionState } from "../../../redux/actions";
 
 /*
 

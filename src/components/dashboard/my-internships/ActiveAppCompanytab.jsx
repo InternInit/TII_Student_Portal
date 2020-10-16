@@ -5,7 +5,7 @@ import {
   CompanyTitle,
   JobTitle,
   TabContainer,
-} from "./styledDashboardComponents";
+} from "../styledDashboardComponents";
 
 import { Link } from "react-router-dom";
 
@@ -57,6 +57,7 @@ function ActiveAppCompanytab(props) {
         <div key={index}>
           <Link
             to={`/dashboard/add-companies/company-information/${companyId}`}
+            style={{ color: 'inherit', textDecoration: 'inherit' }}
           >
             <TabContainer
               style={{ display: "flex", justifyContent: "space-evenly" }}

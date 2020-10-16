@@ -2,14 +2,16 @@ import React from "react";
 import styled from "styled-components";
 
 import { Input } from "antd";
-import SearchCompanytab from "./SearchCompanytab.js";
+import SearchCompanytab from "../SearchCompanytab.js";
+import AddCompaniesSkeleton from "./AddCompaniesSkeleton";
 import { Collapse, Checkbox, Pagination, Form, Button } from "antd";
 import { Col as AntCol, Row as AntRow, Modal, notification } from "antd";
 import QueueAnim from "rc-queue-anim";
 import { withRouter } from "react-router";
 import { values } from "underscore";
 import { CheckOutlined } from "@ant-design/icons";
-import CompleteApplication from "./CompleteApplication.gif";
+import { connect } from "react-redux";
+
 
 const { Search } = Input;
 const { Panel } = Collapse;
@@ -56,6 +58,12 @@ const industry = [
 ];
 
 let Info = [];
+
+const mapStateToProps = (state) => {
+  return {
+    finishedLoading: state.finishedLoading,
+  };
+};
 
 class AddCompanies extends React.Component {
   constructor(props) {
@@ -134,7 +142,9 @@ class AddCompanies extends React.Component {
     );
 
     return (
-      <div style={{ paddingBottom: "50%" }}>
+      <>
+      {this.props.finishedLoading ? (
+        <div style={{ paddingBottom: "50%" }}>
         {this.props.version < 1 ? (
           <ModuleContainer>
             <AntRow>
@@ -345,6 +355,8 @@ class AddCompanies extends React.Component {
           </React.Fragment>
         )}
       </div>
+      ) : (<AddCompaniesSkeleton />)}
+      </>
     );
   }
 
@@ -414,4 +426,4 @@ class AddCompanies extends React.Component {
     }
   };
 }
-export default withRouter(AddCompanies);
+export default withRouter(connect(mapStateToProps)(AddCompanies));
