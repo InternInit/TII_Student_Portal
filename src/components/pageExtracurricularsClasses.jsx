@@ -115,11 +115,21 @@ const boldify = (text, info = false, popoverText) =>
   );
 
 class PageExtracurricularsClasses extends Component {
+  formRef = React.createRef();
+
+  componentDidMount() {
+    this.getUserData();
+  }
+
+  componentWillUnmount() {
+    this.updateFieldData();
+  }
+
   render() {
     return (
       <div style={{ width: "100%", marginTop: "40px" }}>
         <h1 className="apply-header twentyEightFont">Activities and Classes</h1>
-        <Form layout="vertical" align="left">
+        <Form layout="vertical" align="left" ref={this.formRef}>
           <h1 className="apply-header twentyFourFont universal-left mt-2">
             Activities
           </h1>
@@ -156,12 +166,42 @@ class PageExtracurricularsClasses extends Component {
       </div>
     );
   }
+
+  updateFieldData = async () => {
+    const values = await this.formRef.current.getFieldsValue();
+    console.log(values);
+    //this.props.updateData(values, "4");
+  };
+
+  getUserData = async () => {
+    let token = await this.props.getJwt();
+    fetch("/api/get_user_data", {
+      method: "POST",
+      headers: {
+        Authorization: "Bearer " + JSON.parse(JSON.stringify(token)),
+      },
+      body: 3,
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        let parsedRecv = JSON.parse(data);
+        let parsedData = parsedRecv.formData;
+        if (parsedRecv !== "No Info") {
+          try {
+            this.setState({ loaded: true });
+            console.log(parsedData);
+            this.formRef.current.setFieldsValue(parsedData);
+          } catch (e) {}
+        }
+        this.setState({ loaded: true });
+      });
+  };
 }
 
 const Extracurriculars = (props) => {
   return (
     <React.Fragment>
-      <Form.List name="extracurriculars" key="extracurriculars">
+      <Form.List name="Extracurriculars" key="extracurriculars">
         {(fields, { add, remove }) => {
           return (
             <div>
@@ -193,7 +233,7 @@ const Extracurriculars = (props) => {
                           <Form.Item
                             {...field}
                             className="universal-left"
-                            name={[field.name, "activityType"]}
+                            name={[field.name, "Activity Type"]}
                             fieldKey={[field.fieldKey, "activityType"]}
                             label={boldify("Activity Type")}
                           >
@@ -219,7 +259,7 @@ const Extracurriculars = (props) => {
                           <Form.Item
                             {...field}
                             className="universal-left"
-                            name={[field.name, "years-involved"]}
+                            name={[field.name, "Years Involved"]}
                             fieldKey={[field.fieldKey, "years-involved"]}
                             label={boldify("Years Involved")}
                           >
@@ -229,7 +269,7 @@ const Extracurriculars = (props) => {
                         <Col span={12}>
                           <Form.Item
                             {...field}
-                            name={[field.name, "position"]}
+                            name={[field.name, "Position/Title"]}
                             fieldKey={[field.fieldKey, "position"]}
                             label={boldify("Position/Title")}
                           >
@@ -241,7 +281,7 @@ const Extracurriculars = (props) => {
                         <Col span={24}>
                           <Form.Item
                             {...field}
-                            name={[field.name, "description"]}
+                            name={[field.name, "Description"]}
                             fieldKey={[field.fieldKey, "description"]}
                             label={boldify("Activity Description")}
                             extra="150 characters"
@@ -292,7 +332,7 @@ const Extracurriculars = (props) => {
 const Courses = (props) => {
   return (
     <React.Fragment>
-      <Form.List name="courses" key="courses">
+      <Form.List name="Courses" key="courses">
         {(fields, { add, remove }) => {
           return (
             <div>
@@ -324,7 +364,7 @@ const Courses = (props) => {
                           <Form.Item
                             {...field}
                             className="universal-left"
-                            name={[field.name, "courseLevel"]}
+                            name={[field.name, "Course Level"]}
                             fieldKey={[field.fieldKey, "courseLevel"]}
                             label={boldify("Course Level")}
                           >
@@ -349,7 +389,7 @@ const Courses = (props) => {
                         <Col span={18}>
                           <Form.Item
                             {...field}
-                            name={[field.name, "position"]}
+                            name={[field.name, "Position"]}
                             fieldKey={[field.fieldKey, "position"]}
                             label={boldify("Course Title")}
                           >
