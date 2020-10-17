@@ -111,7 +111,7 @@ const percentComplete = [
     "#fcffe0",
     "#a0f2da",
     "activityClassChecklist",
-    "activity-class",
+    "extracurriculars-and-classes",
   ],
   ["References", "#f9f0ff", "#722ed1", "referencesChecklist", "references"],
 ];
@@ -134,6 +134,7 @@ class ApplicationProgress extends Component {
       internshipInfoChecklist: false,
       personalChecklist: false,
       essayChecklist: false,
+      activityClassChecklist: false,
       referencesChecklist: false,
     };
   }
@@ -170,6 +171,7 @@ class ApplicationProgress extends Component {
         this.setState({
           activityClassChecklist: !activityClassChecklist,
         });
+        break;
       case "References":
         this.setState({
           referencesChecklist: !referencesChecklist,
