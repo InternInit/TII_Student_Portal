@@ -897,36 +897,6 @@ class PageInternshipInformation extends Component {
 
               {/**
                *
-               * Relevant Courses
-               *
-               */}
-              <Row gutter={formGutter}>
-                <Col span={standardSpan}>
-                  <Form.Item {...formItemProps.courses}>
-                    <Input.TextArea
-                      placeholder="(e.g.) Business Communications, AP Computer Science, etc."
-                      style={{ height: "100px" }}
-                    />
-                  </Form.Item>
-                </Col>
-              </Row>
-
-              {/**
-            Extracurriculars
-            */}
-              <Row gutter={formGutter}>
-                <Col span={standardSpan}>
-                  <Form.Item {...formItemProps.extracurriculars}>
-                    <Input.TextArea
-                      placeholder="(e.g.) Speech and Debate (3), DECA (4), HOSA (2), Student Council (2)"
-                      style={{ height: "100px" }}
-                    />
-                  </Form.Item>
-                </Col>
-              </Row>
-
-              {/**
-               *
                * Day and Time Willing to Work
                *
                */}

@@ -420,8 +420,6 @@ class App extends Component {
         { key: "Zip Code", completed: false },
         { key: "Year Of Graduation", completed: false },
         { key: "Unweighted GPA", completed: false },
-        { key: "Relevant Courses", completed: false },
-        { key: "Extracurriculars", completed: false },
         { key: "Willing Work Days", completed: false },
         { key: "Willing Work Times", completed: false },
         { key: "Starting/Ending Dates", completed: false },
