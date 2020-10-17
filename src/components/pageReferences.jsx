@@ -11,7 +11,6 @@ import QueueAnim from "rc-queue-anim";
 import { InfoCircle } from "./StyledComponents/InternshipForms";
 import { GoX } from "react-icons/go";
 
-
 import "../App.scss";
 
 //React Routing
@@ -225,7 +224,7 @@ class PageReferences extends Component {
                             <Form.Item
                               required={false}
                               key={field.key}
-                              style={{marginBottom: "0px"}}
+                              style={{ marginBottom: "0px" }}
                             >
                               {/**
                                *
@@ -462,11 +461,11 @@ class PageReferences extends Component {
     let completionPercentage = parseFloat(
       (completedCount / Object.keys(allValues).length).toFixed(2)
     );
-    if (completionPercentage !== this.props.completionState[3])
-      this.props.updateCompletionState(3, completionPercentage);
+    if (completionPercentage !== this.props.completionState[4])
+      this.props.updateCompletionState(4, completionPercentage);
 
-    if (!_.isEqual(checklist, this.props.completionChecklist[3]))
-      this.props.updateCompletionChecklist(3, checklist);
+    if (!_.isEqual(checklist, this.props.completionChecklist[4]))
+      this.props.updateCompletionChecklist(4, checklist);
   };
 
   /**
@@ -476,11 +475,11 @@ class PageReferences extends Component {
    */
   onFinish = (values) => {
     console.log("FinishRefPage:", values);
-    this.props.updateCompletionState(3, 1.0);
+    this.props.updateCompletionState(4, 1.0);
 
     let status = this.props.completionState;
 
-    if (_.isEqual(status, [1, 1, 1, 1])) {
+    if (_.isEqual(status, [1, 1, 1, 1, 1])) {
       // checks to see if all forms are completed
       //this.setState({ CanSubmit: true }); //sets canSubmit to true
       notification.open({
@@ -489,7 +488,7 @@ class PageReferences extends Component {
         description: "Your results have been submitted",
         icon: <CheckOutlined style={{ color: "green" }} />,
       });
-      this.props.onSubmit(values, "3");
+      this.props.onSubmit(values, "4");
       this.routeChange("/submission-success");
     } else {
       notification.open({
@@ -508,7 +507,7 @@ class PageReferences extends Component {
   updateFieldData = async () => {
     const values = await this.formRef.current.getFieldsValue();
 
-    this.props.updateData(values, "3");
+    this.props.updateData(values, "4");
   };
 
   /**
@@ -517,7 +516,7 @@ class PageReferences extends Component {
    *
    */
   backHandler = () => {
-    this.props.updateData(this.formRef.current.getFieldsValue(), "3");
+    this.props.updateData(this.formRef.current.getFieldsValue(), "4");
   };
 
   /**
@@ -543,7 +542,7 @@ class PageReferences extends Component {
       headers: {
         Authorization: "Bearer " + JSON.parse(JSON.stringify(token)),
       },
-      body: 3,
+      body: 4,
     })
       .then((response) => response.json())
       .then((data) => {
