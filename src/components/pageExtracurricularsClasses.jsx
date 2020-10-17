@@ -146,6 +146,7 @@ class PageExtracurricularsClasses extends Component {
           align="left"
           ref={this.formRef}
           onValuesChange={this.onValuesChange}
+          onFinish={this.onFinish}
         >
           <h1 className="apply-header twentyFourFont universal-left mt-2">
             Activities
@@ -202,7 +203,7 @@ class PageExtracurricularsClasses extends Component {
         } else {
           item.completed = false;
         }
-        //console.log(item)
+        //console.log(item);
         checklist.push(item);
       }
     }
@@ -219,6 +220,12 @@ class PageExtracurricularsClasses extends Component {
   updateFieldData = async () => {
     const values = await this.formRef.current.getFieldsValue();
     console.log(values);
+    this.props.updateData(values, "3");
+  };
+
+  onFinish = (values) => {
+    console.log("FinishECPage:", values);
+    this.props.updateCompletionState(3, 1.0);
     this.props.updateData(values, "3");
   };
 
