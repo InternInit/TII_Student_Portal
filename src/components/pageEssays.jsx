@@ -545,14 +545,30 @@ class PageEssays extends React.Component {
     let allValues = this.formRef.current.getFieldsValue();
     delete allValues["Cover Letter"];
     delete allValues.Portfolio;
+    try {
+      this.setState({
+        essayOneLen: allValues["Why This Industry Essay"].length,
+      });
+    } catch (e) {
+      this.setState({
+        essayOneLen: 0,
+      });
+    }
+    try {
+      this.setState({
+        essayTwoLen: allValues["Leadership Roles Essay"].length,
+      });
+    } catch (e) {
+      this.setState({
+        essayTwoLen: 0,
+      });
+    }
 
-    this.setState({
-      essayOneLen: allValues["Why This Industry Essay"].length,
-    });
-    this.setState({
-      essayTwoLen: allValues["Leadership Roles Essay"].length,
-    });
-    this.setState({ essayThreeLen: allValues["Extra Essay"].length });
+    try {
+      this.setState({ essayThreeLen: allValues["Extra Essay"].length });
+    } catch (e) {
+      this.setState({ essayThreeLen: 0 });
+    }
 
     let completedCount = 0;
     let checklist = [];
