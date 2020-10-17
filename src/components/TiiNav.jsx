@@ -299,8 +299,10 @@ class TiiNav extends React.Component {
       this.props.clickTwo();
     } else if (path === "/apply/written-work") {
       this.props.clickThree();
-    } else if (path === "/apply/references") {
+    } else if (path === "/apply/extracurriculars-and-classes") {
       this.props.clickFour();
+    } else if (path === "/apply/references") {
+      this.props.clickFive();
     }
     this.props.history.push(path);
   };

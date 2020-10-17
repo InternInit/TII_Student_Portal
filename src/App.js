@@ -626,6 +626,7 @@ class App extends Component {
         clickTwo={this.clickTwo}
         clickThree={this.clickThree}
         clickFour={this.clickFour}
+        clickFive={this.clickFive}
         highlightKey={highlightKey}
         completionState={this.props.completionState}
         onSubmit={this.onSubmit}
