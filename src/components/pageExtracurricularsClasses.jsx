@@ -170,7 +170,7 @@ class PageExtracurricularsClasses extends Component {
   updateFieldData = async () => {
     const values = await this.formRef.current.getFieldsValue();
     console.log(values);
-    //this.props.updateData(values, "4");
+    this.props.updateData(values, "3");
   };
 
   getUserData = async () => {
