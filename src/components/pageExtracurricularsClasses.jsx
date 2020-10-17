@@ -130,6 +130,7 @@ class PageExtracurricularsClasses extends Component {
   formRef = React.createRef();
 
   componentDidMount() {
+    window.scrollTo(0, 0);
     this.getUserData();
   }
 
