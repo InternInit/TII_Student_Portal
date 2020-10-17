@@ -9,7 +9,7 @@ import {
   EditOutlined,
   ContainerOutlined,
   TeamOutlined,
-  CompassOutlined
+  CompassOutlined,
 } from "@ant-design/icons";
 
 //React Routing
@@ -184,7 +184,9 @@ class TiiNav extends React.Component {
               this.routeChange("/apply/extracurriculars-and-classes");
             }}
           >
-            {this.props.completionState[4] == 1 ? CheckMark : ExtracurricularsClassesButton}
+            {this.props.completionState[3] == 1
+              ? CheckMark
+              : ExtracurricularsClassesButton}
             <Router>
               <span>Actities/Classes</span>
             </Router>
@@ -201,7 +203,7 @@ class TiiNav extends React.Component {
               this.routeChange("/apply/references");
             }}
           >
-            {this.props.completionState[3] == 1 ? CheckMark : ReferencesButton}
+            {this.props.completionState[4] == 1 ? CheckMark : ReferencesButton}
             <Router>
               <span>References</span>
             </Router>
@@ -220,7 +222,7 @@ class TiiNav extends React.Component {
               alignContent: "center",
               justifyContent: "center",
             }}
-            key="5"
+            key="6"
             onClick={this.handleSubmit} //checks other states before allowing submit
           >
             {SubmitButton}
@@ -239,7 +241,7 @@ class TiiNav extends React.Component {
   handleSubmit = () => {
     let status = this.props.completionState;
 
-    if (_.isEqual(status, [1, 1, 1, 1])) {
+    if (_.isEqual(status, [1, 1, 1, 1, 1])) {
       // checks to see if all forms are completed
       //this.setState({ CanSubmit: true }); //sets canSubmit to true
       notification.open({
