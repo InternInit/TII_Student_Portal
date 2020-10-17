@@ -17,26 +17,27 @@ const defaultState = [
     { key: "Willing Work Times", completed: false },
     { key: "Starting/Ending Dates", completed: false },
     { key: "Paid/Unpaid Preference", completed: false },
-    { key: "Resume", completed: false }
+    { key: "Resume", completed: false },
   ],
   [
     { key: "Gender", completed: false },
     { key: "Age", completed: false },
-    { key: "Education", completed: false }
+    { key: "Education", completed: false },
   ],
   [
     { key: "Why This Industry Essay", completed: false },
     { key: "Leadership Roles Essay", completed: false },
     { key: "Extra Essay", completed: false },
-    { key: "Cover Letter", completed: false }
+    { key: "Cover Letter", completed: false },
   ],
-  [{ key: "Reference", completed: false }]
+  [],
+  [{ key: "Reference", completed: false }],
 ];
 
 const completionChecklistReducer = (state = defaultState, action) => {
   switch (action.type) {
     case "UPDATE_COMPLETION_CHECKLIST":
-      let newState = state.slice()
+      let newState = state.slice();
       newState[action.page] = action.completionChecklist;
       return newState;
     case "BATCH_UPDATE_COMPLETION_CHECKLIST":

@@ -54,7 +54,7 @@ import {
   updateCompletionState,
   batchUpdateCompletionState,
   batchUpdateCompletionChecklist,
-  finishLoading
+  finishLoading,
 } from "./redux/actions";
 
 import devConfigurationFile from "./configuration_dev.json";
@@ -119,7 +119,7 @@ const mapDispatchToProps = {
   updateCompletionState,
   batchUpdateCompletionState,
   batchUpdateCompletionChecklist,
-  finishLoading
+  finishLoading,
 };
 
 class App extends Component {
@@ -439,6 +439,7 @@ class App extends Component {
         { key: "Extra Essay", completed: false },
         { key: "Cover Letter", completed: false },
       ],
+      [],
       [{ key: "Reference", completed: false }],
     ];
 
@@ -461,7 +462,7 @@ class App extends Component {
           this.props.updateVersion(parsedRecv.version);
           this.props.updateDisabledIndustries(parsedRecv.checkedIndustries);
         } else {
-          this.props.batchUpdateCompletionState([0, 0, 0, 0]);
+          this.props.batchUpdateCompletionState([0, 0, 0, 0, 0]);
           this.props.batchUpdateCompletionChecklist(defaultChecklist);
           this.props.updateVersion(0);
         }
