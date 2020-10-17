@@ -114,6 +114,18 @@ const boldify = (text, info = false, popoverText) =>
     </React.Fragment>
   );
 
+const mapStateToProps = (state) => {
+  return {
+    completionState: state.completionState,
+    completionChecklist: state.completionChecklist,
+  };
+};
+
+const mapDispatchToProps = {
+  updateCompletionState,
+  updateCompletionChecklist,
+};
+
 class PageExtracurricularsClasses extends Component {
   formRef = React.createRef();
 
@@ -129,7 +141,12 @@ class PageExtracurricularsClasses extends Component {
     return (
       <div style={{ width: "100%", marginTop: "40px" }}>
         <h1 className="apply-header twentyEightFont">Activities and Classes</h1>
-        <Form layout="vertical" align="left" ref={this.formRef}>
+        <Form
+          layout="vertical"
+          align="left"
+          ref={this.formRef}
+          onValuesChange={this.onValuesChange}
+        >
           <h1 className="apply-header twentyFourFont universal-left mt-2">
             Activities
           </h1>
@@ -166,6 +183,38 @@ class PageExtracurricularsClasses extends Component {
       </div>
     );
   }
+
+  onValuesChange = () => {
+    let allValues = this.formRef.current.getFieldsValue();
+
+    let completedCount = 0;
+    let checklist = [];
+    for (var field in allValues) {
+      if (allValues.hasOwnProperty(field)) {
+        let item = {};
+        item.key = field;
+        if (
+          typeof allValues[field] !== "undefined" &&
+          allValues[field] !== ""
+        ) {
+          completedCount++;
+          item.completed = true;
+        } else {
+          item.completed = false;
+        }
+        //console.log(item)
+        checklist.push(item);
+      }
+    }
+    let completionPercentage = parseFloat(
+      (completedCount / Object.keys(allValues).length).toFixed(2)
+    );
+    if (completionPercentage !== this.props.completionState[3])
+      this.props.updateCompletionState(3, completionPercentage);
+
+    if (!_.isEqual(checklist, this.props.completionChecklist[3]))
+      this.props.updateCompletionChecklist(3, checklist);
+  };
 
   updateFieldData = async () => {
     const values = await this.formRef.current.getFieldsValue();
@@ -431,4 +480,6 @@ const Courses = (props) => {
   );
 };
 
-export default withRouter(PageExtracurricularsClasses);
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(PageExtracurricularsClasses)
+);

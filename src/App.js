@@ -439,7 +439,16 @@ class App extends Component {
         { key: "Extra Essay", completed: false },
         { key: "Cover Letter", completed: false },
       ],
-      [],
+      [
+        {
+          key: "Extracurriculars",
+          completed: false,
+        },
+        {
+          key: "Courses",
+          completed: false,
+        },
+      ],
       [{ key: "Reference", completed: false }],
     ];
 
