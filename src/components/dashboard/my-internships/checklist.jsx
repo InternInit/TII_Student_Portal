@@ -111,6 +111,8 @@ function parseChecklist(checklist, page) {
       parsedChecklist = newChecklist;
       break;
     case 3:
+      break;
+    case 4:
       parsedChecklist[0].key = "Reference Contact Information";
       break;
     default:
