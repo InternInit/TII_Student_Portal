@@ -134,8 +134,8 @@ class PageReferences extends Component {
 
   constructor(props) {
     super(props);
-    this.routeChange = this.routeChange.bind(this);
   }
+
   render() {
     return (
       <div style={{ width: "100%", marginTop: "40px" }}>
@@ -421,7 +421,7 @@ class PageReferences extends Component {
                   type="primary"
                   htmlType="submit"
                 >
-                  Submit
+                  <Link to="/submission-success">Submit</Link>
                 </Button>
               </Form.Item>
             </Form>
@@ -489,7 +489,6 @@ class PageReferences extends Component {
         icon: <CheckOutlined style={{ color: "green" }} />,
       });
       this.props.onSubmit(values, "4");
-      this.routeChange("/submission-success");
     } else {
       notification.open({
         message: "Failed.",
@@ -517,17 +516,6 @@ class PageReferences extends Component {
    */
   backHandler = () => {
     this.props.updateData(this.formRef.current.getFieldsValue(), "4");
-  };
-
-  /**
-   *
-   * Changing routes (React Router)
-   *
-   */
-  routeChange = (path) => {
-    console.log(path);
-    this.props.clickThree();
-    this.props.history.push(path);
   };
 
   /**
