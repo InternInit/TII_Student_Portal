@@ -43,7 +43,6 @@ const { useBreakpoint } = Grid;
 
 //Formatting
 const formGutter = [16, 4];
-const standardSpan = 24;
 
 //items
 const activityCategories = [
@@ -113,6 +112,41 @@ const boldify = (text, info = false, popoverText) =>
       </Popover>
     </React.Fragment>
   );
+
+  const formItemProps = {
+    totalForm: {
+      layout: "vertical",
+      align: "left",
+      className: "pageReferences",
+    },
+    inputField: function (
+      required,
+      field,
+      label,
+      name,
+      validationType,
+      pattern,
+      popoverText,
+      showPopOver
+    ) {
+      return {
+        key: [field.fieldKey, name],
+        label: boldify(label, showPopOver, popoverText),
+        name: [field.name, name],
+        rules: validationRules(
+          required,
+          label,
+          validationType ? validationType : "string",
+          pattern
+        ),
+      };
+    },
+    addButton: {
+      type: "dashed",
+      size: "large",
+      style: { width: "100%", marginTop: "10px", marginBottom: "30px" },
+    },
+  };
 
 const mapStateToProps = (state) => {
   return {
@@ -293,6 +327,12 @@ const Extracurriculars = (props) => {
                             name={[field.name, "Activity Type"]}
                             fieldKey={[field.fieldKey, "activityType"]}
                             label={boldify("Activity Type")}
+                            {...formItemProps.inputField(
+                              true,
+                              field,
+                              "Activity Type",
+                              "activityType"
+                            )}
                           >
                             <Select
                               showSearch
@@ -317,8 +357,16 @@ const Extracurriculars = (props) => {
                             {...field}
                             className="universal-left"
                             name={[field.name, "Years Involved"]}
-                            fieldKey={[field.fieldKey, "years-involved"]}
+                            fieldKey={[field.fieldKey, "yearsInvolved"]}
                             label={boldify("Years Involved")}
+                            {...formItemProps.inputField(
+                              true,
+                              field,
+                              "Years Involved",
+                              "yearsInvolved",
+                              "number",
+                              null
+                            )}
                           >
                             <InputNumber style={{ width: "100%" }} />
                           </Form.Item>
@@ -329,6 +377,12 @@ const Extracurriculars = (props) => {
                             name={[field.name, "Position/Title"]}
                             fieldKey={[field.fieldKey, "position"]}
                             label={boldify("Position/Title")}
+                            {...formItemProps.inputField(
+                              true,
+                              field,
+                              "Position/Title",
+                              "Position/Title"
+                            )}
                           >
                             <Input placeholder="Position" />
                           </Form.Item>
@@ -424,6 +478,12 @@ const Courses = (props) => {
                             name={[field.name, "Course Level"]}
                             fieldKey={[field.fieldKey, "courseLevel"]}
                             label={boldify("Course Level")}
+                            {...formItemProps.inputField(
+                              true,
+                              field,
+                              "Course Level",
+                              "courseLevel"
+                            )}
                           >
                             <Select
                               showSearch
@@ -446,9 +506,15 @@ const Courses = (props) => {
                         <Col span={18}>
                           <Form.Item
                             {...field}
-                            name={[field.name, "Position"]}
-                            fieldKey={[field.fieldKey, "position"]}
+                            name={[field.name, "courseTitle"]}
+                            fieldKey={[field.fieldKey, "courseTitle"]}
                             label={boldify("Course Title")}
+                            {...formItemProps.inputField(
+                              true,
+                              field,
+                              "Course Title",
+                              "courseTitle"
+                            )}
                           >
                             <Input placeholder="Course Title" />
                           </Form.Item>
