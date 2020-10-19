@@ -136,71 +136,50 @@ class PageEssays extends React.Component {
          */}
         {!this.state.loaded ? (
           <React.Fragment>
-            <div style={{ marginBottom: "40px" }}>
+            <div className="mb-2" style={{ marginBottom: "40px" }}>
               <Skeleton.Input style={{ width: "25vw" }} size="default" />
             </div>
-            <Row gutter={formGutter}>
-              <Col span={halfSpan}>
-                <Skeleton.Input style={{ width: "25vw" }} size="small" />
-              </Col>
-            </Row>
+            <div>
+              <Skeleton title={false} paragraph={{ rows: 1 }} />
+            </div>
+            <div className="universal-left mb-1">
+              <Skeleton.Input style={{ width: "25vw" }} size="small" />
+            </div>
 
-            <Row gutter={formGutter}>
-              <Col span={standardSpan}>
-                <Skeleton.Input style={{ width: "25vw" }} size="small" />
-                <Skeleton.Input style={{ width: "25vw" }} size="small" />
-                <Skeleton.Input style={{ width: "25vw" }} size="small" />
-                <Skeleton.Input style={{ width: "25vw" }} size="small" />
-                <Skeleton.Input style={{ width: "25vw" }} size="small" />
-                <Skeleton.Input style={{ width: "25vw" }} size="small" />
-                <Skeleton.Input style={{ width: "25vw" }} size="small" />
-                <Skeleton.Input style={{ width: "25vw" }} size="small" />
-                <Skeleton.Input style={{ width: "25vw" }} size="small" />
-                <Skeleton.Input style={{ width: "25vw" }} size="small" />
-              </Col>
-            </Row>
+            <div>
+              <Skeleton
+                className="page-essay-input-skeleton"
+                title={false}
+                paragraph={{ rows: 1, width: "100%" }}
+                style={{ marginTop: "0px" }}
+              />
+            </div>
 
-            <Row gutter={formGutter}>
-              <Col span={halfSpan}>
-                <Skeleton.Input style={{ width: "25vw" }} size="small" />
-              </Col>
-            </Row>
+            <div className="universal-left mb-1 mt-2">
+              <Skeleton.Input style={{ width: "25vw" }} size="small" />
+            </div>
 
-            <Row gutter={formGutter}>
-              <Col span={standardSpan}>
-                <Skeleton.Input style={{ width: "25vw" }} size="small" />
-                <Skeleton.Input style={{ width: "25vw" }} size="small" />
-                <Skeleton.Input style={{ width: "25vw" }} size="small" />
-                <Skeleton.Input style={{ width: "25vw" }} size="small" />
-                <Skeleton.Input style={{ width: "25vw" }} size="small" />
-                <Skeleton.Input style={{ width: "25vw" }} size="small" />
-                <Skeleton.Input style={{ width: "25vw" }} size="small" />
-                <Skeleton.Input style={{ width: "25vw" }} size="small" />
-                <Skeleton.Input style={{ width: "25vw" }} size="small" />
-                <Skeleton.Input style={{ width: "25vw" }} size="small" />
-              </Col>
-            </Row>
+            <div>
+              <Skeleton
+                className="page-essay-input-skeleton"
+                title={false}
+                paragraph={{ rows: 1, width: "100%" }}
+                style={{ marginTop: "0px" }}
+              />
+            </div>
 
-            <Row gutter={formGutter}>
-              <Col span={halfSpan}>
-                <Skeleton.Input style={{ width: "25vw" }} size="small" />
-              </Col>
-            </Row>
+            <div className="universal-left mb-1 mt-2">
+              <Skeleton.Input style={{ width: "25vw" }} size="small" />
+            </div>
 
-            <Row gutter={formGutter}>
-              <Col span={standardSpan}>
-                <Skeleton.Input style={{ width: "25vw" }} size="small" />
-                <Skeleton.Input style={{ width: "25vw" }} size="small" />
-                <Skeleton.Input style={{ width: "25vw" }} size="small" />
-                <Skeleton.Input style={{ width: "25vw" }} size="small" />
-                <Skeleton.Input style={{ width: "25vw" }} size="small" />
-                <Skeleton.Input style={{ width: "25vw" }} size="small" />
-                <Skeleton.Input style={{ width: "25vw" }} size="small" />
-                <Skeleton.Input style={{ width: "25vw" }} size="small" />
-                <Skeleton.Input style={{ width: "25vw" }} size="small" />
-                <Skeleton.Input style={{ width: "25vw" }} size="small" />
-              </Col>
-            </Row>
+            <div>
+              <Skeleton
+                className="page-essay-input-skeleton"
+                title={false}
+                paragraph={{ rows: 1, width: "100%" }}
+                style={{ marginTop: "0px" }}
+              />
+            </div>
 
             <Row gutter={formGutter}>
               <Col span={standardSpan}>
@@ -208,18 +187,25 @@ class PageEssays extends React.Component {
               </Col>
             </Row>
 
-            <Row gutter={formGutter}>
-              <Col span={halfSpan}>
-                <Skeleton.Input style={{ width: "25vw" }} size="small" />
-                <Skeleton.Input style={{ width: "25vw" }} size="small" />
-                <Skeleton.Input style={{ width: "25vw" }} size="small" />
-              </Col>
-              <Col span={halfSpan}>
-                <Skeleton.Input style={{ width: "25vw" }} size="small" />
-                <Skeleton.Input style={{ width: "25vw" }} size="small" />
-                <Skeleton.Input style={{ width: "25vw" }} size="small" />
-              </Col>
-            </Row>
+            <div className="mb-3">
+              <Row style={{ justifyContent: "center" }}>
+                <Col span={8} style={{ marginRight: "5vw" }}>
+                  <Skeleton
+                    className="page-essay-upload-skeleton"
+                    title={false}
+                    paragraph={{ rows: 1, width: "100%" }}
+                  />
+                </Col>
+                <Col span={8}>
+                  <Skeleton
+                    className="page-essay-upload-skeleton"
+                    title={false}
+                    paragraph={{ rows: 1, width: "100%" }}
+                    style={{ marginTop: "0px" }}
+                  />
+                </Col>
+              </Row>
+            </div>
 
             {/**
              *
@@ -227,10 +213,19 @@ class PageEssays extends React.Component {
              *
              */}
             <Form.Item>
-              <div style={{ display: "flex", justifyContent: "space-between" }}>
-                <SkeletonButton />
-                <SkeletonButton />
-              </div>
+              <Button
+                className="back-button"
+                type="primary"
+                htmlType="button"
+                onClick={this.backHandler}
+              >
+                <Link to="/apply/personal">Previous</Link>
+              </Button>
+              <Button className="next-button" type="primary" htmlType="submit">
+                <Link to="/apply/extracurriculars-and-classes">
+                  Save and Continue
+                </Link>
+              </Button>
             </Form.Item>
           </React.Fragment>
         ) : (
