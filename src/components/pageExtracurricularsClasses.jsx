@@ -113,40 +113,40 @@ const boldify = (text, info = false, popoverText) =>
     </React.Fragment>
   );
 
-  const formItemProps = {
-    totalForm: {
-      layout: "vertical",
-      align: "left",
-      className: "pageReferences",
-    },
-    inputField: function (
-      required,
-      field,
-      label,
-      name,
-      validationType,
-      pattern,
-      popoverText,
-      showPopOver
-    ) {
-      return {
-        key: [field.fieldKey, name],
-        label: boldify(label, showPopOver, popoverText),
-        name: [field.name, name],
-        rules: validationRules(
-          required,
-          label,
-          validationType ? validationType : "string",
-          pattern
-        ),
-      };
-    },
-    addButton: {
-      type: "dashed",
-      size: "large",
-      style: { width: "100%", marginTop: "10px", marginBottom: "30px" },
-    },
-  };
+const formItemProps = {
+  totalForm: {
+    layout: "vertical",
+    align: "left",
+    className: "pageReferences",
+  },
+  inputField: function (
+    required,
+    field,
+    label,
+    name,
+    validationType,
+    pattern,
+    popoverText,
+    showPopOver
+  ) {
+    return {
+      key: [field.fieldKey, name],
+      label: boldify(label, showPopOver, popoverText),
+      name: [field.name, name],
+      rules: validationRules(
+        required,
+        label,
+        validationType ? validationType : "string",
+        pattern
+      ),
+    };
+  },
+  addButton: {
+    type: "dashed",
+    size: "large",
+    style: { width: "100%", marginTop: "10px", marginBottom: "30px" },
+  },
+};
 
 const mapStateToProps = (state) => {
   return {
@@ -161,6 +161,10 @@ const mapDispatchToProps = {
 };
 
 class PageExtracurricularsClasses extends Component {
+  state = {
+    loaded: false,
+  };
+
   formRef = React.createRef();
 
   componentDidMount() {
@@ -175,47 +179,133 @@ class PageExtracurricularsClasses extends Component {
   render() {
     return (
       <div style={{ width: "100%", marginTop: "40px" }}>
-        <h1 className="apply-header twentyEightFont">Activities and Classes</h1>
-        <Form
-          layout="vertical"
-          align="left"
-          ref={this.formRef}
-          onValuesChange={this.onValuesChange}
-          onFinish={this.onFinish}
-        >
-          <h1 className="apply-header twentyFourFont universal-left mt-2">
-            Activities
-          </h1>
-          <p className="mb-3" style={{ marginTop: "-12px" }}>
-            Your extracurricular activities show employers how you spend your
-            time outside of the classroom and what your interests are. These
-            activities can show a business why you are particularly qualified
-            for their specific internship position.
-          </p>
+        {this.state.loaded ? (
+          <>
+            <h1 className="apply-header twentyEightFont">
+              Activities and Classes
+            </h1>
+            <Form
+              layout="vertical"
+              align="left"
+              ref={this.formRef}
+              onValuesChange={this.onValuesChange}
+              onFinish={this.onFinish}
+            >
+              <h1 className="apply-header twentyFourFont universal-left mt-2">
+                Activities
+              </h1>
+              <p className="mb-3" style={{ marginTop: "-12px" }}>
+                Your extracurricular activities show employers how you spend
+                your time outside of the classroom and what your interests are.
+                These activities can show a business why you are particularly
+                qualified for their specific internship position.
+              </p>
 
-          <Extracurriculars />
+              <Extracurriculars />
 
-          <h1 className="apply-header twentyFourFont universal-left mt-1">
-            Classes
-          </h1>
-          <p className="mb-3" style={{ marginTop: "-12px" }}>
-            Relevant courses are any courses you've taken which you think are
-            helpful for your application to a specific position or industry.
-            Only list the classes which you have taken recently or are{" "}
-            <em>specifically</em> relevant to your industries of interest.
-          </p>
+              <h1 className="apply-header twentyFourFont universal-left mt-1">
+                Classes
+              </h1>
+              <p className="mb-3" style={{ marginTop: "-12px" }}>
+                Relevant courses are any courses you've taken which you think
+                are helpful for your application to a specific position or
+                industry. Only list the classes which you have taken recently or
+                are <em>specifically</em> relevant to your industries of
+                interest.
+              </p>
 
-          <Courses />
+              <Courses />
 
-          <Form.Item>
+              <Form.Item>
+                <Button
+                  className="back-button"
+                  type="primary"
+                  htmlType="button"
+                >
+                  <Link to="/apply/written-work">Previous</Link>
+                </Button>
+                <Button
+                  className="next-button"
+                  type="primary"
+                  htmlType="submit"
+                >
+                  <Link to="/apply/references">Save and Continue</Link>
+                </Button>
+              </Form.Item>
+            </Form>
+          </>
+        ) : (
+          <>
+            <div style={{ marginBottom: "40px" }}>
+              <Skeleton.Input style={{ width: "25vw" }} size="default" />
+            </div>
+            <div className="universal-left mb-1">
+              <Skeleton.Input style={{ width: "10vw" }} size="small" />
+            </div>
+            <Skeleton title={false} paragraph={{ rows: 2 }} />
+            <Row gutter={formGutter}>
+              <Col span={24}>
+                <Skeleton.Input style={{ width: "25vw" }} size="small" />
+                <Skeleton.Input style={{ width: "25vw" }} size="small" />
+                <Skeleton.Input style={{ width: "25vw" }} size="small" />
+                <Skeleton.Input style={{ width: "25vw" }} size="small" />
+                <Skeleton.Input style={{ width: "25vw" }} size="small" />
+                <Skeleton.Input style={{ width: "25vw" }} size="small" />
+                <Skeleton.Input style={{ width: "25vw" }} size="small" />
+                <Skeleton.Input style={{ width: "25vw" }} size="small" />
+                <Skeleton.Input style={{ width: "25vw" }} size="small" />
+                <Skeleton.Input style={{ width: "25vw" }} size="small" />
+                <Skeleton.Input style={{ width: "25vw" }} size="small" />
+                <Skeleton.Input style={{ width: "25vw" }} size="small" />
+                <Skeleton.Input style={{ width: "25vw" }} size="small" />
+                <Skeleton.Input style={{ width: "25vw" }} size="small" />
+                <Skeleton.Input style={{ width: "25vw" }} size="small" />
+                <Skeleton.Input style={{ width: "25vw" }} size="small" />
+                <Skeleton.Input style={{ width: "25vw" }} size="small" />
+                <Skeleton.Input style={{ width: "25vw" }} size="small" />
+                <Skeleton.Input style={{ width: "25vw" }} size="small" />
+                <Skeleton.Input style={{ width: "25vw" }} size="small" />
+                <Skeleton.Input style={{ width: "25vw" }} size="small" />
+                <Skeleton.Input style={{ width: "25vw" }} size="small" />
+                <Skeleton.Input style={{ width: "25vw" }} size="small" />
+                <Skeleton.Input style={{ width: "25vw" }} size="small" />
+                <Skeleton.Input style={{ width: "25vw" }} size="small" />
+                <Skeleton.Input style={{ width: "25vw" }} size="small" />
+              </Col>
+            </Row>
+
+            <div className="universal-left mb-1 mt-2">
+              <Skeleton.Input style={{ width: "10vw" }} size="small" />
+            </div>
+            <Skeleton title={false} paragraph={{ rows: 2 }} />
+            <div className="mb-5">
+              <Row gutter={formGutter}>
+                <Col span={24}>
+                  <Skeleton.Input style={{ width: "25vw" }} size="small" />
+                  <Skeleton.Input style={{ width: "25vw" }} size="small" />
+                  <Skeleton.Input style={{ width: "25vw" }} size="small" />
+                  <Skeleton.Input style={{ width: "25vw" }} size="small" />
+                  <Skeleton.Input style={{ width: "25vw" }} size="small" />
+                  <Skeleton.Input style={{ width: "25vw" }} size="small" />
+                  <Skeleton.Input style={{ width: "25vw" }} size="small" />
+                  <Skeleton.Input style={{ width: "25vw" }} size="small" />
+                  <Skeleton.Input style={{ width: "25vw" }} size="small" />
+                  <Skeleton.Input style={{ width: "25vw" }} size="small" />
+                  <Skeleton.Input style={{ width: "25vw" }} size="small" />
+                  <Skeleton.Input style={{ width: "25vw" }} size="small" />
+                  <Skeleton.Input style={{ width: "25vw" }} size="small" />
+                  <Skeleton.Input style={{ width: "25vw" }} size="small" />
+                </Col>
+              </Row>
+            </div>
             <Button className="back-button" type="primary" htmlType="button">
               <Link to="/apply/written-work">Previous</Link>
             </Button>
             <Button className="next-button" type="primary" htmlType="submit">
               <Link to="/apply/references">Save and Continue</Link>
             </Button>
-          </Form.Item>
-        </Form>
+          </>
+        )}
       </div>
     );
   }

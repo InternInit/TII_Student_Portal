@@ -143,9 +143,10 @@ class PageReferences extends Component {
 
         {!this.state.loaded ? (
           <React.Fragment>
-            <div style={{ marginBottom: "40px" }}>
+            <div className="mb-1" style={{ marginBottom: "40px" }}>
               <Skeleton.Input style={{ width: "25vw" }} size="default" />
             </div>
+            <Skeleton title={false} paragraph={{ rows: 2 }} />
 
             <Row gutter={formGutter}>
               <Col span={standardSpan}>
