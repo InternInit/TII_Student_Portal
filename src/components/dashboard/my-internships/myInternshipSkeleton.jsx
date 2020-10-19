@@ -66,6 +66,15 @@ const MyInternshipSkeleton = (props) => {
           <div className="universal-left" style={{ marginBottom: "-15px" }}>
             <Skeleton paragraph={false} title={{ width: "100%" }} active />
           </div>
+          <div className="universal-left" style={{ marginBottom: "15px" }}>
+            <Skeleton paragraph={false} title={{ width: "10%" }} active />
+          </div>
+          <div className="universal-left" style={{ marginBottom: "-1px" }}>
+            <Skeleton.Input size="medium" active style={{ width: "25vw" }} />
+          </div>
+          <div className="universal-left" style={{ marginBottom: "-15px" }}>
+            <Skeleton paragraph={false} title={{ width: "100%" }} active />
+          </div>
           <div className="universal-left" style={{ marginBottom: "-5px" }}>
             <Skeleton paragraph={false} title={{ width: "10%" }} active />
           </div>
