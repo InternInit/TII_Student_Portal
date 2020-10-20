@@ -458,7 +458,7 @@ const Extracurriculars = (props) => {
                               null
                             )}
                           >
-                            <InputNumber style={{ width: "100%" }} />
+                            <InputNumber min={0} max={8} style={{ width: "100%" }} />
                           </Form.Item>
                         </Col>
                         <Col span={12}>
