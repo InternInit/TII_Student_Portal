@@ -388,6 +388,10 @@ class PageExtracurricularsClasses extends Component {
 const Extracurriculars = (props) => {
   const [characters, setCharacters] = useState({});
 
+  useEffect(() => {
+    console.log("EC RENDERED");
+  })
+
   return (
     <React.Fragment>
       <Form.List name="Extracurriculars" key="extracurriculars">
@@ -498,7 +502,7 @@ const Extracurriculars = (props) => {
                             fieldKey={[field.fieldKey, "description"]}
                             label={boldify("Activity Description")}
                             extra={
-                              characters[index]
+                              characters[index] || characters[index] === 0
                                 ? characters[index] + "/150"
                                 : props.startingLengths[index]
                                 ? props.startingLengths[index].Description
