@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useState, useEFfect, useEffect } from "react";
 import {
   Form,
   Select,
@@ -163,6 +163,7 @@ const mapDispatchToProps = {
 class PageExtracurricularsClasses extends Component {
   state = {
     loaded: false,
+    descriptionFieldLengths: [],
   };
 
   formRef = React.createRef();
@@ -201,7 +202,9 @@ class PageExtracurricularsClasses extends Component {
                 qualified for their specific internship position.
               </p>
 
-              <Extracurriculars />
+              <Extracurriculars
+                startingLengths={this.state.descriptionFieldLengths}
+              />
 
               <h1 className="apply-header twentyFourFont universal-left mt-1">
                 Classes
@@ -372,6 +375,9 @@ class PageExtracurricularsClasses extends Component {
             this.setState({ loaded: true });
             console.log(parsedData);
             this.formRef.current.setFieldsValue(parsedData);
+            this.setState({
+              descriptionFieldLengths: parsedData.Extracurriculars,
+            });
           } catch (e) {}
         }
         this.setState({ loaded: true });
@@ -380,6 +386,8 @@ class PageExtracurricularsClasses extends Component {
 }
 
 const Extracurriculars = (props) => {
+  const [characters, setCharacters] = useState({});
+
   return (
     <React.Fragment>
       <Form.List name="Extracurriculars" key="extracurriculars">
@@ -458,7 +466,11 @@ const Extracurriculars = (props) => {
                               null
                             )}
                           >
-                            <InputNumber min={0} max={8} style={{ width: "100%" }} />
+                            <InputNumber
+                              min={0}
+                              max={8}
+                              style={{ width: "100%" }}
+                            />
                           </Form.Item>
                         </Col>
                         <Col span={12}>
@@ -485,13 +497,26 @@ const Extracurriculars = (props) => {
                             name={[field.name, "Description"]}
                             fieldKey={[field.fieldKey, "description"]}
                             label={boldify("Activity Description")}
-                            extra="150 characters"
+                            extra={
+                              characters[index]
+                                ? characters[index] + "/150"
+                                : props.startingLengths[index]
+                                ? props.startingLengths[index].Description
+                                    .length + "/150"
+                                : "0/150"
+                            }
                           >
                             <Input.TextArea
                               placeholder="Activity Description"
                               autoSize={{ minRows: 2, maxRows: 4 }}
                               maxlength={150}
                               className="universal-left"
+                              onChange={(event) =>
+                                setCharacters({
+                                  ...characters,
+                                  [index]: event.target.value.length,
+                                })
+                              }
                             />
                           </Form.Item>
                         </Col>
