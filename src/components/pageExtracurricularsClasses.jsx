@@ -390,7 +390,7 @@ const Extracurriculars = (props) => {
 
   useEffect(() => {
     console.log("EC RENDERED");
-  })
+  });
 
   return (
     <React.Fragment>
@@ -496,33 +496,16 @@ const Extracurriculars = (props) => {
                       </Row>
                       <Row gutter={formGutter} style={{ width: "100%" }}>
                         <Col span={24}>
-                          <Form.Item
-                            {...field}
-                            name={[field.name, "Description"]}
-                            fieldKey={[field.fieldKey, "description"]}
-                            label={boldify("Activity Description")}
-                            extra={
-                              characters[index] || characters[index] === 0
-                                ? characters[index] + "/150"
-                                : props.startingLengths[index]
+                          <LaglessTextArea
+                            field={field}
+                            index={index}
+                            characterCount={
+                              props.startingLengths[index]
                                 ? props.startingLengths[index].Description
-                                    .length + "/150"
-                                : "0/150"
+                                    .length
+                                : 0
                             }
-                          >
-                            <Input.TextArea
-                              placeholder="Activity Description"
-                              autoSize={{ minRows: 2, maxRows: 4 }}
-                              maxlength={150}
-                              className="universal-left"
-                              onChange={(event) =>
-                                setCharacters({
-                                  ...characters,
-                                  [index]: event.target.value.length,
-                                })
-                              }
-                            />
-                          </Form.Item>
+                          />
                         </Col>
                       </Row>
                     </Form.Item>
@@ -556,6 +539,28 @@ const Extracurriculars = (props) => {
         }}
       </Form.List>
     </React.Fragment>
+  );
+};
+
+const LaglessTextArea = ({ characterCount, field, index }) => {
+  const [characters, setCharacters] = useState(characterCount);
+
+  return (
+    <Form.Item
+      {...field}
+      name={[field.name, "Description"]}
+      fieldKey={[field.fieldKey, "description"]}
+      label={boldify("Activity Description")}
+      extra={characters + "/150"}
+    >
+      <Input.TextArea
+        placeholder="Activity Description"
+        autoSize={{ minRows: 2, maxRows: 4 }}
+        maxlength={150}
+        className="universal-left"
+        onChange={(event) => setCharacters(event.target.value.length)}
+      />
+    </Form.Item>
   );
 };
 
