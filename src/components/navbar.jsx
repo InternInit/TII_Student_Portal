@@ -18,7 +18,7 @@ import {
 import Logo from "../TII-logo.png";
 
 //React Router
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { withRouter } from "react-router";
 
 //==========================================================

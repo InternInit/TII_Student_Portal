@@ -136,7 +136,7 @@ class TiiNav extends React.Component {
               this.routeChange("/apply/internship-info");
             }}
           >
-            {this.props.completionState[0] == 1 ? CheckMark : InternButton}
+            {this.props.completionState[0] === 1 ? CheckMark : InternButton}
             <span> Internship Info</span>
           </Menu.Item>
 
@@ -151,7 +151,7 @@ class TiiNav extends React.Component {
               this.routeChange("/apply/personal");
             }}
           >
-            {this.props.completionState[1] == 1 ? CheckMark : PersonalButton}
+            {this.props.completionState[1] === 1 ? CheckMark : PersonalButton}
 
             <span> Personal</span>
           </Menu.Item>
@@ -167,7 +167,7 @@ class TiiNav extends React.Component {
               this.routeChange("/apply/written-work");
             }}
           >
-            {this.props.completionState[2] == 1 ? CheckMark : EssayButton}
+            {this.props.completionState[2] === 1 ? CheckMark : EssayButton}
             <Router>
               <span>Written Work</span>
             </Router>
@@ -184,7 +184,7 @@ class TiiNav extends React.Component {
               this.routeChange("/apply/extracurriculars-and-classes");
             }}
           >
-            {this.props.completionState[3] == 1
+            {this.props.completionState[3] === 1
               ? CheckMark
               : ExtracurricularsClassesButton}
             <Router>
@@ -203,7 +203,7 @@ class TiiNav extends React.Component {
               this.routeChange("/apply/references");
             }}
           >
-            {this.props.completionState[4] == 1 ? CheckMark : ReferencesButton}
+            {this.props.completionState[4] === 1 ? CheckMark : ReferencesButton}
             <Router>
               <span>References</span>
             </Router>
