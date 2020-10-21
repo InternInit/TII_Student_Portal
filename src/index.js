@@ -7,8 +7,7 @@ import * as Sentry from "@sentry/browser";
 import { createStore, applyMiddleware } from "redux";
 import rootReducer from "./redux/reducers";
 import { Provider } from "react-redux";
-import logger from 'redux-logger'
-
+import logger from "redux-logger";
 
 if (!process.env.NODE_ENV || process.env.NODE_ENV === "production") {
   Sentry.init({
@@ -17,11 +16,9 @@ if (!process.env.NODE_ENV || process.env.NODE_ENV === "production") {
   });
 }
 
-const store = createStore(
-  rootReducer,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
-  applyMiddleware(logger)
-);
+const composer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+const store = createStore(rootReducer, composer(applyMiddleware(logger)));
 
 ReactDOM.render(
   <Provider store={store}>
