@@ -155,10 +155,9 @@ class CompanyInformation extends React.Component {
     }
 
     if (isLoading) {
-      console.log("Rendered loading and info is:" + info.description);
       return <Skeleton />;
     } else {
-      console.log("Rendered component and info is:" + info.description);
+      console.log(info);
       return (
         <React.Fragment>
           {/**
