@@ -401,7 +401,7 @@ class PageReferences extends Component {
                   type="primary"
                   htmlType="submit"
                 >
-                  Save Application
+                  Submit
                 </Button>
               </Form.Item>
             </Form>
