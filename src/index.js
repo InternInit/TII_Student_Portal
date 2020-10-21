@@ -4,7 +4,7 @@ import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import * as Sentry from "@sentry/browser";
-import { createStore, applyMiddleware } from "redux";
+import { createStore, compose, applyMiddleware } from "redux";
 import rootReducer from "./redux/reducers";
 import { Provider } from "react-redux";
 import logger from "redux-logger";
