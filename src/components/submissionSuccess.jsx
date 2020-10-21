@@ -45,7 +45,6 @@ class SubmissionSuccess extends Component {
     return (
       <PageContainer>
         <Confetti
-          width={width}
           minHeight={height}
           initialVelocity={20}
           recycle={false}

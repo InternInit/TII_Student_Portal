@@ -1,9 +1,7 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 
-import "../../App.scss";
-import "./dashboard.scss";
-import "antd/dist/antd.css";
+import "../dashboard.scss";
 
 import Checklist from "./checklist.jsx";
 import { Progress, Button, Row, Col } from "antd";
@@ -11,7 +9,7 @@ import { CheckCircleTwoTone } from "@ant-design/icons";
 import { withRouter } from "react-router";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { updateCompletionState } from "../../redux/actions";
+import { updateCompletionState } from "../../../redux/actions";
 
 /*
 
@@ -39,7 +37,7 @@ const ProgressHeader = styled.h2`
   float: left;
 
   font-weight: 500;
-   line-height: 28px;
+  line-height: 28px;
   align-items: center;
 
   color: black;
@@ -55,7 +53,7 @@ const PercentHeader = styled.h2`
   float: right;
 
   font-weight: bold;
- `;
+`;
 
 /*
 
@@ -69,7 +67,7 @@ const ViewChecklist = styled.p`
   font-family: Roboto;
   font-style: italic;
   font-weight: normal;
-   line-height: 16px;
+  line-height: 16px;
   align-items: center;
   color: #1890ff;
   :hover {
@@ -84,7 +82,7 @@ const DescriptorText = styled.span`
   font-weight: 500;
 
   text-align:left;
- 
+
   color: black;
 `;
 
@@ -108,6 +106,13 @@ const percentComplete = [
   ],
   ["Personal", "#fff7e6", "#fa8c16", "personalChecklist", "personal"],
   ["Essays", "#fcffe6", "#a0d911", "essayChecklist", "written-work"],
+  [
+    "Activities and Classes",
+    "#fcffe0",
+    "#a0f2da",
+    "activityClassChecklist",
+    "extracurriculars-and-classes",
+  ],
   ["References", "#f9f0ff", "#722ed1", "referencesChecklist", "references"],
 ];
 
@@ -129,6 +134,7 @@ class ApplicationProgress extends Component {
       internshipInfoChecklist: false,
       personalChecklist: false,
       essayChecklist: false,
+      activityClassChecklist: false,
       referencesChecklist: false,
     };
   }
@@ -141,6 +147,7 @@ class ApplicationProgress extends Component {
       internshipInfoChecklist,
       personalChecklist,
       essayChecklist,
+      activityClassChecklist,
       referencesChecklist,
     } = this.state;
 
@@ -158,6 +165,11 @@ class ApplicationProgress extends Component {
       case "Essays":
         this.setState({
           essayChecklist: !essayChecklist,
+        });
+        break;
+      case "Activities and Classes":
+        this.setState({
+          activityClassChecklist: !activityClassChecklist,
         });
         break;
       case "References":
@@ -180,7 +192,7 @@ class ApplicationProgress extends Component {
          */}
 
         {this.props.completionState.every((item) => item === 0) ? (
-          <ModuleContainer style={{ marginTop: "3%", width: '100%' }}>
+          <ModuleContainer style={{ marginTop: "3%", width: "100%" }}>
             <Row>
               <Col
                 span={20}
@@ -208,7 +220,7 @@ class ApplicationProgress extends Component {
                     fontWeight: "bold",
                     width: "200px",
                   }}
-                  className='sixteenFont'
+                  className="sixteenFont"
                 >
                   <Link to="/apply">Build my Profile</Link>
                 </Button>
@@ -230,7 +242,10 @@ class ApplicationProgress extends Component {
               {/**
                * Progress Bar Name
                */}
-              <ProgressHeader key={section[0] + "pheader"} className="twentyTwoFont">
+              <ProgressHeader
+                key={section[0] + "pheader"}
+                className="twentyTwoFont"
+              >
                 {section[0]}
               </ProgressHeader>
 
@@ -241,11 +256,11 @@ class ApplicationProgress extends Component {
                 {this.props.completionState[index] < 1 ? (
                   Math.floor(this.props.completionState[index] * 100) + "%"
                 ) : (
-                    <CheckCircleTwoTone
-                      style={{ fontSize: "24px" }}
-                      twoToneColor="#52c41a"
-                    />
-                  )}
+                  <CheckCircleTwoTone
+                    style={{ fontSize: "24px" }}
+                    twoToneColor="#52c41a"
+                  />
+                )}
               </PercentHeader>
 
               {/**
@@ -269,7 +284,7 @@ class ApplicationProgress extends Component {
                * Checklist Text
                *<a onClick={() => this.handleClick(section[0])}>
                */}
-              <ViewChecklist onClick={() => this.handleClick(section[0])} >
+              <ViewChecklist onClick={() => this.handleClick(section[0])}>
                 View Checklist
               </ViewChecklist>
 
@@ -282,7 +297,6 @@ class ApplicationProgress extends Component {
                     checklist={this.props.completionChecklist}
                     page={index}
                     linkTo={section[4]}
-
                   />
                 ) : null}
               </div>
