@@ -422,7 +422,7 @@ class PageReferences extends Component {
                   type="primary"
                   htmlType="submit"
                 >
-                  <Link to="/submission-success">Submit</Link>
+                  Submit
                 </Button>
               </Form.Item>
             </Form>
@@ -490,6 +490,7 @@ class PageReferences extends Component {
         icon: <CheckOutlined style={{ color: "green" }} />,
       });
       this.props.onSubmit(values, "4");
+      this.routeChange("/submission-success");
     } else {
       notification.open({
         message: "Failed.",
@@ -545,6 +546,10 @@ class PageReferences extends Component {
         }
         this.setState({ loaded: true });
       });
+  };
+
+  routeChange = (path) => {
+    this.props.history.push(path);
   };
 }
 
