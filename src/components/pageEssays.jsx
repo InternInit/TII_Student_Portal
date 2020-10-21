@@ -288,6 +288,7 @@ class PageEssays extends React.Component {
                   display: "flex",
                   flexDirection: "row",
                   justifyContent: "space-evenly",
+                  flexWrap: "wrap",
                 }}
               >
                 {/**
@@ -337,6 +338,8 @@ class PageEssays extends React.Component {
                     <h5>Click or Drag Files to Upload Here</h5>
                   </Dragger>
                 </Form.Item>
+
+                <div className="break" />
 
                 {/**
                  *

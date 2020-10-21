@@ -114,6 +114,16 @@ p {
   text-align: left;
 }
 
+.break {
+  display: none;
+
+  @media screen and (max-width: $medium-breakpoint) {
+    display: inline;
+    flex-basis: 100%;
+    height: 0;
+  }
+}
+
 .save-and-continue {
   float: right;
   width: 150px;
