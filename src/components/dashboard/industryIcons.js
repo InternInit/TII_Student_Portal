@@ -26,7 +26,7 @@ import { FaGraduationCap } from "react-icons/fa";
 
 const standardSize = 32;
 
-export const indusryIcons = {
+export const industryIcons = {
   generalBusiness: <TiBriefcase size={standardSize} />,
   accounting: <RiBankLine size={standardSize} />,
   consulting: <RiArtboardLine size={standardSize} />,
