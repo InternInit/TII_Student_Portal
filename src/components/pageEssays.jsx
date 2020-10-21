@@ -1,11 +1,10 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   Form,
   Input,
   Button,
   message,
   Upload,
-  Spin,
   Popover,
   Skeleton,
   Row,
@@ -27,7 +26,6 @@ import {
 } from "../redux/actions";
 
 import _ from "lodash";
-import SkeletonButton from "antd/lib/skeleton/Button";
 
 //Object Destructuring
 const { TextArea } = Input;
@@ -258,130 +256,32 @@ class PageEssays extends React.Component {
                * Industry Response
                *
                */}
-              <div ref={this.essayOneRef}>
-                <Form.Item
-                  className="text-left"
-                  key="industryEssay"
-                  name="Why This Industry Essay"
-                  label={this.boldify(
-                    "What industries are you interested in and why?",
-                    true,
-                    <React.Fragment>
-                      <p>
-                        This is your chance to show why you are a great fit for
-                        <br />
-                        internships in your industries of interest.
-                      </p>
-                      <p>
-                        Ex: If you are interested in biotechnology, you could
-                        write
-                        <br />
-                        about why biotechnology is a career you're interested
-                        in,
-                        <br />
-                        how your classes may have influenced your decision, or
-                        <br />
-                        anything else you think will be helpful for the
-                        companies in
-                        <br />
-                        the industries you are applying to.
-                      </p>
-                    </React.Fragment>
-                  )}
-                  extra={this.state.essayOneLen + "/1000 Characters"}
-                  rules={this.validationRules(true, "response")}
-                >
-                  <TextArea
-                    autoSize={{ minRows: 5, maxRows: 10 }}
-                    maxlength={1000}
-                  />
-                </Form.Item>
-              </div>
+              <LaglessEssayOne
+                key="industry-interest"
+                characterCount={this.state.essayOneLen}
+              />
 
               {/**
                *
                * Leadership Question
                *
                */}
-              <div ref={this.essayTwoRef}>
-                <Form.Item
-                  className="text-left"
-                  key="leadership"
-                  name="Leadership Roles Essay"
-                  label={this.boldify(
-                    "What are your leadership roles in your extracurriculars and what have they taught you?",
-                    true,
-                    <React.Fragment>
-                      <p>
-                        This question aims to reveal what activities you spend
-                        the most time in and the specific
-                        <br />
-                        skills you've learned from each one.
-                      </p>
-                      <p>
-                        Ex: You could write about one particular activity that
-                        has had a large impact on you,
-                        <br />
-                        several activities which have together influenced your
-                        life, or how being a leader at
-                        <br />
-                        school can make you a better intern.{" "}
-                        <em>There's no right or wrong answer.</em>
-                      </p>
-                    </React.Fragment>
-                  )}
-                  extra={this.state.essayTwoLen + "/1000 Characters"}
-                  rules={this.validationRules(true, "response")}
-                >
-                  <TextArea
-                    autoSize={{ minRows: 5, maxRows: 10 }}
-                    maxlength={1000}
-                  />
-                </Form.Item>
-              </div>
+
+              <LaglessEssayTwo
+                key="leadership"
+                characterCount={this.state.essayTwoLen}
+              />
 
               {/**
                *
                * "Additional Information
                *
                */}
-              <div ref={this.additionalInfoRef}>
-                <Form.Item
-                  className="text-left"
-                  key="extra"
-                  name="Extra Essay"
-                  label={this.boldify(
-                    "Is there anything more about you that we should know?",
-                    true,
-                    <React.Fragment>
-                      <p>
-                        This is an open ended response area where you can write
-                        <br />
-                        about anything. Really.
-                      </p>
-                      <p>
-                        If you saw want to explain a situation concerning your
-                        grades
-                        <br />
-                        or activites, feel free to fill it in here. If there's
-                        another story
-                        <br />
-                        or skill that you think will improve your chances, feel
-                        free to
-                        <br />
-                        write about it. The options are limitless!
-                      </p>
-                    </React.Fragment>
-                  )}
-                  extra={this.state.essayThreeLen + "/1000 Characters"}
-                  rules={this.validationRules(false, "response")}
-                >
-                  <TextArea
-                    autoSize={{ minRows: 5, maxRows: 10 }}
-                    maxlength={1000}
-                  />
-                </Form.Item>
-              </div>
+
+              <LaglessAdditionalInformation
+                key="additional-information"
+                characterCount={this.state.essayThreeLen}
+              />
 
               <div
                 style={{
@@ -511,12 +411,6 @@ class PageEssays extends React.Component {
       </div>
     );
   }
-  //Functions
-  //THIS NEEDS TO BE FIXED ASAP!!!
-  handleChange = (event) => {
-    this.setState({ otherIndustry: event.target.value });
-    console.log(this.state);
-  };
 
   /**
    *
@@ -540,30 +434,6 @@ class PageEssays extends React.Component {
     let allValues = this.formRef.current.getFieldsValue();
     delete allValues["Cover Letter"];
     delete allValues.Portfolio;
-    try {
-      this.setState({
-        essayOneLen: allValues["Why This Industry Essay"].length,
-      });
-    } catch (e) {
-      this.setState({
-        essayOneLen: 0,
-      });
-    }
-    try {
-      this.setState({
-        essayTwoLen: allValues["Leadership Roles Essay"].length,
-      });
-    } catch (e) {
-      this.setState({
-        essayTwoLen: 0,
-      });
-    }
-
-    try {
-      this.setState({ essayThreeLen: allValues["Extra Essay"].length });
-    } catch (e) {
-      this.setState({ essayThreeLen: 0 });
-    }
 
     let completedCount = 0;
     let checklist = [];
@@ -777,6 +647,163 @@ class PageEssays extends React.Component {
     this.props.history.push(path);
   };
 }
+
+const boldify = (text, info = false, popoverText) =>
+  !info ? (
+    <strong>{text}</strong>
+  ) : (
+    <React.Fragment>
+      <strong>{text}</strong>
+      <Popover style={{ width: "10px" }} title={text} content={popoverText}>
+        <InfoCircle size={12} />
+      </Popover>
+    </React.Fragment>
+  );
+
+const validationRules = (required, inputName, type) => [
+  {
+    required: required,
+    message: "Please enter a valid " + inputName,
+    type: type,
+  },
+];
+
+const LaglessEssayOne = ({ characterCount }) => {
+  const [characters, setCharacters] = useState(characterCount);
+
+  useEffect(() => {
+    setCharacters(characterCount);
+  }, [characterCount]);
+
+  return (
+    <Form.Item
+      className="text-left"
+      key="industryEssay"
+      name="Why This Industry Essay"
+      label={boldify(
+        "What industries are you interested in and why?",
+        true,
+        <React.Fragment>
+          <p>
+            This is your chance to show why you are a great fit for
+            <br />
+            internships in your industries of interest.
+          </p>
+          <p>
+            Ex: If you are interested in biotechnology, you could write
+            <br />
+            about why biotechnology is a career you're interested in,
+            <br />
+            how your classes may have influenced your decision, or
+            <br />
+            anything else you think will be helpful for the companies in
+            <br />
+            the industries you are applying to.
+          </p>
+        </React.Fragment>
+      )}
+      extra={characters + "/1000 Characters"}
+      rules={validationRules(true, "response")}
+    >
+      <TextArea
+        autoSize={{ minRows: 5, maxRows: 10 }}
+        maxlength={1000}
+        onChange={(event) => setCharacters(event.target.value.length)}
+      />
+    </Form.Item>
+  );
+};
+
+const LaglessEssayTwo = ({ characterCount }) => {
+  const [characters, setCharacters] = useState(characterCount);
+
+  useEffect(() => {
+    setCharacters(characterCount);
+  }, [characterCount]);
+
+  return (
+    <Form.Item
+      className="text-left"
+      key="leadership"
+      name="Leadership Roles Essay"
+      label={boldify(
+        "What are your leadership roles in your extracurriculars and what have they taught you?",
+        true,
+        <React.Fragment>
+          <p>
+            This question aims to reveal what activities you spend the most time
+            in and the specific
+            <br />
+            skills you've learned from each one.
+          </p>
+          <p>
+            Ex: You could write about one particular activity that has had a
+            large impact on you,
+            <br />
+            several activities which have together influenced your life, or how
+            being a leader at
+            <br />
+            school can make you a better intern.{" "}
+            <em>There's no right or wrong answer.</em>
+          </p>
+        </React.Fragment>
+      )}
+      extra={characters + "/1000 Characters"}
+      rules={validationRules(true, "response")}
+    >
+      <TextArea
+        autoSize={{ minRows: 5, maxRows: 10 }}
+        maxlength={1000}
+        onChange={(event) => setCharacters(event.target.value.length)}
+      />
+    </Form.Item>
+  );
+};
+
+const LaglessAdditionalInformation = ({ characterCount }) => {
+  const [characters, setCharacters] = useState(characterCount);
+
+  useEffect(() => {
+    setCharacters(characterCount);
+  }, [characterCount]);
+
+  return (
+    <Form.Item
+      className="text-left"
+      key="extra"
+      name="Extra Essay"
+      label={boldify(
+        "Is there anything more about you that we should know?",
+        true,
+        <React.Fragment>
+          <p>
+            This is an open ended response area where you can write
+            <br />
+            about anything. Really.
+          </p>
+          <p>
+            If you saw want to explain a situation concerning your grades
+            <br />
+            or activites, feel free to fill it in here. If there's another story
+            <br />
+            or skill that you think will improve your chances, feel free to
+            <br />
+            write about it. The options are limitless!
+          </p>
+        </React.Fragment>
+      )}
+      extra={characters + "/1000 Characters"}
+      rules={validationRules(false, "response")}
+    >
+      <TextArea
+        autoSize={{ minRows: 5, maxRows: 10 }}
+        maxlength={1000}
+        onChange={(event) => setCharacters(event.target.value.length)}
+      />
+    </Form.Item>
+  );
+};
+
 export default withRouter(
   connect(mapStateToProps, mapDispatchToProps)(PageEssays)
 );

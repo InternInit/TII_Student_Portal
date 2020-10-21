@@ -386,7 +386,6 @@ class PageExtracurricularsClasses extends Component {
 }
 
 const Extracurriculars = (props) => {
-  const [characters, setCharacters] = useState({});
 
   useEffect(() => {
     console.log("EC RENDERED");
