@@ -252,6 +252,12 @@ hr {
     text-align: left;
   }
 }
+
+.company-info-listing-card {
+  @include soft-box-shadow();
+  @include light-border-radius();
+  text-align: left;
+}
 /*
 ============================================================
 ************************************************************

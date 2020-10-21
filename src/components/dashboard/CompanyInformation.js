@@ -1,13 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 import {
-  Divider,
   Breadcrumb,
   Avatar,
   Row as AntRow,
   Col as AntCol,
-  Button,
-  Skeleton
+  Skeleton,
 } from "antd";
 import {
   AiFillFacebook,
@@ -15,7 +13,9 @@ import {
   AiFillLinkedin,
 } from "react-icons/ai";
 import { FaInstagram } from "react-icons/fa";
-import { CSSTransition } from "react-transition-group";
+import { industryIcons } from "./industryIcons";
+import _ from "underscore";
+import { uniq } from "underscore";
 
 import { Link } from "react-router-dom";
 
@@ -207,16 +207,13 @@ class CompanyInformation extends React.Component {
                   </div>
                 </AntRow>
 
-                {/**
-                 *
-                 * Divider
-                 *
-                 */}
                 <AntRow style={{ width: "100%" }}>
                   <h1 className="company-info-subsection-header thirtySixFont">
                     Company Overview
                   </h1>
                 </AntRow>
+
+                <RenderListings listings={info.listings} />
 
                 {/**
                  *
@@ -237,7 +234,11 @@ class CompanyInformation extends React.Component {
                     className="company-info-read-more-button sixteenFont"
                     onClick={this.toggle}
                   >
-                    {info.description.length < 1000 ? null : show ? "Read Less" : "Read More"}
+                    {info.description.length < 1000
+                      ? null
+                      : show
+                      ? "Read Less"
+                      : "Read More"}
                   </p>
                 </Row>
 
@@ -316,5 +317,26 @@ class CompanyInformation extends React.Component {
     }
   }
 }
+
+const ListingCard = (props) => {
+  return (
+    <div className="company-info-listing-card">
+      <h1>{props.position}</h1>
+      <h2>{props.industry}</h2>
+    </div>
+  );
+};
+
+const RenderListings = (props) => {
+  let filtered_results = _.uniq(props.listings, "Listing Type");
+
+  return (
+    <div>
+      {filtered_results.map((listing) => (
+        <ListingCard position={listing.Title} industry={listing.Industry} />
+      ))}
+    </div>
+  );
+};
 
 export default CompanyInformation;
