@@ -4,7 +4,6 @@ import { Row, Col } from "antd";
 import {
   CheckOutlined,
   CloseOutlined,
-  MinusCircleOutlined,
   PlusOutlined,
 } from "@ant-design/icons";
 import QueueAnim from "rc-queue-anim";
@@ -31,22 +30,6 @@ import SkeletonButton from "antd/lib/skeleton/Button";
 const formGutter = [16, 16];
 const standardSpan = 24;
 const halfSpan = standardSpan / 2;
-const formItemLayout = {
-  labelCol: {
-    xs: { span: 24 },
-    sm: { span: 4 },
-  },
-  wrapperCol: {
-    xs: { span: 24 },
-    sm: { span: 24 },
-  },
-};
-const formItemLayoutWithOutLabel = {
-  wrapperCol: {
-    xs: { span: 24, offset: 0 },
-    sm: { span: 24, offset: 0 },
-  },
-};
 
 //Functions
 const validationRules = (required, inputName, type, pattern) => [
@@ -130,10 +113,6 @@ class PageReferences extends Component {
 
   componentWillUnmount() {
     this.updateFieldData();
-  }
-
-  constructor(props) {
-    super(props);
   }
 
   render() {

@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 
 import {
-  Button,
   Modal,
   Input,
   notification,
@@ -16,9 +15,8 @@ import {
   Card,
 } from "antd";
 
-import { CloseOutlined, UserOutlined, CameraOutlined } from "@ant-design/icons";
+import { CloseOutlined, UserOutlined } from "@ant-design/icons";
 import { FaCamera } from "react-icons/fa";
-import { FiTrash2 } from "react-icons/fi";
 import EditProfileBackground from "../EditProfileBackground.jpg";
 
 import { connect } from "react-redux";
@@ -41,15 +39,6 @@ import "./EditProfile.scss";
 //                                      Styled Components
 //
 //============================================================================================================
-
-const ModuleContainer = styled.div`
-  background: white;
-  border-radius: 10px;
-  padding: 5% 7% 5% 7%;
-  border: 1px solid #e2e8ed;
-  box-shadow: 0 0 6px -4px;
-  width: 70%;
-`;
 
 const UserInfo = styled.div`
   display: flex;

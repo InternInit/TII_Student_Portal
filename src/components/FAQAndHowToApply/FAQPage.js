@@ -1,11 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 
-import { CheckOutlined } from "@ant-design/icons";
 //styles
 import { withRouter } from "react-router-dom";
 
-import { Menu, Layout, Collapse } from "antd";
+import { Layout, Collapse } from "antd";
 
 import "../../App.scss";
 import "./FAQAndHowToApply.scss";
@@ -76,7 +75,6 @@ const QuestionArray = [
   },
 ];
 
-const { Content, Header, Sider } = Layout;
 const { Panel } = Collapse;
 
 class FAQPage extends React.Component {
@@ -123,7 +121,7 @@ class FAQPage extends React.Component {
     );
   }
 }
-export default FAQPage;
+export default withRouter(FAQPage);
 
 function Response(props) {
   return <ResponseText className="sixteenFont">{props.children}</ResponseText>;
