@@ -76,7 +76,7 @@ class TiiFooter extends Component {
 
           <Col>
             <div style={textStyle} className="eighteenFont bold">
-              Follow and Connect
+              Connect
             </div>
             <span style={textStyle} className="fourteenFont">
               <a href="mailto:contact-us@interninit.com">

@@ -12,6 +12,7 @@ import TiiNav from "./components/TiiNav.jsx";
 import PagePersonal from "./components/pagePersonal.jsx";
 import PageInternshipInformation from "./components/pageInternshipInformation.jsx";
 import PageEssays from "./components/pageEssays";
+import PageExtracurricularsClasses from "./components/pageExtracurricularsClasses";
 import PageReferences from "./components/pageReferences";
 import PageNotFound from "./components/pageNotFound";
 import Dashboard from "./components/dashboard/dashboard.jsx";
@@ -21,7 +22,7 @@ import EditProfile from "./components/EditProfile.js";
 import FAQPage from "./components/FAQAndHowToApply/FAQPage";
 //import newStudent from "./components/newStudent.jsx";
 
-import TiiFooter from './components/TiiFooter';
+import TiiFooter from "./components/TiiFooter";
 
 import LogIn from "./components/LogIn.js";
 import SignUp from "./components/SignUp.js";
@@ -53,6 +54,7 @@ import {
   updateCompletionState,
   batchUpdateCompletionState,
   batchUpdateCompletionChecklist,
+  finishLoading,
 } from "./redux/actions";
 
 import devConfigurationFile from "./configuration_dev.json";
@@ -73,7 +75,7 @@ if (!process.env.NODE_ENV || process.env.NODE_ENV === "development") {
   console.error = noop;
 }
 
-function noop() { }
+function noop() {}
 
 //Declarations
 const { Content } = Layout;
@@ -82,8 +84,8 @@ const { Content } = Layout;
 const PageContainer = styled.div`
   display: flex;
   width: 70%;
-  padding-left: 2%;
-  padding-right: 2%;
+  padding-left: 4.5vw;
+  padding-right: 4.5vw;
   justifycontent: center;
   background-color: white;
   border: 1px solid #d9d9d9;
@@ -96,6 +98,7 @@ const PageContainer = styled.div`
 
 const mapStateToProps = (state) => {
   return {
+    isLoading: state.isLoading,
     completionState: state.completionState,
     completionChecklist: state.completionChecklist,
     userInfo: state.userInfo,
@@ -116,6 +119,7 @@ const mapDispatchToProps = {
   updateCompletionState,
   batchUpdateCompletionState,
   batchUpdateCompletionChecklist,
+  finishLoading,
 };
 
 class App extends Component {
@@ -240,7 +244,7 @@ class App extends Component {
       })
         .then((response) => response.json())
         .then((data) => {
-          console.log(data);
+          console.log("Done"/*data*/);
         });
     } else if (this.state.submissionState === false) {
       console.log("Submission disabled");
@@ -290,7 +294,7 @@ class App extends Component {
         Source: JSON.parse(JSON.stringify(source)),
       },
       body: fd,
-    }).then((response) => { });
+    }).then((response) => {});
   };
 
   updateBusinessStatus = async (businessId, status) => {
@@ -416,8 +420,6 @@ class App extends Component {
         { key: "Zip Code", completed: false },
         { key: "Year Of Graduation", completed: false },
         { key: "Unweighted GPA", completed: false },
-        { key: "Relevant Courses", completed: false },
-        { key: "Extracurriculars", completed: false },
         { key: "Willing Work Days", completed: false },
         { key: "Willing Work Times", completed: false },
         { key: "Starting/Ending Dates", completed: false },
@@ -434,6 +436,16 @@ class App extends Component {
         { key: "Leadership Roles Essay", completed: false },
         { key: "Extra Essay", completed: false },
         { key: "Cover Letter", completed: false },
+      ],
+      [
+        {
+          key: "Extracurriculars",
+          completed: false,
+        },
+        {
+          key: "Courses",
+          completed: false,
+        },
       ],
       [{ key: "Reference", completed: false }],
     ];
@@ -457,10 +469,11 @@ class App extends Component {
           this.props.updateVersion(parsedRecv.version);
           this.props.updateDisabledIndustries(parsedRecv.checkedIndustries);
         } else {
-          this.props.batchUpdateCompletionState([0, 0, 0, 0]);
+          this.props.batchUpdateCompletionState([0, 0, 0, 0, 0]);
           this.props.batchUpdateCompletionChecklist(defaultChecklist);
           this.props.updateVersion(0);
         }
+        this.props.finishLoading(true);
       });
   };
 
@@ -485,6 +498,10 @@ class App extends Component {
 
   clickFour = () => {
     this.setState({ page: 3 });
+  };
+
+  clickFive = () => {
+    this.setState({ page: 4 });
   };
 
   AppContainer = () => {
@@ -529,7 +546,7 @@ class App extends Component {
               render={(props) => (
                 <PageInternshipInformation
                   {...props}
-                  clickTwo={this.clickTwo}
+                  clickOne={this.clickOne}
                   uploadFile={this.uploadFile}
                   updateData={this.updateData}
                   getJwt={this.getJwt}
@@ -543,8 +560,7 @@ class App extends Component {
               render={(props) => (
                 <PagePersonal
                   {...props}
-                  clickOne={this.clickOne}
-                  clickThree={this.clickThree}
+                  clickTwo={this.clickTwo}
                   updateData={this.updateData}
                   getJwt={this.getJwt}
                   setCompletionState={this.setCompletionState}
@@ -557,7 +573,20 @@ class App extends Component {
               render={(props) => (
                 <PageEssays
                   {...props}
-                  clickTwo={this.clickTwo}
+                  clickThree={this.clickThree}
+                  uploadFile={this.uploadFile}
+                  updateData={this.updateData}
+                  getJwt={this.getJwt}
+                  setCompletionState={this.setCompletionState}
+                />
+              )}
+            />
+
+            <Route
+              path="/apply/extracurriculars-and-classes"
+              render={(props) => (
+                <PageExtracurricularsClasses
+                  {...props}
                   clickFour={this.clickFour}
                   uploadFile={this.uploadFile}
                   updateData={this.updateData}
@@ -572,7 +601,7 @@ class App extends Component {
               render={(props) => (
                 <PageReferences
                   {...props}
-                  clickThree={this.clickThree}
+                  clickFive={this.clickFive}
                   onSubmit={this.onSubmit}
                   updateData={this.updateData}
                   getJwt={this.getJwt}
@@ -604,6 +633,7 @@ class App extends Component {
         clickTwo={this.clickTwo}
         clickThree={this.clickThree}
         clickFour={this.clickFour}
+        clickFive={this.clickFive}
         highlightKey={highlightKey}
         completionState={this.props.completionState}
         onSubmit={this.onSubmit}
@@ -618,11 +648,11 @@ class App extends Component {
         {this.resize()}
         <Router>
           {window.location.pathname.includes("login") ||
-            window.location.pathname.includes("signup") ? null : (
-              <header>
-                <Navbar logout={this.logout} userInfo={this.props.userInfo} />
-              </header>
-            )}
+          window.location.pathname.includes("signup") ? null : (
+            <header>
+              <Navbar logout={this.logout} userInfo={this.props.userInfo} />
+            </header>
+          )}
           <ReactSwitch>
             <Route
               path="/dashboard"

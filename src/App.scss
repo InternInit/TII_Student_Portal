@@ -15,8 +15,9 @@ $medium-breakpoint: 768px;
 $large-breakpoint: 992px;
 $x-large-breakpoint: 1200px;
 
-$background-color: #EBEFF2;
+$background-color: #ebeff2;
 $gray-two: #e2e8ed;
+$gray-thirteen: #425866;
 
 //Mixins
 @mixin standard-box-shadow {
@@ -34,6 +35,30 @@ $gray-two: #e2e8ed;
 @mixin standard-box-shadow-hover {
   box-shadow: 2px 2px 5px -4px;
   transition: 0.3s ease;
+}
+
+@mixin mt($name, $amount) {
+  .mt-#{$name} {
+    margin-top: #{$amount}vh;
+  }
+}
+
+@mixin mb($name, $amount) {
+  .mb-#{$name} {
+    margin-bottom: #{$amount}vh;
+  }
+}
+
+@mixin ml($name, $amount) {
+  .ml-#{$name} {
+    margin-left: #{$amount}vw;
+  }
+}
+
+@mixin mr($name, $amount) {
+  .mr-#{$name} {
+    margin-right: #{$amount}vw;
+  }
 }
 
 /*
@@ -89,6 +114,16 @@ p {
   text-align: left;
 }
 
+.break {
+  display: none;
+
+  @media screen and (max-width: $medium-breakpoint) {
+    display: inline;
+    flex-basis: 100%;
+    height: 0;
+  }
+}
+
 .save-and-continue {
   float: right;
   width: 150px;
@@ -105,11 +140,34 @@ p {
   padding-left: 5%;
   padding-right: 5%;
   padding-top: 3%;
+  padding-bottom: 1%;
   margin-top: 20px;
   margin-bottom: 10px;
   background-color: $background-color;
   border: 1px solid $gray-two;
   border-radius: 5px;
+  position: relative;
+}
+
+.new-box {
+  @include standard-box-shadow();
+  background-color: $background-color;
+  border: 1px solid $gray-two;
+  border-radius: 5px;
+  position: relative;
+}
+
+.education-box-remove-button {
+  position: absolute;
+  top: -.5vh;
+  right: -1.3vw;
+  color: $gray-thirteen;
+
+  :hover {
+    transition: 0.3s ease;
+    color: #cf1322;
+    cursor: pointer;
+  }
 }
 
 .apply-header {
@@ -120,7 +178,7 @@ p {
 .application-box-heading {
   font-family: Lato;
   font-weight: bold;
-  margin-bottom: 10px;
+  margin-bottom: 2vh;
 }
 
 .radio-styling {
@@ -237,6 +295,14 @@ h2 {
   left: 5px;
 }
 
+.page-essay-input-skeleton .ant-skeleton-content .ant-skeleton-paragraph > li {
+  height: 130px;
+}
+
+.page-essay-upload-skeleton .ant-skeleton-content .ant-skeleton-paragraph > li {
+  height: 100px;
+}
+
 /**
 FONT SIZES
 */
@@ -288,3 +354,43 @@ FONT SIZES
 .bold {
   font-weight: bold;
 }
+
+/**
+Margins
+*/
+
+@include mt(1, 1);
+@include mt(2, 2);
+@include mt(3, 3);
+@include mt(4, 4);
+@include mt(5, 5);
+@include mt(6, 6);
+@include mt(7, 7);
+@include mt(8, 8);
+
+@include mb(1, 1);
+@include mb(2, 2);
+@include mb(3, 3);
+@include mb(4, 4);
+@include mb(5, 5);
+@include mb(6, 6);
+@include mb(7, 7);
+@include mb(8, 8);
+
+@include ml(1, 1);
+@include ml(2, 2);
+@include ml(3, 3);
+@include ml(4, 4);
+@include ml(5, 5);
+@include ml(6, 6);
+@include ml(7, 7);
+@include ml(8, 8);
+
+@include mr(1, 1);
+@include mr(2, 2);
+@include mr(3, 3);
+@include mr(4, 4);
+@include mr(5, 5);
+@include mr(6, 6);
+@include mr(7, 7);
+@include mr(8, 8);

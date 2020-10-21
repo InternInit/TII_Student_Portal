@@ -1,11 +1,10 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   Form,
   Input,
   Button,
   message,
   Upload,
-  Spin,
   Popover,
   Skeleton,
   Row,
@@ -27,7 +26,6 @@ import {
 } from "../redux/actions";
 
 import _ from "lodash";
-import SkeletonButton from "antd/lib/skeleton/Button";
 
 //Object Destructuring
 const { TextArea } = Input;
@@ -136,71 +134,50 @@ class PageEssays extends React.Component {
          */}
         {!this.state.loaded ? (
           <React.Fragment>
-            <div style={{ marginBottom: "40px" }}>
+            <div className="mb-2" style={{ marginBottom: "40px" }}>
               <Skeleton.Input style={{ width: "25vw" }} size="default" />
             </div>
-            <Row gutter={formGutter}>
-              <Col span={halfSpan}>
-                <Skeleton.Input style={{ width: "25vw" }} size="small" />
-              </Col>
-            </Row>
+            <div>
+              <Skeleton title={false} paragraph={{ rows: 1 }} />
+            </div>
+            <div className="universal-left mb-1">
+              <Skeleton.Input style={{ width: "25vw" }} size="small" />
+            </div>
 
-            <Row gutter={formGutter}>
-              <Col span={standardSpan}>
-                <Skeleton.Input style={{ width: "25vw" }} size="small" />
-                <Skeleton.Input style={{ width: "25vw" }} size="small" />
-                <Skeleton.Input style={{ width: "25vw" }} size="small" />
-                <Skeleton.Input style={{ width: "25vw" }} size="small" />
-                <Skeleton.Input style={{ width: "25vw" }} size="small" />
-                <Skeleton.Input style={{ width: "25vw" }} size="small" />
-                <Skeleton.Input style={{ width: "25vw" }} size="small" />
-                <Skeleton.Input style={{ width: "25vw" }} size="small" />
-                <Skeleton.Input style={{ width: "25vw" }} size="small" />
-                <Skeleton.Input style={{ width: "25vw" }} size="small" />
-              </Col>
-            </Row>
+            <div>
+              <Skeleton
+                className="page-essay-input-skeleton"
+                title={false}
+                paragraph={{ rows: 1, width: "100%" }}
+                style={{ marginTop: "0px" }}
+              />
+            </div>
 
-            <Row gutter={formGutter}>
-              <Col span={halfSpan}>
-                <Skeleton.Input style={{ width: "25vw" }} size="small" />
-              </Col>
-            </Row>
+            <div className="universal-left mb-1 mt-2">
+              <Skeleton.Input style={{ width: "25vw" }} size="small" />
+            </div>
 
-            <Row gutter={formGutter}>
-              <Col span={standardSpan}>
-                <Skeleton.Input style={{ width: "25vw" }} size="small" />
-                <Skeleton.Input style={{ width: "25vw" }} size="small" />
-                <Skeleton.Input style={{ width: "25vw" }} size="small" />
-                <Skeleton.Input style={{ width: "25vw" }} size="small" />
-                <Skeleton.Input style={{ width: "25vw" }} size="small" />
-                <Skeleton.Input style={{ width: "25vw" }} size="small" />
-                <Skeleton.Input style={{ width: "25vw" }} size="small" />
-                <Skeleton.Input style={{ width: "25vw" }} size="small" />
-                <Skeleton.Input style={{ width: "25vw" }} size="small" />
-                <Skeleton.Input style={{ width: "25vw" }} size="small" />
-              </Col>
-            </Row>
+            <div>
+              <Skeleton
+                className="page-essay-input-skeleton"
+                title={false}
+                paragraph={{ rows: 1, width: "100%" }}
+                style={{ marginTop: "0px" }}
+              />
+            </div>
 
-            <Row gutter={formGutter}>
-              <Col span={halfSpan}>
-                <Skeleton.Input style={{ width: "25vw" }} size="small" />
-              </Col>
-            </Row>
+            <div className="universal-left mb-1 mt-2">
+              <Skeleton.Input style={{ width: "25vw" }} size="small" />
+            </div>
 
-            <Row gutter={formGutter}>
-              <Col span={standardSpan}>
-                <Skeleton.Input style={{ width: "25vw" }} size="small" />
-                <Skeleton.Input style={{ width: "25vw" }} size="small" />
-                <Skeleton.Input style={{ width: "25vw" }} size="small" />
-                <Skeleton.Input style={{ width: "25vw" }} size="small" />
-                <Skeleton.Input style={{ width: "25vw" }} size="small" />
-                <Skeleton.Input style={{ width: "25vw" }} size="small" />
-                <Skeleton.Input style={{ width: "25vw" }} size="small" />
-                <Skeleton.Input style={{ width: "25vw" }} size="small" />
-                <Skeleton.Input style={{ width: "25vw" }} size="small" />
-                <Skeleton.Input style={{ width: "25vw" }} size="small" />
-              </Col>
-            </Row>
+            <div>
+              <Skeleton
+                className="page-essay-input-skeleton"
+                title={false}
+                paragraph={{ rows: 1, width: "100%" }}
+                style={{ marginTop: "0px" }}
+              />
+            </div>
 
             <Row gutter={formGutter}>
               <Col span={standardSpan}>
@@ -208,18 +185,25 @@ class PageEssays extends React.Component {
               </Col>
             </Row>
 
-            <Row gutter={formGutter}>
-              <Col span={halfSpan}>
-                <Skeleton.Input style={{ width: "25vw" }} size="small" />
-                <Skeleton.Input style={{ width: "25vw" }} size="small" />
-                <Skeleton.Input style={{ width: "25vw" }} size="small" />
-              </Col>
-              <Col span={halfSpan}>
-                <Skeleton.Input style={{ width: "25vw" }} size="small" />
-                <Skeleton.Input style={{ width: "25vw" }} size="small" />
-                <Skeleton.Input style={{ width: "25vw" }} size="small" />
-              </Col>
-            </Row>
+            <div className="mb-3">
+              <Row style={{ justifyContent: "center" }}>
+                <Col span={8} style={{ marginRight: "5vw" }}>
+                  <Skeleton
+                    className="page-essay-upload-skeleton"
+                    title={false}
+                    paragraph={{ rows: 1, width: "100%" }}
+                  />
+                </Col>
+                <Col span={8}>
+                  <Skeleton
+                    className="page-essay-upload-skeleton"
+                    title={false}
+                    paragraph={{ rows: 1, width: "100%" }}
+                    style={{ marginTop: "0px" }}
+                  />
+                </Col>
+              </Row>
+            </div>
 
             {/**
              *
@@ -227,10 +211,19 @@ class PageEssays extends React.Component {
              *
              */}
             <Form.Item>
-              <div style={{ display: "flex", justifyContent: "space-between" }}>
-                <SkeletonButton />
-                <SkeletonButton />
-              </div>
+              <Button
+                className="back-button"
+                type="primary"
+                htmlType="button"
+                onClick={this.backHandler}
+              >
+                <Link to="/apply/personal">Previous</Link>
+              </Button>
+              <Button className="next-button" type="primary" htmlType="submit">
+                <Link to="/apply/extracurriculars-and-classes">
+                  Save and Continue
+                </Link>
+              </Button>
             </Form.Item>
           </React.Fragment>
         ) : (
@@ -263,136 +256,39 @@ class PageEssays extends React.Component {
                * Industry Response
                *
                */}
-              <div ref={this.essayOneRef}>
-                <Form.Item
-                  className="text-left"
-                  key="industryEssay"
-                  name="Why This Industry Essay"
-                  label={this.boldify(
-                    "What industries are you interested in and why?",
-                    true,
-                    <React.Fragment>
-                      <p>
-                        This is your chance to show why you are a great fit for
-                        <br />
-                        internships in your industries of interest.
-                      </p>
-                      <p>
-                        Ex: If you are interested in biotechnology, you could
-                        write
-                        <br />
-                        about why biotechnology is a career you're interested
-                        in,
-                        <br />
-                        how your classes may have influenced your decision, or
-                        <br />
-                        anything else you think will be helpful for the
-                        companies in
-                        <br />
-                        the industries you are applying to.
-                      </p>
-                    </React.Fragment>
-                  )}
-                  extra={this.state.essayOneLen + "/1000 Characters"}
-                  rules={this.validationRules(true, "response")}
-                >
-                  <TextArea
-                    autoSize={{ minRows: 5, maxRows: 10 }}
-                    maxlength={1000}
-                  />
-                </Form.Item>
-              </div>
+              <LaglessEssayOne
+                key="industry-interest"
+                characterCount={this.state.essayOneLen}
+              />
 
               {/**
                *
                * Leadership Question
                *
                */}
-              <div ref={this.essayTwoRef}>
-                <Form.Item
-                  className="text-left"
-                  key="leadership"
-                  name="Leadership Roles Essay"
-                  label={this.boldify(
-                    "What are your leadership roles in your extracurriculars and what have they taught you?",
-                    true,
-                    <React.Fragment>
-                      <p>
-                        This question aims to reveal what activities you spend
-                        the most time in and the specific
-                        <br />
-                        skills you've learned from each one.
-                      </p>
-                      <p>
-                        Ex: You could write about one particular activity that
-                        has had a large impact on you,
-                        <br />
-                        several activities which have together influenced your
-                        life, or how being a leader at
-                        <br />
-                        school can make you a better intern.{" "}
-                        <em>There's no right or wrong answer.</em>
-                      </p>
-                    </React.Fragment>
-                  )}
-                  extra={this.state.essayTwoLen + "/1000 Characters"}
-                  rules={this.validationRules(true, "response")}
-                >
-                  <TextArea
-                    autoSize={{ minRows: 5, maxRows: 10 }}
-                    maxlength={1000}
-                  />
-                </Form.Item>
-              </div>
+
+              <LaglessEssayTwo
+                key="leadership"
+                characterCount={this.state.essayTwoLen}
+              />
 
               {/**
                *
                * "Additional Information
                *
                */}
-              <div ref={this.additionalInfoRef}>
-                <Form.Item
-                  className="text-left"
-                  key="extra"
-                  name="Extra Essay"
-                  label={this.boldify(
-                    "Is there anything more about you that we should know?",
-                    true,
-                    <React.Fragment>
-                      <p>
-                        This is an open ended response area where you can write
-                        <br />
-                        about anything. Really.
-                      </p>
-                      <p>
-                        If you saw want to explain a situation concerning your
-                        grades
-                        <br />
-                        or activites, feel free to fill it in here. If there's
-                        another story
-                        <br />
-                        or skill that you think will improve your chances, feel
-                        free to
-                        <br />
-                        write about it. The options are limitless!
-                      </p>
-                    </React.Fragment>
-                  )}
-                  extra={this.state.essayThreeLen + "/1000 Characters"}
-                  rules={this.validationRules(false, "response")}
-                >
-                  <TextArea
-                    autoSize={{ minRows: 5, maxRows: 10 }}
-                    maxlength={1000}
-                  />
-                </Form.Item>
-              </div>
+
+              <LaglessAdditionalInformation
+                key="additional-information"
+                characterCount={this.state.essayThreeLen}
+              />
 
               <div
                 style={{
                   display: "flex",
                   flexDirection: "row",
                   justifyContent: "space-evenly",
+                  flexWrap: "wrap",
                 }}
               >
                 {/**
@@ -442,6 +338,8 @@ class PageEssays extends React.Component {
                     <h5>Click or Drag Files to Upload Here</h5>
                   </Dragger>
                 </Form.Item>
+
+                <div className="break" />
 
                 {/**
                  *
@@ -498,14 +396,16 @@ class PageEssays extends React.Component {
                   htmlType="button"
                   onClick={this.backHandler}
                 >
-                  Previous
+                  <Link to="/apply/personal">Previous</Link>
                 </Button>
                 <Button
                   className="next-button"
                   type="primary"
                   htmlType="submit"
                 >
-                  Save and Continue
+                  <Link to="/apply/extracurriculars-and-classes">
+                    Save and Continue
+                  </Link>
                 </Button>
               </Form.Item>
             </Form>
@@ -514,12 +414,6 @@ class PageEssays extends React.Component {
       </div>
     );
   }
-  //Functions
-  //THIS NEEDS TO BE FIXED ASAP!!!
-  handleChange = (event) => {
-    this.setState({ otherIndustry: event.target.value });
-    console.log(this.state);
-  };
 
   /**
    *
@@ -543,14 +437,6 @@ class PageEssays extends React.Component {
     let allValues = this.formRef.current.getFieldsValue();
     delete allValues["Cover Letter"];
     delete allValues.Portfolio;
-
-    this.setState({
-      essayOneLen: allValues["Why This Industry Essay"].length,
-    });
-    this.setState({
-      essayTwoLen: allValues["Leadership Roles Essay"].length,
-    });
-    this.setState({ essayThreeLen: allValues["Extra Essay"].length });
 
     let completedCount = 0;
     let checklist = [];
@@ -590,7 +476,6 @@ class PageEssays extends React.Component {
     console.log("FinishedPageEssays:", values);
     this.props.updateCompletionState(2, 1.0);
     this.props.updateData(values, "2");
-    this.routeChange("/apply/references");
   };
 
   updateFieldData = async () => {
@@ -601,7 +486,6 @@ class PageEssays extends React.Component {
 
   backHandler = () => {
     this.props.updateData(this.formRef.current.getFieldsValue(), "2");
-    this.routeChange("/apply/personal");
   };
 
   /**
@@ -766,6 +650,163 @@ class PageEssays extends React.Component {
     this.props.history.push(path);
   };
 }
+
+const boldify = (text, info = false, popoverText) =>
+  !info ? (
+    <strong>{text}</strong>
+  ) : (
+    <React.Fragment>
+      <strong>{text}</strong>
+      <Popover style={{ width: "10px" }} title={text} content={popoverText}>
+        <InfoCircle size={12} />
+      </Popover>
+    </React.Fragment>
+  );
+
+const validationRules = (required, inputName, type) => [
+  {
+    required: required,
+    message: "Please enter a valid " + inputName,
+    type: type,
+  },
+];
+
+const LaglessEssayOne = ({ characterCount }) => {
+  const [characters, setCharacters] = useState(characterCount);
+
+  useEffect(() => {
+    setCharacters(characterCount);
+  }, [characterCount]);
+
+  return (
+    <Form.Item
+      className="text-left"
+      key="industryEssay"
+      name="Why This Industry Essay"
+      label={boldify(
+        "What industries are you interested in and why?",
+        true,
+        <React.Fragment>
+          <p>
+            This is your chance to show why you are a great fit for
+            <br />
+            internships in your industries of interest.
+          </p>
+          <p>
+            Ex: If you are interested in biotechnology, you could write
+            <br />
+            about why biotechnology is a career you're interested in,
+            <br />
+            how your classes may have influenced your decision, or
+            <br />
+            anything else you think will be helpful for the companies in
+            <br />
+            the industries you are applying to.
+          </p>
+        </React.Fragment>
+      )}
+      extra={characters + "/1000 Characters"}
+      rules={validationRules(true, "response")}
+    >
+      <TextArea
+        autoSize={{ minRows: 5, maxRows: 10 }}
+        maxlength={1000}
+        onChange={(event) => setCharacters(event.target.value.length)}
+      />
+    </Form.Item>
+  );
+};
+
+const LaglessEssayTwo = ({ characterCount }) => {
+  const [characters, setCharacters] = useState(characterCount);
+
+  useEffect(() => {
+    setCharacters(characterCount);
+  }, [characterCount]);
+
+  return (
+    <Form.Item
+      className="text-left"
+      key="leadership"
+      name="Leadership Roles Essay"
+      label={boldify(
+        "What are your leadership roles in your extracurriculars and what have they taught you?",
+        true,
+        <React.Fragment>
+          <p>
+            This question aims to reveal what activities you spend the most time
+            in and the specific
+            <br />
+            skills you've learned from each one.
+          </p>
+          <p>
+            Ex: You could write about one particular activity that has had a
+            large impact on you,
+            <br />
+            several activities which have together influenced your life, or how
+            being a leader at
+            <br />
+            school can make you a better intern.{" "}
+            <em>There's no right or wrong answer.</em>
+          </p>
+        </React.Fragment>
+      )}
+      extra={characters + "/1000 Characters"}
+      rules={validationRules(true, "response")}
+    >
+      <TextArea
+        autoSize={{ minRows: 5, maxRows: 10 }}
+        maxlength={1000}
+        onChange={(event) => setCharacters(event.target.value.length)}
+      />
+    </Form.Item>
+  );
+};
+
+const LaglessAdditionalInformation = ({ characterCount }) => {
+  const [characters, setCharacters] = useState(characterCount);
+
+  useEffect(() => {
+    setCharacters(characterCount);
+  }, [characterCount]);
+
+  return (
+    <Form.Item
+      className="text-left"
+      key="extra"
+      name="Extra Essay"
+      label={boldify(
+        "Is there anything more about you that we should know?",
+        true,
+        <React.Fragment>
+          <p>
+            This is an open ended response area where you can write
+            <br />
+            about anything. Really.
+          </p>
+          <p>
+            If you saw want to explain a situation concerning your grades
+            <br />
+            or activites, feel free to fill it in here. If there's another story
+            <br />
+            or skill that you think will improve your chances, feel free to
+            <br />
+            write about it. The options are limitless!
+          </p>
+        </React.Fragment>
+      )}
+      extra={characters + "/1000 Characters"}
+      rules={validationRules(false, "response")}
+    >
+      <TextArea
+        autoSize={{ minRows: 5, maxRows: 10 }}
+        maxlength={1000}
+        onChange={(event) => setCharacters(event.target.value.length)}
+      />
+    </Form.Item>
+  );
+};
+
 export default withRouter(
   connect(mapStateToProps, mapDispatchToProps)(PageEssays)
 );

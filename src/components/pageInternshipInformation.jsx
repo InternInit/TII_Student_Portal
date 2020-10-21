@@ -11,9 +11,15 @@ import {
   Spin,
   Popover,
   Skeleton,
+  Grid,
+  Space,
 } from "antd";
 import { Row, Col } from "antd";
-import { InboxOutlined } from "@ant-design/icons";
+import {
+  InboxOutlined,
+  MinusCircleOutlined,
+  PlusOutlined,
+} from "@ant-design/icons";
 import { InfoCircle } from "./StyledComponents/InternshipForms";
 
 import "antd/dist/antd.css";
@@ -43,12 +49,31 @@ import SkeletonImage from "antd/lib/skeleton/Image";
 const { Option } = Select;
 const { RangePicker } = DatePicker;
 const { Dragger } = Upload;
+const { useBreakpoint } = Grid;
 
 //Formatting
 const formGutter = [16, 16];
 const standardSpan = 24;
 const halfSpan = standardSpan / 2;
 const thirdSpan = standardSpan / 3;
+
+const formItemLayout = {
+  labelCol: {
+    xs: { span: 24 },
+    sm: { span: 4 },
+  },
+  wrapperCol: {
+    xs: { span: 24 },
+    sm: { span: 24 },
+  },
+};
+
+const formItemLayoutWithOutLabel = {
+  wrapperCol: {
+    xs: { span: 24, offset: 0 },
+    sm: { span: 24, offset: 0 },
+  },
+};
 
 //items
 const allStates = [
@@ -741,7 +766,9 @@ class PageInternshipInformation extends Component {
           </React.Fragment>
         ) : (
           <React.Fragment>
-            <h1 className="apply-header twentyEightFont">Internship Information</h1>
+            <h1 className="apply-header twentyEightFont">
+              Internship Information
+            </h1>
             <br />
 
             {/**
@@ -870,37 +897,6 @@ class PageInternshipInformation extends Component {
 
               {/**
                *
-               * Relevant Courses
-               *
-               */}
-              <Row gutter={formGutter}>
-                <Col span={standardSpan}>
-                  <Form.Item {...formItemProps.courses}>
-                    <Input.TextArea
-                      placeholder="(e.g.) Business Communications, AP Computer Science, etc."
-                      style={{ height: "100px" }}
-                    />
-                  </Form.Item>
-                </Col>
-              </Row>
-
-              {/**
-            Extracurriculars
-            CHANGE REQUIRED: Switch to a standardized input format
-            */}
-              <Row gutter={formGutter}>
-                <Col span={standardSpan}>
-                  <Form.Item {...formItemProps.extracurriculars}>
-                    <Input.TextArea
-                      placeholder="(e.g.) Speech and Debate (3), DECA (4), HOSA (2), Student Council (2)"
-                      style={{ height: "100px" }}
-                    />
-                  </Form.Item>
-                </Col>
-              </Row>
-
-              {/**
-               *
                * Day and Time Willing to Work
                *
                */}
@@ -1000,7 +996,7 @@ class PageInternshipInformation extends Component {
                   type="primary"
                   htmlType="submit"
                 >
-                  Save and Continue
+                  <Link to="/apply/personal">Save and Continue</Link>
                 </Button>
               </Form.Item>
             </Form>
@@ -1057,7 +1053,6 @@ class PageInternshipInformation extends Component {
     console.log("FinishedPageInternship:", values);
     this.props.updateCompletionState(0, 1.0);
     this.props.updateData(values, "0");
-    this.routeChange("/apply/personal");
   };
 
   /**

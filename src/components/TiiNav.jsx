@@ -9,6 +9,7 @@ import {
   EditOutlined,
   ContainerOutlined,
   TeamOutlined,
+  CompassOutlined,
 } from "@ant-design/icons";
 
 //React Routing
@@ -30,8 +31,10 @@ class TiiNav extends React.Component {
         return Array.from("2");
       case "/apply/written-work":
         return Array.from("3");
-      case "/apply/references":
+      case "/apply/extracurriculars-and-classes":
         return Array.from("4");
+      case "/apply/references":
+        return Array.from("5");
       default:
         return Array.from("1");
     }
@@ -55,6 +58,7 @@ class TiiNav extends React.Component {
       InternButton: <ContainerOutlined />,
       PersonalButton: <UserOutlined />,
       EssayButton: <EditOutlined />,
+      ExtracurricularsClassesButton: <CompassOutlined />,
       ReferencesButton: <TeamOutlined />,
 
       CheckMark: <CheckOutlined style={{ color: "green" }} />,
@@ -87,6 +91,7 @@ class TiiNav extends React.Component {
       InternButton,
       PersonalButton,
       EssayButton,
+      ExtracurricularsClassesButton,
       ReferencesButton,
       CheckMark,
     } = this.state;
@@ -170,16 +175,35 @@ class TiiNav extends React.Component {
 
           {/**
            *
-           * References Tab
+           * Written Work Tab
            *
            */}
           <Menu.Item
             key="4"
             onClick={() => {
+              this.routeChange("/apply/extracurriculars-and-classes");
+            }}
+          >
+            {this.props.completionState[3] == 1
+              ? CheckMark
+              : ExtracurricularsClassesButton}
+            <Router>
+              <span>Actities/Classes</span>
+            </Router>
+          </Menu.Item>
+
+          {/**
+           *
+           * References Tab
+           *
+           */}
+          <Menu.Item
+            key="5"
+            onClick={() => {
               this.routeChange("/apply/references");
             }}
           >
-            {this.props.completionState[3] == 1 ? CheckMark : ReferencesButton}
+            {this.props.completionState[4] == 1 ? CheckMark : ReferencesButton}
             <Router>
               <span>References</span>
             </Router>
@@ -198,7 +222,7 @@ class TiiNav extends React.Component {
               alignContent: "center",
               justifyContent: "center",
             }}
-            key="5"
+            key="6"
             onClick={this.handleSubmit} //checks other states before allowing submit
           >
             {SubmitButton}
@@ -217,7 +241,7 @@ class TiiNav extends React.Component {
   handleSubmit = () => {
     let status = this.props.completionState;
 
-    if (_.isEqual(status, [1, 1, 1, 1])) {
+    if (_.isEqual(status, [1, 1, 1, 1, 1])) {
       // checks to see if all forms are completed
       //this.setState({ CanSubmit: true }); //sets canSubmit to true
       notification.open({
@@ -275,8 +299,10 @@ class TiiNav extends React.Component {
       this.props.clickTwo();
     } else if (path === "/apply/written-work") {
       this.props.clickThree();
-    } else if (path === "/apply/references") {
+    } else if (path === "/apply/extracurriculars-and-classes") {
       this.props.clickFour();
+    } else if (path === "/apply/references") {
+      this.props.clickFive();
     }
     this.props.history.push(path);
   };
