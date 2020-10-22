@@ -244,7 +244,7 @@ class App extends Component {
       })
         .then((response) => response.json())
         .then((data) => {
-          console.log("Done"/*data*/);
+          console.log("Done" /*data*/);
         });
     } else if (this.state.submissionState === false) {
       console.log("Submission disabled");
