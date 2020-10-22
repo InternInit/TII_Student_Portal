@@ -42,15 +42,6 @@ import "./EditProfile.scss";
 //
 //============================================================================================================
 
-const ModuleContainer = styled.div`
-  background: white;
-  border-radius: 10px;
-  padding: 5% 7% 5% 7%;
-  border: 1px solid #e2e8ed;
-  box-shadow: 0 0 6px -4px;
-  width: 70%;
-`;
-
 const UserInfo = styled.div`
   display: flex;
   text-align: left;
@@ -82,7 +73,7 @@ const Header = styled.span`
   font-size: 36px;
   font-family: Lato;
   font-weight: bold;
-  margin-left: 7vh;
+  margin-left: 6vh;
   margin-top: 20px;
   color: #262626;
 `;
@@ -90,7 +81,7 @@ const Header = styled.span`
 const HeaderEmail = styled.span`
   display: flex;
   justify-content: left;
-  margin-left: 7vh;
+  margin-left: 6vh;
   color: #595959;
   font-size: 16px;
 `;
