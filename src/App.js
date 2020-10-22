@@ -244,7 +244,7 @@ class App extends Component {
       })
         .then((response) => response.json())
         .then((data) => {
-          console.log("Done"/*data*/);
+          console.log("Done" /*data*/);
         });
     } else if (this.state.submissionState === false) {
       console.log("Submission disabled");
@@ -308,6 +308,28 @@ class App extends Component {
         businessId: JSON.parse(JSON.stringify(businessId)),
       },
       body: status,
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        //Placeholder behavior to pinpoint memoization bug
+        //#########################################
+        this.props.updatePinnedBusinesses([]);
+        //#########################################
+        this.getPinnedBusinesses();
+        this.getActiveApplications();
+      });
+  };
+
+  removeBusiness = async (businessId) => {
+    let token = await this.getJwt();
+
+    fetch("/api/remove_business", {
+      headers: {
+        Authorization: "Bearer " + JSON.parse(JSON.stringify(token)),
+        "Content-Type": "text/plain",
+        businessId: JSON.parse(JSON.stringify(businessId)),
+      },
     })
       .then((response) => response.json())
       .then((data) => {
@@ -469,6 +491,7 @@ class App extends Component {
           this.props.updateVersion(parsedRecv.version);
           this.props.updateDisabledIndustries(parsedRecv.checkedIndustries);
         } else {
+          console.log("Is this getting called???");
           this.props.batchUpdateCompletionState([0, 0, 0, 0, 0]);
           this.props.batchUpdateCompletionChecklist(defaultChecklist);
           this.props.updateVersion(0);
@@ -660,6 +683,7 @@ class App extends Component {
                 <Dashboard
                   version={this.state.version}
                   updateBusinessStatus={this.updateBusinessStatus}
+                  removeBusiness={this.removeBusiness}
                   updateData={this.updateData}
                 />
               )}
