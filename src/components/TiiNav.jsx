@@ -44,6 +44,24 @@ class TiiNav extends React.Component {
     this.getInitialHighlight();
   }
 
+  getScrollStyle = () => {
+    console.log("Styled");
+    switch (this.props.location.pathname) {
+      case "/apply/internship-info":
+        return "tii-nav-div-one";
+      case "/apply/personal":
+        return "tii-nav-div-two";
+      case "/apply/written-work":
+        return "tii-nav-div-three";
+      case "/apply/extracurriculars-and-classes":
+        return "tii-nav-div-four";
+      case "/apply/references":
+        return "tii-nav-div-five";
+      default:
+        return "tii-nav-div-one";
+    }
+  };
+
   constructor(props) {
     super(props);
     this.routeChange = this.routeChange.bind(this);
@@ -103,133 +121,126 @@ class TiiNav extends React.Component {
        * Sider Layout (AntD)
        *
        */
-      <Sider //styling the sider
-        style={{
-          position: "fixed",
-          overflow: "initial",
-          width: "207px",
-          margin: "10px",
-          marginTop: "8.5%",
-        }}
-        //Collapsing
-        collapsed={this.props.isCollapsed}
-      >
-        {/**
-         *
-         * Nav Panel Menu (AntD)
-         *
-         */}
-        <Menu
-          theme="light"
-          mode="inline"
-          defaultSelectedKeys={this.getInitialHighlight()}
-          selectedKeys={this.getInitialHighlight()}
+      <div className={this.getScrollStyle()}>
+        <Sider //styling the sider
+          className="tii-nav-sider"
+          //Collapsing
+          collapsed={this.props.isCollapsed}
         >
           {/**
            *
-           * Internship Information Tab
+           * Nav Panel Menu (AntD)
            *
            */}
-          <Menu.Item
-            key="1"
-            onClick={() => {
-              this.routeChange("/apply/internship-info");
-            }}
+          <Menu
+            theme="light"
+            mode="inline"
+            defaultSelectedKeys={this.getInitialHighlight()}
+            selectedKeys={this.getInitialHighlight()}
           >
-            {this.props.completionState[0] == 1 ? CheckMark : InternButton}
-            <span> Internship Info</span>
-          </Menu.Item>
+            {/**
+             *
+             * Internship Information Tab
+             *
+             */}
+            <Menu.Item
+              key="1"
+              onClick={() => {
+                this.routeChange("/apply/internship-info");
+              }}
+            >
+              {this.props.completionState[0] == 1 ? CheckMark : InternButton}
+              <span> Internship Info</span>
+            </Menu.Item>
 
-          {/**
-           *
-           * Personal Information Tab
-           *
-           */}
-          <Menu.Item
-            key="2"
-            onClick={() => {
-              this.routeChange("/apply/personal");
-            }}
-          >
-            {this.props.completionState[1] == 1 ? CheckMark : PersonalButton}
+            {/**
+             *
+             * Personal Information Tab
+             *
+             */}
+            <Menu.Item
+              key="2"
+              onClick={() => {
+                this.routeChange("/apply/personal");
+              }}
+            >
+              {this.props.completionState[1] == 1 ? CheckMark : PersonalButton}
 
-            <span> Personal</span>
-          </Menu.Item>
+              <span> Personal</span>
+            </Menu.Item>
 
-          {/**
-           *
-           * Written Work Tab
-           *
-           */}
-          <Menu.Item
-            key="3"
-            onClick={() => {
-              this.routeChange("/apply/written-work");
-            }}
-          >
-            {this.props.completionState[2] == 1 ? CheckMark : EssayButton}
-            <Router>
-              <span>Written Work</span>
-            </Router>
-          </Menu.Item>
+            {/**
+             *
+             * Written Work Tab
+             *
+             */}
+            <Menu.Item
+              key="3"
+              onClick={() => {
+                this.routeChange("/apply/written-work");
+              }}
+            >
+              {this.props.completionState[2] == 1 ? CheckMark : EssayButton}
+              <Router>
+                <span>Written Work</span>
+              </Router>
+            </Menu.Item>
 
-          {/**
-           *
-           * Written Work Tab
-           *
-           */}
-          <Menu.Item
-            key="4"
-            onClick={() => {
-              this.routeChange("/apply/extracurriculars-and-classes");
-            }}
-          >
-            {this.props.completionState[3] == 1
-              ? CheckMark
-              : ExtracurricularsClassesButton}
-            <Router>
-              <span>Activities/Classes</span>
-            </Router>
-          </Menu.Item>
+            {/**
+             *
+             * Written Work Tab
+             *
+             */}
+            <Menu.Item
+              key="4"
+              onClick={() => {
+                this.routeChange("/apply/extracurriculars-and-classes");
+              }}
+            >
+              {this.props.completionState[3] == 1
+                ? CheckMark
+                : ExtracurricularsClassesButton}
+              <Router>
+                <span>Activities/Classes</span>
+              </Router>
+            </Menu.Item>
 
-          {/**
-           *
-           * References Tab
-           *
-           */}
-          <Menu.Item
-            key="5"
-            onClick={() => {
-              this.routeChange("/apply/references");
-            }}
-          >
-            {this.props.completionState[4] == 1 ? CheckMark : ReferencesButton}
-            <Router>
-              <span>References</span>
-            </Router>
-          </Menu.Item>
+            {/**
+             *
+             * References Tab
+             *
+             */}
+            <Menu.Item
+              key="5"
+              onClick={() => {
+                this.routeChange("/apply/references");
+              }}
+            >
+              {this.props.completionState[4] == 1
+                ? CheckMark
+                : ReferencesButton}
+              <Router>
+                <span>References</span>
+              </Router>
+            </Menu.Item>
 
-          {/**
-           *
-           * Submit Button Menu Item
-           *
-           */}
-          <Menu.Item
-            className="third-step"
-            style={{
-              marginTop: "100%",
-              display: "flex",
-              alignContent: "center",
-              justifyContent: "center",
-            }}
-            key="6"
-            onClick={this.handleSubmit} //checks other states before allowing submit
-          >
-            {SubmitButton}
-            <span> Submit</span>
-          </Menu.Item>
-        </Menu>
-      </Sider>
+            {/**
+             *
+             * Submit Button Menu Item
+             *
+             */}
+            <Menu.Item
+              className="third-step tii-nav-submit"
+              style={{ marginTop: "12vh" }}
+              key="6"
+              onClick={this.handleSubmit} //checks other states before allowing submit
+            >
+              {SubmitButton}
+              <span> Submit</span>
+            </Menu.Item>
+          </Menu>
+        </Sider>
+      </div>
     );
   }
 
