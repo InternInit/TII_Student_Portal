@@ -124,6 +124,46 @@ p {
   }
 }
 
+.tii-nav-sider {
+  position: sticky;
+  z-index: 100;
+  overflow: initial;
+  top: calc(50px + 10%);
+  width: 207px;
+  margin: auto;
+  margin-top: 10%;
+  background-color: transparent;
+
+  @media screen and (max-width: $medium-breakpoint) {
+    margin-left: 1%;
+  }
+
+  @media screen and (max-height: 750px) {
+    margin-top: 1%;
+  }
+}
+
+@mixin tii-nav-div($name, $amount) {
+  .tii-nav-div-#{$name} {
+    position: absolute;
+    height: #{$amount}em;
+    width: 16%;
+  }
+}
+
+@include tii-nav-div("one", 90);
+@include tii-nav-div("two", 98);
+@include tii-nav-div("three", 69);
+@include tii-nav-div("four", 80);
+@include tii-nav-div("five", 67);
+
+.tii-nav-submit {
+  margin-top: 100%;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+}
+
 .save-and-continue {
   float: right;
   width: 150px;
@@ -159,7 +199,7 @@ p {
 
 .education-box-remove-button {
   position: absolute;
-  top: -.5vh;
+  top: -0.5vh;
   right: -1.3vw;
   color: $gray-thirteen;
 
