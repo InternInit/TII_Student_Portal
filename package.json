@@ -31,6 +31,7 @@
     "react-loading": "^2.0.3",
     "react-lottie": "^1.2.3",
     "react-redux": "^7.2.1",
+    "react-responsive": "^8.1.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "^3.4.4",
     "react-spring": "^8.0.27",
