@@ -203,7 +203,11 @@ class PageExtracurricularsClasses extends Component {
               </p>
 
               <Extracurriculars
-                startingLengths={this.state.descriptionFieldLengths}
+                startingLengths={
+                  this.state.descriptionFieldLengths
+                    ? this.state.descriptionFieldLengths
+                    : 0
+                }
               />
 
               <h1 className="apply-header twentyFourFont universal-left mt-1">
@@ -386,9 +390,9 @@ class PageExtracurricularsClasses extends Component {
 }
 
 const Extracurriculars = (props) => {
-
   useEffect(() => {
     console.log("EC RENDERED");
+    console.log(props.startingLengths);
   });
 
   return (
@@ -499,7 +503,8 @@ const Extracurriculars = (props) => {
                             field={field}
                             index={index}
                             characterCount={
-                              props.startingLengths[index]
+                              props.startingLengths[index] &&
+                              props.startingLengths !== 0
                                 ? props.startingLengths[index].Description
                                     .length
                                 : 0
