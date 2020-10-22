@@ -378,6 +378,7 @@ class PageExtracurricularsClasses extends Component {
             this.setState({
               descriptionFieldLengths: parsedData.Extracurriculars,
             });
+            console.log(parsedData.Extracurriculars);
           } catch (e) {}
         }
         this.setState({ loaded: true });
@@ -500,7 +501,9 @@ const Extracurriculars = (props) => {
                             index={index}
                             characterCount={
                               props.startingLengths[index] &&
-                              props.startingLengths !== 0
+                              props.startingLengths !== 0 &&
+                              props.startingLengths[index].Description !==
+                                undefined
                                 ? props.startingLengths[index].Description
                                     .length
                                 : 0
