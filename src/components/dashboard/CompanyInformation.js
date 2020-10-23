@@ -213,8 +213,6 @@ class CompanyInformation extends React.Component {
                   </h1>
                 </AntRow>
 
-                <RenderListings listings={info.listings} />
-
                 {/**
                  *
                  * Company Description
@@ -241,6 +239,8 @@ class CompanyInformation extends React.Component {
                       : "Read More"}
                   </p>
                 </Row>
+                
+                <RenderListings listings={info.listings} />
 
                 <AntRow gutter={[32, 16]} style={{ marginTop: "5%" }}>
                   <AntCol span={12}>
@@ -319,8 +319,13 @@ class CompanyInformation extends React.Component {
 }
 
 const ListingCard = (props) => {
+
+  let ind = props.industry.split(" ").join("");
+  let industryKey = ind.toLowerCase();
+
   return (
     <div className="company-info-listing-card">
+      {industryIcons[industryKey]}
       <h1>{props.position}</h1>
       <h2>{props.industry}</h2>
     </div>
@@ -332,9 +337,13 @@ const RenderListings = (props) => {
 
   return (
     <div>
+      <AntRow gutter={[32, 16]}>
       {filtered_results.map((listing) => (
+        <AntCol span={6}>
         <ListingCard position={listing.Title} industry={listing.Industry} />
+        </AntCol>
       ))}
+      </AntRow>
     </div>
   );
 };
