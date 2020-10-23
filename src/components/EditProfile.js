@@ -71,7 +71,7 @@ const Header = styled.span`
   font-size: 36px;
   font-family: Lato;
   font-weight: bold;
-  margin-left: 7vh;
+  margin-left: 6vh;
   margin-top: 20px;
   color: #262626;
 `;
@@ -79,7 +79,7 @@ const Header = styled.span`
 const HeaderEmail = styled.span`
   display: flex;
   justify-content: left;
-  margin-left: 7vh;
+  margin-left: 6vh;
   color: #595959;
   font-size: 16px;
 `;
