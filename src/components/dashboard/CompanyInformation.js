@@ -337,8 +337,8 @@ const ListingCard = (props) => {
 
   return (
     <div className="company-info-listing-card">
-      <div style={{textAlign: "center"}}>{industryIcons[industryKey]}</div>
-      <h1 className="sub-card-heading sixteenFont">{props.position}</h1>
+      <div className="mb-1" style={{textAlign: "center"}}>{industryIcons[industryKey]}</div>
+      <h1 className="sub-card-heading eighteenFont">{props.position}</h1>
     </div>
   );
 };

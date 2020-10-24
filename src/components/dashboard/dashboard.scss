@@ -255,8 +255,9 @@ hr {
   @include soft-box-shadow();
   @include light-border-radius();
   text-align: left;
-  padding: 7% 12%;
+  padding: 4vh 2vw;
   text-align: left;
+  word-wrap: break-word;
 
   .sub-card-heading {
     font-family: Lato;
