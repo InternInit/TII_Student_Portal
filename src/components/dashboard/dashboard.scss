@@ -310,6 +310,26 @@ hr {
     width: 100%;
     height: 4vh;
   }
+  @media screen and (max-height: 800px) {
+    display: inline-block;
+    width: 100%;
+    height: 6vh;
+  }
+  @media screen and (max-height: 600px) {
+    display: inline-block;
+    width: 100%;
+    height: 12vh;
+  }
+  @media screen and (max-height: 400px) {
+    display: inline-block;
+    width: 100%;
+    height: 20vh;
+  }
+  @media screen and (max-height: 300px) {
+    display: inline-block;
+    width: 100%;
+    height: 25vh;
+  }
 }
 
 .industry-icon {
