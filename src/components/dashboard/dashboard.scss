@@ -258,14 +258,14 @@ hr {
   text-align: left;
   position: relative;
   word-wrap: break-word;
-  height: 150%;
+  height: 170%;
   padding: 0 7%;
   display: flex;
   flex-direction: column;
   align-content: space-around;
 
   .company-info-listing-card-icon-box {
-    flex-basis: 80%;
+    flex-basis: 70%;
     display: flex;
     align-items: flex-end;
     justify-content: center;
@@ -276,7 +276,7 @@ hr {
     font-style: normal;
     font-weight: medium;
     text-align: center;
-    flex-basis: 70%;
+    flex-basis: 50%;
 
     @media screen and (max-width: $large-breakpoint) {
       @include font-size(14px);

@@ -346,7 +346,7 @@ const ListingCard = (props) => {
   return (
     <AntCol span={isDesktop ? 6 : 12} >
       <div className="company-info-listing-card">
-        <div className="company-info-listing-card-icon-box mb-1">
+        <div className="company-info-listing-card-icon-box">
           <div>{industryIcons[industryKey]}</div>
         </div>
         {/***
