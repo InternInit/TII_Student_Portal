@@ -245,7 +245,7 @@ class CompanyInformation extends React.Component {
                     Open Positions
                   </h1>
                 </AntRow>
-                
+
                 <RenderListings listings={info.listings} />
 
                 <AntRow style={{ width: "100%" }}>
@@ -331,14 +331,15 @@ class CompanyInformation extends React.Component {
 }
 
 const ListingCard = (props) => {
-
   let ind = props.industry.split(" ").join("");
   let industryKey = ind.toLowerCase();
 
   return (
     <div className="company-info-listing-card">
-      <div className="mb-1" style={{textAlign: "center"}}>{industryIcons[industryKey]}</div>
-      <h1 className="sub-card-heading eighteenFont">{props.position}</h1>
+        <div className="company-info-listing-card-icon mb-1" style={{ textAlign: "center"}}>
+          {industryIcons[industryKey]}
+        </div>
+        <h1 className="sub-card-heading eighteenFont">{props.position}</h1>
     </div>
   );
 };
@@ -348,12 +349,12 @@ const RenderListings = (props) => {
 
   return (
     <div>
-      <AntRow gutter={[32, 16]} >
-      {filtered_results.map((listing) => (
-        <AntCol span={6}>
-        <ListingCard position={listing.Title} industry={listing.Industry} />
-        </AntCol>
-      ))}
+      <AntRow gutter={[32, 16]}>
+        {filtered_results.map((listing) => (
+          <AntCol span={6}>
+            <ListingCard position={listing.Title} industry={listing.Industry} />
+          </AntCol>
+        ))}
       </AntRow>
     </div>
   );

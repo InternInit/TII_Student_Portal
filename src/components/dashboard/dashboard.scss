@@ -255,15 +255,18 @@ hr {
   @include soft-box-shadow();
   @include light-border-radius();
   text-align: left;
-  padding: 4vh 2vw;
-  text-align: left;
+  position: relative;
   word-wrap: break-word;
+  height: 17vh;
+  padding: 0 2vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 
   .sub-card-heading {
     font-family: Lato;
     font-style: normal;
     font-weight: bold;
-    margin-bottom: 7%;
     text-align: center;
   }
 }
@@ -375,7 +378,6 @@ hr {
   @media screen and (max-width: $medium-breakpoint) {
     display: none;
   }
-
 }
 
 .companyLocation {
