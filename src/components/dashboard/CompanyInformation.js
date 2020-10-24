@@ -6,6 +6,7 @@ import {
   Row as AntRow,
   Col as AntCol,
   Skeleton,
+  Grid
 } from "antd";
 import {
   AiFillFacebook,
@@ -16,8 +17,11 @@ import { FaInstagram } from "react-icons/fa";
 import { industryIcons } from "./industryIcons";
 import _ from "underscore";
 import { uniq } from "underscore";
+import { useMediaQuery } from "react-responsive";
 
 import { Link } from "react-router-dom";
+
+const { useBreakpoint } = Grid;
 
 const Image = styled.img`
   background-color: #d9d9d9;
@@ -248,7 +252,7 @@ class CompanyInformation extends React.Component {
 
                 <RenderListings listings={info.listings} />
 
-                <div style={{display:"inline-block", width: "100%", height: "2vh"}}/>
+                <div className="company-info-div-break" />
 
                 <AntRow style={{ width: "100%" }}>
                   <h1 className="company-info-subsection-header twentyEightFont mt-4 mb-2 universal-left">
@@ -334,20 +338,23 @@ class CompanyInformation extends React.Component {
 
 const ListingCard = (props) => {
   let ind = props.industry.split(" ").join("");
-  let industryKey = ind.toLowerCase();
+  const industryKey = ind.toLowerCase();
+
+  const screens = useBreakpoint();
+  const isDesktop = Object.entries(screens).filter(screen => !!screen[1]).length > 2;
 
   return (
-    <div className="company-info-listing-card">
+    <AntCol span={isDesktop ? 6 : 12} >
+      <div className="company-info-listing-card">
         <div className="company-info-listing-card-icon-box mb-1">
-          <div>
-          {industryIcons[industryKey]}
-          </div>
+          <div>{industryIcons[industryKey]}</div>
         </div>
         {/***
          * Font-size assigned in CSS class to adjust based on card resizing
          */}
         <h1 className="sub-card-heading sixteenFont">{props.position}</h1>
-    </div>
+      </div>
+    </AntCol>
   );
 };
 
@@ -356,11 +363,9 @@ const RenderListings = (props) => {
 
   return (
     <div>
-      <AntRow gutter={[32, 16]} style={{marginBottom: "4vh"}}>
+      <AntRow gutter={[32, 16]} style={{ marginBottom: "4vh" }}>
         {filtered_results.map((listing) => (
-          <AntCol span={6}>
-            <ListingCard position={listing.Title} industry={listing.Industry} />
-          </AntCol>
+          <ListingCard position={listing.Title} industry={listing.Industry} />
         ))}
       </AntRow>
     </div>
