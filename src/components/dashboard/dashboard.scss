@@ -16,6 +16,9 @@ $medium-breakpoint: 768px;
 $large-breakpoint: 992px;
 $x-large-breakpoint: 1200px;
 $medium-dark-gray: #434343;
+$background-color: #ebeff2;
+$gray-two: #e2e8ed;
+$gray-thirteen: #425866;
 
 //Mixins
 @mixin standard-box-shadow {
@@ -23,7 +26,8 @@ $medium-dark-gray: #434343;
 }
 
 @mixin soft-box-shadow {
-  box-shadow: 1px 1px 7px rgba(0, 0, 0, 0.25);
+  //box-shadow: 1px 1px 7px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 0px 15px -8px rgba(0, 0, 0, 0.25);
 }
 
 @mixin standard-border-radius {
@@ -32,6 +36,10 @@ $medium-dark-gray: #434343;
 
 @mixin light-border-radius {
   border-radius: 10px;
+}
+
+@mixin standard-light-border {
+  border: 1px solid $gray-two;
 }
 
 @mixin standard-box-shadow-hover {
@@ -234,6 +242,7 @@ hr {
 .company-info-sub-card {
   @include soft-box-shadow();
   @include light-border-radius();
+  @include standard-light-border();
   padding: 7% 12%;
   text-align: left;
 
@@ -255,31 +264,40 @@ hr {
 .company-info-listing-card {
   @include soft-box-shadow();
   @include light-border-radius();
+  @include standard-light-border();
   text-align: left;
   position: relative;
   word-wrap: break-word;
-  height: 170%;
-  padding: 0 7%;
+  height: 330%;
+  padding: 0 5%;
   display: flex;
   flex-direction: column;
-  align-content: space-around;
 
   .company-info-listing-card-icon-box {
-    flex-basis: 70%;
+    flex-basis: 50%;
     display: flex;
     align-items: flex-end;
     justify-content: center;
   }
 
-  .sub-card-heading {
-    font-family: Roboto;
-    font-style: normal;
-    font-weight: medium;
-    text-align: center;
+  .company-info-listing-card-position-box {
     flex-basis: 50%;
+    position: relative;
+    display: block;
+    height: 30%;
+    width: 100%;
 
-    @media screen and (max-width: $large-breakpoint) {
-      @include font-size(14px);
+    .sub-card-heading {
+      font-family: Roboto;
+      font-style: normal;
+      font-weight: medium;
+      text-align: center;
+      position: absolute;
+      width: 100%;
+
+      @media screen and (max-width: $large-breakpoint) {
+        @include font-size(14px);
+      }
     }
   }
 }
@@ -287,10 +305,10 @@ hr {
 .company-info-div-break {
   display: none;
 
-  @media screen and (max-height: 700px) {
+  @media screen and (max-height: 1000px) {
     display: inline-block;
     width: 100%;
-    height: 2vh;
+    height: 4vh;
   }
 }
 

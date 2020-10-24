@@ -6,7 +6,7 @@ import {
   Row as AntRow,
   Col as AntCol,
   Skeleton,
-  Grid
+  Grid,
 } from "antd";
 import {
   AiFillFacebook,
@@ -341,10 +341,11 @@ const ListingCard = (props) => {
   const industryKey = ind.toLowerCase();
 
   const screens = useBreakpoint();
-  const isDesktop = Object.entries(screens).filter(screen => !!screen[1]).length > 2;
+  const isDesktop =
+    Object.entries(screens).filter((screen) => !!screen[1]).length > 2;
 
   return (
-    <AntCol span={isDesktop ? 6 : 12} >
+    <AntCol span={isDesktop ? 6 : 12}>
       <div className="company-info-listing-card">
         <div className="company-info-listing-card-icon-box">
           <div>{industryIcons[industryKey]}</div>
@@ -352,7 +353,9 @@ const ListingCard = (props) => {
         {/***
          * Font-size assigned in CSS class to adjust based on card resizing
          */}
-        <h1 className="sub-card-heading sixteenFont">{props.position}</h1>
+        <div className="company-info-listing-card-position-box">
+          <h1 className="sub-card-heading sixteenFont">{props.position}</h1>
+        </div>
       </div>
     </AntCol>
   );
