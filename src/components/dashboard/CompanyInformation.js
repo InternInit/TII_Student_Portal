@@ -208,7 +208,7 @@ class CompanyInformation extends React.Component {
                 </AntRow>
 
                 <AntRow style={{ width: "100%" }}>
-                  <h1 className="company-info-subsection-header thirtySixFont">
+                  <h1 className="company-info-subsection-header twentyEightFont mt-2 mb-2 universal-left">
                     Company Overview
                   </h1>
                 </AntRow>
@@ -239,10 +239,22 @@ class CompanyInformation extends React.Component {
                       : "Read More"}
                   </p>
                 </Row>
+
+                <AntRow style={{ width: "100%" }}>
+                  <h1 className="company-info-subsection-header twentyEightFont mt-4 mb-2 universal-left">
+                    Open Positions
+                  </h1>
+                </AntRow>
                 
                 <RenderListings listings={info.listings} />
 
-                <AntRow gutter={[32, 16]} style={{ marginTop: "5%" }}>
+                <AntRow style={{ width: "100%" }}>
+                  <h1 className="company-info-subsection-header twentyEightFont mt-4 mb-2 universal-left">
+                    About
+                  </h1>
+                </AntRow>
+
+                <AntRow gutter={[32, 16]}>
                   <AntCol span={12}>
                     <div className="company-info-sub-card">
                       <h1 className="sub-card-heading twentyEightFont">
@@ -325,9 +337,8 @@ const ListingCard = (props) => {
 
   return (
     <div className="company-info-listing-card">
-      {industryIcons[industryKey]}
-      <h1>{props.position}</h1>
-      <h2>{props.industry}</h2>
+      <div style={{textAlign: "center"}}>{industryIcons[industryKey]}</div>
+      <h1 className="sub-card-heading sixteenFont">{props.position}</h1>
     </div>
   );
 };
@@ -337,7 +348,7 @@ const RenderListings = (props) => {
 
   return (
     <div>
-      <AntRow gutter={[32, 16]}>
+      <AntRow gutter={[32, 16]} >
       {filtered_results.map((listing) => (
         <AntCol span={6}>
         <ListingCard position={listing.Title} industry={listing.Industry} />

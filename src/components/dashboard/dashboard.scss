@@ -211,8 +211,6 @@ hr {
   font-weight: bold;
   width: 100%;
   text-align: center;
-  margin-top: 4vh;
-  margin-bottom: 4vh;
 }
 
 .company-info-description {
@@ -257,6 +255,16 @@ hr {
   @include soft-box-shadow();
   @include light-border-radius();
   text-align: left;
+  padding: 7% 12%;
+  text-align: left;
+
+  .sub-card-heading {
+    font-family: Lato;
+    font-style: normal;
+    font-weight: bold;
+    margin-bottom: 7%;
+    text-align: center;
+  }
 }
 /*
 ============================================================
