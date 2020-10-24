@@ -336,10 +336,15 @@ const ListingCard = (props) => {
 
   return (
     <div className="company-info-listing-card">
-        <div className="company-info-listing-card-icon mb-1" style={{ textAlign: "center"}}>
+        <div className="company-info-listing-card-icon-box mb-1">
+          <div>
           {industryIcons[industryKey]}
+          </div>
         </div>
-        <h1 className="sub-card-heading eighteenFont">{props.position}</h1>
+        {/***
+         * Font-size assigned in CSS class to adjust based on card resizing
+         */}
+        <h1 className="sub-card-heading sixteenFont">{props.position}</h1>
     </div>
   );
 };
@@ -349,7 +354,7 @@ const RenderListings = (props) => {
 
   return (
     <div>
-      <AntRow gutter={[32, 16]}>
+      <AntRow gutter={[32, 16]} style={{marginBottom: "4vh"}}>
         {filtered_results.map((listing) => (
           <AntCol span={6}>
             <ListingCard position={listing.Title} industry={listing.Industry} />
