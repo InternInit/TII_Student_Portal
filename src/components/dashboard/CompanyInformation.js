@@ -248,6 +248,8 @@ class CompanyInformation extends React.Component {
 
                 <RenderListings listings={info.listings} />
 
+                <div style={{display:"inline-block", width: "100%", height: "2vh"}}/>
+
                 <AntRow style={{ width: "100%" }}>
                   <h1 className="company-info-subsection-header twentyEightFont mt-4 mb-2 universal-left">
                     About
