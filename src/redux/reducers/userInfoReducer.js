@@ -57,7 +57,7 @@ const userInfoReducer = (
     case "REMOVE_ONE_BUSINESS":
       return {
         ...state,
-        pinnedBusinesses: state.pinnedBusinesses.filter(
+        activeBusinesses: state.activeBusinesses.filter(
           (business) => business.Id !== action.businessId
         ),
       };

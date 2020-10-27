@@ -55,7 +55,7 @@ import {
   batchUpdateCompletionState,
   batchUpdateCompletionChecklist,
   finishLoading,
-  removeOneBusiness
+  removeOneBusiness,
 } from "./redux/actions";
 
 import devConfigurationFile from "./configuration_dev.json";
@@ -121,7 +121,7 @@ const mapDispatchToProps = {
   batchUpdateCompletionState,
   batchUpdateCompletionChecklist,
   finishLoading,
-  removeOneBusiness
+  removeOneBusiness,
 };
 
 class App extends Component {
@@ -144,8 +144,7 @@ class App extends Component {
     console.log("mounted");
     this.auth();
     this.getCachedCompletionState();
-    this.getPinnedBusinesses();
-    this.getActiveApplications();
+    this.fetchAssociatedBusinessIds();
     window.addEventListener("resize", this.resize);
   }
 
@@ -340,7 +339,7 @@ class App extends Component {
         this.props.removeOneBusiness(businessId);
       });
   };
-
+  /*
   getPinnedBusinesses = async () => {
     let token = await this.getJwt();
 
@@ -358,8 +357,9 @@ class App extends Component {
         this.matchBusinessesPinned(data);
       });
   };
+  */
 
-  getActiveApplications = async () => {
+  fetchAssociatedBusinessIds = async () => {
     let token = await this.getJwt();
 
     fetch("/api/get_business_by_status", {
@@ -374,13 +374,13 @@ class App extends Component {
       .then((data) => {
         let parsedData = JSON.parse(data);
         console.log(parsedData);
-        this.matchBusinessesActive(
+        this.matchAssociatedBusinessInfo(
           JSON.stringify(parsedData[0]),
           parsedData[1]
         );
       });
   };
-
+  /*
   matchBusinessesPinned = (businessList) => {
     fetch("/api/match_businesses", {
       method: "POST",
@@ -393,6 +393,7 @@ class App extends Component {
           JSON.parse(data).hits.hits.forEach((item) =>
             matchedBusinessesArray.push(item._source)
           );
+          console.log(matchedBusinessesArray);
           this.props.updatePinnedBusinesses(matchedBusinessesArray);
         } catch (e) {
           console.log(data);
@@ -400,8 +401,9 @@ class App extends Component {
         }
       });
   };
+  */
 
-  matchBusinessesActive = (businessList, statusList) => {
+  matchAssociatedBusinessInfo = (businessList, statusList) => {
     fetch("/api/match_businesses", {
       method: "POST",
       body: JSON.parse(JSON.stringify(businessList)),
@@ -409,17 +411,18 @@ class App extends Component {
       .then((response) => response.json())
       .then((data) => {
         try {
-          let matchedBusinessesArray = [];
-          JSON.parse(data).hits.hits.forEach((item) =>
-            matchedBusinessesArray.push(item._source)
-          );
-          matchedBusinessesArray.forEach(
-            (item, index) => (item.status = statusList[item.Id])
-          );
-          console.log(matchedBusinessesArray);
-          this.props.updateActiveApplications(matchedBusinessesArray);
+          let pinnedBusinessArray = [];
+          let activeAppsArray = [];
+          JSON.parse(data).hits.hits.forEach((item) => {
+            item._source.status = statusList[item._source.Id];
+            item._source.status === "Pinned"
+              ? pinnedBusinessArray.push(item._source)
+              : activeAppsArray.push(item._source);
+          });
+
+          this.props.updatePinnedBusinesses(pinnedBusinessArray);
+          this.props.updateActiveApplications(activeAppsArray);
         } catch (e) {
-          console.log(data);
           console.log(e);
         }
       });

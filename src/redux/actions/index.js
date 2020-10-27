@@ -116,26 +116,26 @@ export const startLoading = (loadingStatus) => {
   return {
     type: "START_LOADING",
     loadingStatus,
-  }
-}
+  };
+};
 
 export const finishLoading = (loadingStatus) => {
   return {
     type: "FINISH_LOADING",
     loadingStatus,
-  }
-}
+  };
+};
 
 export const addBusiness = (businessId) => {
   return {
     type: "FINISH_LOADING",
-    businessId
-  }
-}
+    businessId,
+  };
+};
 
 export const removeOneBusiness = (businessId) => {
   return {
     type: "REMOVE_ONE_BUSINESS",
-    businessId
-  }
-}
+    businessId,
+  };
+};
