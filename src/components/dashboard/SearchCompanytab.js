@@ -98,6 +98,8 @@ class SearchCompanytab extends React.Component {
           location={location}
           companyid={companyid}
           updateBusinessStatus={this.props.updateBusinessStatus}
+          addPinnedBusiness={this.props.addPinnedBusiness}
+          companyObject={this.props.companyObject}
         />
       );
     }
@@ -192,6 +194,7 @@ class QuickView extends React.Component {
     console.log(this.props);
     message.success(`Company Pinned! 🎉`);
     this.props.updateBusinessStatus(this.props.companyid, "Pinned");
+    this.props.addPinnedBusiness(this.props.companyObject);
   };
 
   render() {
@@ -257,7 +260,7 @@ class QuickView extends React.Component {
                     marginTop: "24px",
                     width: "100%",
                     justifyContent: "space-between",
-                    flexWrap: "wrap"
+                    flexWrap: "wrap",
                   }}
                 >
                   <div style={{ alignSelf: "flex-start" }}>
