@@ -39,7 +39,7 @@ class PinCompany extends Component {
 
   render() {
     let { page, busPerPage } = this.state;
-    let { pinnedBusinesses, updateBusinessStatus } = this.props;
+    let { pinnedBusinesses, updateBusinessStatus, removeBusiness } = this.props;
     return (
       <React.Fragment>
         {/**
@@ -77,6 +77,7 @@ class PinCompany extends Component {
                       avatar={pinnedCompany.avatar}
                       companyid={pinnedCompany.Id}
                       updateBusinessStatus={updateBusinessStatus}
+                      removeBusiness={removeBusiness}
                     />
                   </div>
                 ))}
