@@ -91,6 +91,7 @@ class Companytab extends React.Component {
             companyid={this.props.companyid}
             name={this.props.name}
             updateBusinessStatus={this.props.updateBusinessStatus}
+            removeBusiness={this.props.removeBusiness}
           />
         </Panel>
       </Collapse>

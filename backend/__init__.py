@@ -191,5 +191,11 @@ def update_business_status():
     req = requests.post(businessApiUrl, headers = {"Authorization" : headers.get("Authorization"), "Content-Type" : headers.get("Content-Type"), "businessId" : headers.get("businessId")}, json=request.get_data().decode("utf-8"))
     return jsonify(req.text)
 
+@app.route("/api/remove_business", methods=["GET"])
+def remove_business():
+    headers = request.headers
+    req = requests.delete(url=businessApiUrl, headers = {"Authorization" : headers.get("Authorization"), "Content-Type" : headers.get("Content-Type"), "businessId" : headers.get("businessId")})
+    return jsonify("Ok")
+
 if __name__ == "__main__":
     app.run(debug=True)

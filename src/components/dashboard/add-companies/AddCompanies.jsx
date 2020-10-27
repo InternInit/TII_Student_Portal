@@ -46,7 +46,7 @@ const industry = [
   "General Business",
   "Consulting",
   "Finance or Accounting",
-  "Media or Tellecommunications",
+  "Media or Telecommunications",
   "Real Estate",
   "Engineering",
   "Science Research",
@@ -78,7 +78,7 @@ class AddCompanies extends React.Component {
       page: 0,
       busPerPage: 10,
       mergedIndustry:
-        "General BusinessConsultingFinance or AccountingMedia or TellecommunicationsReal EstateEngineeringScience ResearchComputer ScienceBiotechnologyVocationalPoliticalMarketing",
+        "General BusinessConsultingFinance or AccountingMedia or TelecommunicationsReal EstateEngineeringScience ResearchComputer ScienceBiotechnologyVocationalPoliticalMarketing",
     };
     this.searchCompany = this.searchCompany.bind(this);
     this.filterIndustries = this.filterIndustries.bind(this);
@@ -421,7 +421,7 @@ class AddCompanies extends React.Component {
       this.setState({
         page: 0,
         mergedIndustry:
-          "General BusinessBusinessConsultingFinance or AccountingMedia or TellecommunicationsReal EstateEngineeringScience ResearchComputer ScienceBiotechnologyVocationalPoliticalMarketing",
+          "General BusinessBusinessConsultingFinance or AccountingMedia or TelecommunicationsReal EstateEngineeringScience ResearchComputer ScienceBiotechnologyVocationalPoliticalMarketing",
       });
     }
   };
