@@ -336,13 +336,8 @@ class App extends Component {
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
-        //Placeholder behavior to pinpoint memoization bug
-        //#########################################
-        //this.props.updatePinnedBusinesses([]);
-        //#########################################
+        //To revert to prev version, please refer to code in updateBusinessStatus
         this.props.removeOneBusiness(businessId);
-        //this.getPinnedBusinesses();
-        //this.getActiveApplications();
       });
   };
 
