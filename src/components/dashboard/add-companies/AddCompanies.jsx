@@ -330,8 +330,6 @@ class AddCompanies extends React.Component {
                  *
                  */}
                 <QueueAnim
-                  type="scale"
-                  ease={["easeOutQuart", "easeInOutQuart"]}
                 >
                   {filteredInfo
                     .slice(
