@@ -85,7 +85,7 @@ class SearchCompanytab extends React.Component {
 
     let showDescription = description;
     if (description.length >= 250) {
-      showDescription = description.substring(0, 250) + ". . .";
+      showDescription = description.substring(0, 250) + " . . .";
     }
 
     if (show === true) {
