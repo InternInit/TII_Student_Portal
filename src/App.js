@@ -315,14 +315,6 @@ class App extends Component {
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
-        //Placeholder behavior to pinpoint memoization bug
-        //#########################################
-        /*
-        this.props.updatePinnedBusinesses([]);
-        //#########################################
-        this.getPinnedBusinesses();
-        this.getActiveApplications();
-        */
       });
   };
 
@@ -343,25 +335,6 @@ class App extends Component {
         this.props.removePinnedBusiness(businessId);
       });
   };
-  /*
-  getPinnedBusinesses = async () => {
-    let token = await this.getJwt();
-
-    fetch("/api/get_business_by_status", {
-      method: "POST",
-      headers: {
-        Authorization: "Bearer " + JSON.parse(JSON.stringify(token)),
-        "Content-Type": "text/plain",
-      },
-      body: JSON.parse(JSON.stringify("Pinned")),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-        this.matchBusinessesPinned(data);
-      });
-  };
-  */
 
   fetchAssociatedBusinessIds = async () => {
     let token = await this.getJwt();
@@ -384,28 +357,6 @@ class App extends Component {
         );
       });
   };
-  /*
-  matchBusinessesPinned = (businessList) => {
-    fetch("/api/match_businesses", {
-      method: "POST",
-      body: JSON.parse(JSON.stringify(businessList)),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        try {
-          let matchedBusinessesArray = [];
-          JSON.parse(data).hits.hits.forEach((item) =>
-            matchedBusinessesArray.push(item._source)
-          );
-          console.log(matchedBusinessesArray);
-          this.props.updatePinnedBusinesses(matchedBusinessesArray);
-        } catch (e) {
-          console.log(data);
-          console.log(e);
-        }
-      });
-  };
-  */
 
   matchAssociatedBusinessInfo = (businessList, statusList) => {
     fetch("/api/match_businesses", {
