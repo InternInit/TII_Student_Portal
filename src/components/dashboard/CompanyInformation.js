@@ -16,8 +16,6 @@ import {
 import { FaInstagram } from "react-icons/fa";
 import { industryIcons } from "./industryIcons";
 import _ from "underscore";
-import { uniq } from "underscore";
-import { useMediaQuery } from "react-responsive";
 
 import { Link } from "react-router-dom";
 
