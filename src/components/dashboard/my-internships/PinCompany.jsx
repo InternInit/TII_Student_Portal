@@ -76,12 +76,15 @@ class PinCompany extends Component {
                 .map((pinnedCompany, index) => (
                   <div style={{ marginBottom: "12px" }} key={index}>
                     <Companytab
+                      companyObject={pinnedCompany}
                       name={pinnedCompany.name}
                       industry={pinnedCompany.industry}
                       avatar={pinnedCompany.avatar}
                       companyid={pinnedCompany.Id}
                       updateBusinessStatus={updateBusinessStatus}
                       disassociatePinnedBusiness={disassociatePinnedBusiness}
+                      removePinnedBusiness={this.props.removePinnedBusiness}
+                      addActiveApp={this.props.addActiveApp}
                     />
                   </div>
                 ))}

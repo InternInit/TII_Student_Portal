@@ -106,6 +106,8 @@ class Dashboard extends Component {
                     disassociatePinnedBusiness={
                       this.props.disassociatePinnedBusiness
                     }
+                    removePinnedBusiness={this.props.removePinnedBusiness}
+                    addActiveApp={this.props.addActiveApp}
                   />
                 </Route>
 

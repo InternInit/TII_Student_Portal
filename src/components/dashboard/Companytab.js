@@ -83,10 +83,13 @@ class Companytab extends React.Component {
            * Dropdown
            */}
           <DroppedView
+            companyObject={this.props.companyObject}
             companyid={this.props.companyid}
             name={this.props.name}
             updateBusinessStatus={this.props.updateBusinessStatus}
             disassociatePinnedBusiness={this.props.disassociatePinnedBusiness}
+            removePinnedBusiness={this.props.removePinnedBusiness}
+            addActiveApp={this.props.addActiveApp}
           />
         </Panel>
       </Collapse>
@@ -230,6 +233,9 @@ class DroppedView extends React.Component {
   submitResponse = () => {
     message.success("Your application was sent successfully.");
     this.props.updateBusinessStatus(this.props.companyid, "Pending");
+    this.props.removePinnedBusiness(this.props.companyid);
+    this.props.companyObject.status = "Pending";
+    this.props.addActiveApp(this.props.companyObject);
   };
 
   cancelReponse = () => {
