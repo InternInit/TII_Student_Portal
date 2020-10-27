@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import QueueAnim from "rc-queue-anim";
-import {CSSTransition} from "react-transition-group";
+import { CSSTransition } from "react-transition-group";
 import { Link } from "react-router-dom";
 import { Button, Avatar, message } from "antd";
 import {
@@ -91,6 +91,42 @@ class SearchCompanytab extends React.Component {
 
     return (
       <>
+        {!show && (
+          <div onClick={this.handleClick}>
+            <CSSTransition
+              in={!show}
+              timeout={200}
+              classNames="add-company-normalview"
+              unmountOnExit
+            >
+              <CLabel name={name} industry={industry} logo={logo} />
+            </CSSTransition>
+          </div>
+        )}
+        <div onClick={this.handleClick}>
+          <CSSTransition
+            in={show}
+            timeout={200}
+            classNames="add-company-quickview"
+            unmountOnExit
+          >
+            <QuickView
+              companyFull={this.props.companyFull}
+              name={name}
+              industry={industry}
+              image={image}
+              description={showDescription}
+              location={location}
+              companyid={companyid}
+              updateBusinessStatus={this.props.updateBusinessStatus}
+            />
+          </CSSTransition>
+        </div>
+      </>
+    );
+    /*
+    return (
+      <>
         {show ? (
           <div onClick={this.handleClick}>
             <QuickView
@@ -129,10 +165,10 @@ class SearchCompanytab extends React.Component {
 
     return (
       <div onClick={this.handleClick}>
-        {/**Tab variable, is switched between quickview and standard */}
         {ctab}
       </div>
     );
+    */
   }
 
   //Handles Switching of Tab
