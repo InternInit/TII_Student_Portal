@@ -249,10 +249,8 @@ class CompanyInformation extends React.Component {
 
                 <RenderListings listings={info.listings} />
 
-                <div className="company-info-div-break" />
-
                 <AntRow style={{ width: "100%" }}>
-                  <h1 className="company-info-subsection-header twentyEightFont mt-4 mb-2 universal-left">
+                  <h1 className="company-info-subsection-header twentyEightFont mt-2 mb-2 universal-left">
                     About
                   </h1>
                 </AntRow>
@@ -297,6 +295,7 @@ const ListingCard = (props) => {
     Object.entries(screens).filter((screen) => !!screen[1]).length > 2;
 
   return (
+    <>
     <AntCol span={isDesktop ? 6 : 12}>
       <div className="company-info-listing-card">
         <div className="company-info-listing-card-icon-box">
@@ -310,6 +309,7 @@ const ListingCard = (props) => {
         </div>
       </div>
     </AntCol>
+    </>
   );
 };
 
