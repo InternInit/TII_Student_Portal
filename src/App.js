@@ -300,7 +300,7 @@ class App extends Component {
     }).then((response) => {});
   };
 
-  updateBusinessStatus = async (businessId, status) => {
+  updateBusinessStatus = async (businessId, status, companyFull) => {
     let token = await this.getJwt();
 
     fetch("/api/update_business_status", {

@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import QueueAnim from "rc-queue-anim";
+import { CSSTransition } from "react-transition-group";
 import { Link } from "react-router-dom";
 import { Button, Avatar, message } from "antd";
 import {
@@ -85,12 +86,73 @@ class SearchCompanytab extends React.Component {
 
     let showDescription = description;
     if (description.length >= 250) {
-      showDescription = description.substring(0, 250) + ". . .";
+      showDescription = description.substring(0, 250) + " . . .";
     }
+
+    return (
+      <>
+        {!show && (
+          <div onClick={this.handleClick}>
+            <CSSTransition
+              in={!show}
+              timeout={200}
+              classNames="add-company-normalview"
+              unmountOnExit
+            >
+              <CLabel name={name} industry={industry} logo={logo} />
+            </CSSTransition>
+          </div>
+        )}
+        <div onClick={this.handleClick}>
+          <CSSTransition
+            in={show}
+            timeout={200}
+            classNames="add-company-quickview"
+            unmountOnExit
+          >
+            <QuickView
+              companyObject={this.props.companyObject}
+              name={name}
+              industry={industry}
+              image={image}
+              description={showDescription}
+              location={location}
+              companyid={companyid}
+              updateBusinessStatus={this.props.updateBusinessStatus}
+              addPinnedBusiness={this.props.addPinnedBusiness}
+            />
+          </CSSTransition>
+        </div>
+      </>
+    );
+    /*
+    return (
+      <>
+        {show ? (
+          <div onClick={this.handleClick}>
+            <QuickView
+              companyFull={this.props.companyFull}
+              name={name}
+              industry={industry}
+              image={image}
+              description={showDescription}
+              location={location}
+              companyid={companyid}
+              updateBusinessStatus={this.props.updateBusinessStatus}
+            />
+          </div>
+        ) : (
+          <div onClick={this.handleClick}>
+            <CLabel name={name} industry={industry} logo={logo} />
+          </div>
+        )}
+      </>
+    );
 
     if (show === true) {
       ctab = (
         <QuickView
+          companyFull={this.props.companyFull}
           name={name}
           industry={industry}
           image={image}
@@ -106,10 +168,10 @@ class SearchCompanytab extends React.Component {
 
     return (
       <div onClick={this.handleClick}>
-        {/**Tab variable, is switched between quickview and standard */}
         {ctab}
       </div>
     );
+    */
   }
 
   //Handles Switching of Tab
@@ -137,7 +199,7 @@ class CLabel extends React.Component {
       companyName = name;
     }
     return (
-      <QueueAnim type="scale" ease={["easeOutQuart", "easeInOutQuart"]}>
+      <>
         {mapping.map((item, index) => (
           <div key={index}>
             <TabContainer>
@@ -178,7 +240,7 @@ class CLabel extends React.Component {
             </TabContainer>
           </div>
         ))}
-      </QueueAnim>
+      </>
     );
   }
 }
@@ -208,8 +270,7 @@ class QuickView extends React.Component {
     } = this.props;
 
     return (
-      <QueueAnim type="scale" ease={["easeOutQuart", "easeInOutQuart"]}>
-        {this.resize}
+      <>
         {mapping.map((item, index) => (
           <div key={index}>
             <TabContainer
@@ -301,7 +362,7 @@ class QuickView extends React.Component {
             </TabContainer>
           </div>
         ))}
-      </QueueAnim>
+      </>
     );
   }
 }

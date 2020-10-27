@@ -329,10 +329,7 @@ class AddCompanies extends React.Component {
                  * Mapping of search results
                  *
                  */}
-                <QueueAnim
-                  type="scale"
-                  ease={["easeOutQuart", "easeInOutQuart"]}
-                >
+                <QueueAnim>
                   {filteredInfo
                     .slice(
                       page * this.state.busPerPage,
