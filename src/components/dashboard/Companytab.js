@@ -99,7 +99,7 @@ export default Companytab;
 class CLabel extends React.Component {
 
   handleClick = (e) => {
-    e.preventDefault();
+    e.stopPropagation();
     this.props.removeBusiness(this.props.companyid);
 
   }
