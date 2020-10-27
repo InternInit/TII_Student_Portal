@@ -23,31 +23,8 @@ import { Link } from "react-router-dom";
 
 const { useBreakpoint } = Grid;
 
-const Image = styled.img`
-  background-color: #d9d9d9;
-  width: 100%;
-  margin-left: 2vh;
-  margin-right: 2vh;
-  height: 225px;
-  border-radius: 8px;
-  object-fit: cover;
-`;
-
-const Caption = styled.div`
-  display: flex;
-  text-align: left;
-  font-weight: normal;
-  color: 000;
-  width: 100%;
-`;
-
 const Header = styled.div`
   margin-top: 30px;
-`;
-
-const SectionHeader = styled.span`
-  color: black;
-  font-weight: normal;
 `;
 
 const Row = styled.div`
@@ -159,7 +136,27 @@ class CompanyInformation extends React.Component {
     }
 
     if (isLoading) {
-      return <Skeleton />;
+      return (
+        <>
+          <Breadcrumb
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              fontWeight: "500",
+              marginTop: "2vh",
+            }}
+            className="eighteenFont"
+          >
+            <Link to="/dashboard/add-companies">
+              <Breadcrumb.Item>Add Companies</Breadcrumb.Item>
+            </Link>
+            <Breadcrumb.Item>
+              <Skeleton.Input size="small" style={{ width: "10vw" }} />{" "}
+            </Breadcrumb.Item>
+          </Breadcrumb>
+          <CompanyInformationSkeleton />
+        </>
+      );
     } else {
       console.log(info);
       return (
@@ -331,7 +328,6 @@ const RenderListings = (props) => {
 };
 
 const AboutSection = ({ info }) => {
-
   const screens = useBreakpoint();
   const isDesktop =
     Object.entries(screens).filter((screen) => !!screen[1]).length > 2;
@@ -367,6 +363,116 @@ const AboutSection = ({ info }) => {
         </div>
       </AntCol>
     </AntRow>
+  );
+};
+
+const CompanyInformationSkeleton = (props) => {
+  const screens = useBreakpoint();
+
+  const isDesktop =
+    Object.entries(screens).filter((screen) => !!screen[1]).length > 2;
+
+  return (
+    <>
+      <div className="company-info-card">
+        <div className="company-info-banner-skeleton" />
+        <div className="company-info-inner-content-skeleton">
+          <AntRow>
+            <Skeleton.Avatar active size={75} style={{ float: "left" }} />
+            <div style={{ marginLeft: "2vw" }}>
+              <div style={{ marginBottom: "1vh" }}>
+                <Skeleton.Input active size="large" style={{ width: "17vw" }} />
+              </div>
+              <div className="universal-left">
+                <Skeleton.Input active size="small" style={{ width: "12vw" }} />
+              </div>
+            </div>
+          </AntRow>
+          <AntRow style={{ width: "100%" }}>
+            <h1 className="company-info-subsection-header twentyEightFont mt-2 mb-2 universal-left">
+              Company Overview
+            </h1>
+          </AntRow>
+          <AntRow>
+            <Skeleton
+              active
+              className="company-info-description-skeleton"
+              title={false}
+              paragraph={{ rows: 8 }}
+            />
+          </AntRow>
+          <AntRow style={{ width: "100%" }}>
+            <h1 className="company-info-subsection-header twentyEightFont mt-4 mb-2 universal-left">
+              Open Positions
+            </h1>
+          </AntRow>
+          <AntRow gutter={[32, 16]}>
+            <AntCol span={isDesktop ? 6 : 12}>
+              <div
+                className="company-info-listing-card-skeleton"
+                style={{ textAlign: "center" }}
+              >
+                <Skeleton.Avatar active size={48} />
+                <Skeleton.Input
+                  active
+                  className="mt-1"
+                  style={{ textAlign: "center", width: "8vw" }}
+                />
+              </div>
+            </AntCol>
+            <AntCol span={isDesktop ? 6 : 12}>
+              <div
+                className="company-info-listing-card-skeleton"
+                style={{ textAlign: "center" }}
+              >
+                <Skeleton.Avatar active size={48} />
+                <Skeleton.Input
+                  active
+                  className="mt-1"
+                  style={{ textAlign: "center", width: "8vw" }}
+                />
+              </div>
+            </AntCol>
+          </AntRow>
+          <div className="company-info-div-break" />
+          <AntRow style={{ width: "100%" }}>
+            <h1 className="company-info-subsection-header twentyEightFont mt-4 mb-2 universal-left">
+              About
+            </h1>
+          </AntRow>
+          <AntRow gutter={[32, 16]}>
+            <AntCol span={isDesktop ? 12 : 24}>
+              <div className="company-info-sub-card">
+                <h1 className="sub-card-heading twentyEightFont">
+                  Internship Facts
+                </h1>
+                <h2 className="sub-card-sub-heading sixteenFont">Industry</h2>
+                <Skeleton active title={false} paragraph={{ rows: 1 }} />
+                <h2 className="sub-card-sub-heading sixteenFont">Work Time</h2>
+                <Skeleton active title={false} paragraph={{ rows: 1 }} />
+                <h2 className="sub-card-sub-heading sixteenFont">
+                  Additional Information
+                </h2>
+                <Skeleton active title={false} paragraph={{ rows: 1 }} />
+              </div>
+            </AntCol>
+            <AntCol span={isDesktop ? 12 : 24}>
+              <div className="company-info-sub-card">
+                <h1 className="sub-card-heading twentyEightFont">Contact</h1>
+                <h2 className="sub-card-sub-heading sixteenFont">Website</h2>
+                <Skeleton active title={false} paragraph={{ rows: 1 }} />
+                <h2 className="sub-card-sub-heading sixteenFont">Email</h2>
+                <Skeleton active title={false} paragraph={{ rows: 1 }} />
+                <h2 className="sub-card-sub-heading sixteenFont">
+                  Phone Number
+                </h2>
+                <Skeleton active title={false} paragraph={{ rows: 1 }} />
+              </div>
+            </AntCol>
+          </AntRow>
+        </div>
+      </div>
+    </>
   );
 };
 
