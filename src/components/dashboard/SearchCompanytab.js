@@ -91,6 +91,7 @@ class SearchCompanytab extends React.Component {
     if (show === true) {
       ctab = (
         <QuickView
+          companyFull={this.props.companyFull}
           name={name}
           industry={industry}
           image={image}
@@ -191,7 +192,7 @@ class QuickView extends React.Component {
   addCompany = () => {
     console.log(this.props);
     message.success(`Company Pinned! 🎉`);
-    this.props.updateBusinessStatus(this.props.companyid, "Pinned");
+    this.props.updateBusinessStatus(this.props.companyid, "Pinned", this.props.companyFull);
   };
 
   render() {
@@ -257,7 +258,7 @@ class QuickView extends React.Component {
                     marginTop: "24px",
                     width: "100%",
                     justifyContent: "space-between",
-                    flexWrap: "wrap"
+                    flexWrap: "wrap",
                   }}
                 >
                   <div style={{ alignSelf: "flex-start" }}>

@@ -61,6 +61,11 @@ const userInfoReducer = (
           (business) => business.Id !== action.businessId
         ),
       };
+    case "ADD_ONE_BUSINESS":
+      return {
+        ...state,
+        pinnedBusinesses: state.pinnedBusinesses.concat(action.business),
+      }
     default:
       return state;
   }

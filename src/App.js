@@ -55,7 +55,8 @@ import {
   batchUpdateCompletionState,
   batchUpdateCompletionChecklist,
   finishLoading,
-  removeOneBusiness
+  removeOneBusiness,
+  addOneBusiness
 } from "./redux/actions";
 
 import devConfigurationFile from "./configuration_dev.json";
@@ -121,7 +122,8 @@ const mapDispatchToProps = {
   batchUpdateCompletionState,
   batchUpdateCompletionChecklist,
   finishLoading,
-  removeOneBusiness
+  removeOneBusiness,
+  addOneBusiness
 };
 
 class App extends Component {
@@ -299,7 +301,7 @@ class App extends Component {
     }).then((response) => {});
   };
 
-  updateBusinessStatus = async (businessId, status) => {
+  updateBusinessStatus = async (businessId, status, companyFull) => {
     let token = await this.getJwt();
 
     fetch("/api/update_business_status", {
@@ -314,12 +316,13 @@ class App extends Component {
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
+        this.props.addOneBusiness(companyFull);
         //Placeholder behavior to pinpoint memoization bug
         //#########################################
-        this.props.updatePinnedBusinesses([]);
+        //this.props.updatePinnedBusinesses([]);
         //#########################################
-        this.getPinnedBusinesses();
-        this.getActiveApplications();
+        //this.getPinnedBusinesses();
+        //this.getActiveApplications();
       });
   };
 

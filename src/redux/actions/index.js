@@ -126,10 +126,10 @@ export const finishLoading = (loadingStatus) => {
   }
 }
 
-export const addBusiness = (businessId) => {
+export const addOneBusiness = (business) => {
   return {
-    type: "FINISH_LOADING",
-    businessId
+    type: "ADD_ONE_BUSINESS",
+    business
   }
 }
 
