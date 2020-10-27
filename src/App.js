@@ -140,7 +140,7 @@ class App extends Component {
 
   componentDidMount() {
     console.log("mounted");
-    this.newAuth();
+    this.auth();
     this.getCachedCompletionState();
     this.getPinnedBusinesses();
     this.getActiveApplications();
@@ -154,7 +154,7 @@ class App extends Component {
 
   inMemoryToken;
 
-  newAuth = async () => {
+  auth = async () => {
     Auth.currentSession()
       .then((session) => {
         console.log(session);
@@ -690,11 +690,11 @@ class App extends Component {
             />
             <Route
               path="/login"
-              render={(props) => <LogIn newAuth={this.newAuth} />}
+              render={(props) => <LogIn auth={this.auth} />}
             />
             <Route
               path="/signup"
-              render={(props) => <SignUp newAuth={this.newAuth} />}
+              render={(props) => <SignUp auth={this.auth} />}
             />
             <Route path="/how-to-apply" exact component={HowtoApply} />
             <Route
