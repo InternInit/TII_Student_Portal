@@ -55,6 +55,7 @@ import {
   batchUpdateCompletionState,
   batchUpdateCompletionChecklist,
   finishLoading,
+  removeOneBusiness
 } from "./redux/actions";
 
 import devConfigurationFile from "./configuration_dev.json";
@@ -120,6 +121,7 @@ const mapDispatchToProps = {
   batchUpdateCompletionState,
   batchUpdateCompletionChecklist,
   finishLoading,
+  removeOneBusiness
 };
 
 class App extends Component {
@@ -334,12 +336,8 @@ class App extends Component {
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
-        //Placeholder behavior to pinpoint memoization bug
-        //#########################################
-        this.props.updatePinnedBusinesses([]);
-        //#########################################
-        this.getPinnedBusinesses();
-        this.getActiveApplications();
+        //To revert to prev version, please refer to code in updateBusinessStatus
+        this.props.removeOneBusiness(businessId);
       });
   };
 

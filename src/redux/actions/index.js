@@ -125,3 +125,17 @@ export const finishLoading = (loadingStatus) => {
     loadingStatus,
   }
 }
+
+export const addBusiness = (businessId) => {
+  return {
+    type: "FINISH_LOADING",
+    businessId
+  }
+}
+
+export const removeOneBusiness = (businessId) => {
+  return {
+    type: "REMOVE_ONE_BUSINESS",
+    businessId
+  }
+}

@@ -54,6 +54,13 @@ const userInfoReducer = (
       return Object.assign({}, state, {
         disabledIndustries: action.disabledIndustries,
       });
+    case "REMOVE_ONE_BUSINESS":
+      return {
+        ...state,
+        pinnedBusinesses: state.pinnedBusinesses.filter(
+          (business) => business.Id !== action.businessId
+        ),
+      };
     default:
       return state;
   }
