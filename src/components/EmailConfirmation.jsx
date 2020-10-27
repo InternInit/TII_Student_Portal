@@ -1,5 +1,5 @@
 //Standard React Import
-import React, { Component } from "react";
+import React from "react";
 import styled from "styled-components";
 
 //CSS Imports
@@ -7,8 +7,7 @@ import "antd/dist/antd.css";
 import "../App.scss";
 
 //Ant Design
-import { Form, Input, Button, Divider } from "antd";
-import { CloseOutlined } from "@ant-design/icons";
+import { Form, Input, Divider } from "antd";
 
 const ModalContainer = styled.div`
   border-radius: 15px;
@@ -22,10 +21,6 @@ const ModalHeading = styled.h1`
   font-family: Lato;
   font-weight: bold;
   align: center;
-`;
-
-const Seperator = styled.div`
-  border-bottom: 1px gray;
 `;
 
 const DescriptionText = styled.p`

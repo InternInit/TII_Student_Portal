@@ -3,13 +3,11 @@ import styled from "styled-components";
 import QueueAnim from "rc-queue-anim";
 import { Link } from "react-router-dom";
 import { Button, Avatar, message } from "antd";
-import { TeamOutlined } from "@ant-design/icons";
 import {
   CompanyTitle,
   JobTitle,
   TabContainer,
 } from "./styledDashboardComponents";
-import { autoShowTooltip } from "aws-amplify";
 
 const QVCompany = styled.div`
   font-family: Lato;
@@ -148,7 +146,7 @@ class CLabel extends React.Component {
                 <Avatar
                   size={36}
                   shape="square"
-                  src={this.props.logo}
+                  src={logo}
                   style={{
                     marginLeft: "8%",
                     marginBottom: "14px",

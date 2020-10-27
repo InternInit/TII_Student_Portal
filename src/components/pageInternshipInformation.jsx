@@ -8,18 +8,11 @@ import {
   Radio,
   Upload,
   message,
-  Spin,
   Popover,
   Skeleton,
-  Grid,
-  Space,
 } from "antd";
 import { Row, Col } from "antd";
-import {
-  InboxOutlined,
-  MinusCircleOutlined,
-  PlusOutlined,
-} from "@ant-design/icons";
+import { InboxOutlined } from "@ant-design/icons";
 import { InfoCircle } from "./StyledComponents/InternshipForms";
 
 import "antd/dist/antd.css";
@@ -49,7 +42,6 @@ import SkeletonImage from "antd/lib/skeleton/Image";
 const { Option } = Select;
 const { RangePicker } = DatePicker;
 const { Dragger } = Upload;
-const { useBreakpoint } = Grid;
 
 //Formatting
 const formGutter = [16, 16];
@@ -57,23 +49,6 @@ const standardSpan = 24;
 const halfSpan = standardSpan / 2;
 const thirdSpan = standardSpan / 3;
 
-const formItemLayout = {
-  labelCol: {
-    xs: { span: 24 },
-    sm: { span: 4 },
-  },
-  wrapperCol: {
-    xs: { span: 24 },
-    sm: { span: 24 },
-  },
-};
-
-const formItemLayoutWithOutLabel = {
-  wrapperCol: {
-    xs: { span: 24, offset: 0 },
-    sm: { span: 24, offset: 0 },
-  },
-};
 
 //items
 const allStates = [

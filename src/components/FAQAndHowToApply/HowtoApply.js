@@ -27,13 +27,6 @@ const Text = styled.p`
 
   text-align: left;
 `;
-const Bullet = styled.span`
-  font-weight: normal;
-  display: flex;
-  padding-left: 50px;
-
-  text-align: left;
-`;
 const Image = styled.img`
   border-radius: 20px;
   padding: 30px;
@@ -52,7 +45,7 @@ const Caption = styled.p`
   align-self: center;
 `;
 
-const { Content, Header } = Layout;
+const { Content } = Layout;
 
 //THIS IS BEING TESTED INSTEAD OF INTERNSHIPINFORMATION, MAKE SURE TO CHANGE ROUTE BACK WHEN FINISHED!
 

@@ -3,16 +3,15 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import "../../../App.scss";
 import "../dashboard.scss";
-import ImageWebp from "./ImageWebp";
 
 //IMAGE IMPORTS
 import GettingStarted from "./GettingStarted.jpg";
 import Choosing_Resume from "./tiiArrayPictures/Choosing_Resume.jpg";
 import What_To_Include_On_Resume from "./tiiArrayPictures/What_To_Include_On_Resume.jpg";
-import Writing_Reverse_Chronological from "./tiiArrayPictures/Writing_Reverse_Chronological.jpg";
+//import Writing_Reverse_Chronological from "./tiiArrayPictures/Writing_Reverse_Chronological.jpg";
 import Writing_Functional_Resume from "./tiiArrayPictures/Writing_Functional_Resume.jpg";
 import Writing_Combination_Resume from "./tiiArrayPictures/Writing_Combination_Resume.jpg";
-import Reverse_Chron_Resume_Example from "./tiiArrayPictures/Reverse_Chron_Resume_Example.jpg";
+//import Reverse_Chron_Resume_Example from "./tiiArrayPictures/Reverse_Chron_Resume_Example.jpg";
 import Funct_Resume_Example from "./tiiArrayPictures/Funct_Resume_Example.jpg";
 import Comb_Resume_Example from "./tiiArrayPictures/Comb_Resume_Example.jpg";
 import What_to_Say_in_Interview from "./tiiArrayPictures/What_to_Say_in_Interview.jpg";
@@ -29,7 +28,7 @@ import BigCard from "./bigCard";
 import LittleCard from "./littleCard";
 
 import { Row, PageHeader } from "antd";
-import { Transition, Spring } from "react-spring/renderprops";
+import { Transition } from "react-spring/renderprops";
 
 import { Link, Route, Redirect } from "react-router-dom";
 import { withRouter } from "react-router";
@@ -38,7 +37,7 @@ import { withRouter } from "react-router";
 import fillingOutAnApplication from "./tiiSkillInfo/Application/fillingOutAnApplication.js";
 import writingACoverLetter from "./tiiSkillInfo/Cover-Letters/writingACoverLetter.js";
 import howToActInAnInterview from "./tiiSkillInfo/Interview/howToActInAnInterview.js";
-import introductionToInterviewing from "./tiiSkillInfo/Interview/introductionToInterviewing.js";
+//import introductionToInterviewing from "./tiiSkillInfo/Interview/introductionToInterviewing.js";
 import mockInterviewQuestions from "./tiiSkillInfo/Interview/mockInterviewQuestions.js";
 import whatToDoBeforeAndAfterTheInterview from "./tiiSkillInfo/Interview/whatToDoBeforeAndAfterTheInterview.js";
 import whatToSayInAnInterview from "./tiiSkillInfo/Interview/whatToSayInAnInterview.js";
@@ -49,7 +48,7 @@ import combinationResumeExamples from "./tiiSkillInfo/Resume Creation/combinatio
 import functionalResumeExample from "./tiiSkillInfo/Resume Creation/functionalResumeExample.js";
 import howToWriteACombinationResume from "./tiiSkillInfo/Resume Creation/howToWriteACombinationResume.js";
 import howToWriteAFunctionalResume from "./tiiSkillInfo/Resume Creation/howToWriteAFunctionalResume.js";
-import reverseChronologicalResumeExample from "./tiiSkillInfo/Resume Creation/reverseChronologicalResumeExample.js";
+//import reverseChronologicalResumeExample from "./tiiSkillInfo/Resume Creation/reverseChronologicalResumeExample.js";
 import whatShouldIIncludeOnMyResume from "./tiiSkillInfo/Resume Creation/whatShouldIIncludeOnMyResume.js";
 
 const resumeSkills = [

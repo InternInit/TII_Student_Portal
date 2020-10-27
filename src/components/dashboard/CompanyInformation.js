@@ -1,13 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 import {
-  Divider,
   Breadcrumb,
   Avatar,
   Row as AntRow,
   Col as AntCol,
-  Button,
-  Skeleton
+  Skeleton,
+  Grid,
 } from "antd";
 import {
   AiFillFacebook,
@@ -15,35 +14,15 @@ import {
   AiFillLinkedin,
 } from "react-icons/ai";
 import { FaInstagram } from "react-icons/fa";
-import { CSSTransition } from "react-transition-group";
+import { industryIcons } from "./industryIcons";
+import _ from "underscore";
 
 import { Link } from "react-router-dom";
 
-const Image = styled.img`
-  background-color: #d9d9d9;
-  width: 100%;
-  margin-left: 2vh;
-  margin-right: 2vh;
-  height: 225px;
-  border-radius: 8px;
-  object-fit: cover;
-`;
-
-const Caption = styled.div`
-  display: flex;
-  text-align: left;
-  font-weight: normal;
-  color: 000;
-  width: 100%;
-`;
+const { useBreakpoint } = Grid;
 
 const Header = styled.div`
   margin-top: 30px;
-`;
-
-const SectionHeader = styled.span`
-  color: black;
-  font-weight: normal;
 `;
 
 const Row = styled.div`
@@ -116,11 +95,11 @@ class CompanyInformation extends React.Component {
   }
 
   componentDidMount() {
+    window.scrollTo(0, 0);
     let idList = [];
     let id = window.location.href.split("/")[6];
     idList.push(id);
     this.matchBusinesses(JSON.stringify(idList));
-    window.scrollTo(0, 0);
     console.log("Mounted and Info is:" + this.state.info.description);
   }
 
@@ -155,10 +134,29 @@ class CompanyInformation extends React.Component {
     }
 
     if (isLoading) {
-      console.log("Rendered loading and info is:" + info.description);
-      return <Skeleton />;
+      return (
+        <>
+          <Breadcrumb
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              fontWeight: "500",
+              marginTop: "2vh",
+            }}
+            className="eighteenFont"
+          >
+            <Link to="/dashboard/add-companies">
+              <Breadcrumb.Item>Add Companies</Breadcrumb.Item>
+            </Link>
+            <Breadcrumb.Item>
+              <Skeleton.Input size="small" style={{ width: "10vw" }} />{" "}
+            </Breadcrumb.Item>
+          </Breadcrumb>
+          <CompanyInformationSkeleton />
+        </>
+      );
     } else {
-      console.log("Rendered component and info is:" + info.description);
+      console.log(info);
       return (
         <React.Fragment>
           {/**
@@ -208,13 +206,8 @@ class CompanyInformation extends React.Component {
                   </div>
                 </AntRow>
 
-                {/**
-                 *
-                 * Divider
-                 *
-                 */}
                 <AntRow style={{ width: "100%" }}>
-                  <h1 className="company-info-subsection-header thirtySixFont">
+                  <h1 className="company-info-subsection-header twentyEightFont mt-2 mb-2 universal-left">
                     Company Overview
                   </h1>
                 </AntRow>
@@ -238,56 +231,29 @@ class CompanyInformation extends React.Component {
                     className="company-info-read-more-button sixteenFont"
                     onClick={this.toggle}
                   >
-                    {info.description.length < 1000 ? null : show ? "Read Less" : "Read More"}
+                    {info.description.length < 1000
+                      ? null
+                      : show
+                      ? "Read Less"
+                      : "Read More"}
                   </p>
                 </Row>
 
-                <AntRow gutter={[32, 16]} style={{ marginTop: "5%" }}>
-                  <AntCol span={12}>
-                    <div className="company-info-sub-card">
-                      <h1 className="sub-card-heading twentyEightFont">
-                        Internship Facts
-                      </h1>
-                      <h2 className="sub-card-sub-heading sixteenFont">
-                        Industry
-                      </h2>
-                      <p className="sixteenFont">{info.industry}</p>
-                      <h2 className="sub-card-sub-heading sixteenFont">
-                        Work Time
-                      </h2>
-                      <p className="sixteenFont">
-                        {info.starttime} - {info.endtime}
-                      </p>
-                      <h2 className="sub-card-sub-heading sixteenFont">
-                        Additional Information
-                      </h2>
-                      <p className="sixteenFont">
-                        - AP CSA - AP CSP - Must be 18+
-                      </p>
-                    </div>
-                  </AntCol>
-                  <AntCol span={12}>
-                    <div className="company-info-sub-card">
-                      <h1 className="sub-card-heading twentyEightFont">
-                        Contact
-                      </h1>
-                      <h2 className="sub-card-sub-heading sixteenFont">
-                        Website
-                      </h2>
-                      <p className="sixteenFont">
-                        <a href={info.website}>{info.website}</a>
-                      </p>
-                      <h2 className="sub-card-sub-heading sixteenFont">
-                        Email
-                      </h2>
-                      <p className="sixteenFont">{info.email}</p>
-                      <h2 className="sub-card-sub-heading sixteenFont">
-                        Phone Number
-                      </h2>
-                      <p className="sixteenFont">{info.phonenumber}</p>
-                    </div>
-                  </AntCol>
+                <AntRow style={{ width: "100%" }}>
+                  <h1 className="company-info-subsection-header twentyEightFont mt-4 mb-2 universal-left">
+                    Open Positions
+                  </h1>
                 </AntRow>
+
+                <RenderListings listings={info.listings} />
+
+                <AntRow style={{ width: "100%" }}>
+                  <h1 className="company-info-subsection-header twentyEightFont mt-2 mb-2 universal-left">
+                    About
+                  </h1>
+                </AntRow>
+
+                <AboutSection info={info} />
 
                 {/**
                  *
@@ -317,5 +283,195 @@ class CompanyInformation extends React.Component {
     }
   }
 }
+
+const ListingCard = (props) => {
+  let ind = props.industry.split(" ").join("");
+  const industryKey = ind.toLowerCase();
+
+  const screens = useBreakpoint();
+  const isDesktop =
+    Object.entries(screens).filter((screen) => !!screen[1]).length > 2;
+
+  return (
+    <>
+    <AntCol span={isDesktop ? 6 : 12}>
+      <div className="company-info-listing-card">
+        <div className="company-info-listing-card-icon-box">
+          <div>{industryIcons[industryKey]}</div>
+        </div>
+        {/***
+         * Font-size assigned in CSS class to adjust based on card resizing
+         */}
+        <div className="company-info-listing-card-position-box">
+          <h1 className="sub-card-heading sixteenFont">{props.position}</h1>
+        </div>
+      </div>
+    </AntCol>
+    </>
+  );
+};
+
+const RenderListings = (props) => {
+  let filtered_results = _.uniq(props.listings, "Listing Type");
+
+  return (
+    <div>
+      <AntRow gutter={[32, 16]} style={{ marginBottom: "4vh" }}>
+        {filtered_results.map((listing) => (
+          <ListingCard position={listing.Title} industry={listing.Industry} />
+        ))}
+      </AntRow>
+    </div>
+  );
+};
+
+const AboutSection = ({ info }) => {
+  const screens = useBreakpoint();
+  const isDesktop =
+    Object.entries(screens).filter((screen) => !!screen[1]).length > 2;
+
+  return (
+    <AntRow gutter={[32, 16]}>
+      <AntCol span={isDesktop ? 12 : 24}>
+        <div className="company-info-sub-card">
+          <h1 className="sub-card-heading twentyEightFont">Internship Facts</h1>
+          <h2 className="sub-card-sub-heading sixteenFont">Industry</h2>
+          <p className="sixteenFont">{info.industry}</p>
+          <h2 className="sub-card-sub-heading sixteenFont">Work Time</h2>
+          <p className="sixteenFont">
+            {info.starttime} - {info.endtime}
+          </p>
+          <h2 className="sub-card-sub-heading sixteenFont">
+            Additional Information
+          </h2>
+          <p className="sixteenFont">- AP CSA - AP CSP - Must be 18+</p>
+        </div>
+      </AntCol>
+      <AntCol span={isDesktop ? 12 : 24}>
+        <div className="company-info-sub-card">
+          <h1 className="sub-card-heading twentyEightFont">Contact</h1>
+          <h2 className="sub-card-sub-heading sixteenFont">Website</h2>
+          <p className="sixteenFont">
+            <a href={info.website}>{info.website}</a>
+          </p>
+          <h2 className="sub-card-sub-heading sixteenFont">Email</h2>
+          <p className="sixteenFont">{info.email}</p>
+          <h2 className="sub-card-sub-heading sixteenFont">Phone Number</h2>
+          <p className="sixteenFont">{info.phonenumber}</p>
+        </div>
+      </AntCol>
+    </AntRow>
+  );
+};
+
+const CompanyInformationSkeleton = (props) => {
+  const screens = useBreakpoint();
+
+  const isDesktop =
+    Object.entries(screens).filter((screen) => !!screen[1]).length > 2;
+
+  return (
+    <>
+      <div className="company-info-card">
+        <div className="company-info-banner-skeleton" />
+        <div className="company-info-inner-content-skeleton">
+          <AntRow>
+            <Skeleton.Avatar active size={75} style={{ float: "left" }} />
+            <div style={{ marginLeft: "2vw" }}>
+              <div style={{ marginBottom: "1vh" }}>
+                <Skeleton.Input active size="large" style={{ width: "17vw" }} />
+              </div>
+              <div className="universal-left">
+                <Skeleton.Input active size="small" style={{ width: "12vw" }} />
+              </div>
+            </div>
+          </AntRow>
+          <AntRow style={{ width: "100%" }}>
+            <h1 className="company-info-subsection-header twentyEightFont mt-2 mb-2 universal-left">
+              Company Overview
+            </h1>
+          </AntRow>
+          <AntRow>
+            <Skeleton
+              active
+              className="company-info-description-skeleton"
+              title={false}
+              paragraph={{ rows: 8 }}
+            />
+          </AntRow>
+          <AntRow style={{ width: "100%" }}>
+            <h1 className="company-info-subsection-header twentyEightFont mt-4 mb-2 universal-left">
+              Open Positions
+            </h1>
+          </AntRow>
+          <AntRow gutter={[32, 16]}>
+            <AntCol span={isDesktop ? 6 : 12}>
+              <div
+                className="company-info-listing-card-skeleton"
+                style={{ textAlign: "center" }}
+              >
+                <Skeleton.Avatar active size={48} />
+                <Skeleton.Input
+                  active
+                  className="mt-1"
+                  style={{ textAlign: "center", width: "8vw" }}
+                />
+              </div>
+            </AntCol>
+            <AntCol span={isDesktop ? 6 : 12}>
+              <div
+                className="company-info-listing-card-skeleton"
+                style={{ textAlign: "center" }}
+              >
+                <Skeleton.Avatar active size={48} />
+                <Skeleton.Input
+                  active
+                  className="mt-1"
+                  style={{ textAlign: "center", width: "8vw" }}
+                />
+              </div>
+            </AntCol>
+          </AntRow>
+          <div className="company-info-div-break" />
+          <AntRow style={{ width: "100%" }}>
+            <h1 className="company-info-subsection-header twentyEightFont mt-4 mb-2 universal-left">
+              About
+            </h1>
+          </AntRow>
+          <AntRow gutter={[32, 16]}>
+            <AntCol span={isDesktop ? 12 : 24}>
+              <div className="company-info-sub-card">
+                <h1 className="sub-card-heading twentyEightFont">
+                  Internship Facts
+                </h1>
+                <h2 className="sub-card-sub-heading sixteenFont">Industry</h2>
+                <Skeleton active title={false} paragraph={{ rows: 1 }} />
+                <h2 className="sub-card-sub-heading sixteenFont">Work Time</h2>
+                <Skeleton active title={false} paragraph={{ rows: 1 }} />
+                <h2 className="sub-card-sub-heading sixteenFont">
+                  Additional Information
+                </h2>
+                <Skeleton active title={false} paragraph={{ rows: 1 }} />
+              </div>
+            </AntCol>
+            <AntCol span={isDesktop ? 12 : 24}>
+              <div className="company-info-sub-card">
+                <h1 className="sub-card-heading twentyEightFont">Contact</h1>
+                <h2 className="sub-card-sub-heading sixteenFont">Website</h2>
+                <Skeleton active title={false} paragraph={{ rows: 1 }} />
+                <h2 className="sub-card-sub-heading sixteenFont">Email</h2>
+                <Skeleton active title={false} paragraph={{ rows: 1 }} />
+                <h2 className="sub-card-sub-heading sixteenFont">
+                  Phone Number
+                </h2>
+                <Skeleton active title={false} paragraph={{ rows: 1 }} />
+              </div>
+            </AntCol>
+          </AntRow>
+        </div>
+      </div>
+    </>
+  );
+};
 
 export default CompanyInformation;

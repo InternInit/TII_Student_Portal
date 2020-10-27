@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 
 import {
-  Button,
   Modal,
   Input,
   notification,
@@ -16,9 +15,8 @@ import {
   Card,
 } from "antd";
 
-import { CloseOutlined, UserOutlined, CameraOutlined } from "@ant-design/icons";
+import { CloseOutlined, UserOutlined } from "@ant-design/icons";
 import { FaCamera } from "react-icons/fa";
-import { FiTrash2 } from "react-icons/fi";
 import EditProfileBackground from "../EditProfileBackground.jpg";
 
 import { connect } from "react-redux";

@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Input, Button, Form, notification, message } from "antd";
+import { Input, Button, Form, notification } from "antd";
 import {
   Container,
   Background,
@@ -16,15 +16,6 @@ import { CloseOutlined, CheckOutlined } from "@ant-design/icons";
 import { Auth } from "aws-amplify";
 
 import { withRouter } from "react-router";
-
-//Styled Components
-const ForgotPass = styled.a`
-  display: flex;
-  text-align: left;
-  font-weight: 500;
-  width: 80%;
-  margin-top: -19px;
-`;
 
 const openSuccessfulNotification = (title, description) => {
   notification.open({

@@ -7,13 +7,12 @@ import {
   Checkbox,
   Radio,
   InputNumber,
-  Spin,
   Popover,
   Skeleton,
 } from "antd";
 import QueueAnim from "rc-queue-anim";
 import { Row, Col } from "antd";
-import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
+import { PlusOutlined } from "@ant-design/icons";
 import { InfoCircle } from "./StyledComponents/InternshipForms";
 import { GoX } from "react-icons/go";
 
@@ -43,23 +42,6 @@ const addressGutter = [16, 0];
 const standardSpan = 24;
 const halfSpan = standardSpan / 2;
 const thirdSpan = standardSpan / 3;
-const formItemLayout = {
-  labelCol: {
-    xs: { span: 24 },
-    sm: { span: 4 },
-  },
-  wrapperCol: {
-    xs: { span: 24 },
-    sm: { span: 24 },
-  },
-};
-
-const formItemLayoutWithOutLabel = {
-  wrapperCol: {
-    xs: { span: 24, offset: 0 },
-    sm: { span: 24, offset: 0 },
-  },
-};
 
 //items
 const genders = ["Male", "Female", "Prefer Not to Say", "Other"];
