@@ -97,11 +97,11 @@ class CompanyInformation extends React.Component {
   }
 
   componentDidMount() {
+    window.scrollTo(0, 0);
     let idList = [];
     let id = window.location.href.split("/")[6];
     idList.push(id);
     this.matchBusinesses(JSON.stringify(idList));
-    window.scrollTo(0, 0);
     console.log("Mounted and Info is:" + this.state.info.description);
   }
 
