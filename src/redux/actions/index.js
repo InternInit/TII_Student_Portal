@@ -125,3 +125,10 @@ export const finishLoading = (loadingStatus) => {
     loadingStatus,
   }
 }
+
+export const removeOneBusiness = (businessId) => {
+  return {
+    type: "REMOVE_ONE_BUSINESS",
+    businessId
+  }
+}

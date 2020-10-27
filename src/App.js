@@ -55,6 +55,7 @@ import {
   batchUpdateCompletionState,
   batchUpdateCompletionChecklist,
   finishLoading,
+  removeOneBusiness
 } from "./redux/actions";
 
 import devConfigurationFile from "./configuration_dev.json";
@@ -120,6 +121,7 @@ const mapDispatchToProps = {
   batchUpdateCompletionState,
   batchUpdateCompletionChecklist,
   finishLoading,
+  removeOneBusiness
 };
 
 class App extends Component {
@@ -336,10 +338,11 @@ class App extends Component {
         console.log(data);
         //Placeholder behavior to pinpoint memoization bug
         //#########################################
-        this.props.updatePinnedBusinesses([]);
+        //this.props.updatePinnedBusinesses([]);
         //#########################################
-        this.getPinnedBusinesses();
-        this.getActiveApplications();
+        this.props.removeOneBusiness(businessId);
+        //this.getPinnedBusinesses();
+        //this.getActiveApplications();
       });
   };
 
