@@ -64,7 +64,7 @@ const userInfoReducer = (
     case "ADD_PINNED_BUSINESS":
       return {
         ...state,
-        pinnedBusinesses: [...pinnedBusiness, action.newPinnedBusiness],
+        pinnedBusinesses: [...state.pinnedBusinesses, action.newPinnedBusiness],
       };
     case "REMOVE_ACTIVE_APP":
       return {
@@ -76,7 +76,7 @@ const userInfoReducer = (
     case "ADD_ACTIVE_APP":
       return {
         ...state,
-        activeApplications: [...activeApplications, action.newActiveApp],
+        activeApplications: [...state.activeApplications, action.newActiveApp],
       };
     default:
       return state;
