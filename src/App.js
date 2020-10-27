@@ -315,10 +315,12 @@ class App extends Component {
         console.log(data);
         //Placeholder behavior to pinpoint memoization bug
         //#########################################
+        /*
         this.props.updatePinnedBusinesses([]);
         //#########################################
         this.getPinnedBusinesses();
         this.getActiveApplications();
+        */
       });
   };
 
