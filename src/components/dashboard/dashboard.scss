@@ -366,6 +366,16 @@ hr {
 .industry-icon {
   color: #595959;
 }
+
+.pin-company-remove-button {
+  color: $gray-two;
+
+  :hover {
+    transition: 0.3s ease;
+    color: #cf1322;
+    cursor: pointer;
+  }
+}
 /*
 ============================================================
 ************************************************************
