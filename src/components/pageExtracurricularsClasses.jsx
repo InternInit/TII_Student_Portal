@@ -1,4 +1,4 @@
-import React, { Component, useState, useEFfect, useEffect } from "react";
+import React, { Component, useState, useEffect } from "react";
 import {
   Form,
   Select,
@@ -7,7 +7,6 @@ import {
   Popover,
   Skeleton,
   Grid,
-  Space,
   InputNumber,
 } from "antd";
 import { Row, Col } from "antd";
@@ -34,9 +33,6 @@ import {
 } from "../redux/actions";
 
 import _ from "lodash";
-import SkeletonInput from "antd/lib/skeleton/Input";
-import SkeletonButton from "antd/lib/skeleton/Button";
-import SkeletonImage from "antd/lib/skeleton/Image";
 
 //Object Destructuring
 const { useBreakpoint } = Grid;

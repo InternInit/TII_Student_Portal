@@ -2,9 +2,8 @@ import React from "react";
 import styled from "styled-components";
 
 import { Input } from "antd";
-import SearchCompanytab from "../SearchCompanytab.js";
-import { Collapse, Checkbox, Pagination, Form, Button, Skeleton } from "antd";
-import { Col as AntCol, Row as AntRow, Modal, notification } from "antd";
+import { Collapse, Checkbox, Skeleton } from "antd";
+import { Col as AntCol, Row as AntRow } from "antd";
 import { withRouter } from "react-router";
 
 const { Panel } = Collapse;

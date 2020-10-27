@@ -5,12 +5,10 @@ import {
   Button,
   Modal,
   Input,
-  notification,
   Avatar,
   message,
 } from "antd";
 import { Link } from "react-router-dom";
-import { CheckOutlined, TeamOutlined } from "@ant-design/icons";
 
 const { Panel } = Collapse;
 const { TextArea } = Input;

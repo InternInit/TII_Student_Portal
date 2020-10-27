@@ -1,10 +1,9 @@
-import React, { Component } from "react";
+import React from "react";
 import styled from "styled-components";
 
 import "../dashboard.scss";
 
-import Checklist from "./checklist.jsx";
-import { Skeleton, Space, Row, Col } from "antd";
+import { Skeleton, Row, Col } from "antd";
 import { withRouter } from "react-router";
 
 /*

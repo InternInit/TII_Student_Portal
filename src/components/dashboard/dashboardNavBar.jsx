@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "../../App.scss";
 import "./dashboard.scss";
 import "antd/dist/antd.css";
-import { Menu, message } from "antd";
+import { Menu } from "antd";
 import { Link, NavLink } from "react-router-dom";
 import { withRouter } from "react-router";
 
@@ -15,9 +15,6 @@ const MenuItemStyle = {
 };
 
 class DashboardNavBar extends Component {
-  constructor(props) {
-    super(props);
-  }
   /**
    *
    * Displaying Current Page
