@@ -64,7 +64,7 @@ class Companytab extends React.Component {
               industry={this.props.industry}
               companyid={this.props.companyid}
               avatar={this.props.avatar}
-              removeBusiness={this.props.removeBusiness}
+              disassociatePinnedBusiness={this.props.disassociatePinnedBusiness}
             />
           }
           key="1"
@@ -86,7 +86,7 @@ class Companytab extends React.Component {
             companyid={this.props.companyid}
             name={this.props.name}
             updateBusinessStatus={this.props.updateBusinessStatus}
-            removeBusiness={this.props.removeBusiness}
+            disassociatePinnedBusiness={this.props.disassociatePinnedBusiness}
           />
         </Panel>
       </Collapse>
@@ -97,12 +97,10 @@ export default Companytab;
 
 //Tab View of the Company Tab
 class CLabel extends React.Component {
-
   handleClick = (e) => {
     e.stopPropagation();
-    this.props.removeBusiness(this.props.companyid);
-
-  }
+    this.props.disassociatePinnedBusiness(this.props.companyid);
+  };
   render() {
     let { name, industry } = this.props;
     return (

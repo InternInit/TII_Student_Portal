@@ -54,12 +54,29 @@ const userInfoReducer = (
       return Object.assign({}, state, {
         disabledIndustries: action.disabledIndustries,
       });
-    case "REMOVE_ONE_BUSINESS":
+    case "REMOVE_PINNED_BUSINESS":
       return {
         ...state,
-        activeBusinesses: state.activeBusinesses.filter(
+        pinnedBusinesses: state.pinnedBusinesses.filter(
           (business) => business.Id !== action.businessId
         ),
+      };
+    case "ADD_PINNED_BUSINESS":
+      return {
+        ...state,
+        pinnedBusinesses: [...pinnedBusiness, action.newPinnedBusiness],
+      };
+    case "REMOVE_ACTIVE_APP":
+      return {
+        ...state,
+        activeApplications: state.activeApplications.filter(
+          (business) => business.Id !== action.businessId
+        ),
+      };
+    case "ADD_ACTIVE_APP":
+      return {
+        ...state,
+        activeApplications: [...activeApplications, action.newActiveApp],
       };
     default:
       return state;

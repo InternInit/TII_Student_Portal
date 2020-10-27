@@ -47,10 +47,38 @@ export const updatePinnedBusinesses = (pinnedBusinesses) => {
   };
 };
 
+export const removePinnedBusiness = (businessId) => {
+  return {
+    type: "REMOVE_PINNED_BUSINESS",
+    businessId,
+  };
+};
+
+export const addPinnedBusiness = (newPinnedBusiness) => {
+  return {
+    type: "ADD_PINNED_BUSINESS",
+    newPinnedBusiness,
+  };
+};
+
 export const updateActiveApplications = (activeApplications) => {
   return {
     type: "UPDATE_ACTIVE_APPLICATIONS",
     activeApplications,
+  };
+};
+
+export const removeActiveApp = (businessId) => {
+  return {
+    type: "REMOVE_ACTIVE_APP",
+    businessId,
+  };
+};
+
+export const addActiveApp = (newActiveApp) => {
+  return {
+    type: "ADD_ACTIVE_APP",
+    newActiveApp,
   };
 };
 
@@ -129,13 +157,6 @@ export const finishLoading = (loadingStatus) => {
 export const addBusiness = (businessId) => {
   return {
     type: "FINISH_LOADING",
-    businessId,
-  };
-};
-
-export const removeOneBusiness = (businessId) => {
-  return {
-    type: "REMOVE_ONE_BUSINESS",
     businessId,
   };
 };

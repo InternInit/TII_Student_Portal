@@ -50,12 +50,13 @@ import {
   updateCheckedIndustries,
   updateDisabledIndustries,
   updatePinnedBusinesses,
+  removePinnedBusiness,
   updateActiveApplications,
+  removeActiveApp,
   updateCompletionState,
   batchUpdateCompletionState,
   batchUpdateCompletionChecklist,
   finishLoading,
-  removeOneBusiness,
 } from "./redux/actions";
 
 import devConfigurationFile from "./configuration_dev.json";
@@ -116,12 +117,13 @@ const mapDispatchToProps = {
   updateCheckedIndustries,
   updateDisabledIndustries,
   updatePinnedBusinesses,
+  removePinnedBusiness,
   updateActiveApplications,
+  removeActiveApp,
   updateCompletionState,
   batchUpdateCompletionState,
   batchUpdateCompletionChecklist,
   finishLoading,
-  removeOneBusiness,
 };
 
 class App extends Component {
@@ -324,7 +326,7 @@ class App extends Component {
       });
   };
 
-  removeBusiness = async (businessId) => {
+  disassociatePinnedBusiness = async (businessId) => {
     let token = await this.getJwt();
 
     fetch("/api/remove_business", {
@@ -338,7 +340,7 @@ class App extends Component {
       .then((data) => {
         console.log(data);
         //To revert to prev version, please refer to code in updateBusinessStatus
-        this.props.removeOneBusiness(businessId);
+        this.props.removePinnedBusiness(businessId);
       });
   };
   /*
@@ -686,7 +688,7 @@ class App extends Component {
                 <Dashboard
                   version={this.state.version}
                   updateBusinessStatus={this.updateBusinessStatus}
-                  removeBusiness={this.removeBusiness}
+                  disassociatePinnedBusiness={this.disassociatePinnedBusiness}
                   updateData={this.updateData}
                 />
               )}

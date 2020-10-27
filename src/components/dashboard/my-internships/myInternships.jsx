@@ -24,7 +24,7 @@ const MyInternships = (props) => {
           <PinCompany
             pinnedBusinesses={props.userInfo.pinnedBusinesses}
             updateBusinessStatus={props.updateBusinessStatus}
-            removeBusiness={props.removeBusiness}
+            disassociatePinnedBusiness={props.disassociatePinnedBusiness}
           />
           <ActiveApplications
             activeApplications={props.userInfo.activeApplications}

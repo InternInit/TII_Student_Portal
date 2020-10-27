@@ -97,7 +97,9 @@ class Dashboard extends Component {
                 <Route path="/dashboard/my-internships" exact>
                   <MyInternships
                     updateBusinessStatus={this.props.updateBusinessStatus}
-                    removeBusiness={this.props.removeBusiness}
+                    disassociatePinnedBusiness={
+                      this.props.disassociatePinnedBusiness
+                    }
                   />
                 </Route>
 
