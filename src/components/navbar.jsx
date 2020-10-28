@@ -6,12 +6,13 @@ import "antd/dist/antd.css";
 import "../App.scss";
 
 //Ant Design Imports
-import { Menu } from "antd";
+import { Menu, Divider } from "antd";
 import { Avatar } from "antd";
 import {
   UserOutlined,
   LogoutOutlined,
   AlignLeftOutlined,
+  BellOutlined,
 } from "@ant-design/icons";
 
 //Logo Import
@@ -209,6 +210,19 @@ class Navbar extends Component {
         <Menu.Item key="FAQ" style={menuItemStyle}>
           <Link to="/frequently-asked-questions">FAQ</Link>
         </Menu.Item>
+
+        <div
+          className="tii-nav-notifications"
+          key="notifications"
+          style={{
+            ...menuItemStyle,
+            position: "absolute",
+            right: "110px",
+            top: "4px",
+          }}
+        >
+          <BellOutlined style={{ fontSize: "22px" }} />
+        </div>
 
         <SubMenu
           key="navbar-avatar"

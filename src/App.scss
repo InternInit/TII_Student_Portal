@@ -82,7 +82,17 @@ $gray-thirteen: #425866;
 .main-navbar.ant-menu-horizontal > .ant-menu-item-selected,
 .main-navbar.ant-menu-horizontal > .ant-menu-item:after {
   color: #1890ff;
-  border-bottom: 2px solid white;
+  border-bottom: 2px solid transparent;
+  box-sizing: border-box;
+}
+
+.tii-nav-notifications {
+  color: #bfbfbf;
+  :hover {
+    cursor: pointer;
+    color: rgba(0, 0, 0, 0.85);
+    transition: 0.3s ease;
+  }
 }
 
 /*
