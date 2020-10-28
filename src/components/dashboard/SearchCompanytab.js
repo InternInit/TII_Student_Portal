@@ -51,10 +51,6 @@ const Image = styled.img`
   object-fit: cover;
 `;
 
-const mapping = [
-  "this single item in the array is allowing me to use the queue animations lol",
-];
-
 const contentStyle = {
   display: "flex",
   flexDirection: "row",
@@ -123,53 +119,6 @@ class SearchCompanytab extends React.Component {
         </div>
       </>
     );
-    /*
-    return (
-      <>
-        {show ? (
-          <div onClick={this.handleClick}>
-            <QuickView
-              companyFull={this.props.companyFull}
-              name={name}
-              industry={industry}
-              image={image}
-              description={showDescription}
-              location={location}
-              companyid={companyid}
-              updateBusinessStatus={this.props.updateBusinessStatus}
-            />
-          </div>
-        ) : (
-          <div onClick={this.handleClick}>
-            <CLabel name={name} industry={industry} logo={logo} />
-          </div>
-        )}
-      </>
-    );
-
-    if (show === true) {
-      ctab = (
-        <QuickView
-          companyFull={this.props.companyFull}
-          name={name}
-          industry={industry}
-          image={image}
-          description={showDescription}
-          location={location}
-          companyid={companyid}
-          updateBusinessStatus={this.props.updateBusinessStatus}
-          addPinnedBusiness={this.props.addPinnedBusiness}
-          companyObject={this.props.companyObject}
-        />
-      );
-    }
-
-    return (
-      <div onClick={this.handleClick}>
-        {ctab}
-      </div>
-    );
-    */
   }
 
   //Handles Switching of Tab
@@ -198,8 +147,7 @@ class CLabel extends React.Component {
     }
     return (
       <>
-        {mapping.map((item, index) => (
-          <div key={index}>
+          <div key={companyName}>
             <TabContainer>
               {/**Company Logo + Name + Position */}
 
@@ -237,7 +185,6 @@ class CLabel extends React.Component {
               </div>
             </TabContainer>
           </div>
-        ))}
       </>
     );
   }
@@ -269,8 +216,7 @@ class QuickView extends React.Component {
 
     return (
       <>
-        {mapping.map((item, index) => (
-          <div key={index}>
+          <div key={name}>
             <TabContainer
               style={{
                 padding: "24px",
@@ -359,7 +305,6 @@ class QuickView extends React.Component {
               </div>
             </TabContainer>
           </div>
-        ))}
       </>
     );
   }
