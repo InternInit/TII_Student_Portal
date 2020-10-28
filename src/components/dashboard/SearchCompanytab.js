@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import QueueAnim from "rc-queue-anim";
+import { CSSTransition } from "react-transition-group";
 import { Link } from "react-router-dom";
 import { Button, Avatar, message } from "antd";
 import {
@@ -50,10 +51,6 @@ const Image = styled.img`
   object-fit: cover;
 `;
 
-const mapping = [
-  "this single item in the array is allowing me to use the queue animations lol",
-];
-
 const contentStyle = {
   display: "flex",
   flexDirection: "row",
@@ -85,28 +82,42 @@ class SearchCompanytab extends React.Component {
 
     let showDescription = description;
     if (description.length >= 250) {
-      showDescription = description.substring(0, 250) + ". . .";
-    }
-
-    if (show === true) {
-      ctab = (
-        <QuickView
-          name={name}
-          industry={industry}
-          image={image}
-          description={showDescription}
-          location={location}
-          companyid={companyid}
-          updateBusinessStatus={this.props.updateBusinessStatus}
-        />
-      );
+      showDescription = description.substring(0, 250) + " . . .";
     }
 
     return (
-      <div onClick={this.handleClick}>
-        {/**Tab variable, is switched between quickview and standard */}
-        {ctab}
-      </div>
+      <>
+        <div onClick={this.handleClick}>
+          <CSSTransition
+            in={!show}
+            timeout={50}
+            classNames="add-company-normalview"
+            unmountOnExit
+          >
+            <CLabel name={name} industry={industry} logo={logo} />
+          </CSSTransition>
+        </div>
+        <div onClick={this.handleClick}>
+          <CSSTransition
+            in={show}
+            timeout={200}
+            classNames="add-company-quickview"
+            unmountOnExit
+          >
+            <QuickView
+              companyObject={this.props.companyObject}
+              name={name}
+              industry={industry}
+              image={image}
+              description={showDescription}
+              location={location}
+              companyid={companyid}
+              updateBusinessStatus={this.props.updateBusinessStatus}
+              addPinnedBusiness={this.props.addPinnedBusiness}
+            />
+          </CSSTransition>
+        </div>
+      </>
     );
   }
 
@@ -135,9 +146,8 @@ class CLabel extends React.Component {
       companyName = name;
     }
     return (
-      <QueueAnim type="scale" ease={["easeOutQuart", "easeInOutQuart"]}>
-        {mapping.map((item, index) => (
-          <div key={index}>
+      <>
+          <div key={companyName}>
             <TabContainer>
               {/**Company Logo + Name + Position */}
 
@@ -175,8 +185,7 @@ class CLabel extends React.Component {
               </div>
             </TabContainer>
           </div>
-        ))}
-      </QueueAnim>
+      </>
     );
   }
 }
@@ -192,6 +201,7 @@ class QuickView extends React.Component {
     console.log(this.props);
     message.success(`Company Pinned! 🎉`);
     this.props.updateBusinessStatus(this.props.companyid, "Pinned");
+    this.props.addPinnedBusiness(this.props.companyObject);
   };
 
   render() {
@@ -205,10 +215,8 @@ class QuickView extends React.Component {
     } = this.props;
 
     return (
-      <QueueAnim type="scale" ease={["easeOutQuart", "easeInOutQuart"]}>
-        {this.resize}
-        {mapping.map((item, index) => (
-          <div key={index}>
+      <>
+          <div key={name}>
             <TabContainer
               style={{
                 padding: "24px",
@@ -257,7 +265,7 @@ class QuickView extends React.Component {
                     marginTop: "24px",
                     width: "100%",
                     justifyContent: "space-between",
-                    flexWrap: "wrap"
+                    flexWrap: "wrap",
                   }}
                 >
                   <div style={{ alignSelf: "flex-start" }}>
@@ -297,8 +305,7 @@ class QuickView extends React.Component {
               </div>
             </TabContainer>
           </div>
-        ))}
-      </QueueAnim>
+      </>
     );
   }
 }

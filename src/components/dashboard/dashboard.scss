@@ -366,6 +366,63 @@ hr {
 .industry-icon {
   color: #595959;
 }
+
+.pin-company-remove-button {
+  color: $gray-two;
+
+  :hover {
+    transition: 0.3s ease;
+    color: #cf1322;
+    cursor: pointer;
+  }
+}
+
+/*
+============================================================
+                    Add Companies
+============================================================
+*/
+
+.add-company-quickview-enter {
+  opacity: 0;
+  transform: scale(0.9);
+}
+.add-company-quickview-enter-active {
+  opacity: 1;
+  transform: translateX(0);
+  transition: opacity 300ms, transform 300ms;
+}
+.add-company-quickview-exit {
+  opacity: 1;
+  height: auto;
+}
+.add-company-quickview-exit-active {
+  opacity: 0;
+  //transform: scale(0.9);
+  //transform: translateX(100);
+  height: 0;
+  overflow: hidden;
+  transition: opacity 300ms, transform 500ms, height 100ms;
+}
+
+.add-company-normalview-enter {
+  opacity: 0;
+}
+.add-company-normalview-active {
+  opacity: 1;
+  transform: translateX(0);
+  transition: opacity 300ms, transform 300ms;
+}
+.add-company-normalview-exit {
+  opacity: 1;
+}
+.add-company-normalview-active {
+  opacity: 0;
+  transform: scale(1.5);
+  transition: opacity 2ms, transform 2ms;
+}
+
+
 /*
 ============================================================
 ************************************************************

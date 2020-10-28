@@ -16,9 +16,12 @@ if (!process.env.NODE_ENV || process.env.NODE_ENV === "production") {
   });
 }
 
-const composer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+//const composer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-const store = createStore(rootReducer, composer(applyMiddleware(logger)));
+const store = createStore(
+  rootReducer,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);
 
 ReactDOM.render(
   <Provider store={store}>

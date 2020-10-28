@@ -94,7 +94,7 @@ class LogIn extends React.Component {
     let { username, password } = values;
     try {
       const user = await Auth.signIn(username, password);
-      this.props.newAuth();
+      this.props.auth();
       openSuccessfulNotification(
         "Success",
         "You will be redirected to the dashboard in a bit."

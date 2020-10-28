@@ -1,14 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import {
-  Collapse,
-  Button,
-  Modal,
-  Input,
-  Avatar,
-  message,
-} from "antd";
+import { Collapse, Button, Modal, Input, Avatar, message } from "antd";
 import { Link } from "react-router-dom";
+import { GoX } from "react-icons/go";
 
 const { Panel } = Collapse;
 const { TextArea } = Input;
@@ -70,6 +64,7 @@ class Companytab extends React.Component {
               industry={this.props.industry}
               companyid={this.props.companyid}
               avatar={this.props.avatar}
+              disassociatePinnedBusiness={this.props.disassociatePinnedBusiness}
             />
           }
           key="1"
@@ -88,10 +83,13 @@ class Companytab extends React.Component {
            * Dropdown
            */}
           <DroppedView
+            companyObject={this.props.companyObject}
             companyid={this.props.companyid}
             name={this.props.name}
             updateBusinessStatus={this.props.updateBusinessStatus}
-            removeBusiness={this.props.removeBusiness}
+            disassociatePinnedBusiness={this.props.disassociatePinnedBusiness}
+            removePinnedBusiness={this.props.removePinnedBusiness}
+            addActiveApp={this.props.addActiveApp}
           />
         </Panel>
       </Collapse>
@@ -102,6 +100,10 @@ export default Companytab;
 
 //Tab View of the Company Tab
 class CLabel extends React.Component {
+  handleClick = (e) => {
+    e.stopPropagation();
+    this.props.disassociatePinnedBusiness(this.props.companyid);
+  };
   render() {
     let { name, industry } = this.props;
     return (
@@ -118,13 +120,22 @@ class CLabel extends React.Component {
             alignItems: "center",
           }}
         >
+          <Col
+            className="pin-company-remove-button"
+            onClick={(e) => this.handleClick(e)}
+            style={{
+              marginLeft: "1vw",
+            }}
+          >
+            <GoX size={24} />
+          </Col>
           {/**company logo */}
           <Avatar
             size={36}
             shape="square"
             src={this.props.avatar}
             style={{
-              marginLeft: "4vw",
+              marginLeft: "2vw",
               marginBottom: "14px",
             }}
           />
@@ -222,6 +233,9 @@ class DroppedView extends React.Component {
   submitResponse = () => {
     message.success("Your application was sent successfully.");
     this.props.updateBusinessStatus(this.props.companyid, "Pending");
+    this.props.removePinnedBusiness(this.props.companyid);
+    this.props.companyObject.status = "Pending";
+    this.props.addActiveApp(this.props.companyObject);
   };
 
   cancelReponse = () => {

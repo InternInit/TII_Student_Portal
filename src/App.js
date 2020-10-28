@@ -50,7 +50,9 @@ import {
   updateCheckedIndustries,
   updateDisabledIndustries,
   updatePinnedBusinesses,
+  removePinnedBusiness,
   updateActiveApplications,
+  removeActiveApp,
   updateCompletionState,
   batchUpdateCompletionState,
   batchUpdateCompletionChecklist,
@@ -115,7 +117,9 @@ const mapDispatchToProps = {
   updateCheckedIndustries,
   updateDisabledIndustries,
   updatePinnedBusinesses,
+  removePinnedBusiness,
   updateActiveApplications,
+  removeActiveApp,
   updateCompletionState,
   batchUpdateCompletionState,
   batchUpdateCompletionChecklist,
@@ -140,10 +144,9 @@ class App extends Component {
 
   componentDidMount() {
     console.log("mounted");
-    this.newAuth();
+    this.auth();
     this.getCachedCompletionState();
-    this.getPinnedBusinesses();
-    this.getActiveApplications();
+    this.fetchAssociatedBusinessIds();
     window.addEventListener("resize", this.resize);
   }
 
@@ -154,7 +157,7 @@ class App extends Component {
 
   inMemoryToken;
 
-  newAuth = async () => {
+  auth = async () => {
     Auth.currentSession()
       .then((session) => {
         console.log(session);
@@ -297,7 +300,7 @@ class App extends Component {
     }).then((response) => {});
   };
 
-  updateBusinessStatus = async (businessId, status) => {
+  updateBusinessStatus = async (businessId, status, companyFull) => {
     let token = await this.getJwt();
 
     fetch("/api/update_business_status", {
@@ -312,16 +315,10 @@ class App extends Component {
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
-        //Placeholder behavior to pinpoint memoization bug
-        //#########################################
-        this.props.updatePinnedBusinesses([]);
-        //#########################################
-        this.getPinnedBusinesses();
-        this.getActiveApplications();
       });
   };
 
-  removeBusiness = async (businessId) => {
+  disassociatePinnedBusiness = async (businessId) => {
     let token = await this.getJwt();
 
     fetch("/api/remove_business", {
@@ -334,34 +331,12 @@ class App extends Component {
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
-        //Placeholder behavior to pinpoint memoization bug
-        //#########################################
-        this.props.updatePinnedBusinesses([]);
-        //#########################################
-        this.getPinnedBusinesses();
-        this.getActiveApplications();
+        //To revert to prev version, please refer to code in updateBusinessStatus
+        this.props.removePinnedBusiness(businessId);
       });
   };
 
-  getPinnedBusinesses = async () => {
-    let token = await this.getJwt();
-
-    fetch("/api/get_business_by_status", {
-      method: "POST",
-      headers: {
-        Authorization: "Bearer " + JSON.parse(JSON.stringify(token)),
-        "Content-Type": "text/plain",
-      },
-      body: JSON.parse(JSON.stringify("Pinned")),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-        this.matchBusinessesPinned(data);
-      });
-  };
-
-  getActiveApplications = async () => {
+  fetchAssociatedBusinessIds = async () => {
     let token = await this.getJwt();
 
     fetch("/api/get_business_by_status", {
@@ -376,14 +351,14 @@ class App extends Component {
       .then((data) => {
         let parsedData = JSON.parse(data);
         console.log(parsedData);
-        this.matchBusinessesActive(
+        this.matchAssociatedBusinessInfo(
           JSON.stringify(parsedData[0]),
           parsedData[1]
         );
       });
   };
 
-  matchBusinessesPinned = (businessList) => {
+  matchAssociatedBusinessInfo = (businessList, statusList) => {
     fetch("/api/match_businesses", {
       method: "POST",
       body: JSON.parse(JSON.stringify(businessList)),
@@ -391,37 +366,18 @@ class App extends Component {
       .then((response) => response.json())
       .then((data) => {
         try {
-          let matchedBusinessesArray = [];
-          JSON.parse(data).hits.hits.forEach((item) =>
-            matchedBusinessesArray.push(item._source)
-          );
-          this.props.updatePinnedBusinesses(matchedBusinessesArray);
-        } catch (e) {
-          console.log(data);
-          console.log(e);
-        }
-      });
-  };
+          let pinnedBusinessArray = [];
+          let activeAppsArray = [];
+          JSON.parse(data).hits.hits.forEach((item) => {
+            item._source.status = statusList[item._source.Id];
+            item._source.status === "Pinned"
+              ? pinnedBusinessArray.push(item._source)
+              : activeAppsArray.push(item._source);
+          });
 
-  matchBusinessesActive = (businessList, statusList) => {
-    fetch("/api/match_businesses", {
-      method: "POST",
-      body: JSON.parse(JSON.stringify(businessList)),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        try {
-          let matchedBusinessesArray = [];
-          JSON.parse(data).hits.hits.forEach((item) =>
-            matchedBusinessesArray.push(item._source)
-          );
-          matchedBusinessesArray.forEach(
-            (item, index) => (item.status = statusList[item.Id])
-          );
-          console.log(matchedBusinessesArray);
-          this.props.updateActiveApplications(matchedBusinessesArray);
+          this.props.updatePinnedBusinesses(pinnedBusinessArray);
+          this.props.updateActiveApplications(activeAppsArray);
         } catch (e) {
-          console.log(data);
           console.log(e);
         }
       });
@@ -683,18 +639,18 @@ class App extends Component {
                 <Dashboard
                   version={this.state.version}
                   updateBusinessStatus={this.updateBusinessStatus}
-                  removeBusiness={this.removeBusiness}
+                  disassociatePinnedBusiness={this.disassociatePinnedBusiness}
                   updateData={this.updateData}
                 />
               )}
             />
             <Route
               path="/login"
-              render={(props) => <LogIn newAuth={this.newAuth} />}
+              render={(props) => <LogIn auth={this.auth} />}
             />
             <Route
               path="/signup"
-              render={(props) => <SignUp newAuth={this.newAuth} />}
+              render={(props) => <SignUp auth={this.auth} />}
             />
             <Route path="/how-to-apply" exact component={HowtoApply} />
             <Route
