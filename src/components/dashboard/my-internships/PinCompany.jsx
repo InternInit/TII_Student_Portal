@@ -39,7 +39,11 @@ class PinCompany extends Component {
 
   render() {
     let { page, busPerPage } = this.state;
-    let { pinnedBusinesses, updateBusinessStatus, removeBusiness } = this.props;
+    let {
+      pinnedBusinesses,
+      updateBusinessStatus,
+      disassociatePinnedBusiness,
+    } = this.props;
     return (
       <React.Fragment>
         {/**
@@ -72,12 +76,15 @@ class PinCompany extends Component {
                 .map((pinnedCompany, index) => (
                   <div style={{ marginBottom: "12px" }} key={index}>
                     <Companytab
+                      companyObject={pinnedCompany}
                       name={pinnedCompany.name}
                       industry={pinnedCompany.industry}
                       avatar={pinnedCompany.avatar}
                       companyid={pinnedCompany.Id}
                       updateBusinessStatus={updateBusinessStatus}
-                      removeBusiness={removeBusiness}
+                      disassociatePinnedBusiness={disassociatePinnedBusiness}
+                      removePinnedBusiness={this.props.removePinnedBusiness}
+                      addActiveApp={this.props.addActiveApp}
                     />
                   </div>
                 ))}

@@ -63,7 +63,6 @@ class ActiveApplications extends Component {
             >
               {activeApplications
                 .slice(page * busPerPage, (page + 1) * busPerPage)
-                .filter((apps) => apps.status !== "Pinned")
                 .map((pinnedCompany, index) => (
                   <div style={{ marginBottom: "12px" }} key={index}>
                     <ActiveAppCompanytab
@@ -82,10 +81,7 @@ class ActiveApplications extends Component {
             </QueueAnim>
             <Pagination
               current={parseInt(page) + 1}
-              total={
-                activeApplications.filter((apps) => apps.status !== "Pinned")
-                  .length
-              }
+              total={activeApplications.length}
               onChange={(pageChange) => this.handlePageChange(pageChange - 1)}
               pageSize={busPerPage}
             />

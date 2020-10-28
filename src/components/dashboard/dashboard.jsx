@@ -21,6 +21,9 @@ import { connect } from "react-redux";
 import {
   updateCheckedIndustries,
   updateDisabledIndustries,
+  addPinnedBusiness,
+  removePinnedBusiness,
+  addActiveApp,
 } from "../../redux/actions";
 
 const PageContainer = styled.div`
@@ -52,6 +55,9 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = {
   updateCheckedIndustries,
   updateDisabledIndustries,
+  addPinnedBusiness,
+  removePinnedBusiness,
+  addActiveApp,
 };
 
 class Dashboard extends Component {
@@ -97,7 +103,11 @@ class Dashboard extends Component {
                 <Route path="/dashboard/my-internships" exact>
                   <MyInternships
                     updateBusinessStatus={this.props.updateBusinessStatus}
-                    removeBusiness={this.props.removeBusiness}
+                    disassociatePinnedBusiness={
+                      this.props.disassociatePinnedBusiness
+                    }
+                    removePinnedBusiness={this.props.removePinnedBusiness}
+                    addActiveApp={this.props.addActiveApp}
                   />
                 </Route>
 
@@ -109,9 +119,11 @@ class Dashboard extends Component {
                       version={this.props.userInfo.version}
                       updateBusinessStatus={this.props.updateBusinessStatus}
                       pinnedBusinesses={this.props.userInfo.pinnedBusinesses}
+                      addPinnedBusiness={this.props.addPinnedBusiness}
                       activeApplications={
                         this.props.userInfo.activeApplications
                       }
+                      addActiveApp={this.props.addActiveApp}
                       updateData={this.props.updateData}
                       checkedIndustries={this.props.userInfo.checkedIndustries}
                       updateCheckedIndustries={

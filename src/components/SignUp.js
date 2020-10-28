@@ -320,7 +320,7 @@ class SignUp extends React.Component {
       this.setState({
         emailConfirmationVisible: false,
       });
-      this.props.newAuth();
+      this.props.auth();
       this.props.history.push("/dashboard");
     } catch (error) {
       console.log(error);
