@@ -91,18 +91,16 @@ class SearchCompanytab extends React.Component {
 
     return (
       <>
-        {!show && (
-          <div onClick={this.handleClick}>
-            <CSSTransition
-              in={!show}
-              timeout={200}
-              classNames="add-company-normalview"
-              unmountOnExit
-            >
-              <CLabel name={name} industry={industry} logo={logo} />
-            </CSSTransition>
-          </div>
-        )}
+        <div onClick={this.handleClick}>
+          <CSSTransition
+            in={!show}
+            timeout={50}
+            classNames="add-company-normalview"
+            unmountOnExit
+          >
+            <CLabel name={name} industry={industry} logo={logo} />
+          </CSSTransition>
+        </div>
         <div onClick={this.handleClick}>
           <CSSTransition
             in={show}
