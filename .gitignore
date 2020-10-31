@@ -59,3 +59,8 @@ amplifytools.xcconfig
 
 # Local History for Visual Studio Code
 .history/
+
+# User Specific ignores
+
+# Tejas
+tmux.sh
