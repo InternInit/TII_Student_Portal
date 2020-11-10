@@ -196,13 +196,16 @@ class CompanyInformation extends React.Component {
               <div>
                 <AntRow>
                   <Avatar size={75} src={info.avatar} />
-                  <div>
+                  <div style={{backgroundColor: "red"}}>
                     <h1 className="company-info-company-name thirtySixFont">
                       {info.name}
                     </h1>
                     <h1 className="company-info-company-location twentyTwoFont">
                       {info.location}
                     </h1>
+                  </div>
+                  <div>
+                    <h1>Hello</h1>
                   </div>
                 </AntRow>
 
