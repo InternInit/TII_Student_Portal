@@ -19,8 +19,7 @@ import { industryIcons } from "./industryIcons";
 import _ from "underscore";
 
 import { Link } from "react-router-dom";
-import { CSSTransition } from "react-transition-group";
-import { Spring, Transition } from "react-spring/renderprops";
+import { Spring, config } from "react-spring/renderprops";
 
 const { useBreakpoint } = Grid;
 
@@ -227,8 +226,8 @@ class CompanyInformation extends React.Component {
                           fontSize: 20,
                           fontWeight: "bold",
                           transform: this.state.isCompanyAdded ? "rotate(0deg)" : "rotate(360deg)",
-                          zIndex: this.state.isCompanyAdded ? 5 : 0,
                         }}
+                        config={config.stiff}
                       >
                         {(props) => <CheckOutlined style={props} />}
                       </Spring>
@@ -242,8 +241,8 @@ class CompanyInformation extends React.Component {
                           fontSize: 20,
                           fontWeight: "bold",
                           transform: this.state.isCompanyAdded ? "rotate(0deg)" : "rotate(360deg)",
-                          zIndex: this.state.isCompanyAdded ? 0 : 5,
                         }}
+                        config={config.stiff}
                       >
                         {(props) => <PlusOutlined style={props} />}
                       </Spring>
