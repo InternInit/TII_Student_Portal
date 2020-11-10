@@ -19,6 +19,7 @@ import { industryIcons } from "./industryIcons";
 import _ from "underscore";
 
 import { Link } from "react-router-dom";
+import { CSSTransition } from "react-transition-group";
 
 const { useBreakpoint } = Grid;
 
@@ -92,7 +93,7 @@ class CompanyInformation extends React.Component {
       info: {},
       isLoading: true,
       show: false,
-      addCompany: false,
+      isCompanyAdded: false,
     };
   }
 
@@ -129,7 +130,7 @@ class CompanyInformation extends React.Component {
   toggle = () => this.setState({ show: !this.state.show });
 
   addCompany = () => {
-    this.setState({ addCompany: !this.state.addCompany });
+    this.setState({ isCompanyAdded: !this.state.isCompanyAdded });
   };
 
   render() {
@@ -215,27 +216,32 @@ class CompanyInformation extends React.Component {
                       className="company-info-add-button"
                       onClick={this.addCompany}
                     >
-                      {this.state.addCompany ? (
-                        <span>
-                          <CheckOutlined
-                            style={{
-                              fontSize: 20,
-                              fontWeight: "bold",
-                              marginTop: "4px",
-                            }}
-                          />
-                        </span>
-                      ) : (
-                        <span>
-                          <PlusOutlined
-                            style={{
-                              fontSize: 20,
-                              fontWeight: "bold",
-                              marginTop: "4px",
-                            }}
-                          />
-                        </span>
-                      )}
+                      <CSSTransition
+                        classNames="company-info-add-button-check"
+                        timeout={50}
+                        in={this.state.isCompanyAdded}
+                        unmountOnExit
+                      >
+                        <CheckOutlined
+                          style={{
+                            fontSize: 20,
+                            fontWeight: "bold",
+                          }}
+                        />
+                      </CSSTransition>
+                      <CSSTransition
+                        classNames="company-info-add-button-plus"
+                        timeout={50}
+                        in={!this.state.isCompanyAdded}
+                        unmountOnExit
+                      >
+                        <PlusOutlined
+                          style={{
+                            fontSize: 20,
+                            fontWeight: "bold",
+                          }}
+                        />
+                      </CSSTransition>
                     </div>
                   </AntCol>
                 </AntRow>

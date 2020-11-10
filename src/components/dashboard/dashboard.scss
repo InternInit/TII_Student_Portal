@@ -210,21 +210,38 @@ hr {
   display: flex;
   align-items: center;
   justify-content: center;
-
-  span {
-    color: $ant-gray;
-  }
+  color: $ant-gray;
 }
 
 .company-info-add-button:hover {
   border: 1px solid #52c41a;
-  transition: 300ms ease-in-out;
+  transition: 400ms ease-in-out;
   cursor: pointer;
+  color: #52c41a;
+}
 
-  span {
-    color: #52c41a;
-    transition: 300ms ease;
-  }
+.company-info-add-button-check-enter {
+  opacity: 0;
+  transform: scale(0.9);
+  transform: rotate(90);
+}
+
+.company-info-add-button-check-enter-active {
+  opacity: 1;
+  transform: rotate(0);
+  transition: opacity 1000ms, transform 1000ms;
+}
+
+.company-info-add-button-check-enter {
+  opacity: 0;
+  transform: scale(0.9);
+  transform: rotate(90);
+}
+
+.company-info-add-button-check-enter-active {
+  opacity: 1;
+  transform: rotate(0);
+  transition: opacity 1000ms, transform 1000ms;
 }
 
 .company-info-inner-content-skeleton {
