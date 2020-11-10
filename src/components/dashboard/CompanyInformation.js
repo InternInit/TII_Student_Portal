@@ -218,7 +218,6 @@ class CompanyInformation extends React.Component {
                     >
                       <CSSTransition
                         classNames="company-info-add-button-check"
-                        timeout={50}
                         in={this.state.isCompanyAdded}
                         unmountOnExit
                       >
@@ -231,7 +230,7 @@ class CompanyInformation extends React.Component {
                       </CSSTransition>
                       <CSSTransition
                         classNames="company-info-add-button-plus"
-                        timeout={50}
+                        timeout={200}
                         in={!this.state.isCompanyAdded}
                         unmountOnExit
                       >
