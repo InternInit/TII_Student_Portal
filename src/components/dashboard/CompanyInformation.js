@@ -20,6 +20,7 @@ import _ from "underscore";
 
 import { Link } from "react-router-dom";
 import { CSSTransition } from "react-transition-group";
+import { Spring, Transition } from "react-spring/renderprops";
 
 const { useBreakpoint } = Grid;
 
@@ -216,31 +217,34 @@ class CompanyInformation extends React.Component {
                       className="company-info-add-button"
                       onClick={this.addCompany}
                     >
-                      <CSSTransition
-                        classNames="company-info-add-button-check"
-                        in={this.state.isCompanyAdded}
-                        unmountOnExit
+                      <Spring
+                        from={{ opacity: 0, fontSize: 20, fontWeight: "bold" }}
+                        to={{
+                          position: "absolute",
+                          top: "10px",
+                          left: "10px",
+                          opacity: this.state.isCompanyAdded ? 1 : 0,
+                          fontSize: 20,
+                          fontWeight: "bold",
+                          zIndex: this.state.isCompanyAdded ? 5 : 0,
+                        }}
                       >
-                        <CheckOutlined
-                          style={{
-                            fontSize: 20,
-                            fontWeight: "bold",
-                          }}
-                        />
-                      </CSSTransition>
-                      <CSSTransition
-                        classNames="company-info-add-button-plus"
-                        timeout={200}
-                        in={!this.state.isCompanyAdded}
-                        unmountOnExit
+                        {(props) => <CheckOutlined style={props} />}
+                      </Spring>
+                      <Spring
+                        from={{ opacity: 0, fontSize: 20, fontWeight: "bold" }}
+                        to={{
+                          position: "absolute",
+                          top: "10px",
+                          left: "10px",
+                          opacity: this.state.isCompanyAdded ? 0 : 1,
+                          fontSize: 20,
+                          fontWeight: "bold",
+                          zIndex: this.state.isCompanyAdded ? 0 : 5,
+                        }}
                       >
-                        <PlusOutlined
-                          style={{
-                            fontSize: 20,
-                            fontWeight: "bold",
-                          }}
-                        />
-                      </CSSTransition>
+                        {(props) => <PlusOutlined style={props} />}
+                      </Spring>
                     </div>
                   </AntCol>
                 </AntRow>
