@@ -226,6 +226,7 @@ class CompanyInformation extends React.Component {
                           opacity: this.state.isCompanyAdded ? 1 : 0,
                           fontSize: 20,
                           fontWeight: "bold",
+                          transform: this.state.isCompanyAdded ? "rotate(0deg)" : "rotate(360deg)",
                           zIndex: this.state.isCompanyAdded ? 5 : 0,
                         }}
                       >
@@ -240,6 +241,7 @@ class CompanyInformation extends React.Component {
                           opacity: this.state.isCompanyAdded ? 0 : 1,
                           fontSize: 20,
                           fontWeight: "bold",
+                          transform: this.state.isCompanyAdded ? "rotate(0deg)" : "rotate(360deg)",
                           zIndex: this.state.isCompanyAdded ? 0 : 5,
                         }}
                       >
