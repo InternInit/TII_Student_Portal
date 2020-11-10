@@ -14,7 +14,7 @@ import {
   AiFillTwitterSquare,
   AiFillLinkedin,
 } from "react-icons/ai";
-import { FaInstagram } from "react-icons/fa";
+import { FaInstagram, FaCheck, FaPlus } from "react-icons/fa";
 import { industryIcons } from "./industryIcons";
 import _ from "underscore";
 
@@ -220,8 +220,8 @@ class CompanyInformation extends React.Component {
                         from={{ opacity: 0, fontSize: 20, fontWeight: "bold" }}
                         to={{
                           position: "absolute",
-                          top: "10px",
-                          left: "10px",
+                          top: "7px",
+                          left: "7px",
                           opacity: this.state.isCompanyAdded ? 1 : 0,
                           fontSize: 20,
                           fontWeight: "bold",
@@ -229,14 +229,14 @@ class CompanyInformation extends React.Component {
                         }}
                         config={config.stiff}
                       >
-                        {(props) => <CheckOutlined style={props} />}
+                        {(props) => <FaCheck style={props} />}
                       </Spring>
                       <Spring
                         from={{ opacity: 0, fontSize: 20, fontWeight: "bold" }}
                         to={{
                           position: "absolute",
-                          top: "10px",
-                          left: "10px",
+                          top: "7px",
+                          left: "7px",
                           opacity: this.state.isCompanyAdded ? 0 : 1,
                           fontSize: 20,
                           fontWeight: "bold",
@@ -244,7 +244,7 @@ class CompanyInformation extends React.Component {
                         }}
                         config={config.stiff}
                       >
-                        {(props) => <PlusOutlined style={props} />}
+                        {(props) => <FaPlus style={props} />}
                       </Spring>
                     </div>
                   </AntCol>

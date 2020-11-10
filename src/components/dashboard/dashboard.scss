@@ -206,21 +206,20 @@ hr {
   border-radius: 50%;
   width: 40px;
   height: 40px;
-  border: 1px solid $ant-gray;
-  display: relative;
+  border: 3px solid $ant-gray;
+  position: relative;
+  top: 25%;
   color: $ant-gray;
 }
 
 .company-info-add-button:hover {
-  border: 1px solid #52c41a;
+  border: 3px solid #52c41a;
   transition: 400ms ease-in-out;
   cursor: pointer;
   color: #52c41a;
 }
 
 .company-info-inner-content-skeleton {
-  //display: flex;
-  //justify-content: flex-start;
   padding-left: 7%;
   padding-right: 7%;
   padding-bottom: 7%;
