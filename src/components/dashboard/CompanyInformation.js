@@ -7,9 +7,8 @@ import {
   Col as AntCol,
   Skeleton,
   Grid,
-  Button,
 } from "antd";
-import { PlusOutlined } from "@ant-design/icons";
+import { PlusOutlined, CheckOutlined } from "@ant-design/icons";
 import {
   AiFillFacebook,
   AiFillTwitterSquare,
@@ -93,6 +92,7 @@ class CompanyInformation extends React.Component {
       info: {},
       isLoading: true,
       show: false,
+      addCompany: false,
     };
   }
 
@@ -127,6 +127,10 @@ class CompanyInformation extends React.Component {
   };
 
   toggle = () => this.setState({ show: !this.state.show });
+
+  addCompany = () => {
+    this.setState({ addCompany: !this.state.addCompany });
+  };
 
   render() {
     const { info, isLoading, show } = this.state;
@@ -207,12 +211,31 @@ class CompanyInformation extends React.Component {
                     </h1>
                   </div>
                   <AntCol className="ml-2">
-                    <div className="company-info-add-button">
-                      <span>
-                        <PlusOutlined
-                          style={{ fontSize: 20, fontWeight: "bold", marginTop: "4px" }}
-                        />
-                      </span>
+                    <div
+                      className="company-info-add-button"
+                      onClick={this.addCompany}
+                    >
+                      {this.state.addCompany ? (
+                        <span>
+                          <CheckOutlined
+                            style={{
+                              fontSize: 20,
+                              fontWeight: "bold",
+                              marginTop: "4px",
+                            }}
+                          />
+                        </span>
+                      ) : (
+                        <span>
+                          <PlusOutlined
+                            style={{
+                              fontSize: 20,
+                              fontWeight: "bold",
+                              marginTop: "4px",
+                            }}
+                          />
+                        </span>
+                      )}
                     </div>
                   </AntCol>
                 </AntRow>
