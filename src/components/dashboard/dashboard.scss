@@ -19,6 +19,7 @@ $medium-dark-gray: #434343;
 $background-color: #ebeff2;
 $gray-two: #e2e8ed;
 $gray-thirteen: #425866;
+$ant-gray: #bfbfbf;
 
 //Mixins
 @mixin standard-box-shadow {
@@ -198,6 +199,32 @@ hr {
   padding-bottom: 7%;
   width: 85%;
   margin-top: 3%;
+}
+
+.company-info-add-button {
+  @include soft-box-shadow();
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  border: 1px solid $ant-gray;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  span {
+    color: $ant-gray;
+  }
+}
+
+.company-info-add-button:hover {
+  border: 1px solid #52c41a;
+  transition: 300ms ease-in-out;
+  cursor: pointer;
+
+  span {
+    color: #52c41a;
+    transition: 300ms ease;
+  }
 }
 
 .company-info-inner-content-skeleton {
@@ -421,7 +448,6 @@ hr {
   transform: scale(1.5);
   transition: opacity 2ms, transform 2ms;
 }
-
 
 /*
 ============================================================

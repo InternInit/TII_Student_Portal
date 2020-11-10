@@ -7,7 +7,9 @@ import {
   Col as AntCol,
   Skeleton,
   Grid,
+  Button,
 } from "antd";
+import { PlusOutlined } from "@ant-design/icons";
 import {
   AiFillFacebook,
   AiFillTwitterSquare,
@@ -196,7 +198,7 @@ class CompanyInformation extends React.Component {
               <div>
                 <AntRow>
                   <Avatar size={75} src={info.avatar} />
-                  <div style={{backgroundColor: "red"}}>
+                  <div>
                     <h1 className="company-info-company-name thirtySixFont">
                       {info.name}
                     </h1>
@@ -204,9 +206,15 @@ class CompanyInformation extends React.Component {
                       {info.location}
                     </h1>
                   </div>
-                  <div>
-                    <h1>Hello</h1>
-                  </div>
+                  <AntCol className="ml-2">
+                    <div className="company-info-add-button">
+                      <span>
+                        <PlusOutlined
+                          style={{ fontSize: 20, fontWeight: "bold", marginTop: "4px" }}
+                        />
+                      </span>
+                    </div>
+                  </AntCol>
                 </AntRow>
 
                 <AntRow style={{ width: "100%" }}>
@@ -297,19 +305,19 @@ const ListingCard = (props) => {
 
   return (
     <>
-    <AntCol span={isDesktop ? 6 : 12}>
-      <div className="company-info-listing-card">
-        <div className="company-info-listing-card-icon-box">
-          <div>{industryIcons[industryKey]}</div>
+      <AntCol span={isDesktop ? 6 : 12}>
+        <div className="company-info-listing-card">
+          <div className="company-info-listing-card-icon-box">
+            <div>{industryIcons[industryKey]}</div>
+          </div>
+          {/***
+           * Font-size assigned in CSS class to adjust based on card resizing
+           */}
+          <div className="company-info-listing-card-position-box">
+            <h1 className="sub-card-heading sixteenFont">{props.position}</h1>
+          </div>
         </div>
-        {/***
-         * Font-size assigned in CSS class to adjust based on card resizing
-         */}
-        <div className="company-info-listing-card-position-box">
-          <h1 className="sub-card-heading sixteenFont">{props.position}</h1>
-        </div>
-      </div>
-    </AntCol>
+      </AntCol>
     </>
   );
 };
