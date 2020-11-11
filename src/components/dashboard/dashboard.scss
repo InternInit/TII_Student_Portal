@@ -213,7 +213,7 @@ hr {
   right: 0;
   color: $ant-gray;
 
-  @media screen and (max-width: $large-breakpoint) {
+  @media screen and (max-width: $x-large-breakpoint) {
     position: relative;
     display: flex;
     flex-basis: 1;
@@ -239,7 +239,7 @@ hr {
     font-weight: lighter;
   }
 
-  @media screen and (max-width: $large-breakpoint) {
+  @media screen and (max-width: $x-large-breakpoint) {
     position: relative;
     display: flex;
     flex-basis: 2;
@@ -539,7 +539,7 @@ hr {
 .break-large {
   display: none;
 
-  @media screen and (max-width: $large-breakpoint) {
+  @media screen and (max-width: $x-large-breakpoint) {
     display: inline;
     flex-basis: 100%;
     height: 0;
