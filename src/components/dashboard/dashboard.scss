@@ -235,6 +235,8 @@ hr {
 
   h1 {
     color: $ant-gray;
+    font-family: Roboto;
+    font-weight: lighter;
   }
 
   @media screen and (max-width: $large-breakpoint) {
