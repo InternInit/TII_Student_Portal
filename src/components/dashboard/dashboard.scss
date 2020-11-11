@@ -212,6 +212,13 @@ hr {
   top: 1.5em;
   right: 0;
   color: $ant-gray;
+
+  @media screen and (max-width: $large-breakpoint) {
+    position: relative;
+    display: flex;
+    flex-basis: 1;
+    margin-bottom: 4vh;
+  }
 }
 
 .company-info-add-button:hover {
@@ -228,6 +235,14 @@ hr {
 
   h1 {
     color: $ant-gray;
+  }
+
+  @media screen and (max-width: $large-breakpoint) {
+    position: relative;
+    display: flex;
+    flex-basis: 2;
+    left: 1em;
+    margin-bottom: 4vh;
   }
 }
 
@@ -513,6 +528,16 @@ hr {
   display: none;
 
   @media screen and (max-width: $medium-breakpoint) {
+    display: inline;
+    flex-basis: 100%;
+    height: 0;
+  }
+}
+
+.break-large {
+  display: none;
+
+  @media screen and (max-width: $large-breakpoint) {
     display: inline;
     flex-basis: 100%;
     height: 0;

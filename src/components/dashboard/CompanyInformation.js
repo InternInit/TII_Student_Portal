@@ -201,7 +201,9 @@ class CompanyInformation extends React.Component {
                *
                */}
               <div>
-                <AntRow>
+                <AntRow
+                  style={{ position: "relative" }}
+                >
                   <AntCol>
                     <Avatar size={75} src={info.avatar} />
                   </AntCol>
@@ -215,7 +217,7 @@ class CompanyInformation extends React.Component {
                       </h1>
                     </div>
                   </AntCol>
-                  <AntCol className="universal-right" span={14}>
+                  <div className="break-large" />
                     <div
                       className="company-info-add-button"
                       style={{
@@ -260,12 +262,13 @@ class CompanyInformation extends React.Component {
                     </div>
                     <div className="company-info-add-company-indicator">
                       {this.state.isCompanyAdded ? (
-                        <h1 style={{ color: "#52c41a" }} className="twentyFont">Company Added</h1>
+                        <h1 style={{ color: "#52c41a" }} className="twentyFont">
+                          Company Added
+                        </h1>
                       ) : (
                         <h1 className="twentyFont">Add Company</h1>
                       )}
                     </div>
-                  </AntCol>
                 </AntRow>
 
                 <AntRow style={{ width: "100%" }}>
