@@ -187,6 +187,50 @@ class CompanyInformation extends React.Component {
           </Breadcrumb>
 
           <div className="company-info-card">
+            <div
+              className="company-info-add-button"
+              style={{
+                border: this.state.isCompanyAdded && "3px solid #52c41a",
+              }}
+              onClick={this.addCompany}
+            >
+              <Spring
+                from={{ opacity: 0, fontSize: 20, fontWeight: "bold" }}
+                to={{
+                  position: "absolute",
+                  top: "7px",
+                  left: "7px",
+                  opacity: this.state.isCompanyAdded ? 1 : 0,
+                  fontSize: 20,
+                  transform: this.state.isCompanyAdded
+                    ? "rotate(0deg)"
+                    : "rotate(360deg)",
+                  color: "#52c41a",
+                }}
+                config={config.stiff}
+              >
+                {(props) => <FaCheck style={props} />}
+              </Spring>
+              <Spring
+                from={{ opacity: 0, fontSize: 20, fontWeight: "bold" }}
+                to={{
+                  position: "absolute",
+                  top: "7px",
+                  left: "7px",
+                  opacity: this.state.isCompanyAdded ? 0 : 1,
+                  fontSize: 20,
+                  transform: this.state.isCompanyAdded
+                    ? "rotate(0deg)"
+                    : "rotate(360deg)",
+                }}
+                config={config.stiff}
+              >
+                {(props) => <FaPlus style={props} />}
+              </Spring>
+            </div>
+            <div className="company-info-add-company-indicator">
+              <h1 className="twentyFont" >Add Company</h1>
+            </div>
             <div className="company-info-banner">
               <img
                 className="company-info-banner-img"
@@ -211,43 +255,7 @@ class CompanyInformation extends React.Component {
                       {info.location}
                     </h1>
                   </div>
-                  <AntCol className="ml-2">
-                    <div
-                      className="company-info-add-button"
-                      onClick={this.addCompany}
-                    >
-                      <Spring
-                        from={{ opacity: 0, fontSize: 20, fontWeight: "bold" }}
-                        to={{
-                          position: "absolute",
-                          top: "7px",
-                          left: "7px",
-                          opacity: this.state.isCompanyAdded ? 1 : 0,
-                          fontSize: 20,
-                          fontWeight: "bold",
-                          transform: this.state.isCompanyAdded ? "rotate(0deg)" : "rotate(360deg)",
-                        }}
-                        config={config.stiff}
-                      >
-                        {(props) => <FaCheck style={props} />}
-                      </Spring>
-                      <Spring
-                        from={{ opacity: 0, fontSize: 20, fontWeight: "bold" }}
-                        to={{
-                          position: "absolute",
-                          top: "7px",
-                          left: "7px",
-                          opacity: this.state.isCompanyAdded ? 0 : 1,
-                          fontSize: 20,
-                          fontWeight: "bold",
-                          transform: this.state.isCompanyAdded ? "rotate(0deg)" : "rotate(360deg)",
-                        }}
-                        config={config.stiff}
-                      >
-                        {(props) => <FaPlus style={props} />}
-                      </Spring>
-                    </div>
-                  </AntCol>
+                  <AntCol className="ml-2"></AntCol>
                 </AntRow>
 
                 <AntRow style={{ width: "100%" }}>
