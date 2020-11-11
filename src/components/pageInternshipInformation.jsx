@@ -990,6 +990,8 @@ class PageInternshipInformation extends Component {
     let allValues = this.formRef.current.getFieldsValue();
     delete allValues["Weighted GPA"];
 
+    //console.log(allValues);
+
     let completedCount = 0;
     let checklist = [];
     for (var field in allValues) {

@@ -45,7 +45,6 @@ class TiiNav extends React.Component {
   }
 
   getScrollStyle = () => {
-    console.log("Styled");
     switch (this.props.location.pathname) {
       case "/apply/internship-info":
         return "tii-nav-div-one";
