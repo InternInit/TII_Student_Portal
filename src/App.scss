@@ -110,6 +110,16 @@ p {
   justify-content: left;
 }
 
+.universal-center {
+  justify-content: center;
+  text-align: center;
+}
+
+.universal-right {
+  justify-content: right;
+  text-align: right;
+}
+
 .universal-middle {
   vertical-align: middle;
   align-content: center;

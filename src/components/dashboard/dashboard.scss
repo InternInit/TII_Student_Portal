@@ -210,7 +210,7 @@ hr {
   border: 3px solid $ant-gray;
   position: absolute;
   top: 1.5em;
-  left: 2em;
+  right: 0;
   color: $ant-gray;
 }
 
@@ -224,7 +224,7 @@ hr {
 .company-info-add-company-indicator {
   position: absolute;
   top: 1.75em;
-  left: 6em;
+  right: 4em;
 
   h1 {
     color: $ant-gray;
