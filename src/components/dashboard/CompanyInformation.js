@@ -8,6 +8,7 @@ import {
   Skeleton,
   Grid,
   Tooltip,
+  message,
 } from "antd";
 import {
   AiFillFacebook,
@@ -284,13 +285,18 @@ class CompanyInformation extends React.Component {
 }
 
 const CompanyHeading = (props) => {
-  const {info, status} = props;
+  const { info, status } = props;
 
   const [isCompanyAdded, changeCompanyStatus] = useState(status);
 
   const addCompany = () => {
     changeCompanyStatus(!isCompanyAdded);
-  }
+    if (!isCompanyAdded) {
+      message.success(`Company Pinned! 🎉`);
+    } else {
+      message.success(`Company Removed`);
+    }
+  };
 
   return (
     <AntRow gutter={[0, 32]} style={{ position: "relative" }}>
@@ -315,9 +321,7 @@ const CompanyHeading = (props) => {
       </AntCol>
       <AntCol className="universal-middle">
         <AntRow justify="end">
-          <Tooltip
-            title={isCompanyAdded ? "Remove Company" : "Add Company"}
-          >
+          <Tooltip title={isCompanyAdded ? "Remove Company" : "Add Company"}>
             <div
               className="company-info-add-button"
               style={{
@@ -337,9 +341,7 @@ const CompanyHeading = (props) => {
                   left: "7px",
                   opacity: isCompanyAdded ? 1 : 0,
                   fontSize: 20,
-                  transform: isCompanyAdded
-                    ? "rotate(0deg)"
-                    : "rotate(360deg)",
+                  transform: isCompanyAdded ? "rotate(0deg)" : "rotate(360deg)",
                   color: "#52c41a",
                 }}
                 config={config.stiff}
@@ -358,9 +360,7 @@ const CompanyHeading = (props) => {
                   left: "7px",
                   opacity: isCompanyAdded ? 0 : 1,
                   fontSize: 20,
-                  transform: isCompanyAdded
-                    ? "rotate(0deg)"
-                    : "rotate(360deg)",
+                  transform: isCompanyAdded ? "rotate(0deg)" : "rotate(360deg)",
                 }}
                 config={config.stiff}
               >
