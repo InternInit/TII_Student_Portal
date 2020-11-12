@@ -7,6 +7,7 @@ import {
   Col as AntCol,
   Skeleton,
   Grid,
+  Tooltip,
 } from "antd";
 import { PlusOutlined, CheckOutlined } from "@ant-design/icons";
 import {
@@ -207,7 +208,13 @@ class CompanyInformation extends React.Component {
                   </AntCol>
                   <AntCol flex="auto">
                     <div>
-                      <h1 className="company-info-company-name thirtySixFont">
+                      <h1
+                        className={
+                          info.name.length < 15
+                            ? "company-info-company-name thirtySixFont"
+                            : "company-info-company-name-responsive thirtySixFont"
+                        }
+                      >
                         {info.name}
                       </h1>
                       <h1 className="company-info-company-location twentyTwoFont">
@@ -215,29 +222,15 @@ class CompanyInformation extends React.Component {
                       </h1>
                     </div>
                   </AntCol>
-                  <AntCol className="universal-middle" flex="200px">
-                    <AntRow>
-
-                    </AntRow>
-                    <AntRow>
-                      
-                    </AntRow>
-                    <AntRow justify="space-between">
-                      <AntCol className="universal-right" flex="auto" order={1}>
-                        <div className="company-info-add-company-indicator">
-                          {this.state.isCompanyAdded ? (
-                            <h1
-                              style={{ color: "#52c41a" }}
-                              className="twentyFont"
-                            >
-                              Company Added
-                            </h1>
-                          ) : (
-                            <h1 className="twentyFont">Add Company</h1>
-                          )}
-                        </div>
-                      </AntCol>
-                      <AntCol order={2}>
+                  <AntCol className="universal-middle">
+                    <AntRow justify="end">
+                      <Tooltip
+                        title={
+                          this.state.isCompanyAdded
+                            ? "Remove Company"
+                            : "Add Company"
+                        }
+                      >
                         <div
                           className="company-info-add-button"
                           style={{
@@ -288,7 +281,7 @@ class CompanyInformation extends React.Component {
                             {(props) => <FaPlus style={props} />}
                           </Spring>
                         </div>
-                      </AntCol>
+                      </Tooltip>
                     </AntRow>
                   </AntCol>
                 </AntRow>
