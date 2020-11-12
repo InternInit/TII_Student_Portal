@@ -288,7 +288,8 @@ hr {
 .company-info-description {
   font-family: Roboto;
   font-style: normal;
-  text-align: left;
+  text-align: justify; 
+  text-justify: inter-word;
 }
 
 .company-info-read-more-button {
