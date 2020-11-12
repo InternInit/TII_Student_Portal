@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import {
   Breadcrumb,
@@ -14,7 +14,7 @@ import {
   AiFillTwitterSquare,
   AiFillLinkedin,
 } from "react-icons/ai";
-import 'antd/dist/antd.css';
+import "antd/dist/antd.css";
 
 import { FaInstagram, FaCheck, FaPlus } from "react-icons/fa";
 import { industryIcons } from "./industryIcons";
@@ -203,92 +203,7 @@ class CompanyInformation extends React.Component {
                *
                */}
               <div>
-                <AntRow gutter={[0, 32]} style={{ position: "relative" }}>
-                  <AntCol>
-                    <Avatar
-                      size={70}
-                      src={info.avatar}
-                    />
-                  </AntCol>
-                  <AntCol flex="auto">
-                    <div>
-                      <h1
-                        className={
-                          info.name.length < 15
-                            ? "company-info-company-name thirtySixFont"
-                            : "company-info-company-name-responsive thirtySixFont"
-                        }
-                      >
-                        {info.name}
-                      </h1>
-                      <h1 className="company-info-company-location twentyTwoFont">
-                        {info.location}
-                      </h1>
-                    </div>
-                  </AntCol>
-                  <AntCol className="universal-middle">
-                    <AntRow justify="end">
-                      <Tooltip
-                        title={
-                          this.state.isCompanyAdded
-                            ? "Remove Company"
-                            : "Add Company"
-                        }
-                      >
-                        <div
-                          className="company-info-add-button"
-                          style={{
-                            border:
-                              this.state.isCompanyAdded && "3px solid #52c41a",
-                          }}
-                          onClick={this.addCompany}
-                        >
-                          <Spring
-                            from={{
-                              opacity: 0,
-                              fontSize: 20,
-                              fontWeight: "bold",
-                            }}
-                            to={{
-                              position: "absolute",
-                              top: "7px",
-                              left: "7px",
-                              opacity: this.state.isCompanyAdded ? 1 : 0,
-                              fontSize: 20,
-                              transform: this.state.isCompanyAdded
-                                ? "rotate(0deg)"
-                                : "rotate(360deg)",
-                              color: "#52c41a",
-                            }}
-                            config={config.stiff}
-                          >
-                            {(props) => <FaCheck style={props} />}
-                          </Spring>
-                          <Spring
-                            from={{
-                              opacity: 0,
-                              fontSize: 20,
-                              fontWeight: "bold",
-                            }}
-                            to={{
-                              position: "absolute",
-                              top: "7px",
-                              left: "7px",
-                              opacity: this.state.isCompanyAdded ? 0 : 1,
-                              fontSize: 20,
-                              transform: this.state.isCompanyAdded
-                                ? "rotate(0deg)"
-                                : "rotate(360deg)",
-                            }}
-                            config={config.stiff}
-                          >
-                            {(props) => <FaPlus style={props} />}
-                          </Spring>
-                        </div>
-                      </Tooltip>
-                    </AntRow>
-                  </AntCol>
-                </AntRow>
+                <CompanyHeading info={info} status={false} />
 
                 <AntRow style={{ width: "100%" }}>
                   <h1 className="company-info-subsection-header twentyEightFont mb-2 universal-left">
@@ -367,6 +282,97 @@ class CompanyInformation extends React.Component {
     }
   }
 }
+
+const CompanyHeading = (props) => {
+  const {info, status} = props;
+
+  const [isCompanyAdded, changeCompanyStatus] = useState(status);
+
+  const addCompany = () => {
+    changeCompanyStatus(!isCompanyAdded);
+  }
+
+  return (
+    <AntRow gutter={[0, 32]} style={{ position: "relative" }}>
+      <AntCol>
+        <Avatar size={70} src={info.avatar} />
+      </AntCol>
+      <AntCol flex="auto">
+        <div>
+          <h1
+            className={
+              info.name.length < 15
+                ? "company-info-company-name thirtySixFont"
+                : "company-info-company-name-responsive thirtySixFont"
+            }
+          >
+            {info.name}
+          </h1>
+          <h1 className="company-info-company-location twentyTwoFont">
+            {info.location}
+          </h1>
+        </div>
+      </AntCol>
+      <AntCol className="universal-middle">
+        <AntRow justify="end">
+          <Tooltip
+            title={isCompanyAdded ? "Remove Company" : "Add Company"}
+          >
+            <div
+              className="company-info-add-button"
+              style={{
+                border: isCompanyAdded && "3px solid #52c41a",
+              }}
+              onClick={addCompany}
+            >
+              <Spring
+                from={{
+                  opacity: 0,
+                  fontSize: 20,
+                  fontWeight: "bold",
+                }}
+                to={{
+                  position: "absolute",
+                  top: "7px",
+                  left: "7px",
+                  opacity: isCompanyAdded ? 1 : 0,
+                  fontSize: 20,
+                  transform: isCompanyAdded
+                    ? "rotate(0deg)"
+                    : "rotate(360deg)",
+                  color: "#52c41a",
+                }}
+                config={config.stiff}
+              >
+                {(props) => <FaCheck style={props} />}
+              </Spring>
+              <Spring
+                from={{
+                  opacity: 0,
+                  fontSize: 20,
+                  fontWeight: "bold",
+                }}
+                to={{
+                  position: "absolute",
+                  top: "7px",
+                  left: "7px",
+                  opacity: isCompanyAdded ? 0 : 1,
+                  fontSize: 20,
+                  transform: isCompanyAdded
+                    ? "rotate(0deg)"
+                    : "rotate(360deg)",
+                }}
+                config={config.stiff}
+              >
+                {(props) => <FaPlus style={props} />}
+              </Spring>
+            </div>
+          </Tooltip>
+        </AntRow>
+      </AntCol>
+    </AntRow>
+  );
+};
 
 const ListingCard = (props) => {
   let ind = props.industry.split(" ").join("");
