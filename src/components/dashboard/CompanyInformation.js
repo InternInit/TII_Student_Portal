@@ -9,12 +9,13 @@ import {
   Grid,
   Tooltip,
 } from "antd";
-import { PlusOutlined, CheckOutlined } from "@ant-design/icons";
 import {
   AiFillFacebook,
   AiFillTwitterSquare,
   AiFillLinkedin,
 } from "react-icons/ai";
+import 'antd/dist/antd.css';
+
 import { FaInstagram, FaCheck, FaPlus } from "react-icons/fa";
 import { industryIcons } from "./industryIcons";
 import _ from "underscore";
@@ -202,9 +203,12 @@ class CompanyInformation extends React.Component {
                *
                */}
               <div>
-                <AntRow style={{ position: "relative" }}>
+                <AntRow gutter={[0, 32]} style={{ position: "relative" }}>
                   <AntCol>
-                    <Avatar size={75} src={info.avatar} />
+                    <Avatar
+                      size={70}
+                      src={info.avatar}
+                    />
                   </AntCol>
                   <AntCol flex="auto">
                     <div>
@@ -287,7 +291,7 @@ class CompanyInformation extends React.Component {
                 </AntRow>
 
                 <AntRow style={{ width: "100%" }}>
-                  <h1 className="company-info-subsection-header twentyEightFont mt-2 mb-2 universal-left">
+                  <h1 className="company-info-subsection-header twentyEightFont mb-2 universal-left">
                     Company Overview
                   </h1>
                 </AntRow>

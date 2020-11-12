@@ -15,6 +15,7 @@ $small-breakpoint: 600px;
 $medium-breakpoint: 768px;
 $large-breakpoint: 992px;
 $x-large-breakpoint: 1200px;
+$x-x-large-breakpoint: 1600px;
 $medium-dark-gray: #434343;
 $background-color: #ebeff2;
 $gray-two: #e2e8ed;
@@ -252,7 +253,22 @@ hr {
 }
 
 .company-info-company-name-responsive {
+  font-family: Lato;
+  font-style: normal;
+  font-weight: bold;
+  text-align: left;
 
+  margin-top: -1vh;
+  margin-left: 2vw;
+  margin-bottom: -1vh;
+
+  @media screen and (max-width: $x-x-large-breakpoint) {
+    @include font-size(28px);
+  }
+
+  @media screen and (max-width: $large-breakpoint) {
+    @include font-size(24px);
+  }
 }
 
 .company-info-company-location {
