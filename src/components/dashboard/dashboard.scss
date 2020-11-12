@@ -208,17 +208,10 @@ hr {
   width: 40px;
   height: 40px;
   border: 3px solid $ant-gray;
-  position: absolute;
-  top: 1.5em;
+  position: relative;
+  //top: 1.5em;
   right: 0;
   color: $ant-gray;
-
-  @media screen and (max-width: $x-large-breakpoint) {
-    position: relative;
-    display: flex;
-    flex-basis: 1;
-    margin-bottom: 4vh;
-  }
 }
 
 .company-info-add-button:hover {
@@ -229,22 +222,17 @@ hr {
 }
 
 .company-info-add-company-indicator {
-  position: absolute;
-  top: 1.75em;
-  right: 4em;
+  //position: absolute;
+  //top: 1.75em;
+  //right: 4em;
+
+  margin-right: .75em;
+  margin-top: 4px;
 
   h1 {
     color: $ant-gray;
     font-family: Roboto;
     font-weight: lighter;
-  }
-
-  @media screen and (max-width: $x-large-breakpoint) {
-    position: relative;
-    display: flex;
-    flex-basis: 2;
-    left: 1em;
-    margin-bottom: 4vh;
   }
 }
 

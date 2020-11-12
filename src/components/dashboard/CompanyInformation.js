@@ -205,7 +205,7 @@ class CompanyInformation extends React.Component {
                   <AntCol>
                     <Avatar size={75} src={info.avatar} />
                   </AntCol>
-                  <AntCol flex="auto" style={{ backgroundColor: "red" }}>
+                  <AntCol flex="auto">
                     <div>
                       <h1 className="company-info-company-name thirtySixFont">
                         {info.name}
@@ -215,59 +215,81 @@ class CompanyInformation extends React.Component {
                       </h1>
                     </div>
                   </AntCol>
-                  <div className="break-large" />
-                  <AntCol flex="200px" style={{ backgroundColor: "blue" }}>
-                    <div
-                      className="company-info-add-button"
-                      style={{
-                        border:
-                          this.state.isCompanyAdded && "3px solid #52c41a",
-                      }}
-                      onClick={this.addCompany}
-                    >
-                      <Spring
-                        from={{ opacity: 0, fontSize: 20, fontWeight: "bold" }}
-                        to={{
-                          position: "absolute",
-                          top: "7px",
-                          left: "7px",
-                          opacity: this.state.isCompanyAdded ? 1 : 0,
-                          fontSize: 20,
-                          transform: this.state.isCompanyAdded
-                            ? "rotate(0deg)"
-                            : "rotate(360deg)",
-                          color: "#52c41a",
-                        }}
-                        config={config.stiff}
-                      >
-                        {(props) => <FaCheck style={props} />}
-                      </Spring>
-                      <Spring
-                        from={{ opacity: 0, fontSize: 20, fontWeight: "bold" }}
-                        to={{
-                          position: "absolute",
-                          top: "7px",
-                          left: "7px",
-                          opacity: this.state.isCompanyAdded ? 0 : 1,
-                          fontSize: 20,
-                          transform: this.state.isCompanyAdded
-                            ? "rotate(0deg)"
-                            : "rotate(360deg)",
-                        }}
-                        config={config.stiff}
-                      >
-                        {(props) => <FaPlus style={props} />}
-                      </Spring>
-                    </div>
-                    <div className="company-info-add-company-indicator">
-                      {this.state.isCompanyAdded ? (
-                        <h1 style={{ color: "#52c41a" }} className="twentyFont">
-                          Company Added
-                        </h1>
-                      ) : (
-                        <h1 className="twentyFont">Add Company</h1>
-                      )}
-                    </div>
+                  <AntCol className="universal-middle" flex="200px">
+                    <AntRow>
+
+                    </AntRow>
+                    <AntRow>
+                      
+                    </AntRow>
+                    <AntRow justify="space-between">
+                      <AntCol className="universal-right" flex="auto" order={1}>
+                        <div className="company-info-add-company-indicator">
+                          {this.state.isCompanyAdded ? (
+                            <h1
+                              style={{ color: "#52c41a" }}
+                              className="twentyFont"
+                            >
+                              Company Added
+                            </h1>
+                          ) : (
+                            <h1 className="twentyFont">Add Company</h1>
+                          )}
+                        </div>
+                      </AntCol>
+                      <AntCol order={2}>
+                        <div
+                          className="company-info-add-button"
+                          style={{
+                            border:
+                              this.state.isCompanyAdded && "3px solid #52c41a",
+                          }}
+                          onClick={this.addCompany}
+                        >
+                          <Spring
+                            from={{
+                              opacity: 0,
+                              fontSize: 20,
+                              fontWeight: "bold",
+                            }}
+                            to={{
+                              position: "absolute",
+                              top: "7px",
+                              left: "7px",
+                              opacity: this.state.isCompanyAdded ? 1 : 0,
+                              fontSize: 20,
+                              transform: this.state.isCompanyAdded
+                                ? "rotate(0deg)"
+                                : "rotate(360deg)",
+                              color: "#52c41a",
+                            }}
+                            config={config.stiff}
+                          >
+                            {(props) => <FaCheck style={props} />}
+                          </Spring>
+                          <Spring
+                            from={{
+                              opacity: 0,
+                              fontSize: 20,
+                              fontWeight: "bold",
+                            }}
+                            to={{
+                              position: "absolute",
+                              top: "7px",
+                              left: "7px",
+                              opacity: this.state.isCompanyAdded ? 0 : 1,
+                              fontSize: 20,
+                              transform: this.state.isCompanyAdded
+                                ? "rotate(0deg)"
+                                : "rotate(360deg)",
+                            }}
+                            config={config.stiff}
+                          >
+                            {(props) => <FaPlus style={props} />}
+                          </Spring>
+                        </div>
+                      </AntCol>
+                    </AntRow>
                   </AntCol>
                 </AntRow>
 
