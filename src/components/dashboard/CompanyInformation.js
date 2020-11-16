@@ -117,6 +117,10 @@ class CompanyInformation extends React.Component {
     this.props.addPinnedBusiness(this.state.info);
   };
 
+  removeCompany = () => {
+    this.props.disassociatePinnedBusiness(this.state.info.Id);
+  }
+
   componentDidMount() {
     window.scrollTo(0, 0);
     let idList = [];
@@ -231,6 +235,7 @@ class CompanyInformation extends React.Component {
                     (company) => company.Id === info.Id
                   )}
                   addCompany={this.addCompany}
+                  removeCompany={this.removeCompany}
                 />
 
                 <AntRow style={{ width: "100%" }}>
@@ -367,6 +372,7 @@ const CompanyHeading = (props) => {
                   ? null
                   : isCompanyAdded
                   ? () => {
+                    props.removeCompany();
                     changeCompanyStatus(!isCompanyAdded);
                   }
                   : () => {

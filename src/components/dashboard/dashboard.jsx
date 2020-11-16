@@ -146,6 +146,9 @@ class Dashboard extends Component {
                     <CompanyInformation
                       updateBusinessStatus={this.props.updateBusinessStatus}
                       addPinnedBusiness={this.props.addPinnedBusiness}
+                      disassociatePinnedBusiness={
+                        this.props.disassociatePinnedBusiness
+                      }
                     />
                   )}
                 />
