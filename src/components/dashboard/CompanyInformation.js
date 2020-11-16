@@ -24,7 +24,15 @@ import _ from "underscore";
 import { Link } from "react-router-dom";
 import { Spring, config } from "react-spring/renderprops";
 
+import { connect } from "react-redux";
+
 const { useBreakpoint } = Grid;
+
+const mapStateToProps = (state) => {
+  return {
+    userInfo: state.userInfo,
+  };
+};
 
 const Header = styled.div`
   margin-top: 30px;
@@ -99,6 +107,13 @@ class CompanyInformation extends React.Component {
       isCompanyAdded: false,
     };
   }
+
+  addCompany = () => {
+    console.log(this.props);
+    message.success(`Company Pinned! 🎉`);
+    this.props.updateBusinessStatus(this.props.companyid, "Pinned");
+    this.props.addPinnedBusiness(this.props.companyObject);
+  };
 
   componentDidMount() {
     window.scrollTo(0, 0);

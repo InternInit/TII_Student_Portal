@@ -142,7 +142,12 @@ class Dashboard extends Component {
                 <Route
                   path="/dashboard/add-companies/company-information/:companyid"
                   exact
-                  component={CompanyInformation}
+                  render={() => (
+                    <CompanyInformation
+                      updateBusinessStatus={this.props.updateBusinessStatus}
+                      addPinnedBusiness={this.props.addPinnedBusiness}
+                    />
+                  )}
                 />
 
                 <Route path="/dashboard/apply-skills">
