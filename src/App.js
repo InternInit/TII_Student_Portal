@@ -447,7 +447,6 @@ class App extends Component {
           this.props.updateVersion(parsedRecv.version);
           this.props.updateDisabledIndustries(parsedRecv.checkedIndustries);
         } else {
-          console.log("Is this getting called???");
           this.props.batchUpdateCompletionState([0, 0, 0, 0, 0]);
           this.props.batchUpdateCompletionChecklist(defaultChecklist);
           this.props.updateVersion(0);
