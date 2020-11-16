@@ -26,7 +26,6 @@ import { Spring, config } from "react-spring/renderprops";
 
 import { connect } from "react-redux";
 import { withRouter } from "react-router";
-import { finished } from "form-data";
 
 const { useBreakpoint } = Grid;
 
@@ -97,6 +96,14 @@ const LinkedIn = styled(AiFillLinkedin)`
   }
 `;
 
+
+/*
+=================================================================
+
+                    CompanyInformation Class
+
+=================================================================
+*/
 class CompanyInformation extends React.Component {
   constructor(props) {
     super(props);
@@ -107,7 +114,6 @@ class CompanyInformation extends React.Component {
       info: {},
       isLoading: true,
       show: false,
-      isCompanyAdded: false,
     };
   }
 
@@ -183,7 +189,6 @@ class CompanyInformation extends React.Component {
       );
     } else {
       console.log(info);
-      console.log(this.props.userInfo);
       return (
         <React.Fragment>
           {/**
@@ -320,15 +325,6 @@ const CompanyHeading = (props) => {
   const { info, status } = props;
 
   const [isCompanyAdded, changeCompanyStatus] = useState(status);
-
-  const addCompany = () => {
-    changeCompanyStatus(!isCompanyAdded);
-    if (!isCompanyAdded) {
-      message.success(`Company Pinned! 🎉`);
-    } else {
-      message.success(`Company Removed`);
-    }
-  };
 
   return (
     <AntRow gutter={[0, 32]} style={{ position: "relative" }}>
