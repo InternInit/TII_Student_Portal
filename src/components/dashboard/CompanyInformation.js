@@ -26,12 +26,14 @@ import { Spring, config } from "react-spring/renderprops";
 
 import { connect } from "react-redux";
 import { withRouter } from "react-router";
+import { finished } from "form-data";
 
 const { useBreakpoint } = Grid;
 
 const mapStateToProps = (state) => {
   return {
     userInfo: state.userInfo,
+    finishedLoading: state.finishedLoading,
   };
 };
 
@@ -157,7 +159,7 @@ class CompanyInformation extends React.Component {
       return null;
     }
 
-    if (isLoading) {
+    if (isLoading || !this.props.finishedLoading) {
       return (
         <>
           <Breadcrumb
@@ -181,6 +183,7 @@ class CompanyInformation extends React.Component {
       );
     } else {
       console.log(info);
+      console.log(this.props.userInfo)
       return (
         <React.Fragment>
           {/**

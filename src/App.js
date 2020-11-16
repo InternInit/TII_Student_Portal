@@ -377,6 +377,7 @@ class App extends Component {
 
           this.props.updatePinnedBusinesses(pinnedBusinessArray);
           this.props.updateActiveApplications(activeAppsArray);
+          this.props.finishLoading(true);
         } catch (e) {
           console.log(e);
         }
@@ -451,7 +452,6 @@ class App extends Component {
           this.props.batchUpdateCompletionChecklist(defaultChecklist);
           this.props.updateVersion(0);
         }
-        this.props.finishLoading(true);
       });
   };
 
