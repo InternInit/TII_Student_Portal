@@ -148,10 +148,6 @@ class CompanyInformation extends React.Component {
 
   toggle = () => this.setState({ show: !this.state.show });
 
-  addCompany = () => {
-    this.setState({ isCompanyAdded: !this.state.isCompanyAdded });
-  };
-
   render() {
     const { info, isLoading, show } = this.state;
 
@@ -183,7 +179,7 @@ class CompanyInformation extends React.Component {
       );
     } else {
       console.log(info);
-      console.log(this.props.userInfo)
+      console.log(this.props.userInfo);
       return (
         <React.Fragment>
           {/**
@@ -225,15 +221,16 @@ class CompanyInformation extends React.Component {
                   info={info}
                   status={
                     this.props.userInfo.pinnedBusinesses.some(
-                      (company) => (company.Id === info.Id)
+                      (company) => company.Id === info.Id
                     ) ||
                     this.props.userInfo.activeApplications.some(
-                      (company) => (company.Id === info.Id)
+                      (company) => company.Id === info.Id
                     )
                   }
                   applied={this.props.userInfo.activeApplications.some(
-                    (company) => (company.Id === info.Id)
+                    (company) => company.Id === info.Id
                   )}
+                  addCompany={this.addCompany}
                 />
 
                 <AntRow style={{ width: "100%" }}>
@@ -365,7 +362,18 @@ const CompanyHeading = (props) => {
               style={{
                 border: isCompanyAdded && "3px solid #52c41a",
               }}
-              onClick={props.applied ? props.addCompany : null}
+              onClick={
+                props.applied
+                  ? null
+                  : isCompanyAdded
+                  ? () => {
+                    changeCompanyStatus(!isCompanyAdded);
+                  }
+                  : () => {
+                      props.addCompany();
+                      changeCompanyStatus(!isCompanyAdded);
+                    }
+              }
             >
               <Spring
                 from={{
