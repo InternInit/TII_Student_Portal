@@ -25,6 +25,7 @@ import { Link } from "react-router-dom";
 import { Spring, config } from "react-spring/renderprops";
 
 import { connect } from "react-redux";
+import { withRouter } from "react-router";
 
 const { useBreakpoint } = Grid;
 
@@ -109,10 +110,9 @@ class CompanyInformation extends React.Component {
   }
 
   addCompany = () => {
-    console.log(this.props);
     message.success(`Company Pinned! 🎉`);
-    this.props.updateBusinessStatus(this.props.companyid, "Pinned");
-    this.props.addPinnedBusiness(this.props.companyObject);
+    this.props.updateBusinessStatus(this.state.info.Id, "Pinned");
+    this.props.addPinnedBusiness(this.state.info);
   };
 
   componentDidMount() {
@@ -136,7 +136,6 @@ class CompanyInformation extends React.Component {
           JSON.parse(data).hits.hits.forEach((item) =>
             matchedBusinessesArray.push(item._source)
           );
-          //console.log(matchedBusinessesArray)
           this.setState({ info: matchedBusinessesArray[0] });
           this.setState({ isLoading: false });
         } catch (e) {
@@ -219,7 +218,20 @@ class CompanyInformation extends React.Component {
                *
                */}
               <div>
-                <CompanyHeading info={info} status={false} />
+                <CompanyHeading
+                  info={info}
+                  status={
+                    this.props.userInfo.pinnedBusinesses.some(
+                      (company) => (company.Id === info.Id)
+                    ) ||
+                    this.props.userInfo.activeApplications.some(
+                      (company) => (company.Id === info.Id)
+                    )
+                  }
+                  applied={this.props.userInfo.activeApplications.some(
+                    (company) => (company.Id === info.Id)
+                  )}
+                />
 
                 <AntRow style={{ width: "100%" }}>
                   <h1 className="company-info-subsection-header twentyEightFont mb-2 universal-left">
@@ -336,13 +348,21 @@ const CompanyHeading = (props) => {
       </AntCol>
       <AntCol className="universal-middle">
         <AntRow justify="end">
-          <Tooltip title={isCompanyAdded ? "Remove Company" : "Add Company"}>
+          <Tooltip
+            title={
+              isCompanyAdded
+                ? props.applied
+                  ? "Already Applied"
+                  : "Remove Company"
+                : "Add Company"
+            }
+          >
             <div
               className="company-info-add-button"
               style={{
                 border: isCompanyAdded && "3px solid #52c41a",
               }}
-              onClick={addCompany}
+              onClick={props.applied ? props.addCompany : null}
             >
               <Spring
                 from={{
@@ -579,4 +599,4 @@ const CompanyInformationSkeleton = (props) => {
   );
 };
 
-export default CompanyInformation;
+export default connect(mapStateToProps)(withRouter(CompanyInformation));
