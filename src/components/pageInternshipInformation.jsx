@@ -49,7 +49,6 @@ const standardSpan = 24;
 const halfSpan = standardSpan / 2;
 const thirdSpan = standardSpan / 3;
 
-
 //items
 const allStates = [
   "Alabama",
@@ -435,7 +434,7 @@ const formItemProps = {
     key: "resume",
     name: "Resume",
     label: boldify(
-      "Resumé (.doc, .docx, .pdf)",
+      "Resumé (.doc, .docx, .pdf) (Optional)",
       true,
       <React.Fragment>
         <p>
@@ -455,7 +454,7 @@ const formItemProps = {
         </p>
       </React.Fragment>
     ),
-    rules: validationRules(true, "resume", "object"),
+    rules: validationRules(false, "resume", "object"),
   },
 };
 
@@ -989,6 +988,9 @@ class PageInternshipInformation extends Component {
   onValuesChange = () => {
     let allValues = this.formRef.current.getFieldsValue();
     delete allValues["Weighted GPA"];
+    delete allValues["Resume"];
+
+    //console.log(allValues);
 
     let completedCount = 0;
     let checklist = [];

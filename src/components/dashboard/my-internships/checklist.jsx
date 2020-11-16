@@ -83,7 +83,6 @@ function parseChecklist(checklist, page) {
         key: "Internship Information",
         completed: completed,
       });
-      newChecklist.push(parsedChecklist[14]);
       parsedChecklist = newChecklist;
       break;
     case 1:
@@ -106,10 +105,6 @@ function parseChecklist(checklist, page) {
           completed: parsedChecklist[i].completed,
         });
       }
-      newChecklist.push({
-        key: "Additional Information",
-        completed: parsedChecklist[2].completed,
-      });
       parsedChecklist = newChecklist;
       break;
     case 3:
