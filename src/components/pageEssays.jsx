@@ -435,6 +435,7 @@ class PageEssays extends React.Component {
    */
   onValuesChange = () => {
     let allValues = this.formRef.current.getFieldsValue();
+    delete allValues["Extra Essay"]
     delete allValues["Cover Letter"];
     delete allValues.Portfolio;
 
