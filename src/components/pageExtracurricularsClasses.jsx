@@ -496,6 +496,25 @@ const Extracurriculars = (props) => {
                       </Row>
                       <Row gutter={formGutter} style={{ width: "100%" }}>
                         <Col span={24}>
+                          <Form.Item
+                            {...field}
+                            className="universal-left"
+                            name={[field.name, "Activity Name"]}
+                            fieldKey={[field.fieldKey, "activityName"]}
+                            label={boldify("Activity Name")}
+                            {...formItemProps.inputField(
+                              true,
+                              field,
+                              "Activity Name",
+                              "activityName"
+                            )}
+                          >
+                            <Input placeholder="Activity Name" />
+                          </Form.Item>
+                        </Col>
+                      </Row>
+                      <Row gutter={formGutter} style={{ width: "100%" }}>
+                        <Col span={24}>
                           <LaglessTextArea
                             field={field}
                             index={index}
