@@ -20,6 +20,8 @@ import HowtoApply from "./components/FAQAndHowToApply/HowtoApply.js";
 import SubmissionSuccess from "./components/submissionSuccess";
 import EditProfile from "./components/EditProfile.js";
 import FAQPage from "./components/FAQAndHowToApply/FAQPage";
+import Tasks from "./components/dashboard/Tasks/Tasks.jsx"
+
 //import newStudent from "./components/newStudent.jsx";
 
 import TiiFooter from "./components/TiiFooter";
@@ -670,6 +672,13 @@ class App extends Component {
               render={(props) => {
                 return <Redirect to="/dashboard/my-internships" />;
               }}
+            />
+            <Route
+              path="/tasks"
+              render={(props) => (
+                <Tasks
+                />
+              )}
             />
             <Route path="*" render={(props) => <PageNotFound {...props} />} />
           </ReactSwitch>

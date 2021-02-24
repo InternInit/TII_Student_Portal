@@ -162,6 +162,7 @@ class Navbar extends Component {
             >
               <LogoutOutlined /> Logout
             </Menu.Item>
+
           </SubMenu>
 
           {/*
@@ -193,6 +194,10 @@ class Navbar extends Component {
 
         <Menu.Item key="apply" style={menuItemStyle}>
           <Link to="/apply/internship-info">Apply</Link>
+        </Menu.Item>
+
+        <Menu.Item key="Tasks" style={menuItemStyle}>
+          <Link to="/tasks">Tasks</Link>
         </Menu.Item>
 
         <Menu.Item

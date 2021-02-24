@@ -1,0 +1,12 @@
+.current-intern-tab {
+    &-mail {
+        color: #bfbfbf;
+        @include font-size(28px);
+
+        &:hover {
+            cursor: pointer;
+            color: #262626;
+            transition: .3s ease;
+        }
+    }
+}

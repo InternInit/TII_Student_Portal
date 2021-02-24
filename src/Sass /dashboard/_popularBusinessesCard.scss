@@ -1,0 +1,34 @@
+.popular-businesses-card {
+  &-banner {
+    border-radius: 10px 10px 0px 0px;
+    width: 100%;
+    height: 100px;
+    object-fit: cover;
+  }
+
+  &-responsive-tab-container {
+    position: relative;
+
+    &:hover {
+      box-shadow: 1px 1px 5px -1px #bfbfbf;
+      transition: 0.3s ease;
+      cursor: pointer;
+
+      .click-more-icon {
+        color: #595959;
+        transition: 0.3s ease;
+      }
+    }
+
+    &:active {
+      box-shadow: 1px 1px 10px 0px #bfbfbf;
+      transition: 0.3s ease;
+      cursor: pointer;
+
+      .click-more-icon {
+        color: #595959;
+        transition: 0.3s ease;
+      }
+    }
+  }
+}

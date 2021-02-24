@@ -1,0 +1,96 @@
+//Margins
+@mixin margins($name, $amount) {
+  .mt-#{$name} {
+    margin-top: #{$amount}em;
+  }
+  .mb-#{$name} {
+    margin-bottom: #{$amount}em;
+  }
+  .ml-#{$name} {
+    margin-left: #{$amount}em;
+  }
+  .mr-#{$name} {
+    margin-right: #{$amount}em;
+  }
+  .mx-#{$name} {
+    margin-left: #{$amount}em;
+    margin-right: #{$amount}em;
+  }
+  .my-#{$name} {
+    margin-top: #{$amount}em;
+    margin-bottom: #{$amount}em;
+  }
+  .m-#{$name} {
+    margin: #{$amount}em;
+  }
+}
+
+@mixin paddings($name, $amount) {
+  .pt-#{$name} {
+    padding-top: #{$amount}em;
+  }
+  .pb-#{$name} {
+    padding-bottom: #{$amount}em;
+  }
+  .pl-#{$name} {
+    padding-left: #{$amount}em;
+  }
+  .pr-#{$name} {
+    padding-right: #{$amount}em;
+  }
+  .px-#{$name} {
+    padding-left: #{$amount}em;
+    padding-right: #{$amount}em;
+  }
+  .py-#{$name} {
+    padding-top: #{$amount}em;
+    padding-bottom: #{$amount}em;
+  }
+  .p-#{$name} {
+    padding: #{$amount}em;
+  }
+}
+
+@include margins("point-1", .1);
+@include margins("point-25", .25);
+@include margins("point-5", .5);
+@include margins("point-75", .75);
+@include margins(1, 1);
+@include margins("1-2", 1.2);
+@include margins("1-5", 1.5);
+@include margins(2, 2);
+@include margins("2-5", 2.5);
+@include margins(3, 3);
+@include margins(4, 4);
+@include margins(5, 5);
+@include margins(6, 6);
+@include margins(7, 7);
+@include margins(8, 8);
+@include margins(9, 9);
+@include margins(10, 10);
+@include margins(11, 11);
+@include margins(12, 12);
+@include margins(13, 13);
+@include margins(14, 14);
+
+@include paddings("point-1", .1);
+@include paddings("point-25", .25);
+@include paddings("point-5", .5);
+@include paddings("point-75", .75);
+@include paddings(1, 1);
+@include paddings("1-2", 1.2);
+@include paddings("1-5", 1.5);
+@include paddings(2, 2);
+@include paddings("2-5", 2.5);
+@include paddings(3, 3);
+@include paddings(4, 4);
+@include paddings(5, 5);
+@include paddings(6, 6);
+@include paddings(7, 7);
+@include paddings(8, 8);
+@include paddings(9, 9);
+@include paddings(10, 10);
+@include paddings(11, 11);
+@include paddings(12, 12);
+@include paddings(13, 13);
+@include paddings(14, 14);
