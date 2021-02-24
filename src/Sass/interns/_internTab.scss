@@ -1,0 +1,10 @@
+.intern-tab {
+    &-action-icon {
+        color: $GRAY_M;
+
+        &:hover {
+            color: $GRAY_BLACK;
+            transition: .3s ease;
+        }
+    }
+}

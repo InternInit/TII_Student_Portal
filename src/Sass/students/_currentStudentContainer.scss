@@ -1,0 +1,15 @@
+.current-student {
+  &-collapse {
+  }
+
+  &-panel {
+    .ant-collapse-content .ant-collapse-content-box {
+      padding: 0px;
+      margin-top: 0px;
+    }
+  }
+}
+
+.current-student-panel .ant-collapse-header {
+  padding: 20px;
+}
