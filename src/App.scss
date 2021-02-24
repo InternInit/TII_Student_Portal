@@ -2,32 +2,31 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
 @import "~rfs/scss";
 
-
 //SCHOOL PORTAL BELOW
-// @import "./Sass/Globals/breakpoints";
-// @import "./Sass/Globals/fontSize";
-// @import "./Sass/Globals/marginAndPadding";
-// @import "./Sass/Globals/variables";
-// @import "./Sass/dashboard/applyingStudentCard";
-// @import "./Sass/dashboard/currentInternTab";
-// @import "./Sass/dashboard/popularBusinessesCard";
-// @import "./Sass/applicants/manageApplicants";
-// @import "./Sass/applicants/meetingCalendar";
-// @import "./Sass/general/toDoTab";
-// @import "./Sass/general/subMenu";
-// @import "./Sass/general/pageHeader";
-// @import "./Sass/general/addTagButton";
-// @import "./Sass/interns/createTaskCard";
-// @import "./Sass/interns/studentActivityCard";
-// @import "./Sass/interns/internTab";
-// @import "./Sass/students/studentInfoCard";
-// @import "./Sass/students/currentStudentContainer";
-// @import "./Sass/students/studentApplication";
-// @import url("https://fonts.googleapis.com/css2?family=Lato&display=swap");
-// @import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
-// @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500&display=swap");
-// @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap");
-// @import url("https://fonts.googleapis.com/css2?family=Lato:wght@300;400;600;700&display=swap");
+@import "./Sass/Globals/breakpoints";
+@import "./Sass/Globals/fontSize";
+@import "./Sass/Globals/marginAndPadding";
+@import "./Sass/Globals/variables";
+@import "./Sass/dashboard/applyingStudentCard";
+@import "./Sass/dashboard/currentInternTab";
+@import "./Sass/dashboard/popularBusinessesCard";
+@import "./Sass/applicants/manageApplicants";
+@import "./Sass/applicants/meetingCalendar";
+@import "./Sass/general/toDoTab";
+@import "./Sass/general/subMenu";
+@import "./Sass/general/pageHeader";
+@import "./Sass/general/addTagButton";
+@import "./Sass/interns/createTaskCard";
+@import "./Sass/interns/studentActivityCard";
+@import "./Sass/interns/internTab";
+@import "./Sass/students/studentInfoCard";
+@import "./Sass/students/currentStudentContainer";
+@import "./Sass/students/studentApplication";
+@import url("https://fonts.googleapis.com/css2?family=Lato&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@300;400;600;700&display=swap");
 
 /*
 ============================================================
@@ -386,7 +385,10 @@ h2 {
   height: 100px;
 }
 
-.company-info-description-skeleton .ant-skeleton-content .ant-skeleton-paragraph > li {
+.company-info-description-skeleton
+  .ant-skeleton-content
+  .ant-skeleton-paragraph
+  > li {
   height: 16px;
   margin-top: 10px;
 }
@@ -483,7 +485,6 @@ Margins
 @include mr(7, 7);
 @include mr(8, 8);
 
-
 /*
 ==========================================================================================
 ******************************************************************************************
@@ -491,129 +492,128 @@ Margins
 ******************************************************************************************
 ==========================================================================================
 */
-// $background-color: #eceff9;
-// $gray-1: #ebeff2;
-// $gray-2: #e2e8ed;
-// $gray-4: #c5d1d8;
-// $gray-6: #a3b5bf;
-// $gray-8: #889aa5;
-// $gray-10: #677e8c;
-// $gray-13: #425866;
-// $gray-16: #23343f;
-// $gray-18: #121f26;
+$background-color: #eceff9;
+$gray-1: #ebeff2;
+$gray-2: #e2e8ed;
+$gray-4: #c5d1d8;
+$gray-6: #a3b5bf;
+$gray-8: #889aa5;
+$gray-10: #677e8c;
+$gray-13: #425866;
+$gray-16: #23343f;
+$gray-18: #121f26;
 
-// html {
-//   overflow-y: scroll;
-// }
+html {
+  overflow-y: scroll;
+}
 
-// a:hover {
-//   cursor: pointer;
-// }
+a:hover {
+  cursor: pointer;
+}
 
-// .rm-sm {
-//   @include sm {
-//     display: none;
-//   }
-// }
-// .rm-md {
-//   @include md {
-//     display: none;
-//   }
-// }
-// .rm-lg {
-//   @include lg {
-//     display: none;
-//   }
-// }
-// .rm-xl {
-//   @include xl {
-//     display: none;
-//   }
-// }
+.rm-sm {
+  @include sm {
+    display: none;
+  }
+}
+.rm-md {
+  @include md {
+    display: none;
+  }
+}
+.rm-lg {
+  @include lg {
+    display: none;
+  }
+}
+.rm-xl {
+  @include xl {
+    display: none;
+  }
+}
 
-// .global-container {
-//   background-color: $gray-1;
-//   height: 100vh;
-// }
+.global-container {
+  background-color: $gray-1;
+  height: 100vh;
+}
 
-// .responsive-tab-container {
-//   position: relative;
+.responsive-tab-container {
+  position: relative;
 
-//     @include lg {
-//       padding-left: 3em;
-//       padding-right: 3em;
-//     }
-//     @include sm {
-//       padding-left: 1em;
-//       padding-right: 1em;
-//     }
+  @include lg {
+    padding-left: 3em;
+    padding-right: 3em;
+  }
+  @include sm {
+    padding-left: 1em;
+    padding-right: 1em;
+  }
 
-//     &:hover {
-//       box-shadow: 1px 1px 5px -1px #bfbfbf;
-//       transition: 0.3s ease;
-//       cursor: pointer;
+  &:hover {
+    box-shadow: 1px 1px 5px -1px #bfbfbf;
+    transition: 0.3s ease;
+    cursor: pointer;
 
-//       .click-more-icon {
-//         color: #595959;
-//         transition: 0.3s ease;
-//       }
-//     }
+    .click-more-icon {
+      color: #595959;
+      transition: 0.3s ease;
+    }
+  }
 
-//     &:active {
-//       box-shadow: 1px 1px 10px 0px #bfbfbf;
-//       transition: 0.3s ease;
-//       cursor: pointer;
+  &:active {
+    box-shadow: 1px 1px 10px 0px #bfbfbf;
+    transition: 0.3s ease;
+    cursor: pointer;
 
-//       .click-more-icon {
-//         color: #595959;
-//         transition: 0.3s ease;
-//       }
-//     }
-// }
+    .click-more-icon {
+      color: #595959;
+      transition: 0.3s ease;
+    }
+  }
+}
 
-// .click-more-icon {
-  
-// }
+.click-more-icon {
+}
 
-// .click-more-icon {
-//   position: absolute;
-//   right: 1em;
-//   top: calc(50% - 12px);
-//   color: #bfbfbf;
-// }
+.click-more-icon {
+  position: absolute;
+  right: 1em;
+  top: calc(50% - 12px);
+  color: #bfbfbf;
+}
 
-// .universal-left {
-//   text-align: left;
-// }
+.universal-left {
+  text-align: left;
+}
 
-// .universal-center {
-//   text-align: center;
-//   justify-content: center;
-// }
+.universal-center {
+  text-align: center;
+  justify-content: center;
+}
 
-// .universal-right {
-//   text-align: right;
-//   justify-content: right;
-// }
+.universal-right {
+  text-align: right;
+  justify-content: right;
+}
 
-// .universal-top {
-//   align-items: flex-start;
-//   align-self: flex-start;
-//   vertical-align: top;
-// }
+.universal-top {
+  align-items: flex-start;
+  align-self: flex-start;
+  vertical-align: top;
+}
 
-// .universal-middle {
-//   align-items: center;
-//   align-self: center;
-//   vertical-align: middle;
-// }
+.universal-middle {
+  align-items: center;
+  align-self: center;
+  vertical-align: middle;
+}
 
-// .universal-bottom {
-//   align-items: flex-end;
-//   align-self: flex-end;
-//   vertical-align: bottom;
-// }
+.universal-bottom {
+  align-items: flex-end;
+  align-self: flex-end;
+  vertical-align: bottom;
+}
 
-// .flex-left {
-//   justify-content: flex-start;
-// }
+.flex-left {
+  justify-content: flex-start;
+}
