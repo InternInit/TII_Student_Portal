@@ -72,6 +72,9 @@ class Navbar extends Component {
     if (window.location.pathname.includes("questions")) {
       return "FAQ";
     }
+    if (window.location.pathname.includes("tasks")) {
+      return "task";
+    }
     let defaultKey = window.location.pathname;
     let newDefaultKey = defaultKey.replace("/", "");
     return newDefaultKey;
@@ -117,6 +120,10 @@ class Navbar extends Component {
 
             <Menu.Item key="apply" style={menuItemStyle}>
               <Link to="/apply/internship-info">Apply</Link>
+            </Menu.Item>
+            
+            <Menu.Item key="task" style={menuItemStyle}>
+              <Link to="/tasks">Tasks</Link>
             </Menu.Item>
 
             <Menu.Item
@@ -196,7 +203,7 @@ class Navbar extends Component {
           <Link to="/apply/internship-info">Apply</Link>
         </Menu.Item>
 
-        <Menu.Item key="Tasks" style={menuItemStyle}>
+        <Menu.Item key="task" style={menuItemStyle}>
           <Link to="/tasks">Tasks</Link>
         </Menu.Item>
 
