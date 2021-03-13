@@ -54,39 +54,41 @@ class Navbar extends Component {
     super(props);
     this.routeChange = this.routeChange.bind(this);
     this.state = {
-      current: this.getCurrentKey(),
+      current: [],
       isMobile: false,
     };
+    this.state.current = this.getCurrentKey();
   }
 
   getCurrentKey = () => {
-    if (window.location.pathname.includes("apply/")) {
+    console.log(this.props);
+    if (this.props.location.pathname.includes("apply/")) {
       return "apply";
     }
     if (
-      window.location.pathname.includes("dashboard") ||
-      window.location.pathname === "/"
+      this.props.location.pathname.includes("dashboard") ||
+      this.props.location.pathname === "/"
     ) {
       return "dashboard";
     }
-    if (window.location.pathname.includes("questions")) {
+    if (this.props.location.pathname.includes("questions")) {
       return "FAQ";
     }
-    if (window.location.pathname.includes("tasks")) {
+    if (this.props.location.pathname.includes("tasks")) {
       return "task";
     }
-    let defaultKey = window.location.pathname;
+    let defaultKey = this.props.location.pathname;
     let newDefaultKey = defaultKey.replace("/", "");
     return newDefaultKey;
   };
 
-  //Click Handler
-  handleClick = (e) => {
-    console.log("click ", e);
-    this.setState({
-      current: e.key,
-    });
-  };
+  componentDidUpdate(prevProps) {
+    if (this.props.location.pathname !== prevProps.location.pathname) {
+      this.setState({
+        current: this.getCurrentKey(),
+      });
+    }
+  }
 
   routeChange = (path) => {
     this.props.history.push(path);
@@ -100,8 +102,8 @@ class Navbar extends Component {
         <Menu
           className="main-navbar"
           onClick={this.handleClick}
-          defaultSelectedKeys={[this.getCurrentKey()]}
-          selectedKeys={[this.getCurrentKey]}
+          defaultSelectedKeys={this.state.current}
+          selectedKeys={this.state.current}
           mode="horizontal"
           style={menuStyle}
         >
@@ -121,7 +123,7 @@ class Navbar extends Component {
             <Menu.Item key="apply" style={menuItemStyle}>
               <Link to="/apply/internship-info">Apply</Link>
             </Menu.Item>
-            
+
             <Menu.Item key="task" style={menuItemStyle}>
               <Link to="/tasks">Tasks</Link>
             </Menu.Item>
@@ -169,7 +171,6 @@ class Navbar extends Component {
             >
               <LogoutOutlined /> Logout
             </Menu.Item>
-
           </SubMenu>
 
           {/*
