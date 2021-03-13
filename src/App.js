@@ -675,8 +675,10 @@ class App extends Component {
             />
             <Route
               path="/tasks"
+              exact
               render={(props) => (
                 <Tasks
+                {...props}
                 />
               )}
             />

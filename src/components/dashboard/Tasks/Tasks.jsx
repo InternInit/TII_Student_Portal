@@ -103,22 +103,20 @@ const Tasks = (props) => {
       attendanceSection.current.scrollIntoView({ behavior: "smooth" });
     }
   };
-
   return (
     <PageContainer>
       <InnerContainer className="py-1">
         <PageHeader
-        onBack={() => this.props.history.push("/dashboard")}
+        onBack={() => props.history.push("/dashboard")}
         title={
           <Link
             to="/dashboard"
-            style={{ fontWeight: "normal", color: "#262626"}}
-            className="twentyFont"
+            style={{fontWeight: "normal", color: "#262626"}}
+            onClick={() => props.history.push("/dashboard")}
           >
             Back to Dashboard
-          </Link>
-        }
-        />
+          </Link>}
+          />
         <Row gutter={[32, 0]} className="py-2">
           <Col span={8}>
             <StudentInfoCard
