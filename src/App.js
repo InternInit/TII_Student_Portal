@@ -673,7 +673,7 @@ class App extends Component {
                 return <Redirect to="/dashboard/my-internships" />;
               }}
             />
-            <Route
+            {/*<Route
               path="/tasks"
               exact
               render={(props) => (
@@ -681,7 +681,7 @@ class App extends Component {
                 {...props}
                 />
               )}
-            />
+            />*/}
             <Route path="*" render={(props) => <PageNotFound {...props} />} />
           </ReactSwitch>
           <TiiFooter />

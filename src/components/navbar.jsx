@@ -124,10 +124,11 @@ class Navbar extends Component {
               <Link to="/apply/internship-info">Apply</Link>
             </Menu.Item>
 
+            {/*
             <Menu.Item key="task" style={menuItemStyle}>
               <Link to="/tasks">Tasks</Link>
             </Menu.Item>
-
+            */}
             <Menu.Item
               key="how-to-apply"
               className="first-step"
@@ -204,9 +205,11 @@ class Navbar extends Component {
           <Link to="/apply/internship-info">Apply</Link>
         </Menu.Item>
 
+        {/*
         <Menu.Item key="task" style={menuItemStyle}>
           <Link to="/tasks">Tasks</Link>
         </Menu.Item>
+        */}
 
         <Menu.Item
           key="how-to-apply"
