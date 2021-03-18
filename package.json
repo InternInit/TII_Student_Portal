@@ -6,6 +6,7 @@
     "@ant-design/icons": "^4.2.2",
     "@aws-amplify/ui-react": "^0.2.21",
     "@crossfield/react-read-more": "^0.2.0",
+    "@react-pdf/renderer": "^1.6.13",
     "@sentry/browser": "^5.23.0",
     "@testing-library/jest-dom": "^5.11.2",
     "@testing-library/react": "^11.0.4",
@@ -64,6 +65,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {}
+  }
 }

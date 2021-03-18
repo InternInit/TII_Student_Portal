@@ -1,11 +1,15 @@
 import React, { Component } from "react";
-import { Form, Input, Button, Skeleton, Popover, notification } from "antd";
-import { Row, Col } from "antd";
 import {
-  CheckOutlined,
-  CloseOutlined,
-  PlusOutlined,
-} from "@ant-design/icons";
+  Form,
+  Input,
+  Button,
+  Skeleton,
+  Popover,
+  notification,
+  Row,
+  Col,
+} from "antd";
+import { CheckOutlined, CloseOutlined, PlusOutlined } from "@ant-design/icons";
 import QueueAnim from "rc-queue-anim";
 import { InfoCircle } from "./StyledComponents/InternshipForms";
 import { GoX } from "react-icons/go";
@@ -388,21 +392,32 @@ class PageReferences extends Component {
 
               {/**Submit Button */}
               <Form.Item>
-                <Button
-                  className="back-button"
-                  type="primary"
-                  htmlType="button"
-                  onClick={this.backHandler}
-                >
-                  <Link to="/apply/extracurriculars-and-classes">Previous</Link>
-                </Button>
-                <Button
-                  className="next-button"
-                  type="primary"
-                  htmlType="submit"
-                >
-                  Submit
-                </Button>
+                <Row justify="space-between">
+                  <Col>
+                    <Button
+                      //className="back-button"
+                      type="primary"
+                      htmlType="button"
+                      onClick={this.backHandler}
+                    >
+                      <Link to="/apply/extracurriculars-and-classes">
+                        Previous
+                      </Link>
+                    </Button>
+                  </Col>
+                  <Col>
+                    <Button type="default" style={{ marginRight: ".5em" }}>
+                      Generate PDF
+                    </Button>
+                    <Button
+                      //className="next-button"
+                      type="primary"
+                      htmlType="submit"
+                    >
+                      Submit
+                    </Button>
+                  </Col>
+                </Row>
               </Form.Item>
             </Form>
           </React.Fragment>
