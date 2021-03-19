@@ -31,8 +31,8 @@ if(app.config.get("ENV") == "development"):
     profileApiUrl = profileApiUrl.format(stage="dev")
 elif(app.config.get("ENV") == "production"):
     sentry_sdk.init(
-    dsn="https://8537ba8551334943a20d5b615f267b36@o412197.ingest.sentry.io/5288579",
-    integrations=[FlaskIntegration()]
+        dsn="https://8537ba8551334943a20d5b615f267b36@o412197.ingest.sentry.io/5288579",
+        integrations=[FlaskIntegration()]
     )
     username = "3og5ph16taqf598bchokdfs1r2"
     password = "bpuroud7lcqo5t3eomd6nvsspthu83c7e9taik2cqentf4f0o6g"
@@ -47,18 +47,38 @@ elif(app.config.get("ENV") == "production"):
     businessApiUrl = businessApiUrl.format(stage="prod")
     profileApiUrl = profileApiUrl.format(stage="prod")
 
+
 @app.route("/api/")
 def root():
     return "root"
+
 
 @app.route("/api/get_user_data", methods=["POST"])
 def get_user_data():
     print(cacheApiUrl)
     page = request.get_data().decode("utf-8")
     token = request.headers.get("Authorization")
-    params={"page":page}
-    req = requests.get(cacheApiUrl, headers = {"Authorization" : token}, params=params)
+    params = {"page": page}
+    req = requests.get(cacheApiUrl, headers={
+                       "Authorization": token}, params=params)
     return jsonify(req.text)
+
+# This is not good code lol
+
+
+@app.route("/api/get_user_data_for_pdf", methods=["GET", "POST"])
+def get_user_data_for_pdf():
+    print(cacheApiUrl)
+    token = request.headers.get("Authorization")
+    all_pages = [0, 1, 2, 3, 4]
+    data = []
+    for val in all_pages:
+        params = {"page": val}
+        req = requests.get(cacheApiUrl, headers={
+                           "Authorization": token}, params=params)
+        data.append(req.text)
+    
+    return jsonify(data)
 
 
 @app.route("/api/update_user_data", methods=["POST"])
@@ -76,10 +96,13 @@ def update_user_data():
     except:
         pass
     headers = request.headers
-    print(type(request.headers.get("Authorization")), request.headers.get("Authorization"))
+    print(type(request.headers.get("Authorization")),
+          request.headers.get("Authorization"))
     #req = requests.post(apiUrl, headers=request.headers,data = info)
-    req = requests.post(cacheApiUrl, headers = {"Authorization" : headers.get("Authorization"), "Completion-State" : headers.get("Completion-State"), "Completion-Checklist" : headers.get("Completion-Checklist"), "Version": headers.get("Version"), "Checked-Industries": headers.get("Checked-Industries")}, json = info)
+    req = requests.post(cacheApiUrl, headers={"Authorization": headers.get("Authorization"), "Completion-State": headers.get("Completion-State"), "Completion-Checklist": headers.get(
+        "Completion-Checklist"), "Version": headers.get("Version"), "Checked-Industries": headers.get("Checked-Industries")}, json=info)
     return req.text
+
 
 @app.route("/api/upload_user_files", methods=["POST"])
 def upload_user_files():
@@ -88,17 +111,18 @@ def upload_user_files():
 
     data = req.get("file")
     res = requests.post(url=uploadApiUrl,
-                    data=data,
-                    headers = {"Content-Type" : "application/octet-stream",
-                               "Filename" : str(data.filename),
-                               "Authorization" : headers.get("Authorization"),
-                               "Source" : headers.get("Source")})
+                        data=data,
+                        headers={"Content-Type": "application/octet-stream",
+                                 "Filename": str(data.filename),
+                                 "Authorization": headers.get("Authorization"),
+                                 "Source": headers.get("Source")})
     return res.text
     '''
     req = requests.post(uploadApiUrl, headers = {"Authorization" : headers.get("Authorization"), "Content-Type" : headers.get("Content-Type")}, data = body)
     print(req.text)
     return req.text,req.status_code
     '''
+
 
 @app.route("/api/upload_user_profile_picture", methods=["POST"])
 def upload_user_profile_picture():
@@ -107,57 +131,66 @@ def upload_user_profile_picture():
     data = req.get("file")
 
     res = requests.post(url=profileApiUrl,
-                    data=data,
-                    headers = {"Content-Type" : "application/octet-stream",
-                               "Subject" : headers.get("Subject")})
+                        data=data,
+                        headers={"Content-Type": "application/octet-stream",
+                                 "Subject": headers.get("Subject")})
     return "Ok"
+
 
 @app.route("/api/remove_user_profile_picture")
 def remove_user_profile_picture():
     req = request.files
     headers = request.headers
     res = requests.delete(url=profileApiUrl,
-                    headers = {"Subject" : headers.get("Subject")})
+                          headers={"Subject": headers.get("Subject")})
     return "Ok"
+
 
 @app.route("/api/auth", methods=["POST"])
 def auth():
     rawBody = request.get_data()
     body = rawBody.decode("utf-8")
     auth = "Basic " + str(tokenAuth)
-    req = requests.post(tokenUrl, headers={"Authorization":auth,"Content-Type":"application/x-www-form-urlencoded"}, data={"grant_type" : "authorization_code", "client_id":username, "code":rawBody, "redirect_uri":redirect_uri})
+    req = requests.post(tokenUrl, headers={"Authorization": auth, "Content-Type": "application/x-www-form-urlencoded"}, data={
+                        "grant_type": "authorization_code", "client_id": username, "code": rawBody, "redirect_uri": redirect_uri})
     print(req.text)
     try:
         load = json.loads(req.text)
         refresh_token = load["refresh_token"]
 
         response = jsonify(req.text)
-        response.set_cookie("refresh_token", value=refresh_token, httponly = True)
+        response.set_cookie(
+            "refresh_token", value=refresh_token, httponly=True)
         return response
     except KeyError:
         print("Invalid Grant")
         return jsonify("Invalid Grant")
+
 
 @app.route("/api/auth/refresh")
 def refresh():
     refresh = request.cookies.get("refresh_token")
     return jsonify(refresh)
 
+
 @app.route("/api/auth/getheaders")
 def get_headers():
     headers = request.headers
     auth_header = headers.get("Authorization")
-    req = requests.get(claimsUrl, headers={"Authorization":auth_header})
+    req = requests.get(claimsUrl, headers={"Authorization": auth_header})
     print(req.text)
     return jsonify(json.loads(req.text))
+
 
 @app.route("/api/auth/exchange")
 def exchange():
     auth = "Basic " + str(tokenAuth)
     refresh = request.cookies.get("refresh_token")
-    req = requests.post(tokenUrl, headers={"Authorization":auth,"Content-Type":"application/x-www-form-urlencoded"}, data={"grant_type" : "refresh_token", "client_id":username, "refresh_token":refresh})
+    req = requests.post(tokenUrl, headers={"Authorization": auth, "Content-Type": "application/x-www-form-urlencoded"}, data={
+                        "grant_type": "refresh_token", "client_id": username, "refresh_token": refresh})
     response = jsonify(req.text)
     return response
+
 
 @app.route("/api/logout")
 def logout():
@@ -165,37 +198,48 @@ def logout():
     resp.delete_cookie("refresh_token")
     return resp
 
+
 @app.route("/api/get_businesses")
 def get_businesses():
-    req = requests.get("https://search-demo-matchmaker-cvpgbysybccgp4c3wmp6n3opau.us-east-1.es.amazonaws.com/business/_search", headers={'Content-Type' : 'application/json'}, data='{"query":{"match_all":{} },"size" : 50}')
+    req = requests.get("https://search-demo-matchmaker-cvpgbysybccgp4c3wmp6n3opau.us-east-1.es.amazonaws.com/business/_search",
+                       headers={'Content-Type': 'application/json'}, data='{"query":{"match_all":{} },"size" : 50}')
     return jsonify(req.text)
+
 
 @app.route("/api/match_businesses", methods=["POST"])
 def match_businesses():
     ids = request.get_data().decode("UTF-8")
     print(ids)
     #req = requests.get("https://search-demo-matchmaker-cvpgbysybccgp4c3wmp6n3opau.us-east-1.es.amazonaws.com/business/_search", headers={'Content-Type' : 'application/json'}, data='{"query": {"ids": {"values":' + '"' + str(ids) + '"' + '}  },  "size" : 50}')
-    req = requests.get("https://search-demo-matchmaker-cvpgbysybccgp4c3wmp6n3opau.us-east-1.es.amazonaws.com/business/_search", headers={'Content-Type' : 'application/json'}, data='{"query": {"ids": {"values":' + str(ids).replace("'",'"') + '}  },  "size" : 50}')
+    req = requests.get("https://search-demo-matchmaker-cvpgbysybccgp4c3wmp6n3opau.us-east-1.es.amazonaws.com/business/_search", headers={
+                       'Content-Type': 'application/json'}, data='{"query": {"ids": {"values":' + str(ids).replace("'", '"') + '}  },  "size" : 50}')
     return jsonify(req.text)
+
 
 @app.route("/api/get_business_by_status", methods=["POST"])
 def get_business_by_status():
     status = request.get_data().decode("UTF-8")
     headers = request.headers
-    req = requests.get(businessApiUrl, headers = {"Authorization" : headers.get("Authorization"), "Content-Type" : headers.get("Content-Type"), "Status" : status})
+    req = requests.get(businessApiUrl, headers={"Authorization": headers.get(
+        "Authorization"), "Content-Type": headers.get("Content-Type"), "Status": status})
     return jsonify(req.text)
+
 
 @app.route("/api/update_business_status", methods=["POST"])
 def update_business_status():
     headers = request.headers
-    req = requests.post(businessApiUrl, headers = {"Authorization" : headers.get("Authorization"), "Content-Type" : headers.get("Content-Type"), "businessId" : headers.get("businessId")}, json=request.get_data().decode("utf-8"))
+    req = requests.post(businessApiUrl, headers={"Authorization": headers.get("Authorization"), "Content-Type": headers.get(
+        "Content-Type"), "businessId": headers.get("businessId")}, json=request.get_data().decode("utf-8"))
     return jsonify(req.text)
+
 
 @app.route("/api/remove_business", methods=["GET"])
 def remove_business():
     headers = request.headers
-    req = requests.delete(url=businessApiUrl, headers = {"Authorization" : headers.get("Authorization"), "Content-Type" : headers.get("Content-Type"), "businessId" : headers.get("businessId")})
+    req = requests.delete(url=businessApiUrl, headers={"Authorization": headers.get(
+        "Authorization"), "Content-Type": headers.get("Content-Type"), "businessId": headers.get("businessId")})
     return jsonify("Ok")
+
 
 if __name__ == "__main__":
     app.run(debug=True)

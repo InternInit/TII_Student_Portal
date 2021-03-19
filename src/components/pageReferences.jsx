@@ -109,6 +109,7 @@ class PageReferences extends Component {
 
   state = {
     loaded: false,
+    tempData: null,
   };
 
   componentDidMount() {
@@ -406,7 +407,7 @@ class PageReferences extends Component {
                     </Button>
                   </Col>
                   <Col>
-                    <Button type="default" style={{ marginRight: ".5em" }}>
+                    <Button type="default" style={{ marginRight: ".5em" }} onClick={this.generatePDF}>
                       Generate PDF
                     </Button>
                     <Button
@@ -536,11 +537,31 @@ class PageReferences extends Component {
           try {
             this.setState({ loaded: true });
             this.formRef.current.setFieldsValue(parsedData);
+            this.setState({ tempData: parsedData });
           } catch (e) {}
         }
         this.setState({ loaded: true });
       });
   };
+
+  generatePDF = async () => {
+    console.log("GENERATED");
+    let token = await this.props.getJwt();
+    fetch("/api/get_user_data_for_pdf", {
+      method: "POST",
+      headers: {
+        Authorization: "Bearer " + JSON.parse(JSON.stringify(token)),
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        let data_array = []
+        _.forEach(data, (formPage) => {
+          data_array.push(JSON.parse(formPage));
+        })
+        console.log(data_array);
+      });
+  }
 
   routeChange = (path) => {
     this.props.history.push(path);
