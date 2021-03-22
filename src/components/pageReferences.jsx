@@ -11,6 +11,8 @@ import {
 } from "antd";
 import { CheckOutlined, CloseOutlined, PlusOutlined } from "@ant-design/icons";
 import QueueAnim from "rc-queue-anim";
+import ReactPDF, { PDFDownloadLink, pdf } from "@react-pdf/renderer";
+import ApplicationPdf from "./ApplicationPdf";
 import { InfoCircle } from "./StyledComponents/InternshipForms";
 import { GoX } from "react-icons/go";
 
@@ -110,6 +112,7 @@ class PageReferences extends Component {
   state = {
     loaded: false,
     tempData: null,
+    isPDF: false,
   };
 
   componentDidMount() {
@@ -407,7 +410,11 @@ class PageReferences extends Component {
                     </Button>
                   </Col>
                   <Col>
-                    <Button type="default" style={{ marginRight: ".5em" }} onClick={this.generatePDF}>
+                    <Button
+                      type="default"
+                      style={{ marginRight: ".5em" }}
+                      onClick={this.generatePDF}
+                    >
                       Generate PDF
                     </Button>
                     <Button
@@ -555,13 +562,13 @@ class PageReferences extends Component {
     })
       .then((response) => response.json())
       .then((data) => {
-        let data_array = []
+        let data_array = [];
         _.forEach(data, (formPage) => {
           data_array.push(JSON.parse(formPage));
-        })
-        console.log(data_array);
+        });
+        this.setState({ tempData: data_array, isPDF: true });
       });
-  }
+  };
 
   routeChange = (path) => {
     this.props.history.push(path);
