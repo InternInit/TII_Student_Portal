@@ -1,0 +1,4 @@
+#!/bin/bash
+source /home/ubuntu/FLASKAPPS/env/bin/activate
+pip install -r /home/ubuntu/FLASKAPPS/backend/requirements.txt
+deactivate

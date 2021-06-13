@@ -1,2 +1,3 @@
 #!/bin/bash
-sudo /opt/bitnami/ctlscript.sh stop
+sudo systemctl stop apache2
+sudo systemctl stop backend

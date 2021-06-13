@@ -1,3 +1,5 @@
 #!/bin/bash
-rm -rf /home/bitnami/apps/react/htdocs/*
-rm -rf /home/bitnami/FLASKAPPS/backend/*
+rm -rf /var/www/apply.interninit.com/*
+rm -rf /var/www/apply.interninit.com/.[a-zA-Z_]*
+rm -rf /home/ubuntu/FLASKAPPS/backend/*
+rm -rf /home/ubuntu/FLASKAPPS/backend/.[a-zA-Z_]*

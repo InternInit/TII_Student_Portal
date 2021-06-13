@@ -2,12 +2,20 @@ version: 0.0
 os: linux
 files:
   - source: /frontend
-    destination: /home/bitnami/apps/react/htdocs
+    destination: /var/www/apply.interninit.com
   - source: /backend
-    destination: /home/bitnami/FLASKAPPS/backend
+    destination: /home/ubuntu/FLASKAPPS/backend
 hooks:
   ApplicationStop:
     - location: scripts/stop_server
+      timeout: 300
+      runas: root
+  BeforeInstall:
+    - location: scripts/cleanup
+      timeout: 300
+      runas: root
+  AfterInstall:
+    - location: scripts/pip-setup
       timeout: 300
       runas: root
   ApplicationStart:
