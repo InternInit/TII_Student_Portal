@@ -5,6 +5,8 @@ files:
     destination: /var/www/apply.interninit.com
   - source: /backend
     destination: /home/ubuntu/FLASKAPPS/backend
+  - source: /apache
+    destination: /etc/apache2/sites-available
 hooks:
   ApplicationStop:
     - location: scripts/stop_server

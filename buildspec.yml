@@ -21,6 +21,7 @@ phases:
       - cp -a ./backend ./fullbuild/backend 
       - cp ./appspec.yml ./fullbuild/appspec.yml
       - cp -a ./scripts ./fullbuild/scripts
+      - cp -a ./apache ./fullbuild/apache
 artifacts:
   files:
     - "**/*"
