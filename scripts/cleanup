@@ -1,5 +1,10 @@
 #!/bin/bash
-rm -rf /var/www/apply.interninit.com/*
-rm -rf /var/www/apply.interninit.com/.[a-zA-Z_]*
-rm -rf /home/ubuntu/FLASKAPPS/backend/*
-rm -rf /home/ubuntu/FLASKAPPS/backend/.[a-zA-Z_]*
+if [ -d "/var/www/apply.interninit.com" ]; then
+    rm -rf /var/www/apply.interninit.com/*
+    rm -rf /var/www/apply.interninit.com/.[a-zA-Z_]*
+fi
+
+if [ -d "/home/ubuntu/FLASKAPPS/backend" ]; then
+    rm -rf /home/ubuntu/FLASKAPPS/backend/*
+    rm -rf /home/ubuntu/FLASKAPPS/backend/.[a-zA-Z_]*
+fi
