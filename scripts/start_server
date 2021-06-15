@@ -1,5 +1,13 @@
 #!/bin/bash
-sudo systemctl start apache2
-sudo systemctl start backend
+sudo apt-get install libapache2-mod-wsgi -y
+
 sudo a2ensite apply-api.interninit.com
 sudo a2ensite apply.interninit.com
+
+sudo a2enmod proxy
+sudo a2enmod proxy_http
+sudo a2enmod proxy_balancer
+sudo a2enmod lbmethod_byrequests
+
+sudo systemctl start apache2
+sudo systemctl start backend
