@@ -10,20 +10,20 @@ phases:
     commands:
       - echo Installing dependencies...
       - npm install
+      - cp -a $CODEBUILD_SRC_DIR_S3SourceArtifact ./config/
+
   build:
     commands:
       - echo Building...
       - npm run build
   post_build:
     commands:
-      - echo $CODEBUILD_SRC_DIR_S3SourceArtifact
       - mkdir ./fullbuild
       - cp -a ./build ./fullbuild/frontend
       - cp -a ./backend ./fullbuild/backend 
       - cp ./appspec.yml ./fullbuild/appspec.yml
       - cp -a ./scripts ./fullbuild/scripts
       - cp -a ./apache ./fullbuild/apache
-      - cp -a $CODEBUILD_SRC_DIR_S3SourceArtifact ./fullbuild/
 artifacts:
   files:
     - "**/*"
