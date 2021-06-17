@@ -21,7 +21,9 @@ phases:
     commands:
       - mkdir ./fullbuild
       - cp -a ./build ./fullbuild/frontend
-      - cp -a ./backend ./fullbuild/backend 
+      - cp -a ./backend ./fullbuild/backend
+      - mv ./fullbuild/backend/__init__.py ./fullbuild/backend/backend.py
+      - cp ./requirements.txt ./fullbuild/backend/requirements.txt 
       - cp ./appspec.yml ./fullbuild/appspec.yml
       - cp -a ./scripts ./fullbuild/scripts
       - cp -a ./apache ./fullbuild/apache
