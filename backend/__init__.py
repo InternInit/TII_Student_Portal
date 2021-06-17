@@ -3,49 +3,16 @@ import requests
 import json
 import os
 import base64
-import sentry_sdk
-from sentry_sdk.integrations.flask import FlaskIntegration
 
 app = Flask(__name__)
 
-cacheApiUrl = "https://jzvyvnvxld.execute-api.us-east-1.amazonaws.com/{stage}/cache"
-uploadApiUrl = "https://jzvyvnvxld.execute-api.us-east-1.amazonaws.com/{stage}/upload"
-businessApiUrl = "https://jzvyvnvxld.execute-api.us-east-1.amazonaws.com/{stage}/business"
-profileApiUrl = "https://jzvyvnvxld.execute-api.us-east-1.amazonaws.com/{stage}/profile"
+app.config.from_json("./config/network-config.json")
 
-testUrl = "https://webhook.site/2d399065-ea56-45ea-b6a0-e19da9c75caa"
-
-tokenAuth = ""
-username = ""
-password = ""
-redirect_uri = ""
-tokenUrl = ""
-logoutUrl = ""
-mediaBucketName = "tii-intern-media"
-
-
-if(app.config.get("ENV") == "development"):
-    cacheApiUrl = cacheApiUrl.format(stage="dev")
-    uploadApiUrl = uploadApiUrl.format(stage="dev")
-    businessApiUrl = businessApiUrl.format(stage="dev")
-    profileApiUrl = profileApiUrl.format(stage="dev")
-elif(app.config.get("ENV") == "production"):
-    sentry_sdk.init(
-    dsn="https://8537ba8551334943a20d5b615f267b36@o412197.ingest.sentry.io/5288579",
-    integrations=[FlaskIntegration()]
-    )
-    username = "3og5ph16taqf598bchokdfs1r2"
-    password = "bpuroud7lcqo5t3eomd6nvsspthu83c7e9taik2cqentf4f0o6g"
-    redirect_uri = "https://apply.interninit.com"
-    tokenUrl = "https://auth.interninit.com/oauth2/token"
-    claimsUrl = "https://auth.interninit.com/oauth2/userInfo"
-    logoutUrl = "https://auth.interninit.com/login?response_type=code&client_id=3og5ph16taqf598bchokdfs1r2&redirect_uri=https://apply.interninit.com"
-    tokenAuthBytes = (username + ":" + password).encode("ascii")
-    tokenAuth = base64.b64encode(tokenAuthBytes).decode("ascii")
-    cacheApiUrl = cacheApiUrl.format(stage="prod")
-    uploadApiUrl = uploadApiUrl.format(stage="prod")
-    businessApiUrl = businessApiUrl.format(stage="prod")
-    profileApiUrl = profileApiUrl.format(stage="prod")
+baseApiUrl = app.config["API_ENDPOINT"]
+cacheApiUrl = baseApiUrl + "cache"
+uploadApiUrl = baseApiUrl + "upload"
+businessApiUrl = baseApiUrl + "business"
+profileApiUrl = baseApiUrl + "profile"
 
 @app.route("/api/")
 def root():
@@ -119,51 +86,6 @@ def remove_user_profile_picture():
     res = requests.delete(url=profileApiUrl,
                     headers = {"Subject" : headers.get("Subject")})
     return "Ok"
-
-@app.route("/api/auth", methods=["POST"])
-def auth():
-    rawBody = request.get_data()
-    body = rawBody.decode("utf-8")
-    auth = "Basic " + str(tokenAuth)
-    req = requests.post(tokenUrl, headers={"Authorization":auth,"Content-Type":"application/x-www-form-urlencoded"}, data={"grant_type" : "authorization_code", "client_id":username, "code":rawBody, "redirect_uri":redirect_uri})
-    print(req.text)
-    try:
-        load = json.loads(req.text)
-        refresh_token = load["refresh_token"]
-
-        response = jsonify(req.text)
-        response.set_cookie("refresh_token", value=refresh_token, httponly = True)
-        return response
-    except KeyError:
-        print("Invalid Grant")
-        return jsonify("Invalid Grant")
-
-@app.route("/api/auth/refresh")
-def refresh():
-    refresh = request.cookies.get("refresh_token")
-    return jsonify(refresh)
-
-@app.route("/api/auth/getheaders")
-def get_headers():
-    headers = request.headers
-    auth_header = headers.get("Authorization")
-    req = requests.get(claimsUrl, headers={"Authorization":auth_header})
-    print(req.text)
-    return jsonify(json.loads(req.text))
-
-@app.route("/api/auth/exchange")
-def exchange():
-    auth = "Basic " + str(tokenAuth)
-    refresh = request.cookies.get("refresh_token")
-    req = requests.post(tokenUrl, headers={"Authorization":auth,"Content-Type":"application/x-www-form-urlencoded"}, data={"grant_type" : "refresh_token", "client_id":username, "refresh_token":refresh})
-    response = jsonify(req.text)
-    return response
-
-@app.route("/api/logout")
-def logout():
-    resp = make_response(jsonify(logoutUrl))
-    resp.delete_cookie("refresh_token")
-    return resp
 
 @app.route("/api/get_businesses")
 def get_businesses():

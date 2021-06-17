@@ -139,7 +139,7 @@ class AddCompanies extends React.Component {
     filteredInfo = filteredInfo.filter(
       (company) => excludedBusinesses.indexOf(company.Id) === -1
     );
-
+    
     return (
       <>
         {this.props.finishedLoading ? (
@@ -153,223 +153,23 @@ class AddCompanies extends React.Component {
                 </AntRow>
               </ModuleContainer>
             ) : (
-              <React.Fragment>
-                <h1 className="module-name">Apply to an Entire Industry</h1>
-                <Form>
-                  <Collapse defaultActiveKey={["1"]} expandIconPosition="right">
-                    <Panel
-                      header={
-                        <strong
-                          style={{ fontWeight: "500" }}
-                          className="sixteenFont"
-                        >
-                          Choose an entire industry to submit your application
-                          to.
-                        </strong>
-                      }
-                    >
-                      <AntRow gutter={formGutter}>
-                        <AntCol span={standardSpan}>
-                          <Checkbox.Group
-                            value={this.props.checkedIndustries}
-                            onChange={(value) => {
-                              this.addConfirmIndustry(value);
-                            }}
-                          >
-                            <AntRow gutter={checkGutter}>
-                              {industry.map((industry) => (
-                                <AntCol
-                                  span={thirdSpan}
-                                  style={{
-                                    display: "flex",
-                                    alignItems: "flex-start",
-                                  }}
-                                >
-                                  <Checkbox
-                                    key={industry}
-                                    value={industry}
-                                    disabled={this.props.disabledIndustries.includes(
-                                      industry
-                                    )}
-                                    style={{
-                                      lineHeight: "32px",
-                                      marginLeft: "25%",
-
-                                      textAlign: "left",
-                                    }}
-                                  >
-                                    {industry}
-                                  </Checkbox>
-                                </AntCol>
-                              ))}
-                            </AntRow>
-                          </Checkbox.Group>
-                        </AntCol>
-                      </AntRow>
-                      <AntRow>
-                        <Button
-                          type="primary"
-                          style={{ margin: "auto" }}
-                          onClick={this.showModal}
-                          disabled={
-                            this.props.checkedIndustries.length === 0
-                              ? true
-                              : false
-                          }
-                        >
-                          Send my application to these industries
-                        </Button>
-                      </AntRow>
-                    </Panel>
-                  </Collapse>
-                </Form>
-                {/**
-                 *
-                 * MODAL FOR CONFIRMING INDUSTRIES
-                 *
-                 */}
-                <Modal
-                  visible={visible}
-                  width={"100vh"}
-                  onCancel={this.cancelModal}
-                  onOk={this.confirmIndustry}
-                  okText="Confirm"
-                  title="Confirm Industries"
-                >
-                  <p>
-                    <strong>
-                      Your application will be sent to the following industries:
-                    </strong>
-                  </p>
-                  {this.props.checkedIndustries.map((industry) => (
-                    <p>{industry}</p>
-                  ))}
-
-                  {/**Map the industries here */}
-                </Modal>
-
-                <h1 className="module-name" ref={this.myRef}>
-                  Search Companies
-                </h1>
-
-                {/**
-                 *
-                 * Search bar
-                 *
-                 */}
-                <Search
-                  placeholder="Search Company Name"
-                  allowClear="true"
-                  size="large"
-                  onChange={(value) => this.searchCompany(value)}
-                  style={{
-                    width: "100%",
-                    marginBottom: "20px",
-                    marginTop: "8px",
-                  }}
-                />
-
-                {/**
-                 *
-                 * Filter by industries Collapse Tab
-                 *
-                 */}
-                <AntRow style={{ width: "100%", marginBottom: "3vh" }}>
-                  <Collapse defaultActiveKey={["0"]} expandIconPosition="right">
-                    <Panel
-                      header={
-                        <strong
-                          style={{ fontWeight: "500" }}
-                          className="sixteenFont"
-                        >
-                          Filter by Industry
-                        </strong>
-                      }
-                    >
-                      <AntRow gutter={formGutter}>
-                        <AntCol span={standardSpan}>
-                          <Checkbox.Group
-                            onChange={(value) => {
-                              this.filterIndustries(value);
-                            }}
-                          >
-                            <AntRow gutter={checkGutter}>
-                              {industry.map((industry) => (
-                                <AntCol
-                                  span={thirdSpan}
-                                  style={{
-                                    display: "flex",
-                                    alignItems: "flex-start",
-                                  }}
-                                >
-                                  <Checkbox
-                                    key={industry}
-                                    value={industry}
-                                    style={{
-                                      lineHeight: "32px",
-                                      marginLeft: "25%",
-
-                                      textAlign: "left",
-                                    }}
-                                  >
-                                    {industry}
-                                  </Checkbox>
-                                </AntCol>
-                              ))}
-                            </AntRow>
-                          </Checkbox.Group>
-                        </AntCol>
-                      </AntRow>
-                    </Panel>
-                  </Collapse>
+              <ModuleContainer>
+                <AntRow>
+                  <DescriptorText style={{ margin: "auto" }}>
+                    Partnered companies will appear here. Check back soon!
+                  </DescriptorText>
                 </AntRow>
-
-                {/**
-                 *
-                 * Mapping of search results
-                 *
-                 */}
-                <QueueAnim>
-                  {filteredInfo
-                    .slice(
-                      page * this.state.busPerPage,
-                      (page + 1) * this.state.busPerPage
-                    )
-                    .map((company, index) => (
-                      <div style={{ marginBottom: "12px" }} key={index}>
-                        <SearchCompanytab
-                          companyObject={company}
-                          key={company.name}
-                          name={company.name}
-                          industry={company.industry}
-                          logo={company.avatar}
-                          image={company.avatar}
-                          description={company.description}
-                          location={company.location}
-                          companyid={company.Id}
-                          updateBusinessStatus={this.props.updateBusinessStatus}
-                          addPinnedBusiness={this.props.addPinnedBusiness}
-                        />
-                      </div>
-                    ))}
-                </QueueAnim>
-                <Pagination
-                  current={parseInt(page) + 1}
-                  total={filteredInfo.length}
-                  onChange={(pageChange) =>
-                    this.handlePageChange(pageChange - 1)
-                  }
-                  pageSize={this.state.busPerPage}
-                  style={{ marginBottom: "-40%" }}
-                />
-              </React.Fragment>
-            )}
+              </ModuleContainer>
+            ) 
+            
+            }
           </div>
         ) : (
           <AddCompaniesSkeleton />
         )}
       </>
     );
+    
   }
 
   showModal = () => {
