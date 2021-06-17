@@ -252,7 +252,7 @@ const formItemProps = {
     className: "text-left",
     key: "weightedGPA",
     label: boldify(
-      "What is your weighted GPA (optional)?",
+      "What is your weighted GPA? (optional)",
       true,
       <React.Fragment>
         <p>
