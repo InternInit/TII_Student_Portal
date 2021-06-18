@@ -8,3 +8,8 @@ if [ -d "/home/ubuntu/FLASKAPPS/backend" ]; then
     rm -rf /home/ubuntu/FLASKAPPS/backend/*
     rm -rf /home/ubuntu/FLASKAPPS/backend/.[a-zA-Z_]*
 fi
+
+if [ -d "/var/www/html" ]; then
+    rm -r /var/www/html/*
+    rm -r /var/www/html/.[a-zA-Z_]*
+fi
