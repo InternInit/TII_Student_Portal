@@ -10,6 +10,5 @@ if [ -d "/home/ubuntu/FLASKAPPS/backend" ]; then
 fi
 
 if [ -d "/var/www/html" ]; then
-    rm -r /var/www/html/*
-    rm -r /var/www/html/.[a-zA-Z_]*
+    rm -rf /var/www/html
 fi
