@@ -161,7 +161,9 @@ class App extends Component {
     console.log("mounted");
     this.auth();
     this.getCachedCompletionState();
-    this.fetchAssociatedBusinessIds();
+    this.props.finishLoading(true);
+    // Come back to this when you connect matchmaker
+    //this.fetchAssociatedBusinessIds();
     window.addEventListener("resize", this.resize);
   }
 
