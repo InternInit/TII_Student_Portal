@@ -210,7 +210,7 @@ class PagePersonal extends Component {
 
   componentDidMount() {
     this.getUserData();
-    this.scrollToRef();
+    //this.scrollToRef();
   }
 
   componentWillUnmount() {
@@ -837,6 +837,7 @@ class PagePersonal extends Component {
    *
    */
   getUserData = async () => {
+    /*
     let token = await this.props.getJwt();
     fetch("/api/get_user_data", {
       method: "POST",
@@ -855,6 +856,8 @@ class PagePersonal extends Component {
         }
         this.setState({ loaded: true });
       });
+    */
+    this.setState({ loaded: true });
   };
 
   /**

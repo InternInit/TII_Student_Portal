@@ -99,7 +99,7 @@ class PageEssays extends React.Component {
 
   componentDidMount() {
     this.getUserData();
-    this.scrollToRef();
+    //this.scrollToRef();
     console.log(this.state);
   }
 
@@ -575,7 +575,7 @@ class PageEssays extends React.Component {
    *
    */
   getUserData = async () => {
-    let token = await this.props.getJwt();
+    /*let token = await this.props.getJwt();
     fetch("/api/get_user_data", {
       method: "POST",
       headers: {
@@ -621,6 +621,9 @@ class PageEssays extends React.Component {
         }
         this.setState({ loaded: true });
       });
+      */
+      this.setState({ loaded: true });
+
   };
 
   //BOLDIFY!!!

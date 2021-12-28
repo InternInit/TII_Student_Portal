@@ -158,6 +158,11 @@ class App extends Component {
   inMemoryToken;
 
   auth = async () => {
+    this.props.updateUserName("johnsmith");
+    this.props.updateDisplayName("John Smith");
+    this.props.updateEmail("johnsmith@email.com");
+    this.props.updateId("c1ecc778-1e1e-47e1-8206-7a4db6786468");
+    /*
     Auth.currentSession()
       .then((session) => {
         console.log(session);
@@ -184,45 +189,11 @@ class App extends Component {
         }
         //TODO: Update to a more elegant solution
       });
+      */
   };
 
   updateData = (values, origin) => {
-    if (
-      this.state.submissionState === true &&
-      typeof this.inMemoryToken != "undefined"
-    ) {
-      fetch("/api/update_user_data", {
-        method: "POST",
-        headers: {
-          Authorization:
-            "Bearer " + JSON.parse(JSON.stringify(this.inMemoryToken.token)),
-          "Content-Type": "text/plain",
-          "Completion-State": JSON.stringify(this.props.completionState),
-          "Completion-Checklist": JSON.stringify(
-            this.props.completionChecklist
-          ),
-          Version: JSON.stringify(this.props.userInfo.version),
-          "Checked-Industries": JSON.stringify(
-            this.props.userInfo.checkedIndustries.concat(
-              this.props.userInfo.disabledIndustries
-            )
-          ),
-        },
-        body: JSON.stringify(values) + "#" + origin,
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          console.log("Sent: " + data);
-          this.props.updateDisabledIndustries(
-            this.props.userInfo.checkedIndustries.concat(
-              this.props.userInfo.disabledIndustries
-            )
-          );
-          this.props.updateCheckedIndustries([]);
-        });
-    } else if (this.state.submissionState === false) {
-      console.log("Submission disabled");
-    }
+    console.log("Updating data");
   };
 
   onSubmit = (values, origin) => {
@@ -428,7 +399,7 @@ class App extends Component {
       ],
       [{ key: "Reference", completed: false }],
     ];
-
+    /**
     fetch("/api/get_user_data", {
       method: "POST",
       headers: {
@@ -453,6 +424,10 @@ class App extends Component {
           this.props.updateVersion(0);
         }
       });
+      */
+    this.props.batchUpdateCompletionState([0, 0, 0, 0, 0]);
+    this.props.batchUpdateCompletionChecklist(defaultChecklist);
+    this.props.updateVersion(0);
   };
 
   resize = () => {

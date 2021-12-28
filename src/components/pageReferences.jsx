@@ -505,6 +505,7 @@ class PageReferences extends Component {
    *
    */
   getUserData = async () => {
+    /*
     let token = await this.props.getJwt();
     fetch("/api/get_user_data", {
       method: "POST",
@@ -525,6 +526,9 @@ class PageReferences extends Component {
         }
         this.setState({ loaded: true });
       });
+      */
+      this.setState({ loaded: true });
+
   };
 
   routeChange = (path) => {
