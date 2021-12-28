@@ -61,32 +61,15 @@ import {
   finishLoading,
 } from "./redux/actions";
 
-import devConfigurationFile from "./configuration_dev.json";
-import prodConfigurationFile from "./configuration_prod.json";
-
-import cognitoConfig from "./config/cognito-config.json";
 
 //Amplify
 import Amplify, { Auth } from "aws-amplify";
-Amplify.configure({
-  Auth: {
 
-      // REQUIRED - Amazon Cognito Region
-      region: cognitoConfig.Region,
-
-      //Amazon Cognito User Pool ID
-      userPoolId: cognitoConfig.Id,
-
-      //Amazon Cognito Web Client ID (26-char alphanumeric string)
-      userPoolWebClientId: cognitoConfig.Client.ClientId,
-  }
-});
 
 let configurationFile = {};
 if (!process.env.NODE_ENV || process.env.NODE_ENV === "development") {
-  configurationFile = devConfigurationFile;
+  console.log("Dev");
 } else {
-  configurationFile = prodConfigurationFile;
   console.log = noop;
   console.warn = noop;
   console.error = noop;
