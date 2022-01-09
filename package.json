@@ -1,7 +1,6 @@
 {
   "name": "my-app",
   "version": "2.3.0-beta",
-  "homepage": "https://apply.interninit.com",
   "private": true,
   "dependencies": {
     "@ant-design/icons": "^4.2.2",
@@ -16,7 +15,6 @@
     "axios": "^0.20.0",
     "bootstrap": "^4.5.2",
     "form-data": "^3.0.0",
-    "gh-pages": "^3.2.3",
     "json-loader": "^0.5.7",
     "node-sass": "^4.14.1",
     "password-validator": "^5.1.0",
@@ -49,9 +47,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": "react-app"
