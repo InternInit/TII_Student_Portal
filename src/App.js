@@ -34,7 +34,7 @@ import "./App.scss";
 
 //React Routing
 import {
-  BrowserRouter as Router,
+  HashRouter as Router,
   Route,
   Switch as ReactSwitch,
   Redirect,
