@@ -8,6 +8,7 @@ import { createStore, compose, applyMiddleware } from "redux";
 import rootReducer from "./redux/reducers";
 import { Provider } from "react-redux";
 import logger from "redux-logger";
+import { HashRouter } from "react-router-dom";
 
 if (!process.env.NODE_ENV || process.env.NODE_ENV === "production") {
   Sentry.init({
@@ -24,11 +25,13 @@ const store = createStore(
 );
 
 ReactDOM.render(
-  <Provider store={store}>
-    <React.StrictMode>
-      <App />
-    </React.StrictMode>
-  </Provider>,
+  <HashRouter>
+    <Provider store={store}>
+      <React.StrictMode>
+        <App />
+      </React.StrictMode>
+    </Provider>
+  </HashRouter>,
   document.getElementById("root")
 );
 

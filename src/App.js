@@ -599,7 +599,6 @@ class App extends Component {
     return (
       <div className="App">
         {this.resize()}
-        <Router>
           {window.location.pathname.includes("login") ||
           window.location.pathname.includes("signup") ? null : (
             <header>
@@ -658,7 +657,6 @@ class App extends Component {
             <Route path="*" render={(props) => <PageNotFound {...props} />} />
           </ReactSwitch>
           <TiiFooter />
-        </Router>
       </div>
     );
   }
